@@ -635,7 +635,7 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
           // Step 3: fade out intro, show video
           setTimeout(() => {
             intro.classList.add('hidden');
-            video.currentTime = window.innerWidth <= 768 ? 2.65 : 2.5;
+            video.currentTime = window.innerWidth <= 768 ? 2.7 : 2.5;
             video.play();
             video.classList.add('visible');
             video.onended = () => { sbsCur = 1; sbsGo(1); clearInterval(sbsTimer); sbsTimer = setInterval(() => sbsGo((sbsCur+1)%7), 3500); };
