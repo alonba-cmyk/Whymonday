@@ -1,1 +1,590 @@
-placeholder — reading full content next
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>monday.com — AI Work Platform</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #000;
+  --purple: #6161ff;
+  --teal: #00d2d2;
+  --white: #fff;
+  --dim: rgba(255,255,255,0.4);
+  --border: rgba(255,255,255,0.08);
+  --card: rgba(255,255,255,0.04);
+}
+html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',sans-serif; background:var(--bg); color:var(--white); }
+
+.deck { width:100%; height:100%; position:relative; }
+.slide {
+  position:absolute; top:0; left:0;
+  width:100%; height:100%;
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  padding:80px 120px;
+  opacity:0; pointer-events:none;
+  transition:opacity 0.6s ease;
+  overflow:hidden;
+}
+.slide.active { opacity:1; pointer-events:all; }
+
+.progress { position:fixed; top:0; left:0; height:1px; background:var(--purple); z-index:200; transition:width 0.4s ease; }
+
+.nav-dots { position:fixed; right:28px; top:50%; transform:translateY(-50%); z-index:100; display:flex; flex-direction:column; gap:14px; }
+.nav-dot { width:5px; height:5px; border-radius:50%; background:rgba(255,255,255,0.2); cursor:pointer; transition:all 0.3s; border:none; }
+.nav-dot.active { background:var(--purple); transform:scale(1.6); }
+
+.eyebrow { font-size:10px; font-weight:600; letter-spacing:4px; text-transform:uppercase; color:var(--purple); margin-bottom:24px; }
+.glow { position:absolute; border-radius:50%; filter:blur(120px); opacity:0.08; pointer-events:none; }
+
+/* S0 */
+#s0 { background:#000; text-align:center; }
+.opening-brand { display:flex; align-items:center; justify-content:center; gap:12px; margin-bottom:40px; }
+.opening-brand img { height:24px; opacity:0.85; }
+.opening-brand-div { width:1px; height:20px; background:rgba(255,255,255,0.15); }
+.opening-brand span { font-size:11px; font-weight:500; letter-spacing:3px; text-transform:uppercase; color:rgba(255,255,255,0.35); }
+.line1, .line2 { display:block; font-weight:800; line-height:1.1; letter-spacing:-1.5px; }
+.line1 { font-size:clamp(32px,6vw,88px); color:#fff; }
+.line2 { font-size:clamp(32px,6vw,88px); background:linear-gradient(90deg,var(--purple),var(--teal)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+
+/* S1 */
+#s1 { padding:0; background:#000; }
+.mission-inner { width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:40px; padding:60px 80px; }
+.mission-text { text-align:center; max-width:680px; }
+.mission-text p.eyebrow { margin-bottom:16px; }
+.mission-text h2 { font-size:clamp(24px,3.5vw,52px); font-weight:800; line-height:1.1; letter-spacing:-1px; }
+.mission-text h2 em { font-style:normal; background:linear-gradient(90deg,var(--purple),var(--teal)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.marquee-outer { width:100%; overflow:hidden; position:relative; }
+.marquee-outer::before, .marquee-outer::after { content:''; position:absolute; top:0; bottom:0; width:80px; z-index:2; pointer-events:none; }
+.marquee-outer::before { left:0; background:linear-gradient(to right,#000,transparent); }
+.marquee-outer::after { right:0; background:linear-gradient(to left,#000,transparent); }
+.marquee-track { display:flex; gap:12px; width:max-content; animation:marquee 28s linear infinite; }
+.marquee-track:hover { animation-play-state:paused; }
+.mq-card { flex-shrink:0; background:var(--card); border:1px solid var(--border); border-radius:12px; padding:12px 16px; display:flex; align-items:center; gap:10px; min-width:160px; }
+.mq-av { width:32px; height:32px; border-radius:50%; overflow:hidden; flex-shrink:0; }
+.mq-av img { width:100%; height:100%; object-fit:cover; }
+.mq-info { display:flex; flex-direction:column; gap:2px; }
+.mq-name { font-size:11px; font-weight:600; color:#fff; }
+.mq-role { font-size:9px; color:var(--dim); text-transform:uppercase; letter-spacing:1px; }
+@keyframes marquee { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+
+/* S2 */
+#s2 { text-align:center; }
+.shift-wrap { max-width:800px; }
+.shift-wrap h2 { font-size:clamp(22px,3.5vw,52px); font-weight:800; line-height:1.1; letter-spacing:-1px; margin-bottom:clamp(20px,3vh,40px); }
+
+/* AI Logos row */
+.ai-logos { display:flex; align-items:center; justify-content:center; gap:32px; margin:24px 0 32px; flex-wrap:wrap; }
+.ai-logo { display:flex; flex-direction:column; align-items:center; gap:8px; opacity:0.28; transition:opacity .3s; }
+.ai-logo:hover { opacity:0.55; }
+.ai-logo svg { width:32px; height:32px; fill:#fff; }
+.ai-logo span { font-size:10px; font-weight:500; color:#fff; letter-spacing:1px; }
+/* S2 */
+#s2 { text-align:center; }
+.pillars { display:grid; grid-template-columns:repeat(3,1fr); border-top:1px solid var(--border); }
+.pillar { padding:clamp(16px,2.5vh,32px) clamp(12px,2vw,32px); border-right:1px solid var(--border); }
+.pillar:last-child { border-right:none; }
+.pillar-num { font-size:10px; font-weight:700; letter-spacing:3px; color:var(--purple); margin-bottom:8px; }
+.pillar-title { font-size:clamp(13px,1.2vw,16px); font-weight:700; margin-bottom:8px; }
+.pillar-desc { font-size:clamp(10px,0.9vw,13px); color:var(--dim); line-height:1.7; }
+
+/* S3 */
+#s3 { }
+.gap-wrap { max-width:900px; width:100%; }
+.gap-eyebrow { text-align:center; margin-bottom:clamp(24px,4vh,48px); }
+.gap-eyebrow h2 { font-size:clamp(22px,3.5vw,52px); font-weight:800; line-height:1.1; letter-spacing:-1px; margin-top:12px; }
+.gap-stats { display:grid; grid-template-columns:repeat(3,1fr); gap:0; border:1px solid var(--border); border-radius:16px; overflow:hidden; }
+.gap-stat { padding:clamp(20px,3vh,40px) clamp(16px,2vw,32px); border-right:1px solid var(--border); display:flex; flex-direction:column; }
+.gap-stat:last-child { border-right:none; }
+.gap-stat-num { font-size:clamp(40px,6vw,80px); font-weight:800; line-height:1; letter-spacing:-2px; }
+.gap-stat-num.purple { color:var(--purple); }
+.gap-stat-num.teal   { color:var(--teal); }
+.gap-stat-num.white  { color:#fff; }
+.gap-stat-label { font-size:clamp(11px,1vw,14px); color:var(--dim); line-height:1.6; margin-top:12px; }
+.gap-stat-yet { display:flex; align-items:center; gap:8px; margin-top:auto; padding-top:16px; }
+.gap-stat-yet-line { flex:1; height:1px; background:var(--border); }
+.gap-stat-yet-tag { font-size:9px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,0.2); }
+.gap-list { margin-top:clamp(20px,3vh,36px); display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
+.gap-list-item { display:flex; align-items:flex-start; gap:10px; background:var(--card); border:1px solid var(--border); border-radius:10px; padding:14px 16px; font-size:clamp(10px,0.85vw,12px); color:var(--dim); line-height:1.6; }
+.gap-list-item::before { content:'→'; color:var(--purple); flex-shrink:0; font-size:12px; }
+
+/* S4b – side-by-side: text left, image+tabs right */
+#s4b { background:#000; padding:0; overflow:hidden; }
+.sbs-wrap { display:flex; flex-direction:row; width:100%; height:100%; }
+.sbs-left { width:34%; display:flex; flex-direction:column; justify-content:center; padding:60px 28px 60px 72px; flex-shrink:0; }
+.sbs-eyebrow { font-size:10px; font-weight:600; letter-spacing:4px; text-transform:uppercase; color:var(--purple); margin-bottom:20px; }
+.sbs-heading { font-size:clamp(26px,3vw,44px); font-weight:700; line-height:1.2; color:#fff; margin:0; }
+.sbs-right { flex:1; display:flex; flex-direction:column; overflow:hidden; min-width:0; }
+.sbs-img-area { flex:1; position:relative; overflow:hidden; min-height:0; }
+.sbs-img { position:absolute; inset:20px 50px 0; width:calc(100% - 100px); height:calc(100% - 20px); object-fit:contain; object-position:center center; opacity:0; transition:opacity .5s ease; }
+.sbs-img.active { opacity:1; }
+.sbs-tabs { flex-shrink:0; display:flex; flex-direction:row; justify-content:center; gap:10px; padding:14px 32px 20px; flex-wrap:wrap; }
+.sbs-tab { padding:7px 18px; background:transparent; border:1px solid rgba(255,255,255,0.18); border-radius:100px; font-family:'Poppins',sans-serif; font-size:12px; font-weight:500; color:rgba(255,255,255,0.45); cursor:pointer; transition:all .25s; }
+.sbs-tab.active, .sbs-tab:hover { background:var(--purple); border-color:var(--purple); color:#fff; }
+
+/* S5 – Platform */
+#s5 { padding:60px 80px 0; justify-content:flex-start; }
+.layers-top { text-align:center; margin-bottom:clamp(20px,3vh,36px); }
+.layers-top h2 { font-size:clamp(22px,2.8vw,42px); font-weight:800; line-height:1.1; letter-spacing:-0.5px; margin-bottom:12px; }
+.layers-top p { font-size:clamp(12px,1vw,15px); color:var(--dim); max-width:480px; margin:0 auto; }
+.stage { display:flex; align-items:flex-end; justify-content:center; gap:clamp(16px,3vw,48px); margin-bottom:clamp(16px,2.5vh,28px); }
+.char { width:clamp(100px,11vw,160px); height:clamp(200px,22vw,320px); flex-shrink:0; }
+.char svg { width:100%; height:100%; }
+.char-p { position:relative; }
+.char-a { position:relative; }
+.pills { display:flex; flex-direction:column; gap:10px; width:clamp(200px,28vw,360px); }
+.pill { display:flex; align-items:center; gap:12px; background:var(--card); border:1px solid var(--border); border-radius:100px; padding:10px 16px; transition:all .4s; }
+.pill.active { background:rgba(97,97,255,0.12); border-color:var(--purple); }
+.pill-icon { width:28px; height:28px; border-radius:50%; background:var(--purple); display:flex; align-items:center; justify-content:center; font-size:12px; flex-shrink:0; }
+.pill-title { font-size:14px; font-weight:600; color:#fff; min-width:90px; }
+.pill-desc { font-size:11px; color:var(--dim); line-height:1.4; }
+
+/* S6 */
+#s6 { text-align:center; }
+.outcome-wrap { max-width:720px; position:relative; z-index:2; }
+.s6-human { position:absolute; bottom:0; left:0; height:78%; width:auto; object-fit:contain; object-position:bottom left; pointer-events:none; }
+.s6-agent { position:absolute; bottom:0; right:0; height:78%; width:auto; object-fit:contain; object-position:bottom right; pointer-events:none; }
+.outcome-wrap h2 { font-size:clamp(28px,4.5vw,68px); font-weight:800; line-height:1.05; letter-spacing:-1px; margin-bottom:clamp(16px,2.5vh,28px); }
+.outcome-wrap p { font-size:clamp(13px,1.4vw,17px); color:var(--dim); font-weight:300; line-height:1.8; margin-bottom:clamp(24px,4vh,48px); }
+.cta { display:inline-flex; align-items:center; gap:10px; border:1px solid rgba(255,255,255,0.2); color:white; font-family:'Poppins',sans-serif; font-size:12px; font-weight:500; padding:14px 32px; border-radius:100px; text-decoration:none; letter-spacing:1px; text-transform:uppercase; transition:all 0.3s; }
+.cta:hover { border-color:var(--purple); color:var(--purple); }
+
+/* Spread animation for chars */
+@keyframes spreadL { from{transform:translateX(0)} to{transform:translateX(-30px)} }
+@keyframes spreadR { from{transform:translateX(0)} to{transform:translateX(30px)} }
+.char-p.spread { animation:spreadL .6s ease forwards; }
+.char-a.spread { animation:spreadR .6s ease forwards; }
+
+/* ── MOBILE ─────────────────────────────── */
+@media (max-width: 768px) {
+  .slide { padding: 24px 16px; }
+  .nav-dots { right: 10px; gap: 10px; }
+
+  /* S0 */
+  #s0 { padding: 32px 20px; }
+  .opening-brand { margin-bottom: 24px; }
+  .opening-brand img { height: 20px; }
+
+  /* S1 – Mission + marquee */
+  .mission-inner { gap: 16px; height: auto; justify-content: center; }
+  .mission-text h2 { font-size: clamp(20px, 6vw, 32px); }
+  .mission-inner { padding: 40px 20px 20px; }
+  .mq-card { min-width: 130px; padding: 10px 12px; }
+  .mq-av { width: 26px; height: 26px; }
+
+  /* S2 – Shift */
+  #s2 { justify-content: flex-start; padding-top: 56px; }
+  .ai-logos { gap: 12px; margin: 12px 0 16px; flex-wrap: nowrap; justify-content: space-around; }
+  .ai-logo svg { width: 22px; height: 22px; }
+  .ai-logo span { font-size: 8px; }
+  .shift-wrap h2 { font-size: clamp(20px, 5.5vw, 30px); margin-bottom: 20px; }
+  .pillars { grid-template-columns: 1fr; border-top: none; }
+
+  /* S3 – Gap */
+  #s3 { justify-content: flex-start; padding-top: 48px; }
+  .gap-stats { grid-template-columns: 1fr; border-radius: 10px; }
+  .gap-stat { border-right: none; border-bottom: 1px solid var(--border); }
+  .gap-stat:last-child { border-bottom: none; }
+  .gap-stat-yet-line { height: 20px; }
+  .gap-list { display: none; }
+  #s3 { justify-content: center; }
+  .gap-stat-num { font-size: clamp(52px, 16vw, 88px); }
+
+  /* S4b – Department gallery */
+  #s4b { padding: 0 !important; justify-content: flex-start !important; }
+  .sbs-wrap { display: flex !important; flex-direction: column !important; width: 100% !important; height: 100% !important; gap: 0; }
+  .sbs-left { width: 100% !important; flex-shrink: 0; padding: 20px 20px 10px; text-align: center; }
+  .sbs-eyebrow { margin-bottom: 4px; font-size: 8px; letter-spacing: 3px; }
+  .sbs-heading { font-size: 15px; line-height: 1.3; }
+  .sbs-right { flex: 1 !important; width: 100% !important; display: flex !important; flex-direction: column !important; min-height: 0; justify-content: flex-start !important; }
+  .sbs-img-area { flex: none !important; height: 56vw !important; min-height: 0 !important; width: 100%; position: relative; overflow: hidden; }
+  .sbs-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; object-position: center center; }
+  .sbs-tabs { flex-shrink: 0; gap: 5px; padding: 12px 10px 8px; }
+  .sbs-tab { padding: 5px 11px; font-size: 10px; }
+
+  /* S5 – Platform layers */
+  #s5 { padding: 40px 16px 0; }
+  .layers-top h2 { font-size: clamp(18px, 5vw, 26px); }
+  .layers-top p { font-size: 12px; }
+  .char { height: clamp(180px, 38vh, 280px); }
+  .pills { width: 90%; }
+  .pill-title { font-size: 13px; min-width: 80px; }
+  .pill-desc { font-size: 11px; }
+
+  /* S6 – CTA */
+  .outcome-wrap h2 { font-size: clamp(22px, 7vw, 40px); }
+  .outcome-wrap p { font-size: clamp(12px, 3.5vw, 15px); }
+  .cta { padding: 12px 24px; font-size: 11px; }
+  .s6-human, .s6-agent { height: 44%; }
+}
+</style>
+</head>
+<body>
+
+<div class="progress" id="prog"></div>
+<nav class="nav-dots" id="navDots">
+  <button class="nav-dot active" onclick="goTo(0)"></button><button class="nav-dot" onclick="goTo(1)"></button><button class="nav-dot" onclick="goTo(2)"></button><button class="nav-dot" onclick="goTo(3)"></button><button class="nav-dot" onclick="goTo(4)"></button><button class="nav-dot" onclick="goTo(5)"></button><button class="nav-dot" onclick="goTo(6)"></button>
+</nav>
+
+<div class="deck">
+
+<div class="slide active" id="s0">
+  
+  <div class="glow" style="width:600px;height:600px;top:50%;left:50%;transform:translate(-50%,-50%);background:var(--purple);"></div>
+  <div class="opening-brand">
+    <img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/monday%20Logo/monday.com%20Logo.png" alt="monday.com" style="height:28px;flex-shrink:0;object-fit:contain">
+    <div class="opening-brand-div"></div>
+    <span>AI Work Platform</span>
+  </div>
+  <span class="line1" id="line1"></span>
+  <span class="line2" id="line2"></span>
+</div>
+
+<div class="slide" id="s1">
+  <div class="mission-inner">
+    <div class="mission-text">
+      <p class="eyebrow">Our Mission</p>
+      <h2>Empower teams to do their <em>best work</em> — together.</h2>
+    </div>
+    <div class="marquee-outer">
+      <div class="marquee-track" id="mqTrack">
+        <div class="mq-card"><div class="mq-av"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/012f240f3a87d4b9507b3306396ea0954ebb82f2.png" alt=""></div><div class="mq-info"><span class="mq-name">Alex</span><span class="mq-role">Marketing</span></div></div>
+        <div class="mq-card"><div class="mq-av"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/084fc1b320f94aa65233683f6d07e27bc528df49.png" alt=""></div><div class="mq-info"><span class="mq-name">Jordan</span><span class="mq-role">HR</span></div></div>
+        <div class="mq-card"><div class="mq-av"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/31fef8e27a4c799459c58ae163c55324da0a21d4.png" alt=""></div><div class="mq-info"><span class="mq-name">Sam</span><span class="mq-role">IT</span></div></div>
+        <div class="mq-card"><div class="mq-av"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/44c98f36561338e389a6bf8368546aa8aba3c0a7.png" alt=""></div><div class="mq-info"><span class="mq-name">Taylor</span><span class="mq-role">Sales</span></div></div>
+        <div class="mq-card"><div class="mq-av"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/4f1259d102c1081ca7d88367c1ec9d3487166104.png" alt=""></div><div class="mq-info"><span class="mq-name">Morgan</span><span class="mq-role">Operations</span></div></div>
+        <div class="mq-card"><div class="mq-av"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/840c44286a6c4e57e9df25a1565fdbb673fa3a6c.png" alt=""></div><div class="mq-info"><span class="mq-name">Riley</span><span class="mq-role">Product</span></div></div>
+        <div class="mq-card"><div class="mq-av"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/a8016eb62d3e284810c5691fa950de5343f7d776.png" alt=""></div><div class="mq-info"><span class="mq-name">Casey</span><span class="mq-role">PMO</span></div></div>
+        <div class="mq-card"><div class="mq-av"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/c7005ced01914c6b1f5e7c0f86f6d5e4e22d3e9f.png" alt=""></div><div class="mq-info"><span class="mq-name">Drew</span><span class="mq-role">Finance</span></div></div>
+        <div class="mq-card"><div class="mq-av"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/012f240f3a87d4b9507b3306396ea0954ebb82f2.png" alt=""></div><div class="mq-info"><span class="mq-name">Alex</span><span class="mq-role">Marketing</span></div></div>
+        <div class="mq-card"><div class="mq-av"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/084fc1b320f94aa65233683f6d07e27bc528df49.png" alt=""></div><div class="mq-info"><span class="mq-name">Jordan</span><span class="mq-role">HR</span></div></div>
+        <div class="mq-card"><div class="mq-av"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/31fef8e27a4c799459c58ae163c55324da0a21d4.png" alt=""></div><div class="mq-info"><span class="mq-name">Sam</span><span class="mq-role">IT</span></div></div>
+        <div class="mq-card"><div class="mq-av"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/44c98f36561338e389a6bf8368546aa8aba3c0a7.png" alt=""></div><div class="mq-info"><span class="mq-name">Taylor</span><span class="mq-role">Sales</span></div></div>
+        <div class="mq-card"><div class="mq-av"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/4f1259d102c1081ca7d88367c1ec9d3487166104.png" alt=""></div><div class="mq-info"><span class="mq-name">Morgan</span><span class="mq-role">Operations</span></div></div>
+        <div class="mq-card"><div class="mq-av"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/840c44286a6c4e57e9df25a1565fdbb673fa3a6c.png" alt=""></div><div class="mq-info"><span class="mq-name">Riley</span><span class="mq-role">Product</span></div></div>
+        <div class="mq-card"><div class="mq-av"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/a8016eb62d3e284810c5691fa950de5343f7d776.png" alt=""></div><div class="mq-info"><span class="mq-name">Casey</span><span class="mq-role">PMO</span></div></div>
+        <div class="mq-card"><div class="mq-av"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/c7005ced01914c6b1f5e7c0f86f6d5e4e22d3e9f.png" alt=""></div><div class="mq-info"><span class="mq-name">Drew</span><span class="mq-role">Finance</span></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" id="s2">
+  <div class="shift-wrap">
+    <p class="eyebrow">The Shift</p>
+    <h2>What's changed is how fast work can get done when people and agents work together.</h2>
+    <div class="ai-logos">
+      <div class="ai-logo">
+        <svg viewBox="0 0 28 14" style="fill:none;width:32px;height:16px">
+          <circle cx="3.5" cy="7" r="3.5" style="fill:#FF3D57"/>
+          <circle cx="14" cy="7" r="3.5" style="fill:#FF7B00"/>
+          <circle cx="24.5" cy="7" r="3.5" style="fill:#FFCC00"/>
+        </svg>
+        <span>monday</span>
+      </div>
+      <div class="ai-logo">
+        <svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 2c.967 2.051 1.637 4.242 1.953 6.515C16.228 9.162 18.18 10.4 20 12c-1.82 1.6-3.772 2.838-6.047 3.485C13.637 17.758 12.967 19.949 12 22c-.967-2.051-1.637-4.242-1.953-6.515C7.772 14.838 5.82 13.6 4 12c1.82-1.6 3.772-2.838 6.047-3.485C10.363 6.242 11.033 4.051 12 2z"/></svg>
+        <span>Gemini</span>
+      </div>
+      <div class="ai-logo">
+        <svg viewBox="0 0 24 24"><path d="M13.827 3.52h3.603L24 20.48h-3.603l-6.57-16.96zm-7.258 0h3.767L16.906 20.48h-3.674l-1.343-3.461H5.017l-1.344 3.46H0L6.57 3.522zm4.132 9.959L8.453 7.687 6.205 13.48H10.7z"/></svg>
+        <span>Claude</span>
+      </div>
+      <div class="ai-logo">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 3a4 4 0 1 1 0 8 4 4 0 0 1 0-8zm0 14.5a7.5 7.5 0 0 1-6-3c.022-2 4-3.1 6-3.1s5.978 1.1 6 3.1a7.5 7.5 0 0 1-6 3z"/></svg>
+        <span>Copilot</span>
+      </div>
+    </div>
+    <div class="pillars">
+      <div class="pillar"><div class="pillar-num">01</div><div class="pillar-title">Move faster</div><div class="pillar-desc">Agents handle routine work so your team never waits on the next step.</div></div>
+      <div class="pillar"><div class="pillar-num">02</div><div class="pillar-title">Stay focused</div><div class="pillar-desc">People focus on what actually moves the business forward.</div></div>
+      <div class="pillar"><div class="pillar-num">03</div><div class="pillar-title">Deliver results</div><div class="pillar-desc">Real business outcomes, not just completed tasks.</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" id="s3">
+  <div class="gap-wrap">
+    <div class="gap-eyebrow">
+      <p class="eyebrow">The Gap</p>
+      <h2>AI tools exist. The work still piles up.</h2>
+    </div>
+    <div class="gap-stats">
+      <div class="gap-stat">
+        <div class="gap-stat-num purple">77%</div>
+        <div class="gap-stat-label">of knowledge workers say they don't have enough time in the day to get their work done.</div>
+        <div class="gap-stat-yet"><div class="gap-stat-yet-line"></div><div class="gap-stat-yet-tag">yet</div><div class="gap-stat-yet-line"></div></div>
+        <div class="gap-stat-label" style="color:rgba(255,255,255,0.55)">they spend 60% of their day on coordination, not the actual work.</div>
+      </div>
+      <div class="gap-stat">
+        <div class="gap-stat-num teal">4.4h</div>
+        <div class="gap-stat-label">lost every week per employee searching for information and context that already exists somewhere.</div>
+        <div class="gap-stat-yet"><div class="gap-stat-yet-line"></div><div class="gap-stat-yet-tag">yet</div><div class="gap-stat-yet-line"></div></div>
+        <div class="gap-stat-label" style="color:rgba(255,255,255,0.55)">most AI tools still can't act on it — they only answer questions.</div>
+      </div>
+      <div class="gap-stat">
+        <div class="gap-stat-num white">$4.6T</div>
+        <div class="gap-stat-label">in productivity lost annually to inefficient work processes across global knowledge workers.</div>
+        <div class="gap-stat-yet"><div class="gap-stat-yet-line"></div><div class="gap-stat-yet-tag">yet</div><div class="gap-stat-yet-line"></div></div>
+        <div class="gap-stat-label" style="color:rgba(255,255,255,0.55)">most orgs are still managing projects and people the same way they did 10 years ago.</div>
+      </div>
+    </div>
+    <div class="gap-list">
+      <div class="gap-list-item">Status meetings that exist only to report what a board already shows</div>
+      <div class="gap-list-item">Approval chains that slow down decisions by days</div>
+      <div class="gap-list-item">Repetitive updates sent manually across teams</div>
+      <div class="gap-list-item">Onboarding that takes weeks when it could take days</div>
+      <div class="gap-list-item">Reports built from scratch every quarter</div>
+      <div class="gap-list-item">Follow-ups that fall through the cracks</div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" id="s4b">
+  <div class="sbs-wrap">
+    <div class="sbs-left">
+      <p class="sbs-eyebrow">The Answer</p>
+      <h2 class="sbs-heading">monday is the platform where people and agents work together.</h2>
+    </div>
+    <div class="sbs-right">
+      <div class="sbs-img-area">
+        <img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/MARKETING.png" class="sbs-img active" alt="Marketing">
+        <img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/HR.png" class="sbs-img" alt="HR">
+        <img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/IT.png" class="sbs-img" alt="IT">
+        <img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/Sales.png" class="sbs-img" alt="Sales">
+        <img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/OPERATIONS.png" class="sbs-img" alt="Operations">
+        <img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/PRODUCT.png" class="sbs-img" alt="Product">
+        <img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/PMO.png" class="sbs-img" alt="PMO">
+      </div>
+      <div class="sbs-tabs">
+        <button class="sbs-tab active" onclick="sbsGo(0);sbsStopAuto()">Marketing</button>
+        <button class="sbs-tab" onclick="sbsGo(1);sbsStopAuto()">HR</button>
+        <button class="sbs-tab" onclick="sbsGo(2);sbsStopAuto()">IT</button>
+        <button class="sbs-tab" onclick="sbsGo(3);sbsStopAuto()">Sales</button>
+        <button class="sbs-tab" onclick="sbsGo(4);sbsStopAuto()">Operations</button>
+        <button class="sbs-tab" onclick="sbsGo(5);sbsStopAuto()">Product</button>
+        <button class="sbs-tab" onclick="sbsGo(6);sbsStopAuto()">PMO</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" id="s5">
+  <div class="layers-top">
+    <p class="eyebrow">The Platform</p>
+    <h2>One platform. People and agents, working as one.</h2>
+    <p>monday brings together your team and your AI agents in a single, connected workspace.</p>
+  </div>
+  <div class="stage">
+    <div class="char char-p" id="charP">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 320" fill="none" width="100%" height="100%">
+        <circle cx="80" cy="68" r="40" fill="rgba(255,255,255,0.92)"/>
+        <rect x="36" y="118" width="88" height="104" rx="22" fill="rgba(255,255,255,0.88)"/>
+        <rect x="8" y="124" width="28" height="82" rx="14" fill="rgba(255,255,255,0.80)"/>
+        <rect x="124" y="124" width="28" height="82" rx="14" fill="rgba(255,255,255,0.80)"/>
+        <rect x="40" y="216" width="32" height="98" rx="16" fill="rgba(255,255,255,0.82)"/>
+        <rect x="88" y="216" width="32" height="98" rx="16" fill="rgba(255,255,255,0.82)"/>
+        <circle cx="68" cy="63" r="6" fill="rgba(0,0,0,0.30)"/>
+        <circle cx="92" cy="63" r="6" fill="rgba(0,0,0,0.30)"/>
+        <path d="M66 82 Q80 94 94 82" stroke="rgba(0,0,0,0.25)" stroke-width="3" stroke-linecap="round" fill="none"/>
+      </svg>
+    </div>
+    <div class="pills" id="pills">
+      <div class="pill active"><div class="pill-icon">🎯</div><div><div class="pill-title">Goals</div><div class="pill-desc">Shared objectives across people and agents</div></div></div>
+      <div class="pill"><div class="pill-icon">⚡</div><div><div class="pill-title">Automations</div><div class="pill-desc">Agents act on triggers, not just prompts</div></div></div>
+      <div class="pill"><div class="pill-icon">📊</div><div><div class="pill-title">Dashboards</div><div class="pill-desc">Real-time visibility for every stakeholder</div></div></div>
+    </div>
+    <div class="char char-a" id="charA">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 320" fill="none" width="100%" height="100%">
+        <rect x="34" y="26" width="92" height="90" rx="24" fill="#6161ff"/>
+        <rect x="46" y="42" width="68" height="48" rx="12" fill="rgba(0,0,0,0.45)"/>
+        <circle cx="69" cy="66" r="11" fill="#00d2d2"/>
+        <circle cx="91" cy="66" r="11" fill="#00d2d2"/>
+        <circle cx="69" cy="66" r="5" fill="white"/>
+        <circle cx="91" cy="66" r="5" fill="white"/>
+        <rect x="64" y="112" width="32" height="16" rx="7" fill="#5050dd"/>
+        <rect x="28" y="124" width="104" height="100" rx="24" fill="#6161ff"/>
+        <rect x="48" y="140" width="64" height="40" rx="10" fill="rgba(0,210,210,0.15)"/>
+        <line x1="54" y1="151" x2="106" y2="151" stroke="#00d2d2" stroke-width="1.5" opacity="0.7"/>
+        <line x1="54" y1="163" x2="100" y2="163" stroke="#00d2d2" stroke-width="1.5" opacity="0.5"/>
+        <line x1="54" y1="175" x2="90" y2="175" stroke="#00d2d2" stroke-width="1.5" opacity="0.35"/>
+        <rect x="2" y="128" width="26" height="84" rx="13" fill="#5050dd"/>
+        <rect x="132" y="128" width="26" height="84" rx="13" fill="#5050dd"/>
+        <rect x="34" y="220" width="36" height="94" rx="15" fill="#5050dd"/>
+        <rect x="90" y="220" width="36" height="94" rx="15" fill="#5050dd"/>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<div class="slide" id="s6">
+  <div class="glow" style="width:500px;height:500px;top:-50px;right:-100px;background:var(--teal);"></div>
+  <div class="glow" style="width:400px;height:400px;bottom:-50px;left:-50px;background:var(--purple);"></div>
+  <img class="s6-human" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/Human.png" alt="Human">
+  <img class="s6-agent" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/Agent.png" alt="Agent">
+  <div class="outcome-wrap">
+    <p class="eyebrow" style="color:var(--teal)">The Result</p>
+    <h2>Move at the speed your business demands.</h2>
+    <p>Less coordination. More execution. Teams that deliver results, not just manage processes. Growth that doesn't require headcount to match.</p>
+    <a href="#" class="cta" onclick="goTo(0);return false;">See it in action</a>
+  </div>
+</div>
+
+</div>
+
+<script>
+
+
+  // Option B — sbs gallery
+  let sbsCur = 0, sbsTimer = null;
+  function sbsGo(idx) {
+    document.querySelectorAll('.sbs-img').forEach((el,i) => el.classList.toggle('active', i===idx));
+    document.querySelectorAll('.sbs-tab').forEach((el,i) => el.classList.toggle('active', i===idx));
+    sbsCur = idx;
+  }
+  function sbsStartAuto() { clearInterval(sbsTimer); sbsCur = 0; sbsGo(0); sbsTimer = setInterval(() => sbsGo((sbsCur+1)%7), 3500); }
+  function sbsStopAuto()  { clearInterval(sbsTimer); }
+
+  // Dept gallery
+  const dgAvatars = [
+    'https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/012f240f3a87d4b9507b3306396ea0954ebb82f2.png',
+    'https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/084fc1b320f94aa65233683f6d07e27bc528df49.png',
+    'https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/31fef8e27a4c799459c58ae163c55324da0a21d4.png',
+    'https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/44c98f36561338e389a6bf8368546aa8aba3c0a7.png',
+    'https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/4f1259d102c1081ca7d88367c1ec9d3487166104.png',
+    'https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/840c44286a6c4e57e9df25a1565fdbb673fa3a6c.png',
+    'https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/a8016eb62d3e284810c5691fa950de5343f7d776.png',
+    'https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/c7005ced01914c6b1f5e7c0f86f6d5e4e22d3e9f.png',
+  ];
+  const dgDepts = [
+    {label:'Marketing', person:'Dan, Marketing Lead', personGrad:'linear-gradient(160deg,#fff0fa 0%,#ffd6f0 100%)',
+      prompt:'Create a campaign brief and generate 5 creative variations for our Q2 launch.',
+      agentReply:'Done — brief drafted, 5 variations ready for review in your board.',
+      avatars:[0,1,2], agentName:'Campaign Agent', agentIcon:'🎨'},
+    {label:'HR', person:'Shira, HR Director', personGrad:'linear-gradient(160deg,#f0fff4 0%,#d6ffe6 100%)',
+      prompt:'Summarise feedback from this quarter\'s engagement survey and flag key themes.',
+      agentReply:'3 key themes identified and ranked. Low scores flagged in 2 departments.',
+      avatars:[3,4,5], agentName:'HR Insights Agent', agentIcon:'📋'},
+    {label:'IT', person:'Lior, IT Manager', personGrad:'linear-gradient(160deg,#f0f4ff 0%,#d6e0ff 100%)',
+      prompt:'Auto-triage new tickets and assign to the right sub-team.',
+      agentReply:'14 tickets triaged. 3 critical escalated. SLA breach risk: 1 ticket.',
+      avatars:[6,7,0], agentName:'IT Ops Agent', agentIcon:'🛠️'},
+    {label:'Sales', person:'Noa, Sales Lead', personGrad:'linear-gradient(160deg,#fffbf0 0%,#fff0c8 100%)',
+      prompt:'Update all open deals with notes from today\'s calls and flag stalled ones.',
+      agentReply:'12 deals updated. 3 flagged as stalled — next step suggestions added.',
+      avatars:[1,2,3], agentName:'Pipeline Agent', agentIcon:'💼'},
+    {label:'Operations', person:'Eyal, COO', personGrad:'linear-gradient(160deg,#f0fbff 0%,#d6f4ff 100%)',
+      prompt:'Run a capacity check across all teams and surface where we\'re over-allocated.',
+      agentReply:'2 teams over capacity by 20%+. Reallocation options modelled and ready.',
+      avatars:[4,5,6], agentName:'Ops Agent', agentIcon:'⚙️'},
+    {label:'Product', person:'Yael, Product Lead', personGrad:'linear-gradient(160deg,#f4f0ff 0%,#e0d6ff 100%)',
+      prompt:'Group open feature requests by theme and link to relevant roadmap items.',
+      agentReply:'67 requests grouped into 8 themes. 3 already map to Q3 roadmap items.',
+      avatars:[7,0,1], agentName:'Product Agent', agentIcon:'🗺️'},
+    {label:'PMO', person:'Oren, PMO Lead', personGrad:'linear-gradient(160deg,#fff4f0 0%,#ffd6cc 100%)',
+      prompt:'Create a cross-project status roll-up for the board deck due Thursday.',
+      agentReply:'Roll-up complete. 2 projects at risk highlighted with mitigation options.',
+      avatars:[2,3,4], agentName:'PMO Agent', agentIcon:'📊'},
+  ];
+
+  // Navigation
+  let cur = 0;
+  const slides = document.querySelectorAll('.slide');
+  const dots   = document.querySelectorAll('.nav-dot');
+  const prog   = document.getElementById('prog');
+
+  function goTo(n) {
+    if (n < 0 || n >= slides.length) return;
+    slides[cur].classList.remove('active');
+    dots[cur].classList.remove('active');
+    cur = n;
+    slides[cur].classList.add('active');
+    dots[cur].classList.add('active');
+    prog.style.width = ((cur / (slides.length - 1)) * 100) + '%';
+    onEnter(cur);
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') goTo(cur + 1);
+    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   goTo(cur - 1);
+  });
+
+  let touchStartX = 0, touchStartY = 0;
+  document.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; touchStartY = e.touches[0].clientY; }, {passive:true});
+  document.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    const dy = e.changedTouches[0].clientY - touchStartY;
+    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) goTo(cur + (dx < 0 ? 1 : -1));
+    else if (Math.abs(dy) > Math.abs(dx) && Math.abs(dy) > 40) goTo(cur + (dy < 0 ? 1 : -1));
+  }, {passive:true});
+
+  function onEnter(n) {
+    if (n === 0) startTypewriter();
+    if (n === 1) { /* marquee auto-runs */ }
+    if (n === 3) { sbsStartAuto(); }
+    if (n === 4) startPlatform();
+  }
+
+  // Typewriter
+  const L1 = 'Work at the', L2 = 'speed of AI.';
+  let twTimer = null;
+  function startTypewriter() {
+    clearTimeout(twTimer);
+    const e1 = document.getElementById('line1'), e2 = document.getElementById('line2');
+    e1.textContent = ''; e2.textContent = '';
+    let i = 0;
+    function tick() {
+      if (i <= L1.length) { e1.textContent = L1.slice(0, i); i++; twTimer = setTimeout(tick, 55); }
+      else if (i <= L1.length + L2.length) { e2.textContent = L2.slice(0, i - L1.length); i++; twTimer = setTimeout(tick, 55); }
+    }
+    twTimer = setTimeout(tick, 400);
+  }
+
+  // Platform animation
+  let pillTimer = null, pillIdx = 0;
+  function startPlatform() {
+    const pills = document.querySelectorAll('.pill');
+    clearInterval(pillTimer);
+    pillIdx = 0;
+    pills.forEach(p => p.classList.remove('active'));
+    pills[0]?.classList.add('active');
+    setTimeout(() => {
+      document.getElementById('charP')?.classList.add('spread');
+      document.getElementById('charA')?.classList.add('spread');
+    }, 350);
+    pillTimer = setInterval(() => {
+      pills[pillIdx]?.classList.remove('active');
+      pillIdx = (pillIdx + 1) % pills.length;
+      pills[pillIdx]?.classList.add('active');
+    }, 2200);
+  }
+
+  // init
+  startTypewriter();
+  prog.style.width = '0%';
+
+  // Typewriter re-trigger stub (called from inline if needed)
+  function typeResults(t, l, fn) {
+    let i = 0; const el = document.getElementById(t);
+    if (!el) { fn && fn(); return; }
+    el.textContent = '';
+    function tick() { if (i <= l.length) { el.textContent = l.slice(0, i++); setTimeout(tick, 22); } else fn && fn(); }
+    tick();
+  }
+
+  function runDgDemo(idx, fn) {
+    setTimeout(() => {
+      typeResults('dgResult', dgDepts[idx % dgDepts.length].agentReply, () => {
+        setTimeout(() => { fn && fn(); }, 1200);
+      });
+    }, 42, 'short', () => {
+      });
+    }, 350);
+  }
+
+</script>
+</body>
+</html>
