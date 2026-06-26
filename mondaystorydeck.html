@@ -253,13 +253,13 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
   .gap-stat-num { font-size: clamp(52px, 16vw, 88px); }
 
   /* S4b – Department gallery */
-  #s4b { padding: 0 !important; justify-content: center; }
-  .sbs-wrap { display: flex !important; flex-direction: column !important; width: 100% !important; height: auto !important; gap: 0; }
-  .sbs-left { width: 100% !important; flex-shrink: 0; padding: 28px 20px 12px; text-align: center; }
+  #s4b { padding: 0 !important; justify-content: flex-start !important; }
+  .sbs-wrap { display: flex !important; flex-direction: column !important; width: 100% !important; height: 100% !important; gap: 0; }
+  .sbs-left { width: 100% !important; flex-shrink: 0; padding: 20px 20px 10px; text-align: center; }
   .sbs-eyebrow { margin-bottom: 4px; font-size: 8px; letter-spacing: 3px; }
   .sbs-heading { font-size: 15px; line-height: 1.3; }
-  .sbs-right { width: 100% !important; display: flex !important; flex-direction: column !important; }
-  .sbs-img-area { width: 100%; height: 54vw; position: relative; overflow: hidden; }
+  .sbs-right { flex: 1 !important; width: 100% !important; display: flex !important; flex-direction: column !important; min-height: 0; }
+  .sbs-img-area { flex: 1 !important; min-height: 40vw; width: 100%; position: relative; overflow: hidden; }
   .sbs-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; object-position: center center; }
   .sbs-tabs { flex-shrink: 0; gap: 5px; padding: 12px 10px 8px; }
   .sbs-tab { padding: 5px 11px; font-size: 10px; }
