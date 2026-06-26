@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>S2 Mobile Variants</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #111; font-family: 'Poppins', sans-serif; padding: 32px 16px 48px; }
+h1 { color: #fff; text-align: center; font-size: 18px; font-weight: 600; margin-bottom: 8px; letter-spacing: 1px; }
+.subtitle { color: rgba(255,255,255,0.4); text-align: center; font-size: 13px; margin-bottom: 32px; }
+.grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; max-width: 900px; margin: 0 auto; }
+.variant { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.label { color: #fff; font-size: 13px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; }
+.label span { color: #6161ff; }
+.sublabel { color: rgba(255,255,255,0.4); font-size: 11px; text-align: center; max-width: 280px; line-height: 1.5; }
+.phone { width: 320px; height: 640px; background: #000; border-radius: 36px; border: 2px solid rgba(255,255,255,0.12); overflow: hidden; position: relative; padding: 40px 20px 28px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0; flex-shrink: 0; }
+.phone::before { content: ''; position: absolute; top: 16px; left: 50%; transform: translateX(-50%); width: 60px; height: 4px; background: rgba(255,255,255,0.15); border-radius: 2px; }
+
+/* shared */
+.eyebrow { font-size: 9px; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; color: #6161ff; margin-bottom: 14px; }
+.heading { font-size: 20px; font-weight: 800; line-height: 1.2; color: #fff; text-align: center; margin-bottom: 0; }
+
+/* ── VARIANT A: Compact — logos bigger, pills titles-only 3col ── */
+.va { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 18px; }
+.va-logos { display: flex; justify-content: space-around; width: 100%; }
+.va-logo { display: flex; flex-direction: column; align-items: center; gap: 5px; opacity: 0.6; }
+.va-logo svg { width: 26px; height: 26px; fill: #fff; }
+.va-logo img { height: 22px; width: auto; filter: brightness(0) invert(1); }
+.va-logo span { font-size: 9px; color: #fff; letter-spacing: 0.5px; }
+.va-pillars { display: grid; grid-template-columns: repeat(3, 1fr); width: 100%; border-top: 1px solid rgba(255,255,255,0.08); }
+.va-pillar { padding: 12px 4px; border-right: 1px solid rgba(255,255,255,0.08); text-align: center; }
+.va-pillar:last-child { border-right: none; }
+.va-num { font-size: 9px; font-weight: 600; letter-spacing: 2px; color: #6161ff; margin-bottom: 6px; }
+.va-title { font-size: 12px; font-weight: 700; color: #fff; }
+
+/* ── VARIANT B: Bold Numbers — large colored numbers ── */
+.vb { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 18px; }
+.vb-logos { display: flex; justify-content: space-around; width: 100%; }
+.vb-logo { display: flex; flex-direction: column; align-items: center; gap: 5px; opacity: 0.55; }
+.vb-logo svg { width: 24px; height: 24px; fill: #fff; }
+.vb-logo img { height: 20px; width: auto; filter: brightness(0) invert(1); }
+.vb-logo span { font-size: 8px; color: #fff; }
+.vb-pillars { display: flex; gap: 0; width: 100%; }
+.vb-pillar { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 14px 4px; border-right: 1px solid rgba(255,255,255,0.08); }
+.vb-pillar:last-child { border-right: none; }
+.vb-bignum { font-size: 38px; font-weight: 800; line-height: 1; background: linear-gradient(135deg, #6161ff, #a084ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.vb-title { font-size: 11px; font-weight: 600; color: #fff; text-align: center; }
+
+/* ── VARIANT C: Pill Chips — horizontal scrollable chips ── */
+.vc { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 20px; }
+.vc-logos { display: flex; justify-content: space-around; width: 100%; }
+.vc-logo { display: flex; flex-direction: column; align-items: center; gap: 5px; opacity: 0.55; }
+.vc-logo svg { width: 24px; height: 24px; fill: #fff; }
+.vc-logo img { height: 20px; width: auto; filter: brightness(0) invert(1); }
+.vc-logo span { font-size: 8px; color: #fff; }
+.vc-chips { display: flex; flex-direction: column; gap: 8px; width: 100%; }
+.vc-chip { display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09); border-radius: 100px; padding: 9px 16px; }
+.vc-chip-num { font-size: 9px; font-weight: 700; color: #6161ff; letter-spacing: 2px; min-width: 20px; }
+.vc-chip-title { font-size: 13px; font-weight: 600; color: #fff; }
+.vc-chip-desc { font-size: 10px; color: rgba(255,255,255,0.35); margin-left: auto; }
+
+/* ── VARIANT D: Cards — 3 gradient cards ── */
+.vd { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 18px; }
+.vd-logos { display: flex; justify-content: space-around; width: 100%; background: rgba(255,255,255,0.04); border-radius: 12px; padding: 12px 8px; }
+.vd-logo { display: flex; flex-direction: column; align-items: center; gap: 5px; opacity: 0.7; }
+.vd-logo svg { width: 22px; height: 22px; fill: #fff; }
+.vd-logo img { height: 19px; width: auto; filter: brightness(0) invert(1); }
+.vd-logo span { font-size: 8px; color: #fff; }
+.vd-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; width: 100%; }
+.vd-card { background: rgba(97,97,255,0.1); border: 1px solid rgba(97,97,255,0.25); border-radius: 14px; padding: 14px 8px; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.vd-card-icon { font-size: 20px; }
+.vd-card-num { font-size: 8px; font-weight: 700; letter-spacing: 2px; color: #6161ff; }
+.vd-card-title { font-size: 11px; font-weight: 700; color: #fff; text-align: center; }
+
+@media (max-width: 720px) {
+  .grid { grid-template-columns: 1fr; }
+  .phone { width: 100%; max-width: 360px; height: 620px; }
+}
+</style>
+</head>
+<body>
+<h1>S2 — Mobile Variants</h1>
+<p class="subtitle">בחר וריאנט — ל-The Shift סלייד במובייל</p>
+
+<div class="grid">
+
+  <!-- VARIANT A -->
+  <div class="variant">
+    <div class="label"><span>A</span> — Compact Titles</div>
+    <div class="phone">
+      <div class="va">
+        <p class="eyebrow">The Shift</p>
+        <h2 class="heading" style="font-size:19px;margin-bottom:4px;">What's changed is how fast work can get done when people and agents work together.</h2>
+        <div class="va-logos">
+          <div class="va-logo"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/monday%20Logo/monday.com%20icon.png" alt="monday"><span>monday</span></div>
+          <div class="va-logo"><svg viewBox="0 0 24 24"><path d="M22.282 9.821a5.985 5.985 0 0 0-.516-4.91 6.046 6.046 0 0 0-6.51-2.9A6.065 6.065 0 0 0 4.981 4.18a5.985 5.985 0 0 0-3.998 2.9 6.046 6.046 0 0 0 .743 7.097 5.98 5.98 0 0 0 .51 4.911 6.051 6.051 0 0 0 6.515 2.9A5.985 5.985 0 0 0 13.26 24a6.056 6.056 0 0 0 5.772-4.206 5.99 5.99 0 0 0 3.997-2.9 6.056 6.056 0 0 0-.747-7.073zM13.26 22.43a4.476 4.476 0 0 1-2.876-1.04l.141-.081 4.779-2.758a.795.795 0 0 0 .392-.681v-6.737l2.02 1.168a.071.071 0 0 1 .038.052v5.583a4.504 4.504 0 0 1-4.494 4.494zM3.6 18.304a4.47 4.47 0 0 1-.535-3.014l.142.085 4.783 2.759a.771.771 0 0 0 .78 0l5.843-3.369v2.332a.08.08 0 0 1-.032.065L9.74 19.95a4.5 4.5 0 0 1-6.14-1.646zM2.34 7.896a4.485 4.485 0 0 1 2.366-1.973V11.6a.766.766 0 0 0 .388.677l5.815 3.355-2.02 1.168a.076.076 0 0 1-.071 0L4.01 14.3A4.501 4.501 0 0 1 2.34 7.896zm16.597 3.855l-5.843-3.372 2.02-1.164a.076.076 0 0 1 .072 0l4.807 2.779a4.504 4.504 0 0 1-.695 8.115V12.48a.786.786 0 0 0-.36-.729zm2.01-3.023l-.141-.085-4.774-2.782a.776.776 0 0 0-.785 0L9.409 9.23V6.897a.066.066 0 0 1 .028-.061l4.807-2.774a4.5 4.5 0 0 1 6.68 4.66zm-12.64 4.135l-2.02-1.164a.08.08 0 0 1-.038-.057V6.075a4.5 4.5 0 0 1 7.375-3.453l-.142.08L8.704 5.46a.795.795 0 0 0-.393.681zm1.097-2.365l2.602-1.5 2.607 1.5v2.999l-2.597 1.5-2.607-1.5z"/></svg><span>ChatGPT</span></div>
+          <div class="va-logo"><svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 2c.967 2.051 1.637 4.242 1.953 6.515C16.228 9.162 18.18 10.4 20 12c-1.82 1.6-3.772 2.838-6.047 3.485C13.637 17.758 12.967 19.949 12 22c-.967-2.051-1.637-4.242-1.953-6.515C7.772 14.838 5.82 13.6 4 12c1.82-1.6 3.772-2.838 6.047-3.485C10.363 6.242 11.033 4.051 12 2z"/></svg><span>Gemini</span></div>
+          <div class="va-logo"><svg viewBox="0 0 24 24"><path d="M13.827 3.52h3.603L24 20.48h-3.603l-6.57-16.96zm-7.258 0h3.767L16.906 20.48h-3.674l-1.343-3.461H5.017l-1.344 3.46H0L6.57 3.522zm4.132 9.959L8.453 7.687 6.205 13.48H10.7z"/></svg><span>Claude</span></div>
+          <div class="va-logo"><svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 3a4 4 0 1 1 0 8 4 4 0 0 1 0-8zm0 14.5a7.5 7.5 0 0 1-6-3c.022-2 4-3.1 6-3.1s5.978 1.1 6 3.1a7.5 7.5 0 0 1-6 3z"/></svg><span>Copilot</span></div>
+        </div>
+        <div class="va-pillars">
+          <div class="va-pillar"><div class="va-num">01</div><div class="va-title">Move faster</div></div>
+          <div class="va-pillar"><div class="va-num">02</div><div class="va-title">Stay focused</div></div>
+          <div class="va-pillar"><div class="va-num">03</div><div class="va-title">Deliver results</div></div>
+        </div>
+      </div>
+    </div>
+    <p class="sublabel">לוגואים ב-opacity גבוה יותר. Pillars — כותרות בלבד, 3 עמודות</p>
+  </div>
+
+  <!-- VARIANT B -->
+  <div class="variant">
+    <div class="label"><span>B</span> — Bold Numbers</div>
+    <div class="phone">
+      <div class="vb">
+        <p class="eyebrow">The Shift</p>
+        <h2 class="heading" style="font-size:19px;margin-bottom:4px;">What's changed is how fast work can get done when people and agents work together.</h2>
+        <div class="vb-logos">
+          <div class="vb-logo"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/monday%20Logo/monday.com%20icon.png" alt="monday"><span>monday</span></div>
+          <div class="vb-logo"><svg viewBox="0 0 24 24"><path d="M22.282 9.821a5.985 5.985 0 0 0-.516-4.91 6.046 6.046 0 0 0-6.51-2.9A6.065 6.065 0 0 0 4.981 4.18a5.985 5.985 0 0 0-3.998 2.9 6.046 6.046 0 0 0 .743 7.097 5.98 5.98 0 0 0 .51 4.911 6.051 6.051 0 0 0 6.515 2.9A5.985 5.985 0 0 0 13.26 24a6.056 6.056 0 0 0 5.772-4.206 5.99 5.99 0 0 0 3.997-2.9 6.056 6.056 0 0 0-.747-7.073zM13.26 22.43a4.476 4.476 0 0 1-2.876-1.04l.141-.081 4.779-2.758a.795.795 0 0 0 .392-.681v-6.737l2.02 1.168a.071.071 0 0 1 .038.052v5.583a4.504 4.504 0 0 1-4.494 4.494zM3.6 18.304a4.47 4.47 0 0 1-.535-3.014l.142.085 4.783 2.759a.771.771 0 0 0 .78 0l5.843-3.369v2.332a.08.08 0 0 1-.032.065L9.74 19.95a4.5 4.5 0 0 1-6.14-1.646zM2.34 7.896a4.485 4.485 0 0 1 2.366-1.973V11.6a.766.766 0 0 0 .388.677l5.815 3.355-2.02 1.168a.076.076 0 0 1-.071 0L4.01 14.3A4.501 4.501 0 0 1 2.34 7.896zm16.597 3.855l-5.843-3.372 2.02-1.164a.076.076 0 0 1 .072 0l4.807 2.779a4.504 4.504 0 0 1-.695 8.115V12.48a.786.786 0 0 0-.36-.729zm2.01-3.023l-.141-.085-4.774-2.782a.776.776 0 0 0-.785 0L9.409 9.23V6.897a.066.066 0 0 1 .028-.061l4.807-2.774a4.5 4.5 0 0 1 6.68 4.66zm-12.64 4.135l-2.02-1.164a.08.08 0 0 1-.038-.057V6.075a4.5 4.5 0 0 1 7.375-3.453l-.142.08L8.704 5.46a.795.795 0 0 0-.393.681zm1.097-2.365l2.602-1.5 2.607 1.5v2.999l-2.597 1.5-2.607-1.5z"/></svg><span>ChatGPT</span></div>
+          <div class="vb-logo"><svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 2c.967 2.051 1.637 4.242 1.953 6.515C16.228 9.162 18.18 10.4 20 12c-1.82 1.6-3.772 2.838-6.047 3.485C13.637 17.758 12.967 19.949 12 22c-.967-2.051-1.637-4.242-1.953-6.515C7.772 14.838 5.82 13.6 4 12c1.82-1.6 3.772-2.838 6.047-3.485C10.363 6.242 11.033 4.051 12 2z"/></svg><span>Gemini</span></div>
+          <div class="vb-logo"><svg viewBox="0 0 24 24"><path d="M13.827 3.52h3.603L24 20.48h-3.603l-6.57-16.96zm-7.258 0h3.767L16.906 20.48h-3.674l-1.343-3.461H5.017l-1.344 3.46H0L6.57 3.522zm4.132 9.959L8.453 7.687 6.205 13.48H10.7z"/></svg><span>Claude</span></div>
+          <div class="vb-logo"><svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 3a4 4 0 1 1 0 8 4 4 0 0 1 0-8zm0 14.5a7.5 7.5 0 0 1-6-3c.022-2 4-3.1 6-3.1s5.978 1.1 6 3.1a7.5 7.5 0 0 1-6 3z"/></svg><span>Copilot</span></div>
+        </div>
+        <div class="vb-pillars">
+          <div class="vb-pillar"><div class="vb-bignum">01</div><div class="vb-title">Move faster</div></div>
+          <div class="vb-pillar"><div class="vb-bignum">02</div><div class="vb-title">Stay focused</div></div>
+          <div class="vb-pillar"><div class="vb-bignum">03</div><div class="vb-title">Deliver results</div></div>
+        </div>
+      </div>
+    </div>
+    <p class="sublabel">מספרים גדולים וצבעוניים במקום טקסט — ויזואלי וחזק יותר</p>
+  </div>
+
+  <!-- VARIANT C -->
+  <div class="variant">
+    <div class="label"><span>C</span> — Pill Rows</div>
+    <div class="phone">
+      <div class="vc">
+        <p class="eyebrow">The Shift</p>
+        <h2 class="heading" style="font-size:18px;margin-bottom:4px;">What's changed is how fast work can get done when people and agents work together.</h2>
+        <div class="vc-logos">
+          <div class="vc-logo"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/monday%20Logo/monday.com%20icon.png" alt="monday"><span>monday</span></div>
+          <div class="vc-logo"><svg viewBox="0 0 24 24"><path d="M22.282 9.821a5.985 5.985 0 0 0-.516-4.91 6.046 6.046 0 0 0-6.51-2.9A6.065 6.065 0 0 0 4.981 4.18a5.985 5.985 0 0 0-3.998 2.9 6.046 6.046 0 0 0 .743 7.097 5.98 5.98 0 0 0 .51 4.911 6.051 6.051 0 0 0 6.515 2.9A5.985 5.985 0 0 0 13.26 24a6.056 6.056 0 0 0 5.772-4.206 5.99 5.99 0 0 0 3.997-2.9 6.056 6.056 0 0 0-.747-7.073zM13.26 22.43a4.476 4.476 0 0 1-2.876-1.04l.141-.081 4.779-2.758a.795.795 0 0 0 .392-.681v-6.737l2.02 1.168a.071.071 0 0 1 .038.052v5.583a4.504 4.504 0 0 1-4.494 4.494zM3.6 18.304a4.47 4.47 0 0 1-.535-3.014l.142.085 4.783 2.759a.771.771 0 0 0 .78 0l5.843-3.369v2.332a.08.08 0 0 1-.032.065L9.74 19.95a4.5 4.5 0 0 1-6.14-1.646zM2.34 7.896a4.485 4.485 0 0 1 2.366-1.973V11.6a.766.766 0 0 0 .388.677l5.815 3.355-2.02 1.168a.076.076 0 0 1-.071 0L4.01 14.3A4.501 4.501 0 0 1 2.34 7.896zm16.597 3.855l-5.843-3.372 2.02-1.164a.076.076 0 0 1 .072 0l4.807 2.779a4.504 4.504 0 0 1-.695 8.115V12.48a.786.786 0 0 0-.36-.729zm2.01-3.023l-.141-.085-4.774-2.782a.776.776 0 0 0-.785 0L9.409 9.23V6.897a.066.066 0 0 1 .028-.061l4.807-2.774a4.5 4.5 0 0 1 6.68 4.66zm-12.64 4.135l-2.02-1.164a.08.08 0 0 1-.038-.057V6.075a4.5 4.5 0 0 1 7.375-3.453l-.142.08L8.704 5.46a.795.795 0 0 0-.393.681zm1.097-2.365l2.602-1.5 2.607 1.5v2.999l-2.597 1.5-2.607-1.5z"/></svg><span>ChatGPT</span></div>
+          <div class="vc-logo"><svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 2c.967 2.051 1.637 4.242 1.953 6.515C16.228 9.162 18.18 10.4 20 12c-1.82 1.6-3.772 2.838-6.047 3.485C13.637 17.758 12.967 19.949 12 22c-.967-2.051-1.637-4.242-1.953-6.515C7.772 14.838 5.82 13.6 4 12c1.82-1.6 3.772-2.838 6.047-3.485C10.363 6.242 11.033 4.051 12 2z"/></svg><span>Gemini</span></div>
+          <div class="vc-logo"><svg viewBox="0 0 24 24"><path d="M13.827 3.52h3.603L24 20.48h-3.603l-6.57-16.96zm-7.258 0h3.767L16.906 20.48h-3.674l-1.343-3.461H5.017l-1.344 3.46H0L6.57 3.522zm4.132 9.959L8.453 7.687 6.205 13.48H10.7z"/></svg><span>Claude</span></div>
+          <div class="vc-logo"><svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 3a4 4 0 1 1 0 8 4 4 0 0 1 0-8zm0 14.5a7.5 7.5 0 0 1-6-3c.022-2 4-3.1 6-3.1s5.978 1.1 6 3.1a7.5 7.5 0 0 1-6 3z"/></svg><span>Copilot</span></div>
+        </div>
+        <div class="vc-chips">
+          <div class="vc-chip"><span class="vc-chip-num">01</span><span class="vc-chip-title">Move faster</span><span class="vc-chip-desc">→</span></div>
+          <div class="vc-chip"><span class="vc-chip-num">02</span><span class="vc-chip-title">Stay focused</span><span class="vc-chip-desc">→</span></div>
+          <div class="vc-chip"><span class="vc-chip-num">03</span><span class="vc-chip-title">Deliver results</span><span class="vc-chip-desc">→</span></div>
+        </div>
+      </div>
+    </div>
+    <p class="sublabel">Pills עגולות לכל pillar — נקי ומינימלי, כל שורה בולטת</p>
+  </div>
+
+  <!-- VARIANT D -->
+  <div class="variant">
+    <div class="label"><span>D</span> — Icon Cards</div>
+    <div class="phone">
+      <div class="vd">
+        <p class="eyebrow">The Shift</p>
+        <h2 class="heading" style="font-size:18px;margin-bottom:4px;">What's changed is how fast work can get done when people and agents work together.</h2>
+        <div class="vd-logos">
+          <div class="vd-logo"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/monday%20Logo/monday.com%20icon.png" alt="monday"><span>monday</span></div>
+          <div class="vd-logo"><svg viewBox="0 0 24 24"><path d="M22.282 9.821a5.985 5.985 0 0 0-.516-4.91 6.046 6.046 0 0 0-6.51-2.9A6.065 6.065 0 0 0 4.981 4.18a5.985 5.985 0 0 0-3.998 2.9 6.046 6.046 0 0 0 .743 7.097 5.98 5.98 0 0 0 .51 4.911 6.051 6.051 0 0 0 6.515 2.9A5.985 5.985 0 0 0 13.26 24a6.056 6.056 0 0 0 5.772-4.206 5.99 5.99 0 0 0 3.997-2.9 6.056 6.056 0 0 0-.747-7.073zM13.26 22.43a4.476 4.476 0 0 1-2.876-1.04l.141-.081 4.779-2.758a.795.795 0 0 0 .392-.681v-6.737l2.02 1.168a.071.071 0 0 1 .038.052v5.583a4.504 4.504 0 0 1-4.494 4.494zM3.6 18.304a4.47 4.47 0 0 1-.535-3.014l.142.085 4.783 2.759a.771.771 0 0 0 .78 0l5.843-3.369v2.332a.08.08 0 0 1-.032.065L9.74 19.95a4.5 4.5 0 0 1-6.14-1.646zM2.34 7.896a4.485 4.485 0 0 1 2.366-1.973V11.6a.766.766 0 0 0 .388.677l5.815 3.355-2.02 1.168a.076.076 0 0 1-.071 0L4.01 14.3A4.501 4.501 0 0 1 2.34 7.896zm16.597 3.855l-5.843-3.372 2.02-1.164a.076.076 0 0 1 .072 0l4.807 2.779a4.504 4.504 0 0 1-.695 8.115V12.48a.786.786 0 0 0-.36-.729zm2.01-3.023l-.141-.085-4.774-2.782a.776.776 0 0 0-.785 0L9.409 9.23V6.897a.066.066 0 0 1 .028-.061l4.807-2.774a4.5 4.5 0 0 1 6.68 4.66zm-12.64 4.135l-2.02-1.164a.08.08 0 0 1-.038-.057V6.075a4.5 4.5 0 0 1 7.375-3.453l-.142.08L8.704 5.46a.795.795 0 0 0-.393.681zm1.097-2.365l2.602-1.5 2.607 1.5v2.999l-2.597 1.5-2.607-1.5z"/></svg><span>ChatGPT</span></div>
+          <div class="vd-logo"><svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 2c.967 2.051 1.637 4.242 1.953 6.515C16.228 9.162 18.18 10.4 20 12c-1.82 1.6-3.772 2.838-6.047 3.485C13.637 17.758 12.967 19.949 12 22c-.967-2.051-1.637-4.242-1.953-6.515C7.772 14.838 5.82 13.6 4 12c1.82-1.6 3.772-2.838 6.047-3.485C10.363 6.242 11.033 4.051 12 2z"/></svg><span>Gemini</span></div>
+          <div class="vd-logo"><svg viewBox="0 0 24 24"><path d="M13.827 3.52h3.603L24 20.48h-3.603l-6.57-16.96zm-7.258 0h3.767L16.906 20.48h-3.674l-1.343-3.461H5.017l-1.344 3.46H0L6.57 3.522zm4.132 9.959L8.453 7.687 6.205 13.48H10.7z"/></svg><span>Claude</span></div>
+          <div class="vd-logo"><svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 3a4 4 0 1 1 0 8 4 4 0 0 1 0-8zm0 14.5a7.5 7.5 0 0 1-6-3c.022-2 4-3.1 6-3.1s5.978 1.1 6 3.1a7.5 7.5 0 0 1-6 3z"/></svg><span>Copilot</span></div>
+        </div>
+        <div class="vd-cards">
+          <div class="vd-card"><div class="vd-card-icon">⚡</div><div class="vd-card-num">01</div><div class="vd-card-title">Move faster</div></div>
+          <div class="vd-card"><div class="vd-card-icon">🎯</div><div class="vd-card-num">02</div><div class="vd-card-title">Stay focused</div></div>
+          <div class="vd-card"><div class="vd-card-icon">📈</div><div class="vd-card-num">03</div><div class="vd-card-title">Deliver results</div></div>
+        </div>
+      </div>
+    </div>
+    <p class="sublabel">כרטיסיות עם אייקון + מספר + כותרת — ויזואלי, בולט, קל לסריקה</p>
+  </div>
+
+</div>
+</body>
+</html>
