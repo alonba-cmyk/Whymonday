@@ -46,35 +46,28 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
 .opening-brand img { height:24px; opacity:0.85; }
 .opening-brand-div { width:1px; height:20px; background:rgba(255,255,255,0.15); }
 .opening-brand span { font-size:11px; font-weight:500; letter-spacing:3px; text-transform:uppercase; color:rgba(255,255,255,0.35); }
-.line1, .line2 { display:block; font-weight:800; line-height:1.1; letter-spacing:-1.5px; }
-.line1 { font-size:clamp(32px,6vw,88px); color:#fff; }
-.line2 { font-size:clamp(32px,6vw,88px); background:linear-gradient(90deg,var(--purple),var(--teal)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.line1 { font-size:clamp(36px,5.5vw,72px); font-weight:800; line-height:1.05; letter-spacing:-1.5px; display:block; background:linear-gradient(135deg,#fff 40%,rgba(255,255,255,0.6)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; min-height:1.1em; }
+.line2 { font-size:clamp(18px,2.5vw,34px); font-weight:300; line-height:1.2; color:var(--dim); display:block; margin-top:16px; min-height:1.3em; }
+.cursor { display:inline-block; width:2px; background:var(--purple); margin-left:3px; animation:blink 0.9s infinite; vertical-align:middle; }
+.cursor.tall { height:clamp(30px,4.5vw,58px); }
+.cursor.short { height:clamp(14px,2vw,28px); }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
 
 /* S1 */
-#s1 { padding:0; background:#000; }
-.mission-inner { width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:40px; padding:60px 80px; }
-.mission-text { text-align:center; max-width:680px; }
-.mission-text p.eyebrow { margin-bottom:16px; }
-.mission-text h2 { font-size:clamp(24px,3.5vw,52px); font-weight:800; line-height:1.1; letter-spacing:-1px; }
-.mission-text h2 em { font-style:normal; background:linear-gradient(90deg,var(--purple),var(--teal)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
-.marquee-outer { width:100%; overflow:hidden; position:relative; }
-.marquee-outer::before, .marquee-outer::after { content:''; position:absolute; top:0; bottom:0; width:80px; z-index:2; pointer-events:none; }
-.marquee-outer::before { left:0; background:linear-gradient(to right,#000,transparent); }
-.marquee-outer::after { right:0; background:linear-gradient(to left,#000,transparent); }
-.marquee-track { display:flex; gap:12px; width:max-content; animation:marquee 28s linear infinite; }
-.marquee-track:hover { animation-play-state:paused; }
-.mq-card { flex-shrink:0; background:var(--card); border:1px solid var(--border); border-radius:12px; padding:12px 16px; display:flex; align-items:center; gap:10px; min-width:160px; }
-.mq-av { width:32px; height:32px; border-radius:50%; overflow:hidden; flex-shrink:0; }
-.mq-av img { width:100%; height:100%; object-fit:cover; }
-.mq-info { display:flex; flex-direction:column; gap:2px; }
-.mq-name { font-size:11px; font-weight:600; color:#fff; }
-.mq-role { font-size:9px; color:var(--dim); text-transform:uppercase; letter-spacing:1px; }
-@keyframes marquee { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
-
-/* S2 */
-#s2 { text-align:center; }
-.shift-wrap { max-width:800px; }
-.shift-wrap h2 { font-size:clamp(22px,3.5vw,52px); font-weight:800; line-height:1.1; letter-spacing:-1px; margin-bottom:clamp(20px,3vh,40px); }
+#s1 { padding:60px 0; justify-content:center; }
+.mission-inner { display:flex; flex-direction:column; align-items:center; justify-content:center; width:100%; height:100%; gap:40px; }
+.mission-text { text-align:center; padding:0 120px; margin-bottom:0; }
+.mission-text h1 { font-size:clamp(24px,2.8vw,40px); font-weight:700; line-height:1.2; }
+.mq-wrap { width:100%; overflow:hidden; -webkit-mask-image:linear-gradient(to right,transparent,black 8%,black 92%,transparent); mask-image:linear-gradient(to right,transparent,black 8%,black 92%,transparent); }
+.mq-track { display:flex; gap:14px; width:max-content; animation:mq 48s linear infinite; padding:4px 0 6px; }
+.mq-track:hover { animation-play-state:paused; }
+@keyframes mq { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+.mq-card { width:200px; background:var(--card); border:1px solid var(--border); border-radius:14px; overflow:hidden; flex-shrink:0; transition:background 0.3s,transform 0.3s; }
+.mq-card:hover { background:rgba(255,255,255,0.07); transform:translateY(-3px); }
+.mq-dept-img { width:100%; height:140px; object-fit:contain; object-position:bottom center; display:block; background:rgba(255,255,255,0.02); }
+.mq-dept-info { padding:10px 14px 14px; }
+.mq-name { font-size:13px; font-weight:700; display:block; margin-bottom:4px; }
+.mq-desc { font-size:11px; color:var(--dim); font-weight:300; line-height:1.5; }
 
 /* AI Logos row */
 .ai-logos { display:flex; align-items:center; justify-content:center; gap:32px; margin:24px 0 32px; flex-wrap:wrap; }
@@ -82,36 +75,38 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
 .ai-logo:hover { opacity:0.55; }
 .ai-logo svg { width:32px; height:32px; fill:#fff; }
 .ai-logo span { font-size:10px; font-weight:500; color:#fff; letter-spacing:1px; }
+
 /* S2 */
 #s2 { text-align:center; }
+.shift-wrap { max-width:900px; width:100%; }
+.shift-wrap h2 { font-size:clamp(22px,3vw,48px); font-weight:700; line-height:1.2; margin-bottom:clamp(24px,4vh,48px); }
 .pillars { display:grid; grid-template-columns:repeat(3,1fr); border-top:1px solid var(--border); }
-.pillar { padding:clamp(16px,2.5vh,32px) clamp(12px,2vw,32px); border-right:1px solid var(--border); }
+.pillar { padding:clamp(16px,3vh,32px) 28px; text-align:left; border-right:1px solid var(--border); }
 .pillar:last-child { border-right:none; }
-.pillar-num { font-size:10px; font-weight:700; letter-spacing:3px; color:var(--purple); margin-bottom:8px; }
-.pillar-title { font-size:clamp(13px,1.2vw,16px); font-weight:700; margin-bottom:8px; }
-.pillar-desc { font-size:clamp(10px,0.9vw,13px); color:var(--dim); line-height:1.7; }
+.pillar-num { font-size:10px; font-weight:600; letter-spacing:3px; color:var(--purple); text-transform:uppercase; margin-bottom:14px; }
+.pillar-title { font-size:18px; font-weight:700; margin-bottom:10px; }
+.pillar-desc { font-size:12px; color:var(--dim); font-weight:300; line-height:1.7; }
 
 /* S3 */
-#s3 { }
-.gap-wrap { max-width:900px; width:100%; }
-.gap-eyebrow { text-align:center; margin-bottom:clamp(24px,4vh,48px); }
-.gap-eyebrow h2 { font-size:clamp(22px,3.5vw,52px); font-weight:800; line-height:1.1; letter-spacing:-1px; margin-top:12px; }
-.gap-stats { display:grid; grid-template-columns:repeat(3,1fr); gap:0; border:1px solid var(--border); border-radius:16px; overflow:hidden; }
-.gap-stat { padding:clamp(20px,3vh,40px) clamp(16px,2vw,32px); border-right:1px solid var(--border); display:flex; flex-direction:column; }
-.gap-stat:last-child { border-right:none; }
-.gap-stat-num { font-size:clamp(40px,6vw,80px); font-weight:800; line-height:1; letter-spacing:-2px; }
-.gap-stat-num.purple { color:var(--purple); }
-.gap-stat-num.teal   { color:var(--teal); }
-.gap-stat-num.white  { color:#fff; }
-.gap-stat-label { font-size:clamp(11px,1vw,14px); color:var(--dim); line-height:1.6; margin-top:12px; }
-.gap-stat-yet { display:flex; align-items:center; gap:8px; margin-top:auto; padding-top:16px; }
-.gap-stat-yet-line { flex:1; height:1px; background:var(--border); }
-.gap-stat-yet-tag { font-size:9px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,0.2); }
-.gap-list { margin-top:clamp(20px,3vh,36px); display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
-.gap-list-item { display:flex; align-items:flex-start; gap:10px; background:var(--card); border:1px solid var(--border); border-radius:10px; padding:14px 16px; font-size:clamp(10px,0.85vw,12px); color:var(--dim); line-height:1.6; }
-.gap-list-item::before { content:'→'; color:var(--purple); flex-shrink:0; font-size:12px; }
+#s3 { align-items:center; text-align:center; }
+.gap-wrap { max-width:860px; width:100%; display:flex; flex-direction:column; align-items:center; gap:clamp(16px,2.5vh,32px); }
+.gap-stmt { font-size:clamp(18px,2.2vw,34px); font-weight:700; line-height:1.25; color:rgba(255,255,255,0.65); }
+.gap-stats { display:flex; align-items:center; justify-content:center; gap:clamp(20px,5vw,80px); }
+.gap-stat-item { text-align:center; }
+.gap-stat-num { font-size:clamp(64px,10vw,140px); font-weight:800; line-height:1; background:linear-gradient(135deg,#fff 30%,rgba(255,255,255,0.35)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.gap-stat-num sup { font-size:38%; vertical-align:top; margin-top:0.2em; }
+.gap-stat-label { font-size:clamp(10px,1vw,13px); color:var(--dim); font-weight:300; line-height:1.6; max-width:200px; margin:6px auto 0; }
+.gap-stat-yet { display:flex; flex-direction:column; align-items:center; gap:8px; flex-shrink:0; }
+.gap-stat-yet-line { width:1px; height:clamp(28px,4vh,48px); background:rgba(255,255,255,0.12); }
+.gap-stat-yet-text { font-size:9px; color:rgba(255,255,255,0.22); letter-spacing:2px; text-transform:uppercase; }
+.gap-source { font-size:9px; color:rgba(255,255,255,0.18); letter-spacing:1px; text-transform:uppercase; }
+.gap-list { display:flex; gap:clamp(12px,3vw,40px); border-top:1px solid var(--border); padding-top:clamp(12px,2vh,24px); width:100%; }
+.gap-pt { flex:1; text-align:left; opacity:0; transform:translateY(14px); transition:all 0.5s; }
+.gap-pt.show { opacity:1; transform:translateY(0); }
+.gap-num { font-size:10px; font-weight:600; letter-spacing:3px; color:var(--purple); margin-bottom:8px; }
+.gap-text { font-size:clamp(10px,0.9vw,12px); color:rgba(255,255,255,0.22); font-weight:300; line-height:1.7; }
 
-/* S4b – side-by-side: text left, image+tabs right */
+/* S4b – side-by-side */
 #s4b { background:#000; padding:0; overflow:hidden; }
 .sbs-wrap { display:flex; flex-direction:row; width:100%; height:100%; }
 .sbs-left { width:34%; display:flex; flex-direction:column; justify-content:center; padding:60px 28px 60px 72px; flex-shrink:0; }
@@ -125,17 +120,18 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
 .sbs-tab { padding:7px 18px; background:transparent; border:1px solid rgba(255,255,255,0.18); border-radius:100px; font-family:'Poppins',sans-serif; font-size:12px; font-weight:500; color:rgba(255,255,255,0.45); cursor:pointer; transition:all .25s; }
 .sbs-tab.active, .sbs-tab:hover { background:var(--purple); border-color:var(--purple); color:#fff; }
 
-/* S5 – Platform */
-#s5 { padding:60px 80px 0; justify-content:flex-start; }
-.layers-top { text-align:center; margin-bottom:clamp(20px,3vh,36px); }
-.layers-top h2 { font-size:clamp(22px,2.8vw,42px); font-weight:800; line-height:1.1; letter-spacing:-0.5px; margin-bottom:12px; }
-.layers-top p { font-size:clamp(12px,1vw,15px); color:var(--dim); max-width:480px; margin:0 auto; }
-.stage { display:flex; align-items:flex-end; justify-content:center; gap:clamp(16px,3vw,48px); margin-bottom:clamp(16px,2.5vh,28px); }
-.char { width:clamp(100px,11vw,160px); height:clamp(200px,22vw,320px); flex-shrink:0; }
-.char svg { width:100%; height:100%; }
-.char-p { position:relative; }
-.char-a { position:relative; }
-.pills { display:flex; flex-direction:column; gap:10px; width:clamp(200px,28vw,360px); }
+/* S5 */
+#s5 { flex-direction:column; padding:40px 80px 0; }
+.layers-top { text-align:center; margin-bottom:24px; }
+.layers-top h2 { font-size:clamp(24px,2.8vw,40px); font-weight:700; margin-bottom:8px; }
+.layers-top p { font-size:14px; color:var(--dim); }
+.layers-scene { position:relative; width:100%; max-width:1200px; flex:1; display:flex; align-items:center; justify-content:center; min-height:0; overflow:hidden; }
+.char { position:absolute; z-index:10; height:clamp(280px,62vh,480px); object-fit:contain; bottom:0; transition:transform 1.3s cubic-bezier(0.4,0,0.2,1); }
+.char-p { left:-20px; transform:translateX(100px); filter:drop-shadow(0 16px 32px rgba(0,0,0,0.5)); }
+.char-p.spread { transform:translateX(-20px); }
+.char-a { right:-20px; left:auto; transform:translateX(-100px); filter:drop-shadow(0 16px 32px rgba(97,97,255,0.3)); }
+.char-a.spread { transform:translateX(20px); }
+.pills-center { position:relative; z-index:20; display:flex; flex-direction:column; gap:12px; width:clamp(200px,28vw,360px); }
 .pill { display:flex; align-items:center; gap:12px; background:var(--card); border:1px solid var(--border); border-radius:100px; padding:10px 16px; transition:all .4s; }
 .pill.active { background:rgba(97,97,255,0.12); border-color:var(--purple); }
 .pill-icon { width:28px; height:28px; border-radius:50%; background:var(--purple); display:flex; align-items:center; justify-content:center; font-size:12px; flex-shrink:0; }
@@ -152,11 +148,11 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
 .cta { display:inline-flex; align-items:center; gap:10px; border:1px solid rgba(255,255,255,0.2); color:white; font-family:'Poppins',sans-serif; font-size:12px; font-weight:500; padding:14px 32px; border-radius:100px; text-decoration:none; letter-spacing:1px; text-transform:uppercase; transition:all 0.3s; }
 .cta:hover { border-color:var(--purple); color:var(--purple); }
 
-/* Spread animation for chars */
-@keyframes spreadL { from{transform:translateX(0)} to{transform:translateX(-30px)} }
-@keyframes spreadR { from{transform:translateX(0)} to{transform:translateX(30px)} }
-.char-p.spread { animation:spreadL .6s ease forwards; }
-.char-a.spread { animation:spreadR .6s ease forwards; }
+/* Spread animation */
+@keyframes spreadL { from{transform:translateX(100px)} to{transform:translateX(-20px)} }
+@keyframes spreadR { from{transform:translateX(-100px)} to{transform:translateX(20px)} }
+.char-p.spread { animation:spreadL 1.3s cubic-bezier(0.4,0,0.2,1) forwards; }
+.char-a.spread { animation:spreadR 1.3s cubic-bezier(0.4,0,0.2,1) forwards; }
 
 /* ── MOBILE ─────────────────────────────── */
 @media (max-width: 768px) {
@@ -168,14 +164,14 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
   .opening-brand { margin-bottom: 24px; }
   .opening-brand img { height: 20px; }
 
-  /* S1 – Mission + marquee */
-  .mission-inner { gap: 16px; height: auto; justify-content: center; }
-  .mission-text h2 { font-size: clamp(20px, 6vw, 32px); }
-  .mission-inner { padding: 40px 20px 20px; }
-  .mq-card { min-width: 130px; padding: 10px 12px; }
-  .mq-av { width: 26px; height: 26px; }
+  /* S1 */
+  .mission-inner { gap: 16px; height: auto; padding: 40px 20px 20px; }
+  .mission-text { padding: 0; }
+  .mission-text h1 { font-size: clamp(18px, 5vw, 28px); }
+  .mq-card { width: 140px; }
+  .mq-dept-img { height: 100px; }
 
-  /* S2 – Shift */
+  /* S2 */
   #s2 { justify-content: flex-start; padding-top: 56px; }
   .ai-logos { gap: 12px; margin: 12px 0 16px; flex-wrap: nowrap; justify-content: space-around; }
   .ai-logo svg { width: 22px; height: 22px; }
@@ -183,17 +179,13 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
   .shift-wrap h2 { font-size: clamp(20px, 5.5vw, 30px); margin-bottom: 20px; }
   .pillars { grid-template-columns: 1fr; border-top: none; }
 
-  /* S3 – Gap */
-  #s3 { justify-content: flex-start; padding-top: 48px; }
-  .gap-stats { grid-template-columns: 1fr; border-radius: 10px; }
-  .gap-stat { border-right: none; border-bottom: 1px solid var(--border); }
-  .gap-stat:last-child { border-bottom: none; }
-  .gap-stat-yet-line { height: 20px; }
-  .gap-list { display: none; }
+  /* S3 */
   #s3 { justify-content: center; }
+  .gap-stats { flex-direction: column; gap: 24px; }
+  .gap-list { display: none; }
   .gap-stat-num { font-size: clamp(52px, 16vw, 88px); }
 
-  /* S4b – Department gallery */
+  /* S4b */
   #s4b { padding: 0 !important; justify-content: flex-start !important; }
   .sbs-wrap { display: flex !important; flex-direction: column !important; width: 100% !important; height: 100% !important; gap: 0; }
   .sbs-left { width: 100% !important; flex-shrink: 0; padding: 20px 20px 10px; text-align: center; }
@@ -205,16 +197,16 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
   .sbs-tabs { flex-shrink: 0; gap: 5px; padding: 12px 10px 8px; }
   .sbs-tab { padding: 5px 11px; font-size: 10px; }
 
-  /* S5 – Platform layers */
+  /* S5 */
   #s5 { padding: 40px 16px 0; }
   .layers-top h2 { font-size: clamp(18px, 5vw, 26px); }
   .layers-top p { font-size: 12px; }
   .char { height: clamp(180px, 38vh, 280px); }
-  .pills { width: 90%; }
+  .pills-center { width: 90%; }
   .pill-title { font-size: 13px; min-width: 80px; }
   .pill-desc { font-size: 11px; }
 
-  /* S6 – CTA */
+  /* S6 */
   .outcome-wrap h2 { font-size: clamp(22px, 7vw, 40px); }
   .outcome-wrap p { font-size: clamp(12px, 3.5vw, 15px); }
   .cta { padding: 12px 24px; font-size: 11px; }
@@ -232,7 +224,6 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
 <div class="deck">
 
 <div class="slide active" id="s0">
-  
   <div class="glow" style="width:600px;height:600px;top:50%;left:50%;transform:translate(-50%,-50%);background:var(--purple);"></div>
   <div class="opening-brand">
     <img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/monday%20Logo/monday.com%20Logo.png" alt="monday.com" style="height:28px;flex-shrink:0;object-fit:contain">
@@ -247,32 +238,31 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
   <div class="mission-inner">
     <div class="mission-text">
       <p class="eyebrow">Our Mission</p>
-      <h2>Empower teams to do their <em>best work</em> — together.</h2>
+      <h1>monday's mission has always been to help businesses achieve their goals.</h1>
     </div>
-    <div class="marquee-outer">
-      <div class="marquee-track" id="mqTrack">
-        <div class="mq-card"><div class="mq-av"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/012f240f3a87d4b9507b3306396ea0954ebb82f2.png" alt=""></div><div class="mq-info"><span class="mq-name">Alex</span><span class="mq-role">Marketing</span></div></div>
-        <div class="mq-card"><div class="mq-av"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/084fc1b320f94aa65233683f6d07e27bc528df49.png" alt=""></div><div class="mq-info"><span class="mq-name">Jordan</span><span class="mq-role">HR</span></div></div>
-        <div class="mq-card"><div class="mq-av"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/31fef8e27a4c799459c58ae163c55324da0a21d4.png" alt=""></div><div class="mq-info"><span class="mq-name">Sam</span><span class="mq-role">IT</span></div></div>
-        <div class="mq-card"><div class="mq-av"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/44c98f36561338e389a6bf8368546aa8aba3c0a7.png" alt=""></div><div class="mq-info"><span class="mq-name">Taylor</span><span class="mq-role">Sales</span></div></div>
-        <div class="mq-card"><div class="mq-av"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/4f1259d102c1081ca7d88367c1ec9d3487166104.png" alt=""></div><div class="mq-info"><span class="mq-name">Morgan</span><span class="mq-role">Operations</span></div></div>
-        <div class="mq-card"><div class="mq-av"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/840c44286a6c4e57e9df25a1565fdbb673fa3a6c.png" alt=""></div><div class="mq-info"><span class="mq-name">Riley</span><span class="mq-role">Product</span></div></div>
-        <div class="mq-card"><div class="mq-av"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/a8016eb62d3e284810c5691fa950de5343f7d776.png" alt=""></div><div class="mq-info"><span class="mq-name">Casey</span><span class="mq-role">PMO</span></div></div>
-        <div class="mq-card"><div class="mq-av"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/c7005ced01914c6b1f5e7c0f86f6d5e4e22d3e9f.png" alt=""></div><div class="mq-info"><span class="mq-name">Drew</span><span class="mq-role">Finance</span></div></div>
-        <div class="mq-card"><div class="mq-av"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/012f240f3a87d4b9507b3306396ea0954ebb82f2.png" alt=""></div><div class="mq-info"><span class="mq-name">Alex</span><span class="mq-role">Marketing</span></div></div>
-        <div class="mq-card"><div class="mq-av"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/084fc1b320f94aa65233683f6d07e27bc528df49.png" alt=""></div><div class="mq-info"><span class="mq-name">Jordan</span><span class="mq-role">HR</span></div></div>
-        <div class="mq-card"><div class="mq-av"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/31fef8e27a4c799459c58ae163c55324da0a21d4.png" alt=""></div><div class="mq-info"><span class="mq-name">Sam</span><span class="mq-role">IT</span></div></div>
-        <div class="mq-card"><div class="mq-av"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/44c98f36561338e389a6bf8368546aa8aba3c0a7.png" alt=""></div><div class="mq-info"><span class="mq-name">Taylor</span><span class="mq-role">Sales</span></div></div>
-        <div class="mq-card"><div class="mq-av"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/4f1259d102c1081ca7d88367c1ec9d3487166104.png" alt=""></div><div class="mq-info"><span class="mq-name">Morgan</span><span class="mq-role">Operations</span></div></div>
-        <div class="mq-card"><div class="mq-av"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/840c44286a6c4e57e9df25a1565fdbb673fa3a6c.png" alt=""></div><div class="mq-info"><span class="mq-name">Riley</span><span class="mq-role">Product</span></div></div>
-        <div class="mq-card"><div class="mq-av"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/a8016eb62d3e284810c5691fa950de5343f7d776.png" alt=""></div><div class="mq-info"><span class="mq-name">Casey</span><span class="mq-role">PMO</span></div></div>
-        <div class="mq-card"><div class="mq-av"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/c7005ced01914c6b1f5e7c0f86f6d5e4e22d3e9f.png" alt=""></div><div class="mq-info"><span class="mq-name">Drew</span><span class="mq-role">Finance</span></div></div>
+    <div class="mq-wrap">
+      <div class="mq-track">
+        <div class="mq-card"><img class="mq-dept-img" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/MARKETING.png" alt="Marketing"><div class="mq-dept-info"><span class="mq-name" style="color:#6161ff">Marketing</span><p class="mq-desc">Drive demand and accelerate the sales cycle</p></div></div>
+        <div class="mq-card"><img class="mq-dept-img" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/HR.png" alt="HR"><div class="mq-dept-info"><span class="mq-name" style="color:#9B59B6">HR</span><p class="mq-desc">Accelerate onboarding &amp; employee experience</p></div></div>
+        <div class="mq-card"><img class="mq-dept-img" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/IT.png" alt="IT"><div class="mq-dept-info"><span class="mq-name" style="color:#00d2d2">IT</span><p class="mq-desc">Secure, scalable infrastructure at speed</p></div></div>
+        <div class="mq-card"><img class="mq-dept-img" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/Sales.png" alt="Sales"><div class="mq-dept-info"><span class="mq-name" style="color:#F5A623">Sales</span><p class="mq-desc">Faster revenue generation</p></div></div>
+        <div class="mq-card"><img class="mq-dept-img" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/OPERATIONS.png" alt="Operations"><div class="mq-dept-info"><span class="mq-name" style="color:#E84393">Operations</span><p class="mq-desc">Operational excellence at scale</p></div></div>
+        <div class="mq-card"><img class="mq-dept-img" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/PRODUCT.png" alt="Product"><div class="mq-dept-info"><span class="mq-name" style="color:#F5A623">Product</span><p class="mq-desc">Ship faster with the power to build anything</p></div></div>
+        <div class="mq-card"><img class="mq-dept-img" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/PMO.png" alt="PMO"><div class="mq-dept-info"><span class="mq-name" style="color:#E8783A">PMO</span><p class="mq-desc">Deliver projects on time and on budget</p></div></div>
+        <div class="mq-card"><img class="mq-dept-img" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/MARKETING.png" alt="Marketing"><div class="mq-dept-info"><span class="mq-name" style="color:#6161ff">Marketing</span><p class="mq-desc">Drive demand and accelerate the sales cycle</p></div></div>
+        <div class="mq-card"><img class="mq-dept-img" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/HR.png" alt="HR"><div class="mq-dept-info"><span class="mq-name" style="color:#9B59B6">HR</span><p class="mq-desc">Accelerate onboarding &amp; employee experience</p></div></div>
+        <div class="mq-card"><img class="mq-dept-img" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/IT.png" alt="IT"><div class="mq-dept-info"><span class="mq-name" style="color:#00d2d2">IT</span><p class="mq-desc">Secure, scalable infrastructure at speed</p></div></div>
+        <div class="mq-card"><img class="mq-dept-img" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/Sales.png" alt="Sales"><div class="mq-dept-info"><span class="mq-name" style="color:#F5A623">Sales</span><p class="mq-desc">Faster revenue generation</p></div></div>
+        <div class="mq-card"><img class="mq-dept-img" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/OPERATIONS.png" alt="Operations"><div class="mq-dept-info"><span class="mq-name" style="color:#E84393">Operations</span><p class="mq-desc">Operational excellence at scale</p></div></div>
+        <div class="mq-card"><img class="mq-dept-img" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/PRODUCT.png" alt="Product"><div class="mq-dept-info"><span class="mq-name" style="color:#F5A623">Product</span><p class="mq-desc">Ship faster with the power to build anything</p></div></div>
+        <div class="mq-card"><img class="mq-dept-img" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/PMO.png" alt="PMO"><div class="mq-dept-info"><span class="mq-name" style="color:#E8783A">PMO</span><p class="mq-desc">Deliver projects on time and on budget</p></div></div>
       </div>
     </div>
   </div>
 </div>
 
 <div class="slide" id="s2">
+  <div class="glow" style="width:600px;height:600px;top:50%;left:50%;transform:translate(-50%,-50%);background:var(--purple);"></div>
   <div class="shift-wrap">
     <p class="eyebrow">The Shift</p>
     <h2>What's changed is how fast work can get done when people and agents work together.</h2>
@@ -308,38 +298,26 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
 
 <div class="slide" id="s3">
   <div class="gap-wrap">
-    <div class="gap-eyebrow">
-      <p class="eyebrow">The Gap</p>
-      <h2>AI tools exist. The work still piles up.</h2>
-    </div>
+    <p class="eyebrow">The Gap</p>
+    <p class="gap-stmt">AI tools exist. The work still piles up.</p>
     <div class="gap-stats">
-      <div class="gap-stat">
-        <div class="gap-stat-num purple">77%</div>
-        <div class="gap-stat-label">of knowledge workers say they don't have enough time in the day to get their work done.</div>
-        <div class="gap-stat-yet"><div class="gap-stat-yet-line"></div><div class="gap-stat-yet-tag">yet</div><div class="gap-stat-yet-line"></div></div>
-        <div class="gap-stat-label" style="color:rgba(255,255,255,0.55)">they spend 60% of their day on coordination, not the actual work.</div>
+      <div class="gap-stat-item">
+        <div class="gap-stat-num">77<sup>%</sup></div>
+        <div class="gap-stat-label">of knowledge workers don't have enough time to get their work done</div>
       </div>
-      <div class="gap-stat">
-        <div class="gap-stat-num teal">4.4h</div>
-        <div class="gap-stat-label">lost every week per employee searching for information and context that already exists somewhere.</div>
-        <div class="gap-stat-yet"><div class="gap-stat-yet-line"></div><div class="gap-stat-yet-tag">yet</div><div class="gap-stat-yet-line"></div></div>
-        <div class="gap-stat-label" style="color:rgba(255,255,255,0.55)">most AI tools still can't act on it — they only answer questions.</div>
-      </div>
-      <div class="gap-stat">
-        <div class="gap-stat-num white">$4.6T</div>
-        <div class="gap-stat-label">in productivity lost annually to inefficient work processes across global knowledge workers.</div>
-        <div class="gap-stat-yet"><div class="gap-stat-yet-line"></div><div class="gap-stat-yet-tag">yet</div><div class="gap-stat-yet-line"></div></div>
-        <div class="gap-stat-label" style="color:rgba(255,255,255,0.55)">most orgs are still managing projects and people the same way they did 10 years ago.</div>
+      <div class="gap-stat-yet"><div class="gap-stat-yet-line"></div><div class="gap-stat-yet-text">yet</div><div class="gap-stat-yet-line"></div></div>
+      <div class="gap-stat-item">
+        <div class="gap-stat-num">60<sup>%</sup></div>
+        <div class="gap-stat-label">of their day goes to coordination — not actual work</div>
       </div>
     </div>
     <div class="gap-list">
-      <div class="gap-list-item">Status meetings that exist only to report what a board already shows</div>
-      <div class="gap-list-item">Approval chains that slow down decisions by days</div>
-      <div class="gap-list-item">Repetitive updates sent manually across teams</div>
-      <div class="gap-list-item">Onboarding that takes weeks when it could take days</div>
-      <div class="gap-list-item">Reports built from scratch every quarter</div>
-      <div class="gap-list-item">Follow-ups that fall through the cracks</div>
+      <div class="gap-pt"><div class="gap-num">01</div><div class="gap-text">Status meetings that exist only to report what a board already shows</div></div>
+      <div class="gap-pt"><div class="gap-num">02</div><div class="gap-text">Approval chains that slow decisions by days</div></div>
+      <div class="gap-pt"><div class="gap-num">03</div><div class="gap-text">Repetitive updates sent manually across teams</div></div>
+      <div class="gap-pt"><div class="gap-num">04</div><div class="gap-text">Onboarding that takes weeks when it could take days</div></div>
     </div>
+    <p class="gap-source">McKinsey Global Institute · IDC · Asana State of Work</p>
   </div>
 </div>
 
@@ -378,7 +356,7 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
     <h2>One platform. People and agents, working as one.</h2>
     <p>monday brings together your team and your AI agents in a single, connected workspace.</p>
   </div>
-  <div class="stage">
+  <div class="layers-scene">
     <div class="char char-p" id="charP">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 320" fill="none" width="100%" height="100%">
         <circle cx="80" cy="68" r="40" fill="rgba(255,255,255,0.92)"/>
@@ -392,7 +370,7 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
         <path d="M66 82 Q80 94 94 82" stroke="rgba(0,0,0,0.25)" stroke-width="3" stroke-linecap="round" fill="none"/>
       </svg>
     </div>
-    <div class="pills" id="pills">
+    <div class="pills-center" id="pills">
       <div class="pill active"><div class="pill-icon">🎯</div><div><div class="pill-title">Goals</div><div class="pill-desc">Shared objectives across people and agents</div></div></div>
       <div class="pill"><div class="pill-icon">⚡</div><div><div class="pill-title">Automations</div><div class="pill-desc">Agents act on triggers, not just prompts</div></div></div>
       <div class="pill"><div class="pill-icon">📊</div><div><div class="pill-title">Dashboards</div><div class="pill-desc">Real-time visibility for every stakeholder</div></div></div>
@@ -436,9 +414,6 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
 </div>
 
 <script>
-
-
-  // Option B — sbs gallery
   let sbsCur = 0, sbsTimer = null;
   function sbsGo(idx) {
     document.querySelectorAll('.sbs-img').forEach((el,i) => el.classList.toggle('active', i===idx));
@@ -448,49 +423,6 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
   function sbsStartAuto() { clearInterval(sbsTimer); sbsCur = 0; sbsGo(0); sbsTimer = setInterval(() => sbsGo((sbsCur+1)%7), 3500); }
   function sbsStopAuto()  { clearInterval(sbsTimer); }
 
-  // Dept gallery
-  const dgAvatars = [
-    'https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/012f240f3a87d4b9507b3306396ea0954ebb82f2.png',
-    'https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/084fc1b320f94aa65233683f6d07e27bc528df49.png',
-    'https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/31fef8e27a4c799459c58ae163c55324da0a21d4.png',
-    'https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/44c98f36561338e389a6bf8368546aa8aba3c0a7.png',
-    'https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/4f1259d102c1081ca7d88367c1ec9d3487166104.png',
-    'https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/840c44286a6c4e57e9df25a1565fdbb673fa3a6c.png',
-    'https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/a8016eb62d3e284810c5691fa950de5343f7d776.png',
-    'https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/c7005ced01914c6b1f5e7c0f86f6d5e4e22d3e9f.png',
-  ];
-  const dgDepts = [
-    {label:'Marketing', person:'Dan, Marketing Lead', personGrad:'linear-gradient(160deg,#fff0fa 0%,#ffd6f0 100%)',
-      prompt:'Create a campaign brief and generate 5 creative variations for our Q2 launch.',
-      agentReply:'Done — brief drafted, 5 variations ready for review in your board.',
-      avatars:[0,1,2], agentName:'Campaign Agent', agentIcon:'🎨'},
-    {label:'HR', person:'Shira, HR Director', personGrad:'linear-gradient(160deg,#f0fff4 0%,#d6ffe6 100%)',
-      prompt:'Summarise feedback from this quarter\'s engagement survey and flag key themes.',
-      agentReply:'3 key themes identified and ranked. Low scores flagged in 2 departments.',
-      avatars:[3,4,5], agentName:'HR Insights Agent', agentIcon:'📋'},
-    {label:'IT', person:'Lior, IT Manager', personGrad:'linear-gradient(160deg,#f0f4ff 0%,#d6e0ff 100%)',
-      prompt:'Auto-triage new tickets and assign to the right sub-team.',
-      agentReply:'14 tickets triaged. 3 critical escalated. SLA breach risk: 1 ticket.',
-      avatars:[6,7,0], agentName:'IT Ops Agent', agentIcon:'🛠️'},
-    {label:'Sales', person:'Noa, Sales Lead', personGrad:'linear-gradient(160deg,#fffbf0 0%,#fff0c8 100%)',
-      prompt:'Update all open deals with notes from today\'s calls and flag stalled ones.',
-      agentReply:'12 deals updated. 3 flagged as stalled — next step suggestions added.',
-      avatars:[1,2,3], agentName:'Pipeline Agent', agentIcon:'💼'},
-    {label:'Operations', person:'Eyal, COO', personGrad:'linear-gradient(160deg,#f0fbff 0%,#d6f4ff 100%)',
-      prompt:'Run a capacity check across all teams and surface where we\'re over-allocated.',
-      agentReply:'2 teams over capacity by 20%+. Reallocation options modelled and ready.',
-      avatars:[4,5,6], agentName:'Ops Agent', agentIcon:'⚙️'},
-    {label:'Product', person:'Yael, Product Lead', personGrad:'linear-gradient(160deg,#f4f0ff 0%,#e0d6ff 100%)',
-      prompt:'Group open feature requests by theme and link to relevant roadmap items.',
-      agentReply:'67 requests grouped into 8 themes. 3 already map to Q3 roadmap items.',
-      avatars:[7,0,1], agentName:'Product Agent', agentIcon:'🗺️'},
-    {label:'PMO', person:'Oren, PMO Lead', personGrad:'linear-gradient(160deg,#fff4f0 0%,#ffd6cc 100%)',
-      prompt:'Create a cross-project status roll-up for the board deck due Thursday.',
-      agentReply:'Roll-up complete. 2 projects at risk highlighted with mitigation options.',
-      avatars:[2,3,4], agentName:'PMO Agent', agentIcon:'📊'},
-  ];
-
-  // Navigation
   let cur = 0;
   const slides = document.querySelectorAll('.slide');
   const dots   = document.querySelectorAll('.nav-dot');
@@ -523,12 +455,15 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
 
   function onEnter(n) {
     if (n === 0) startTypewriter();
-    if (n === 1) { /* marquee auto-runs */ }
-    if (n === 3) { sbsStartAuto(); }
+    if (n === 3) sbsStartAuto();
     if (n === 4) startPlatform();
+    if (n === 2) {
+      document.querySelectorAll('.gap-pt').forEach((el, i) => {
+        setTimeout(() => el.classList.add('show'), i * 150);
+      });
+    }
   }
 
-  // Typewriter
   const L1 = 'Work at the', L2 = 'speed of AI.';
   let twTimer = null;
   function startTypewriter() {
@@ -543,7 +478,6 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
     twTimer = setTimeout(tick, 400);
   }
 
-  // Platform animation
   let pillTimer = null, pillIdx = 0;
   function startPlatform() {
     const pills = document.querySelectorAll('.pill');
@@ -562,29 +496,8 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
     }, 2200);
   }
 
-  // init
   startTypewriter();
   prog.style.width = '0%';
-
-  // Typewriter re-trigger stub (called from inline if needed)
-  function typeResults(t, l, fn) {
-    let i = 0; const el = document.getElementById(t);
-    if (!el) { fn && fn(); return; }
-    el.textContent = '';
-    function tick() { if (i <= l.length) { el.textContent = l.slice(0, i++); setTimeout(tick, 22); } else fn && fn(); }
-    tick();
-  }
-
-  function runDgDemo(idx, fn) {
-    setTimeout(() => {
-      typeResults('dgResult', dgDepts[idx % dgDepts.length].agentReply, () => {
-        setTimeout(() => { fn && fn(); }, 1200);
-      });
-    }, 42, 'short', () => {
-      });
-    }, 350);
-  }
-
 </script>
 </body>
 </html>
