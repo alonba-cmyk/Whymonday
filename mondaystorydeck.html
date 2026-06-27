@@ -100,6 +100,18 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
 .pillar-num { font-size:10px; font-weight:600; letter-spacing:3px; color:var(--purple); text-transform:uppercase; margin-bottom:14px; }
 .pillar-title { font-size:18px; font-weight:700; margin-bottom:10px; }
 .pillar-desc { font-size:12px; color:var(--dim); font-weight:300; line-height:1.7; }
+/* S2 Marquee */
+.s2-marquee-wrap { width:calc(100% + 240px); margin-left:-120px; overflow:hidden; flex-shrink:0; -webkit-mask-image:linear-gradient(to right,transparent 0%,#000 8%,#000 92%,transparent 100%); mask-image:linear-gradient(to right,transparent 0%,#000 8%,#000 92%,transparent 100%); }
+.s2-marquee-track { display:flex; gap:16px; width:max-content; animation:s2ticker 36s linear infinite; padding:6px 0 8px; }
+.s2-marquee-wrap:hover .s2-marquee-track { animation-play-state:paused; }
+@keyframes s2ticker { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+.s2-card { width:340px; flex-shrink:0; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-left:3px solid; border-radius:16px; padding:16px 20px; display:grid; grid-template-columns:auto 1fr; grid-template-rows:auto auto; column-gap:14px; row-gap:8px; text-align:left; }
+.s2-card-top { display:flex; flex-direction:column; align-items:center; gap:8px; grid-column:1; grid-row:1/3; align-self:start; margin-top:2px; }
+.s2-av { width:40px; height:40px; border-radius:50%; border:2px solid; overflow:hidden; }
+.s2-av img { width:100%; height:100%; object-fit:cover; object-position:top; }
+.s2-dept-chip { font-size:8px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; text-align:center; }
+.s2-title { font-size:14px; font-weight:800; color:#fff; line-height:1.35; grid-column:2; grid-row:1; }
+.s2-desc { font-size:10px; color:var(--dim); font-weight:300; line-height:1.6; grid-column:2; grid-row:2; }
 
 /* S3 */
 #s3 { align-items:center; text-align:center; }
@@ -309,7 +321,10 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
   .ai-logo span { font-size: 8px; }
   .shift-wrap h2 { font-size: clamp(20px, 5.5vw, 30px); margin-bottom: 20px; }
   .pillars { display: none; }
-  .pillars-carousel { display: flex; flex-direction: column; width: 100%; gap: 10px; align-items: center; }
+  .pillars-carousel { display: none; }
+  .s2-marquee-wrap { width: calc(100% + 48px); margin-left: -24px; }
+  .s2-card { width: 260px; }
+  .s2-title { font-size: 12px; }
   .pc-track-wrap { width: 100%; overflow: hidden; }
   .pc-track { display: flex; gap: 12px; transition: transform 0.5s cubic-bezier(0.4,0,0.2,1); will-change: transform; padding: 4px 0 6px; }
   .pc-card { flex-shrink: 0; width: 100%; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.09); border-radius: 16px; padding: 20px 18px; }
@@ -546,8 +561,8 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
 
 <div class="slide" id="s2">
   <div class="shift-wrap">
-    <p class="eyebrow">The Shift</p>
-    <h2>What's changed is how fast work can get done when people and agents work together.</h2>
+    <p class="eyebrow">What's changed is</p>
+    <h2>How fast work can get done when people and agents work together.</h2>
     <div class="ai-logos">
       <div class="ai-logo">
         <img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/monday%20Logo/monday.com%20icon.png" alt="monday" style="height:28px;width:auto;filter:brightness(0) invert(1);">
@@ -570,6 +585,12 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
         <span>Copilot</span>
       </div>
     </div>
+  </div>
+  <div class="s2-marquee-wrap">
+    <div class="s2-marquee-track" id="s2Track"></div>
+  </div>
+  <!-- OLD VERSION – pillars + carousel (kept for easy revert)
+  <div class="s2-old">
     <div class="pillars">
       <div class="pillar"><div class="pillar-num">01</div><div class="pillar-title">Move faster</div><div class="pillar-desc">Agents handle routine work so your team never waits on the next step.</div></div>
       <div class="pillar"><div class="pillar-num">02</div><div class="pillar-title">Stay focused</div><div class="pillar-desc">People focus on what actually moves the business forward.</div></div>
@@ -588,6 +609,7 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
       </div>
     </div>
   </div>
+  -->
 </div>
 
 <div class="slide" id="s3">
@@ -945,6 +967,32 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
     const dy = touchY - e.changedTouches[0].clientY;
     if (Math.abs(dy) > 40) goTo(dy > 0 ? current + 1 : current - 1);
   }, {passive:true});
+
+  // S2 department marquee
+  (function() {
+    const B = 'https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/';
+    const cards = [
+      { dept:'Marketing', color:'#F48FB1', img:B+'Marketing.png', title:'Campaign concepts ready before standup', desc:'Agent pulled last quarter\'s results and wrote 5 creative directions while the team was in standup.' },
+      { dept:'Sales', color:'#F9D27A', img:B+'Sales.png', title:'Personalized proposal sent the same day', desc:'Agent built the deck, pulled case studies, and drafted pricing while the rep wrote the follow-up.' },
+      { dept:'HR', color:'#8ECEC0', img:B+'HR.png', title:'Onboarding pack done the night before day one', desc:'Agent set up access requests, a 30-60-90 plan, and briefed the manager — automatically.' },
+      { dept:'IT', color:'#A89BD9', img:B+'IT.png', title:'Most tickets resolved before anyone noticed', desc:'Agent diagnosed, routed, and closed routine requests. Humans only handle what needs them.' },
+      { dept:'Operations', color:'#85C1AE', img:B+'Operations.png', title:'Weekly exec report, fully automated', desc:'Agent pulled data from 4 tools, flagged anomalies, and formatted the update before Monday standup.' },
+      { dept:'Product', color:'#7FC8D4', img:B+'Product.png', title:'PRD drafted while the team slept', desc:'Agent turned 6 customer interviews into a structured doc, grouped themes, flagged conflicts.' },
+      { dept:'Finance', color:'#93C6E7', img:B+'Finance.png', title:'Budget variance explained automatically', desc:'Agent pulled actuals from 3 systems and prepared the CFO summary in minutes.' },
+      { dept:'Legal', color:'#F6C27A', img:B+'Legal.png', title:'Contract reviewed before the meeting, not after', desc:'Agent flagged non-standard clauses and prepared a summary before negotiation started.' },
+    ];
+    const track = document.getElementById('s2Track');
+    if (!track) return;
+    const html = cards.map(c => `<div class="s2-card" style="border-color:${c.color}60">
+      <div class="s2-card-top">
+        <div class="s2-av" style="border-color:${c.color}90"><img src="${c.img}" alt="${c.dept}" loading="lazy"></div>
+        <span class="s2-dept-chip" style="color:${c.color}">${c.dept}</span>
+      </div>
+      <div class="s2-title">${c.title}</div>
+      <div class="s2-desc">${c.desc}</div>
+    </div>`).join('');
+    track.innerHTML = html + html;
+  })();
 
   // Pillars carousel (mobile auto-play)
   let pcCur = 0, pcTimer = null;
