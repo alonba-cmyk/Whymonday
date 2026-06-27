@@ -18,8 +18,7 @@
     padding: 40px 16px;
   }
 
-  @keyframes cw  { to { transform: rotate( 360deg); } }
-  @keyframes ccw { to { transform: rotate(-360deg); } }
+  /* rotation driven by JS */
 
   /* ── Phone ── */
   .phone {
@@ -59,9 +58,7 @@
   }
   .orbit-people {
     position: absolute; inset: 0;
-    animation: cw 45s linear infinite;
   }
-  .orbit-people.paused { animation-play-state: paused; }
 
   .orbit-glow {
     position: absolute; top:50%; left:50%;
@@ -100,8 +97,7 @@
     position: absolute;
     display: flex; flex-direction: column;
     align-items: center; gap: 4px;
-    z-index: 3; cursor: pointer;
-    animation: ccw 45s linear infinite;
+    z-index: 3;
   }
   .orbit-av {
     width: 42px; height: 42px;
@@ -222,44 +218,65 @@
 </div>
 
 <script>
-  const people = Array.from(document.querySelectorAll('.orbit-person'));
+  const orbitEl  = document.getElementById('orbitPeople');
+  const people   = Array.from(document.querySelectorAll('.orbit-person'));
   const card     = document.getElementById('infoCard');
   const infoDept = document.getElementById('infoDept');
   const infoDesc = document.getElementById('infoDesc');
-  const INTERVAL = 5625; // 45s / 8 people
-  let current = 0;
+
+  // Starting angles for each person (clockwise from top = 0°)
+  // Sales=0, Finance=45, HR=90, IT=135, Legal=180, Marketing=225, Operations=270, Product=315
+  const startAngles = [0, 45, 90, 135, 180, 225, 270, 315];
+
+  const SPEED = 360 / 45000; // degrees per ms — full revolution in 45s
+  let angle = 0;
+  let lastActive = -1;
+  let lastTs = null;
 
   function activate(idx) {
-    const prev = people[current];
-    const next = people[idx];
-    const color = next.dataset.color;
+    const el    = people[idx];
+    const color = el.dataset.color;
 
-    // Reset all
     people.forEach(p => {
       p.classList.remove('active');
       p.querySelector('.orbit-av').style.boxShadow = '';
     });
+    el.classList.add('active');
+    el.querySelector('.orbit-av').style.boxShadow =
+      `0 0 22px ${color}90, 0 0 44px ${color}28`;
 
-    // Highlight new
-    next.classList.add('active');
-    next.querySelector('.orbit-av').style.boxShadow =
-      `0 0 20px ${color}90, 0 0 40px ${color}30`;
-
-    // Swap card content
     card.classList.remove('visible');
     setTimeout(() => {
-      infoDept.textContent  = next.dataset.name;
-      infoDept.style.color  = color;
-      infoDesc.textContent  = next.dataset.desc;
+      infoDept.textContent = el.dataset.name;
+      infoDept.style.color = color;
+      infoDesc.textContent = el.dataset.desc;
       card.classList.add('visible');
-    }, 180);
-
-    current = idx;
+    }, 160);
   }
 
-  // Kick off immediately, then cycle
-  activate(0);
-  setInterval(() => activate((current + 1) % people.length), INTERVAL);
+  function frame(ts) {
+    if (!lastTs) lastTs = ts;
+    angle = (angle + SPEED * (ts - lastTs)) % 360;
+    lastTs = ts;
+
+    // Rotate container CW, counter-rotate each person to keep upright
+    orbitEl.style.transform = `rotate(${angle}deg)`;
+    people.forEach(p => { p.style.transform = `rotate(${-angle}deg)`; });
+
+    // Who's closest to 12 o'clock (0°)?
+    let minDist = Infinity, atTop = 0;
+    startAngles.forEach((init, i) => {
+      const pos  = (init + angle) % 360;
+      const dist = Math.min(pos, 360 - pos);
+      if (dist < minDist) { minDist = dist; atTop = i; }
+    });
+
+    if (atTop !== lastActive) { lastActive = atTop; activate(atTop); }
+
+    requestAnimationFrame(frame);
+  }
+
+  requestAnimationFrame(frame);
 </script>
 </body>
 </html>
