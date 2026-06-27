@@ -378,19 +378,24 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
   #s5b { padding: 28px 22px; }
   .sp-eyebrow { text-align: center; }
   .sp-heading { font-size: 19px; text-align: center; }
-  .sp-body { grid-template-columns: 1fr; gap: 16px; margin-top: 16px; }
-  .sp-row { padding: 12px 0; }
-  .sp-logo { flex: 0 0 76px; }
-  .sp-logo.is-m { padding-left: 6px; }
-  .sp-stat-num { font-size: 32px; flex: 0 0 80px; }
-  .sp-stat-label { font-size: 9px; }
+  .sp-body { grid-template-columns: 1fr; gap: 20px; margin-top: 18px; }
+  /* Companies → 3-col centered grid */
+  .sp-companies { display: grid; grid-template-columns: repeat(3,1fr); gap: 0; border-top: 1px solid #1a1a1a; border-bottom: 1px solid #1a1a1a; }
+  .sp-row { flex-direction: column; align-items: center; text-align: center; padding: 16px 4px; border-bottom: none; border-right: 1px solid #1a1a1a; }
+  .sp-row:first-child { border-top: none; }
+  .sp-row:last-child { border-right: none; }
+  .sp-logo { flex: 0 0 auto; min-height: 22px; justify-content: center; margin-bottom: 8px; }
+  .sp-logo.is-m { padding-left: 0; }
+  .sp-stat-num { font-size: 28px; flex: 0 0 auto; }
+  .sp-stat-label { font-size: 8.5px; text-align: center; margin-top: 3px; }
+  .sp-l-arcaise { font-size: 13px; }
+  .sp-l-unilever { font-size: 13px; }
   .sp-right { padding-top: 0; }
   .sp-quote { gap: 12px; }
   .sp-quote-mark { font-size: 38px; }
   .sp-quote-text { font-size: 12px; line-height: 1.7; }
   .sp-q-name { font-size: 11px; margin-top: 10px; }
   .sp-q-role { font-size: 9px; }
-  .sp-l-arcaise, .sp-l-unilever { font-size: 14px; }
 
   /* S6 – CTA */
   .outcome-wrap h2 { font-size: clamp(22px, 7vw, 40px); }
