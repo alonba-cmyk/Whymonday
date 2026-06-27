@@ -635,13 +635,15 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
         chatTxt.textContent = msg.slice(0, ++i);
         if (i >= msg.length) {
           clearInterval(typeInterval);
-          // Step 3: fade out intro, show video
+          // Step 3: seek video first, then swap intro→video once frame is ready
           setTimeout(() => {
-            intro.classList.add('hidden');
             video.currentTime = window.innerWidth <= 768 ? 3.1 : 2.5;
-            video.play();
-            video.classList.add('visible');
-            video.onended = () => { sbsCur = 1; sbsGo(1); clearInterval(sbsTimer); sbsTimer = setInterval(() => sbsGo((sbsCur+1)%7), 3500); };
+            video.onseeked = () => {
+              intro.classList.add('hidden');
+              video.play();
+              video.classList.add('visible');
+              video.onended = () => { sbsCur = 1; sbsGo(1); clearInterval(sbsTimer); sbsTimer = setInterval(() => sbsGo((sbsCur+1)%7), 3500); };
+            };
           }, 400);
         }
       }, 38);
