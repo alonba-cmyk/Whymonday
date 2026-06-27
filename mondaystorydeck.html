@@ -42,6 +42,7 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
 
 /* S0 */
 #s0 { background:#000; text-align:center; gap:20px; }
+.s0-text { display:flex; flex-direction:column; align-items:center; gap:4px; }
 .opening-brand { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; }
 .opening-brand img { height:22px; opacity:0.85; }
 .opening-brand span { font-size:11px; font-weight:500; letter-spacing:4px; text-transform:uppercase; color:var(--dim); white-space:nowrap; }
@@ -224,7 +225,7 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
   .opening-brand { gap: 8px; }
   .opening-brand img { height: 18px; }
   .line1 { font-size: clamp(28px, 8vw, 42px); letter-spacing: -0.5px; }
-  .line2 { font-size: clamp(14px, 4vw, 20px); margin-top: 4px; }
+  .line2 { font-size: clamp(14px, 4vw, 20px); }
 
   /* S1 – Mission */
   #s1 { padding: 24px 0 16px; justify-content: center; }
@@ -346,8 +347,10 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
     <span>AI Work Platform</span>
   </div>
   <img class="s0-strip" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/Agents%20and%20People%20strip.png" alt="">
-  <span class="line1" id="line1"></span>
-  <span class="line2" id="line2"></span>
+  <div class="s0-text">
+    <span class="line1" id="line1"></span>
+    <span class="line2" id="line2"></span>
+  </div>
 </div>
 
 <div class="slide" id="s1">
