@@ -263,11 +263,13 @@
     orbitEl.style.transform = `rotate(${angle}deg)`;
     people.forEach(p => { p.style.transform = `rotate(${-angle}deg)`; });
 
-    // Who's closest to 12 o'clock (0°)?
+    // Who's closest to visual 12 o'clock?
+    // Mathematical 30° = visual 12 o'clock (label below avatar offsets perception by ~1 hour)
+    const TARGET = 30;
     let minDist = Infinity, atTop = 0;
     startAngles.forEach((init, i) => {
       const pos  = (init + angle) % 360;
-      const dist = Math.min(pos, 360 - pos);
+      const dist = Math.min((pos - TARGET + 360) % 360, (TARGET - pos + 360) % 360);
       if (dist < minDist) { minDist = dist; atTop = i; }
     });
 
