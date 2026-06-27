@@ -7,35 +7,96 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
-  body { background:#111; font-family:'Poppins',sans-serif; display:flex; flex-direction:column; align-items:center; padding:32px 16px 64px; gap:16px; }
-  .label { color:#888; font-size:11px; letter-spacing:3px; text-transform:uppercase; }
+  body {
+    background: #0a0a0a;
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 16px;
+    gap: 20px;
+  }
+  .page-label {
+    color: rgba(255,255,255,0.25);
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+  }
 
-  /* Phone shell */
-  .phone { width:320px; background:#000; border-radius:36px; border:2px solid rgba(255,255,255,0.12); overflow:hidden; position:relative; }
-  .phone-inner { padding:48px 0 40px; display:flex; flex-direction:column; align-items:center; }
+  /* ── Phone shell ── */
+  .phone {
+    width: 320px;
+    height: 620px;
+    background: #000;
+    border-radius: 40px;
+    border: 1.5px solid rgba(255,255,255,0.1);
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 40px 80px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.04);
+  }
+  /* Notch */
+  .phone::before {
+    content: '';
+    position: absolute;
+    top: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 72px; height: 5px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 3px;
+  }
 
-  /* Eyebrow */
-  .eyebrow { font-size:9px; font-weight:600; letter-spacing:4px; text-transform:uppercase; color:#6161ff; margin-bottom:20px; }
+  /* ── Eyebrow ── */
+  .eyebrow {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: #6161ff;
+    margin-bottom: 28px;
+  }
 
-  /* Orbit container */
+  /* ── Orbit container ── */
   .orbit-wrap {
     position: relative;
-    width: 300px;
-    height: 300px;
+    width: 296px;
+    height: 296px;
     flex-shrink: 0;
+  }
+
+  /* Radial glow at center */
+  .orbit-glow {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 160px; height: 160px;
+    background: radial-gradient(circle, rgba(97,97,255,0.12) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
   }
 
   /* Concentric rings */
   .ring {
     position: absolute;
     border-radius: 50%;
-    border: 1px solid rgba(255,255,255,0.08);
     top: 50%; left: 50%;
     transform: translate(-50%, -50%);
     pointer-events: none;
   }
-  .ring-outer { width: 280px; height: 280px; }
-  .ring-inner { width: 178px; height: 178px; }
+  .ring-outer {
+    width: 272px; height: 272px;
+    border: 1px solid rgba(255,255,255,0.07);
+  }
+  .ring-inner {
+    width: 170px; height: 170px;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
 
   /* Center text */
   .orbit-center {
@@ -43,140 +104,150 @@
     top: 50%; left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
-    width: 150px;
+    width: 144px;
     z-index: 2;
   }
   .orbit-center h2 {
-    font-size: 12px;
+    font-size: 11.5px;
     font-weight: 800;
-    line-height: 1.3;
+    line-height: 1.4;
     color: #fff;
+    letter-spacing: -0.1px;
   }
 
-  /* People on orbit */
+  /* ── People on orbit ── */
   .orbit-person {
     position: absolute;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 3px;
+    gap: 4px;
     z-index: 3;
   }
   .orbit-av {
-    width: 40px; height: 40px;
+    width: 42px; height: 42px;
     border-radius: 50%;
     border: 2px solid;
     overflow: hidden;
     background: #111;
+    position: relative;
   }
-  .orbit-av img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+  .orbit-av img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: top center;
+  }
   .orbit-name {
     font-size: 8px;
     font-weight: 600;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.3px;
     white-space: nowrap;
   }
 
   /*
-    Container 300×300, center at (150,150), orbit radius=118px
-    Avatar 40×40, label ~14px below
-    position = center - radius*[cos/sin] - avatar/2
+    Container 296×296, center (148,148), orbit radius=108
+    Avatar 42px → half=21px
+    top-left = center ± r*trig - 21
 
-    angle from top clockwise:
-    Sales      0°:   left=130, top=  8
-    Finance   45°:   left=213, top= 42
-    HR        90°:   left=250, top=130
-    IT       135°:   left=213, top=213
-    Legal    180°:   left=130, top=250
-    Marketing 225°:  left= 47, top=213
-    Operations270°:  left= 10, top=130
-    Product  315°:   left= 47, top= 42
+    Sales      0°: left=127, top=19
+    Finance   45°: left=127+76.4=203, top=148-76.4-21=50
+    HR        90°: left=148+108-21=235, top=127
+    IT       135°: left=203, top=203
+    Legal    180°: left=127, top=148+108-21=235
+    Marketing 225°: left=148-76.4-21=50, top=203
+    Operations270°: left=148-108-21=19, top=127
+    Product  315°: left=50, top=50
   */
-  .p-sales      { left:130px; top:  8px; }
-  .p-finance    { left:213px; top: 42px; }
-  .p-hr         { left:250px; top:130px; }
-  .p-it         { left:213px; top:213px; }
-  .p-legal      { left:130px; top:250px; }
-  .p-marketing  { left: 47px; top:213px; }
-  .p-operations { left: 10px; top:130px; }
-  .p-product    { left: 47px; top: 42px; }
+  .p-sales      { left:127px; top: 19px; }
+  .p-finance    { left:203px; top: 50px; }
+  .p-hr         { left:235px; top:127px; }
+  .p-it         { left:203px; top:203px; }
+  .p-legal      { left:127px; top:235px; }
+  .p-marketing  { left: 50px; top:203px; }
+  .p-operations { left: 19px; top:127px; }
+  .p-product    { left: 50px; top: 50px; }
 </style>
 </head>
 <body>
 
-<div class="label">S1 Mission — Orbit Mobile Variant</div>
+<p class="page-label">S1 Mission — Orbit Variant</p>
 
 <div class="phone">
-  <div class="phone-inner">
-    <p class="eyebrow">Our Mission</p>
+  <p class="eyebrow">Our Mission</p>
 
-    <div class="orbit-wrap">
-      <!-- Rings -->
-      <div class="ring ring-outer"></div>
-      <div class="ring ring-inner"></div>
+  <div class="orbit-wrap">
+    <div class="orbit-glow"></div>
+    <div class="ring ring-outer"></div>
+    <div class="ring ring-inner"></div>
 
-      <!-- Center text -->
-      <div class="orbit-center">
-        <h2>monday's mission has always been to help businesses achieve their goals.</h2>
-      </div>
-
-      <!-- People -->
-      <div class="orbit-person p-sales">
-        <div class="orbit-av" style="border-color:#F9D27A80">
-          <img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/Sales.png" alt="">
-        </div>
-        <span class="orbit-name" style="color:#F9D27A">Sales</span>
-      </div>
-
-      <div class="orbit-person p-finance">
-        <div class="orbit-av" style="border-color:#93C6E780">
-          <img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/Finance.png" alt="">
-        </div>
-        <span class="orbit-name" style="color:#93C6E7">Finance</span>
-      </div>
-
-      <div class="orbit-person p-hr">
-        <div class="orbit-av" style="border-color:#8ECEC080">
-          <img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/HR.png" alt="">
-        </div>
-        <span class="orbit-name" style="color:#8ECEC0">HR</span>
-      </div>
-
-      <div class="orbit-person p-it">
-        <div class="orbit-av" style="border-color:#A89BD980">
-          <img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/IT.png" alt="">
-        </div>
-        <span class="orbit-name" style="color:#A89BD9">IT</span>
-      </div>
-
-      <div class="orbit-person p-legal">
-        <div class="orbit-av" style="border-color:#F6C27A80">
-          <img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/Legal.png" alt="">
-        </div>
-        <span class="orbit-name" style="color:#F6C27A">Legal</span>
-      </div>
-
-      <div class="orbit-person p-marketing">
-        <div class="orbit-av" style="border-color:#F48FB180">
-          <img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/MARKETING.png" alt="">
-        </div>
-        <span class="orbit-name" style="color:#F48FB1">Marketing</span>
-      </div>
-
-      <div class="orbit-person p-operations">
-        <div class="orbit-av" style="border-color:#85C1AE80">
-          <img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/OPERATIONS.png" alt="">
-        </div>
-        <span class="orbit-name" style="color:#85C1AE">Operations</span>
-      </div>
-
-      <div class="orbit-person p-product">
-        <div class="orbit-av" style="border-color:#7FC8D480">
-          <img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/PRODUCT.png" alt="">
-        </div>
-        <span class="orbit-name" style="color:#7FC8D4">Product</span>
-      </div>
+    <div class="orbit-center">
+      <h2>monday's mission has always been to help businesses achieve their goals.</h2>
     </div>
+
+    <!-- Sales -->
+    <div class="orbit-person p-sales">
+      <div class="orbit-av" style="border-color:#F9D27A90; box-shadow:0 0 10px #F9D27A30;">
+        <img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/Sales.png" alt="">
+      </div>
+      <span class="orbit-name" style="color:#F9D27A">Sales</span>
+    </div>
+
+    <!-- Finance -->
+    <div class="orbit-person p-finance">
+      <div class="orbit-av" style="border-color:#93C6E790; box-shadow:0 0 10px #93C6E730;">
+        <img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/Finance.png" alt="">
+      </div>
+      <span class="orbit-name" style="color:#93C6E7">Finance</span>
+    </div>
+
+    <!-- HR -->
+    <div class="orbit-person p-hr">
+      <div class="orbit-av" style="border-color:#8ECEC090; box-shadow:0 0 10px #8ECEC030;">
+        <img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/HR.png" alt="">
+      </div>
+      <span class="orbit-name" style="color:#8ECEC0">HR</span>
+    </div>
+
+    <!-- IT -->
+    <div class="orbit-person p-it">
+      <div class="orbit-av" style="border-color:#A89BD990; box-shadow:0 0 10px #A89BD930;">
+        <img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/IT.png" alt="">
+      </div>
+      <span class="orbit-name" style="color:#A89BD9">IT</span>
+    </div>
+
+    <!-- Legal -->
+    <div class="orbit-person p-legal">
+      <div class="orbit-av" style="border-color:#F6C27A90; box-shadow:0 0 10px #F6C27A30;">
+        <img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/Legal.png" alt="">
+      </div>
+      <span class="orbit-name" style="color:#F6C27A">Legal</span>
+    </div>
+
+    <!-- Marketing -->
+    <div class="orbit-person p-marketing">
+      <div class="orbit-av" style="border-color:#F48FB190; box-shadow:0 0 10px #F48FB130;">
+        <img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/MARKETING.png" alt="">
+      </div>
+      <span class="orbit-name" style="color:#F48FB1">Marketing</span>
+    </div>
+
+    <!-- Operations -->
+    <div class="orbit-person p-operations">
+      <div class="orbit-av" style="border-color:#85C1AE90; box-shadow:0 0 10px #85C1AE30;">
+        <img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/OPERATIONS.png" alt="">
+      </div>
+      <span class="orbit-name" style="color:#85C1AE">Operations</span>
+    </div>
+
+    <!-- Product -->
+    <div class="orbit-person p-product">
+      <div class="orbit-av" style="border-color:#7FC8D490; box-shadow:0 0 10px #7FC8D430;">
+        <img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/PRODUCT.png" alt="">
+      </div>
+      <span class="orbit-name" style="color:#7FC8D4">Product</span>
+    </div>
+
   </div>
 </div>
 
