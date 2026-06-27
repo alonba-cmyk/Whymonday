@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Shift – Outcomes by Department</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --bg: #000;
+  --purple: #6161ff;
+  --purple-light: #a084ff;
+  --dim: rgba(255,255,255,0.4);
+  --card-bg: rgba(255,255,255,0.04);
+  --card-border: rgba(255,255,255,0.09);
+}
+body {
+  background: var(--bg);
+  font-family: 'Poppins', sans-serif;
+  color: #fff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 64px 24px 80px;
+}
+
+/* Header */
+.page-header {
+  text-align: center;
+  margin-bottom: 44px;
+  max-width: 700px;
+}
+.eyebrow {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--purple);
+  margin-bottom: 14px;
+}
+.page-title {
+  font-size: clamp(24px, 3.8vw, 48px);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.5px;
+  background: linear-gradient(135deg, #fff 40%, rgba(255,255,255,0.5));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 16px;
+}
+.page-sub {
+  font-size: 13px;
+  color: var(--dim);
+  font-weight: 300;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 40px;
+  max-width: 960px;
+  width: 100%;
+}
+.tab {
+  padding: 7px 18px;
+  border-radius: 100px;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: transparent;
+  font-family: 'Poppins', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.45);
+  cursor: pointer;
+  transition: all 0.25s;
+}
+.tab.active { background: var(--purple); border-color: var(--purple); color: #fff; }
+.tab:hover:not(.active) { border-color: rgba(255,255,255,0.35); color: rgba(255,255,255,0.75); }
+
+/* Card */
+.outcome-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 20px;
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: border-color 0.25s;
+}
+.outcome-card:hover { border-color: rgba(97,97,255,0.4); }
+.dept-chip {
+  display: inline-block;
+  background: rgba(97,97,255,0.12);
+  color: var(--purple);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 20px;
+  width: fit-content;
+}
+.card-stat {
+  font-size: clamp(38px, 5vw, 54px);
+  font-weight: 800;
+  line-height: 1;
+  background: linear-gradient(135deg, var(--purple) 30%, var(--purple-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.card-context {
+  font-size: 10px;
+  color: var(--dim);
+  font-weight: 300;
+  margin-top: -4px;
+}
+.card-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.4;
+}
+.card-desc {
+  font-size: 11px;
+  color: var(--dim);
+  font-weight: 300;
+  line-height: 1.75;
+}
+
+/* Desktop grid */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  width: 100%;
+  max-width: 960px;
+}
+
+/* Mobile carousel */
+.carousel-wrap { display: none; width: 100%; flex-direction: column; }
+.carousel-track-wrap { overflow: hidden; width: 100%; }
+.carousel-track {
+  display: flex;
+  gap: 12px;
+  transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
+  will-change: transform;
+  padding: 4px 0 8px;
+}
+.carousel-track .outcome-card { flex-shrink: 0; width: 100%; }
+.carousel-dots {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  margin-top: 18px;
+}
+.carousel-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.3s;
+}
+.carousel-dot.active { background: var(--purple); width: 16px; border-radius: 3px; }
+
+@media (max-width: 768px) {
+  body { padding: 40px 20px 60px; }
+  .cards-grid { display: none; }
+  .carousel-wrap { display: flex; }
+  .page-title { font-size: 22px; }
+  .tabs { gap: 6px; margin-bottom: 28px; }
+  .tab { font-size: 10px; padding: 6px 14px; }
+}
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <p class="eyebrow">The Shift</p>
+  <h1 class="page-title">How fast work can get done when people and agents work together.</h1>
+  <p class="page-sub">Real outcomes, by department.</p>
+</div>
+
+<div class="tabs">
+  <button class="tab active" onclick="filter('all',this)">All</button>
+  <button class="tab" onclick="filter('Marketing',this)">Marketing</button>
+  <button class="tab" onclick="filter('Sales',this)">Sales</button>
+  <button class="tab" onclick="filter('HR',this)">HR</button>
+  <button class="tab" onclick="filter('Operations',this)">Operations</button>
+  <button class="tab" onclick="filter('IT',this)">IT</button>
+  <button class="tab" onclick="filter('Product',this)">Product</button>
+  <button class="tab" onclick="filter('PMO',this)">PMO</button>
+</div>
+
+<div class="cards-grid" id="cardsGrid"></div>
+
+<div class="carousel-wrap" id="carouselWrap">
+  <div class="carousel-track-wrap">
+    <div class="carousel-track" id="carouselTrack"></div>
+  </div>
+  <div class="carousel-dots" id="carouselDots"></div>
+</div>
+
+<script>
+const outcomes = [
+  {
+    dept: 'Marketing',
+    stat: '11 min',
+    context: 'used to take 2 days',
+    title: 'Campaign brief ready before the meeting ended',
+    desc: 'Agent pulled last quarter\'s results, benchmarked against competitors, and wrote a full brief with 5 creative directions — while the team was in standup.'
+  },
+  {
+    dept: 'Marketing',
+    stat: '4×',
+    context: 'more content, same team size',
+    title: 'Social calendar for 3 markets in one afternoon',
+    desc: 'Agent localized copy, resized assets, and scheduled posts across channels for the full month.'
+  },
+  {
+    dept: 'Sales',
+    stat: '2 hrs',
+    context: 'from discovery call to proposal',
+    title: 'Personalized proposal sent the same day',
+    desc: 'Agent built the deck, pulled 3 relevant case studies, and drafted pricing options while the rep wrote the follow-up email.'
+  },
+  {
+    dept: 'Sales',
+    stat: '4 min',
+    context: 'after the meeting ended',
+    title: 'Follow-up sent before the prospect closed their laptop',
+    desc: 'Agent wrote the meeting summary, pulled next steps, and drafted the email — the rep just hit send.'
+  },
+  {
+    dept: 'HR',
+    stat: 'Day 0',
+    context: 'ready before they even start',
+    title: 'Full onboarding pack done the night before',
+    desc: 'Agent set up tool access requests, created a 30-60-90 plan, and briefed the new hire\'s manager — automatically.'
+  },
+  {
+    dept: 'HR',
+    stat: '8 min',
+    context: 'to brief a full interview panel',
+    title: 'Every interviewer prepped before the call',
+    desc: 'Agent compared the resume to the job description and wrote tailored questions for each interviewer.'
+  },
+  {
+    dept: 'Operations',
+    stat: '6 min',
+    context: 'used to take 40 minutes',
+    title: 'Weekly exec report, fully automated',
+    desc: 'Agent pulled data from 4 tools, flagged 2 anomalies, and formatted the update — ready before Monday standup.'
+  },
+  {
+    dept: 'IT',
+    stat: '78%',
+    context: 'of L1 tickets resolved automatically',
+    title: 'Most issues never reach the helpdesk',
+    desc: 'Agent diagnosed, routed, and closed routine requests. Humans only handle what actually needs them.'
+  },
+  {
+    dept: 'Product',
+    stat: 'Overnight',
+    context: 'synthesized from 6 customer calls',
+    title: 'PRD drafted while the team slept',
+    desc: 'Agent turned interview notes into a structured requirements doc, grouped themes, and flagged conflicting feedback.'
+  },
+  {
+    dept: 'Product',
+    stat: '20 min',
+    context: 'to break down a full PRD into sprint tickets',
+    title: 'Sprint planned before the planning meeting',
+    desc: 'Agent decomposed requirements into tickets, estimated complexity, and distributed tasks across the team.'
+  },
+  {
+    dept: 'PMO',
+    stat: '9 min',
+    context: 'across 8 active projects',
+    title: 'Cross-team status report, no chasing required',
+    desc: 'Agent queried project leads, surfaced 3 risks, and formatted the board update — no meeting needed.'
+  },
+];
+
+let currentFilter = 'all';
+let carouselIdx = 0;
+
+function cardHTML(o) {
+  return `<div class="outcome-card" data-dept="${o.dept}">
+    <span class="dept-chip">${o.dept}</span>
+    <div class="card-stat">${o.stat}</div>
+    <div class="card-context">${o.context}</div>
+    <div class="card-title">${o.title}</div>
+    <div class="card-desc">${o.desc}</div>
+  </div>`;
+}
+
+function getFiltered() {
+  return currentFilter === 'all' ? outcomes : outcomes.filter(o => o.dept === currentFilter);
+}
+
+function renderGrid() {
+  document.getElementById('cardsGrid').innerHTML = getFiltered().map(cardHTML).join('');
+}
+
+function renderCarousel() {
+  const filtered = getFiltered();
+  carouselIdx = 0;
+  const track = document.getElementById('carouselTrack');
+  const dots = document.getElementById('carouselDots');
+  track.style.transform = 'translateX(0)';
+  track.innerHTML = filtered.map(cardHTML).join('');
+  dots.innerHTML = filtered.map((_,i) =>
+    `<button class="carousel-dot${i===0?' active':''}" onclick="goTo(${i})"></button>`
+  ).join('');
+}
+
+function goTo(idx) {
+  const track = document.getElementById('carouselTrack');
+  const card = track.querySelector('.outcome-card');
+  if (!card) return;
+  const w = card.offsetWidth + 12;
+  track.style.transform = `translateX(-${idx * w}px)`;
+  document.querySelectorAll('.carousel-dot').forEach((d,i) => d.classList.toggle('active', i===idx));
+  carouselIdx = idx;
+}
+
+function filter(dept, btn) {
+  currentFilter = dept;
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  renderGrid();
+  renderCarousel();
+}
+
+// Swipe
+let startX = 0;
+const track = document.getElementById('carouselTrack');
+track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+track.addEventListener('touchend', e => {
+  const dx = e.changedTouches[0].clientX - startX;
+  const total = getFiltered().length;
+  if (dx < -40 && carouselIdx < total - 1) goTo(carouselIdx + 1);
+  if (dx > 40 && carouselIdx > 0) goTo(carouselIdx - 1);
+}, { passive: true });
+
+renderGrid();
+renderCarousel();
+</script>
+</body>
+</html>
