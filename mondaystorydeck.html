@@ -164,6 +164,28 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
 .layer-card-point { display:flex; align-items:flex-start; gap:10px; font-size:13px; color:rgba(255,255,255,0.45); font-weight:300; line-height:1.5; }
 .layer-card-dot { width:5px; height:5px; border-radius:50%; background:var(--purple); flex-shrink:0; margin-top:7px; }
 
+/* S5b – Social Proof */
+#s5b { padding: 40px 56px; justify-content: center; }
+.sp-eyebrow { font-size:9px; font-weight:600; letter-spacing:5px; text-transform:uppercase; color:var(--purple); margin-bottom:10px; }
+.sp-heading { font-size:clamp(20px,2.8vw,34px); font-weight:700; color:#fff; line-height:1.25; margin-bottom:0; }
+.sp-body { display:grid; grid-template-columns:1fr 1.15fr; gap:56px; margin-top:30px; flex:1; }
+.sp-companies { display:flex; flex-direction:column; justify-content:space-between; }
+.sp-row { display:flex; align-items:center; padding:18px 0; border-bottom:1px solid #1a1a1a; }
+.sp-row:first-child { border-top:1px solid #1a1a1a; }
+.sp-logo { flex:0 0 110px; min-height:26px; display:flex; align-items:center; }
+.sp-logo.is-m { padding-left:14px; }
+.sp-stat-num { font-size:clamp(32px,3.2vw,48px); font-weight:800; color:var(--purple); line-height:1; flex:0 0 110px; }
+.sp-stat-label { font-size:10px; color:rgba(255,255,255,0.45); font-weight:300; line-height:1.5; margin-top:4px; }
+.sp-l-arcaise { font-size:17px; font-weight:700; color:#fff; letter-spacing:-0.3px; }
+.sp-l-unilever { font-size:17px; font-weight:700; color:#fff; font-style:italic; }
+.sp-right { display:flex; flex-direction:column; justify-content:center; padding-top:8px; }
+.sp-quote { display:flex; gap:18px; align-items:flex-start; }
+.sp-quote-mark { font-size:52px; color:var(--purple); line-height:0.75; font-family:Georgia,serif; flex-shrink:0; }
+.sp-quote-text { font-size:13px; color:rgba(255,255,255,0.65); line-height:1.75; font-weight:300; }
+.sp-quote-text strong { color:#fff; font-weight:600; }
+.sp-q-name { font-size:12px; font-weight:700; color:#fff; margin-top:14px; }
+.sp-q-role { font-size:10px; color:rgba(255,255,255,0.35); font-weight:300; line-height:1.5; }
+
 /* S6 */
 #s6 { text-align:center; }
 .outcome-wrap { max-width:720px; }
@@ -352,6 +374,22 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
   .layer-card-desc { font-size: 13px; margin-bottom: 16px; }
   .layer-card-point { font-size: 12px; }
 
+  /* S5b – Social Proof */
+  #s5b { padding: 28px 22px; }
+  .sp-heading { font-size: 19px; }
+  .sp-body { grid-template-columns: 1fr; gap: 22px; margin-top: 22px; }
+  .sp-logo { flex: 0 0 80px; }
+  .sp-logo.is-m { padding-left: 8px; }
+  .sp-stat-num { font-size: 28px; flex: 0 0 76px; }
+  .sp-stat-label { font-size: 9px; }
+  .sp-right { padding-top: 0; }
+  .sp-quote { gap: 12px; }
+  .sp-quote-mark { font-size: 38px; }
+  .sp-quote-text { font-size: 12px; line-height: 1.7; }
+  .sp-q-name { font-size: 11px; margin-top: 10px; }
+  .sp-q-role { font-size: 9px; }
+  .sp-l-arcaise, .sp-l-unilever { font-size: 14px; }
+
   /* S6 – CTA */
   .outcome-wrap h2 { font-size: clamp(22px, 7vw, 40px); }
   .outcome-wrap p { font-size: clamp(12px, 3.5vw, 15px); }
@@ -385,7 +423,7 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
 
 <div class="progress" id="prog"></div>
 <nav class="nav-dots" id="navDots">
-  <button class="nav-dot active" onclick="goTo(0)"></button><button class="nav-dot" onclick="goTo(1)"></button><button class="nav-dot" onclick="goTo(2)"></button><button class="nav-dot" onclick="goTo(3)"></button><button class="nav-dot" onclick="goTo(4)"></button><button class="nav-dot" onclick="goTo(5)"></button><button class="nav-dot" onclick="goTo(6)"></button>
+  <button class="nav-dot active" onclick="goTo(0)"></button><button class="nav-dot" onclick="goTo(1)"></button><button class="nav-dot" onclick="goTo(2)"></button><button class="nav-dot" onclick="goTo(3)"></button><button class="nav-dot" onclick="goTo(4)"></button><button class="nav-dot" onclick="goTo(5)"></button><button class="nav-dot" onclick="goTo(6)"></button><button class="nav-dot" onclick="goTo(7)"></button>
 </nav>
 
 <div class="deck">
@@ -632,6 +670,50 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
       <div class="layer-card-title" id="layerTitle"></div>
       <div class="layer-card-desc" id="layerDesc"></div>
       <div class="layer-card-points" id="layerPoints"></div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" id="s5b">
+  <p class="sp-eyebrow">Social Proof</p>
+  <h2 class="sp-heading">Businesses like yours are already seeing the impact</h2>
+  <div class="sp-body">
+    <div class="sp-companies">
+      <div class="sp-row">
+        <div class="sp-logo"><span class="sp-l-arcaise">Arcaise</span></div>
+        <div>
+          <div class="sp-stat-num">10x</div>
+          <div class="sp-stat-label">Company growth since<br>adopting monday.com</div>
+        </div>
+      </div>
+      <div class="sp-row">
+        <div class="sp-logo is-m">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="white">
+            <path d="M17.243 3.006c2.066 0 3.742 8.714 3.742 19.478H24c0-11.588-3.042-20.968-6.766-20.968-2.127 0-4.007 2.81-5.248 7.227-1.241-4.416-3.121-7.227-5.231-7.227C3.031 1.516 0 10.888 0 22.476h3.014c0-10.763 1.658-19.47 3.724-19.47 2.066 0 3.741 8.05 3.741 17.98h2.997c0-9.93 1.684-17.98 3.75-17.98Z"/>
+          </svg>
+        </div>
+        <div>
+          <div class="sp-stat-num">1,200+</div>
+          <div class="sp-stat-label">Hours saved per month</div>
+        </div>
+      </div>
+      <div class="sp-row">
+        <div class="sp-logo"><span class="sp-l-unilever">Unilever</span></div>
+        <div>
+          <div class="sp-stat-num">4x</div>
+          <div class="sp-stat-label">ROI</div>
+        </div>
+      </div>
+    </div>
+    <div class="sp-right">
+      <div class="sp-quote">
+        <div class="sp-quote-mark">"</div>
+        <div>
+          <p class="sp-quote-text">monday.com gave us more than a platform. <strong>It gave us a better way of working</strong>, one that's visible, accountable, and scalable across the entire organization.</p>
+          <div class="sp-q-name">Karin Traina</div>
+          <div class="sp-q-role">VP, Director, Process Improvement & Change Management, athenahealth</div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
