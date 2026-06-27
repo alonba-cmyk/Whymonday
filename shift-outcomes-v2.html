@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Shift – Outcomes v2</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+:root { --bg:#000; --purple:#6161ff; --dim:rgba(255,255,255,0.4); }
+body {
+  background: var(--bg);
+  font-family: 'Poppins', sans-serif;
+  color: #fff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 24px;
+  gap: 40px;
+  overflow-x: hidden;
+}
+
+.page-header {
+  text-align: center;
+  max-width: 640px;
+}
+.eyebrow {
+  font-size: 9px; font-weight:600; letter-spacing:5px;
+  text-transform:uppercase; color:var(--purple); margin-bottom:12px;
+}
+.page-title {
+  font-size: clamp(22px,3.5vw,44px); font-weight:800; line-height:1.15;
+  letter-spacing:-0.5px;
+  background: linear-gradient(135deg,#fff 40%,rgba(255,255,255,0.5));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+}
+
+/* AI Logos */
+.ai-logos {
+  display:flex; align-items:center; justify-content:center;
+  gap:32px; flex-wrap:wrap;
+}
+.ai-logo { display:flex; flex-direction:column; align-items:center; gap:6px; opacity:0.28; transition:opacity .3s; }
+.ai-logo:hover { opacity:0.6; }
+.ai-logo svg { width:26px; height:26px; fill:#fff; }
+.ai-logo img { height:24px; width:auto; filter:brightness(0) invert(1); }
+.ai-logo span { font-size:9px; font-weight:500; color:#fff; letter-spacing:1px; }
+
+/* Swiper */
+.swiper-wrap {
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.swiper-viewport {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.swiper-track {
+  display: flex;
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform;
+}
+
+/* Card */
+.card {
+  width: 100%;
+  flex-shrink: 0;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-left: 3px solid;
+  border-radius: 20px;
+  padding: 24px 24px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto auto;
+  column-gap: 18px;
+  row-gap: 10px;
+}
+
+.card-top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  grid-column: 1;
+  grid-row: 1 / 3;
+  align-self: start;
+  margin-top: 2px;
+}
+.av {
+  width: 52px; height: 52px; border-radius: 50%; border: 2px solid;
+  overflow: hidden; flex-shrink: 0;
+}
+.av img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.dept-chip { font-size: 8px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; text-align: center; }
+
+.title { font-size: 17px; font-weight: 800; color: #fff; line-height: 1.3; grid-column: 2; grid-row: 1; align-self: center; }
+.desc { font-size: 11px; color: var(--dim); font-weight: 300; line-height: 1.65; grid-column: 2; grid-row: 2; }
+
+/* Dots */
+.dots {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.dot {
+  width: 8px; height: 8px;
+  border-radius: 4px;
+  background: rgba(255,255,255,0.2);
+  transition: all 0.3s;
+  cursor: pointer;
+}
+.dot.active {
+  width: 24px;
+  background: var(--purple);
+}
+
+@media (max-width: 640px) {
+  body { padding: 44px 16px; gap: 32px; }
+  .ai-logos { gap: 18px; }
+  .ai-logo svg { width: 20px; height: 20px; }
+  .ai-logo img { height: 18px; }
+  .ai-logo span { font-size: 8px; }
+  .av { width: 46px; height: 46px; }
+  .title { font-size: 15px; }
+}
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <p class="eyebrow">What's changed is</p>
+  <h1 class="page-title">How fast work can get done when people and agents work together.</h1>
+</div>
+
+<div class="ai-logos">
+  <div class="ai-logo">
+    <img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/monday%20Logo/monday.com%20icon.png" alt="monday">
+    <span>monday</span>
+  </div>
+  <div class="ai-logo">
+    <svg viewBox="0 0 24 24"><path d="M22.282 9.821a5.985 5.985 0 0 0-.516-4.91 6.046 6.046 0 0 0-6.51-2.9A6.065 6.065 0 0 0 4.981 4.18a5.985 5.985 0 0 0-3.998 2.9 6.046 6.046 0 0 0 .743 7.097 5.98 5.98 0 0 0 .51 4.911 6.051 6.051 0 0 0 6.515 2.9A5.985 5.985 0 0 0 13.26 24a6.056 6.056 0 0 0 5.772-4.206 5.99 5.99 0 0 0 3.997-2.9 6.056 6.056 0 0 0-.747-7.073zM13.26 22.43a4.476 4.476 0 0 1-2.876-1.04l.141-.081 4.779-2.758a.795.795 0 0 0 .392-.681v-6.737l2.02 1.168a.071.071 0 0 1 .038.052v5.583a4.504 4.504 0 0 1-4.494 4.494zM3.6 18.304a4.47 4.47 0 0 1-.535-3.014l.142.085 4.783 2.759a.771.771 0 0 0 .78 0l5.843-3.369v2.332a.08.08 0 0 1-.032.065L9.74 19.95a4.5 4.5 0 0 1-6.14-1.646zM2.34 7.896a4.485 4.485 0 0 1 2.366-1.973V11.6a.766.766 0 0 0 .388.677l5.815 3.355-2.02 1.168a.076.076 0 0 1-.071 0L4.01 14.3A4.501 4.501 0 0 1 2.34 7.896zm16.597 3.855l-5.843-3.372 2.02-1.164a.076.076 0 0 1 .072 0l4.807 2.779a4.504 4.504 0 0 1-.695 8.115V12.48a.786.786 0 0 0-.36-.729zm2.01-3.023l-.141-.085-4.774-2.782a.776.776 0 0 0-.785 0L9.409 9.23V6.897a.066.066 0 0 1 .028-.061l4.807-2.774a4.5 4.5 0 0 1 6.68 4.66zm-12.64 4.135l-2.02-1.164a.08.08 0 0 1-.038-.057V6.075a4.5 4.5 0 0 1 7.375-3.453l-.142.08L8.704 5.46a.795.795 0 0 0-.393.681zm1.097-2.365l2.602-1.5 2.607 1.5v2.999l-2.597 1.5-2.607-1.5z"/></svg>
+    <span>ChatGPT</span>
+  </div>
+  <div class="ai-logo">
+    <svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 2c.967 2.051 1.637 4.242 1.953 6.515C16.228 9.162 18.18 10.4 20 12c-1.82 1.6-3.772 2.838-6.047 3.485C13.637 17.758 12.967 19.949 12 22c-.967-2.051-1.637-4.242-1.953-6.515C7.772 14.838 5.82 13.6 4 12c1.82-1.6 3.772-2.838 6.047-3.485C10.363 6.242 11.033 4.051 12 2z"/></svg>
+    <span>Gemini</span>
+  </div>
+  <div class="ai-logo">
+    <svg viewBox="0 0 24 24"><path d="M13.827 3.52h3.603L24 20.48h-3.603l-6.57-16.96zm-7.258 0h3.767L16.906 20.48h-3.674l-1.343-3.461H5.017l-1.344 3.46H0L6.57 3.522zm4.132 9.959L8.453 7.687 6.205 13.48H10.7z"/></svg>
+    <span>Claude</span>
+  </div>
+  <div class="ai-logo">
+    <svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 3a4 4 0 1 1 0 8 4 4 0 0 1 0-8zm0 14.5a7.5 7.5 0 0 1-6-3c.022-2 4-3.1 6-3.1s5.978 1.1 6 3.1a7.5 7.5 0 0 1-6 3z"/></svg>
+    <span>Copilot</span>
+  </div>
+</div>
+
+<div class="swiper-wrap">
+  <div class="swiper-viewport">
+    <div class="swiper-track" id="track"></div>
+  </div>
+  <div class="dots" id="dots"></div>
+</div>
+
+<script>
+const B = 'https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/';
+const cards = [
+  { dept:'Marketing', color:'#F48FB1', img:B+'Marketing.png',
+    title:'Campaign brief ready before the meeting ended',
+    desc:'Agent pulled last quarter\'s results and wrote 5 creative directions while the team was in standup.' },
+  { dept:'Sales', color:'#F9D27A', img:B+'Sales.png',
+    title:'Personalized proposal sent the same day',
+    desc:'Agent built the deck, pulled case studies, and drafted pricing while the rep wrote the follow-up.' },
+  { dept:'HR', color:'#8ECEC0', img:B+'HR.png',
+    title:'Onboarding pack done the night before day one',
+    desc:'Agent set up access requests, a 30-60-90 plan, and briefed the manager — automatically.' },
+  { dept:'IT', color:'#A89BD9', img:B+'IT.png',
+    title:'Most tickets resolved before anyone noticed',
+    desc:'Agent diagnosed, routed, and closed routine requests. Humans only handle what needs them.' },
+  { dept:'Operations', color:'#85C1AE', img:B+'Operations.png',
+    title:'Weekly exec report, fully automated',
+    desc:'Agent pulled data from 4 tools, flagged anomalies, and formatted the update before Monday standup.' },
+  { dept:'Product', color:'#7FC8D4', img:B+'Product.png',
+    title:'PRD drafted while the team slept',
+    desc:'Agent turned 6 customer interviews into a structured doc, grouped themes, flagged conflicts.' },
+  { dept:'Finance', color:'#93C6E7', img:B+'Finance.png',
+    title:'Budget variance explained automatically',
+    desc:'Agent pulled actuals from 3 systems and prepared the CFO summary in minutes.' },
+  { dept:'Legal', color:'#F6C27A', img:B+'Legal.png',
+    title:'Contract reviewed before the meeting, not after',
+    desc:'Agent flagged non-standard clauses and prepared a summary before negotiation started.' },
+];
+
+const track = document.getElementById('track');
+const dotsEl = document.getElementById('dots');
+let current = 0;
+
+function cardHTML(c) {
+  return `<div class="card" style="border-color:${c.color}60">
+    <div class="card-top">
+      <div class="av" style="border-color:${c.color}90"><img src="${c.img}" alt="${c.dept}" loading="lazy"></div>
+      <span class="dept-chip" style="color:${c.color}">${c.dept}</span>
+    </div>
+    <div class="title">${c.title}</div>
+    <div class="desc">${c.desc}</div>
+  </div>`;
+}
+
+track.innerHTML = cards.map(cardHTML).join('');
+
+// Dots
+cards.forEach((_, i) => {
+  const d = document.createElement('div');
+  d.className = 'dot' + (i === 0 ? ' active' : '');
+  d.addEventListener('click', () => goTo(i));
+  dotsEl.appendChild(d);
+});
+
+function goTo(n) {
+  current = n;
+  track.style.transform = `translateX(${-100 * current}%)`;
+  document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === current));
+}
+
+// Touch swipe
+let startX = 0;
+track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+track.addEventListener('touchend', e => {
+  const dx = e.changedTouches[0].clientX - startX;
+  if (Math.abs(dx) > 40) {
+    if (dx < 0 && current < cards.length - 1) goTo(current + 1);
+    if (dx > 0 && current > 0) goTo(current - 1);
+  }
+});
+
+// Keyboard
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' && current < cards.length - 1) goTo(current + 1);
+  if (e.key === 'ArrowLeft' && current > 0) goTo(current - 1);
+});
+</script>
+</body>
+</html>
