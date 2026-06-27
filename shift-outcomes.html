@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Shift – Outcomes Variants</title>
+<title>The Shift – Outcomes</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
@@ -12,15 +12,16 @@ body {
   background: var(--bg);
   font-family: 'Poppins', sans-serif;
   color: #fff;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 60px 24px 80px;
-  gap: 64px;
+  justify-content: center;
+  padding: 60px 24px;
+  gap: 40px;
   overflow-x: hidden;
 }
 
-/* Shared header */
 .page-header {
   text-align: center;
   max-width: 640px;
@@ -47,91 +48,47 @@ body {
 .ai-logo img { height:24px; width:auto; filter:brightness(0) invert(1); }
 .ai-logo span { font-size:9px; font-weight:500; color:#fff; letter-spacing:1px; }
 
-/* Variant wrapper */
-.variant { width:100%; display:flex; flex-direction:column; align-items:center; gap:18px; }
-.option-tag {
-  display:inline-block; background:#111; color:#666; font-size:10px;
-  letter-spacing:2px; text-transform:uppercase; padding:4px 14px; border-radius:20px;
-}
-
-/* Marquee shell */
+/* Marquee */
 .marquee-wrap {
-  width:100vw;
-  overflow:hidden;
+  width: 100vw;
+  overflow: hidden;
   -webkit-mask-image: linear-gradient(to right,transparent 0%,#000 7%,#000 93%,transparent 100%);
   mask-image: linear-gradient(to right,transparent 0%,#000 7%,#000 93%,transparent 100%);
 }
 .marquee-track {
-  display:flex; gap:12px; width:max-content;
-  animation: ticker 34s linear infinite;
-  padding:6px 0 8px;
+  display: flex; gap: 16px; width: max-content;
+  animation: ticker 36s linear infinite;
+  padding: 6px 0 8px;
 }
-.marquee-wrap:hover .marquee-track { animation-play-state:paused; }
+.marquee-wrap:hover .marquee-track { animation-play-state: paused; }
 @keyframes ticker { from{transform:translateX(0)} to{transform:translateX(-50%)} }
 
-/* ── VARIANT A — Compact (like the original mission cards) ── */
-.va .card {
-  width:160px; flex-shrink:0;
-  background:rgba(255,255,255,0.04);
-  border:1px solid rgba(255,255,255,0.09);
-  border-radius:14px; padding:16px 14px;
-  display:flex; flex-direction:column; gap:10px;
+/* Card — Bold Statement */
+.card {
+  width: 240px; flex-shrink: 0;
+  border-left: 3px solid;
+  padding: 18px 20px;
+  display: flex; flex-direction: column; gap: 10px;
 }
-.va .card-top { display:flex; align-items:center; gap:9px; }
-.va .av {
-  width:36px; height:36px; border-radius:50%; border:2px solid;
-  overflow:hidden; flex-shrink:0;
+.card-top { display: flex; align-items: center; gap: 10px; }
+.av {
+  width: 36px; height: 36px; border-radius: 50%; border: 2px solid;
+  overflow: hidden; flex-shrink: 0;
 }
-.va .av img { width:100%; height:100%; object-fit:cover; object-position:top; }
-.va .dept { font-size:11px; font-weight:700; }
-.va .desc { font-size:10px; color:var(--dim); font-weight:300; line-height:1.6; }
+.av img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.dept-chip { font-size: 9px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; }
+.title { font-size: 14px; font-weight: 800; color: #fff; line-height: 1.35; }
+.desc { font-size: 10px; color: var(--dim); font-weight: 300; line-height: 1.7; }
 
-/* ── VARIANT B — Story Card (avatar + title + desc) ── */
-.vb .card {
-  width:220px; flex-shrink:0;
-  background:rgba(255,255,255,0.04);
-  border:1px solid rgba(255,255,255,0.09);
-  border-radius:16px; padding:20px 18px;
-  display:flex; flex-direction:column; gap:12px;
-}
-.vb .card-top { display:flex; align-items:center; gap:10px; }
-.vb .av {
-  width:42px; height:42px; border-radius:50%; border:2px solid;
-  overflow:hidden; flex-shrink:0;
-}
-.vb .av img { width:100%; height:100%; object-fit:cover; object-position:top; }
-.vb .dept { font-size:12px; font-weight:700; }
-.vb .divider { height:1px; background:rgba(255,255,255,0.07); }
-.vb .title { font-size:12px; font-weight:700; color:#fff; line-height:1.45; }
-.vb .desc { font-size:10px; color:var(--dim); font-weight:300; line-height:1.7; }
-
-/* ── VARIANT C — Bold Statement ── */
-.vc .card {
-  width:240px; flex-shrink:0;
-  border-left:3px solid;
-  padding:18px 20px;
-  display:flex; flex-direction:column; gap:10px;
-}
-.vc .card-top { display:flex; align-items:center; gap:10px; }
-.vc .av {
-  width:36px; height:36px; border-radius:50%; border:2px solid;
-  overflow:hidden; flex-shrink:0;
-}
-.vc .av img { width:100%; height:100%; object-fit:cover; object-position:top; }
-.vc .dept-chip {
-  font-size:9px; font-weight:600; letter-spacing:2px;
-  text-transform:uppercase;
-}
-.vc .title { font-size:14px; font-weight:800; color:#fff; line-height:1.35; }
-.vc .desc { font-size:10px; color:var(--dim); font-weight:300; line-height:1.7; }
-
-@media (max-width:640px) {
-  body { padding:40px 16px 60px; gap:48px; }
-  .ai-logos { gap:18px; }
-  .ai-logo svg { width:20px; height:20px; }
-  .ai-logo img { height:18px; }
-  .ai-logo span { font-size:8px; }
-  .marquee-track { animation-duration:26s; }
+@media (max-width: 640px) {
+  body { padding: 44px 16px; gap: 32px; }
+  .ai-logos { gap: 18px; }
+  .ai-logo svg { width: 20px; height: 20px; }
+  .ai-logo img { height: 18px; }
+  .ai-logo span { font-size: 8px; }
+  .marquee-track { animation-duration: 26s; }
+  .card { width: 200px; }
+  .title { font-size: 12px; }
 }
 </style>
 </head>
@@ -165,28 +122,8 @@ body {
   </div>
 </div>
 
-<!-- ── OPTION A ── -->
-<div class="variant va">
-  <span class="option-tag">Option A — Compact</span>
-  <div class="marquee-wrap">
-    <div class="marquee-track" id="trackA"></div>
-  </div>
-</div>
-
-<!-- ── OPTION B ── -->
-<div class="variant vb">
-  <span class="option-tag">Option B — Story Card</span>
-  <div class="marquee-wrap">
-    <div class="marquee-track" id="trackB"></div>
-  </div>
-</div>
-
-<!-- ── OPTION C ── -->
-<div class="variant vc">
-  <span class="option-tag">Option C — Bold Statement</span>
-  <div class="marquee-wrap">
-    <div class="marquee-track" id="trackC" style="animation-direction:reverse"></div>
-  </div>
+<div class="marquee-wrap">
+  <div class="marquee-track" id="track"></div>
 </div>
 
 <script>
@@ -218,37 +155,19 @@ const cards = [
     desc:'Agent flagged non-standard clauses and prepared a summary before negotiation started.' },
 ];
 
-function avImg(c) {
-  return `<div class="av" style="border-color:${c.color}90"><img src="${c.img}" alt="${c.dept}" loading="lazy"></div>`;
-}
-
-function htmlA(c) {
-  return `<div class="card">
-    <div class="card-top">${avImg(c)}<span class="dept" style="color:${c.color}">${c.dept}</span></div>
-    <p class="desc">${c.title}</p>
-  </div>`;
-}
-function htmlB(c) {
-  return `<div class="card">
-    <div class="card-top">${avImg(c)}<span class="dept" style="color:${c.color}">${c.dept}</span></div>
-    <div class="divider"></div>
-    <div class="title">${c.title}</div>
-    <div class="desc">${c.desc}</div>
-  </div>`;
-}
-function htmlC(c) {
+function cardHTML(c) {
   return `<div class="card" style="border-color:${c.color}60">
-    <div class="card-top">${avImg(c)}<span class="dept-chip" style="color:${c.color}">${c.dept}</span></div>
+    <div class="card-top">
+      <div class="av" style="border-color:${c.color}90"><img src="${c.img}" alt="${c.dept}" loading="lazy"></div>
+      <span class="dept-chip" style="color:${c.color}">${c.dept}</span>
+    </div>
     <div class="title">${c.title}</div>
     <div class="desc">${c.desc}</div>
   </div>`;
 }
 
-['A','B','C'].forEach(v => {
-  const fn = v==='A' ? htmlA : v==='B' ? htmlB : htmlC;
-  const html = cards.map(fn).join('');
-  document.getElementById('track'+v).innerHTML = html + html;
-});
+const html = cards.map(cardHTML).join('');
+document.getElementById('track').innerHTML = html + html;
 </script>
 </body>
 </html>
