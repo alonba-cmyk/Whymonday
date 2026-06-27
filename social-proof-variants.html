@@ -70,6 +70,61 @@ body { background:#0d0d0d; font-family:'Poppins',sans-serif; display:flex; flex-
 .vd-quote { margin-top:24px; display:flex; gap:18px; align-items:flex-start; flex:1; }
 .vd-quote-text { font-size:clamp(13px,1.7vw,17px); color:rgba(255,255,255,0.75); line-height:1.75; font-weight:300; }
 .vd-quote-text strong { color:#fff; font-weight:700; }
+
+@media (max-width: 640px) {
+  body { padding: 28px 16px 60px; gap: 32px; }
+  .slide { padding: 32px 22px; min-height: auto; border-radius: 14px; }
+  .heading { font-size: 19px; }
+  .stat-num { font-size: 26px; }
+  .quote-mark { font-size: 38px; }
+  .quote-text { font-size: 12px; line-height: 1.7; }
+  .q-name { font-size: 11px; margin-top: 10px; }
+  .q-role { font-size: 9px; }
+  .l-arcaise, .l-unilever { font-size: 14px; }
+
+  /* A – rows instead of columns */
+  .va-grid { grid-template-columns: 1fr; margin-top: 22px; }
+  .va-cell { display: flex; flex-direction: row; align-items: center; gap: 18px;
+             padding: 18px 0; border-right: none; border-bottom: 1px solid #1e1e1e; }
+  .va-cell:first-child { padding-left: 0; }
+  .va-cell:nth-child(2) { padding-left: 0; }
+  .va-cell:last-child { border-bottom: none; padding-left: 0; }
+  .va-cell .logo-wrap { flex: 0 0 80px; margin-bottom: 0; min-height: auto; }
+  .va-cell .stat-num { font-size: 26px; }
+  .va-cell .stat-label { font-size: 10px; margin-top: 3px; }
+  .va-quote { margin-top: 22px; padding-top: 22px; gap: 12px; }
+
+  /* B – single column cards */
+  .vb-top { margin-bottom: 18px; }
+  .vb-cards { grid-template-columns: 1fr; gap: 10px; margin-bottom: 14px; }
+  .vb-card { padding: 18px 16px; display: flex; flex-direction: row; align-items: center; gap: 16px; }
+  .vb-card .logo-wrap { flex: 0 0 70px; margin-bottom: 0; min-height: auto; }
+  .vb-card .stat-num { font-size: 26px; }
+  .vb-card .stat-label { font-size: 10px; margin-top: 2px; }
+  .vb-quote-box { padding: 16px 18px; gap: 12px; }
+  .vb-quote-box .quote-text { font-size: 12px; }
+
+  /* C – stack: companies then quote */
+  .vc-body { grid-template-columns: 1fr; gap: 22px; margin-top: 22px; }
+  .vc-row .logo-wrap { flex: 0 0 80px; }
+  .vc-row .stat-num { font-size: 22px; flex: 0 0 60px; }
+  .vc-row .stat-label { font-size: 9px; }
+  .vc-right { padding-top: 0; }
+  .vc-quote-big { font-size: 13px; line-height: 1.7; }
+
+  /* D – stack numbers, then quote */
+  .vd-nums { grid-template-columns: 1fr; margin-top: 14px; }
+  .vd-col { border-right: none; border-bottom: 1px solid #1a1a1a;
+            padding: 16px 0; display: flex; flex-direction: row; align-items: center; gap: 16px; }
+  .vd-col:first-child { padding-left: 0; }
+  .vd-col:nth-child(2) { padding-left: 0; }
+  .vd-col:last-child { border-bottom: none; padding-left: 0; }
+  .vd-big { font-size: 38px; flex-shrink: 0; }
+  .vd-col .logo-wrap { margin: 0 0 2px; min-height: auto; }
+  .vd-col .stat-label { font-size: 10px; }
+  .vd-quote { margin-top: 20px; gap: 12px; }
+  .vd-quote-text { font-size: 13px; }
+}
 </style>
 </head>
 <body>
