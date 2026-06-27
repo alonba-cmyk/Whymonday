@@ -322,35 +322,23 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
   .outcome-wrap p { font-size: clamp(12px, 3.5vw, 15px); }
   .cta { padding: 12px 24px; font-size: 11px; }
   .s0v-h1 { font-size: clamp(28px, 8vw, 42px); letter-spacing: -0.5px; }
-  .s0v-h2 { font-size: clamp(14px, 4vw, 20px); margin-top: 8px; }
-  .s0v1-inner { gap: 14px; padding: 32px 20px; }
-  .s0v2-inner { gap: 20px; padding: 32px 20px; }
-  .s0v3-inner { gap: 12px; padding: 32px 20px; }
+  .s0v-h2 { font-size: clamp(14px, 4vw, 20px); }
 }
 
 /* S0 Variants */
-#s0v1, #s0v2, #s0v3 { background:#000; text-align:center; }
-.s0v-label { font-size:9px; font-weight:600; letter-spacing:4px; text-transform:uppercase; color:var(--purple); margin-bottom:4px; }
-.s0v-h1 { font-size:clamp(36px,5.5vw,72px); font-weight:800; line-height:1.05; letter-spacing:-1.5px; display:block; background:linear-gradient(135deg,#fff 40%,rgba(255,255,255,0.6)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
-.s0v-h2 { font-size:clamp(18px,2.5vw,34px); font-weight:300; line-height:1.2; color:var(--dim); display:block; margin-top:12px; }
-
-/* Variant A — Stacked Brand above strip, text below */
-.s0v1-inner { display:flex; flex-direction:column; align-items:center; justify-content:center; width:100%; height:100%; gap:20px; padding:40px 20px; }
+#s0v1, #s0v2, #s0v3 { background:#000; text-align:center; gap:20px; }
+.s0v-label { font-size:9px; font-weight:600; letter-spacing:4px; text-transform:uppercase; color:var(--purple); }
+.s0v-h1 { font-size:clamp(36px,5.5vw,72px); font-weight:800; line-height:1.05; letter-spacing:-1.5px; background:linear-gradient(135deg,#fff 40%,rgba(255,255,255,0.6)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.s0v-h2 { font-size:clamp(18px,2.5vw,34px); font-weight:300; line-height:1.2; color:var(--dim); }
 .s0v1-brand { display:flex; flex-direction:column; align-items:center; gap:10px; }
 .s0v1-brand img { height:22px; opacity:0.85; }
 .s0v1-sub { font-size:10px; font-weight:500; letter-spacing:4px; text-transform:uppercase; color:var(--dim); }
 .s0v1-strip { width:90%; max-width:1000px; opacity:0.18; pointer-events:none; }
-
-/* Variant B — Headline first, strip middle, brand bottom */
-.s0v2-inner { display:flex; flex-direction:column; align-items:center; justify-content:center; width:100%; height:100%; gap:28px; padding:40px 20px; }
 .s0v2-strip { width:90%; max-width:1000px; opacity:0.18; pointer-events:none; }
 .s0v2-brand { display:flex; align-items:center; justify-content:center; gap:12px; }
 .s0v2-brand img { height:18px; opacity:0.85; }
 .s0v2-brand-div { width:1px; height:16px; background:rgba(255,255,255,0.2); }
 .s0v2-brand span { font-size:11px; font-weight:500; letter-spacing:4px; text-transform:uppercase; color:var(--dim); white-space:nowrap; }
-
-/* Variant C — Brand top, strip full-width prominent, text below */
-.s0v3-inner { display:flex; flex-direction:column; align-items:center; justify-content:center; width:100%; height:100%; gap:16px; padding:40px 20px; }
 .s0v3-brand { display:flex; align-items:center; justify-content:center; gap:12px; }
 .s0v3-brand img { height:18px; opacity:0.85; }
 .s0v3-brand-div { width:1px; height:16px; background:rgba(255,255,255,0.2); }
@@ -539,52 +527,41 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
     <p>Less coordination. More execution. Teams that deliver results, not just manage processes. Growth that doesn't require headcount to match.</p>
     <a href="#" class="cta" onclick="goTo(0);return false;">See it in action</a>
   </div>
+</div>
 
 <div class="slide" id="s0v1">
-  <div class="s0v1-inner">
-    <p class="s0v-label">VARIANT A</p>
-    <div class="s0v1-brand">
-      <img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/monday%20Logo/monday.com%20Logo.png" alt="monday.com">
-      <span class="s0v1-sub">AI Work Platform</span>
-    </div>
-    <img class="s0v1-strip" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/Agents%20and%20People%20strip.png" alt="">
-    <div>
-      <span class="s0v-h1">People and agents.</span>
-      <span class="s0v-h2">Working together. Driving results.</span>
-    </div>
+  <p class="s0v-label">VARIANT A</p>
+  <div class="s0v1-brand">
+    <img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/monday%20Logo/monday.com%20Logo.png" alt="monday.com">
+    <span class="s0v1-sub">AI Work Platform</span>
   </div>
+  <img class="s0v1-strip" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/Agents%20and%20People%20strip.png" alt="">
+  <span class="s0v-h1">People and agents.</span>
+  <span class="s0v-h2">Working together. Driving results.</span>
 </div>
 
 <div class="slide" id="s0v2">
-  <div class="s0v2-inner">
-    <p class="s0v-label">VARIANT B</p>
-    <div>
-      <span class="s0v-h1">People and agents.</span>
-      <span class="s0v-h2">Working together. Driving results.</span>
-    </div>
-    <img class="s0v2-strip" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/Agents%20and%20People%20strip.png" alt="">
-    <div class="s0v2-brand">
-      <img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/monday%20Logo/monday.com%20Logo.png" alt="monday.com">
-      <div class="s0v2-brand-div"></div>
-      <span>AI Work Platform</span>
-    </div>
+  <p class="s0v-label">VARIANT B</p>
+  <span class="s0v-h1">People and agents.</span>
+  <span class="s0v-h2">Working together. Driving results.</span>
+  <img class="s0v2-strip" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/Agents%20and%20People%20strip.png" alt="">
+  <div class="s0v2-brand">
+    <img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/monday%20Logo/monday.com%20Logo.png" alt="monday.com">
+    <div class="s0v2-brand-div"></div>
+    <span>AI Work Platform</span>
   </div>
 </div>
 
 <div class="slide" id="s0v3">
-  <div class="s0v3-inner">
-    <p class="s0v-label">VARIANT C</p>
-    <div class="s0v3-brand">
-      <img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/monday%20Logo/monday.com%20Logo.png" alt="monday.com">
-      <div class="s0v3-brand-div"></div>
-      <span>AI Work Platform</span>
-    </div>
-    <img class="s0v3-strip" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/Agents%20and%20People%20strip.png" alt="">
-    <div>
-      <span class="s0v-h1">People and agents.</span>
-      <span class="s0v-h2">Working together. Driving results.</span>
-    </div>
+  <p class="s0v-label">VARIANT C</p>
+  <div class="s0v3-brand">
+    <img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/monday%20Logo/monday.com%20Logo.png" alt="monday.com">
+    <div class="s0v3-brand-div"></div>
+    <span>AI Work Platform</span>
   </div>
+  <img class="s0v3-strip" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/Agents%20and%20People%20strip.png" alt="">
+  <span class="s0v-h1">People and agents.</span>
+  <span class="s0v-h2">Working together. Driving results.</span>
 </div>
 
 </div>
