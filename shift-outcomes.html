@@ -10,10 +10,7 @@
 :root {
   --bg: #000;
   --purple: #6161ff;
-  --purple-light: #a084ff;
   --dim: rgba(255,255,255,0.4);
-  --card-bg: rgba(255,255,255,0.04);
-  --card-border: rgba(255,255,255,0.09);
 }
 body {
   background: var(--bg);
@@ -23,14 +20,16 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 64px 24px 80px;
+  padding: 64px 0 80px;
+  overflow-x: hidden;
 }
 
 /* Header */
 .page-header {
   text-align: center;
-  margin-bottom: 44px;
-  max-width: 700px;
+  margin-bottom: 48px;
+  max-width: 680px;
+  padding: 0 24px;
 }
 .eyebrow {
   font-size: 9px;
@@ -49,77 +48,57 @@ body {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  margin-bottom: 16px;
-}
-.page-sub {
-  font-size: 13px;
-  color: var(--dim);
-  font-weight: 300;
 }
 
-/* Tabs */
-.tabs {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-bottom: 40px;
-  max-width: 960px;
+/* Desktop grid */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
   width: 100%;
+  max-width: 980px;
+  padding: 0 24px;
 }
-.tab {
-  padding: 7px 18px;
-  border-radius: 100px;
-  border: 1px solid rgba(255,255,255,0.15);
-  background: transparent;
-  font-family: 'Poppins', sans-serif;
-  font-size: 11px;
-  font-weight: 500;
-  color: rgba(255,255,255,0.45);
-  cursor: pointer;
-  transition: all 0.25s;
-}
-.tab.active { background: var(--purple); border-color: var(--purple); color: #fff; }
-.tab:hover:not(.active) { border-color: rgba(255,255,255,0.35); color: rgba(255,255,255,0.75); }
 
 /* Card */
 .outcome-card {
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.09);
   border-radius: 20px;
-  padding: 28px 24px;
+  padding: 26px 22px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 14px;
   transition: border-color 0.25s;
 }
-.outcome-card:hover { border-color: rgba(97,97,255,0.4); }
-.dept-chip {
-  display: inline-block;
-  background: rgba(97,97,255,0.12);
-  color: var(--purple);
-  font-size: 9px;
-  font-weight: 600;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  padding: 4px 10px;
-  border-radius: 20px;
-  width: fit-content;
+.outcome-card:hover { border-color: rgba(255,255,255,0.18); }
+.card-top {
+  display: flex;
+  align-items: center;
+  gap: 13px;
 }
-.card-stat {
-  font-size: clamp(38px, 5vw, 54px);
-  font-weight: 800;
-  line-height: 1;
-  background: linear-gradient(135deg, var(--purple) 30%, var(--purple-light));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+.card-av {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 2px solid;
+  overflow: hidden;
+  flex-shrink: 0;
 }
-.card-context {
-  font-size: 10px;
-  color: var(--dim);
-  font-weight: 300;
-  margin-top: -4px;
+.card-av img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+.card-dept {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+.card-divider {
+  height: 1px;
+  background: rgba(255,255,255,0.07);
 }
 .card-title {
   font-size: 14px;
@@ -134,31 +113,33 @@ body {
   line-height: 1.75;
 }
 
-/* Desktop grid */
-.cards-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-  width: 100%;
-  max-width: 960px;
-}
-
 /* Mobile carousel */
-.carousel-wrap { display: none; width: 100%; flex-direction: column; }
-.carousel-track-wrap { overflow: hidden; width: 100%; }
-.carousel-track {
+.carousel-wrap {
+  display: none;
+  flex-direction: column;
+  width: 100%;
+}
+.carousel-scroll {
   display: flex;
   gap: 12px;
-  transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
-  will-change: transform;
-  padding: 4px 0 8px;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding: 4px 24px 8px;
 }
-.carousel-track .outcome-card { flex-shrink: 0; width: 100%; }
+.carousel-scroll::-webkit-scrollbar { display: none; }
+.carousel-scroll .outcome-card {
+  flex-shrink: 0;
+  width: 82vw;
+  max-width: 320px;
+  scroll-snap-align: center;
+}
 .carousel-dots {
   display: flex;
   gap: 6px;
   justify-content: center;
-  margin-top: 18px;
+  margin-top: 20px;
 }
 .carousel-dot {
   width: 5px;
@@ -173,12 +154,13 @@ body {
 .carousel-dot.active { background: var(--purple); width: 16px; border-radius: 3px; }
 
 @media (max-width: 768px) {
-  body { padding: 40px 20px 60px; }
+  body { padding: 44px 0 60px; }
   .cards-grid { display: none; }
   .carousel-wrap { display: flex; }
   .page-title { font-size: 22px; }
-  .tabs { gap: 6px; margin-bottom: 28px; }
-  .tab { font-size: 10px; padding: 6px 14px; }
+}
+@media (min-width: 769px) and (max-width: 960px) {
+  .cards-grid { grid-template-columns: repeat(2, 1fr); }
 }
 </style>
 </head>
@@ -187,174 +169,121 @@ body {
 <div class="page-header">
   <p class="eyebrow">The Shift</p>
   <h1 class="page-title">How fast work can get done when people and agents work together.</h1>
-  <p class="page-sub">Real outcomes, by department.</p>
 </div>
 
-<div class="tabs">
-  <button class="tab active" onclick="filter('all',this)">All</button>
-  <button class="tab" onclick="filter('Marketing',this)">Marketing</button>
-  <button class="tab" onclick="filter('Sales',this)">Sales</button>
-  <button class="tab" onclick="filter('HR',this)">HR</button>
-  <button class="tab" onclick="filter('Operations',this)">Operations</button>
-  <button class="tab" onclick="filter('IT',this)">IT</button>
-  <button class="tab" onclick="filter('Product',this)">Product</button>
-  <button class="tab" onclick="filter('PMO',this)">PMO</button>
-</div>
-
+<!-- Desktop grid -->
 <div class="cards-grid" id="cardsGrid"></div>
 
-<div class="carousel-wrap" id="carouselWrap">
-  <div class="carousel-track-wrap">
-    <div class="carousel-track" id="carouselTrack"></div>
-  </div>
+<!-- Mobile carousel -->
+<div class="carousel-wrap">
+  <div class="carousel-scroll" id="carouselScroll"></div>
   <div class="carousel-dots" id="carouselDots"></div>
 </div>
 
 <script>
-const outcomes = [
+const BASE = 'https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/';
+
+const cards = [
   {
     dept: 'Marketing',
-    stat: '11 min',
-    context: 'used to take 2 days',
+    color: '#F48FB1',
+    img: BASE + 'MARKETING.png',
     title: 'Campaign brief ready before the meeting ended',
-    desc: 'Agent pulled last quarter\'s results, benchmarked against competitors, and wrote a full brief with 5 creative directions — while the team was in standup.'
-  },
-  {
-    dept: 'Marketing',
-    stat: '4×',
-    context: 'more content, same team size',
-    title: 'Social calendar for 3 markets in one afternoon',
-    desc: 'Agent localized copy, resized assets, and scheduled posts across channels for the full month.'
+    desc: 'Agent pulled last quarter\'s results, benchmarked competitors, and wrote a full brief with 5 creative directions — while the team was still in standup.'
   },
   {
     dept: 'Sales',
-    stat: '2 hrs',
-    context: 'from discovery call to proposal',
+    color: '#F9D27A',
+    img: BASE + 'Sales.png',
     title: 'Personalized proposal sent the same day',
     desc: 'Agent built the deck, pulled 3 relevant case studies, and drafted pricing options while the rep wrote the follow-up email.'
   },
   {
-    dept: 'Sales',
-    stat: '4 min',
-    context: 'after the meeting ended',
-    title: 'Follow-up sent before the prospect closed their laptop',
-    desc: 'Agent wrote the meeting summary, pulled next steps, and drafted the email — the rep just hit send.'
-  },
-  {
     dept: 'HR',
-    stat: 'Day 0',
-    context: 'ready before they even start',
-    title: 'Full onboarding pack done the night before',
+    color: '#8ECEC0',
+    img: BASE + 'HR.png',
+    title: 'Full onboarding pack done the night before day one',
     desc: 'Agent set up tool access requests, created a 30-60-90 plan, and briefed the new hire\'s manager — automatically.'
   },
   {
-    dept: 'HR',
-    stat: '8 min',
-    context: 'to brief a full interview panel',
-    title: 'Every interviewer prepped before the call',
-    desc: 'Agent compared the resume to the job description and wrote tailored questions for each interviewer.'
-  },
-  {
-    dept: 'Operations',
-    stat: '6 min',
-    context: 'used to take 40 minutes',
-    title: 'Weekly exec report, fully automated',
-    desc: 'Agent pulled data from 4 tools, flagged 2 anomalies, and formatted the update — ready before Monday standup.'
-  },
-  {
     dept: 'IT',
-    stat: '78%',
-    context: 'of L1 tickets resolved automatically',
+    color: '#A89BD9',
+    img: BASE + 'IT.png',
     title: 'Most issues never reach the helpdesk',
     desc: 'Agent diagnosed, routed, and closed routine requests. Humans only handle what actually needs them.'
   },
   {
+    dept: 'Operations',
+    color: '#85C1AE',
+    img: BASE + 'OPERATIONS.png',
+    title: 'Weekly exec report, fully automated',
+    desc: 'Agent pulled data from 4 tools, flagged 2 anomalies, and formatted the update — ready before Monday standup.'
+  },
+  {
     dept: 'Product',
-    stat: 'Overnight',
-    context: 'synthesized from 6 customer calls',
+    color: '#7FC8D4',
+    img: BASE + 'PRODUCT.png',
     title: 'PRD drafted while the team slept',
-    desc: 'Agent turned interview notes into a structured requirements doc, grouped themes, and flagged conflicting feedback.'
+    desc: 'Agent turned 6 customer interviews into a structured requirements doc, grouped themes, and flagged conflicting feedback.'
   },
   {
-    dept: 'Product',
-    stat: '20 min',
-    context: 'to break down a full PRD into sprint tickets',
-    title: 'Sprint planned before the planning meeting',
-    desc: 'Agent decomposed requirements into tickets, estimated complexity, and distributed tasks across the team.'
+    dept: 'Finance',
+    color: '#93C6E7',
+    img: BASE + 'Finance.png',
+    title: 'Budget variance explained automatically',
+    desc: 'Agent pulled actuals from 3 systems, reconciled discrepancies, and prepared the CFO\'s monthly summary in minutes.'
   },
   {
-    dept: 'PMO',
-    stat: '9 min',
-    context: 'across 8 active projects',
-    title: 'Cross-team status report, no chasing required',
-    desc: 'Agent queried project leads, surfaced 3 risks, and formatted the board update — no meeting needed.'
+    dept: 'Legal',
+    color: '#F6C27A',
+    img: BASE + 'Legal.png',
+    title: 'Contract reviewed before the meeting, not after',
+    desc: 'Agent flagged non-standard clauses, benchmarked against templates, and prepared a summary — before the negotiation started.'
   },
 ];
 
-let currentFilter = 'all';
-let carouselIdx = 0;
-
-function cardHTML(o) {
-  return `<div class="outcome-card" data-dept="${o.dept}">
-    <span class="dept-chip">${o.dept}</span>
-    <div class="card-stat">${o.stat}</div>
-    <div class="card-context">${o.context}</div>
-    <div class="card-title">${o.title}</div>
-    <div class="card-desc">${o.desc}</div>
+function cardHTML(c) {
+  return `<div class="outcome-card">
+    <div class="card-top">
+      <div class="card-av" style="border-color:${c.color}80">
+        <img src="${c.img}" alt="${c.dept}" loading="lazy">
+      </div>
+      <span class="card-dept" style="color:${c.color}">${c.dept}</span>
+    </div>
+    <div class="card-divider"></div>
+    <div class="card-title">${c.title}</div>
+    <div class="card-desc">${c.desc}</div>
   </div>`;
 }
 
-function getFiltered() {
-  return currentFilter === 'all' ? outcomes : outcomes.filter(o => o.dept === currentFilter);
+// Desktop
+document.getElementById('cardsGrid').innerHTML = cards.map(cardHTML).join('');
+
+// Mobile carousel
+const scroll = document.getElementById('carouselScroll');
+const dots = document.getElementById('carouselDots');
+scroll.innerHTML = cards.map(cardHTML).join('');
+dots.innerHTML = cards.map((_,i) =>
+  `<button class="carousel-dot${i===0?' active':''}" onclick="scrollToCard(${i})"></button>`
+).join('');
+
+function scrollToCard(i) {
+  const card = scroll.querySelectorAll('.outcome-card')[i];
+  if (card) card.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
 }
 
-function renderGrid() {
-  document.getElementById('cardsGrid').innerHTML = getFiltered().map(cardHTML).join('');
-}
-
-function renderCarousel() {
-  const filtered = getFiltered();
-  carouselIdx = 0;
-  const track = document.getElementById('carouselTrack');
-  const dots = document.getElementById('carouselDots');
-  track.style.transform = 'translateX(0)';
-  track.innerHTML = filtered.map(cardHTML).join('');
-  dots.innerHTML = filtered.map((_,i) =>
-    `<button class="carousel-dot${i===0?' active':''}" onclick="goTo(${i})"></button>`
-  ).join('');
-}
-
-function goTo(idx) {
-  const track = document.getElementById('carouselTrack');
-  const card = track.querySelector('.outcome-card');
-  if (!card) return;
-  const w = card.offsetWidth + 12;
-  track.style.transform = `translateX(-${idx * w}px)`;
-  document.querySelectorAll('.carousel-dot').forEach((d,i) => d.classList.toggle('active', i===idx));
-  carouselIdx = idx;
-}
-
-function filter(dept, btn) {
-  currentFilter = dept;
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-  btn.classList.add('active');
-  renderGrid();
-  renderCarousel();
-}
-
-// Swipe
-let startX = 0;
-const track = document.getElementById('carouselTrack');
-track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
-track.addEventListener('touchend', e => {
-  const dx = e.changedTouches[0].clientX - startX;
-  const total = getFiltered().length;
-  if (dx < -40 && carouselIdx < total - 1) goTo(carouselIdx + 1);
-  if (dx > 40 && carouselIdx > 0) goTo(carouselIdx - 1);
+// Update dots on scroll
+scroll.addEventListener('scroll', () => {
+  const cards = scroll.querySelectorAll('.outcome-card');
+  let closest = 0;
+  let minDist = Infinity;
+  const center = scroll.scrollLeft + scroll.clientWidth / 2;
+  cards.forEach((c, i) => {
+    const dist = Math.abs(c.offsetLeft + c.offsetWidth / 2 - center);
+    if (dist < minDist) { minDist = dist; closest = i; }
+  });
+  document.querySelectorAll('.carousel-dot').forEach((d,i) => d.classList.toggle('active', i===closest));
 }, { passive: true });
-
-renderGrid();
-renderCarousel();
 </script>
 </body>
 </html>
