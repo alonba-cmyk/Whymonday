@@ -732,6 +732,11 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
   const line1El = document.getElementById('line1');
   const line2El = document.getElementById('line2');
 
+  // Show cursor immediately so the text area is visible before typing starts
+  const earlyCursor = document.createElement('span');
+  earlyCursor.className = 'cursor tall';
+  line1El.appendChild(earlyCursor);
+
   function typeWriter(el, text, speed, cls, done) {
     let i = 0;
     const cur = document.createElement('span');
@@ -750,6 +755,7 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
   }
 
   setTimeout(() => {
+    earlyCursor.remove();
     typeWriter(line1El, 'People and agents.', 52, 'tall', () => {
       setTimeout(() => {
         typeWriter(line2El, 'Working together. Driving results.', 42, 'short', () => {
