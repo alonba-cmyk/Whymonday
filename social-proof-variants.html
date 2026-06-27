@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Social Proof – Variants</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:#0d0d0d; font-family:'Poppins',sans-serif; display:flex; flex-direction:column; align-items:center; padding:48px 24px 80px; gap:48px; }
+
+.option-tag { display:inline-block; background:#1a1a1a; color:#888; font-size:10px; letter-spacing:2px; text-transform:uppercase; padding:4px 12px; border-radius:20px; margin-bottom:14px; }
+.variant-wrap { width:100%; max-width:940px; }
+
+.slide { width:100%; background:#000; border-radius:18px; border:1px solid #1e1e1e; padding:52px 72px; display:flex; flex-direction:column; min-height:480px; }
+
+/* Shared */
+.eyebrow { font-size:9px; font-weight:600; letter-spacing:5px; text-transform:uppercase; color:#6161ff; margin-bottom:10px; }
+.heading { font-size:clamp(20px,2.8vw,34px); font-weight:700; color:#fff; line-height:1.25; }
+.stat-num { font-size:clamp(32px,4.5vw,52px); font-weight:800; color:#6161ff; line-height:1; }
+.stat-label { font-size:11px; color:rgba(255,255,255,0.45); font-weight:300; line-height:1.5; margin-top:6px; }
+.quote-mark { font-size:52px; color:#6161ff; line-height:0.75; font-family:Georgia,serif; flex-shrink:0; }
+.quote-text { font-size:13px; color:rgba(255,255,255,0.65); line-height:1.75; font-weight:300; }
+.quote-text strong { color:#fff; font-weight:600; }
+.q-name { font-size:12px; font-weight:700; color:#fff; margin-top:14px; }
+.q-role { font-size:10px; color:rgba(255,255,255,0.35); font-weight:300; line-height:1.5; }
+
+/* Logos */
+.l-arcaise { font-size:17px; font-weight:700; color:#fff; letter-spacing:-0.3px; }
+.l-m svg { display:block; }
+.l-unilever { font-size:17px; font-weight:700; color:#fff; font-style:italic; }
+
+/* ─── A: Classic Grid ─── */
+.va-grid { display:grid; grid-template-columns:repeat(3,1fr); border-top:1px solid #1e1e1e; margin-top:32px; }
+.va-cell { padding:26px 28px 26px 0; border-right:1px solid #1e1e1e; }
+.va-cell:first-child { padding-left:0; }
+.va-cell:last-child { border-right:none; padding-left:28px; }
+.va-cell:nth-child(2) { padding-left:28px; }
+.va-cell .logo-wrap { margin-bottom:18px; min-height:30px; display:flex; align-items:center; }
+.va-quote { margin-top:32px; padding-top:28px; border-top:1px solid #1e1e1e; display:flex; gap:18px; align-items:flex-start; }
+
+/* ─── B: Cards ─── */
+.vb-top { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:24px; }
+.vb-cards { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-bottom:20px; }
+.vb-card { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.07); border-radius:14px; padding:22px 20px; }
+.vb-card .logo-wrap { min-height:28px; display:flex; align-items:center; margin-bottom:16px; }
+.vb-quote-box { background:rgba(97,97,255,0.07); border:1px solid rgba(97,97,255,0.18); border-radius:12px; padding:22px 26px; display:flex; gap:16px; align-items:flex-start; }
+.vb-quote-box .quote-text { font-size:12.5px; }
+
+/* ─── C: Editorial Split ─── */
+.vc-body { display:grid; grid-template-columns:1fr 1.15fr; gap:56px; margin-top:30px; flex:1; }
+.vc-companies { display:flex; flex-direction:column; justify-content:space-between; }
+.vc-row { display:flex; align-items:center; gap:0; padding:18px 0; border-bottom:1px solid #1a1a1a; }
+.vc-row:first-child { border-top:1px solid #1a1a1a; }
+.vc-row .logo-wrap { flex:0 0 110px; min-height:26px; display:flex; align-items:center; }
+.vc-row .stat-num { font-size:28px; flex:0 0 80px; }
+.vc-row .stat-label { font-size:10px; }
+.vc-right { display:flex; flex-direction:column; justify-content:center; padding-top:8px; }
+.vc-quote-big { font-size:clamp(14px,1.8vw,18px); color:rgba(255,255,255,0.8); font-weight:300; line-height:1.75; }
+.vc-quote-big strong { color:#fff; font-weight:700; }
+
+/* ─── D: Numbers Hero ─── */
+.vd-nums { display:grid; grid-template-columns:repeat(3,1fr); gap:0; margin-top:16px; padding-bottom:26px; border-bottom:1px solid #1a1a1a; }
+.vd-col { padding-right:32px; border-right:1px solid #1a1a1a; }
+.vd-col:last-child { border-right:none; padding-right:0; padding-left:32px; }
+.vd-col:nth-child(2) { padding-left:32px; }
+.vd-big { font-size:clamp(52px,7.5vw,88px); font-weight:800; line-height:1; background:linear-gradient(135deg,#fff 40%,rgba(255,255,255,0.45)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.vd-col .logo-wrap { min-height:22px; display:flex; align-items:center; margin:6px 0 4px; }
+.vd-col .stat-label { font-size:10px; color:rgba(255,255,255,0.38); }
+.vd-quote { margin-top:24px; display:flex; gap:18px; align-items:flex-start; flex:1; }
+.vd-quote-text { font-size:clamp(13px,1.7vw,17px); color:rgba(255,255,255,0.75); line-height:1.75; font-weight:300; }
+.vd-quote-text strong { color:#fff; font-weight:700; }
+</style>
+</head>
+<body>
+
+<!-- ── OPTION A ── -->
+<div class="variant-wrap">
+  <div class="option-tag">Option A — Classic Grid</div>
+  <div class="slide">
+    <p class="eyebrow">Social Proof</p>
+    <h2 class="heading">Businesses like yours are already seeing the impact</h2>
+    <div class="va-grid">
+      <div class="va-cell">
+        <div class="logo-wrap"><span class="l-arcaise">Arcaise</span></div>
+        <div class="stat-num">10x</div>
+        <div class="stat-label">Company growth since<br>adopting monday.com</div>
+      </div>
+      <div class="va-cell">
+        <div class="logo-wrap l-m">
+          <svg width="36" height="30" viewBox="0 0 100 84" fill="none">
+            <path d="M4 84V22C4 4 18 4 18 22V46C22 18 30 10 50 10C70 10 78 18 82 46V22C82 4 96 4 96 22V84" stroke="white" stroke-width="9" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="stat-num">1,200+</div>
+        <div class="stat-label">Hours saved<br>per month</div>
+      </div>
+      <div class="va-cell">
+        <div class="logo-wrap"><span class="l-unilever">Unilever</span></div>
+        <div class="stat-num">4x</div>
+        <div class="stat-label">ROI</div>
+      </div>
+    </div>
+    <div class="va-quote">
+      <div class="quote-mark">"</div>
+      <div>
+        <p class="quote-text">monday.com gave us more than a platform. <strong>It gave us a better way of working</strong>, one that's visible, accountable, and scalable across the entire organization.</p>
+        <div class="q-name">Karin Traina</div>
+        <div class="q-role">VP, Director, Process Improvement & Change Management, athenahealth</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── OPTION B ── -->
+<div class="variant-wrap">
+  <div class="option-tag">Option B — Cards</div>
+  <div class="slide">
+    <div class="vb-top">
+      <div>
+        <p class="eyebrow">Social Proof</p>
+        <h2 class="heading">Businesses like yours are already<br>seeing the impact</h2>
+      </div>
+    </div>
+    <div class="vb-cards">
+      <div class="vb-card">
+        <div class="logo-wrap"><span class="l-arcaise">Arcaise</span></div>
+        <div class="stat-num">10x</div>
+        <div class="stat-label">Company growth since adopting monday.com</div>
+      </div>
+      <div class="vb-card">
+        <div class="logo-wrap l-m">
+          <svg width="32" height="26" viewBox="0 0 100 84" fill="none">
+            <path d="M4 84V22C4 4 18 4 18 22V46C22 18 30 10 50 10C70 10 78 18 82 46V22C82 4 96 4 96 22V84" stroke="white" stroke-width="9" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="stat-num">1,200+</div>
+        <div class="stat-label">Hours saved per month</div>
+      </div>
+      <div class="vb-card">
+        <div class="logo-wrap"><span class="l-unilever">Unilever</span></div>
+        <div class="stat-num">4x</div>
+        <div class="stat-label">ROI</div>
+      </div>
+    </div>
+    <div class="vb-quote-box">
+      <div class="quote-mark" style="font-size:40px">"</div>
+      <div>
+        <p class="quote-text">monday.com gave us more than a platform. <strong>It gave us a better way of working</strong>, one that's visible, accountable, and scalable across the entire organization.</p>
+        <div class="q-name">Karin Traina</div>
+        <div class="q-role">VP, Director, Process Improvement & Change Management, athenahealth</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── OPTION C ── -->
+<div class="variant-wrap">
+  <div class="option-tag">Option C — Editorial Split</div>
+  <div class="slide">
+    <p class="eyebrow">Social Proof</p>
+    <h2 class="heading">Businesses like yours are already seeing the impact</h2>
+    <div class="vc-body">
+      <div class="vc-companies">
+        <div class="vc-row">
+          <div class="logo-wrap"><span class="l-arcaise">Arcaise</span></div>
+          <div>
+            <div class="stat-num">10x</div>
+            <div class="stat-label">Company growth since<br>adopting monday.com</div>
+          </div>
+        </div>
+        <div class="vc-row">
+          <div class="logo-wrap l-m">
+            <svg width="30" height="24" viewBox="0 0 100 84" fill="none">
+              <path d="M4 84V22C4 4 18 4 18 22V46C22 18 30 10 50 10C70 10 78 18 82 46V22C82 4 96 4 96 22V84" stroke="white" stroke-width="9" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div>
+            <div class="stat-num">1,200+</div>
+            <div class="stat-label">Hours saved per month</div>
+          </div>
+        </div>
+        <div class="vc-row">
+          <div class="logo-wrap"><span class="l-unilever">Unilever</span></div>
+          <div>
+            <div class="stat-num">4x</div>
+            <div class="stat-label">ROI</div>
+          </div>
+        </div>
+      </div>
+      <div class="vc-right">
+        <div class="quote-mark" style="font-size:64px;margin-bottom:16px">"</div>
+        <p class="vc-quote-big">monday.com gave us more than a platform. <strong>It gave us a better way of working</strong>, one that's visible, accountable, and scalable across the entire organization.</p>
+        <div class="q-name" style="margin-top:20px">Karin Traina</div>
+        <div class="q-role">VP, Director, Process Improvement & Change Management, athenahealth</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── OPTION D ── -->
+<div class="variant-wrap">
+  <div class="option-tag">Option D — Numbers Hero</div>
+  <div class="slide">
+    <p class="eyebrow">Social Proof</p>
+    <h2 class="heading">Businesses like yours are already seeing the impact</h2>
+    <div class="vd-nums">
+      <div class="vd-col">
+        <div class="vd-big">10x</div>
+        <div class="logo-wrap" style="margin-top:10px"><span class="l-arcaise" style="font-size:14px;opacity:0.6">Arcaise</span></div>
+        <div class="stat-label">Company growth since adopting monday.com</div>
+      </div>
+      <div class="vd-col">
+        <div class="vd-big">1,200+</div>
+        <div class="logo-wrap" style="margin-top:10px">
+          <svg width="24" height="20" viewBox="0 0 100 84" fill="none" style="opacity:0.6">
+            <path d="M4 84V22C4 4 18 4 18 22V46C22 18 30 10 50 10C70 10 78 18 82 46V22C82 4 96 4 96 22V84" stroke="white" stroke-width="9" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="stat-label">Hours saved per month</div>
+      </div>
+      <div class="vd-col">
+        <div class="vd-big">4x</div>
+        <div class="logo-wrap" style="margin-top:10px"><span class="l-unilever" style="font-size:14px;opacity:0.6">Unilever</span></div>
+        <div class="stat-label">ROI</div>
+      </div>
+    </div>
+    <div class="vd-quote">
+      <div class="quote-mark" style="font-size:56px">"</div>
+      <div>
+        <p class="vd-quote-text">monday.com gave us more than a platform. <strong>It gave us a better way of working</strong>, one that's visible, accountable, and scalable across the entire organization.</p>
+        <div class="q-name" style="margin-top:16px">Karin Traina</div>
+        <div class="q-role">VP, Director, Process Improvement & Change Management, athenahealth</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
