@@ -176,6 +176,8 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
 .layer-card-points { display:flex; flex-direction:column; gap:10px; }
 .layer-card-point { display:flex; align-items:flex-start; gap:10px; font-size:13px; color:rgba(255,255,255,0.45); font-weight:300; line-height:1.5; }
 .layer-card-dot { width:5px; height:5px; border-radius:50%; background:var(--purple); flex-shrink:0; margin-top:7px; }
+.layer-card-imgs { display:none; grid-template-columns:1fr 1fr; gap:8px; margin-top:20px; }
+.layer-card-imgs img { width:100%; border-radius:10px; object-fit:cover; aspect-ratio:16/9; }
 
 /* S5b – Social Proof */
 #s5b { padding: 40px 56px; justify-content: center; }
@@ -700,6 +702,7 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
       <div class="layer-card-title" id="layerTitle"></div>
       <div class="layer-card-desc" id="layerDesc"></div>
       <div class="layer-card-points" id="layerPoints"></div>
+      <div class="layer-card-imgs" id="layerImgs"></div>
     </div>
   </div>
 </div>
@@ -941,7 +944,7 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
 
   // S5 layer overlay
   const layerData = [
-    { num:'01', title:'Workspace', desc:'One shared place for your team and agents to plan and execute together.', points:['Boards, dashboards and docs — unified in one place','Agents work alongside people in the same workspace','Real-time visibility across every project and team'] },
+    { num:'01', title:'Workspace', desc:'One shared place for your team and agents to plan and execute together.', points:['Boards, dashboards and docs — unified in one place','Agents work alongside people in the same workspace','Real-time visibility across every project and team'], images:['https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/5%20layers/Workspace%201.png','https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/5%20layers/Workspace%202.png'] },
     { num:'02', title:'Context', desc:'Agents with full business context, acting like an experienced team member.', points:['Agents understand your data, processes and goals','No re-explaining — they learn your business over time','Responses grounded in your actual work, not generic answers'] },
     { num:'03', title:'Control', desc:"You stay in the driver's seat. All enterprise-grade secure.", points:['Set exactly what agents can and cannot do','Full audit trail on every automated action','Enterprise-grade security, permissions and compliance'] },
     { num:'04', title:'Workflows', desc:'People and agents handing off seamlessly, keeping things moving.', points:['Automated handoffs between people and agents','No dropped balls — every step tracked end to end','Speed and scale without losing human oversight'] },
@@ -955,6 +958,14 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
     document.getElementById('layerDesc').textContent  = d.desc;
     document.getElementById('layerPoints').innerHTML  =
       d.points.map(p => `<div class="layer-card-point"><div class="layer-card-dot"></div><span>${p}</span></div>`).join('');
+    const imgsEl = document.getElementById('layerImgs');
+    if (d.images && d.images.length) {
+      imgsEl.innerHTML = d.images.map(s => `<img src="${s}" loading="lazy">`).join('');
+      imgsEl.style.display = 'grid';
+    } else {
+      imgsEl.innerHTML = '';
+      imgsEl.style.display = 'none';
+    }
     document.getElementById('layerOverlay').classList.add('open');
   }
   function closeLayer() {
