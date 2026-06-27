@@ -3,162 +3,129 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Shift – Outcomes by Department</title>
+<title>The Shift – Outcomes Variants</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-:root {
-  --bg: #000;
-  --purple: #6161ff;
-  --dim: rgba(255,255,255,0.4);
-}
+:root { --bg:#000; --purple:#6161ff; --dim:rgba(255,255,255,0.4); }
 body {
   background: var(--bg);
   font-family: 'Poppins', sans-serif;
   color: #fff;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 64px 0 80px;
+  padding: 60px 24px 80px;
+  gap: 64px;
   overflow-x: hidden;
 }
 
-/* Header */
+/* Shared header */
 .page-header {
   text-align: center;
-  margin-bottom: 36px;
-  max-width: 680px;
-  padding: 0 24px;
+  max-width: 640px;
 }
 .eyebrow {
-  font-size: 9px;
-  font-weight: 600;
-  letter-spacing: 5px;
-  text-transform: uppercase;
-  color: var(--purple);
-  margin-bottom: 14px;
+  font-size: 9px; font-weight:600; letter-spacing:5px;
+  text-transform:uppercase; color:var(--purple); margin-bottom:12px;
 }
 .page-title {
-  font-size: clamp(24px, 3.8vw, 46px);
-  font-weight: 800;
-  line-height: 1.15;
-  letter-spacing: -0.5px;
-  background: linear-gradient(135deg, #fff 40%, rgba(255,255,255,0.5));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  font-size: clamp(22px,3.5vw,44px); font-weight:800; line-height:1.15;
+  letter-spacing:-0.5px;
+  background: linear-gradient(135deg,#fff 40%,rgba(255,255,255,0.5));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
 }
 
 /* AI Logos */
 .ai-logos {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 36px;
-  margin-bottom: 48px;
-  flex-wrap: wrap;
-  padding: 0 24px;
+  display:flex; align-items:center; justify-content:center;
+  gap:32px; flex-wrap:wrap;
 }
-.ai-logo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  opacity: 0.28;
-  transition: opacity .3s;
-}
-.ai-logo:hover { opacity: 0.6; }
-.ai-logo svg { width: 30px; height: 30px; fill: #fff; }
-.ai-logo img { height: 28px; width: auto; filter: brightness(0) invert(1); }
-.ai-logo span { font-size: 10px; font-weight: 500; color: #fff; letter-spacing: 1px; }
+.ai-logo { display:flex; flex-direction:column; align-items:center; gap:6px; opacity:0.28; transition:opacity .3s; }
+.ai-logo:hover { opacity:0.6; }
+.ai-logo svg { width:26px; height:26px; fill:#fff; }
+.ai-logo img { height:24px; width:auto; filter:brightness(0) invert(1); }
+.ai-logo span { font-size:9px; font-weight:500; color:#fff; letter-spacing:1px; }
 
-/* Marquee */
+/* Variant wrapper */
+.variant { width:100%; display:flex; flex-direction:column; align-items:center; gap:18px; }
+.option-tag {
+  display:inline-block; background:#111; color:#666; font-size:10px;
+  letter-spacing:2px; text-transform:uppercase; padding:4px 14px; border-radius:20px;
+}
+
+/* Marquee shell */
 .marquee-wrap {
-  width: 100%;
-  overflow: hidden;
-  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 8%, #000 92%, transparent 100%);
-  mask-image: linear-gradient(to right, transparent 0%, #000 8%, #000 92%, transparent 100%);
+  width:100vw;
+  overflow:hidden;
+  -webkit-mask-image: linear-gradient(to right,transparent 0%,#000 7%,#000 93%,transparent 100%);
+  mask-image: linear-gradient(to right,transparent 0%,#000 7%,#000 93%,transparent 100%);
 }
 .marquee-track {
-  display: flex;
-  gap: 16px;
-  width: max-content;
-  animation: marquee 36s linear infinite;
-  padding: 8px 0 12px;
+  display:flex; gap:12px; width:max-content;
+  animation: ticker 34s linear infinite;
+  padding:6px 0 8px;
 }
-.marquee-wrap:hover .marquee-track { animation-play-state: paused; }
+.marquee-wrap:hover .marquee-track { animation-play-state:paused; }
+@keyframes ticker { from{transform:translateX(0)} to{transform:translateX(-50%)} }
 
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
+/* ── VARIANT A — Compact (like the original mission cards) ── */
+.va .card {
+  width:160px; flex-shrink:0;
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.09);
+  border-radius:14px; padding:16px 14px;
+  display:flex; flex-direction:column; gap:10px;
 }
+.va .card-top { display:flex; align-items:center; gap:9px; }
+.va .av {
+  width:36px; height:36px; border-radius:50%; border:2px solid;
+  overflow:hidden; flex-shrink:0;
+}
+.va .av img { width:100%; height:100%; object-fit:cover; object-position:top; }
+.va .dept { font-size:11px; font-weight:700; }
+.va .desc { font-size:10px; color:var(--dim); font-weight:300; line-height:1.6; }
 
-/* Card */
-.outcome-card {
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.09);
-  border-radius: 20px;
-  padding: 26px 22px;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  width: 280px;
-  flex-shrink: 0;
-  transition: border-color 0.25s;
-  cursor: default;
+/* ── VARIANT B — Story Card (avatar + title + desc) ── */
+.vb .card {
+  width:220px; flex-shrink:0;
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.09);
+  border-radius:16px; padding:20px 18px;
+  display:flex; flex-direction:column; gap:12px;
 }
-.marquee-wrap:hover .outcome-card:hover { border-color: rgba(255,255,255,0.2); }
-.card-top {
-  display: flex;
-  align-items: center;
-  gap: 13px;
+.vb .card-top { display:flex; align-items:center; gap:10px; }
+.vb .av {
+  width:42px; height:42px; border-radius:50%; border:2px solid;
+  overflow:hidden; flex-shrink:0;
 }
-.card-av {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  border: 2px solid;
-  overflow: hidden;
-  flex-shrink: 0;
-}
-.card-av img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: top center;
-}
-.card-dept {
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.2px;
-}
-.card-divider {
-  height: 1px;
-  background: rgba(255,255,255,0.07);
-}
-.card-title {
-  font-size: 13px;
-  font-weight: 700;
-  color: #fff;
-  line-height: 1.45;
-}
-.card-desc {
-  font-size: 11px;
-  color: var(--dim);
-  font-weight: 300;
-  line-height: 1.75;
-}
+.vb .av img { width:100%; height:100%; object-fit:cover; object-position:top; }
+.vb .dept { font-size:12px; font-weight:700; }
+.vb .divider { height:1px; background:rgba(255,255,255,0.07); }
+.vb .title { font-size:12px; font-weight:700; color:#fff; line-height:1.45; }
+.vb .desc { font-size:10px; color:var(--dim); font-weight:300; line-height:1.7; }
 
-@media (max-width: 768px) {
-  body { padding: 44px 0 60px; }
-  .page-title { font-size: 22px; }
-  .ai-logos { gap: 20px; margin-bottom: 32px; }
-  .ai-logo svg { width: 22px; height: 22px; }
-  .ai-logo img { height: 20px; }
-  .ai-logo span { font-size: 8px; }
-  .outcome-card { width: 72vw; }
-  .marquee-track { animation-duration: 28s; }
+/* ── VARIANT C — Bold Statement (no avatar, dept chip + headline) ── */
+.vc .card {
+  width:240px; flex-shrink:0;
+  border-left:3px solid;
+  padding:18px 20px;
+  display:flex; flex-direction:column; gap:10px;
+}
+.vc .dept-chip {
+  font-size:9px; font-weight:600; letter-spacing:2px;
+  text-transform:uppercase;
+}
+.vc .title { font-size:14px; font-weight:800; color:#fff; line-height:1.35; }
+.vc .desc { font-size:10px; color:var(--dim); font-weight:300; line-height:1.7; }
+
+@media (max-width:640px) {
+  body { padding:40px 16px 60px; gap:48px; }
+  .ai-logos { gap:18px; }
+  .ai-logo svg { width:20px; height:20px; }
+  .ai-logo img { height:18px; }
+  .ai-logo span { font-size:8px; }
+  .marquee-track { animation-duration:26s; }
 }
 </style>
 </head>
@@ -192,41 +159,90 @@ body {
   </div>
 </div>
 
-<div class="marquee-wrap">
-  <div class="marquee-track" id="marqueeTrack"></div>
+<!-- ── OPTION A ── -->
+<div class="variant va">
+  <span class="option-tag">Option A — Compact</span>
+  <div class="marquee-wrap">
+    <div class="marquee-track" id="trackA"></div>
+  </div>
+</div>
+
+<!-- ── OPTION B ── -->
+<div class="variant vb">
+  <span class="option-tag">Option B — Story Card</span>
+  <div class="marquee-wrap">
+    <div class="marquee-track" id="trackB"></div>
+  </div>
+</div>
+
+<!-- ── OPTION C ── -->
+<div class="variant vc">
+  <span class="option-tag">Option C — Bold Statement</span>
+  <div class="marquee-wrap">
+    <div class="marquee-track" id="trackC" style="animation-direction:reverse"></div>
+  </div>
 </div>
 
 <script>
-const BASE = 'https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/';
-
+const B = 'https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/';
 const cards = [
-  { dept:'Marketing', color:'#F48FB1', img:BASE+'MARKETING.png', title:'Campaign brief ready before the meeting ended', desc:'Agent pulled last quarter\'s results, benchmarked competitors, and wrote 5 creative directions — while the team was still in standup.' },
-  { dept:'Sales', color:'#F9D27A', img:BASE+'Sales.png', title:'Personalized proposal sent the same day', desc:'Agent built the deck, pulled 3 relevant case studies, and drafted pricing options while the rep wrote the follow-up.' },
-  { dept:'HR', color:'#8ECEC0', img:BASE+'HR.png', title:'Full onboarding pack done the night before day one', desc:'Agent set up tool access requests, created a 30-60-90 plan, and briefed the new hire\'s manager — automatically.' },
-  { dept:'IT', color:'#A89BD9', img:BASE+'IT.png', title:'Most issues never reach the helpdesk', desc:'Agent diagnosed, routed, and closed routine requests. Humans only handle what actually needs them.' },
-  { dept:'Operations', color:'#85C1AE', img:BASE+'OPERATIONS.png', title:'Weekly exec report, fully automated', desc:'Agent pulled data from 4 tools, flagged 2 anomalies, and formatted the update — ready before Monday standup.' },
-  { dept:'Product', color:'#7FC8D4', img:BASE+'PRODUCT.png', title:'PRD drafted while the team slept', desc:'Agent turned 6 customer interviews into a structured doc, grouped themes, and flagged conflicting feedback.' },
-  { dept:'Finance', color:'#93C6E7', img:BASE+'Finance.png', title:'Budget variance explained automatically', desc:'Agent pulled actuals from 3 systems, reconciled discrepancies, and prepared the CFO\'s monthly summary in minutes.' },
-  { dept:'Legal', color:'#F6C27A', img:BASE+'Legal.png', title:'Contract reviewed before the meeting, not after', desc:'Agent flagged non-standard clauses, benchmarked against templates, and prepared a summary before the negotiation started.' },
+  { dept:'Marketing', color:'#F48FB1', img:B+'MARKETING.png',
+    title:'Campaign brief ready before the meeting ended',
+    desc:'Agent pulled last quarter\'s results and wrote 5 creative directions while the team was in standup.' },
+  { dept:'Sales', color:'#F9D27A', img:B+'Sales.png',
+    title:'Personalized proposal sent the same day',
+    desc:'Agent built the deck, pulled case studies, and drafted pricing while the rep wrote the follow-up.' },
+  { dept:'HR', color:'#8ECEC0', img:B+'HR.png',
+    title:'Onboarding pack done the night before day one',
+    desc:'Agent set up access requests, a 30-60-90 plan, and briefed the manager — automatically.' },
+  { dept:'IT', color:'#A89BD9', img:B+'IT.png',
+    title:'Most tickets resolved before anyone noticed',
+    desc:'Agent diagnosed, routed, and closed routine requests. Humans only handle what needs them.' },
+  { dept:'Operations', color:'#85C1AE', img:B+'OPERATIONS.png',
+    title:'Weekly exec report, fully automated',
+    desc:'Agent pulled data from 4 tools, flagged anomalies, and formatted the update before Monday standup.' },
+  { dept:'Product', color:'#7FC8D4', img:B+'PRODUCT.png',
+    title:'PRD drafted while the team slept',
+    desc:'Agent turned 6 customer interviews into a structured doc, grouped themes, flagged conflicts.' },
+  { dept:'Finance', color:'#93C6E7', img:B+'Finance.png',
+    title:'Budget variance explained automatically',
+    desc:'Agent pulled actuals from 3 systems and prepared the CFO summary in minutes.' },
+  { dept:'Legal', color:'#F6C27A', img:B+'Legal.png',
+    title:'Contract reviewed before the meeting, not after',
+    desc:'Agent flagged non-standard clauses and prepared a summary before negotiation started.' },
 ];
 
-function cardHTML(c) {
-  return `<div class="outcome-card">
-    <div class="card-top">
-      <div class="card-av" style="border-color:${c.color}90">
-        <img src="${c.img}" alt="${c.dept}" loading="lazy">
-      </div>
-      <span class="card-dept" style="color:${c.color}">${c.dept}</span>
-    </div>
-    <div class="card-divider"></div>
-    <div class="card-title">${c.title}</div>
-    <div class="card-desc">${c.desc}</div>
+function avImg(c) {
+  return `<div class="av" style="border-color:${c.color}90"><img src="${c.img}" alt="${c.dept}" loading="lazy"></div>`;
+}
+
+function htmlA(c) {
+  return `<div class="card">
+    <div class="card-top">${avImg(c)}<span class="dept" style="color:${c.color}">${c.dept}</span></div>
+    <p class="desc">${c.title}</p>
+  </div>`;
+}
+function htmlB(c) {
+  return `<div class="card">
+    <div class="card-top">${avImg(c)}<span class="dept" style="color:${c.color}">${c.dept}</span></div>
+    <div class="divider"></div>
+    <div class="title">${c.title}</div>
+    <div class="desc">${c.desc}</div>
+  </div>`;
+}
+function htmlC(c) {
+  return `<div class="card" style="border-color:${c.color}60">
+    <span class="dept-chip" style="color:${c.color}">${c.dept}</span>
+    <div class="title">${c.title}</div>
+    <div class="desc">${c.desc}</div>
   </div>`;
 }
 
-// Duplicate for seamless loop
-const html = cards.map(cardHTML).join('');
-document.getElementById('marqueeTrack').innerHTML = html + html;
+['A','B','C'].forEach(v => {
+  const fn = v==='A' ? htmlA : v==='B' ? htmlB : htmlC;
+  const html = cards.map(fn).join('');
+  document.getElementById('track'+v).innerHTML = html + html;
+});
 </script>
 </body>
 </html>
