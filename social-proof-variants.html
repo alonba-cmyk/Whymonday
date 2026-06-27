@@ -30,22 +30,7 @@ body { background:#0d0d0d; font-family:'Poppins',sans-serif; display:flex; flex-
 .l-m svg { display:block; }
 .l-unilever { font-size:17px; font-weight:700; color:#fff; font-style:italic; }
 
-/* ─── A: Classic Grid ─── */
-.va-grid { display:grid; grid-template-columns:repeat(3,1fr); border-top:1px solid #1e1e1e; margin-top:32px; }
-.va-cell { padding:26px 28px 26px 0; border-right:1px solid #1e1e1e; }
-.va-cell:first-child { padding-left:0; }
-.va-cell:last-child { border-right:none; padding-left:28px; }
-.va-cell:nth-child(2) { padding-left:28px; }
-.va-cell .logo-wrap { margin-bottom:18px; min-height:30px; display:flex; align-items:center; }
-.va-quote { margin-top:32px; padding-top:28px; border-top:1px solid #1e1e1e; display:flex; gap:18px; align-items:flex-start; }
-
-/* ─── B: Cards ─── */
-.vb-top { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:24px; }
-.vb-cards { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-bottom:20px; }
-.vb-card { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.07); border-radius:14px; padding:22px 20px; }
-.vb-card .logo-wrap { min-height:28px; display:flex; align-items:center; margin-bottom:16px; }
-.vb-quote-box { background:rgba(97,97,255,0.07); border:1px solid rgba(97,97,255,0.18); border-radius:12px; padding:22px 26px; display:flex; gap:16px; align-items:flex-start; }
-.vb-quote-box .quote-text { font-size:12.5px; }
+.va-quote { display:flex; gap:18px; align-items:flex-start; }
 
 /* ─── C: Editorial Split ─── */
 .vc-body { display:grid; grid-template-columns:1fr 1.15fr; gap:56px; margin-top:30px; flex:1; }
@@ -82,27 +67,7 @@ body { background:#0d0d0d; font-family:'Poppins',sans-serif; display:flex; flex-
   .q-role { font-size: 9px; }
   .l-arcaise, .l-unilever { font-size: 14px; }
 
-  /* A – rows instead of columns */
-  .va-grid { grid-template-columns: 1fr; margin-top: 22px; }
-  .va-cell { display: flex; flex-direction: row; align-items: center; gap: 18px;
-             padding: 18px 0; border-right: none; border-bottom: 1px solid #1e1e1e; }
-  .va-cell:first-child { padding-left: 0; }
-  .va-cell:nth-child(2) { padding-left: 0; }
-  .va-cell:last-child { border-bottom: none; padding-left: 0; }
-  .va-cell .logo-wrap { flex: 0 0 80px; margin-bottom: 0; min-height: auto; }
-  .va-cell .stat-num { font-size: 26px; }
-  .va-cell .stat-label { font-size: 10px; margin-top: 3px; }
-  .va-quote { margin-top: 22px; padding-top: 22px; gap: 12px; }
-
-  /* B – single column cards */
-  .vb-top { margin-bottom: 18px; }
-  .vb-cards { grid-template-columns: 1fr; gap: 10px; margin-bottom: 14px; }
-  .vb-card { padding: 18px 16px; display: flex; flex-direction: row; align-items: center; gap: 16px; }
-  .vb-card .logo-wrap { flex: 0 0 70px; margin-bottom: 0; min-height: auto; }
-  .vb-card .stat-num { font-size: 26px; }
-  .vb-card .stat-label { font-size: 10px; margin-top: 2px; }
-  .vb-quote-box { padding: 16px 18px; gap: 12px; }
-  .vb-quote-box .quote-text { font-size: 12px; }
+  .va-quote { gap: 12px; }
 
   /* C – stack: companies then quote */
   .vc-body { grid-template-columns: 1fr; gap: 22px; margin-top: 22px; }
@@ -129,86 +94,6 @@ body { background:#0d0d0d; font-family:'Poppins',sans-serif; display:flex; flex-
 </head>
 <body>
 
-<!-- ── OPTION A ── -->
-<div class="variant-wrap">
-  <div class="option-tag">Option A — Classic Grid</div>
-  <div class="slide">
-    <p class="eyebrow">Social Proof</p>
-    <h2 class="heading">Businesses like yours are already seeing the impact</h2>
-    <div class="va-grid">
-      <div class="va-cell">
-        <div class="logo-wrap"><span class="l-arcaise">Arcaise</span></div>
-        <div class="stat-num">10x</div>
-        <div class="stat-label">Company growth since<br>adopting monday.com</div>
-      </div>
-      <div class="va-cell">
-        <div class="logo-wrap l-m">
-          <svg width="36" height="33" viewBox="0 0 120 110" fill="none">
-            <path d="M13,103 C13,5 60,5 60,64 C60,5 107,5 107,103" stroke="white" stroke-width="18" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <div class="stat-num">1,200+</div>
-        <div class="stat-label">Hours saved<br>per month</div>
-      </div>
-      <div class="va-cell">
-        <div class="logo-wrap"><span class="l-unilever">Unilever</span></div>
-        <div class="stat-num">4x</div>
-        <div class="stat-label">ROI</div>
-      </div>
-    </div>
-    <div class="va-quote">
-      <div class="quote-mark">"</div>
-      <div>
-        <p class="quote-text">monday.com gave us more than a platform. <strong>It gave us a better way of working</strong>, one that's visible, accountable, and scalable across the entire organization.</p>
-        <div class="q-name">Karin Traina</div>
-        <div class="q-role">VP, Director, Process Improvement & Change Management, athenahealth</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ── OPTION B ── -->
-<div class="variant-wrap">
-  <div class="option-tag">Option B — Cards</div>
-  <div class="slide">
-    <div class="vb-top">
-      <div>
-        <p class="eyebrow">Social Proof</p>
-        <h2 class="heading">Businesses like yours are already<br>seeing the impact</h2>
-      </div>
-    </div>
-    <div class="vb-cards">
-      <div class="vb-card">
-        <div class="logo-wrap"><span class="l-arcaise">Arcaise</span></div>
-        <div class="stat-num">10x</div>
-        <div class="stat-label">Company growth since adopting monday.com</div>
-      </div>
-      <div class="vb-card">
-        <div class="logo-wrap l-m">
-          <svg width="32" height="29" viewBox="0 0 120 110" fill="none">
-            <path d="M13,103 C13,5 60,5 60,64 C60,5 107,5 107,103" stroke="white" stroke-width="18" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <div class="stat-num">1,200+</div>
-        <div class="stat-label">Hours saved per month</div>
-      </div>
-      <div class="vb-card">
-        <div class="logo-wrap"><span class="l-unilever">Unilever</span></div>
-        <div class="stat-num">4x</div>
-        <div class="stat-label">ROI</div>
-      </div>
-    </div>
-    <div class="vb-quote-box">
-      <div class="quote-mark" style="font-size:40px">"</div>
-      <div>
-        <p class="quote-text">monday.com gave us more than a platform. <strong>It gave us a better way of working</strong>, one that's visible, accountable, and scalable across the entire organization.</p>
-        <div class="q-name">Karin Traina</div>
-        <div class="q-role">VP, Director, Process Improvement & Change Management, athenahealth</div>
-      </div>
-    </div>
-  </div>
-</div>
-
 <!-- ── OPTION C ── -->
 <div class="variant-wrap">
   <div class="option-tag">Option C — Editorial Split</div>
@@ -226,8 +111,9 @@ body { background:#0d0d0d; font-family:'Poppins',sans-serif; display:flex; flex-
         </div>
         <div class="vc-row">
           <div class="logo-wrap l-m">
-            <svg width="30" height="28" viewBox="0 0 120 110" fill="none">
-              <path d="M13,103 C13,5 60,5 60,64 C60,5 107,5 107,103" stroke="white" stroke-width="18" stroke-linecap="round"/>
+            <svg width="30" height="28" viewBox="0 0 100 92" fill="white">
+              <path d="M3,88 C3,2 44,2 44,55 C38,70 24,81 17,88 Z"/>
+              <path d="M97,88 C97,2 56,2 56,55 C62,70 76,81 83,88 Z"/>
             </svg>
           </div>
           <div>
@@ -272,8 +158,9 @@ body { background:#0d0d0d; font-family:'Poppins',sans-serif; display:flex; flex-
       <div class="vd-col">
         <div class="vd-big">1,200+</div>
         <div class="logo-wrap" style="margin-top:10px">
-          <svg width="24" height="22" viewBox="0 0 120 110" fill="none" style="opacity:0.6">
-            <path d="M13,103 C13,5 60,5 60,64 C60,5 107,5 107,103" stroke="white" stroke-width="18" stroke-linecap="round"/>
+          <svg width="24" height="22" viewBox="0 0 100 92" fill="white" style="opacity:0.6">
+            <path d="M3,88 C3,2 44,2 44,55 C38,70 24,81 17,88 Z"/>
+            <path d="M97,88 C97,2 56,2 56,55 C62,70 76,81 83,88 Z"/>
           </svg>
         </div>
         <div class="stat-label">Hours saved per month</div>
