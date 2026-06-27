@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>S1 Variants</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+:root { --purple:#6161ff; --bg:#000; }
+body { background:#111; font-family:'Poppins',sans-serif; color:#fff; padding:40px 20px; }
+
+.page-label {
+  text-align:center; font-size:11px; font-weight:600; letter-spacing:5px;
+  text-transform:uppercase; color:rgba(255,255,255,0.3); margin-bottom:48px;
+}
+
+.variant-row {
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:20px;
+  max-width:900px;
+  margin:0 auto;
+}
+
+@media(max-width:640px){
+  .variant-row { grid-template-columns:1fr; }
+}
+
+.v-block {
+  background:#000;
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:20px;
+  overflow:hidden;
+}
+
+.v-label {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:14px 20px;
+  border-bottom:1px solid rgba(255,255,255,0.07);
+  font-size:10px; font-weight:600; letter-spacing:3px; text-transform:uppercase;
+  color:rgba(255,255,255,0.35);
+}
+.v-label .badge {
+  background:var(--purple); color:#fff;
+  font-size:8px; font-weight:700; letter-spacing:1px;
+  padding:3px 8px; border-radius:20px; text-transform:uppercase;
+}
+
+.v-frame {
+  min-height:480px;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  padding:36px 28px;
+  position:relative;
+  overflow:hidden;
+}
+
+/* ──────────── VARIANT A – Bold Manifesto ──────────── */
+.va .v-frame {
+  gap:0;
+  justify-content:center;
+}
+.va-logo { height:22px; width:auto; margin-bottom:28px; filter:brightness(0) invert(1); opacity:0.9; }
+.va-headline {
+  font-size:clamp(34px,6vw,52px); font-weight:900; line-height:1.05;
+  letter-spacing:-1.5px; text-align:center; margin-bottom:16px;
+  background:linear-gradient(135deg,#fff 50%,rgba(255,255,255,0.45));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+}
+.va-sub {
+  font-size:13px; font-weight:300; color:rgba(255,255,255,0.45);
+  text-align:center; letter-spacing:0.2px; margin-bottom:36px;
+}
+.va-facepile {
+  display:flex; align-items:center; justify-content:center;
+}
+.va-av {
+  width:44px; height:44px; border-radius:50%;
+  border:2.5px solid #000; overflow:hidden;
+  margin-left:-12px; flex-shrink:0;
+  background:#111;
+}
+.va-av:first-child { margin-left:0; }
+.va-av img { width:100%; height:100%; object-fit:cover; object-position:top; }
+.va-dept-list {
+  display:flex; flex-wrap:wrap; justify-content:center; gap:6px; margin-top:16px;
+}
+.va-dept {
+  font-size:8px; font-weight:600; letter-spacing:2px; text-transform:uppercase;
+  background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1);
+  border-radius:20px; padding:4px 10px;
+  color:rgba(255,255,255,0.5);
+}
+
+/* ──────────── VARIANT B – Orbit Center (Current) ──────────── */
+.vb .v-frame { padding:24px 20px; gap:14px; }
+.vb-top { display:flex; flex-direction:column; align-items:center; gap:4px; }
+.vb-logo { height:18px; filter:brightness(0) invert(1); opacity:0.9; }
+.vb-eyebrow { font-size:8px; font-weight:600; letter-spacing:4px; text-transform:uppercase; color:rgba(255,255,255,0.35); }
+.vb-orbit-wrap { position:relative; width:240px; height:240px; flex-shrink:0; }
+.vb-ring { position:absolute; inset:0; border-radius:50%; border:1px solid rgba(255,255,255,0.07); }
+.vb-glow { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:120px; height:120px; background:radial-gradient(circle,rgba(97,97,255,0.15) 0%,transparent 70%); border-radius:50%; }
+.vb-center { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); text-align:center; width:100px; }
+.vb-center span { font-size:10px; font-weight:700; color:#fff; line-height:1.4; display:block; }
+.vb-person { position:absolute; display:flex; flex-direction:column; align-items:center; gap:3px; }
+.vb-av { width:34px; height:34px; border-radius:50%; border:1.5px solid; overflow:hidden; background:#111; }
+.vb-av img { width:100%; height:100%; object-fit:cover; object-position:top; }
+.vb-name { font-size:7px; font-weight:600; white-space:nowrap; }
+/* r=90, center=120, offset=17 */
+.vb-sales      { left:103px; top:  13px; }
+.vb-finance    { left:166px; top:  43px; }
+.vb-hr         { left:193px; top: 103px; }
+.vb-it         { left:166px; top: 166px; }
+.vb-legal      { left:103px; top: 193px; }
+.vb-marketing  { left: 40px; top: 166px; }
+.vb-operations { left: 13px; top: 103px; }
+.vb-product    { left: 40px; top:  43px; }
+.vb-svg { position:absolute; inset:0; width:100%; height:100%; overflow:visible; pointer-events:none; }
+
+.vb-headline { font-size:22px; font-weight:800; letter-spacing:-0.5px; text-align:center; line-height:1.2; }
+.vb-sub { font-size:11px; font-weight:300; color:rgba(255,255,255,0.4); text-align:center; }
+
+/* ──────────── VARIANT C – Facepile Hero ──────────── */
+.vc .v-frame { gap:0; }
+.vc-eyebrow {
+  font-size:8px; font-weight:600; letter-spacing:5px; text-transform:uppercase;
+  color:var(--purple); margin-bottom:24px;
+}
+.vc-facepile { display:flex; align-items:center; justify-content:center; margin-bottom:28px; }
+.vc-av {
+  width:54px; height:54px; border-radius:50%;
+  border:3px solid #000; overflow:hidden; margin-left:-16px;
+  flex-shrink:0; background:#111;
+  box-shadow:0 0 0 1px rgba(255,255,255,0.08);
+}
+.vc-av:first-child { margin-left:0; }
+.vc-av img { width:100%; height:100%; object-fit:cover; object-position:top; }
+.vc-headline {
+  font-size:clamp(28px,5vw,42px); font-weight:900; line-height:1.1;
+  letter-spacing:-1px; text-align:center; margin-bottom:12px;
+}
+.vc-sub {
+  font-size:12px; font-weight:300; color:rgba(255,255,255,0.4);
+  text-align:center; margin-bottom:28px;
+}
+.vc-logo { height:20px; filter:brightness(0) invert(1); opacity:0.5; }
+
+/* ──────────── VARIANT D – Text-First Minimal ──────────── */
+.vd .v-frame {
+  align-items:flex-start; justify-content:space-between;
+  padding:40px 32px;
+}
+.vd-top {}
+.vd-logo { height:18px; filter:brightness(0) invert(1); opacity:0.75; margin-bottom:6px; }
+.vd-eyebrow { font-size:8px; font-weight:600; letter-spacing:4px; text-transform:uppercase; color:rgba(255,255,255,0.3); }
+.vd-main {}
+.vd-headline {
+  font-size:clamp(30px,5.5vw,46px); font-weight:900; line-height:1.05;
+  letter-spacing:-1.5px; margin-bottom:12px;
+  background:linear-gradient(135deg,#fff 50%,rgba(255,255,255,0.4));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+}
+.vd-sub {
+  font-size:12px; font-weight:300; color:rgba(255,255,255,0.4);
+  line-height:1.5; margin-bottom:28px;
+}
+.vd-dept-grid {
+  display:flex; flex-direction:column; gap:6px;
+}
+.vd-dept-row { display:flex; gap:8px; align-items:center; }
+.vd-av-sm { width:26px; height:26px; border-radius:50%; overflow:hidden; border:1px solid rgba(255,255,255,0.15); background:#111; flex-shrink:0; }
+.vd-av-sm img { width:100%; height:100%; object-fit:cover; object-position:top; }
+.vd-dept-name { font-size:10px; font-weight:600; }
+.vd-divider { width:100%; height:1px; background:rgba(255,255,255,0.06); margin:4px 0; }
+</style>
+</head>
+<body>
+
+<p class="page-label">Slide 1 — Variants</p>
+
+<div class="variant-row">
+
+  <!-- ── A: Bold Manifesto ── -->
+  <div class="v-block va">
+    <div class="v-label">A — Bold Manifesto <span class="badge">Headline first</span></div>
+    <div class="v-frame">
+      <img class="va-logo" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/monday%20Logo/monday.com%20Logo.png" alt="monday.com">
+      <h1 class="va-headline">People<br>and agents.</h1>
+      <p class="va-sub">Working together. Driving results.</p>
+      <div class="va-facepile">
+        <div class="va-av"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/Sales.png" alt="Sales"></div>
+        <div class="va-av"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/Finance.png" alt="Finance"></div>
+        <div class="va-av"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/HR.png" alt="HR"></div>
+        <div class="va-av"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/IT.png" alt="IT"></div>
+        <div class="va-av"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/Legal.png" alt="Legal"></div>
+        <div class="va-av"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/Marketing.png" alt="Marketing"></div>
+        <div class="va-av"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/Operations.png" alt="Operations"></div>
+        <div class="va-av"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/Product.png" alt="Product"></div>
+      </div>
+      <div class="va-dept-list">
+        <span class="va-dept" style="color:#F9D27A">Sales</span>
+        <span class="va-dept" style="color:#93C6E7">Finance</span>
+        <span class="va-dept" style="color:#8ECEC0">HR</span>
+        <span class="va-dept" style="color:#A89BD9">IT</span>
+        <span class="va-dept" style="color:#F6C27A">Legal</span>
+        <span class="va-dept" style="color:#F48FB1">Marketing</span>
+        <span class="va-dept" style="color:#85C1AE">Operations</span>
+        <span class="va-dept" style="color:#7FC8D4">Product</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── B: Orbit (Current) ── -->
+  <div class="v-block vb">
+    <div class="v-label">B — Orbit <span class="badge">Current</span></div>
+    <div class="v-frame">
+      <div class="vb-top">
+        <img class="vb-logo" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/monday%20Logo/monday.com%20Logo.png" alt="monday.com">
+        <span class="vb-eyebrow">AI Work Platform</span>
+      </div>
+      <div class="vb-orbit-wrap">
+        <div class="vb-ring"></div>
+        <div class="vb-glow"></div>
+        <div class="vb-center"><span>People &amp; Agents</span></div>
+        <svg class="vb-svg" viewBox="0 0 240 240" fill="none">
+          <line x1="120" y1="120" x2="120" y2="30" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+          <line x1="120" y1="120" x2="183" y2="60" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+          <line x1="120" y1="120" x2="210" y2="120" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+          <line x1="120" y1="120" x2="183" y2="183" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+          <line x1="120" y1="120" x2="120" y2="210" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+          <line x1="120" y1="120" x2="57"  y2="183" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+          <line x1="120" y1="120" x2="30"  y2="120" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+          <line x1="120" y1="120" x2="57"  y2="60"  stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+        </svg>
+        <div class="vb-person vb-sales">
+          <div class="vb-av" style="border-color:#F9D27A90"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/Sales.png" alt=""></div>
+          <span class="vb-name" style="color:#F9D27A">Sales</span>
+        </div>
+        <div class="vb-person vb-finance">
+          <div class="vb-av" style="border-color:#93C6E790"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/Finance.png" alt=""></div>
+          <span class="vb-name" style="color:#93C6E7">Finance</span>
+        </div>
+        <div class="vb-person vb-hr">
+          <div class="vb-av" style="border-color:#8ECEC090"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/HR.png" alt=""></div>
+          <span class="vb-name" style="color:#8ECEC0">HR</span>
+        </div>
+        <div class="vb-person vb-it">
+          <div class="vb-av" style="border-color:#A89BD990"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/IT.png" alt=""></div>
+          <span class="vb-name" style="color:#A89BD9">IT</span>
+        </div>
+        <div class="vb-person vb-legal">
+          <div class="vb-av" style="border-color:#F6C27A90"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/Legal.png" alt=""></div>
+          <span class="vb-name" style="color:#F6C27A">Legal</span>
+        </div>
+        <div class="vb-person vb-marketing">
+          <div class="vb-av" style="border-color:#F48FB190"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/Marketing.png" alt=""></div>
+          <span class="vb-name" style="color:#F48FB1">Marketing</span>
+        </div>
+        <div class="vb-person vb-operations">
+          <div class="vb-av" style="border-color:#85C1AE90"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/Operations.png" alt=""></div>
+          <span class="vb-name" style="color:#85C1AE">Operations</span>
+        </div>
+        <div class="vb-person vb-product">
+          <div class="vb-av" style="border-color:#7FC8D490"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/Product.png" alt=""></div>
+          <span class="vb-name" style="color:#7FC8D4">Product</span>
+        </div>
+      </div>
+      <p class="vb-headline">People and agents.</p>
+      <p class="vb-sub">Working together. Driving results.</p>
+    </div>
+  </div>
+
+  <!-- ── C: Facepile Hero ── -->
+  <div class="v-block vc">
+    <div class="v-label">C — Facepile Hero <span class="badge">Faces first</span></div>
+    <div class="v-frame">
+      <p class="vc-eyebrow">AI Work Platform</p>
+      <div class="vc-facepile">
+        <div class="vc-av"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/Product.png" alt=""></div>
+        <div class="vc-av"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/Marketing.png" alt=""></div>
+        <div class="vc-av"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/HR.png" alt=""></div>
+        <div class="vc-av"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/Sales.png" alt=""></div>
+        <div class="vc-av"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/Finance.png" alt=""></div>
+        <div class="vc-av"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/IT.png" alt=""></div>
+        <div class="vc-av"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/Legal.png" alt=""></div>
+        <div class="vc-av"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/Operations.png" alt=""></div>
+      </div>
+      <h1 class="vc-headline">People<br>and agents.</h1>
+      <p class="vc-sub">Working together. Driving results.</p>
+      <img class="vc-logo" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/monday%20Logo/monday.com%20Logo.png" alt="monday.com">
+    </div>
+  </div>
+
+  <!-- ── D: Minimal List ── -->
+  <div class="v-block vd">
+    <div class="v-label">D — Minimal List <span class="badge">Editorial</span></div>
+    <div class="v-frame">
+      <div class="vd-top">
+        <img class="vd-logo" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/monday%20Logo/monday.com%20Logo.png" alt="monday.com">
+        <p class="vd-eyebrow">AI Work Platform</p>
+      </div>
+      <div class="vd-main">
+        <h1 class="vd-headline">People<br>and agents.</h1>
+        <p class="vd-sub">Working together.<br>Driving results.</p>
+        <div class="vd-dept-grid">
+          <div class="vd-dept-row">
+            <div class="vd-av-sm"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/Marketing.png" alt=""></div>
+            <span class="vd-dept-name" style="color:#F48FB1">Marketing</span>
+          </div>
+          <div class="vd-divider"></div>
+          <div class="vd-dept-row">
+            <div class="vd-av-sm"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/Sales.png" alt=""></div>
+            <span class="vd-dept-name" style="color:#F9D27A">Sales</span>
+          </div>
+          <div class="vd-divider"></div>
+          <div class="vd-dept-row">
+            <div class="vd-av-sm"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/HR.png" alt=""></div>
+            <span class="vd-dept-name" style="color:#8ECEC0">HR</span>
+          </div>
+          <div class="vd-divider"></div>
+          <div class="vd-dept-row">
+            <div class="vd-av-sm"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/IT.png" alt=""></div>
+            <span class="vd-dept-name" style="color:#A89BD9">IT</span>
+          </div>
+          <div class="vd-divider"></div>
+          <div class="vd-dept-row">
+            <div class="vd-av-sm"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/Operations.png" alt=""></div>
+            <span class="vd-dept-name" style="color:#85C1AE">Operations</span>
+          </div>
+          <div class="vd-divider"></div>
+          <div class="vd-dept-row">
+            <div class="vd-av-sm"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/Finance.png" alt=""></div>
+            <span class="vd-dept-name" style="color:#93C6E7">Finance</span>
+          </div>
+          <div class="vd-divider"></div>
+          <div class="vd-dept-row">
+            <div class="vd-av-sm"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/Product.png" alt=""></div>
+            <span class="vd-dept-name" style="color:#7FC8D4">Product</span>
+          </div>
+          <div class="vd-divider"></div>
+          <div class="vd-dept-row">
+            <div class="vd-av-sm"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/Legal.png" alt=""></div>
+            <span class="vd-dept-name" style="color:#F6C27A">Legal</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
