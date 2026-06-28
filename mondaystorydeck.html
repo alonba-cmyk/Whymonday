@@ -69,39 +69,23 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
   .line2 { font-size:1.45vw; margin-top:2%; order:4; min-height:auto; }
 }
 
-/* S1 – Orbit */
-#s1 { padding:40px 0 30px; justify-content:center; }
-.s1-orbit-inner { display:flex; flex-direction:column; align-items:center; justify-content:center; width:100%; height:100%; gap:16px; }
-.s1-orbit-wrap { position:relative; width:520px; height:520px; flex-shrink:0; }
-.s1-orbit-people { position:absolute; inset:0; }
-.s1-orbit-glow { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:240px; height:240px; background:radial-gradient(circle, rgba(97,97,255,0.14) 0%, transparent 70%); border-radius:50%; pointer-events:none; }
-.s1-ring { position:absolute; border-radius:50%; top:50%; left:50%; transform:translate(-50%,-50%); pointer-events:none; border:1px solid rgba(97,97,255,0.25); width:430px; height:430px; }
-.s1-orbit-center { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); text-align:center; width:220px; z-index:2; pointer-events:none; }
-.s1-orbit-center h2 { font-size:clamp(12px,1.2vw,16px); font-weight:700; line-height:1.4; color:#fff; }
-.s1-orbit-svg { position:absolute; inset:0; width:100%; height:100%; overflow:visible; pointer-events:none; }
-.s1-orbit-svg-mobile { display:none; }
-.s1-orbit-person { position:absolute; display:flex; flex-direction:column; align-items:center; gap:5px; z-index:3; }
-.s1-orbit-av { width:68px; height:68px; border-radius:50%; border:2px solid; overflow:hidden; background:#111; transition:box-shadow 0.3s, transform 0.2s; }
-.s1-orbit-person.active .s1-orbit-av { transform:scale(1.18); }
-.s1-orbit-av img { width:100%; height:100%; object-fit:cover; object-position:top center; }
-.s1-orbit-name { font-size:11px; font-weight:600; letter-spacing:0.3px; white-space:nowrap; }
-/* Desktop positions — r=190, center=260, avatar=68 (offset=34) */
-.s1-p-sales      { left:226px; top: 36px; }
-.s1-p-finance    { left:360px; top: 92px; }
-.s1-p-hr         { left:416px; top:226px; }
-.s1-p-it         { left:360px; top:360px; }
-.s1-p-legal      { left:226px; top:416px; }
-.s1-p-marketing  { left: 92px; top:360px; }
-.s1-p-operations { left: 36px; top:226px; }
-.s1-p-product    { left: 92px; top: 92px; }
-.s1-info-card { display:flex; flex-direction:column; align-items:center; gap:4px; min-height:50px; opacity:0; transform:translateY(6px); transition:opacity 0.3s ease, transform 0.3s ease; }
-.s1-info-card.visible { opacity:1; transform:translateY(0); }
-.s1-info-dept { font-size:12px; font-weight:700; letter-spacing:2px; text-transform:uppercase; }
-.s1-info-desc { font-size:13px; font-weight:300; color:rgba(255,255,255,0.5); text-align:center; line-height:1.5; }
-/* S1 desktop-only pieces (hidden by default) */
-.s1-left-panel { display:none; }
-.s1-right-orbit { display:contents; }
-.s1-center-dept { display:none; }
+/* S1 – Carousel */
+#s1 { padding:0; }
+.s1k-inner { display:flex; flex-direction:column; align-items:center; justify-content:center; width:100%; height:100%; gap:16px; padding:40px 24px 30px; }
+.s1k-eyebrow-m { font-size:10px; font-weight:600; letter-spacing:4px; text-transform:uppercase; color:#6161ff; }
+.s1k-left { display:none; }
+.s1k-right { display:flex; flex-direction:column; align-items:center; gap:14px; width:100%; }
+.s1k-wrap { position:relative; overflow:hidden; height:70px; width:100%; }
+.s1k-strip { display:flex; gap:14px; position:absolute; top:7px; left:0; transition:transform 0.55s cubic-bezier(0.4,0,0.2,1); }
+.s1k-thumb { display:flex; flex-direction:column; align-items:center; flex-shrink:0; cursor:pointer; }
+.s1k-av { width:56px; height:56px; border-radius:50%; overflow:hidden; box-shadow:inset 0 0 0 2px rgba(255,255,255,0.1); transition:box-shadow 0.35s; transform:translateZ(0); }
+.s1k-av img { width:100%; height:100%; object-fit:cover; object-position:top; }
+.s1k-fade-l { position:absolute; left:0; top:0; bottom:0; width:70px; background:linear-gradient(to right,#000,transparent); pointer-events:none; }
+.s1k-fade-r { position:absolute; right:0; top:0; bottom:0; width:70px; background:linear-gradient(to left,#000,transparent); pointer-events:none; }
+.s1k-divider { display:flex; align-items:center; gap:12px; width:100%; }
+.s1k-line { flex:1; height:1px; background:rgba(255,255,255,0.07); }
+.s1k-label { font-size:10px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; flex-shrink:0; transition:color 0.35s, opacity 0.35s; }
+.s1k-desc { font-size:clamp(11px,1.1vw,14px); font-weight:300; color:rgba(255,255,255,0.55); line-height:1.55; transition:opacity 0.35s; text-align:center; margin-top:-8px; }
 
 /* AI Logos row */
 .ai-logos { display:flex; align-items:center; justify-content:center; gap:32px; margin:24px 0 32px; flex-wrap:wrap; }
@@ -321,29 +305,14 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
   .s0-text { gap: 8px; }
   .s0-strip { width: calc(100% + 40px); margin-left: -20px; margin-top: 28px; }
 
-  /* S1 – Orbit (mobile) */
-  #s1 { padding: 20px 0 12px; }
-  .s1-orbit-inner { gap: 12px; }
-  .s1-orbit-wrap { width: 296px; height: 296px; }
-  .s1-ring { width: 272px; height: 272px; }
-  .s1-orbit-glow { width: 150px; height: 150px; }
-  .s1-orbit-center { width: 142px; }
-  .s1-orbit-center h2 { font-size: 11.5px; }
-  .s1-orbit-av { width: 42px; height: 42px; }
-  .s1-orbit-name { font-size: 8px; }
-  .s1-orbit-svg-desktop { display: none; }
-  .s1-orbit-svg-mobile { display: block; }
-  /* Mobile positions — r=115, center=148, avatar=42 (offset=21) */
-  .s1-p-sales      { left: 127px; top:  12px; }
-  .s1-p-finance    { left: 208px; top:  45px; }
-  .s1-p-hr         { left: 242px; top: 127px; }
-  .s1-p-it         { left: 208px; top: 208px; }
-  .s1-p-legal      { left: 127px; top: 242px; }
-  .s1-p-marketing  { left:  45px; top: 208px; }
-  .s1-p-operations { left:  12px; top: 127px; }
-  .s1-p-product    { left:  45px; top:  45px; }
-  .s1-info-dept { font-size: 10px; }
-  .s1-info-desc { font-size: 11px; }
+  /* S1 – Carousel (mobile) */
+  #s1 { padding: 0; }
+  .s1k-inner { padding: 20px 16px 20px; gap: 10px; }
+  .s1k-av { width: 44px; height: 44px; }
+  .s1k-wrap { height: 58px; }
+  .s1k-strip { top: 5px; gap: 10px; }
+  .s1k-fade-l, .s1k-fade-r { width: 48px; }
+  .s1k-desc { font-size: 11px; }
 
   /* S2 – Shift */
   #s2 { justify-content: center; padding-top: 0; }
@@ -451,20 +420,17 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
   .s0v-h2 { font-size: clamp(14px, 4vw, 20px); }
 }
 
-/* S1 – Desktop Variant C layout */
+/* S1 – Carousel (desktop) */
 @media (min-width: 769px) {
-  #s1 { padding: 0; }
-  .s1-orbit-inner { flex-direction:row; gap:0; padding:0 3% 0 0; align-items:center; justify-content:center; }
-  .s1-eyebrow-mobile { display:none; }
-  .s1-left-panel { display:flex; flex-direction:column; justify-content:center; flex:1; padding-right:28px; padding-left:clamp(40px,8vw,120px); border-right:1px solid rgba(255,255,255,0.06); align-self:center; height:65%; }
-  .s1-mission-heading { font-size:clamp(22px,2.6vw,36px); font-weight:700; line-height:1.3; color:#fff; margin-top:18px; }
-  .s1-right-orbit { display:flex; align-items:center; justify-content:center; flex:1.15; }
-  .s1-center-h2 { display:none; }
-  .s1-center-dept { display:flex; flex-direction:column; align-items:center; gap:8px; }
-  .s1-orbit-center { width:210px; }
-  .s1-center-name { font-size:11px; font-weight:700; letter-spacing:3px; text-transform:uppercase; transition:color 0.3s; }
-  .s1-center-desc { font-size:13px; font-weight:300; color:rgba(255,255,255,0.5); line-height:1.55; text-align:center; }
-  .s1-info-card { display:none !important; }
+  .s1k-inner { flex-direction:row; padding:0; gap:0; align-items:stretch; justify-content:flex-start; }
+  .s1k-eyebrow-m { display:none; }
+  .s1k-left { display:flex; flex-direction:column; justify-content:center; flex:0 0 40%; padding:6% 5% 6% clamp(40px,8vw,100px); border-right:1px solid rgba(255,255,255,0.07); }
+  .s1k-left-eyebrow { font-size:10px; font-weight:600; letter-spacing:4px; text-transform:uppercase; color:#6161ff; margin-bottom:18px; }
+  .s1k-mission { font-size:clamp(20px,2.4vw,32px); font-weight:700; line-height:1.35; color:#fff; }
+  .s1k-right { flex:1; flex-direction:column; justify-content:center; align-items:stretch; padding:5% 5%; }
+  .s1k-av { width:56px; height:56px; }
+  .s1k-wrap { height:70px; }
+  .s1k-strip { top:7px; gap:14px; }
 }
 
 /* S2 – Hide marquee on desktop */
@@ -617,112 +583,26 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
 </div>
 
 <div class="slide" id="s1">
-  <div class="s1-orbit-inner">
-    <p class="eyebrow s1-eyebrow-mobile" style="margin-bottom:0">Our Mission</p>
-
-    <div class="s1-left-panel">
-      <p class="eyebrow" style="margin-bottom:18px">Our Mission</p>
-      <h2 class="s1-mission-heading">monday's mission has always been to help teams get more done and achieve their business goals.</h2>
+  <div class="s1k-inner">
+    <p class="s1k-eyebrow-m">Our Mission</p>
+    <div class="s1k-left">
+      <p class="s1k-left-eyebrow">Our Mission</p>
+      <h2 class="s1k-mission">monday's mission has always been to help teams get more done and achieve their business goals.</h2>
     </div>
-
-    <div class="s1-right-orbit">
-    <div class="s1-orbit-wrap">
-      <div class="s1-orbit-glow"></div>
-      <div class="s1-ring"></div>
-      <div class="s1-orbit-center">
-        <h2 class="s1-center-h2">monday's mission has always been to help teams get more done and achieve their business goals.</h2>
-        <div class="s1-center-dept" id="s1CenterDept">
-          <span class="s1-center-name" id="s1CenterName"></span>
-          <span class="s1-center-desc" id="s1CenterDesc"></span>
-        </div>
+    <div class="s1k-right">
+      <div class="s1k-wrap">
+        <div class="s1k-strip" id="s1kStrip"></div>
+        <div class="s1k-fade-l"></div>
+        <div class="s1k-fade-r"></div>
       </div>
-      <div class="s1-orbit-people" id="s1OrbitPeople">
-        <!-- Desktop SVG lines (r=190, center=260, avatar=68→offset=34) -->
-        <svg class="s1-orbit-svg s1-orbit-svg-desktop" viewBox="0 0 520 520" fill="none">
-          <line x1="260" y1="260" x2="260" y2="70"  stroke="rgba(97,97,255,0.45)" stroke-width="1" stroke-dasharray="4 6"/>
-          <line x1="260" y1="260" x2="394" y2="126" stroke="rgba(97,97,255,0.45)" stroke-width="1" stroke-dasharray="4 6"/>
-          <line x1="260" y1="260" x2="450" y2="260" stroke="rgba(97,97,255,0.45)" stroke-width="1" stroke-dasharray="4 6"/>
-          <line x1="260" y1="260" x2="394" y2="394" stroke="rgba(97,97,255,0.45)" stroke-width="1" stroke-dasharray="4 6"/>
-          <line x1="260" y1="260" x2="260" y2="450" stroke="rgba(97,97,255,0.45)" stroke-width="1" stroke-dasharray="4 6"/>
-          <line x1="260" y1="260" x2="126" y2="394" stroke="rgba(97,97,255,0.45)" stroke-width="1" stroke-dasharray="4 6"/>
-          <line x1="260" y1="260" x2="70"  y2="260" stroke="rgba(97,97,255,0.45)" stroke-width="1" stroke-dasharray="4 6"/>
-          <line x1="260" y1="260" x2="126" y2="126" stroke="rgba(97,97,255,0.45)" stroke-width="1" stroke-dasharray="4 6"/>
-        </svg>
-        <!-- Mobile SVG lines (r=115, center=148, avatar=42→offset=21) -->
-        <svg class="s1-orbit-svg s1-orbit-svg-mobile" viewBox="0 0 296 296" fill="none">
-          <line x1="148" y1="148" x2="148" y2="33"  stroke="rgba(97,97,255,0.45)" stroke-width="0.8" stroke-dasharray="3 5"/>
-          <line x1="148" y1="148" x2="229" y2="66"  stroke="rgba(97,97,255,0.45)" stroke-width="0.8" stroke-dasharray="3 5"/>
-          <line x1="148" y1="148" x2="263" y2="148" stroke="rgba(97,97,255,0.45)" stroke-width="0.8" stroke-dasharray="3 5"/>
-          <line x1="148" y1="148" x2="229" y2="229" stroke="rgba(97,97,255,0.45)" stroke-width="0.8" stroke-dasharray="3 5"/>
-          <line x1="148" y1="148" x2="148" y2="263" stroke="rgba(97,97,255,0.45)" stroke-width="0.8" stroke-dasharray="3 5"/>
-          <line x1="148" y1="148" x2="66"  y2="229" stroke="rgba(97,97,255,0.45)" stroke-width="0.8" stroke-dasharray="3 5"/>
-          <line x1="148" y1="148" x2="33"  y2="148" stroke="rgba(97,97,255,0.45)" stroke-width="0.8" stroke-dasharray="3 5"/>
-          <line x1="148" y1="148" x2="66"  y2="66"  stroke="rgba(97,97,255,0.45)" stroke-width="0.8" stroke-dasharray="3 5"/>
-        </svg>
-
-        <div class="s1-orbit-person s1-p-sales"      data-name="Sales"      data-color="#F9D27A" data-desc="Faster revenue generation">
-          <div class="s1-orbit-av" style="border-color:#F9D27A90"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/Sales.png" alt=""></div>
-          <span class="s1-orbit-name" style="color:#F9D27A">Sales</span>
-        </div>
-        <div class="s1-orbit-person s1-p-finance"    data-name="Finance"    data-color="#93C6E7" data-desc="Streamline financial operations efficiently">
-          <div class="s1-orbit-av" style="border-color:#93C6E790"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/Finance.png" alt=""></div>
-          <span class="s1-orbit-name" style="color:#93C6E7">Finance</span>
-        </div>
-        <div class="s1-orbit-person s1-p-hr"         data-name="HR"         data-color="#8ECEC0" data-desc="Accelerate onboarding & employee experience">
-          <div class="s1-orbit-av" style="border-color:#8ECEC090"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/HR.png" alt=""></div>
-          <span class="s1-orbit-name" style="color:#8ECEC0">HR</span>
-        </div>
-        <div class="s1-orbit-person s1-p-it"         data-name="IT"         data-color="#A89BD9" data-desc="Secure, scalable infrastructure at speed">
-          <div class="s1-orbit-av" style="border-color:#A89BD990"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/IT.png" alt=""></div>
-          <span class="s1-orbit-name" style="color:#A89BD9">IT</span>
-        </div>
-        <div class="s1-orbit-person s1-p-legal"      data-name="Legal"      data-color="#F6C27A" data-desc="Reduce risk and move faster on decisions">
-          <div class="s1-orbit-av" style="border-color:#F6C27A90"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/Legal.png" alt=""></div>
-          <span class="s1-orbit-name" style="color:#F6C27A">Legal</span>
-        </div>
-        <div class="s1-orbit-person s1-p-marketing"  data-name="Marketing"  data-color="#F48FB1" data-desc="Drive demand and accelerate the sales cycle">
-          <div class="s1-orbit-av" style="border-color:#F48FB190"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/Marketing.png" alt=""></div>
-          <span class="s1-orbit-name" style="color:#F48FB1">Marketing</span>
-        </div>
-        <div class="s1-orbit-person s1-p-operations" data-name="Operations" data-color="#85C1AE" data-desc="Operational excellence at scale">
-          <div class="s1-orbit-av" style="border-color:#85C1AE90"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/Operations.png" alt=""></div>
-          <span class="s1-orbit-name" style="color:#85C1AE">Operations</span>
-        </div>
-        <div class="s1-orbit-person s1-p-product"    data-name="Product"    data-color="#7FC8D4" data-desc="Ship faster with the power to build anything">
-          <div class="s1-orbit-av" style="border-color:#7FC8D490"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/Product.png" alt=""></div>
-          <span class="s1-orbit-name" style="color:#7FC8D4">Product</span>
-        </div>
+      <div class="s1k-divider">
+        <div class="s1k-line"></div>
+        <div class="s1k-label" id="s1kLabel">Sales</div>
+        <div class="s1k-line"></div>
       </div>
-    </div>
-    </div><!-- /s1-right-orbit -->
-
-    <div class="s1-info-card" id="s1InfoCard">
-      <span class="s1-info-dept" id="s1InfoDept"></span>
-      <span class="s1-info-desc" id="s1InfoDesc"></span>
+      <div class="s1k-desc" id="s1kDesc">Faster revenue generation</div>
     </div>
   </div>
-
-  <!--BACKUP CAROUSEL – to restore: replace s1-orbit-inner block above with this
-  <div class="mission-inner">
-    <div class="mission-text">
-      <p class="eyebrow">Our Mission</p>
-      <h1>monday's mission has always been to help teams<br>get more done and achieve their business goals.</h1>
-    </div>
-    <div class="mq-wrap">
-      <div class="mq-track">
-        <div class="mq-card"><div class="mq-top"><div class="mq-av" style="border-color:#F9D27A60"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/Sales.png" alt="Sales"></div><span class="mq-name" style="color:#F9D27A">Sales</span></div><p class="mq-desc">Faster revenue generation</p></div>
-        <div class="mq-card"><div class="mq-top"><div class="mq-av" style="border-color:#93C6E760"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/Finance.png" alt="Finance"></div><span class="mq-name" style="color:#93C6E7">Finance</span></div><p class="mq-desc">Streamline financial operations efficiently</p></div>
-        <div class="mq-card"><div class="mq-top"><div class="mq-av" style="border-color:#8ECEC060"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/HR.png" alt="HR"></div><span class="mq-name" style="color:#8ECEC0">HR</span></div><p class="mq-desc">Accelerate onboarding & employee experience</p></div>
-        <div class="mq-card"><div class="mq-top"><div class="mq-av" style="border-color:#A89BD960"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/IT.png" alt="IT"></div><span class="mq-name" style="color:#A89BD9">IT</span></div><p class="mq-desc">Secure, scalable infrastructure at speed</p></div>
-        <div class="mq-card"><div class="mq-top"><div class="mq-av" style="border-color:#F6C27A60"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/Legal.png" alt="Legal"></div><span class="mq-name" style="color:#F6C27A">Legal</span></div><p class="mq-desc">Reduce risk and move faster on decisions</p></div>
-        <div class="mq-card"><div class="mq-top"><div class="mq-av" style="border-color:#F48FB160"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/MARKETING.png" alt="Marketing"></div><span class="mq-name" style="color:#F48FB1">Marketing</span></div><p class="mq-desc">Drive demand and accelerate the sales cycle</p></div>
-        <div class="mq-card"><div class="mq-top"><div class="mq-av" style="border-color:#85C1AE60"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/OPERATIONS.png" alt="Operations"></div><span class="mq-name" style="color:#85C1AE">Operations</span></div><p class="mq-desc">Operational excellence at scale</p></div>
-        <div class="mq-card"><div class="mq-top"><div class="mq-av" style="border-color:#7FC8D460"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/PRODUCT.png" alt="Product"></div><span class="mq-name" style="color:#7FC8D4">Product</span></div><p class="mq-desc">Ship faster with the power to build anything</p></div>
-        [repeat 8 cards for infinite scroll]
-      </div>
-    </div>
-  </div>
-  END BACKUP -->
 </div>
 
 <div class="slide" id="s2">
@@ -1359,57 +1239,92 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
     });
   }, 500);
 
-  // S1 orbit
+  // S1 – Carousel
   (function() {
-    const orbitEl  = document.getElementById('s1OrbitPeople');
-    if (!orbitEl) return;
-    const people   = Array.from(orbitEl.querySelectorAll('.s1-orbit-person'));
-    const card       = document.getElementById('s1InfoCard');
-    const infoDept   = document.getElementById('s1InfoDept');
-    const infoDesc   = document.getElementById('s1InfoDesc');
-    const centerName = document.getElementById('s1CenterName');
-    const centerDesc = document.getElementById('s1CenterDesc');
-    const startAngles = [0, 45, 90, 135, 180, 225, 270, 315];
-    const SPEED = 360 / 45000;
-    let angle = 0, lastActive = -1, lastTs = null;
+    const strip = document.getElementById('s1kStrip');
+    const label = document.getElementById('s1kLabel');
+    const desc  = document.getElementById('s1kDesc');
+    if (!strip) return;
 
-    function activate(idx) {
-      const el    = people[idx];
-      const color = el.dataset.color;
-      people.forEach(p => {
-        p.classList.remove('active');
-        p.querySelector('.s1-orbit-av').style.boxShadow = '';
+    const depts = [
+      { name:'Sales',      color:'#F9D27A', desc:'Faster revenue generation',                    img:'https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/Sales.png' },
+      { name:'Finance',    color:'#93C6E7', desc:'Streamline financial operations efficiently',   img:'https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/Finance.png' },
+      { name:'HR',         color:'#8ECEC0', desc:'Accelerate onboarding & employee experience',  img:'https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/HR.png' },
+      { name:'IT',         color:'#A89BD9', desc:'Secure, scalable infrastructure at speed',     img:'https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/IT.png' },
+      { name:'Legal',      color:'#F6C27A', desc:'Reduce risk and move faster on decisions',     img:'https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/Legal.png' },
+      { name:'Marketing',  color:'#F48FB1', desc:'Drive demand and accelerate the sales cycle',  img:'https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/Marketing.png' },
+      { name:'Operations', color:'#85C1AE', desc:'Operational excellence at scale',              img:'https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/Operations.png' },
+      { name:'Product',    color:'#7FC8D4', desc:'Ship faster with the power to build anything', img:'https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/Product.png' },
+    ];
+
+    const SZ = 56, GAP = 14, LEAD = 6, N = depts.length;
+    const TRANS    = 'transform 0.55s cubic-bezier(0.4,0,0.2,1)';
+    const AV_TRANS = 'box-shadow 0.35s';
+    const ext = [...depts.slice(-LEAD), ...depts, ...depts.slice(0, LEAD)];
+    let avEls = [], vkSI = LEAD, vkTimer;
+
+    ext.forEach((d, si) => {
+      const thumb = document.createElement('div');
+      thumb.className = 's1k-thumb';
+      thumb.innerHTML = `<div class="s1k-av"><img src="${d.img}" alt="${d.name}"></div>`;
+      thumb.onclick = () => { const r = (si - LEAD + N * 100) % N; goTo(r + LEAD, r, true); };
+      strip.appendChild(thumb);
+      avEls.push(thumb.querySelector('.s1k-av'));
+    });
+
+    function getStep() { return (window.innerWidth < 769 ? 44 : SZ) + (window.innerWidth < 769 ? 10 : GAP); }
+    function getX(si) { return strip.parentElement.offsetWidth / 2 - (window.innerWidth < 769 ? 22 : SZ/2) - si * getStep(); }
+
+    function moveStrip(x, animate) {
+      strip.style.transition = animate ? TRANS : 'none';
+      strip.style.transform  = `translateX(${x}px)`;
+      if (!animate) requestAnimationFrame(() => requestAnimationFrame(() => { strip.style.transition = TRANS; }));
+    }
+
+    function setHL(si, d) {
+      avEls.forEach((av, j) => {
+        av.style.boxShadow = j === si
+          ? `inset 0 0 0 2px ${d.color}, 0 0 0 3px ${d.color}60, 0 0 18px ${d.color}30`
+          : 'inset 0 0 0 2px rgba(255,255,255,0.1)';
       });
-      el.classList.add('active');
-      el.querySelector('.s1-orbit-av').style.boxShadow =
-        `0 0 22px ${color}90, 0 0 44px ${color}28`;
-      card.classList.remove('visible');
+    }
+
+    function goTo(si, ri, manual) {
+      vkSI = si;
+      const d = depts[ri];
+      setHL(si, d);
+      moveStrip(getX(si), true);
+      label.style.opacity = '0'; desc.style.opacity = '0';
       setTimeout(() => {
-        infoDept.textContent = el.dataset.name;
-        infoDept.style.color = color;
-        infoDesc.textContent = el.dataset.desc;
-        card.classList.add('visible');
-        if (centerName) { centerName.textContent = el.dataset.name; centerName.style.color = color; }
-        if (centerDesc) { centerDesc.textContent = el.dataset.desc; }
-      }, 160);
+        label.textContent = d.name; label.style.color = d.color;
+        desc.textContent  = d.desc;
+        label.style.opacity = '1'; desc.style.opacity = '1';
+      }, 220);
+      if (manual) { clearInterval(vkTimer); vkTimer = setInterval(next, 2500); }
     }
 
-    function frame(ts) {
-      if (!lastTs) lastTs = ts;
-      angle = (angle + SPEED * (ts - lastTs)) % 360;
-      lastTs = ts;
-      orbitEl.style.transform = `rotate(${angle}deg)`;
-      people.forEach(p => { p.style.transform = `rotate(${-angle}deg)`; });
-      let minDist = Infinity, atTop = 0;
-      startAngles.forEach((init, i) => {
-        const pos  = (init + angle) % 360;
-        const dist = Math.min(pos, 360 - pos);
-        if (dist < minDist) { minDist = dist; atTop = i; }
-      });
-      if (atTop !== lastActive) { lastActive = atTop; activate(atTop); }
-      requestAnimationFrame(frame);
+    function next() {
+      const nsi = vkSI + 1, ri = (nsi - LEAD + N * 100) % N;
+      goTo(nsi, ri, false);
+      if (nsi >= LEAD + N) {
+        setTimeout(() => {
+          const ssi = nsi - N, d = depts[ri];
+          vkSI = ssi;
+          avEls.forEach(av => { av.style.transition = 'none'; });
+          setHL(ssi, d);
+          moveStrip(getX(ssi), false);
+          requestAnimationFrame(() => requestAnimationFrame(() => {
+            avEls.forEach(av => { av.style.transition = AV_TRANS; });
+          }));
+        }, 570);
+      }
     }
-    requestAnimationFrame(frame);
+
+    setTimeout(() => {
+      goTo(LEAD, 0, false);
+      vkTimer = setInterval(next, 2500);
+      window.addEventListener('resize', () => moveStrip(getX(vkSI), false));
+    }, 80);
   })();
 </script>
 </body>
