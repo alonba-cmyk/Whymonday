@@ -198,6 +198,49 @@ h3.label { font-size:11px; font-weight:600; letter-spacing:4px; text-transform:u
   background:
     linear-gradient(to bottom, #000 0%, transparent 12%, transparent 88%, #000 100%);
 }
+
+/* ═══════════════════════════════════════════
+   VARIANT E — Logo top · Strip center · Text below
+   Tightly composed vertical stack, no dead space
+═══════════════════════════════════════════ */
+.ve {
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center; text-align:center;
+  gap:0; padding:5% 0 4%;
+}
+
+.ve-logo { display:flex; flex-direction:column; align-items:center; gap:5px; margin-bottom:5%; }
+.ve-logo img { height:26px; opacity:0.88; }
+.ve-logo span { font-size:8px; font-weight:600; letter-spacing:5px; text-transform:uppercase; color:rgba(255,255,255,0.3); }
+
+/* Strip: sized to roughly 55% of slide width, centered */
+.ve-strip-wrap {
+  width:62%; position:relative; flex-shrink:0; margin-bottom:3.5%;
+}
+.ve-strip-wrap::before {
+  content:''; position:absolute; inset:0; z-index:2; pointer-events:none;
+  background:
+    linear-gradient(to right,  #000 0%, transparent 8%, transparent 92%, #000 100%),
+    linear-gradient(to bottom, rgba(0,0,0,0.25) 0%, transparent 30%, transparent 70%, rgba(0,0,0,0.25) 100%);
+}
+/* Subtle purple glow beneath the strip */
+.ve-strip-wrap::after {
+  content:''; position:absolute; bottom:-10%; left:50%; transform:translateX(-50%);
+  width:80%; height:60px; border-radius:50%;
+  background:radial-gradient(ellipse, rgba(97,97,255,0.18) 0%, transparent 70%);
+  filter:blur(18px); z-index:0;
+}
+.ve-strip-wrap img {
+  width:100%; display:block; position:relative; z-index:1;
+}
+
+.ve h1 {
+  font-size:5.2vw; font-weight:800; line-height:1.02; letter-spacing:-2.5px;
+  background:linear-gradient(135deg,#fff 45%,rgba(255,255,255,0.5));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+  margin-bottom:1.2%;
+}
+.ve p { font-size:1.45vw; font-weight:300; color:var(--dim); }
 </style>
 </head>
 <body>
@@ -282,6 +325,22 @@ h3.label { font-size:11px; font-weight:600; letter-spacing:4px; text-transform:u
         <img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Hero/HERO%20HUMAN%203.png" alt="Human">
       </div>
     </div>
+  </div>
+</div>
+
+<!-- VARIANT E -->
+<div>
+  <h3 class="label">Variant E — Logo · Strip · Text (vertical stack)</h3>
+  <div class="variant ve">
+    <div class="ve-logo">
+      <img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/monday%20Logo/monday.com%20Logo.png" alt="monday.com">
+      <span>AI Work Platform</span>
+    </div>
+    <div class="ve-strip-wrap">
+      <img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/Agents%20and%20People%20strip.png" alt="">
+    </div>
+    <h1>People and agents.</h1>
+    <p>Working together. Driving results.</p>
   </div>
 </div>
 
