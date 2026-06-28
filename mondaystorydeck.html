@@ -450,13 +450,49 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
 .s0v3-brand-div { width:1px; height:16px; background:rgba(255,255,255,0.2); }
 .s0v3-brand span { font-size:11px; font-weight:500; letter-spacing:4px; text-transform:uppercase; color:var(--dim); white-space:nowrap; }
 .s0v3-strip { width:100%; max-width:1200px; opacity:0.35; pointer-events:none; }
+
+/* ── Credibility slide ── */
+#scred { padding:60px 28px 44px; justify-content:center; }
+.scred-headline {
+  font-size:clamp(20px,4vw,30px); font-weight:800; line-height:1.15;
+  letter-spacing:-1px; margin-bottom:28px; text-align:center;
+  background:linear-gradient(140deg,#fff 50%,rgba(255,255,255,0.45));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+}
+.scred-cards { display:flex; flex-direction:column; gap:10px; width:100%; max-width:480px; }
+.scred-card {
+  display:flex; align-items:center; gap:16px;
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(255,255,255,0.06);
+  border-left:2px solid var(--purple);
+  border-radius:0 14px 14px 0;
+  padding:16px 18px;
+}
+.scred-logo-wrap { width:82px; flex-shrink:0; display:flex; align-items:center; }
+.scred-logo { height:18px; filter:brightness(0) invert(1); opacity:0.8; object-fit:contain; max-width:80px; display:block; }
+.scred-copy { flex:1; }
+.scred-title { font-size:12px; font-weight:600; margin-bottom:3px; color:#fff; }
+.scred-sub { font-size:10px; font-weight:300; color:rgba(255,255,255,0.38); line-height:1.4; }
+.scred-security { display:flex; flex-direction:column; align-items:center; gap:9px; margin-top:20px; }
+.scred-sec-label {
+  font-size:8px; font-weight:600; letter-spacing:3px; text-transform:uppercase;
+  color:rgba(255,255,255,0.3); display:flex; align-items:center; gap:6px;
+}
+.scred-certs { display:flex; gap:7px; justify-content:center; flex-wrap:wrap; }
+.scred-cert {
+  display:flex; flex-direction:column; align-items:center;
+  border:1px solid rgba(255,255,255,0.12); border-radius:9px;
+  padding:6px 10px; gap:2px; min-width:50px;
+}
+.scred-cert-abbr { font-size:9px; font-weight:700; color:rgba(255,255,255,0.68); }
+.scred-cert-full { font-size:6px; font-weight:400; text-transform:uppercase; letter-spacing:0.3px; color:rgba(255,255,255,0.26); text-align:center; line-height:1.3; }
 </style>
 </head>
 <body>
 
 <div class="progress" id="prog"></div>
 <nav class="nav-dots" id="navDots">
-  <button class="nav-dot active" onclick="goTo(0)"></button><button class="nav-dot" onclick="goTo(1)"></button><button class="nav-dot" onclick="goTo(2)"></button><button class="nav-dot" onclick="goTo(3)"></button><button class="nav-dot" onclick="goTo(4)"></button><button class="nav-dot" onclick="goTo(5)"></button><button class="nav-dot" onclick="goTo(6)"></button><button class="nav-dot" onclick="goTo(7)"></button>
+  <button class="nav-dot active" onclick="goTo(0)"></button><button class="nav-dot" onclick="goTo(1)"></button><button class="nav-dot" onclick="goTo(2)"></button><button class="nav-dot" onclick="goTo(3)"></button><button class="nav-dot" onclick="goTo(4)"></button><button class="nav-dot" onclick="goTo(5)"></button><button class="nav-dot" onclick="goTo(6)"></button><button class="nav-dot" onclick="goTo(7)"></button><button class="nav-dot" onclick="goTo(8)"></button>
 </nav>
 
 <div class="deck">
@@ -761,6 +797,45 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
   </div>
 </div>
 
+<div class="slide" id="scred">
+  <div class="scred-headline">Recognized by the<br>world's leading analysts.</div>
+  <div class="scred-cards" id="scredCards">
+    <div class="scred-card">
+      <div class="scred-logo-wrap">
+        <img class="scred-logo" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Enterprise/Gartner.svg" alt="Gartner">
+      </div>
+      <div class="scred-copy">
+        <div class="scred-title">3× Magic Quadrant Leader</div>
+        <div class="scred-sub">Only work management platform recognized as Leader in 3 MQ reports</div>
+      </div>
+    </div>
+    <div class="scred-card">
+      <div class="scred-logo-wrap">
+        <img class="scred-logo" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Enterprise/Forster.svg" alt="Forrester">
+      </div>
+      <div class="scred-copy">
+        <div class="scred-title">Motorola achieved 346% ROI</div>
+        <div class="scred-sub">according to Forrester's Total Economic Impact™ research</div>
+      </div>
+    </div>
+  </div>
+  <div class="scred-security">
+    <div class="scred-sec-label">
+      <svg width="12" height="12" viewBox="0 0 36 36" fill="none">
+        <path d="M18 3L5 8.5V17c0 8.4 5.8 16.2 13 18C25.2 33.2 31 25.4 31 17V8.5L18 3z" fill="rgba(97,97,255,0.3)" stroke="rgba(97,97,255,0.6)" stroke-width="2"/>
+        <path d="M12 18l4 4 8-8" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Enterprise-grade security
+    </div>
+    <div class="scred-certs">
+      <div class="scred-cert"><span class="scred-cert-abbr">GDPR</span><span class="scred-cert-full">EU Data<br>Protection</span></div>
+      <div class="scred-cert"><span class="scred-cert-abbr">SOC 2</span><span class="scred-cert-full">AICPA<br>Certified</span></div>
+      <div class="scred-cert"><span class="scred-cert-abbr">ISO</span><span class="scred-cert-full">27001<br>Certified</span></div>
+      <div class="scred-cert"><span class="scred-cert-abbr">HIPAA</span><span class="scred-cert-full">Health Data<br>Compliant</span></div>
+    </div>
+  </div>
+</div>
+
 <div class="slide" id="s6">
   <div class="outcome-wrap">
     <p class="eyebrow" style="color:var(--teal)">The Result</p>
@@ -870,6 +945,17 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
   const slides = document.querySelectorAll('.slide');
   const dots   = document.querySelectorAll('.nav-dot');
   const prog   = document.getElementById('prog');
+
+  // Equalize credibility card heights
+  function equalizeScredCards() {
+    const cards = document.querySelectorAll('#scredCards .scred-card');
+    cards.forEach(c => c.style.height = 'auto');
+    let maxH = 0;
+    cards.forEach(c => maxH = Math.max(maxH, c.offsetHeight));
+    cards.forEach(c => c.style.height = maxH + 'px');
+  }
+  equalizeScredCards();
+  window.addEventListener('resize', equalizeScredCards);
   let current  = 0;
   let layersDone = false;
   let mktDone = false;
