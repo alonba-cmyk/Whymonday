@@ -688,6 +688,32 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
   </div>
 </div>
 
+<div class="slide" id="s5">
+  <div class="layers-top">
+    <p class="eyebrow">Why monday.com</p>
+    <h2>Built for people and agents</h2>
+    <p>Six layers that make it possible</p>
+  </div>
+  <div class="layers-scene">
+    <img id="charP" class="char char-p" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/Human.png" alt="Human">
+    <img id="charA" class="char char-a" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/Agent.png" alt="Agent">
+    <div class="pills" id="pills">
+      <div class="pill" id="pill0" onclick="openLayer(0)"><div class="pill-num">01</div><div class="pill-title">Workspace</div><div class="pill-desc">One shared place for your team and agents to plan and execute together.</div></div><div class="pill" id="pill1" onclick="openLayer(1)"><div class="pill-num">02</div><div class="pill-title">Context</div><div class="pill-desc">Agents with full business context, acting like an experienced team member.</div></div><div class="pill" id="pill2" onclick="openLayer(2)"><div class="pill-num">03</div><div class="pill-title">Control</div><div class="pill-desc">You stay in the driver's seat. All enterprise-grade secure.</div></div><div class="pill" id="pill3" onclick="openLayer(3)"><div class="pill-num">04</div><div class="pill-title">Workflows</div><div class="pill-desc">People and agents handing off seamlessly, keeping things moving.</div></div><div class="pill" id="pill4" onclick="openLayer(4)"><div class="pill-num">05</div><div class="pill-title">Integrations</div><div class="pill-desc">200+ native integrations. Your entire stack, unified under one platform.</div></div><div class="pill" id="pill5" onclick="openLayer(5)"><div class="pill-num">06</div><div class="pill-title">Multi-Agent</div><div class="pill-desc">Connect agents from any AI provider and put them to work directly inside your workflows.</div></div>
+    </div>
+  </div>
+  <!-- Layer detail overlay -->
+  <div class="layer-overlay" id="layerOverlay" onclick="if(event.target===this)closeLayer()">
+    <div class="layer-card">
+      <button class="layer-close" onclick="closeLayer()">✕</button>
+      <div class="layer-card-num" id="layerNum"></div>
+      <div class="layer-card-title" id="layerTitle"></div>
+      <div class="layer-card-desc" id="layerDesc"></div>
+      <div class="layer-card-points" id="layerPoints"></div>
+      <div class="layer-card-imgs" id="layerImgs"></div>
+    </div>
+  </div>
+</div>
+
 <div class="slide" id="s4b">
   <div class="sbs-wrap">
     <div class="sbs-left">
@@ -725,32 +751,6 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
     </div>
   </div>
 </div>
-<div class="slide" id="s5">
-  <div class="layers-top">
-    <p class="eyebrow">Why monday.com</p>
-    <h2>Built for people and agents</h2>
-    <p>Six layers that make it possible</p>
-  </div>
-  <div class="layers-scene">
-    <img id="charP" class="char char-p" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/Human.png" alt="Human">
-    <img id="charA" class="char char-a" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/Agent.png" alt="Agent">
-    <div class="pills" id="pills">
-      <div class="pill" id="pill0" onclick="openLayer(0)"><div class="pill-num">01</div><div class="pill-title">Workspace</div><div class="pill-desc">One shared place for your team and agents to plan and execute together.</div></div><div class="pill" id="pill1" onclick="openLayer(1)"><div class="pill-num">02</div><div class="pill-title">Context</div><div class="pill-desc">Agents with full business context, acting like an experienced team member.</div></div><div class="pill" id="pill2" onclick="openLayer(2)"><div class="pill-num">03</div><div class="pill-title">Control</div><div class="pill-desc">You stay in the driver's seat. All enterprise-grade secure.</div></div><div class="pill" id="pill3" onclick="openLayer(3)"><div class="pill-num">04</div><div class="pill-title">Workflows</div><div class="pill-desc">People and agents handing off seamlessly, keeping things moving.</div></div><div class="pill" id="pill4" onclick="openLayer(4)"><div class="pill-num">05</div><div class="pill-title">Integrations</div><div class="pill-desc">200+ native integrations. Your entire stack, unified under one platform.</div></div><div class="pill" id="pill5" onclick="openLayer(5)"><div class="pill-num">06</div><div class="pill-title">Multi-Agent</div><div class="pill-desc">Connect agents from any AI provider and put them to work directly inside your workflows.</div></div>
-    </div>
-  </div>
-  <!-- Layer detail overlay -->
-  <div class="layer-overlay" id="layerOverlay" onclick="if(event.target===this)closeLayer()">
-    <div class="layer-card">
-      <button class="layer-close" onclick="closeLayer()">✕</button>
-      <div class="layer-card-num" id="layerNum"></div>
-      <div class="layer-card-title" id="layerTitle"></div>
-      <div class="layer-card-desc" id="layerDesc"></div>
-      <div class="layer-card-points" id="layerPoints"></div>
-      <div class="layer-card-imgs" id="layerImgs"></div>
-    </div>
-  </div>
-</div>
-
 <div class="slide" id="s5b">
   <p class="sp-eyebrow">Don't take our word</p>
   <h2 class="sp-heading">Businesses like yours are already seeing the impact</h2>
