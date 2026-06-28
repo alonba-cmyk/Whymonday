@@ -131,30 +131,17 @@
   .vh-feat-desc { font-size:clamp(11px,1.1vw,14px); font-weight:300; color:rgba(255,255,255,0.55); line-height:1.55; transition:opacity 0.4s; }
 
   /* ─────────────────────────────────────────
-     J  full-slide: title top, dept strip center, info below
+     J  full-slide: title top, tight dept strip center
   ───────────────────────────────────────── */
-  .vj-slide { flex-direction:column; align-items:center; justify-content:center; gap:18px; padding:5% 6%; }
+  .vj-slide { flex-direction:column; align-items:center; justify-content:center; gap:22px; padding:5% 6%; }
   .vj-header { text-align:center; }
   .vj-eyebrow { font-size:10px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:#644ef8; margin-bottom:12px; }
   .vj-mission { font-size:clamp(14px,1.7vw,23px); font-weight:700; line-height:1.38; color:#fff; }
-  .vj-strip { display:flex; justify-content:space-around; width:100%; }
-  .vj-thumb { display:flex; flex-direction:column; align-items:center; gap:5px; cursor:pointer; transition:transform 0.2s; }
-  .vj-thumb:hover { transform:translateY(-2px); }
-  .vj-thumb.active { transform:translateY(-2px); }
-  .vj-thumb-av { width:56px; height:56px; border-radius:50%; overflow:hidden; border:2px solid rgba(255,255,255,0.12); transition:border-color 0.3s, box-shadow 0.3s; }
+  .vj-strip { display:flex; justify-content:center; gap:10px; }
+  .vj-thumb { display:flex; flex-direction:column; align-items:center; gap:5px; cursor:pointer; }
+  .vj-thumb-av { width:56px; height:56px; border-radius:50%; overflow:hidden; border:2px solid rgba(255,255,255,0.1); transition:border-color 0.35s, box-shadow 0.35s; }
   .vj-thumb-av img { width:100%; height:100%; object-fit:cover; object-position:top; }
-  .vj-thumb.active .vj-thumb-av { box-shadow:0 0 0 3px rgba(100,78,248,0.3); }
-  .vj-thumb-name { font-size:8px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:rgba(255,255,255,0.3); white-space:nowrap; transition:color 0.3s; }
-  .vj-thumb.active .vj-thumb-name { color:#fff; }
-  .vj-divider { display:flex; align-items:center; gap:10px; width:100%; }
-  .vj-div-line { flex:1; height:1px; background:rgba(255,255,255,0.07); }
-  .vj-div-badge { display:flex; align-items:center; gap:6px; flex-shrink:0; }
-  .vj-div-badge .hub-box { width:18px; height:18px; border-radius:5px; }
-  .vj-div-badge .hub-box svg { display:block; }
-  .vj-div-badge span { font-size:8px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:rgba(100,78,248,0.65); }
-  .vj-featured { text-align:center; }
-  .vj-feat-name { font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; margin-bottom:5px; transition:color 0.3s, opacity 0.4s; }
-  .vj-feat-desc { font-size:clamp(11px,1.1vw,14px); font-weight:300; color:rgba(255,255,255,0.55); line-height:1.55; transition:opacity 0.4s; }
+  .vj-thumb-name { font-size:8px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:rgba(255,255,255,0.2); white-space:nowrap; transition:color 0.35s; }
 </style>
 </head>
 <body>
@@ -304,25 +291,6 @@
       <h2 class="vj-mission">monday's mission has always been to help teams get more done and achieve their business goals.</h2>
     </div>
     <div class="vj-strip" id="vjStrip"></div>
-    <div class="vj-divider">
-      <div class="vj-div-line"></div>
-      <div class="vj-div-badge">
-        <div class="hub-box" style="width:18px;height:18px;border-radius:5px">
-          <svg width="9" height="9" viewBox="0 0 24 24" fill="none">
-            <circle cx="5" cy="12" r="3" fill="#644ef8"/>
-            <circle cx="12" cy="5" r="3" fill="#e8341c"/>
-            <circle cx="19" cy="12" r="3" fill="#ffcc00"/>
-            <circle cx="12" cy="19" r="3" fill="#00b884"/>
-          </svg>
-        </div>
-        <span>monday</span>
-      </div>
-      <div class="vj-div-line"></div>
-    </div>
-    <div class="vj-featured">
-      <div class="vj-feat-name" id="vjFeatName" style="color:#F9D27A">Sales</div>
-      <div class="vj-feat-desc" id="vjFeatDesc">Faster revenue generation</div>
-    </div>
   </div>
 </div>
 
@@ -445,40 +413,36 @@ vhFeatName.textContent = depts[0].name;
 vhFeatDesc.textContent = depts[0].desc;
 let vhTimer = setInterval(vhNext, 2400);
 
-/* ── J: full-slide, strip + info ── */
-const vjStrip    = document.getElementById('vjStrip');
-const vjFeatName = document.getElementById('vjFeatName');
-const vjFeatDesc = document.getElementById('vjFeatDesc');
-let vjThumbs = [];
-let vjIdx = 0;
+/* ── J: tight strip, active glows ── */
+const vjStrip   = document.getElementById('vjStrip');
+let vjAvEls     = [];
+let vjNameEls   = [];
+let vjIdx       = 0;
 
 function vjActivate(i, manual) {
   vjIdx = i;
   const d = depts[i];
-  vjThumbs.forEach(t => t.classList.remove('active'));
-  vjThumbs[i].classList.add('active');
-  vjFeatName.style.opacity = '0';
-  vjFeatDesc.style.opacity = '0';
-  setTimeout(() => {
-    vjFeatName.textContent = d.name; vjFeatName.style.color = d.color;
-    vjFeatDesc.textContent = d.desc;
-    vjFeatName.style.opacity = '1';
-    vjFeatDesc.style.opacity = '1';
-  }, 200);
+  vjAvEls.forEach((av, j) => {
+    av.style.borderColor = j === i ? d.color           : 'rgba(255,255,255,0.1)';
+    av.style.boxShadow   = j === i ? `0 0 0 2.5px ${d.color}70, 0 0 18px ${d.color}35` : 'none';
+  });
+  vjNameEls.forEach((nm, j) => {
+    nm.style.color = j === i ? d.color : 'rgba(255,255,255,0.2)';
+  });
   if (manual) { clearInterval(vjTimer); vjTimer = setInterval(vjNext, 2400); }
 }
 function vjNext() { vjActivate((vjIdx + 1) % depts.length, false); }
 
 depts.forEach((d, i) => {
   const thumb = document.createElement('div');
-  thumb.className = 'vj-thumb' + (i === 0 ? ' active' : '');
-  thumb.innerHTML = `<div class="vj-thumb-av" style="border-color:${d.color}80"><img src="${d.img}" alt="${d.name}"></div><span class="vj-thumb-name">${d.name}</span>`;
+  thumb.className = 'vj-thumb';
+  thumb.innerHTML = `<div class="vj-thumb-av"><img src="${d.img}" alt="${d.name}"></div><span class="vj-thumb-name">${d.name}</span>`;
   thumb.onclick = () => vjActivate(i, true);
   vjStrip.appendChild(thumb);
-  vjThumbs.push(thumb);
+  vjAvEls.push(thumb.querySelector('.vj-thumb-av'));
+  vjNameEls.push(thumb.querySelector('.vj-thumb-name'));
 });
-vjFeatName.textContent = depts[0].name;
-vjFeatDesc.textContent = depts[0].desc;
+vjActivate(0, false);
 let vjTimer = setInterval(vjNext, 2400);
 
 /* ── F: dept grid ── */
