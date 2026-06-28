@@ -3,204 +3,478 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=1280">
-<title>S5b Desktop Variant</title>
+<title>S5b Desktop Variants</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  :root {
-    --purple: #6161ff;
-    --bg: #0d0d0d;
-  }
+:root { --purple: #6161ff; --bg: #0d0d0d; }
 
-  body {
-    font-family: 'Poppins', sans-serif;
-    background: #111;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    padding: 40px 20px;
-  }
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #111;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 64px;
+  padding: 60px 24px;
+}
 
-  /* ── Slide shell ── */
-  .slide {
-    width: 1280px;
-    aspect-ratio: 16/9;
-    background: var(--bg);
-    display: flex;
-    flex-direction: column;
-    padding: 5% 6%;
-    position: relative;
-    overflow: hidden;
-    flex-shrink: 0;
-  }
+/* ── Label ── */
+.variant-label {
+  width: 1280px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+  margin-bottom: -48px;
+}
+.variant-label span { color: var(--purple); margin-right: 10px; }
+.variant-label em { font-style: normal; color: rgba(255,255,255,0.15); margin-left: 10px; }
 
-  /* ── Header ── */
-  .sp-eyebrow {
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: var(--purple);
-    margin-bottom: 14px;
-  }
+/* ── Slide shell ── */
+.slide {
+  width: 1280px;
+  aspect-ratio: 16/9;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  padding: 5% 6%;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
 
-  .sp-heading {
-    font-size: clamp(24px, 2.4vw, 36px);
-    font-weight: 700;
-    color: #fff;
-    line-height: 1.2;
-    max-width: 620px;
-  }
+/* ── Shared header ── */
+.sp-eyebrow {
+  font-size: 10px; font-weight: 600; letter-spacing: 4px;
+  text-transform: uppercase; color: var(--purple); margin-bottom: 10px;
+}
+.sp-heading {
+  font-size: clamp(22px,2.2vw,32px); font-weight: 700;
+  color: #fff; line-height: 1.2;
+}
 
-  /* ── Stat cards ── */
-  .sp-cards {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    margin-top: 36px;
-    flex: 1;
-    min-height: 0;
-  }
+/* ════════════════════════════════════════════
+   VARIANT A — Stats row + Quotes row below
+   ════════════════════════════════════════════ */
+.va .sp-heading { max-width: 560px; }
 
-  .sp-card {
-    border: 1px solid #222;
-    border-radius: 16px;
-    padding: 28px 32px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    position: relative;
-    overflow: hidden;
-    transition: border-color 0.3s;
-  }
+.va-stats {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 1px;
+  background: #1e1e1e;
+  margin-top: 30px;
+  border-radius: 12px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.va-stat {
+  background: var(--bg);
+  padding: 22px 28px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.va-stat-num {
+  font-size: clamp(44px,4.5vw,62px);
+  font-weight: 800;
+  color: var(--purple);
+  line-height: 1;
+  letter-spacing: -2px;
+  flex-shrink: 0;
+}
+.va-stat-right {}
+.va-stat-company {
+  font-size: 9px; font-weight: 600; letter-spacing: 2.5px;
+  text-transform: uppercase; color: rgba(255,255,255,0.3);
+  margin-bottom: 4px;
+}
+.va-stat-label {
+  font-size: 12px; color: rgba(255,255,255,0.55); font-weight: 300; line-height: 1.5;
+}
 
-  .sp-card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, rgba(97,97,255,0.06) 0%, transparent 60%);
-    pointer-events: none;
-  }
+.va-quotes {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 20px;
+  margin-top: 20px;
+  flex: 1;
+  min-height: 0;
+}
+.va-quote-card {
+  border: 1px solid #1e1e1e;
+  border-radius: 12px;
+  padding: 22px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.va-quote-mark {
+  font-size: 40px; color: var(--purple); line-height: 0.7;
+  font-family: Georgia, serif; opacity: 0.6; flex-shrink: 0;
+}
+.va-quote-text {
+  font-size: 12px; color: rgba(255,255,255,0.65);
+  line-height: 1.7; font-weight: 300; font-style: italic; flex: 1;
+}
+.va-quote-person { margin-top: auto; padding-top: 12px; border-top: 1px solid #1e1e1e; }
+.va-q-name { font-size: 11px; font-weight: 700; color: #fff; }
+.va-q-role { font-size: 9px; color: rgba(255,255,255,0.3); font-weight: 300; line-height: 1.4; margin-top: 2px; }
 
-  .sp-card-company {
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.4);
-  }
+/* ════════════════════════════════════════════
+   VARIANT B — All-in-one testimony cards
+   ════════════════════════════════════════════ */
+.vb .sp-heading { max-width: 560px; }
 
-  .sp-card-num {
-    font-size: clamp(52px, 5vw, 72px);
-    font-weight: 800;
-    color: var(--purple);
-    line-height: 1;
-    letter-spacing: -2px;
-    margin-top: auto;
-  }
+.vb-cards {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 16px;
+  margin-top: 28px;
+  flex: 1;
+  min-height: 0;
+}
+.vb-card {
+  border: 1px solid #1e1e1e;
+  border-radius: 16px;
+  padding: 28px 26px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+.vb-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--purple), transparent);
+}
+.vb-company {
+  font-size: 9px; font-weight: 600; letter-spacing: 2.5px;
+  text-transform: uppercase; color: rgba(255,255,255,0.3);
+}
+.vb-num {
+  font-size: clamp(48px,5vw,68px); font-weight: 800;
+  color: var(--purple); line-height: 1; letter-spacing: -2px;
+  margin: 10px 0 4px;
+}
+.vb-label {
+  font-size: 11px; color: rgba(255,255,255,0.5); font-weight: 300; line-height: 1.5;
+}
+.vb-divider {
+  height: 1px; background: #1e1e1e; margin: 18px 0;
+}
+.vb-quote-mark {
+  font-size: 32px; color: var(--purple); line-height: 0.7;
+  font-family: Georgia, serif; opacity: 0.5; margin-bottom: 8px;
+}
+.vb-quote-text {
+  font-size: 12px; color: rgba(255,255,255,0.6);
+  line-height: 1.7; font-weight: 300; font-style: italic; flex: 1;
+}
+.vb-person { margin-top: 16px; }
+.vb-name { font-size: 11px; font-weight: 700; color: #fff; }
+.vb-role { font-size: 9px; color: rgba(255,255,255,0.3); font-weight: 300; line-height: 1.4; margin-top: 2px; }
 
-  .sp-card-label {
-    font-size: 13px;
-    color: rgba(255,255,255,0.6);
-    font-weight: 300;
-    line-height: 1.5;
-  }
+/* ════════════════════════════════════════════
+   VARIANT C — Featured quote left, stats right
+   ════════════════════════════════════════════ */
+.vc-body {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 48px;
+  margin-top: 28px;
+  flex: 1;
+  min-height: 0;
+}
+.vc-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-right: 1px solid #1e1e1e;
+  padding-right: 48px;
+}
+.vc-big-mark {
+  font-size: 80px; color: var(--purple); line-height: 0.7;
+  font-family: Georgia, serif; opacity: 0.5; margin-bottom: 20px;
+}
+.vc-big-quote {
+  font-size: clamp(18px,1.8vw,26px); font-weight: 300;
+  color: rgba(255,255,255,0.8); line-height: 1.55;
+  font-style: italic; flex: 1;
+}
+.vc-big-person { margin-top: 24px; }
+.vc-big-name { font-size: 13px; font-weight: 700; color: #fff; }
+.vc-big-role { font-size: 10px; color: rgba(255,255,255,0.35); font-weight: 300; line-height: 1.5; margin-top: 3px; }
 
-  /* ── Quote ── */
-  .sp-quote-block {
-    margin-top: 28px;
-    padding-top: 24px;
-    border-top: 1px solid #1e1e1e;
-    display: flex;
-    align-items: flex-start;
-    gap: 20px;
-  }
+.vc-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0;
+}
+.vc-row {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 20px 0;
+  border-bottom: 1px solid #1a1a1a;
+}
+.vc-row:first-child { border-top: 1px solid #1a1a1a; }
+.vc-num {
+  font-size: clamp(36px,3.6vw,52px); font-weight: 800;
+  color: var(--purple); line-height: 1; letter-spacing: -1.5px;
+  flex: 0 0 100px;
+}
+.vc-row-right {}
+.vc-row-company {
+  font-size: 8.5px; font-weight: 600; letter-spacing: 2.5px;
+  text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 3px;
+}
+.vc-row-label {
+  font-size: 11px; color: rgba(255,255,255,0.55); font-weight: 300; line-height: 1.5;
+  margin-bottom: 6px;
+}
+.vc-row-quote {
+  font-size: 10.5px; color: rgba(255,255,255,0.35); font-style: italic; line-height: 1.5;
+}
 
-  .sp-quote-mark {
-    font-size: 64px;
-    color: var(--purple);
-    line-height: 0.7;
-    font-family: Georgia, serif;
-    flex-shrink: 0;
-    opacity: 0.7;
-  }
+/* ════════════════════════════════════════════
+   VARIANT D — Full-width horizontal rows
+   ════════════════════════════════════════════ */
+.vd .sp-heading { max-width: 620px; }
 
-  .sp-quote-inner {
-    display: flex;
-    align-items: center;
-    gap: 40px;
-  }
-
-  .sp-quote-text {
-    font-size: 15px;
-    color: rgba(255,255,255,0.75);
-    line-height: 1.7;
-    font-weight: 300;
-    font-style: italic;
-    flex: 1;
-  }
-
-  .sp-quote-person {
-    flex-shrink: 0;
-    text-align: right;
-    padding-left: 32px;
-    border-left: 1px solid #2a2a2a;
-  }
-
-  .sp-q-name {
-    font-size: 13px;
-    font-weight: 700;
-    color: #fff;
-  }
-
-  .sp-q-role {
-    font-size: 11px;
-    color: rgba(255,255,255,0.35);
-    font-weight: 300;
-    line-height: 1.5;
-    margin-top: 3px;
-  }
+.vd-rows {
+  margin-top: 28px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.vd-row {
+  display: grid;
+  grid-template-columns: 120px 90px 220px 1fr 200px;
+  align-items: center;
+  gap: 28px;
+  padding: 22px 0;
+  border-bottom: 1px solid #1a1a1a;
+}
+.vd-row:first-child { border-top: 1px solid #1a1a1a; }
+.vd-company {
+  font-size: 15px; font-weight: 700; color: #fff; letter-spacing: -0.3px;
+}
+.vd-num {
+  font-size: clamp(36px,3.8vw,52px); font-weight: 800;
+  color: var(--purple); line-height: 1; letter-spacing: -2px;
+}
+.vd-label {
+  font-size: 11px; color: rgba(255,255,255,0.45); font-weight: 300; line-height: 1.5;
+}
+.vd-quote {
+  font-size: 12px; color: rgba(255,255,255,0.55);
+  font-style: italic; line-height: 1.6; font-weight: 300;
+  padding-left: 24px;
+  border-left: 2px solid #2a2a2a;
+}
+.vd-person {}
+.vd-name { font-size: 11px; font-weight: 700; color: #fff; text-align: right; }
+.vd-role { font-size: 9.5px; color: rgba(255,255,255,0.3); font-weight: 300; line-height: 1.4; margin-top: 2px; text-align: right; }
 </style>
 </head>
 <body>
 
-<div class="slide">
+<!-- ─────────────── VARIANT A ─────────────── -->
+<div class="variant-label"><span>A</span> Stats strip + Quote cards below</div>
+<div class="slide va">
   <p class="sp-eyebrow">Don't take our word</p>
   <h2 class="sp-heading">Businesses like yours are already seeing the impact</h2>
 
-  <div class="sp-cards">
-
-    <div class="sp-card">
-      <div class="sp-card-company">VML</div>
-      <div class="sp-card-num">98h</div>
-      <div class="sp-card-label">Saved cutting project<br>planning time in half</div>
+  <div class="va-stats">
+    <div class="va-stat">
+      <div class="va-stat-num">98h</div>
+      <div class="va-stat-right">
+        <div class="va-stat-company">VML</div>
+        <div class="va-stat-label">Saved cutting project<br>planning time in half</div>
+      </div>
     </div>
-
-    <div class="sp-card">
-      <div class="sp-card-company">Arcaise</div>
-      <div class="sp-card-num">75%</div>
-      <div class="sp-card-label">Reduction in internal<br>support requests</div>
+    <div class="va-stat">
+      <div class="va-stat-num">75%</div>
+      <div class="va-stat-right">
+        <div class="va-stat-company">Arcaise</div>
+        <div class="va-stat-label">Reduction in internal<br>support requests</div>
+      </div>
     </div>
-
-    <div class="sp-card">
-      <div class="sp-card-company">Agora</div>
-      <div class="sp-card-num">30h</div>
-      <div class="sp-card-label">Saved surfacing OKR<br>metrics automatically</div>
+    <div class="va-stat">
+      <div class="va-stat-num">30h</div>
+      <div class="va-stat-right">
+        <div class="va-stat-company">Agora</div>
+        <div class="va-stat-label">Saved surfacing OKR<br>metrics automatically</div>
+      </div>
     </div>
-
   </div>
 
-  <div class="sp-quote-block">
-    <div class="sp-quote-mark">"</div>
-    <div class="sp-quote-inner">
-      <p class="sp-quote-text">monday brought AI to our data, and that changed everything.</p>
-      <div class="sp-quote-person">
-        <div class="sp-q-name">Alex Boulder</div>
-        <div class="sp-q-role">Director of Operations<br>Arcaise</div>
+  <div class="va-quotes">
+    <div class="va-quote-card">
+      <div class="va-quote-mark">"</div>
+      <p class="va-quote-text">Our planning cycles used to eat entire weeks. monday's AI agents gave us that time back.</p>
+      <div class="va-quote-person">
+        <div class="va-q-name">Sarah Luxemberg</div>
+        <div class="va-q-role">Operations Director, VML</div>
+      </div>
+    </div>
+    <div class="va-quote-card">
+      <div class="va-quote-mark">"</div>
+      <p class="va-quote-text">monday brought AI to our data, and that changed everything.</p>
+      <div class="va-quote-person">
+        <div class="va-q-name">Alex Boulder</div>
+        <div class="va-q-role">Director of Operations, Arcaise</div>
+      </div>
+    </div>
+    <div class="va-quote-card">
+      <div class="va-quote-mark">"</div>
+      <p class="va-quote-text">We used to spend days pulling OKR data every quarter. Now it surfaces automatically — before we even ask.</p>
+      <div class="va-quote-person">
+        <div class="va-q-name">Asaf Goldstof</div>
+        <div class="va-q-role">Director, Efficiency & AI, Agora</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ─────────────── VARIANT B ─────────────── -->
+<div class="variant-label"><span>B</span> All-in-one testimony cards <em>← המלצה</em></div>
+<div class="slide vb">
+  <p class="sp-eyebrow">Don't take our word</p>
+  <h2 class="sp-heading">Businesses like yours are already seeing the impact</h2>
+
+  <div class="vb-cards">
+    <div class="vb-card">
+      <div class="vb-company">VML</div>
+      <div class="vb-num">98h</div>
+      <div class="vb-label">Saved cutting project planning<br>time in half</div>
+      <div class="vb-divider"></div>
+      <div class="vb-quote-mark">"</div>
+      <p class="vb-quote-text">Our planning cycles used to eat entire weeks. monday's AI agents gave us that time back.</p>
+      <div class="vb-person">
+        <div class="vb-name">Sarah Luxemberg</div>
+        <div class="vb-role">Operations Director, VML</div>
+      </div>
+    </div>
+    <div class="vb-card">
+      <div class="vb-company">Arcaise</div>
+      <div class="vb-num">75%</div>
+      <div class="vb-label">Reduction in internal<br>support requests</div>
+      <div class="vb-divider"></div>
+      <div class="vb-quote-mark">"</div>
+      <p class="vb-quote-text">monday brought AI to our data, and that changed everything.</p>
+      <div class="vb-person">
+        <div class="vb-name">Alex Boulder</div>
+        <div class="vb-role">Director of Operations, Arcaise</div>
+      </div>
+    </div>
+    <div class="vb-card">
+      <div class="vb-company">Agora</div>
+      <div class="vb-num">30h</div>
+      <div class="vb-label">Saved surfacing OKR<br>metrics automatically</div>
+      <div class="vb-divider"></div>
+      <div class="vb-quote-mark">"</div>
+      <p class="vb-quote-text">We used to spend days pulling OKR data every quarter. Now it surfaces automatically — before we even ask.</p>
+      <div class="vb-person">
+        <div class="vb-name">Asaf Goldstof</div>
+        <div class="vb-role">Director, Efficiency & AI, Agora</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ─────────────── VARIANT C ─────────────── -->
+<div class="variant-label"><span>C</span> Featured quote left, stats + mini-quotes right</div>
+<div class="slide vc">
+  <p class="sp-eyebrow">Don't take our word</p>
+  <h2 class="sp-heading">Businesses like yours are already seeing the impact</h2>
+
+  <div class="vc-body">
+    <div class="vc-left">
+      <div class="vc-big-mark">"</div>
+      <p class="vc-big-quote">monday brought AI to our data, and that changed everything.</p>
+      <div class="vc-big-person">
+        <div class="vc-big-name">Alex Boulder</div>
+        <div class="vc-big-role">Director of Operations, Arcaise</div>
+      </div>
+    </div>
+    <div class="vc-right">
+      <div class="vc-row">
+        <div class="vc-num">98h</div>
+        <div class="vc-row-right">
+          <div class="vc-row-company">VML</div>
+          <div class="vc-row-label">Saved cutting project planning time in half</div>
+          <div class="vc-row-quote">"Our planning cycles used to eat entire weeks."</div>
+        </div>
+      </div>
+      <div class="vc-row">
+        <div class="vc-num">75%</div>
+        <div class="vc-row-right">
+          <div class="vc-row-company">Arcaise</div>
+          <div class="vc-row-label">Reduction in internal support requests</div>
+          <div class="vc-row-quote">"monday brought AI to our data, and that changed everything."</div>
+        </div>
+      </div>
+      <div class="vc-row">
+        <div class="vc-num">30h</div>
+        <div class="vc-row-right">
+          <div class="vc-row-company">Agora</div>
+          <div class="vc-row-label">Saved surfacing OKR metrics automatically</div>
+          <div class="vc-row-quote">"Now it surfaces automatically — before we even ask."</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ─────────────── VARIANT D ─────────────── -->
+<div class="variant-label"><span>D</span> Full-width horizontal rows</div>
+<div class="slide vd">
+  <p class="sp-eyebrow">Don't take our word</p>
+  <h2 class="sp-heading">Businesses like yours are already seeing the impact</h2>
+
+  <div class="vd-rows">
+    <div class="vd-row">
+      <div class="vd-company">VML</div>
+      <div class="vd-num">98h</div>
+      <div class="vd-label">Saved cutting project planning time in half</div>
+      <div class="vd-quote">"Our planning cycles used to eat entire weeks. monday's AI agents gave us that time back."</div>
+      <div class="vd-person">
+        <div class="vd-name">Sarah Luxemberg</div>
+        <div class="vd-role">Operations Director, VML</div>
+      </div>
+    </div>
+    <div class="vd-row">
+      <div class="vd-company">Arcaise</div>
+      <div class="vd-num">75%</div>
+      <div class="vd-label">Reduction in internal support requests</div>
+      <div class="vd-quote">"monday brought AI to our data, and that changed everything."</div>
+      <div class="vd-person">
+        <div class="vd-name">Alex Boulder</div>
+        <div class="vd-role">Director of Operations, Arcaise</div>
+      </div>
+    </div>
+    <div class="vd-row">
+      <div class="vd-company">Agora</div>
+      <div class="vd-num">30h</div>
+      <div class="vd-label">Saved surfacing OKR metrics automatically</div>
+      <div class="vd-quote">"We used to spend days pulling OKR data every quarter. Now it surfaces automatically — before we even ask."</div>
+      <div class="vd-person">
+        <div class="vd-name">Asaf Goldstof</div>
+        <div class="vd-role">Director, Efficiency & AI, Agora</div>
       </div>
     </div>
   </div>
