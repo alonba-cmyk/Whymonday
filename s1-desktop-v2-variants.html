@@ -109,48 +109,6 @@
   .vf-card.active .vf-card-desc { display:block; }
 
   /* ─────────────────────────────────────────
-     G  B variant: outcome top + dept grid center
-  ───────────────────────────────────────── */
-  .vg-right   { flex:1; display:flex; flex-direction:column; padding:4% 4% 3%; gap:10px; }
-  .vg-outcome { display:flex; align-items:center; gap:12px; padding-bottom:10px; border-bottom:1px solid rgba(255,255,255,0.07); flex-shrink:0; }
-  .vg-out-dept { font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; white-space:nowrap; flex-shrink:0; transition:color 0.3s; }
-  .vg-out-sep  { width:1px; height:26px; background:rgba(255,255,255,0.1); flex-shrink:0; }
-  .vg-out-desc { font-size:clamp(11px,1.1vw,14px); font-weight:300; color:rgba(255,255,255,0.6); line-height:1.5; }
-  .vg-grid    { flex:1; display:grid; grid-template-columns:repeat(4,1fr); grid-template-rows:repeat(2,1fr); gap:10px; min-height:0; }
-  .vg-card    { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:7px; padding:8px; border-radius:12px; cursor:pointer; transition:all 0.2s; border:2px solid transparent; background:rgba(255,255,255,0.015); }
-  .vg-card:hover { background:rgba(255,255,255,0.04); border-color:rgba(255,255,255,0.1); }
-  .vg-card.active { background:rgba(100,78,248,0.06); }
-  .vg-av      { width:52px; height:52px; border-radius:50%; overflow:hidden; border:2px solid rgba(255,255,255,0.12); transition:border-color 0.3s, box-shadow 0.3s; flex-shrink:0; }
-  .vg-av img  { width:100%; height:100%; object-fit:cover; object-position:top; }
-  .vg-card.active .vg-av { box-shadow:0 0 0 3px rgba(100,78,248,0.2); }
-  .vg-name    { font-size:8.5px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:rgba(255,255,255,0.4); text-align:center; transition:color 0.3s; }
-  .vg-card.active .vg-name { color:#fff; }
-  .vg-monday  { display:flex; align-items:center; justify-content:center; gap:8px; flex-shrink:0; }
-  .vg-monday .hub-box { width:22px; height:22px; border-radius:7px; }
-  .vg-monday-lbl { font-size:8px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:rgba(100,78,248,0.65); }
-
-  /* ─────────────────────────────────────────
-     I  arc — full slide, dept cards surrounding center
-  ───────────────────────────────────────── */
-  .vi-slide { background:#07070e !important; }
-  .vi-slide::before { background:radial-gradient(ellipse 65% 75% at 50% 44%, rgba(100,78,248,0.09) 0%, transparent 65%) !important; }
-  .vi-svg   { position:absolute; inset:0; width:100%; height:100%; pointer-events:none; z-index:1; }
-  .vi-center { position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); z-index:2; text-align:center; width:38%; display:flex; flex-direction:column; align-items:center; gap:6px; }
-  .vi-hub   { width:40px; height:40px; background:rgba(100,78,248,0.15); border:1px solid rgba(100,78,248,0.4); border-radius:12px; display:flex; align-items:center; justify-content:center; margin-bottom:6px; box-shadow:0 0 20px rgba(100,78,248,0.12); }
-  .vi-hub svg { display:block; }
-  .vi-eyebrow { font-size:9px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:#644ef8; }
-  .vi-mission { font-size:clamp(16px,1.95vw,27px); font-weight:700; line-height:1.32; color:#fff; }
-  .vi-tagline { font-size:clamp(9px,0.8vw,11px); font-weight:300; color:rgba(255,255,255,0.38); line-height:1.65; margin-top:4px; }
-  .vi-card  { position:absolute; z-index:3; background:rgba(12,12,24,0.88); border:1px solid rgba(255,255,255,0.07); border-radius:11px; padding:10px 13px; width:168px; transition:border-color 0.25s, background 0.25s; cursor:pointer; backdrop-filter:blur(4px); }
-  .vi-card:hover { border-color:rgba(255,255,255,0.14); }
-  .vi-card.active { border-color:rgba(100,78,248,0.4); background:rgba(16,12,32,0.92); }
-  .vi-card-head { display:flex; align-items:center; gap:8px; margin-bottom:5px; }
-  .vi-card-av { width:24px; height:24px; border-radius:50%; overflow:hidden; border:1.5px solid; flex-shrink:0; }
-  .vi-card-av img { width:100%; height:100%; object-fit:cover; object-position:top; }
-  .vi-card-name { font-size:9.5px; font-weight:700; letter-spacing:0.5px; line-height:1.1; }
-  .vi-card-desc { font-size:9px; font-weight:300; color:rgba(255,255,255,0.48); line-height:1.55; }
-
-  /* ─────────────────────────────────────────
      H  B variant: dept strip centered, featured info below
   ───────────────────────────────────────── */
   .vh-right    { flex:1; display:flex; flex-direction:column; justify-content:center; padding:5% 5% 4%; gap:14px; }
@@ -168,7 +126,7 @@
   .vh-div-badge { display:flex; align-items:center; gap:6px; flex-shrink:0; }
   .vh-div-badge .hub-box { width:18px; height:18px; border-radius:5px; }
   .vh-div-badge span { font-size:8px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:rgba(100,78,248,0.65); }
-  .vh-featured { display:flex; flex-direction:column; gap:6px; }
+  .vh-featured { display:flex; flex-direction:column; align-items:center; gap:6px; text-align:center; }
   .vh-feat-name { font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; transition:color 0.3s, opacity 0.4s; }
   .vh-feat-desc { font-size:clamp(11px,1.1vw,14px); font-weight:300; color:rgba(255,255,255,0.55); line-height:1.55; transition:opacity 0.4s; }
 </style>
@@ -296,37 +254,6 @@
   </div>
 </div>
 
-<!-- ═══ G ═══ -->
-<div class="variant-label">G — B Variant: outcome info top + dept grid centered</div>
-<div class="slide-frame">
-  <div class="slide">
-    <div class="v-left">
-      <p class="eyebrow">Our Mission</p>
-      <h2 class="mission">monday's mission has always been to help teams get more done and achieve their business goals.</h2>
-      <p class="tagline">Every department. One platform. People and agents working together.</p>
-    </div>
-    <div class="vg-right">
-      <div class="vg-outcome">
-        <div class="vg-out-dept" id="vgOutDept" style="color:#F9D27A">Sales</div>
-        <div class="vg-out-sep"></div>
-        <div class="vg-out-desc" id="vgOutDesc">Faster revenue generation</div>
-      </div>
-      <div class="vg-grid" id="vgGrid"></div>
-      <div class="vg-monday">
-        <div class="hub-box" style="width:22px;height:22px;border-radius:7px">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none">
-            <circle cx="5" cy="12" r="3" fill="#644ef8"/>
-            <circle cx="12" cy="5" r="3" fill="#e8341c"/>
-            <circle cx="19" cy="12" r="3" fill="#ffcc00"/>
-            <circle cx="12" cy="19" r="3" fill="#00b884"/>
-          </svg>
-        </div>
-        <span class="vg-monday-lbl">monday</span>
-      </div>
-    </div>
-  </div>
-</div>
-
 <!-- ═══ F ═══ -->
 <div class="variant-label">F — Department Grid</div>
 <div class="slide-frame">
@@ -338,27 +265,6 @@
     </div>
     <div class="vf-right">
       <div class="vf-grid" id="vfGrid"></div>
-    </div>
-  </div>
-</div>
-
-<!-- ═══ I: Arc around center ═══ -->
-<div class="variant-label">I — Arc: departments surrounding the center</div>
-<div class="slide-frame">
-  <div class="slide vi-slide" id="viSlide">
-    <svg class="vi-svg" id="viSvg"></svg>
-    <div class="vi-center">
-      <div class="vi-hub" id="viHub">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-          <circle cx="5" cy="12" r="3" fill="#644ef8"/>
-          <circle cx="12" cy="5" r="3" fill="#e8341c"/>
-          <circle cx="19" cy="12" r="3" fill="#ffcc00"/>
-          <circle cx="12" cy="19" r="3" fill="#00b884"/>
-        </svg>
-      </div>
-      <p class="vi-eyebrow">Our Mission</p>
-      <h2 class="vi-mission">monday's mission has always been to help teams get more done and achieve their business goals.</h2>
-      <p class="vi-tagline">Every department. People and agents connected through one platform.</p>
     </div>
   </div>
 </div>
@@ -482,23 +388,6 @@ vhFeatName.textContent = depts[0].name;
 vhFeatDesc.textContent = depts[0].desc;
 let vhTimer = setInterval(vhNext, 2400);
 
-/* ── G: outcome top + dept grid ── */
-const vgGrid    = document.getElementById('vgGrid');
-const vgOutDept = document.getElementById('vgOutDept');
-const vgOutDesc = document.getElementById('vgOutDesc');
-depts.forEach((d, i) => {
-  const card = document.createElement('div');
-  card.className = 'vg-card' + (i === 0 ? ' active' : '');
-  card.innerHTML = `<div class="vg-av" style="border-color:${d.color}70"><img src="${d.img}" alt="${d.name}"></div><div class="vg-name">${d.name}</div>`;
-  card.onclick = () => {
-    vgGrid.querySelectorAll('.vg-card').forEach(c => c.classList.remove('active'));
-    card.classList.add('active');
-    vgOutDept.textContent = d.name; vgOutDept.style.color = d.color;
-    vgOutDesc.textContent = d.desc;
-  };
-  vgGrid.appendChild(card);
-});
-
 /* ── F: dept grid ── */
 const vfGrid = document.getElementById('vfGrid');
 depts.forEach((d, i) => {
@@ -515,61 +404,6 @@ depts.forEach((d, i) => {
   vfGrid.appendChild(card);
 });
 
-/* ── I: arc layout ── */
-const viSlide = document.getElementById('viSlide');
-const viSvg   = document.getElementById('viSvg');
-const viLayout = [
-  { di:0, css:'left:24%;top:3%' },
-  { di:5, css:'right:22%;top:3%' },
-  { di:2, css:'left:1%;top:22%' },
-  { di:1, css:'right:1%;top:22%' },
-  { di:6, css:'left:1%;top:44%' },
-  { di:4, css:'right:1%;top:44%' },
-  { di:7, css:'left:1%;top:65%' },
-  { di:3, css:'right:1%;top:65%' },
-];
-const viCards = viLayout.map(({ di, css }) => {
-  const d = depts[di];
-  const card = document.createElement('div');
-  card.className = 'vi-card';
-  card.style.cssText = css;
-  card.innerHTML = `
-    <div class="vi-card-head">
-      <div class="vi-card-av" style="border-color:${d.color}90"><img src="${d.img}" alt="${d.name}"></div>
-      <span class="vi-card-name" style="color:${d.color}">${d.name}</span>
-    </div>
-    <div class="vi-card-desc">${d.desc}</div>`;
-  card.onclick = () => {
-    viCards.forEach(c => c.classList.remove('active'));
-    card.classList.add('active');
-    viDrawLines(card);
-  };
-  viSlide.appendChild(card);
-  return card;
-});
-function viDrawLines(activeCard) {
-  const sRect = viSlide.getBoundingClientRect();
-  const hRect = document.getElementById('viHub').getBoundingClientRect();
-  const hx = hRect.left + hRect.width  / 2 - sRect.left;
-  const hy = hRect.top  + hRect.height / 2 - sRect.top;
-  viSvg.innerHTML = '';
-  viCards.forEach(card => {
-    const cRect = card.getBoundingClientRect();
-    const cx = cRect.left + cRect.width  / 2 - sRect.left;
-    const cy = cRect.top  + cRect.height / 2 - sRect.top;
-    const isActive = card === activeCard;
-    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-    line.setAttribute('x1', hx); line.setAttribute('y1', hy);
-    line.setAttribute('x2', cx); line.setAttribute('y2', cy);
-    line.setAttribute('stroke', isActive ? 'rgba(100,78,248,0.5)' : 'rgba(255,255,255,0.08)');
-    line.setAttribute('stroke-width', isActive ? '1.5' : '0.75');
-    viSvg.appendChild(line);
-  });
-}
-setTimeout(() => {
-  viDrawLines(null);
-  window.addEventListener('resize', () => viDrawLines(viCards.find(c => c.classList.contains('active')) || null));
-}, 80);
 </script>
 
 </body>
