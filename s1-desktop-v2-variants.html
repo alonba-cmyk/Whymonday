@@ -142,6 +142,7 @@
   .vj-thumb-av { width:56px; height:56px; border-radius:50%; overflow:hidden; border:2px solid rgba(255,255,255,0.1); transition:border-color 0.35s, box-shadow 0.35s; }
   .vj-thumb-av img { width:100%; height:100%; object-fit:cover; object-position:top; }
   .vj-thumb-name { font-size:8px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:rgba(255,255,255,0.2); white-space:nowrap; transition:color 0.35s; }
+  .vj-desc { font-size:clamp(11px,1.05vw,14px); font-weight:300; color:rgba(255,255,255,0.52); line-height:1.6; text-align:center; transition:opacity 0.35s; min-height:1.6em; }
 </style>
 </head>
 <body>
@@ -288,9 +289,10 @@
   <div class="slide vj-slide">
     <div class="vj-header">
       <p class="vj-eyebrow">Our Mission</p>
-      <h2 class="vj-mission">monday's mission has always been to help teams get more done and achieve their business goals.</h2>
+      <h2 class="vj-mission">monday's mission has always been to help teams<br>get more done and achieve their business goals.</h2>
     </div>
     <div class="vj-strip" id="vjStrip"></div>
+    <div class="vj-desc" id="vjDesc">Faster revenue generation</div>
   </div>
 </div>
 
@@ -415,6 +417,7 @@ let vhTimer = setInterval(vhNext, 2400);
 
 /* ── J: tight strip, active glows ── */
 const vjStrip   = document.getElementById('vjStrip');
+const vjDesc    = document.getElementById('vjDesc');
 let vjAvEls     = [];
 let vjNameEls   = [];
 let vjIdx       = 0;
@@ -423,12 +426,14 @@ function vjActivate(i, manual) {
   vjIdx = i;
   const d = depts[i];
   vjAvEls.forEach((av, j) => {
-    av.style.borderColor = j === i ? d.color           : 'rgba(255,255,255,0.1)';
+    av.style.borderColor = j === i ? d.color : 'rgba(255,255,255,0.1)';
     av.style.boxShadow   = j === i ? `0 0 0 2.5px ${d.color}70, 0 0 18px ${d.color}35` : 'none';
   });
   vjNameEls.forEach((nm, j) => {
     nm.style.color = j === i ? d.color : 'rgba(255,255,255,0.2)';
   });
+  vjDesc.style.opacity = '0';
+  setTimeout(() => { vjDesc.textContent = d.desc; vjDesc.style.opacity = '1'; }, 180);
   if (manual) { clearInterval(vjTimer); vjTimer = setInterval(vjNext, 2400); }
 }
 function vjNext() { vjActivate((vjIdx + 1) % depts.length, false); }
