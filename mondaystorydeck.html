@@ -446,31 +446,32 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
 
 /* S5b – Desktop card layout */
 @media (min-width: 769px) {
-  #s5b { padding: 4% 6%; justify-content: center; }
-  .sp-heading { font-size: clamp(20px,2vw,30px); }
-  .sp-body { display: block; margin-top: 24px; }
-  .sp-companies { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; align-items: start; }
+  #s5b { padding: 4% 6%; justify-content: flex-start; }
+  .sp-heading { font-size: clamp(20px,2vw,30px); margin-bottom: 0; }
+  .sp-body { display: flex; flex-direction: column; margin-top: 24px; gap: 0; flex: 1; min-height: 0; }
+  .sp-companies { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; flex: 1; min-height: 0; align-items: stretch; }
   .sp-right { display: none; }
   .sp-row {
-    flex-direction: column; align-items: flex-start;
+    display: flex; flex-direction: column; align-items: flex-start; height: 100%;
     border: 1px solid #1e1e1e; border-radius: 16px;
     padding: 28px 26px; position: relative; overflow: hidden;
-    border-bottom: 1px solid #1e1e1e;
+    border-bottom: 1px solid #1e1e1e; box-sizing: border-box;
   }
   .sp-row:first-child { border-top: 1px solid #1e1e1e; }
   .sp-row::before {
     content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
     background: linear-gradient(90deg, var(--purple), transparent);
   }
-  .sp-logo { flex: 0 0 auto; height: 32px; min-height: 0; margin-bottom: 0; }
+  .sp-logo { flex: 0 0 auto; height: 32px; min-height: 0; margin-bottom: 0; display: flex; align-items: center; }
+  .sp-stat-group { flex: 0 0 auto; }
   .sp-stat-num { font-size: clamp(44px,4.8vw,66px); flex: 0 0 auto; margin: 14px 0 4px; }
   .sp-stat-label { font-size: 11px; }
-  .sp-row-quote { display: flex; flex-direction: column; }
-  .sp-row-divider { height: 1px; background: #1e1e1e; margin: 16px 0; }
-  .sp-rq-text { font-size: 12px; color: rgba(255,255,255,0.6); line-height: 1.7; font-weight: 300; font-style: italic; }
+  .sp-row-quote { display: flex; flex-direction: column; flex: 1; min-height: 0; }
+  .sp-row-divider { height: 1px; background: #1e1e1e; margin: 16px 0; flex-shrink: 0; }
+  .sp-rq-text { font-size: 12px; color: rgba(255,255,255,0.6); line-height: 1.7; font-weight: 300; font-style: italic; flex: 1; }
   .sp-rq-text::before { content: '\201C'; font-size: 1.5em; color: var(--purple); font-family: Georgia,serif; font-style: normal; margin-right: 2px; vertical-align: -4px; opacity: 0.8; }
-  .sp-rq-name { font-size: 11px; font-weight: 700; color: #fff; margin-top: 12px; }
-  .sp-rq-role { font-size: 9px; color: rgba(255,255,255,0.3); font-weight: 300; line-height: 1.4; margin-top: 2px; }
+  .sp-rq-name { font-size: 11px; font-weight: 700; color: #fff; margin-top: 12px; flex-shrink: 0; }
+  .sp-rq-role { font-size: 9px; color: rgba(255,255,255,0.3); font-weight: 300; line-height: 1.4; margin-top: 2px; flex-shrink: 0; }
 }
 
 /* S0 Variants */
