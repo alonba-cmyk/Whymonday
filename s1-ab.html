@@ -34,7 +34,8 @@ html, body { background:#000; font-family:'Poppins',sans-serif; color:#fff; }
   padding:3px 9px; border-radius:20px; text-transform:uppercase;
 }
 
-.strip-img { width:100%; display:block; }
+.strip-img { width:100%; display:block; opacity:0; transform:translateY(12px); transition:opacity 0.8s ease, transform 0.8s ease; }
+.strip-img.visible { opacity:1; transform:translateY(0); }
 
 /* ── Body content ── */
 .va-body {
@@ -91,7 +92,11 @@ function typeWriter(el, text, speed, cls, done) {
 setTimeout(() => {
   typeWriter(document.getElementById('line1'), 'People and agents.', 52, 'tall', () => {
     setTimeout(() => {
-      typeWriter(document.getElementById('line2'), 'Working together. Driving results.', 42, 'short');
+      typeWriter(document.getElementById('line2'), 'Working together. Driving results.', 42, 'short', () => {
+        setTimeout(() => {
+          document.querySelector('.strip-img').classList.add('visible');
+        }, 300);
+      });
     }, 350);
   });
 }, 500);
