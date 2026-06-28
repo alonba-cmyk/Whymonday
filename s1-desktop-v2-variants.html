@@ -3,178 +3,197 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>S1 – Our Mission · Desktop Variants v2</title>
+<title>S1 – Our Mission · Desktop Variant A</title>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   body { background: #111; font-family: 'Inter','Helvetica Neue',Arial,sans-serif; color: #fff; padding: 40px 24px 80px; }
   h1.page-title { text-align:center; font-size:13px; font-weight:600; letter-spacing:3px; text-transform:uppercase; color:rgba(255,255,255,0.35); margin-bottom:48px; }
   .variant-label { font-size:11px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:rgba(255,255,255,0.3); margin-bottom:12px; padding-left:4px; }
   .slide-frame { width:100%; max-width:1280px; aspect-ratio:16/9; margin:0 auto 64px; border-radius:12px; overflow:hidden; border:1px solid rgba(255,255,255,0.08); position:relative; }
-  .slide { width:100%; height:100%; background:#0a0a0a; display:flex; position:relative; overflow:hidden; }
-  .slide::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 50% 60% at 70% 50%, rgba(100,78,248,0.08) 0%, transparent 70%); pointer-events:none; }
-  .eyebrow { font-size:10px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:#644ef8; margin-bottom:16px; }
-  .mission { font-size:clamp(16px,1.7vw,24px); font-weight:700; line-height:1.3; color:#fff; }
-  .av { width:52px; height:52px; border-radius:50%; overflow:hidden; border:2px solid; flex-shrink:0; }
-  .av img { width:100%; height:100%; object-fit:cover; object-position:top; }
-  .dept-name { font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; }
-  .dept-desc { font-size:11px; font-weight:300; color:rgba(255,255,255,0.5); line-height:1.6; }
 
-  /* ═══ VARIANT A — Left mission + Right dept list ═══ */
-  .va { display:flex; width:100%; height:100%; }
-  .va-left { flex:0 0 40%; display:flex; flex-direction:column; justify-content:center; padding:6% 5% 6% 6%; border-right:1px solid rgba(255,255,255,0.07); }
-  .va-tagline { font-size:11px; font-weight:300; color:rgba(255,255,255,0.35); margin-top:18px; line-height:1.6; max-width:280px; }
-  .va-right { flex:1; display:flex; flex-direction:column; justify-content:center; padding:5% 5% 5% 4%; gap:4px; overflow:hidden; }
-  .va-row { display:flex; align-items:center; gap:14px; padding:9px 12px; border-radius:10px; cursor:pointer; transition:background 0.2s; border:1px solid transparent; }
-  .va-row:hover { background:rgba(255,255,255,0.04); }
-  .va-row.active { background:rgba(100,78,248,0.08); border-color:rgba(100,78,248,0.2); }
-  .va-row .av { width:36px; height:36px; }
-  .va-row-info { flex:1; }
-  .va-row-name { font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase; }
-  .va-row-desc { font-size:10px; font-weight:300; color:rgba(255,255,255,0.4); margin-top:1px; opacity:0; max-height:0; overflow:hidden; transition:all 0.25s; }
-  .va-row.active .va-row-desc { opacity:1; max-height:30px; }
-  .va-arrow { font-size:10px; color:rgba(100,78,248,0.6); opacity:0; transition:opacity 0.2s; }
-  .va-row.active .va-arrow { opacity:1; }
+  .slide {
+    width:100%; height:100%;
+    background:#0a0a0a;
+    display:flex;
+    position:relative;
+    overflow:hidden;
+  }
+  .slide::before {
+    content:''; position:absolute; inset:0;
+    background: radial-gradient(ellipse 55% 70% at 65% 50%, rgba(100,78,248,0.09) 0%, transparent 70%);
+    pointer-events:none;
+  }
 
-  /* ═══ VARIANT B — Mission top + 4×2 department grid ═══ */
-  .vb { display:flex; flex-direction:column; width:100%; height:100%; padding:4% 6%; gap:0; }
-  .vb-top { display:flex; align-items:flex-start; gap:5%; margin-bottom:3%; flex-shrink:0; }
-  .vb-top-left { flex:0 0 45%; }
-  .vb-divider { width:1px; background:rgba(255,255,255,0.07); align-self:stretch; flex-shrink:0; }
-  .vb-top-right { flex:1; display:flex; flex-direction:column; justify-content:center; padding-left:4%; }
-  .vb-active-name { font-size:10px; font-weight:700; letter-spacing:3px; text-transform:uppercase; margin-bottom:8px; }
-  .vb-active-desc { font-size:13px; font-weight:300; color:rgba(255,255,255,0.55); line-height:1.6; }
-  .vb-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; flex:1; min-height:0; }
-  .vb-card { border:1px solid rgba(255,255,255,0.07); border-radius:10px; padding:14px 12px; display:flex; flex-direction:column; align-items:center; text-align:center; gap:8px; cursor:pointer; transition:all 0.2s; background:rgba(255,255,255,0.02); position:relative; overflow:hidden; }
-  .vb-card::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,currentColor,transparent); opacity:0.4; transition:opacity 0.2s; }
-  .vb-card.active { background:rgba(100,78,248,0.07); border-color:rgba(100,78,248,0.25); }
-  .vb-card.active::before { opacity:0.8; }
-  .vb-card .av { width:40px; height:40px; }
-  .vb-card-name { font-size:9px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; }
+  /* ── LEFT PANEL ── */
+  .s1-left {
+    flex: 0 0 38%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 6% 5% 6% 6%;
+    border-right: 1px solid rgba(255,255,255,0.07);
+    position: relative;
+    z-index: 2;
+  }
+  .eyebrow {
+    font-size: 10px; font-weight: 700; letter-spacing: 3px;
+    text-transform: uppercase; color: #644ef8; margin-bottom: 18px;
+  }
+  .mission {
+    font-size: clamp(16px,1.75vw,24px); font-weight: 700;
+    line-height: 1.35; color: #fff;
+  }
+  .s1-tagline {
+    font-size: 11px; font-weight: 300;
+    color: rgba(255,255,255,0.3); line-height: 1.7;
+    margin-top: 20px; max-width: 260px;
+  }
 
-  /* ═══ VARIANT C — Three column: list | avatar | info ═══ */
-  .vc { display:flex; width:100%; height:100%; }
-  .vc-left { flex:0 0 28%; display:flex; flex-direction:column; justify-content:center; padding:6% 4% 6% 5%; border-right:1px solid rgba(255,255,255,0.07); }
-  .vc-mission { font-size:clamp(13px,1.4vw,19px); font-weight:700; line-height:1.35; color:#fff; margin-top:12px; }
-  .vc-mid { flex:0 0 36%; display:flex; flex-direction:column; justify-content:center; align-items:center; padding:4%; border-right:1px solid rgba(255,255,255,0.07); gap:14px; position:relative; }
-  .vc-big-av { width:160px; height:160px; border-radius:50%; overflow:hidden; border:2px solid; transition:all 0.3s; }
-  .vc-big-av img { width:100%; height:100%; object-fit:cover; object-position:top; }
-  .vc-mid-name { font-size:12px; font-weight:700; letter-spacing:3px; text-transform:uppercase; text-align:center; }
-  .vc-right { flex:1; display:flex; flex-direction:column; justify-content:center; padding:5% 5% 5% 4%; }
-  .vc-dept-list { display:flex; flex-direction:column; gap:6px; }
-  .vc-item { display:flex; align-items:center; gap:10px; padding:7px 10px; border-radius:8px; cursor:pointer; transition:all 0.2s; border:1px solid transparent; }
-  .vc-item:hover { background:rgba(255,255,255,0.03); }
-  .vc-item.active { background:rgba(100,78,248,0.08); border-color:rgba(100,78,248,0.2); }
-  .vc-item .av { width:28px; height:28px; border-width:1.5px; }
-  .vc-item-name { font-size:10px; font-weight:700; letter-spacing:1px; text-transform:uppercase; }
-  .vc-item-desc { font-size:9px; font-weight:300; color:rgba(255,255,255,0.4); margin-top:1px; display:none; }
-  .vc-item.active .vc-item-desc { display:block; }
-  .vc-outcome-label { font-size:9px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,0.25); margin-bottom:10px; }
-  .vc-outcome-text { font-size:clamp(14px,1.5vw,20px); font-weight:300; color:rgba(255,255,255,0.7); line-height:1.55; }
+  /* ── RIGHT PANEL: HUB NETWORK ── */
+  .s1-right {
+    flex: 1;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
-  /* ═══ VARIANT D — Horizontal dept strip bottom ═══ */
-  .vd { display:flex; flex-direction:column; width:100%; height:100%; }
-  .vd-top { flex:1; display:flex; align-items:center; gap:5%; padding:4% 6% 2%; min-height:0; }
-  .vd-top-left { flex:0 0 40%; display:flex; flex-direction:column; justify-content:center; }
-  .vd-top-right { flex:1; display:flex; flex-direction:column; justify-content:center; }
-  .vd-active-av { width:80px; height:80px; border-radius:50%; overflow:hidden; border:2px solid; margin-bottom:14px; transition:all 0.3s; }
-  .vd-active-av img { width:100%; height:100%; object-fit:cover; object-position:top; }
-  .vd-active-name { font-size:10px; font-weight:700; letter-spacing:3px; text-transform:uppercase; margin-bottom:8px; }
-  .vd-active-desc { font-size:clamp(13px,1.4vw,18px); font-weight:300; color:rgba(255,255,255,0.6); line-height:1.6; max-width:380px; }
-  .vd-strip { flex:0 0 auto; display:flex; gap:0; border-top:1px solid rgba(255,255,255,0.07); padding:0 2%; overflow-x:auto; scrollbar-width:none; }
-  .vd-strip::-webkit-scrollbar { display:none; }
-  .vd-tab { flex:1; display:flex; flex-direction:column; align-items:center; gap:6px; padding:12px 8px; cursor:pointer; transition:all 0.2s; border-top:2px solid transparent; margin-top:-1px; min-width:0; }
-  .vd-tab:hover { background:rgba(255,255,255,0.03); }
-  .vd-tab.active { border-top-color:currentColor; }
-  .vd-tab .av { width:32px; height:32px; border-width:1.5px; }
-  .vd-tab-name { font-size:8px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:rgba(255,255,255,0.5); white-space:nowrap; }
-  .vd-tab.active .vd-tab-name { color:#fff; }
+  /* SVG connecting lines — sits behind everything */
+  .s1-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Hub (monday) in center */
+  .s1-hub {
+    position: absolute;
+    left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+  .s1-hub-logo {
+    width: 36px; height: 36px;
+    background: rgba(100,78,248,0.15);
+    border: 1px solid rgba(100,78,248,0.4);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .s1-hub-logo svg { width: 18px; height: 18px; }
+  .s1-hub-label {
+    font-size: 8px; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; color: rgba(100,78,248,0.7);
+  }
+
+  /* Dept nodes */
+  .s1-node {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    z-index: 3;
+    transition: transform 0.2s;
+  }
+  .s1-node:hover { transform: scale(1.05); }
+  .s1-node.active { transform: scale(1.1); }
+
+  .s1-av {
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid rgba(255,255,255,0.15);
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  .s1-av img { width:100%; height:100%; object-fit:cover; object-position:top; }
+  .s1-node.active .s1-av {
+    box-shadow: 0 0 0 3px rgba(100,78,248,0.25);
+  }
+
+  .s1-node-label {
+    font-size: 8px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+    transition: color 0.3s;
+    white-space: nowrap;
+  }
+  .s1-node.active .s1-node-label { color: #fff; }
+
+  /* Info box that appears near active node */
+  .s1-info {
+    position: absolute;
+    z-index: 4;
+    background: rgba(10,10,10,0.92);
+    border: 1px solid rgba(100,78,248,0.3);
+    border-radius: 10px;
+    padding: 10px 14px;
+    min-width: 150px;
+    max-width: 180px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+  .s1-info.visible { opacity: 1; }
+  .s1-info-name {
+    font-size: 9px; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; margin-bottom: 5px;
+  }
+  .s1-info-desc {
+    font-size: 10px; font-weight: 300;
+    color: rgba(255,255,255,0.55); line-height: 1.55;
+  }
 </style>
 </head>
 <body>
 
-<h1 class="page-title">S1 · Our Mission · Desktop Variants v2</h1>
+<h1 class="page-title">S1 · Our Mission · Desktop Variant A</h1>
 
-<!-- ═══ VARIANT A ═══ -->
-<div class="variant-label">Variant A — Mission Left + Department List Right</div>
+<div class="variant-label">Variant A — Mission Left + Connected Network Right</div>
 <div class="slide-frame">
   <div class="slide">
-    <div class="va">
-      <div class="va-left">
-        <p class="eyebrow">Our Mission</p>
-        <h2 class="mission">monday's mission has always been to help teams get more done and achieve their business goals.</h2>
-        <p class="va-tagline">Every department. One platform. People and agents working together.</p>
-      </div>
-      <div class="va-right" id="vaList"></div>
-    </div>
-  </div>
-</div>
 
-<!-- ═══ VARIANT B ═══ -->
-<div class="variant-label">Variant B — Mission + Active Dept Top, Grid Bottom</div>
-<div class="slide-frame">
-  <div class="slide">
-    <div class="vb">
-      <div class="vb-top">
-        <div class="vb-top-left">
-          <p class="eyebrow">Our Mission</p>
-          <h2 class="mission">monday's mission has always been to help teams get more done and achieve their business goals.</h2>
-        </div>
-        <div class="vb-divider"></div>
-        <div class="vb-top-right">
-          <div class="vb-active-name" id="vbName" style="color:#F9D27A">Sales</div>
-          <div class="vb-active-desc" id="vbDesc">Faster revenue generation</div>
-        </div>
-      </div>
-      <div class="vb-grid" id="vbGrid"></div>
+    <!-- Left: mission text -->
+    <div class="s1-left">
+      <p class="eyebrow">Our Mission</p>
+      <h2 class="mission">monday's mission has always been to help teams get more done and achieve their business goals.</h2>
+      <p class="s1-tagline">Every department. People and agents connected through one platform.</p>
     </div>
-  </div>
-</div>
 
-<!-- ═══ VARIANT C ═══ -->
-<div class="variant-label">Variant C — Three Columns: Mission | Featured Avatar | Dept List</div>
-<div class="slide-frame">
-  <div class="slide">
-    <div class="vc">
-      <div class="vc-left">
-        <p class="eyebrow">Our Mission</p>
-        <h2 class="vc-mission">monday's mission has always been to help teams get more done and achieve their business goals.</h2>
-      </div>
-      <div class="vc-mid">
-        <div class="vc-big-av" id="vcAv" style="border-color:#F9D27A">
-          <img id="vcAvImg" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/Sales.png" alt="">
-        </div>
-        <div class="vc-mid-name" id="vcMidName" style="color:#F9D27A">Sales</div>
-      </div>
-      <div class="vc-right">
-        <div class="vc-outcome-label">What monday enables</div>
-        <div class="vc-outcome-text" id="vcOutcome">Faster revenue generation</div>
-        <div style="height:20px"></div>
-        <div class="vc-dept-list" id="vcList"></div>
-      </div>
-    </div>
-  </div>
-</div>
+    <!-- Right: network -->
+    <div class="s1-right" id="s1Right">
 
-<!-- ═══ VARIANT D ═══ -->
-<div class="variant-label">Variant D — Mission + Active Feature Top, Department Strip Bottom</div>
-<div class="slide-frame">
-  <div class="slide">
-    <div class="vd">
-      <div class="vd-top">
-        <div class="vd-top-left">
-          <p class="eyebrow">Our Mission</p>
-          <h2 class="mission">monday's mission has always been to help teams get more done and achieve their business goals.</h2>
+      <!-- SVG lines rendered by JS -->
+      <svg class="s1-svg" id="s1Svg"></svg>
+
+      <!-- Hub -->
+      <div class="s1-hub" id="s1Hub">
+        <div class="s1-hub-logo">
+          <svg viewBox="0 0 24 24" fill="none">
+            <circle cx="5" cy="12" r="3" fill="#644ef8"/>
+            <circle cx="12" cy="5" r="3" fill="#e8341c"/>
+            <circle cx="19" cy="12" r="3" fill="#ffcc00"/>
+            <circle cx="12" cy="19" r="3" fill="#00b884"/>
+          </svg>
         </div>
-        <div class="vd-top-right">
-          <div class="vd-active-av" id="vdAv" style="border-color:#F9D27A">
-            <img id="vdAvImg" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/Sales.png" alt="">
-          </div>
-          <div class="vd-active-name" id="vdName" style="color:#F9D27A">Sales</div>
-          <div class="vd-active-desc" id="vdDesc">Faster revenue generation</div>
-        </div>
+        <span class="s1-hub-label">monday</span>
       </div>
-      <div class="vd-strip" id="vdStrip"></div>
+
+      <!-- Info tooltip -->
+      <div class="s1-info" id="s1Info">
+        <div class="s1-info-name" id="s1InfoName"></div>
+        <div class="s1-info-desc" id="s1InfoDesc"></div>
+      </div>
+
+      <!-- Dept nodes injected by JS -->
     </div>
+
   </div>
 </div>
 
@@ -191,90 +210,115 @@ const depts = [
   { name:'Product',    color:'#7FC8D4', desc:'Ship faster with the power to build anything', img: BASE+'Product.png' },
 ];
 
-/* ── Variant A ── */
-const vaList = document.getElementById('vaList');
-depts.forEach((d, i) => {
-  const row = document.createElement('div');
-  row.className = 'va-row' + (i === 0 ? ' active' : '');
-  row.innerHTML = `
-    <div class="av" style="border-color:${d.color}90"><img src="${d.img}" alt=""></div>
-    <div class="va-row-info">
-      <div class="va-row-name" style="color:${d.color}">${d.name}</div>
-      <div class="va-row-desc">${d.desc}</div>
+/*
+  Non-circular positions — organic but balanced
+  Values are percentage offsets from the right panel's own width/height
+  Layout: left column (2), top-left (1), top-right (1), right column (2), bottom (2)
+*/
+const positions = [
+  { x: 12, y: 18 },   // top-left area
+  { x: 50, y:  8 },   // top center
+  { x: 83, y: 18 },   // top-right area
+  { x: 92, y: 50 },   // far right
+  { x: 83, y: 80 },   // bottom-right
+  { x: 50, y: 90 },   // bottom center
+  { x: 12, y: 80 },   // bottom-left
+  { x:  5, y: 50 },   // far left
+];
+
+const right  = document.getElementById('s1Right');
+const svg    = document.getElementById('s1Svg');
+const info   = document.getElementById('s1Info');
+const infoName = document.getElementById('s1InfoName');
+const infoDesc = document.getElementById('s1InfoDesc');
+let activeNode = null;
+
+// Build nodes
+const nodeEls = depts.map((d, i) => {
+  const pos = positions[i];
+  const node = document.createElement('div');
+  node.className = 's1-node';
+  node.style.cssText = `left:${pos.x}%; top:${pos.y}%; transform:translate(-50%,-50%)`;
+  node.innerHTML = `
+    <div class="s1-av" style="border-color:${d.color}80">
+      <img src="${d.img}" alt="${d.name}">
     </div>
-    <div class="va-arrow" style="color:${d.color}">→</div>`;
-  row.onclick = () => { vaList.querySelectorAll('.va-row').forEach(r => r.classList.remove('active')); row.classList.add('active'); };
-  vaList.appendChild(row);
+    <span class="s1-node-label">${d.name}</span>`;
+
+  node.addEventListener('click', () => activate(i));
+  right.appendChild(node);
+  return { el: node, pos, d };
 });
 
-/* ── Variant B ── */
-const vbGrid = document.getElementById('vbGrid');
-const vbName = document.getElementById('vbName');
-const vbDesc = document.getElementById('vbDesc');
-depts.forEach((d, i) => {
-  const card = document.createElement('div');
-  card.className = 'vb-card' + (i === 0 ? ' active' : '');
-  card.style.color = d.color;
-  card.innerHTML = `
-    <div class="av" style="border-color:${d.color}90"><img src="${d.img}" alt=""></div>
-    <div class="vb-card-name">${d.name}</div>`;
-  card.onclick = () => {
-    vbGrid.querySelectorAll('.vb-card').forEach(c => c.classList.remove('active'));
-    card.classList.add('active');
-    vbName.textContent = d.name; vbName.style.color = d.color;
-    vbDesc.textContent = d.desc;
-  };
-  vbGrid.appendChild(card);
-});
+// Activate first node after render
+function activate(idx) {
+  nodeEls.forEach((n, i) => {
+    n.el.classList.toggle('active', i === idx);
+    n.el.querySelector('.s1-av').style.borderColor = i === idx
+      ? depts[i].color
+      : depts[i].color + '50';
+  });
 
-/* ── Variant C ── */
-const vcList = document.getElementById('vcList');
-const vcAv = document.getElementById('vcAv');
-const vcAvImg = document.getElementById('vcAvImg');
-const vcMidName = document.getElementById('vcMidName');
-const vcOutcome = document.getElementById('vcOutcome');
-depts.forEach((d, i) => {
-  const item = document.createElement('div');
-  item.className = 'vc-item' + (i === 0 ? ' active' : '');
-  item.innerHTML = `
-    <div class="av" style="border-color:${d.color}90"><img src="${d.img}" alt=""></div>
-    <div>
-      <div class="vc-item-name" style="color:${d.color}">${d.name}</div>
-    </div>`;
-  item.onclick = () => {
-    vcList.querySelectorAll('.vc-item').forEach(el => el.classList.remove('active'));
-    item.classList.add('active');
-    vcAv.style.borderColor = d.color;
-    vcAvImg.src = d.img;
-    vcMidName.textContent = d.name; vcMidName.style.color = d.color;
-    vcOutcome.textContent = d.desc;
-  };
-  vcList.appendChild(item);
-});
+  const { pos, d } = nodeEls[idx];
+  infoName.textContent = d.name;
+  infoName.style.color = d.color;
+  infoDesc.textContent = d.desc;
 
-/* ── Variant D ── */
-const vdStrip = document.getElementById('vdStrip');
-const vdAv = document.getElementById('vdAv');
-const vdAvImg = document.getElementById('vdAvImg');
-const vdName = document.getElementById('vdName');
-const vdDesc = document.getElementById('vdDesc');
-depts.forEach((d, i) => {
-  const tab = document.createElement('div');
-  tab.className = 'vd-tab' + (i === 0 ? ' active' : '');
-  tab.style.color = d.color;
-  tab.innerHTML = `
-    <div class="av" style="border-color:${d.color}90"><img src="${d.img}" alt=""></div>
-    <div class="vd-tab-name">${d.name}</div>`;
-  tab.onclick = () => {
-    vdStrip.querySelectorAll('.vd-tab').forEach(t => t.classList.remove('active'));
-    tab.classList.add('active');
-    vdAv.style.borderColor = d.color;
-    vdAvImg.src = d.img;
-    vdName.textContent = d.name; vdName.style.color = d.color;
-    vdDesc.textContent = d.desc;
-  };
-  vdStrip.appendChild(tab);
-});
+  // Position info box: flip if node is on right half
+  const onRight = pos.x > 50;
+  info.style.left = onRight ? `${pos.x - 2}%` : `${pos.x + 8}%`;
+  info.style.top  = pos.y > 50 ? `${pos.y - 30}%` : `${pos.y + 14}%`;
+  info.style.transform = onRight ? 'translate(-100%, -50%)' : 'translate(0, -50%)';
+  info.classList.add('visible');
+
+  drawLines(idx);
+}
+
+// Draw SVG lines
+function drawLines(activeIdx) {
+  const rRect  = right.getBoundingClientRect();
+  const hubEl  = document.getElementById('s1Hub');
+  const hRect  = hubEl.getBoundingClientRect();
+  const hx = hRect.left + hRect.width/2  - rRect.left;
+  const hy = hRect.top  + hRect.height/2 - rRect.top;
+
+  svg.innerHTML = '';
+
+  nodeEls.forEach(({ el, d }, i) => {
+    const nRect = el.getBoundingClientRect();
+    const nx = nRect.left + nRect.width/2  - rRect.left;
+    const ny = nRect.top  + nRect.height/2 - rRect.top;
+
+    const isActive = i === activeIdx;
+    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    line.setAttribute('x1', hx); line.setAttribute('y1', hy);
+    line.setAttribute('x2', nx); line.setAttribute('y2', ny);
+    line.setAttribute('stroke', isActive ? d.color : 'rgba(255,255,255,0.08)');
+    line.setAttribute('stroke-width', isActive ? '1.5' : '1');
+    line.setAttribute('stroke-dasharray', isActive ? 'none' : '4 6');
+    svg.appendChild(line);
+
+    // Dot at node end
+    if (isActive) {
+      const circle = document.createElementNS('http://www.w3.org/2000/svg','circle');
+      circle.setAttribute('cx', nx); circle.setAttribute('cy', ny);
+      circle.setAttribute('r', '3');
+      circle.setAttribute('fill', d.color);
+      svg.appendChild(circle);
+    }
+  });
+}
+
+// Init after layout settles
+setTimeout(() => {
+  activate(0);
+  // Re-draw on resize
+  window.addEventListener('resize', () => {
+    const active = nodeEls.findIndex(n => n.el.classList.contains('active'));
+    if (active >= 0) drawLines(active);
+  });
+}, 80);
 </script>
+
 </body>
 </html>
