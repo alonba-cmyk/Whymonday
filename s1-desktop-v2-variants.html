@@ -66,56 +66,6 @@
   .vb-thumb.active .vb-thumb-name { color:#fff; }
 
   /* ─────────────────────────────────────────
-     C  split panel — chip grid | monday | outcome
-  ───────────────────────────────────────── */
-  .vc-right     { flex:1; display:flex; align-items:stretch; }
-  .vc-chips-col { flex:0 0 52%; display:grid; grid-template-columns:1fr 1fr; gap:7px; padding:6% 4% 6% 5%; align-content:center; }
-  .vc-chip      { display:flex; align-items:center; gap:8px; padding:7px 10px; border-radius:10px; background:rgba(255,255,255,0.025); border:1px solid rgba(255,255,255,0.07); cursor:pointer; transition:all 0.2s; }
-  .vc-chip:hover { background:rgba(255,255,255,0.05); }
-  .vc-chip.active { background:rgba(100,78,248,0.08); border-color:rgba(100,78,248,0.28); }
-  .vc-chip-av   { width:28px; height:28px; border-radius:50%; overflow:hidden; border:1.5px solid; flex-shrink:0; }
-  .vc-chip-av img { width:100%; height:100%; object-fit:cover; object-position:top; }
-  .vc-chip-name { font-size:9px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:rgba(255,255,255,0.5); white-space:nowrap; }
-  .vc-chip.active .vc-chip-name { color:#fff; }
-  .vc-divider   { flex:0 0 1px; background:rgba(255,255,255,0.07); display:flex; align-items:center; justify-content:center; position:relative; }
-  .vc-div-hub   { display:flex; flex-direction:column; align-items:center; gap:4px; }
-  .vc-div-hub .hub-box { width:34px; height:34px; }
-  .vc-div-hub .hub-box svg { display:block; }
-  .vc-outcome   { flex:1; display:flex; flex-direction:column; justify-content:center; padding:6% 5% 6% 4%; }
-  .vc-out-label { font-size:8px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,0.2); margin-bottom:12px; }
-  .vc-out-name  { font-size:12px; font-weight:700; letter-spacing:2px; text-transform:uppercase; margin-bottom:10px; transition:color 0.3s; }
-  .vc-out-desc  { font-size:clamp(12px,1.4vw,18px); font-weight:300; color:rgba(255,255,255,0.62); line-height:1.6; }
-
-  /* ─────────────────────────────────────────
-     D  journey — [dept] → monday → outcome
-  ───────────────────────────────────────── */
-  .vd-right    { flex:1; display:flex; flex-direction:column; padding:5% 4% 4%; }
-  .vd-journey  { flex:1; display:flex; align-items:center; justify-content:center; gap:0; }
-  .vd-j-dept   { display:flex; flex-direction:column; align-items:center; gap:8px; flex-shrink:0; }
-  .vd-j-av     { width:64px; height:64px; border-radius:50%; overflow:hidden; border:2px solid; transition:border-color 0.3s; flex-shrink:0; }
-  .vd-j-av img { width:100%; height:100%; object-fit:cover; object-position:top; }
-  .vd-j-name   { font-size:9px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; transition:color 0.3s; }
-  .vd-j-arrow  { display:flex; align-items:center; padding:0 14px; }
-  .vd-j-line   { width:36px; height:1px; background:rgba(255,255,255,0.14); position:relative; }
-  .vd-j-line::after { content:''; position:absolute; right:-4px; top:-3.5px; border:4px solid transparent; border-left:6px solid rgba(255,255,255,0.2); }
-  .vd-j-hub    { display:flex; flex-direction:column; align-items:center; gap:4px; flex-shrink:0; }
-  .vd-j-hub .hub-box { width:40px; height:40px; }
-  .vd-j-hub .hub-box svg { display:block; }
-  .vd-j-outcome { flex:1; max-width:200px; padding-left:14px; }
-  .vd-j-out-lbl { font-size:8px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,0.2); margin-bottom:8px; }
-  .vd-j-out-desc { font-size:clamp(12px,1.35vw,18px); font-weight:300; color:rgba(255,255,255,0.65); line-height:1.6; }
-  .vd-sep      { width:100%; height:1px; background:rgba(255,255,255,0.07); margin:4px 0; }
-  .vd-selector { display:flex; justify-content:space-around; padding-top:2px; }
-  .vd-sel      { display:flex; flex-direction:column; align-items:center; gap:4px; cursor:pointer; transition:transform 0.2s; }
-  .vd-sel:hover { transform:translateY(-2px); }
-  .vd-sel.active { transform:translateY(-2px); }
-  .vd-sel-av   { width:30px; height:30px; border-radius:50%; overflow:hidden; border:1.5px solid rgba(255,255,255,0.1); transition:border-color 0.3s, box-shadow 0.3s; }
-  .vd-sel-av img { width:100%; height:100%; object-fit:cover; object-position:top; }
-  .vd-sel.active .vd-sel-av { box-shadow:0 0 0 2px rgba(100,78,248,0.3); }
-  .vd-sel-name { font-size:7px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:rgba(255,255,255,0.3); white-space:nowrap; transition:color 0.3s; }
-  .vd-sel.active .vd-sel-name { color:#fff; }
-
-  /* ─────────────────────────────────────────
      E  platform layer (kept)
   ───────────────────────────────────────── */
   .ve-right    { flex:1; display:flex; flex-direction:column; justify-content:center; align-items:center; padding:4% 4%; }
@@ -218,12 +168,9 @@
   .vh-div-badge { display:flex; align-items:center; gap:6px; flex-shrink:0; }
   .vh-div-badge .hub-box { width:18px; height:18px; border-radius:5px; }
   .vh-div-badge span { font-size:8px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:rgba(100,78,248,0.65); }
-  .vh-featured { display:flex; align-items:center; gap:14px; }
-  .vh-feat-av  { width:48px; height:48px; border-radius:50%; overflow:hidden; border:2px solid; flex-shrink:0; transition:border-color 0.3s; }
-  .vh-feat-av img { width:100%; height:100%; object-fit:cover; object-position:top; }
-  .vh-feat-info { flex:1; }
-  .vh-feat-name { font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; margin-bottom:4px; transition:color 0.3s; }
-  .vh-feat-desc { font-size:clamp(11px,1.1vw,14px); font-weight:300; color:rgba(255,255,255,0.55); line-height:1.55; }
+  .vh-featured { display:flex; flex-direction:column; gap:6px; }
+  .vh-feat-name { font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; transition:color 0.3s, opacity 0.4s; }
+  .vh-feat-desc { font-size:clamp(11px,1.1vw,14px); font-weight:300; color:rgba(255,255,255,0.55); line-height:1.55; transition:opacity 0.4s; }
 </style>
 </head>
 <body>
@@ -276,80 +223,6 @@
         <div class="vb-div-line"></div>
       </div>
       <div class="vb-strip" id="vbStrip"></div>
-    </div>
-  </div>
-</div>
-
-<!-- ═══ C ═══ -->
-<div class="variant-label">C — Split Panel: dept grid | monday | outcome</div>
-<div class="slide-frame">
-  <div class="slide">
-    <div class="v-left">
-      <p class="eyebrow">Our Mission</p>
-      <h2 class="mission">monday's mission has always been to help teams get more done and achieve their business goals.</h2>
-      <p class="tagline">Every department. One platform. People and agents working together.</p>
-    </div>
-    <div class="vc-right">
-      <div class="vc-chips-col" id="vcChips"></div>
-      <div class="vc-divider">
-        <div class="vc-div-hub">
-          <div class="hub-box" style="width:34px;height:34px">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none">
-              <circle cx="5" cy="12" r="3" fill="#644ef8"/>
-              <circle cx="12" cy="5" r="3" fill="#e8341c"/>
-              <circle cx="19" cy="12" r="3" fill="#ffcc00"/>
-              <circle cx="12" cy="19" r="3" fill="#00b884"/>
-            </svg>
-          </div>
-          <span class="hub-lbl" style="margin-top:4px">monday</span>
-        </div>
-      </div>
-      <div class="vc-outcome">
-        <div class="vc-out-label">What monday enables</div>
-        <div class="vc-out-name" id="vcOutName" style="color:#F9D27A">Sales</div>
-        <div class="vc-out-desc" id="vcOutDesc">Faster revenue generation</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ═══ D ═══ -->
-<div class="variant-label">D — Journey: Dept → monday → Outcome</div>
-<div class="slide-frame">
-  <div class="slide">
-    <div class="v-left">
-      <p class="eyebrow">Our Mission</p>
-      <h2 class="mission">monday's mission has always been to help teams get more done and achieve their business goals.</h2>
-      <p class="tagline">Every department. One platform. People and agents working together.</p>
-    </div>
-    <div class="vd-right">
-      <div class="vd-journey">
-        <div class="vd-j-dept">
-          <div class="vd-j-av" id="vdJAv" style="border-color:#F9D27A">
-            <img id="vdJImg" src="" alt="">
-          </div>
-          <div class="vd-j-name" id="vdJName" style="color:#F9D27A">Sales</div>
-        </div>
-        <div class="vd-j-arrow"><div class="vd-j-line"></div></div>
-        <div class="vd-j-hub">
-          <div class="hub-box" style="width:40px;height:40px">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-              <circle cx="5" cy="12" r="3" fill="#644ef8"/>
-              <circle cx="12" cy="5" r="3" fill="#e8341c"/>
-              <circle cx="19" cy="12" r="3" fill="#ffcc00"/>
-              <circle cx="12" cy="19" r="3" fill="#00b884"/>
-            </svg>
-          </div>
-          <span class="hub-lbl" style="margin-top:4px">monday</span>
-        </div>
-        <div class="vd-j-arrow"><div class="vd-j-line"></div></div>
-        <div class="vd-j-outcome">
-          <div class="vd-j-out-lbl">What gets unlocked</div>
-          <div class="vd-j-out-desc" id="vdJDesc">Faster revenue generation</div>
-        </div>
-      </div>
-      <div class="vd-sep"></div>
-      <div class="vd-selector" id="vdSelector"></div>
     </div>
   </div>
 </div>
@@ -416,13 +289,8 @@
         <div class="vh-div-line"></div>
       </div>
       <div class="vh-featured">
-        <div class="vh-feat-av" id="vhFeatAv" style="border-color:#F9D27A">
-          <img id="vhFeatImg" src="" alt="">
-        </div>
-        <div class="vh-feat-info">
-          <div class="vh-feat-name" id="vhFeatName" style="color:#F9D27A">Sales</div>
-          <div class="vh-feat-desc" id="vhFeatDesc">Faster revenue generation</div>
-        </div>
+        <div class="vh-feat-name" id="vhFeatName" style="color:#F9D27A">Sales</div>
+        <div class="vh-feat-desc" id="vhFeatDesc">Faster revenue generation</div>
       </div>
     </div>
   </div>
@@ -553,51 +421,6 @@ depts.forEach((d, i) => {
 // init featured
 vbFeatImg.src = depts[0].img;
 
-/* ── C: split panel ── */
-const vcChipsEl  = document.getElementById('vcChips');
-const vcOutName  = document.getElementById('vcOutName');
-const vcOutDesc  = document.getElementById('vcOutDesc');
-let vcChips = [];
-
-depts.forEach((d, i) => {
-  const chip = document.createElement('div');
-  chip.className = 'vc-chip' + (i === 0 ? ' active' : '');
-  chip.innerHTML = `<div class="vc-chip-av" style="border-color:${d.color}90"><img src="${d.img}" alt="${d.name}"></div><span class="vc-chip-name">${d.name}</span>`;
-  chip.onclick = () => {
-    vcChips.forEach(c => c.classList.remove('active'));
-    chip.classList.add('active');
-    vcOutName.textContent = d.name; vcOutName.style.color = d.color;
-    vcOutDesc.textContent = d.desc;
-  };
-  vcChipsEl.appendChild(chip);
-  vcChips.push(chip);
-});
-
-/* ── D: journey ── */
-const vdJAv      = document.getElementById('vdJAv');
-const vdJImg     = document.getElementById('vdJImg');
-const vdJName    = document.getElementById('vdJName');
-const vdJDesc    = document.getElementById('vdJDesc');
-const vdSelector = document.getElementById('vdSelector');
-let vdSels = [];
-
-depts.forEach((d, i) => {
-  const sel = document.createElement('div');
-  sel.className = 'vd-sel' + (i === 0 ? ' active' : '');
-  sel.innerHTML = `<div class="vd-sel-av" style="border-color:${d.color}80"><img src="${d.img}" alt="${d.name}"></div><span class="vd-sel-name">${d.name}</span>`;
-  sel.onclick = () => {
-    vdSels.forEach(s => s.classList.remove('active'));
-    sel.classList.add('active');
-    vdJAv.style.borderColor = d.color;
-    vdJImg.src = d.img; vdJImg.alt = d.name;
-    vdJName.textContent = d.name; vdJName.style.color = d.color;
-    vdJDesc.textContent = d.desc;
-  };
-  vdSelector.appendChild(sel);
-  vdSels.push(sel);
-});
-vdJImg.src = depts[0].img;
-
 /* ── E: platform layer ── */
 const veTopRow  = document.getElementById('veTopRow');
 const veConns   = document.getElementById('veConns');
@@ -623,29 +446,41 @@ depts.forEach((d, i) => {
   veConnEls.push(conn);
 });
 
-/* ── H: strip centered + featured below ── */
+/* ── H: strip auto-rotate ── */
 const vhStrip    = document.getElementById('vhStrip');
-const vhFeatAv   = document.getElementById('vhFeatAv');
-const vhFeatImg  = document.getElementById('vhFeatImg');
 const vhFeatName = document.getElementById('vhFeatName');
 const vhFeatDesc = document.getElementById('vhFeatDesc');
 let vhThumbs = [];
+let vhIdx = 0;
+
+function vhActivate(i, manual) {
+  vhIdx = i;
+  const d = depts[i];
+  vhThumbs.forEach(t => t.classList.remove('active'));
+  vhThumbs[i].classList.add('active');
+  vhFeatName.style.opacity = '0';
+  vhFeatDesc.style.opacity = '0';
+  setTimeout(() => {
+    vhFeatName.textContent = d.name; vhFeatName.style.color = d.color;
+    vhFeatDesc.textContent = d.desc;
+    vhFeatName.style.opacity = '1';
+    vhFeatDesc.style.opacity = '1';
+  }, 200);
+  if (manual) { clearInterval(vhTimer); vhTimer = setInterval(vhNext, 2400); }
+}
+function vhNext() { vhActivate((vhIdx + 1) % depts.length, false); }
+
 depts.forEach((d, i) => {
   const thumb = document.createElement('div');
   thumb.className = 'vh-thumb' + (i === 0 ? ' active' : '');
   thumb.innerHTML = `<div class="vh-thumb-av" style="border-color:${d.color}80"><img src="${d.img}" alt="${d.name}"></div><span class="vh-thumb-name">${d.name}</span>`;
-  thumb.onclick = () => {
-    vhThumbs.forEach(t => t.classList.remove('active'));
-    thumb.classList.add('active');
-    vhFeatAv.style.borderColor = d.color;
-    vhFeatImg.src = d.img; vhFeatImg.alt = d.name;
-    vhFeatName.textContent = d.name; vhFeatName.style.color = d.color;
-    vhFeatDesc.textContent = d.desc;
-  };
+  thumb.onclick = () => vhActivate(i, true);
   vhStrip.appendChild(thumb);
   vhThumbs.push(thumb);
 });
-vhFeatImg.src = depts[0].img;
+vhFeatName.textContent = depts[0].name;
+vhFeatDesc.textContent = depts[0].desc;
+let vhTimer = setInterval(vhNext, 2400);
 
 /* ── G: outcome top + dept grid ── */
 const vgGrid    = document.getElementById('vgGrid');
