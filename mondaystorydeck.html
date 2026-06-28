@@ -483,12 +483,10 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
   .gap-list { display: none; }
   .gap-right { display: flex; flex-direction: column; flex: 1; gap: 10px; justify-content: center; }
   .gap-right-label { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.25); margin-bottom: 2px; }
-  .gap-blocker { border: 1px solid rgba(255,255,255,0.07); border-radius: 12px; padding: 13px 15px; display: flex; align-items: center; gap: 13px; position: relative; overflow: hidden; background: rgba(255,255,255,0.02); }
-  .gap-blocker::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, #644ef8, transparent 60%); opacity: 0.6; }
-  .gap-blocker-icon { width: 32px; height: 32px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; border-radius: 8px; background: rgba(100,78,248,0.1); }
-  .gap-blocker-body { display: flex; flex-direction: column; }
-  .gap-blocker-num { font-size: 9px; font-weight: 700; letter-spacing: 2px; color: rgba(100,78,248,0.5); margin-bottom: 3px; }
-  .gap-blocker-title { font-size: clamp(11px,1vw,13px); font-weight: 700; color: #fff; margin-bottom: 3px; }
+  .gap-blocker { border: 1px solid rgba(255,255,255,0.07); border-radius: 12px; padding: 14px 18px; display: flex; flex-direction: column; align-items: center; text-align: center; position: relative; overflow: hidden; background: rgba(255,255,255,0.02); }
+  .gap-blocker::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, #644ef8, transparent); opacity: 0.6; }
+  .gap-blocker-icon { width: 34px; height: 34px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; border-radius: 8px; background: rgba(100,78,248,0.1); margin-bottom: 10px; }
+  .gap-blocker-title { font-size: clamp(11px,1vw,13px); font-weight: 700; color: #fff; margin-bottom: 4px; }
   .gap-blocker-desc { font-size: clamp(9px,0.78vw,10px); font-weight: 300; color: rgba(255,255,255,0.45); line-height: 1.6; }
 }
 
@@ -807,31 +805,22 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
         <div class="gap-blocker-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="#644ef8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="8" r="3"/><circle cx="17" cy="8" r="3"/><path d="M3 21c0-3 1.8-5.5 4-5.5"/><path d="M21 21c0-3-1.8-5.5-4-5.5"/><line x1="10" y1="15.5" x2="14" y2="15.5" stroke-dasharray="2 2" stroke-opacity="0.4"/></svg>
         </div>
-        <div class="gap-blocker-body">
-          <div class="gap-blocker-num">01</div>
-          <div class="gap-blocker-title">Siloed Agents</div>
-          <div class="gap-blocker-desc">Most people use AI as individuals. Outputs stay personal and never scale.</div>
-        </div>
+        <div class="gap-blocker-title">Siloed Agents</div>
+        <div class="gap-blocker-desc">Most people use AI as individuals. Outputs stay personal and never scale.</div>
       </div>
       <div class="gap-blocker">
         <div class="gap-blocker-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="#644ef8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5"/><circle cx="12" cy="16.5" r="0.5" fill="#644ef8"/></svg>
         </div>
-        <div class="gap-blocker-body">
-          <div class="gap-blocker-num">02</div>
-          <div class="gap-blocker-title">Lack of Context</div>
-          <div class="gap-blocker-desc">When agents don't know enough about the business, they produce generic outputs, not real action.</div>
-        </div>
+        <div class="gap-blocker-title">Lack of Context</div>
+        <div class="gap-blocker-desc">When agents don't know enough about the business, they produce generic outputs, not real action.</div>
       </div>
       <div class="gap-blocker">
         <div class="gap-blocker-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="#644ef8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1" stroke-opacity="0.3" stroke-dasharray="3 2"/></svg>
         </div>
-        <div class="gap-blocker-body">
-          <div class="gap-blocker-num">03</div>
-          <div class="gap-blocker-title">Outside the Workflow</div>
-          <div class="gap-blocker-desc">Agents live in a chat window, not where the work is done. Every handoff is a gap where execution breaks down.</div>
-        </div>
+        <div class="gap-blocker-title">Outside the Workflow</div>
+        <div class="gap-blocker-desc">Agents live in a chat window, not where the work is done. Every handoff is a gap where execution breaks down.</div>
       </div>
     </div>
   </div>
