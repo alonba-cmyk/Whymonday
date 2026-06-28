@@ -117,6 +117,9 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
 .s2-dept-chip { font-size:8px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; text-align:center; }
 .s2-title { font-size:16px; font-weight:800; color:#fff; line-height:1.35; grid-column:2; grid-row:1; }
 .s2-desc { font-size:10px; color:var(--dim); font-weight:300; line-height:1.6; grid-column:2; grid-row:2; }
+.s2-feat { display:none; width:100%; transition:opacity 0.35s; }
+.s2-feat-card { background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-left:3px solid; border-radius:16px; padding:16px 18px; display:flex; align-items:center; gap:14px; width:100%; }
+.s2-feat-title { font-size:15px; font-weight:800; color:#fff; line-height:1.35; }
 
 /* S3 */
 #s3 { align-items:center; text-align:center; }
@@ -332,11 +335,8 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
   .shift-wrap h2 br { display: none; }
   .pillars { display: none; }
   .pillars-carousel { display: none; }
-  .s2-marquee-wrap { width: calc(100% + 48px); margin-left: -24px; }
-  .s2-card { width: 240px; grid-template-rows: auto; }
-  .s2-card-top { grid-row: 1; }
-  .s2-title { font-size: 13px; }
-  .s2-desc { display: none; }
+  .s2-marquee-wrap { display: none; }
+  .s2-feat { display: block; }
   .pc-track-wrap { width: 100%; overflow: hidden; }
   .pc-track { display: flex; gap: 12px; transition: transform 0.5s cubic-bezier(0.4,0,0.2,1); will-change: transform; padding: 4px 0 6px; }
   .pc-card { flex-shrink: 0; width: 100%; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.09); border-radius: 16px; padding: 20px 18px; }
@@ -646,6 +646,15 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
   </div>
   <div class="s2-marquee-wrap">
     <div class="s2-marquee-track" id="s2Track"></div>
+  </div>
+  <div class="s2-feat" id="s2Feat">
+    <div class="s2-feat-card" id="s2FeatCard">
+      <div class="s2-card-top">
+        <div class="s2-av" id="s2FeatAv"><img id="s2FeatImg" src="" alt="" loading="lazy"></div>
+        <span class="s2-dept-chip" id="s2FeatChip"></span>
+      </div>
+      <div class="s2-feat-title" id="s2FeatTitle"></div>
+    </div>
   </div>
   <!-- OLD VERSION – pillars + carousel (kept for easy revert)
   <div class="s2-old">
@@ -1187,6 +1196,43 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
       <div class="s2-desc">${c.desc}</div>
     </div>`).join('');
     track.innerHTML = html + html;
+  })();
+
+  // S2 mobile – single rotating card
+  (function() {
+    const feat   = document.getElementById('s2Feat');
+    const fcard  = document.getElementById('s2FeatCard');
+    const fav    = document.getElementById('s2FeatAv');
+    const fimg   = document.getElementById('s2FeatImg');
+    const fchip  = document.getElementById('s2FeatChip');
+    const ftitle = document.getElementById('s2FeatTitle');
+    if (!feat) return;
+    const B = 'https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/';
+    const cards = [
+      { dept:'Marketing',  color:'#F48FB1', img:B+'Marketing.png',  title:'Campaign concepts ready before standup' },
+      { dept:'Sales',      color:'#F9D27A', img:B+'Sales.png',       title:'Personalized proposal sent the same day' },
+      { dept:'HR',         color:'#8ECEC0', img:B+'HR.png',          title:'Onboarding pack done the night before day one' },
+      { dept:'IT',         color:'#A89BD9', img:B+'IT.png',          title:'Most tickets resolved before anyone noticed' },
+      { dept:'Operations', color:'#85C1AE', img:B+'Operations.png',  title:'Weekly exec report, fully automated' },
+      { dept:'Product',    color:'#7FC8D4', img:B+'Product.png',     title:'PRD drafted while the team slept' },
+      { dept:'Finance',    color:'#93C6E7', img:B+'Finance.png',     title:'Budget variance explained automatically' },
+      { dept:'Legal',      color:'#F6C27A', img:B+'Legal.png',       title:'Contract reviewed before the meeting, not after' },
+    ];
+    let idx = 0;
+    function update(i) {
+      const c = cards[i];
+      feat.style.opacity = '0';
+      setTimeout(() => {
+        fcard.style.borderColor = c.color + '60';
+        fav.style.borderColor   = c.color + '90';
+        fimg.src = c.img; fimg.alt = c.dept;
+        fchip.textContent = c.dept; fchip.style.color = c.color;
+        ftitle.textContent = c.title;
+        feat.style.opacity = '1';
+      }, 320);
+    }
+    update(0);
+    setInterval(() => { idx = (idx + 1) % cards.length; update(idx); }, 2800);
   })();
 
   // Pillars carousel (mobile auto-play)
