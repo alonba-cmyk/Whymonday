@@ -117,9 +117,10 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
 .s2-dept-chip { font-size:8px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; text-align:center; }
 .s2-title { font-size:16px; font-weight:800; color:#fff; line-height:1.35; grid-column:2; grid-row:1; }
 .s2-desc { font-size:10px; color:var(--dim); font-weight:300; line-height:1.6; grid-column:2; grid-row:2; }
-.s2-feat { display:none; width:100%; transition:opacity 0.35s; }
-.s2-feat-card { background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-left:3px solid; border-radius:16px; padding:16px 18px; display:flex; align-items:center; gap:14px; width:100%; }
-.s2-feat-title { font-size:15px; font-weight:800; color:#fff; line-height:1.35; }
+.s2-mob-carousel { display:none; width:100%; overflow:hidden; }
+.s2-mob-track { display:flex; gap:10px; transition:transform 0.5s cubic-bezier(0.4,0,0.2,1); will-change:transform; padding:4px 0 6px; }
+.s2-mob-card { flex-shrink:0; width:calc(100% - 40px); background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-left:3px solid; border-radius:16px; padding:16px 18px; display:flex; align-items:center; gap:14px; }
+.s2-mob-title { font-size:15px; font-weight:800; color:#fff; line-height:1.35; }
 
 /* S3 */
 #s3 { align-items:center; text-align:center; }
@@ -336,7 +337,7 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
   .pillars { display: none; }
   .pillars-carousel { display: none; }
   .s2-marquee-wrap { display: none; }
-  .s2-feat { display: block; }
+  .s2-mob-carousel { display: block; }
   .pc-track-wrap { width: 100%; overflow: hidden; }
   .pc-track { display: flex; gap: 12px; transition: transform 0.5s cubic-bezier(0.4,0,0.2,1); will-change: transform; padding: 4px 0 6px; }
   .pc-card { flex-shrink: 0; width: 100%; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.09); border-radius: 16px; padding: 20px 18px; }
@@ -647,14 +648,8 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
   <div class="s2-marquee-wrap">
     <div class="s2-marquee-track" id="s2Track"></div>
   </div>
-  <div class="s2-feat" id="s2Feat">
-    <div class="s2-feat-card" id="s2FeatCard">
-      <div class="s2-card-top">
-        <div class="s2-av" id="s2FeatAv"><img id="s2FeatImg" src="" alt="" loading="lazy"></div>
-        <span class="s2-dept-chip" id="s2FeatChip"></span>
-      </div>
-      <div class="s2-feat-title" id="s2FeatTitle"></div>
-    </div>
+  <div class="s2-mob-carousel" id="s2MobCarousel">
+    <div class="s2-mob-track" id="s2MobTrack"></div>
   </div>
   <!-- OLD VERSION – pillars + carousel (kept for easy revert)
   <div class="s2-old">
@@ -1198,15 +1193,11 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
     track.innerHTML = html + html;
   })();
 
-  // S2 mobile – single rotating card
+  // S2 mobile – carousel
   (function() {
-    const feat   = document.getElementById('s2Feat');
-    const fcard  = document.getElementById('s2FeatCard');
-    const fav    = document.getElementById('s2FeatAv');
-    const fimg   = document.getElementById('s2FeatImg');
-    const fchip  = document.getElementById('s2FeatChip');
-    const ftitle = document.getElementById('s2FeatTitle');
-    if (!feat) return;
+    const wrap  = document.getElementById('s2MobCarousel');
+    const track = document.getElementById('s2MobTrack');
+    if (!wrap || !track) return;
     const B = 'https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/';
     const cards = [
       { dept:'Marketing',  color:'#F48FB1', img:B+'Marketing.png',  title:'Campaign concepts ready before standup' },
@@ -1218,21 +1209,33 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
       { dept:'Finance',    color:'#93C6E7', img:B+'Finance.png',     title:'Budget variance explained automatically' },
       { dept:'Legal',      color:'#F6C27A', img:B+'Legal.png',       title:'Contract reviewed before the meeting, not after' },
     ];
-    let idx = 0;
-    function update(i) {
-      const c = cards[i];
-      feat.style.opacity = '0';
-      setTimeout(() => {
-        fcard.style.borderColor = c.color + '60';
-        fav.style.borderColor   = c.color + '90';
-        fimg.src = c.img; fimg.alt = c.dept;
-        fchip.textContent = c.dept; fchip.style.color = c.color;
-        ftitle.textContent = c.title;
-        feat.style.opacity = '1';
-      }, 320);
+    const N = cards.length;
+    cards.forEach(c => {
+      const el = document.createElement('div');
+      el.className = 's2-mob-card';
+      el.style.borderLeftColor = c.color;
+      el.innerHTML = `<div class="s2-card-top"><div class="s2-av" style="border-color:${c.color}90"><img src="${c.img}" alt="${c.dept}" loading="lazy"></div><span class="s2-dept-chip" style="color:${c.color}">${c.dept}</span></div><div class="s2-mob-title">${c.title}</div>`;
+      track.appendChild(el);
+    });
+    let cur = 0, timer;
+    function step() { return (track.querySelector('.s2-mob-card') || {offsetWidth:280}).offsetWidth + 10; }
+    function goTo(i, animate) {
+      cur = ((i % N) + N) % N;
+      track.style.transition = animate === false ? 'none' : 'transform 0.5s cubic-bezier(0.4,0,0.2,1)';
+      track.style.transform  = `translateX(-${cur * step()}px)`;
+      if (animate === false) requestAnimationFrame(() => requestAnimationFrame(() => { track.style.transition = 'transform 0.5s cubic-bezier(0.4,0,0.2,1)'; }));
     }
-    update(0);
-    setInterval(() => { idx = (idx + 1) % cards.length; update(idx); }, 2800);
+    function start() {
+      clearInterval(timer);
+      timer = setInterval(() => {
+        if (cur === N - 1) { goTo(0, false); } else { goTo(cur + 1, true); }
+      }, 3000);
+    }
+    let tx = 0;
+    wrap.addEventListener('touchstart', e => { tx = e.touches[0].clientX; clearInterval(timer); }, { passive:true });
+    wrap.addEventListener('touchend',   e => { const dx = tx - e.changedTouches[0].clientX; if (Math.abs(dx) > 30) goTo(cur + (dx > 0 ? 1 : -1), true); start(); }, { passive:true });
+    goTo(0, false);
+    start();
   })();
 
   // Pillars carousel (mobile auto-play)
