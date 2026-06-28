@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Credibility Slide — Variant B</title>
+<title>Credibility — Security Section Variants</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
@@ -28,16 +28,14 @@ html, body { background:#000; font-family:'Poppins',sans-serif; color:#fff; }
   padding:3px 9px; border-radius:20px; text-transform:uppercase;
 }
 
-/* ── Headline ── */
+/* ── Shared top section ── */
 .vb-headline {
   font-size:clamp(22px,6vw,32px); font-weight:800; line-height:1.15;
   letter-spacing:-1px; margin-bottom:28px; text-align:center;
   background:linear-gradient(140deg,#fff 50%,rgba(255,255,255,0.45));
   -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
 }
-
-/* ── Analyst cards ── */
-.vb-analyst-row { display:flex; flex-direction:column; gap:12px; width:100%; margin-bottom:12px; }
+.vb-analyst-row { display:flex; flex-direction:column; gap:10px; width:100%; margin-bottom:10px; }
 .vb-analyst {
   display:flex; align-items:center; gap:16px;
   padding:16px 20px;
@@ -53,46 +51,77 @@ html, body { background:#000; font-family:'Poppins',sans-serif; color:#fff; }
 .vb-analyst-title { font-size:12px; font-weight:600; margin-bottom:2px; }
 .vb-analyst-sub { font-size:10px; font-weight:300; color:rgba(255,255,255,0.38); line-height:1.4; }
 
-/* ── Security row ── */
-.vb-security {
-  display:flex; align-items:center; gap:12px;
-  padding:14px 18px;
-  background:rgba(255,255,255,0.03);
-  border:1px solid rgba(255,255,255,0.06);
-  border-radius:14px;
-}
-.vb-shield { flex-shrink:0; }
-.vb-certs { display:flex; flex-wrap:wrap; gap:6px; flex:1; }
-.vb-cert {
+/* Shared cert chips */
+.certs { display:flex; flex-wrap:wrap; gap:6px; }
+.cert {
   font-size:9px; font-weight:600; letter-spacing:0.3px;
   border:1px solid rgba(255,255,255,0.16);
   border-radius:20px; padding:3px 10px;
-  color:rgba(255,255,255,0.55);
-  white-space:nowrap;
+  color:rgba(255,255,255,0.55); white-space:nowrap;
 }
+
+/* ══════════════════════════════════════════════
+   SECURITY OPTION 1 — Matching card (same style as analysts)
+══════════════════════════════════════════════ */
+.sec1 {
+  display:flex; align-items:center; gap:14px;
+  padding:16px 20px;
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:14px;
+}
+.sec1-icon { flex-shrink:0; }
+.sec1-copy { flex:1; }
+.sec1-title { font-size:12px; font-weight:600; margin-bottom:8px; }
+
+/* ══════════════════════════════════════════════
+   SECURITY OPTION 2 — Prominent card with headline
+══════════════════════════════════════════════ */
+.sec2 {
+  padding:18px 20px;
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:14px;
+  display:flex; flex-direction:column; gap:10px;
+}
+.sec2-top { display:flex; align-items:center; gap:10px; }
+.sec2-headline { font-size:14px; font-weight:700; }
+.sec2-sub { font-size:10px; font-weight:300; color:rgba(255,255,255,0.38); line-height:1.4; margin-bottom:2px; }
+
+/* ══════════════════════════════════════════════
+   SECURITY OPTION 3 — No card, inline minimal
+══════════════════════════════════════════════ */
+.sec3 {
+  display:flex; flex-direction:column; align-items:center;
+  gap:10px; padding:4px 0;
+  text-align:center;
+}
+.sec3-label {
+  font-size:9px; font-weight:600; letter-spacing:3px; text-transform:uppercase;
+  color:rgba(255,255,255,0.3);
+  display:flex; align-items:center; gap:7px;
+}
+.sec3-label span { letter-spacing:3px; }
 </style>
 </head>
 <body>
 
+<!-- ══ OPTION 1 — Matching card, same as analyst cards ══ -->
 <div class="slide">
-  <div class="slide-label">B — Analysts First <span class="var-badge">Trust</span></div>
+  <div class="slide-label">Option 1 — Security as card <span class="var-badge">Consistent</span></div>
 
   <div class="vb-headline">Recognized by the<br>world's leading analysts.</div>
 
   <div class="vb-analyst-row">
     <div class="vb-analyst">
-      <img class="vb-analyst-logo"
-        src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Enterprise/Gartner.svg"
-        alt="Gartner">
+      <img class="vb-analyst-logo" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Enterprise/Gartner.svg" alt="Gartner">
       <div class="vb-analyst-copy">
         <div class="vb-analyst-title">3× Magic Quadrant Leader</div>
         <div class="vb-analyst-sub">Only work management platform recognized as Leader in 3 MQ reports</div>
       </div>
     </div>
     <div class="vb-analyst">
-      <img class="vb-analyst-logo"
-        src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Enterprise/Forster.svg"
-        alt="Forrester">
+      <img class="vb-analyst-logo" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Enterprise/Forster.svg" alt="Forrester">
       <div class="vb-analyst-copy">
         <div class="vb-analyst-title">Total Economic Impact™</div>
         <div class="vb-analyst-sub">Independent research confirms measurable business impact</div>
@@ -100,23 +129,107 @@ html, body { background:#000; font-family:'Poppins',sans-serif; color:#fff; }
     </div>
   </div>
 
-  <div class="vb-security">
-    <div class="vb-shield">
-      <svg width="22" height="22" viewBox="0 0 36 36" fill="none">
+  <div class="sec1">
+    <div class="sec1-icon">
+      <svg width="24" height="24" viewBox="0 0 36 36" fill="none">
         <path d="M18 3L5 8.5V17c0 8.4 5.8 16.2 13 18C25.2 33.2 31 25.4 31 17V8.5L18 3z"
           fill="rgba(97,97,255,0.2)" stroke="rgba(97,97,255,0.5)" stroke-width="1.5"/>
-        <path d="M12 18l4 4 8-8" stroke="#fff" stroke-width="1.8"
-          stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M12 18l4 4 8-8" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     </div>
-    <div class="vb-certs">
-      <span class="vb-cert">GDPR</span>
-      <span class="vb-cert">SOC 2</span>
-      <span class="vb-cert">ISO 27001</span>
-      <span class="vb-cert">HIPAA</span>
+    <div class="sec1-copy">
+      <div class="sec1-title">Enterprise-grade security</div>
+      <div class="certs">
+        <span class="cert">GDPR</span>
+        <span class="cert">SOC 2</span>
+        <span class="cert">ISO 27001</span>
+        <span class="cert">HIPAA</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ OPTION 2 — Prominent card with description ══ -->
+<div class="slide">
+  <div class="slide-label">Option 2 — Security prominent <span class="var-badge">Full</span></div>
+
+  <div class="vb-headline">Recognized by the<br>world's leading analysts.</div>
+
+  <div class="vb-analyst-row">
+    <div class="vb-analyst">
+      <img class="vb-analyst-logo" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Enterprise/Gartner.svg" alt="Gartner">
+      <div class="vb-analyst-copy">
+        <div class="vb-analyst-title">3× Magic Quadrant Leader</div>
+        <div class="vb-analyst-sub">Only work management platform recognized as Leader in 3 MQ reports</div>
+      </div>
+    </div>
+    <div class="vb-analyst">
+      <img class="vb-analyst-logo" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Enterprise/Forster.svg" alt="Forrester">
+      <div class="vb-analyst-copy">
+        <div class="vb-analyst-title">Total Economic Impact™</div>
+        <div class="vb-analyst-sub">Independent research confirms measurable business impact</div>
+      </div>
     </div>
   </div>
 
+  <div class="sec2">
+    <div class="sec2-top">
+      <svg width="20" height="20" viewBox="0 0 36 36" fill="none" style="flex-shrink:0">
+        <path d="M18 3L5 8.5V17c0 8.4 5.8 16.2 13 18C25.2 33.2 31 25.4 31 17V8.5L18 3z"
+          fill="rgba(97,97,255,0.2)" stroke="rgba(97,97,255,0.5)" stroke-width="1.5"/>
+        <path d="M12 18l4 4 8-8" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <div class="sec2-headline">Enterprise-grade security</div>
+    </div>
+    <div class="sec2-sub">Built-in protection, data privacy, governance, permissions and compliance</div>
+    <div class="certs">
+      <span class="cert">GDPR</span>
+      <span class="cert">SOC 2</span>
+      <span class="cert">ISO 27001</span>
+      <span class="cert">HIPAA</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══ OPTION 3 — No card, minimal inline ══ -->
+<div class="slide">
+  <div class="slide-label">Option 3 — Minimal inline <span class="var-badge">Subtle</span></div>
+
+  <div class="vb-headline">Recognized by the<br>world's leading analysts.</div>
+
+  <div class="vb-analyst-row">
+    <div class="vb-analyst">
+      <img class="vb-analyst-logo" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Enterprise/Gartner.svg" alt="Gartner">
+      <div class="vb-analyst-copy">
+        <div class="vb-analyst-title">3× Magic Quadrant Leader</div>
+        <div class="vb-analyst-sub">Only work management platform recognized as Leader in 3 MQ reports</div>
+      </div>
+    </div>
+    <div class="vb-analyst">
+      <img class="vb-analyst-logo" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Enterprise/Forster.svg" alt="Forrester">
+      <div class="vb-analyst-copy">
+        <div class="vb-analyst-title">Total Economic Impact™</div>
+        <div class="vb-analyst-sub">Independent research confirms measurable business impact</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec3">
+    <div class="sec3-label">
+      <svg width="14" height="14" viewBox="0 0 36 36" fill="none">
+        <path d="M18 3L5 8.5V17c0 8.4 5.8 16.2 13 18C25.2 33.2 31 25.4 31 17V8.5L18 3z"
+          fill="rgba(97,97,255,0.3)" stroke="rgba(97,97,255,0.6)" stroke-width="2"/>
+        <path d="M12 18l4 4 8-8" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span>Enterprise-grade security</span>
+    </div>
+    <div class="certs" style="justify-content:center;">
+      <span class="cert">GDPR</span>
+      <span class="cert">SOC 2</span>
+      <span class="cert">ISO 27001</span>
+      <span class="cert">HIPAA</span>
+    </div>
+  </div>
 </div>
 
 </body>
