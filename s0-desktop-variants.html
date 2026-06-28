@@ -19,36 +19,40 @@ h3.label { font-size:11px; font-weight:600; letter-spacing:4px; text-transform:u
 }
 
 /* ═══════════════════════════════════════════
-   VARIANT A — Centered, strip full-bleed bottom
-   Bigger type, more breathing room
+   VARIANT A — Centered, Agent + Human circles below text
 ═══════════════════════════════════════════ */
 .va {
   display:flex; flex-direction:column;
   align-items:center; justify-content:center; text-align:center;
 }
 .va-glow {
-  position:absolute; width:700px; height:500px; border-radius:50%;
-  background:radial-gradient(circle, rgba(97,97,255,0.1) 0%, transparent 70%);
-  top:5%; left:50%; transform:translateX(-50%); pointer-events:none;
+  position:absolute; width:60%; height:70%; border-radius:50%;
+  background:radial-gradient(circle, rgba(97,97,255,0.09) 0%, transparent 70%);
+  top:10%; left:50%; transform:translateX(-50%); pointer-events:none;
 }
-.va-logo { display:flex; flex-direction:column; align-items:center; gap:5px; margin-bottom:28px; position:relative; z-index:2; }
+.va-logo { display:flex; flex-direction:column; align-items:center; gap:5px; margin-bottom:3%; position:relative; z-index:2; }
 .va-logo img { height:26px; opacity:0.88; }
 .va-logo span { font-size:8px; font-weight:600; letter-spacing:5px; text-transform:uppercase; color:rgba(255,255,255,0.3); }
 .va h1 {
   font-size:5.8vw; font-weight:800; line-height:1.02; letter-spacing:-2.5px;
   background:linear-gradient(135deg,#fff 45%,rgba(255,255,255,0.5));
   -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
-  margin-bottom:16px; position:relative; z-index:2;
+  margin-bottom:1.2%; position:relative; z-index:2;
 }
-.va p { font-size:1.6vw; font-weight:300; color:var(--dim); position:relative; z-index:2; }
-.va-body { padding-bottom:16%; position:relative; z-index:2; }
+.va p { font-size:1.5vw; font-weight:300; color:var(--dim); position:relative; z-index:2; margin-bottom:4%; }
+.va-body { position:relative; z-index:2; display:flex; flex-direction:column; align-items:center; }
 
-/* Strip: full-width, fades at top */
-.va-strip {
-  position:absolute; bottom:0; left:0; width:100%; display:block; pointer-events:none;
-  mask-image:linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.6) 55%, transparent 100%);
-  -webkit-mask-image:linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.6) 55%, transparent 100%);
+/* Two circles: Agent + Human */
+.va-circles { display:flex; align-items:center; justify-content:center; gap:0; position:relative; z-index:2; }
+.va-circle {
+  width:22vw; height:22vw; border-radius:50%; overflow:hidden;
+  border:3px solid rgba(255,255,255,0.12);
+  box-shadow:0 0 40px rgba(0,0,0,0.8);
+  flex-shrink:0;
 }
+.va-circle:first-child { transform:translateX(3vw); z-index:1; }
+.va-circle:last-child  { transform:translateX(-3vw); z-index:2; }
+.va-circle img { width:100%; height:100%; object-fit:cover; object-position:top center; display:block; }
 
 /* ═══════════════════════════════════════════
    VARIANT B — Left text, strip as bottom panorama
@@ -171,31 +175,34 @@ h3.label { font-size:11px; font-weight:600; letter-spacing:4px; text-transform:u
 
 .vd-right {
   position:absolute; top:0; right:0;
-  width:57%; height:100%; overflow:hidden;
+  width:55%; height:100%; overflow:hidden;
+  display:flex; align-items:center; justify-content:center;
 }
 .vd-right::before {
   content:''; position:absolute; inset:0; z-index:2;
-  background:
-    linear-gradient(to right, #000 0%, rgba(0,0,0,0.6) 20%, transparent 50%),
-    linear-gradient(to bottom, #000 0%, transparent 20%, transparent 80%, #000 100%);
+  background:linear-gradient(to right, #000 0%, rgba(0,0,0,0.5) 18%, transparent 40%);
 }
-/* The strip is wide — position it to show the center (human faces) */
-.vd-right img {
-  position:absolute;
-  /* Make it cover the full height */
-  height:100%; width:auto;
-  /* Show center of strip by offsetting left by half the excess width */
-  top:0; left:50%; transform:translateX(-40%);
-  /* Alternatively: show it full-width to see more faces */
-  min-width:100%; object-fit:cover; object-position:40% center;
+/* Two equal circles side by side */
+.vd-circles {
+  display:flex; align-items:center; justify-content:center;
+  gap:0; position:relative; z-index:1; padding-right:4%;
 }
+.vd-circle {
+  width:34vh; height:34vh; border-radius:50%; overflow:hidden;
+  border:3px solid rgba(255,255,255,0.12);
+  box-shadow:0 0 48px rgba(0,0,0,0.7);
+  flex-shrink:0;
+}
+.vd-circle:first-child { transform:translateX(3vh); z-index:1; }
+.vd-circle:last-child  { transform:translateX(-3vh); z-index:2; }
+.vd-circle img { width:100%; height:100%; object-fit:cover; object-position:top center; display:block; }
 </style>
 </head>
 <body>
 
 <!-- VARIANT A -->
 <div>
-  <h3 class="label">Variant A — Centered, strip full-bleed</h3>
+  <h3 class="label">Variant A — Centered, Agent + Human circles</h3>
   <div class="variant va">
     <div class="va-glow"></div>
     <div class="va-body">
@@ -205,8 +212,15 @@ h3.label { font-size:11px; font-weight:600; letter-spacing:4px; text-transform:u
       </div>
       <h1>People and agents.</h1>
       <p>Working together. Driving results.</p>
+      <div class="va-circles">
+        <div class="va-circle">
+          <img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/Agent.png" alt="Agent">
+        </div>
+        <div class="va-circle">
+          <img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/Human.png" alt="Human">
+        </div>
+      </div>
     </div>
-    <img class="va-strip" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/Agents%20and%20People%20strip.png" alt="">
   </div>
 </div>
 
@@ -252,7 +266,7 @@ h3.label { font-size:11px; font-weight:600; letter-spacing:4px; text-transform:u
 
 <!-- VARIANT D -->
 <div>
-  <h3 class="label">Variant D — Split: text left, strip right half</h3>
+  <h3 class="label">Variant D — Split: text left, Agent + Human circles right</h3>
   <div class="variant vd">
     <div class="vd-left">
       <div class="vd-logo">
@@ -266,7 +280,14 @@ h3.label { font-size:11px; font-weight:600; letter-spacing:4px; text-transform:u
       <div class="vd-tag">AI Work Platform</div>
     </div>
     <div class="vd-right">
-      <img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/Agents%20and%20People%20strip.png" alt="">
+      <div class="vd-circles">
+        <div class="vd-circle">
+          <img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/Agent.png" alt="Agent">
+        </div>
+        <div class="vd-circle">
+          <img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/Human.png" alt="Human">
+        </div>
+      </div>
     </div>
   </div>
 </div>
