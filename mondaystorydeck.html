@@ -41,12 +41,14 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
 .glow { position:absolute; border-radius:50%; filter:blur(120px); opacity:0.08; pointer-events:none; }
 
 /* S0 */
-#s0 { background:#000; text-align:center; gap:20px; }
+#s0 { background:#000; text-align:center; justify-content:center; padding:0; }
+.s0-body { display:flex; flex-direction:column; align-items:center; justify-content:center; flex:1; padding:40px 28px 28px; }
 .s0-text { display:flex; flex-direction:column; align-items:center; gap:2px; }
-.opening-brand { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; }
+.opening-brand { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px; margin-bottom:28px; }
 .opening-brand img { height:22px; opacity:0.85; }
-.opening-brand span { font-size:11px; font-weight:500; letter-spacing:4px; text-transform:uppercase; color:var(--dim); white-space:nowrap; }
-.s0-strip { width:90%; max-width:1000px; opacity:0.18; pointer-events:none; }
+.opening-brand span { font-size:7px; font-weight:600; letter-spacing:5px; text-transform:uppercase; color:rgba(255,255,255,0.35); white-space:nowrap; }
+.s0-strip { width:100%; display:block; flex-shrink:0; opacity:0; transform:translateY(12px); transition:opacity 0.8s ease, transform 0.8s ease; pointer-events:none; }
+.s0-strip.visible { opacity:1; transform:translateY(0); }
 .line1 { font-size:clamp(36px,5.5vw,72px); font-weight:800; line-height:1.05; letter-spacing:-1.5px; display:block; background:linear-gradient(135deg,#fff 40%,rgba(255,255,255,0.6)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; min-height:1.1em; }
 .line2 { font-size:clamp(18px,2.5vw,34px); font-weight:300; line-height:1.2; color:var(--dim); display:block; margin-top:16px; min-height:1.3em; }
 .cursor { display:inline-block; width:2px; background:var(--purple); margin-left:3px; animation:blink 0.9s infinite; vertical-align:middle; }
@@ -292,8 +294,9 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
   .eyebrow { font-size: 9px; letter-spacing: 3px; margin-bottom: 16px; }
 
   /* S0 – Opening */
-  .opening-brand { gap: 8px; }
+  .opening-brand { gap: 3px; margin-bottom: 20px; }
   .opening-brand img { height: 18px; }
+  .s0-body { padding: 32px 20px 20px; }
   .line1 { font-size: clamp(28px, 8vw, 42px); letter-spacing: -0.5px; }
   .line2 { font-size: clamp(14px, 4vw, 20px); margin-top: 0; }
   .s0-text { gap: 8px; }
@@ -459,15 +462,17 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
 <div class="deck">
 
 <div class="slide active" id="s0">
-  <div class="opening-brand">
-    <img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/monday%20Logo/monday.com%20Logo.png" alt="monday.com">
-    <span>AI Work Platform</span>
+  <div class="s0-body">
+    <div class="opening-brand">
+      <img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/monday%20Logo/monday.com%20Logo.png" alt="monday.com">
+      <span>AI Work Platform</span>
+    </div>
+    <div class="s0-text">
+      <span class="line1" id="line1"></span>
+      <span class="line2" id="line2"></span>
+    </div>
   </div>
-  <img class="s0-strip" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/Agents%20and%20People%20strip.png" alt="">
-  <div class="s0-text">
-    <span class="line1" id="line1"></span>
-    <span class="line2" id="line2"></span>
-  </div>
+  <img class="s0-strip" id="s0Strip" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/Agents%20and%20People%20strip.png" alt="">
 </div>
 
 <div class="slide" id="s1">
@@ -1084,6 +1089,10 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
     typeWriter(line1El, 'People and agents.', 52, 'tall', () => {
       setTimeout(() => {
         typeWriter(line2El, 'Working together. Driving results.', 42, 'short', () => {
+          setTimeout(() => {
+            const strip = document.getElementById('s0Strip');
+            if (strip) strip.classList.add('visible');
+          }, 300);
         });
       }, 350);
     });
