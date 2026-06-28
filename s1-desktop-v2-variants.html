@@ -133,33 +133,22 @@
   /* ─────────────────────────────────────────
      J  full-width: centered title, auto-rotating dept below
   ───────────────────────────────────────── */
-  .vj-slide { flex-direction:column; }
-  .vj-slide::before { background:radial-gradient(ellipse 60% 55% at 50% 30%, rgba(100,78,248,0.08) 0%, transparent 70%) !important; }
-  .vj-top { display:flex; flex-direction:column; align-items:center; justify-content:center; flex:0 0 44%; text-align:center; padding:4% 22% 3%; }
-  .vj-eyebrow { font-size:10px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:#644ef8; margin-bottom:14px; }
-  .vj-mission { font-size:clamp(15px,1.9vw,26px); font-weight:700; line-height:1.35; color:#fff; }
-  .vj-tagline { font-size:11px; font-weight:300; color:rgba(255,255,255,0.3); line-height:1.7; margin-top:14px; }
-  .vj-divider { display:flex; align-items:center; gap:12px; padding:0 6%; flex-shrink:0; }
-  .vj-div-line { flex:1; height:1px; background:rgba(255,255,255,0.07); }
-  .vj-div-badge { display:flex; align-items:center; gap:7px; flex-shrink:0; }
-  .vj-div-badge .hub-box { width:20px; height:20px; border-radius:6px; }
-  .vj-div-badge .hub-box svg { display:block; }
-  .vj-div-badge span { font-size:8px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:rgba(100,78,248,0.65); }
-  .vj-bottom { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; padding:3% 8% 4%; }
-  .vj-featured { display:flex; align-items:center; gap:20px; }
-  .vj-feat-av { width:66px; height:66px; border-radius:50%; overflow:hidden; border:2px solid; flex-shrink:0; transition:border-color 0.35s, opacity 0.35s; }
-  .vj-feat-av img { width:100%; height:100%; object-fit:cover; object-position:top; }
-  .vj-feat-name { font-size:13px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; margin-bottom:6px; transition:color 0.35s, opacity 0.35s; }
-  .vj-feat-desc { font-size:clamp(11px,1.1vw,15px); font-weight:300; color:rgba(255,255,255,0.55); line-height:1.6; max-width:340px; transition:opacity 0.35s; }
-  .vj-strip { display:flex; justify-content:space-around; width:100%; }
+  .vj-slide { flex-direction:column; align-items:center; justify-content:center; }
+  .vj-inner { display:flex; flex-direction:column; align-items:center; text-align:center; gap:20px; width:86%; }
+  .vj-eyebrow { font-size:10px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:#644ef8; }
+  .vj-mission { font-size:clamp(15px,1.85vw,25px); font-weight:700; line-height:1.35; color:#fff; max-width:60%; }
+  .vj-tagline { font-size:11px; font-weight:300; color:rgba(255,255,255,0.3); line-height:1.7; }
+  .vj-strip { display:flex; justify-content:space-between; width:100%; margin-top:6px; }
   .vj-thumb { display:flex; flex-direction:column; align-items:center; gap:4px; cursor:pointer; transition:transform 0.2s; }
   .vj-thumb:hover { transform:translateY(-2px); }
   .vj-thumb.active { transform:translateY(-2px); }
-  .vj-thumb-av { width:40px; height:40px; border-radius:50%; overflow:hidden; border:2px solid rgba(255,255,255,0.1); transition:border-color 0.3s, box-shadow 0.3s; }
+  .vj-thumb-av { width:44px; height:44px; border-radius:50%; overflow:hidden; border:2px solid rgba(255,255,255,0.1); transition:border-color 0.3s, box-shadow 0.3s; }
   .vj-thumb-av img { width:100%; height:100%; object-fit:cover; object-position:top; }
   .vj-thumb.active .vj-thumb-av { box-shadow:0 0 0 3px rgba(100,78,248,0.3); }
   .vj-thumb-name { font-size:7px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:rgba(255,255,255,0.3); white-space:nowrap; transition:color 0.3s; }
   .vj-thumb.active .vj-thumb-name { color:#fff; }
+  .vj-feat-name { font-size:12px; font-weight:700; letter-spacing:2px; text-transform:uppercase; transition:color 0.35s, opacity 0.35s; }
+  .vj-feat-desc { font-size:clamp(11px,1.05vw,14px); font-weight:300; color:rgba(255,255,255,0.5); line-height:1.6; transition:opacity 0.35s; }
 </style>
 </head>
 <body>
@@ -304,37 +293,13 @@
 <div class="variant-label">J — Centered: mission top, auto-rotating department below</div>
 <div class="slide-frame">
   <div class="slide vj-slide">
-    <div class="vj-top">
+    <div class="vj-inner">
       <p class="vj-eyebrow">Our Mission</p>
       <h2 class="vj-mission">monday's mission has always been to help teams get more done and achieve their business goals.</h2>
       <p class="vj-tagline">Every department. People and agents connected through one platform.</p>
-    </div>
-    <div class="vj-divider">
-      <div class="vj-div-line"></div>
-      <div class="vj-div-badge">
-        <div class="hub-box" style="width:20px;height:20px;border-radius:6px">
-          <svg width="10" height="10" viewBox="0 0 24 24" fill="none">
-            <circle cx="5" cy="12" r="3" fill="#644ef8"/>
-            <circle cx="12" cy="5" r="3" fill="#e8341c"/>
-            <circle cx="19" cy="12" r="3" fill="#ffcc00"/>
-            <circle cx="12" cy="19" r="3" fill="#00b884"/>
-          </svg>
-        </div>
-        <span>monday</span>
-      </div>
-      <div class="vj-div-line"></div>
-    </div>
-    <div class="vj-bottom">
-      <div class="vj-featured">
-        <div class="vj-feat-av" id="vjFeatAv" style="border-color:#F9D27A">
-          <img id="vjFeatImg" src="" alt="">
-        </div>
-        <div>
-          <div class="vj-feat-name" id="vjFeatName" style="color:#F9D27A">Sales</div>
-          <div class="vj-feat-desc" id="vjFeatDesc">Faster revenue generation</div>
-        </div>
-      </div>
       <div class="vj-strip" id="vjStrip"></div>
+      <div class="vj-feat-name" id="vjFeatName" style="color:#F9D27A">Sales</div>
+      <div class="vj-feat-desc" id="vjFeatDesc">Faster revenue generation</div>
     </div>
   </div>
 </div>
@@ -460,8 +425,6 @@ let vhTimer = setInterval(vhNext, 2400);
 
 /* ── J: centered title, auto-rotating dept ── */
 const vjStrip    = document.getElementById('vjStrip');
-const vjFeatAv   = document.getElementById('vjFeatAv');
-const vjFeatImg  = document.getElementById('vjFeatImg');
 const vjFeatName = document.getElementById('vjFeatName');
 const vjFeatDesc = document.getElementById('vjFeatDesc');
 let vjThumbs = [];
@@ -472,15 +435,11 @@ function vjActivate(i, manual) {
   const d = depts[i];
   vjThumbs.forEach(t => t.classList.remove('active'));
   vjThumbs[i].classList.add('active');
-  vjFeatAv.style.opacity = '0';
   vjFeatName.style.opacity = '0';
   vjFeatDesc.style.opacity = '0';
   setTimeout(() => {
-    vjFeatAv.style.borderColor = d.color;
-    vjFeatImg.src = d.img; vjFeatImg.alt = d.name;
     vjFeatName.textContent = d.name; vjFeatName.style.color = d.color;
     vjFeatDesc.textContent = d.desc;
-    vjFeatAv.style.opacity = '1';
     vjFeatName.style.opacity = '1';
     vjFeatDesc.style.opacity = '1';
   }, 180);
@@ -496,7 +455,8 @@ depts.forEach((d, i) => {
   vjStrip.appendChild(thumb);
   vjThumbs.push(thumb);
 });
-vjFeatImg.src = depts[0].img;
+vjFeatName.textContent = depts[0].name;
+vjFeatDesc.textContent = depts[0].desc;
 let vjTimer = setInterval(vjNext, 2400);
 
 /* ── F: dept grid ── */
