@@ -151,6 +151,9 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
 .gap-pt.show { opacity:1; transform:translateY(0); }
 .gap-num { font-size:10px; font-weight:600; letter-spacing:3px; color:var(--purple); margin-bottom:8px; }
 .gap-text { font-size:clamp(10px,0.9vw,12px); color:rgba(255,255,255,0.22); font-weight:300; line-height:1.7; }
+.gap-left { display:contents; }
+.gap-right { display:none; }
+.gap-blocker-icon svg { width:20px; height:20px; }
 
 /* S4 */
 #s4 { text-align:center; }
@@ -464,6 +467,30 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
   .s1-info-card { display:none !important; }
 }
 
+/* S3 – Gap desktop split layout */
+@media (min-width: 769px) {
+  #s3 { padding: 0 5% 0 6%; align-items: center; justify-content: center; }
+  .gap-wrap { max-width: none; flex-direction: row; align-items: center; gap: 5%; height: 100%; }
+  .gap-left { display: flex; flex-direction: column; justify-content: center; flex: 0 0 38%; padding-right: 4%; border-right: 1px solid rgba(255,255,255,0.06); align-self: center; height: 65%; }
+  .gap-wrap .eyebrow { margin-bottom: 14px; }
+  .gap-stmt { font-size: clamp(18px,1.9vw,26px); color: #fff; margin-bottom: 0; }
+  .gap-stats { justify-content: flex-start; gap: 16px; margin-top: 24px; }
+  .gap-stat-item { text-align: left; }
+  .gap-stat-num { font-size: clamp(34px,3.5vw,50px); }
+  .gap-stat-label { margin: 4px 0 0; font-size: 10px; max-width: 110px; }
+  .gap-stat-yet-line { height: 18px; }
+  .gap-source { margin-top: 14px; }
+  .gap-list { display: none; }
+  .gap-right { display: flex; flex-direction: column; flex: 1; gap: 10px; justify-content: center; }
+  .gap-right-label { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.25); margin-bottom: 2px; }
+  .gap-blocker { border: 1px solid rgba(255,255,255,0.07); border-radius: 12px; padding: 13px 15px; display: flex; align-items: center; gap: 13px; position: relative; overflow: hidden; background: rgba(255,255,255,0.02); }
+  .gap-blocker::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, #644ef8, transparent 60%); opacity: 0.6; }
+  .gap-blocker-icon { width: 32px; height: 32px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; border-radius: 8px; background: rgba(100,78,248,0.1); }
+  .gap-blocker-title { font-size: clamp(11px,1vw,13px); font-weight: 700; color: #fff; margin-bottom: 3px; }
+  .gap-blocker-desc { font-size: clamp(9px,0.78vw,10px); font-weight: 300; color: rgba(255,255,255,0.45); line-height: 1.6; }
+  .gap-blocker-num { position: absolute; top: 11px; right: 13px; font-size: 9px; font-weight: 700; letter-spacing: 2px; color: rgba(100,78,248,0.4); }
+}
+
 /* S5b – Desktop card layout */
 @media (min-width: 769px) {
   #s5b { padding: 0; justify-content: center; align-items: center; }
@@ -748,28 +775,63 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
 
 <div class="slide" id="s3">
   <div class="gap-wrap">
-    <p class="eyebrow">The Gap</p>
-    <h2 class="gap-stmt">But people and agents can only reach their full potential when they share the same context, the same data, the same place.</h2>
-    <div class="gap-stats">
-      <div class="gap-stat-item">
-        <div class="gap-stat-num">90<sup>%</sup></div>
-        <div class="gap-stat-label">of employees use personal AI tools at work</div>
+    <div class="gap-left">
+      <p class="eyebrow">The Gap</p>
+      <h2 class="gap-stmt">But people and agents aren't reaching their full potential.</h2>
+      <div class="gap-stats">
+        <div class="gap-stat-item">
+          <div class="gap-stat-num">90<sup>%</sup></div>
+          <div class="gap-stat-label">of employees use personal AI tools at work</div>
+        </div>
+        <div class="gap-stat-yet">
+          <div class="gap-stat-yet-line"></div>
+          <div class="gap-stat-yet-text">yet</div>
+          <div class="gap-stat-yet-line"></div>
+        </div>
+        <div class="gap-stat-item">
+          <div class="gap-stat-num">5<sup>%</sup></div>
+          <div class="gap-stat-label">of enterprise AI pilots deliver measurable business impact</div>
+        </div>
       </div>
-      <div class="gap-stat-yet">
-        <div class="gap-stat-yet-line"></div>
-        <div class="gap-stat-yet-text">yet</div>
-        <div class="gap-stat-yet-line"></div>
-      </div>
-      <div class="gap-stat-item">
-        <div class="gap-stat-num">5<sup>%</sup></div>
-        <div class="gap-stat-label">of enterprise AI pilots deliver measurable business impact</div>
-      </div>
+      <p class="gap-source">MIT Sloan Management Review</p>
     </div>
-    <p class="gap-source">MIT Sloan Management Review</p>
     <div class="gap-list">
-      <div class="gap-pt" data-delay="0"><div class="gap-num">01</div><div class="gap-text">Work lives in one tool. Data in another. AI somewhere else.</div></div>
-      <div class="gap-pt" data-delay="150"><div class="gap-num">02</div><div class="gap-text">Agents without context can't drive real results.</div></div>
-      <div class="gap-pt" data-delay="300"><div class="gap-num">03</div><div class="gap-text">Teams coordinate more than they execute.</div></div>
+      <div class="gap-pt" data-delay="0"><div class="gap-num">01</div><div class="gap-text">Most people use AI as individuals. Outputs stay personal and never scale.</div></div>
+      <div class="gap-pt" data-delay="150"><div class="gap-num">02</div><div class="gap-text">When agents don't know enough about the business, they produce generic outputs, not real action.</div></div>
+      <div class="gap-pt" data-delay="300"><div class="gap-num">03</div><div class="gap-text">Agents live in a chat window, not where the work is done. Every handoff is a gap where execution breaks down.</div></div>
+    </div>
+    <div class="gap-right">
+      <p class="gap-right-label">What's standing in their way?</p>
+      <div class="gap-blocker">
+        <div class="gap-blocker-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#644ef8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="8" r="3"/><circle cx="17" cy="8" r="3"/><path d="M3 21c0-3 1.8-5.5 4-5.5"/><path d="M21 21c0-3-1.8-5.5-4-5.5"/><line x1="10" y1="15.5" x2="14" y2="15.5" stroke-dasharray="2 2" stroke-opacity="0.4"/></svg>
+        </div>
+        <div class="gap-blocker-body">
+          <div class="gap-blocker-title">Siloed Agents</div>
+          <div class="gap-blocker-desc">Most people use AI as individuals. Outputs stay personal and never scale.</div>
+        </div>
+        <div class="gap-blocker-num">01</div>
+      </div>
+      <div class="gap-blocker">
+        <div class="gap-blocker-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#644ef8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5"/><circle cx="12" cy="16.5" r="0.5" fill="#644ef8"/></svg>
+        </div>
+        <div class="gap-blocker-body">
+          <div class="gap-blocker-title">Lack of Context</div>
+          <div class="gap-blocker-desc">When agents don't know enough about the business, they produce generic outputs, not real action.</div>
+        </div>
+        <div class="gap-blocker-num">02</div>
+      </div>
+      <div class="gap-blocker">
+        <div class="gap-blocker-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#644ef8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1" stroke-opacity="0.3" stroke-dasharray="3 2"/></svg>
+        </div>
+        <div class="gap-blocker-body">
+          <div class="gap-blocker-title">Outside the Workflow</div>
+          <div class="gap-blocker-desc">Agents live in a chat window, not where the work is done. Every handoff is a gap where execution breaks down.</div>
+        </div>
+        <div class="gap-blocker-num">03</div>
+      </div>
     </div>
   </div>
 </div>
