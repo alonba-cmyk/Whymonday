@@ -75,7 +75,7 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
 .s1-orbit-wrap { position:relative; width:520px; height:520px; flex-shrink:0; }
 .s1-orbit-people { position:absolute; inset:0; }
 .s1-orbit-glow { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:240px; height:240px; background:radial-gradient(circle, rgba(97,97,255,0.14) 0%, transparent 70%); border-radius:50%; pointer-events:none; }
-.s1-ring { position:absolute; border-radius:50%; top:50%; left:50%; transform:translate(-50%,-50%); pointer-events:none; border:1px solid rgba(255,255,255,0.07); width:430px; height:430px; }
+.s1-ring { position:absolute; border-radius:50%; top:50%; left:50%; transform:translate(-50%,-50%); pointer-events:none; border:1px solid rgba(97,97,255,0.25); width:430px; height:430px; }
 .s1-orbit-center { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); text-align:center; width:220px; z-index:2; pointer-events:none; }
 .s1-orbit-center h2 { font-size:clamp(12px,1.2vw,16px); font-weight:700; line-height:1.4; color:#fff; }
 .s1-orbit-svg { position:absolute; inset:0; width:100%; height:100%; overflow:visible; pointer-events:none; }
@@ -454,9 +454,9 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
 /* S1 – Desktop Variant C layout */
 @media (min-width: 769px) {
   #s1 { padding: 0; }
-  .s1-orbit-inner { flex-direction:row; gap:0; padding:0 5% 0 6%; align-items:center; justify-content:center; }
+  .s1-orbit-inner { flex-direction:row; gap:0; padding:0 3% 0 4%; align-items:center; justify-content:center; }
   .s1-eyebrow-mobile { display:none; }
-  .s1-left-panel { display:flex; flex-direction:column; justify-content:center; flex:1; padding-right:48px; border-right:1px solid rgba(255,255,255,0.06); align-self:center; height:65%; }
+  .s1-left-panel { display:flex; flex-direction:column; justify-content:center; flex:1; padding-right:28px; border-right:1px solid rgba(255,255,255,0.06); align-self:center; height:65%; }
   .s1-mission-heading { font-size:clamp(22px,2.6vw,36px); font-weight:700; line-height:1.3; color:#fff; margin-top:18px; }
   .s1-right-orbit { display:flex; align-items:center; justify-content:center; flex:1.15; }
   .s1-center-h2 { display:none; }
@@ -634,25 +634,25 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
       <div class="s1-orbit-people" id="s1OrbitPeople">
         <!-- Desktop SVG lines (r=190, center=260, avatar=68→offset=34) -->
         <svg class="s1-orbit-svg s1-orbit-svg-desktop" viewBox="0 0 520 520" fill="none">
-          <line x1="260" y1="260" x2="260" y2="70"  stroke="rgba(97,97,255,0.2)" stroke-width="1" stroke-dasharray="4 6"/>
-          <line x1="260" y1="260" x2="394" y2="126" stroke="rgba(97,97,255,0.2)" stroke-width="1" stroke-dasharray="4 6"/>
-          <line x1="260" y1="260" x2="450" y2="260" stroke="rgba(97,97,255,0.2)" stroke-width="1" stroke-dasharray="4 6"/>
-          <line x1="260" y1="260" x2="394" y2="394" stroke="rgba(97,97,255,0.2)" stroke-width="1" stroke-dasharray="4 6"/>
-          <line x1="260" y1="260" x2="260" y2="450" stroke="rgba(97,97,255,0.2)" stroke-width="1" stroke-dasharray="4 6"/>
-          <line x1="260" y1="260" x2="126" y2="394" stroke="rgba(97,97,255,0.2)" stroke-width="1" stroke-dasharray="4 6"/>
-          <line x1="260" y1="260" x2="70"  y2="260" stroke="rgba(97,97,255,0.2)" stroke-width="1" stroke-dasharray="4 6"/>
-          <line x1="260" y1="260" x2="126" y2="126" stroke="rgba(97,97,255,0.2)" stroke-width="1" stroke-dasharray="4 6"/>
+          <line x1="260" y1="260" x2="260" y2="70"  stroke="rgba(97,97,255,0.45)" stroke-width="1" stroke-dasharray="4 6"/>
+          <line x1="260" y1="260" x2="394" y2="126" stroke="rgba(97,97,255,0.45)" stroke-width="1" stroke-dasharray="4 6"/>
+          <line x1="260" y1="260" x2="450" y2="260" stroke="rgba(97,97,255,0.45)" stroke-width="1" stroke-dasharray="4 6"/>
+          <line x1="260" y1="260" x2="394" y2="394" stroke="rgba(97,97,255,0.45)" stroke-width="1" stroke-dasharray="4 6"/>
+          <line x1="260" y1="260" x2="260" y2="450" stroke="rgba(97,97,255,0.45)" stroke-width="1" stroke-dasharray="4 6"/>
+          <line x1="260" y1="260" x2="126" y2="394" stroke="rgba(97,97,255,0.45)" stroke-width="1" stroke-dasharray="4 6"/>
+          <line x1="260" y1="260" x2="70"  y2="260" stroke="rgba(97,97,255,0.45)" stroke-width="1" stroke-dasharray="4 6"/>
+          <line x1="260" y1="260" x2="126" y2="126" stroke="rgba(97,97,255,0.45)" stroke-width="1" stroke-dasharray="4 6"/>
         </svg>
         <!-- Mobile SVG lines (r=115, center=148, avatar=42→offset=21) -->
         <svg class="s1-orbit-svg s1-orbit-svg-mobile" viewBox="0 0 296 296" fill="none">
-          <line x1="148" y1="148" x2="148" y2="33"  stroke="rgba(97,97,255,0.2)" stroke-width="0.8" stroke-dasharray="3 5"/>
-          <line x1="148" y1="148" x2="229" y2="66"  stroke="rgba(97,97,255,0.2)" stroke-width="0.8" stroke-dasharray="3 5"/>
-          <line x1="148" y1="148" x2="263" y2="148" stroke="rgba(97,97,255,0.2)" stroke-width="0.8" stroke-dasharray="3 5"/>
-          <line x1="148" y1="148" x2="229" y2="229" stroke="rgba(97,97,255,0.2)" stroke-width="0.8" stroke-dasharray="3 5"/>
-          <line x1="148" y1="148" x2="148" y2="263" stroke="rgba(97,97,255,0.2)" stroke-width="0.8" stroke-dasharray="3 5"/>
-          <line x1="148" y1="148" x2="66"  y2="229" stroke="rgba(97,97,255,0.2)" stroke-width="0.8" stroke-dasharray="3 5"/>
-          <line x1="148" y1="148" x2="33"  y2="148" stroke="rgba(97,97,255,0.2)" stroke-width="0.8" stroke-dasharray="3 5"/>
-          <line x1="148" y1="148" x2="66"  y2="66"  stroke="rgba(97,97,255,0.2)" stroke-width="0.8" stroke-dasharray="3 5"/>
+          <line x1="148" y1="148" x2="148" y2="33"  stroke="rgba(97,97,255,0.45)" stroke-width="0.8" stroke-dasharray="3 5"/>
+          <line x1="148" y1="148" x2="229" y2="66"  stroke="rgba(97,97,255,0.45)" stroke-width="0.8" stroke-dasharray="3 5"/>
+          <line x1="148" y1="148" x2="263" y2="148" stroke="rgba(97,97,255,0.45)" stroke-width="0.8" stroke-dasharray="3 5"/>
+          <line x1="148" y1="148" x2="229" y2="229" stroke="rgba(97,97,255,0.45)" stroke-width="0.8" stroke-dasharray="3 5"/>
+          <line x1="148" y1="148" x2="148" y2="263" stroke="rgba(97,97,255,0.45)" stroke-width="0.8" stroke-dasharray="3 5"/>
+          <line x1="148" y1="148" x2="66"  y2="229" stroke="rgba(97,97,255,0.45)" stroke-width="0.8" stroke-dasharray="3 5"/>
+          <line x1="148" y1="148" x2="33"  y2="148" stroke="rgba(97,97,255,0.45)" stroke-width="0.8" stroke-dasharray="3 5"/>
+          <line x1="148" y1="148" x2="66"  y2="66"  stroke="rgba(97,97,255,0.45)" stroke-width="0.8" stroke-dasharray="3 5"/>
         </svg>
 
         <div class="s1-orbit-person s1-p-sales"      data-name="Sales"      data-color="#F9D27A" data-desc="Faster revenue generation">
