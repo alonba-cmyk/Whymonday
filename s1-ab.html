@@ -50,8 +50,12 @@ html, body { background:#000; font-family:'Poppins',sans-serif; color:#fff; }
 }
 .va-sub {
   font-size:13px; font-weight:300; color:rgba(255,255,255,0.4);
-  text-align:center; line-height:1.5;
+  text-align:center; line-height:1.5; min-height:1.4em;
 }
+.cursor { display:inline-block; width:2px; background:#fff; margin-left:2px; animation:blink 0.9s infinite; vertical-align:middle; }
+.cursor.tall  { height:clamp(34px,8.5vw,48px); }
+.cursor.short { height:14px; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
 </style>
 </head>
 <body>
@@ -60,11 +64,37 @@ html, body { background:#000; font-family:'Poppins',sans-serif; color:#fff; }
   <div class="slide-label">A — Headline First <span class="badge">Bold</span></div>
   <div class="va-body">
     <img class="va-logo" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/monday%20Logo/monday.com%20Logo.png" alt="monday.com">
-    <h1 class="va-headline">People<br>and agents.</h1>
-    <p class="va-sub">Working together. Driving results.</p>
+    <h1 class="va-headline" id="line1"></h1>
+    <p class="va-sub" id="line2"></p>
   </div>
   <img class="strip-img" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/Agents%20and%20People%20strip.png" alt="People and Agents">
 </div>
 
+<script>
+function typeWriter(el, text, speed, cls, done) {
+  let i = 0;
+  const cur = document.createElement('span');
+  cur.className = 'cursor ' + cls;
+  el.appendChild(cur);
+  function t() {
+    if (i < text.length) {
+      el.insertBefore(document.createTextNode(text[i++]), cur);
+      setTimeout(t, speed + Math.random() * 25);
+    } else {
+      cur.remove();
+      if (done) done();
+    }
+  }
+  t();
+}
+
+setTimeout(() => {
+  typeWriter(document.getElementById('line1'), 'People and agents.', 52, 'tall', () => {
+    setTimeout(() => {
+      typeWriter(document.getElementById('line2'), 'Working together. Driving results.', 42, 'short');
+    }, 350);
+  });
+}, 500);
+</script>
 </body>
 </html>
