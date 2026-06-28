@@ -201,13 +201,15 @@ h3.label { font-size:11px; font-weight:600; letter-spacing:4px; text-transform:u
   gap:0; padding:5% 0 4%;
 }
 
-.ve-logo { display:flex; flex-direction:column; align-items:center; gap:5px; margin-bottom:5%; }
+.ve-logo { display:flex; flex-direction:column; align-items:center; gap:5px; margin-bottom:2.5%; }
 .ve-logo img { height:26px; opacity:0.88; }
 .ve-logo span { font-size:8px; font-weight:600; letter-spacing:5px; text-transform:uppercase; color:rgba(255,255,255,0.3); }
 
+.ve h1 { margin-bottom:2%; }
+
 /* Strip: sized to roughly 55% of slide width, centered */
 .ve-strip-wrap {
-  width:62%; position:relative; flex-shrink:0; margin-bottom:3.5%;
+  width:62%; position:relative; flex-shrink:0; margin-bottom:2.5%;
 }
 .ve-strip-wrap::before {
   content:''; position:absolute; inset:0; z-index:2; pointer-events:none;
@@ -319,16 +321,16 @@ h3.label { font-size:11px; font-weight:600; letter-spacing:4px; text-transform:u
 
 <!-- VARIANT E -->
 <div>
-  <h3 class="label">Variant E — Logo · Strip · Text (vertical stack)</h3>
+  <h3 class="label">Variant E — Logo · Headline · Strip · Subtitle</h3>
   <div class="variant ve">
     <div class="ve-logo">
       <img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/monday%20Logo/monday.com%20Logo.png" alt="monday.com">
       <span>AI Work Platform</span>
     </div>
+    <h1>People and agents.</h1>
     <div class="ve-strip-wrap">
       <img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/Agents%20and%20People%20strip.png" alt="">
     </div>
-    <h1>People and agents.</h1>
     <p>Working together. Driving results.</p>
   </div>
 </div>
