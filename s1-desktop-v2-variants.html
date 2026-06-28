@@ -59,10 +59,10 @@
   .vb-thumb    { display:flex; flex-direction:column; align-items:center; gap:4px; cursor:pointer; transition:transform 0.2s; }
   .vb-thumb:hover { transform:translateY(-2px); }
   .vb-thumb.active { transform:translateY(-2px); }
-  .vb-thumb-av { width:30px; height:30px; border-radius:50%; overflow:hidden; border:1.5px solid rgba(255,255,255,0.1); transition:border-color 0.3s, box-shadow 0.3s; }
+  .vb-thumb-av { width:46px; height:46px; border-radius:50%; overflow:hidden; border:2px solid rgba(255,255,255,0.12); transition:border-color 0.3s, box-shadow 0.3s; }
   .vb-thumb-av img { width:100%; height:100%; object-fit:cover; object-position:top; }
-  .vb-thumb.active .vb-thumb-av { box-shadow:0 0 0 2px rgba(100,78,248,0.3); }
-  .vb-thumb-name { font-size:7px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:rgba(255,255,255,0.3); white-space:nowrap; transition:color 0.3s; }
+  .vb-thumb.active .vb-thumb-av { box-shadow:0 0 0 3px rgba(100,78,248,0.3); }
+  .vb-thumb-name { font-size:7.5px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:rgba(255,255,255,0.3); white-space:nowrap; transition:color 0.3s; }
   .vb-thumb.active .vb-thumb-name { color:#fff; }
 
   /* ─────────────────────────────────────────
@@ -157,6 +157,27 @@
   .vf-card.active .vf-card-name { color:#fff; }
   .vf-card-desc { font-size:8.5px; font-weight:300; color:rgba(255,255,255,0.35); text-align:center; line-height:1.5; display:none; }
   .vf-card.active .vf-card-desc { display:block; }
+
+  /* ─────────────────────────────────────────
+     G  B variant: outcome top + dept grid center
+  ───────────────────────────────────────── */
+  .vg-right   { flex:1; display:flex; flex-direction:column; padding:4% 4% 3%; gap:10px; }
+  .vg-outcome { display:flex; align-items:center; gap:12px; padding-bottom:10px; border-bottom:1px solid rgba(255,255,255,0.07); flex-shrink:0; }
+  .vg-out-dept { font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; white-space:nowrap; flex-shrink:0; transition:color 0.3s; }
+  .vg-out-sep  { width:1px; height:26px; background:rgba(255,255,255,0.1); flex-shrink:0; }
+  .vg-out-desc { font-size:clamp(11px,1.1vw,14px); font-weight:300; color:rgba(255,255,255,0.6); line-height:1.5; }
+  .vg-grid    { flex:1; display:grid; grid-template-columns:repeat(4,1fr); grid-template-rows:repeat(2,1fr); gap:10px; min-height:0; }
+  .vg-card    { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:7px; padding:8px; border-radius:12px; cursor:pointer; transition:all 0.2s; border:2px solid transparent; background:rgba(255,255,255,0.015); }
+  .vg-card:hover { background:rgba(255,255,255,0.04); border-color:rgba(255,255,255,0.1); }
+  .vg-card.active { background:rgba(100,78,248,0.06); }
+  .vg-av      { width:52px; height:52px; border-radius:50%; overflow:hidden; border:2px solid rgba(255,255,255,0.12); transition:border-color 0.3s, box-shadow 0.3s; flex-shrink:0; }
+  .vg-av img  { width:100%; height:100%; object-fit:cover; object-position:top; }
+  .vg-card.active .vg-av { box-shadow:0 0 0 3px rgba(100,78,248,0.2); }
+  .vg-name    { font-size:8.5px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:rgba(255,255,255,0.4); text-align:center; transition:color 0.3s; }
+  .vg-card.active .vg-name { color:#fff; }
+  .vg-monday  { display:flex; align-items:center; justify-content:center; gap:8px; flex-shrink:0; }
+  .vg-monday .hub-box { width:22px; height:22px; border-radius:7px; }
+  .vg-monday-lbl { font-size:8px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:rgba(100,78,248,0.65); }
 </style>
 </head>
 <body>
@@ -322,6 +343,37 @@
   </div>
 </div>
 
+<!-- ═══ G ═══ -->
+<div class="variant-label">G — B Variant: outcome info top + dept grid centered</div>
+<div class="slide-frame">
+  <div class="slide">
+    <div class="v-left">
+      <p class="eyebrow">Our Mission</p>
+      <h2 class="mission">monday's mission has always been to help teams get more done and achieve their business goals.</h2>
+      <p class="tagline">Every department. One platform. People and agents working together.</p>
+    </div>
+    <div class="vg-right">
+      <div class="vg-outcome">
+        <div class="vg-out-dept" id="vgOutDept" style="color:#F9D27A">Sales</div>
+        <div class="vg-out-sep"></div>
+        <div class="vg-out-desc" id="vgOutDesc">Faster revenue generation</div>
+      </div>
+      <div class="vg-grid" id="vgGrid"></div>
+      <div class="vg-monday">
+        <div class="hub-box" style="width:22px;height:22px;border-radius:7px">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none">
+            <circle cx="5" cy="12" r="3" fill="#644ef8"/>
+            <circle cx="12" cy="5" r="3" fill="#e8341c"/>
+            <circle cx="19" cy="12" r="3" fill="#ffcc00"/>
+            <circle cx="12" cy="19" r="3" fill="#00b884"/>
+          </svg>
+        </div>
+        <span class="vg-monday-lbl">monday</span>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- ═══ F ═══ -->
 <div class="variant-label">F — Department Grid</div>
 <div class="slide-frame">
@@ -463,6 +515,23 @@ depts.forEach((d, i) => {
   conn.className = 've-conn' + (i === 0 ? ' active' : '');
   veConns.appendChild(conn);
   veConnEls.push(conn);
+});
+
+/* ── G: outcome top + dept grid ── */
+const vgGrid    = document.getElementById('vgGrid');
+const vgOutDept = document.getElementById('vgOutDept');
+const vgOutDesc = document.getElementById('vgOutDesc');
+depts.forEach((d, i) => {
+  const card = document.createElement('div');
+  card.className = 'vg-card' + (i === 0 ? ' active' : '');
+  card.innerHTML = `<div class="vg-av" style="border-color:${d.color}70"><img src="${d.img}" alt="${d.name}"></div><div class="vg-name">${d.name}</div>`;
+  card.onclick = () => {
+    vgGrid.querySelectorAll('.vg-card').forEach(c => c.classList.remove('active'));
+    card.classList.add('active');
+    vgOutDept.textContent = d.name; vgOutDept.style.color = d.color;
+    vgOutDesc.textContent = d.desc;
+  };
+  vgGrid.appendChild(card);
 });
 
 /* ── F: dept grid ── */
