@@ -1003,13 +1003,13 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
 
   function onSlideEnter(n) {
     if (n === 2) { if (window.innerWidth <= 768) { pcGoTo(0); pcStart(); } } else { pcStop(); }
-    if (n === 4) { mktPlayIntro(); } else { sbsStopAuto(); }
+    if (n === 5) { mktPlayIntro(); } else { sbsStopAuto(); }
     if (n === 3) {
       document.querySelectorAll('.gap-pt').forEach(el => {
         setTimeout(() => el.classList.add('show'), parseInt(el.dataset.delay));
       });
     }
-    if (n === 5 && !layersDone) {
+    if (n === 4 && !layersDone) {
       layersDone = true;
       setTimeout(() => {
         document.getElementById('charP').classList.add('spread');
