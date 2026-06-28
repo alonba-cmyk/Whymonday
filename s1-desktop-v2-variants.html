@@ -131,24 +131,27 @@
   .vh-feat-desc { font-size:clamp(11px,1.1vw,14px); font-weight:300; color:rgba(255,255,255,0.55); line-height:1.55; transition:opacity 0.4s; }
 
   /* ─────────────────────────────────────────
-     J  full-width: centered title, auto-rotating dept below
+     J  full-slide spotlight: mission top, large dept center, strip bottom
   ───────────────────────────────────────── */
-  .vj-slide { flex-direction:column; align-items:center; justify-content:center; }
-  .vj-inner { display:flex; flex-direction:column; align-items:center; text-align:center; gap:20px; width:86%; }
-  .vj-eyebrow { font-size:10px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:#644ef8; }
-  .vj-mission { font-size:clamp(15px,1.85vw,25px); font-weight:700; line-height:1.35; color:#fff; max-width:60%; }
-  .vj-tagline { font-size:11px; font-weight:300; color:rgba(255,255,255,0.3); line-height:1.7; }
-  .vj-strip { display:flex; justify-content:space-between; width:100%; margin-top:6px; }
+  .vj-slide { flex-direction:column; align-items:center; justify-content:space-between; padding:5% 0 4%; }
+  .vj-slide::before { background:radial-gradient(ellipse 58% 65% at 50% 52%, rgba(100,78,248,0.1) 0%, transparent 68%) !important; }
+  .vj-header { text-align:center; padding:0 22%; flex-shrink:0; }
+  .vj-eyebrow { font-size:10px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:#644ef8; margin-bottom:12px; }
+  .vj-mission { font-size:clamp(14px,1.65vw,22px); font-weight:700; line-height:1.4; color:#fff; }
+  .vj-hero { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; }
+  .vj-hero-av { width:82px; height:82px; border-radius:50%; overflow:hidden; border:2.5px solid; flex-shrink:0; transition:border-color 0.35s, box-shadow 0.35s, opacity 0.35s; }
+  .vj-hero-av img { width:100%; height:100%; object-fit:cover; object-position:top; }
+  .vj-hero-name { font-size:14px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; transition:color 0.35s, opacity 0.35s; }
+  .vj-hero-desc { font-size:clamp(11px,1.05vw,14px); font-weight:300; color:rgba(255,255,255,0.52); line-height:1.6; text-align:center; max-width:300px; transition:opacity 0.35s; }
+  .vj-strip { display:flex; justify-content:space-around; width:100%; padding:0 5%; flex-shrink:0; }
   .vj-thumb { display:flex; flex-direction:column; align-items:center; gap:4px; cursor:pointer; transition:transform 0.2s; }
   .vj-thumb:hover { transform:translateY(-2px); }
-  .vj-thumb.active { transform:translateY(-2px); }
-  .vj-thumb-av { width:44px; height:44px; border-radius:50%; overflow:hidden; border:2px solid rgba(255,255,255,0.1); transition:border-color 0.3s, box-shadow 0.3s; }
+  .vj-thumb.active { transform:translateY(-3px); }
+  .vj-thumb-av { width:38px; height:38px; border-radius:50%; overflow:hidden; border:2px solid rgba(255,255,255,0.1); transition:border-color 0.3s, box-shadow 0.3s; }
   .vj-thumb-av img { width:100%; height:100%; object-fit:cover; object-position:top; }
-  .vj-thumb.active .vj-thumb-av { box-shadow:0 0 0 3px rgba(100,78,248,0.3); }
-  .vj-thumb-name { font-size:7px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:rgba(255,255,255,0.3); white-space:nowrap; transition:color 0.3s; }
+  .vj-thumb.active .vj-thumb-av { box-shadow:0 0 0 2.5px rgba(100,78,248,0.35); }
+  .vj-thumb-name { font-size:7px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:rgba(255,255,255,0.28); white-space:nowrap; transition:color 0.3s; }
   .vj-thumb.active .vj-thumb-name { color:#fff; }
-  .vj-feat-name { font-size:12px; font-weight:700; letter-spacing:2px; text-transform:uppercase; transition:color 0.35s, opacity 0.35s; }
-  .vj-feat-desc { font-size:clamp(11px,1.05vw,14px); font-weight:300; color:rgba(255,255,255,0.5); line-height:1.6; transition:opacity 0.35s; }
 </style>
 </head>
 <body>
@@ -293,14 +296,18 @@
 <div class="variant-label">J — Centered: mission top, auto-rotating department below</div>
 <div class="slide-frame">
   <div class="slide vj-slide">
-    <div class="vj-inner">
+    <div class="vj-header">
       <p class="vj-eyebrow">Our Mission</p>
       <h2 class="vj-mission">monday's mission has always been to help teams get more done and achieve their business goals.</h2>
-      <p class="vj-tagline">Every department. People and agents connected through one platform.</p>
-      <div class="vj-strip" id="vjStrip"></div>
-      <div class="vj-feat-name" id="vjFeatName" style="color:#F9D27A">Sales</div>
-      <div class="vj-feat-desc" id="vjFeatDesc">Faster revenue generation</div>
     </div>
+    <div class="vj-hero">
+      <div class="vj-hero-av" id="vjHeroAv" style="border-color:#F9D27A">
+        <img id="vjHeroImg" src="" alt="">
+      </div>
+      <div class="vj-hero-name" id="vjHeroName" style="color:#F9D27A">Sales</div>
+      <div class="vj-hero-desc" id="vjHeroDesc">Faster revenue generation</div>
+    </div>
+    <div class="vj-strip" id="vjStrip"></div>
   </div>
 </div>
 
@@ -423,10 +430,12 @@ vhFeatName.textContent = depts[0].name;
 vhFeatDesc.textContent = depts[0].desc;
 let vhTimer = setInterval(vhNext, 2400);
 
-/* ── J: centered title, auto-rotating dept ── */
+/* ── J: full-slide spotlight ── */
 const vjStrip    = document.getElementById('vjStrip');
-const vjFeatName = document.getElementById('vjFeatName');
-const vjFeatDesc = document.getElementById('vjFeatDesc');
+const vjHeroAv   = document.getElementById('vjHeroAv');
+const vjHeroImg  = document.getElementById('vjHeroImg');
+const vjHeroName = document.getElementById('vjHeroName');
+const vjHeroDesc = document.getElementById('vjHeroDesc');
 let vjThumbs = [];
 let vjIdx = 0;
 
@@ -435,29 +444,34 @@ function vjActivate(i, manual) {
   const d = depts[i];
   vjThumbs.forEach(t => t.classList.remove('active'));
   vjThumbs[i].classList.add('active');
-  vjFeatName.style.opacity = '0';
-  vjFeatDesc.style.opacity = '0';
+  vjHeroAv.style.opacity = '0';
+  vjHeroName.style.opacity = '0';
+  vjHeroDesc.style.opacity = '0';
   setTimeout(() => {
-    vjFeatName.textContent = d.name; vjFeatName.style.color = d.color;
-    vjFeatDesc.textContent = d.desc;
-    vjFeatName.style.opacity = '1';
-    vjFeatDesc.style.opacity = '1';
-  }, 180);
-  if (manual) { clearInterval(vjTimer); vjTimer = setInterval(vjNext, 2400); }
+    vjHeroAv.style.borderColor = d.color;
+    vjHeroAv.style.boxShadow = `0 0 32px ${d.color}35`;
+    vjHeroImg.src = d.img; vjHeroImg.alt = d.name;
+    vjHeroName.textContent = d.name; vjHeroName.style.color = d.color;
+    vjHeroDesc.textContent = d.desc;
+    vjHeroAv.style.opacity = '1';
+    vjHeroName.style.opacity = '1';
+    vjHeroDesc.style.opacity = '1';
+  }, 200);
+  if (manual) { clearInterval(vjTimer); vjTimer = setInterval(vjNext, 2500); }
 }
 function vjNext() { vjActivate((vjIdx + 1) % depts.length, false); }
 
 depts.forEach((d, i) => {
   const thumb = document.createElement('div');
   thumb.className = 'vj-thumb' + (i === 0 ? ' active' : '');
-  thumb.innerHTML = `<div class="vj-thumb-av" style="border-color:${d.color}80"><img src="${d.img}" alt="${d.name}"></div><span class="vj-thumb-name">${d.name}</span>`;
+  thumb.innerHTML = `<div class="vj-thumb-av" style="border-color:${d.color}70"><img src="${d.img}" alt="${d.name}"></div><span class="vj-thumb-name">${d.name}</span>`;
   thumb.onclick = () => vjActivate(i, true);
   vjStrip.appendChild(thumb);
   vjThumbs.push(thumb);
 });
-vjFeatName.textContent = depts[0].name;
-vjFeatDesc.textContent = depts[0].desc;
-let vjTimer = setInterval(vjNext, 2400);
+vjHeroImg.src = depts[0].img;
+vjHeroAv.style.boxShadow = `0 0 32px ${depts[0].color}35`;
+let vjTimer = setInterval(vjNext, 2500);
 
 /* ── F: dept grid ── */
 const vfGrid = document.getElementById('vfGrid');
