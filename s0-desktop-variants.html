@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>S0 Desktop Variants</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --purple: #6161ff;
+  --dim: rgba(255,255,255,0.4);
+}
+body { background:#111; font-family:'Poppins',sans-serif; color:#fff; padding:40px 24px; display:flex; flex-direction:column; gap:32px; }
+
+h3.label {
+  font-size:11px; font-weight:600; letter-spacing:4px; text-transform:uppercase;
+  color:rgba(255,255,255,0.3); margin-bottom:12px;
+}
+
+/* ───── shared slide shell ───── */
+.variant {
+  width:100%; aspect-ratio:16/9; background:#000;
+  position:relative; overflow:hidden; border-radius:12px;
+  border:1px solid rgba(255,255,255,0.08);
+  display:flex; flex-direction:column;
+  font-family:'Poppins',sans-serif;
+}
+
+/* ──────────────────────────────────────────────
+   VARIANT A  —  Centered, bigger, more breathing room
+   Strip stays at bottom but full-bleed
+────────────────────────────────────────────── */
+.va { justify-content:center; align-items:center; text-align:center; }
+
+.va-logo { display:flex; flex-direction:column; align-items:center; gap:5px; margin-bottom:32px; }
+.va-logo img { height:26px; opacity:0.88; }
+.va-logo span { font-size:8px; font-weight:600; letter-spacing:5px; text-transform:uppercase; color:rgba(255,255,255,0.3); }
+
+.va h1 {
+  font-size:clamp(48px,5.8vw,92px); font-weight:800; line-height:1.02; letter-spacing:-2.5px;
+  background:linear-gradient(135deg,#fff 45%,rgba(255,255,255,0.5));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+  margin-bottom:20px;
+}
+.va p {
+  font-size:clamp(16px,1.6vw,26px); font-weight:300; color:var(--dim); line-height:1.3;
+}
+
+.va-glow {
+  position:absolute; width:600px; height:600px; border-radius:50%;
+  background:radial-gradient(circle, rgba(97,97,255,0.09) 0%, transparent 70%);
+  top:50%; left:50%; transform:translate(-50%,-60%); pointer-events:none;
+}
+
+.va-strip {
+  position:absolute; bottom:0; left:0; width:100%;
+  display:block;
+  mask-image:linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.3) 60%, transparent 100%);
+  -webkit-mask-image:linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.3) 60%, transparent 100%);
+}
+
+.va-body { position:relative; z-index:2; padding-bottom:14%; }
+
+/* ──────────────────────────────────────────────
+   VARIANT B  —  Left-aligned editorial split
+   Text left, avatars on the right as a column
+────────────────────────────────────────────── */
+.vb { flex-direction:row; align-items:stretch; }
+
+.vb-left {
+  width:52%; padding:7% 6% 7% 7%;
+  display:flex; flex-direction:column; justify-content:center;
+  position:relative; z-index:2;
+}
+.vb-logo { display:flex; align-items:center; gap:10px; margin-bottom:auto; padding-bottom:6%; }
+.vb-logo img { height:20px; opacity:0.82; }
+.vb-logo span { font-size:7px; font-weight:600; letter-spacing:5px; text-transform:uppercase; color:rgba(255,255,255,0.28); }
+
+.vb h1 {
+  font-size:clamp(36px,4.2vw,68px); font-weight:800; line-height:1.03; letter-spacing:-2px;
+  background:linear-gradient(135deg,#fff 40%,rgba(255,255,255,0.55));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+  margin-bottom:18px;
+}
+.vb p { font-size:clamp(13px,1.3vw,20px); font-weight:300; color:var(--dim); line-height:1.4; }
+
+.vb-divider {
+  width:32px; height:2px; background:var(--purple); border-radius:2px; margin-bottom:20px;
+}
+
+.vb-right {
+  width:48%; position:relative; overflow:hidden; flex-shrink:0;
+}
+.vb-right::before {
+  content:''; position:absolute; inset:0; z-index:2;
+  background:linear-gradient(to right, #000 0%, transparent 30%);
+}
+.vb-strip-img {
+  position:absolute; top:50%; left:0; width:auto; height:100%;
+  transform:translateY(-50%);
+  object-fit:cover; object-position:center center;
+  opacity:0.85;
+}
+
+/* ──────────────────────────────────────────────
+   VARIANT C  —  Headline-first, strip as background band
+   Strip fills lower 40%, text sits above in white space
+────────────────────────────────────────────── */
+.vc { justify-content:flex-start; align-items:flex-start; }
+
+.vc-top {
+  padding:5.5% 7% 0;
+  display:flex; align-items:flex-start; justify-content:space-between;
+  width:100%;
+}
+.vc-logo { display:flex; align-items:center; gap:10px; }
+.vc-logo img { height:20px; opacity:0.82; }
+.vc-logo span { font-size:7px; font-weight:600; letter-spacing:5px; text-transform:uppercase; color:rgba(255,255,255,0.28); }
+
+.vc-center {
+  padding:3% 8% 0;
+  flex:1; display:flex; flex-direction:column; justify-content:center;
+}
+.vc h1 {
+  font-size:clamp(52px,6.4vw,102px); font-weight:800; line-height:0.98; letter-spacing:-3px;
+  background:linear-gradient(135deg,#fff 42%,rgba(255,255,255,0.5));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+  margin-bottom:16px;
+}
+.vc p { font-size:clamp(14px,1.4vw,22px); font-weight:300; color:var(--dim); }
+
+.vc-stage {
+  position:absolute; bottom:0; left:0; width:100%;
+  height:46%;
+}
+.vc-stage::before {
+  content:''; position:absolute; inset:0; z-index:2;
+  background:linear-gradient(to bottom, #000 0%, transparent 40%);
+}
+.vc-stage img {
+  width:100%; height:100%; object-fit:cover; object-position:top center; display:block;
+  mask-image:linear-gradient(to right, transparent 0%, rgba(0,0,0,1) 10%, rgba(0,0,0,1) 90%, transparent 100%);
+  -webkit-mask-image:linear-gradient(to right, transparent 0%, rgba(0,0,0,1) 10%, rgba(0,0,0,1) 90%, transparent 100%);
+}
+
+.vc-glow {
+  position:absolute; width:500px; height:300px; border-radius:50%;
+  background:radial-gradient(circle, rgba(97,97,255,0.12) 0%, transparent 70%);
+  bottom:10%; left:50%; transform:translateX(-50%); pointer-events:none; z-index:1;
+}
+
+/* ──────────────────────────────────────────────
+   VARIANT D  —  Two-panel with large type left,
+   avatar grid mosaic right
+────────────────────────────────────────────── */
+.vd { flex-direction:row; }
+
+.vd-left {
+  width:55%; padding:6% 5% 6% 7%;
+  display:flex; flex-direction:column; justify-content:space-between;
+  position:relative; z-index:2;
+}
+.vd-logo { display:flex; align-items:center; gap:10px; }
+.vd-logo img { height:20px; opacity:0.82; }
+.vd-logo span { font-size:7px; font-weight:600; letter-spacing:5px; text-transform:uppercase; color:rgba(255,255,255,0.28); }
+
+.vd-text {}
+.vd h1 {
+  font-size:clamp(40px,4.8vw,78px); font-weight:800; line-height:1.02; letter-spacing:-2.5px;
+  background:linear-gradient(135deg,#fff 40%,rgba(255,255,255,0.55));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+  margin-bottom:16px;
+}
+.vd p { font-size:clamp(13px,1.2vw,19px); font-weight:300; color:var(--dim); line-height:1.5; max-width:420px; }
+
+.vd-tag {
+  display:inline-flex; align-items:center; gap:7px;
+  padding:6px 14px; border-radius:100px;
+  border:1px solid rgba(97,97,255,0.3);
+  background:rgba(97,97,255,0.06);
+  font-size:10px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--purple);
+}
+.vd-tag::before { content:''; width:6px; height:6px; border-radius:50%; background:var(--purple); display:block; }
+
+.vd-right {
+  width:45%; position:relative; overflow:hidden;
+}
+.vd-right::before {
+  content:''; position:absolute; inset:0; z-index:2;
+  background:linear-gradient(to right, #000 0%, transparent 25%),
+             linear-gradient(to bottom, #000 0%, transparent 15%, transparent 85%, #000 100%);
+}
+/* Position strip so it fills the right panel */
+.vd-strip {
+  position:absolute; top:50%; left:-5%; height:100%; width:auto;
+  transform:translateY(-50%);
+  object-fit:cover;
+  min-width:110%;
+  opacity:0.9;
+}
+
+/* ── nav ── */
+.nav-row {
+  display:flex; gap:16px; justify-content:center; margin-top:8px;
+}
+.nav-btn {
+  padding:8px 20px; border-radius:100px; border:1px solid rgba(255,255,255,0.15);
+  background:transparent; color:rgba(255,255,255,0.5); font-family:'Poppins',sans-serif;
+  font-size:11px; font-weight:500; cursor:pointer; transition:all 0.2s; letter-spacing:1px;
+}
+.nav-btn:hover { border-color:var(--purple); color:var(--purple); }
+.nav-btn.active { border-color:var(--purple); background:rgba(97,97,255,0.12); color:#fff; }
+</style>
+</head>
+<body>
+
+<!-- VARIANT A -->
+<div>
+  <h3 class="label">Variant A — Centered, full-bleed</h3>
+  <div class="variant va">
+    <div class="va-glow"></div>
+    <div class="va-body">
+      <div class="va-logo">
+        <img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/monday%20Logo/monday.com%20Logo.png" alt="monday.com">
+        <span>AI Work Platform</span>
+      </div>
+      <h1>People and agents.</h1>
+      <p>Working together. Driving results.</p>
+    </div>
+    <img class="va-strip" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/Agents%20and%20People%20strip.png" alt="">
+  </div>
+</div>
+
+<!-- VARIANT B -->
+<div>
+  <h3 class="label">Variant B — Left-aligned editorial split</h3>
+  <div class="variant vb">
+    <div class="vb-left">
+      <div class="vb-logo">
+        <img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/monday%20Logo/monday.com%20Logo.png" alt="monday.com">
+        <span>AI Work Platform</span>
+      </div>
+      <div>
+        <div class="vb-divider"></div>
+        <h1>People<br>and agents.</h1>
+        <p>Working together.<br>Driving results.</p>
+      </div>
+    </div>
+    <div class="vb-right">
+      <img class="vb-strip-img" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/Agents%20and%20People%20strip.png" alt="">
+    </div>
+  </div>
+</div>
+
+<!-- VARIANT C -->
+<div>
+  <h3 class="label">Variant C — Headline-first, strip as stage</h3>
+  <div class="variant vc">
+    <div class="vc-top">
+      <div class="vc-logo">
+        <img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/monday%20Logo/monday.com%20Logo.png" alt="monday.com">
+        <span>AI Work Platform</span>
+      </div>
+    </div>
+    <div class="vc-center">
+      <h1 class="vc">People<br>and agents.</h1>
+      <p class="vc">Working together. Driving results.</p>
+    </div>
+    <div class="vc-stage">
+      <img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/Agents%20and%20People%20strip.png" alt="">
+    </div>
+    <div class="vc-glow"></div>
+  </div>
+</div>
+
+<!-- VARIANT D -->
+<div>
+  <h3 class="label">Variant D — Two-panel with avatar mosaic</h3>
+  <div class="variant vd">
+    <div class="vd-left">
+      <div class="vd-logo">
+        <img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/monday%20Logo/monday.com%20Logo.png" alt="monday.com">
+        <span>AI Work Platform</span>
+      </div>
+      <div class="vd-text">
+        <h1>People<br>and agents.</h1>
+        <p>Working together.<br>Driving results.</p>
+      </div>
+      <div class="vd-tag">AI Work Platform</div>
+    </div>
+    <div class="vd-right">
+      <img class="vd-strip" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/Agents%20and%20People%20strip.png" alt="">
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
