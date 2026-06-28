@@ -19,37 +19,42 @@ h3.label { font-size:11px; font-weight:600; letter-spacing:4px; text-transform:u
 }
 
 /* ═══════════════════════════════════════════
-   VARIANT A — Centered text, strip rising from bottom
+   VARIANT A — Logo · Text · Strip stacked, centered as one unit
 ═══════════════════════════════════════════ */
 .va {
   display:flex; flex-direction:column;
-  align-items:center; justify-content:flex-start; text-align:center;
-  padding-top:6%;
+  align-items:center; justify-content:center; text-align:center;
 }
 .va-glow {
   position:absolute; width:55%; height:55%; border-radius:50%;
   background:radial-gradient(circle, rgba(97,97,255,0.1) 0%, transparent 70%);
-  top:0; left:50%; transform:translateX(-50%); pointer-events:none;
+  top:10%; left:50%; transform:translateX(-50%); pointer-events:none;
 }
-.va-logo { display:flex; flex-direction:column; align-items:center; gap:5px; margin-bottom:3.5%; position:relative; z-index:2; }
+.va-logo { display:flex; flex-direction:column; align-items:center; gap:5px; margin-bottom:3%; position:relative; z-index:2; }
 .va-logo img { height:26px; opacity:0.88; }
 .va-logo span { font-size:8px; font-weight:600; letter-spacing:5px; text-transform:uppercase; color:rgba(255,255,255,0.3); }
 .va h1 {
   font-size:5.8vw; font-weight:800; line-height:1.02; letter-spacing:-2.5px;
   background:linear-gradient(135deg,#fff 45%,rgba(255,255,255,0.5));
   -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
-  margin-bottom:1.5%; position:relative; z-index:2;
+  margin-bottom:1.2%; position:relative; z-index:2;
 }
-.va p { font-size:1.5vw; font-weight:300; color:var(--dim); position:relative; z-index:2; }
-.va-body { position:relative; z-index:2; display:flex; flex-direction:column; align-items:center; }
+.va p { font-size:1.5vw; font-weight:300; color:var(--dim); position:relative; z-index:2; margin-bottom:2.5%; }
+.va-body { position:relative; z-index:2; display:flex; flex-direction:column; align-items:center; width:100%; }
 
-/* Strip rises from bottom, fades strongly at top */
-.va-strip {
-  position:absolute; bottom:0; left:0; width:100%; display:block; pointer-events:none; z-index:1;
-  mask-image:linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.85) 40%, rgba(0,0,0,0.2) 70%, transparent 90%);
-  -webkit-mask-image:linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.85) 40%, rgba(0,0,0,0.2) 70%, transparent 90%);
-  transform:translateY(8%);
+/* Strip in the flow, directly after text */
+.va-strip-wrap {
+  width:100%; position:relative; z-index:1; flex-shrink:0;
 }
+.va-strip-wrap::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:55%; z-index:2; pointer-events:none;
+  background:linear-gradient(to bottom, #000 0%, transparent 100%);
+}
+.va-strip-wrap::after {
+  content:''; position:absolute; left:0; right:0; bottom:0; height:35%; z-index:2; pointer-events:none;
+  background:linear-gradient(to top, #000 0%, transparent 100%);
+}
+.va-strip-wrap img { width:100%; display:block; }
 
 /* ═══════════════════════════════════════════
    VARIANT B — Left text, strip as bottom panorama
@@ -247,7 +252,7 @@ h3.label { font-size:11px; font-weight:600; letter-spacing:4px; text-transform:u
 
 <!-- VARIANT A -->
 <div>
-  <h3 class="label">Variant A — Centered, strip rising from bottom</h3>
+  <h3 class="label">Variant A — Text then strip, centered as one unit</h3>
   <div class="variant va">
     <div class="va-glow"></div>
     <div class="va-body">
@@ -257,8 +262,10 @@ h3.label { font-size:11px; font-weight:600; letter-spacing:4px; text-transform:u
       </div>
       <h1>People and agents.</h1>
       <p>Working together. Driving results.</p>
+      <div class="va-strip-wrap">
+        <img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/Agents%20and%20People%20strip.png" alt="">
+      </div>
     </div>
-    <img class="va-strip" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/Agents%20and%20People%20strip.png" alt="">
   </div>
 </div>
 
