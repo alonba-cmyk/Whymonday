@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Credibility Slide</title>
+<title>Credibility — Design Variations</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
@@ -28,138 +28,251 @@ html, body { background:#000; font-family:'Poppins',sans-serif; color:#fff; }
   padding:3px 9px; border-radius:20px; text-transform:uppercase;
 }
 
-/* ── Headline ── */
-.headline {
+/* ── Shared cert chips ── */
+.cert-logos { display:flex; gap:7px; justify-content:center; flex-wrap:wrap; }
+.cert-logo {
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  border:1px solid rgba(255,255,255,0.13); border-radius:10px;
+  padding:7px 11px; gap:3px; min-width:54px;
+}
+.cert-abbr { font-size:10px; font-weight:700; color:rgba(255,255,255,0.7); }
+.cert-full { font-size:6.5px; font-weight:400; text-transform:uppercase; letter-spacing:0.3px; color:rgba(255,255,255,0.28); text-align:center; line-height:1.3; }
+
+.shield-svg { flex-shrink:0; }
+
+/* ══════════════════════════════════════════════
+   CURRENT — reference
+══════════════════════════════════════════════ */
+.cur-headline {
   font-size:clamp(22px,6vw,32px); font-weight:800; line-height:1.15;
   letter-spacing:-1px; margin-bottom:28px; text-align:center;
   background:linear-gradient(140deg,#fff 50%,rgba(255,255,255,0.45));
   -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
 }
-
-/* ── Analyst cards ── */
-.analysts { display:flex; flex-direction:column; gap:10px; width:100%; }
-.analyst {
-  display:flex; align-items:center; gap:0;
-  background:rgba(255,255,255,0.04);
-  border:1px solid rgba(255,255,255,0.08);
+.analysts-a { display:flex; flex-direction:column; gap:10px; width:100%; }
+.analyst-a {
+  display:flex; align-items:center;
+  background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08);
   border-radius:14px; overflow:hidden;
 }
-.analyst-logo-wrap {
+.logo-wrap-a {
   width:110px; flex-shrink:0;
-  display:flex; align-items:center; justify-content:center;
-  padding:18px 16px;
+  display:flex; align-items:center; justify-content:center; padding:18px 16px;
   border-right:1px solid rgba(255,255,255,0.07);
 }
-.analyst-logo {
-  height:20px; filter:brightness(0) invert(1); opacity:0.8;
-  object-fit:contain; max-width:80px; display:block;
-}
-.analyst-copy { flex:1; padding:16px 16px; }
-.analyst-title { font-size:12px; font-weight:600; margin-bottom:3px; }
-.analyst-sub { font-size:10px; font-weight:300; color:rgba(255,255,255,0.38); line-height:1.4; }
-
-/* ── Security section ── */
-.security {
-  display:flex; flex-direction:column; align-items:center;
-  gap:10px; margin-top:20px;
-}
-.sec-label {
+.analyst-logo { height:20px; filter:brightness(0) invert(1); opacity:0.8; object-fit:contain; max-width:80px; display:block; }
+.copy-a { flex:1; padding:16px; }
+.copy-title-a { font-size:12px; font-weight:600; margin-bottom:3px; }
+.copy-sub-a { font-size:10px; font-weight:300; color:rgba(255,255,255,0.38); line-height:1.4; }
+.security-a { display:flex; flex-direction:column; align-items:center; gap:10px; margin-top:20px; }
+.sec-label-a {
   font-size:9px; font-weight:600; letter-spacing:3px; text-transform:uppercase;
-  color:rgba(255,255,255,0.3);
-  display:flex; align-items:center; gap:7px;
+  color:rgba(255,255,255,0.3); display:flex; align-items:center; gap:7px;
 }
-.cert-logos {
-  display:flex; gap:8px; justify-content:center; flex-wrap:wrap;
+
+/* ══════════════════════════════════════════════
+   B — No internal divider, logo floats
+══════════════════════════════════════════════ */
+.analysts-b { display:flex; flex-direction:column; gap:10px; width:100%; }
+.analyst-b {
+  display:flex; align-items:center; gap:14px;
+  background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08);
+  border-radius:14px; padding:18px 18px;
 }
-.cert-logo {
-  display:flex; flex-direction:column; align-items:center; justify-content:center;
-  border:1px solid rgba(255,255,255,0.13);
-  border-radius:10px; padding:7px 12px; gap:3px;
-  min-width:56px;
+.logo-wrap-b { width:80px; flex-shrink:0; display:flex; align-items:center; justify-content:center; }
+.copy-b { flex:1; }
+.copy-title-b { font-size:12px; font-weight:600; margin-bottom:3px; }
+.copy-sub-b { font-size:10px; font-weight:300; color:rgba(255,255,255,0.38); line-height:1.4; }
+.security-b { display:flex; flex-direction:column; align-items:center; gap:10px; margin-top:20px; }
+.sec-label-b { font-size:9px; font-weight:600; letter-spacing:3px; text-transform:uppercase; color:rgba(255,255,255,0.3); display:flex; align-items:center; gap:7px; }
+
+/* ══════════════════════════════════════════════
+   C — Purple left accent border
+══════════════════════════════════════════════ */
+.analysts-c { display:flex; flex-direction:column; gap:10px; width:100%; }
+.analyst-c {
+  display:flex; align-items:center; gap:16px;
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(255,255,255,0.06);
+  border-left:2px solid var(--purple);
+  border-radius:0 14px 14px 0; padding:18px 18px;
 }
-.cert-logo .cert-abbr {
-  font-size:10px; font-weight:700; letter-spacing:0.2px;
-  color:rgba(255,255,255,0.7);
+.logo-wrap-c { width:80px; flex-shrink:0; display:flex; align-items:center; }
+.copy-c { flex:1; }
+.copy-title-c { font-size:12px; font-weight:600; margin-bottom:3px; }
+.copy-sub-c { font-size:10px; font-weight:300; color:rgba(255,255,255,0.38); line-height:1.4; }
+.security-c { display:flex; flex-direction:column; align-items:center; gap:10px; margin-top:20px; }
+.sec-label-c { font-size:9px; font-weight:600; letter-spacing:3px; text-transform:uppercase; color:rgba(255,255,255,0.3); display:flex; align-items:center; gap:7px; }
+
+/* ══════════════════════════════════════════════
+   D — Three unified cards (security as equal card)
+══════════════════════════════════════════════ */
+.analysts-d { display:flex; flex-direction:column; gap:10px; width:100%; }
+.analyst-d {
+  display:flex; align-items:center; gap:0;
+  background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08);
+  border-radius:14px; overflow:hidden;
 }
-.cert-logo .cert-full {
-  font-size:6.5px; font-weight:400; letter-spacing:0.3px; text-transform:uppercase;
-  color:rgba(255,255,255,0.28); text-align:center; line-height:1.3;
+.logo-wrap-d {
+  width:110px; flex-shrink:0;
+  display:flex; align-items:center; justify-content:center; padding:18px 16px;
+  border-right:1px solid rgba(255,255,255,0.07);
 }
+.copy-d { flex:1; padding:16px; }
+.copy-title-d { font-size:12px; font-weight:600; margin-bottom:3px; }
+.copy-sub-d { font-size:10px; font-weight:300; color:rgba(255,255,255,0.38); line-height:1.4; }
+.security-card-d {
+  display:flex; align-items:center; gap:0;
+  background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08);
+  border-radius:14px; overflow:hidden; margin-top:10px;
+}
+.sec-icon-wrap-d {
+  width:110px; flex-shrink:0;
+  display:flex; align-items:center; justify-content:center; padding:18px 16px;
+  border-right:1px solid rgba(255,255,255,0.07);
+}
+.sec-copy-d { flex:1; padding:16px; }
+.sec-title-d { font-size:12px; font-weight:600; margin-bottom:8px; }
 </style>
 </head>
 <body>
 
+<!-- ══ CURRENT ══ -->
 <div class="slide">
-  <div class="slide-label">Credibility <span class="var-badge">Enterprise</span></div>
-
-  <div class="headline">Recognized by the<br>world's leading analysts.</div>
-
-  <div class="analysts">
-    <div class="analyst">
-      <div class="analyst-logo-wrap">
-        <img class="analyst-logo"
-          src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Enterprise/Gartner.svg"
-          alt="Gartner">
-      </div>
-      <div class="analyst-copy">
-        <div class="analyst-title">3× Magic Quadrant Leader</div>
-        <div class="analyst-sub">Only work management platform recognized as Leader in 3 MQ reports</div>
-      </div>
+  <div class="slide-label">Current <span class="var-badge">Reference</span></div>
+  <div class="cur-headline">Recognized by the<br>world's leading analysts.</div>
+  <div class="analysts-a" id="cards-a">
+    <div class="analyst-a">
+      <div class="logo-wrap-a"><img class="analyst-logo" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Enterprise/Gartner.svg" alt="Gartner"></div>
+      <div class="copy-a"><div class="copy-title-a">3× Magic Quadrant Leader</div><div class="copy-sub-a">Only work management platform recognized as Leader in 3 MQ reports</div></div>
     </div>
-    <div class="analyst">
-      <div class="analyst-logo-wrap">
-        <img class="analyst-logo"
-          src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Enterprise/Forster.svg"
-          alt="Forrester">
-      </div>
-      <div class="analyst-copy">
-        <div class="analyst-title">Motorola achieved 346% ROI</div>
-        <div class="analyst-sub">according to Forrester's Total Economic Impact™ research</div>
-      </div>
+    <div class="analyst-a">
+      <div class="logo-wrap-a"><img class="analyst-logo" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Enterprise/Forster.svg" alt="Forrester"></div>
+      <div class="copy-a"><div class="copy-title-a">Motorola achieved 346% ROI</div><div class="copy-sub-a">according to Forrester's Total Economic Impact™ research</div></div>
     </div>
   </div>
-
-  <div class="security">
-    <div class="sec-label">
-      <svg width="13" height="13" viewBox="0 0 36 36" fill="none">
-        <path d="M18 3L5 8.5V17c0 8.4 5.8 16.2 13 18C25.2 33.2 31 25.4 31 17V8.5L18 3z"
-          fill="rgba(97,97,255,0.3)" stroke="rgba(97,97,255,0.6)" stroke-width="2"/>
-        <path d="M12 18l4 4 8-8" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
+  <div class="security-a">
+    <div class="sec-label-a">
+      <svg class="shield-svg" width="13" height="13" viewBox="0 0 36 36" fill="none"><path d="M18 3L5 8.5V17c0 8.4 5.8 16.2 13 18C25.2 33.2 31 25.4 31 17V8.5L18 3z" fill="rgba(97,97,255,0.3)" stroke="rgba(97,97,255,0.6)" stroke-width="2"/><path d="M12 18l4 4 8-8" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       Enterprise-grade security
     </div>
     <div class="cert-logos">
-      <div class="cert-logo">
-        <span class="cert-abbr">GDPR</span>
-        <span class="cert-full">EU Data<br>Protection</span>
-      </div>
-      <div class="cert-logo">
-        <span class="cert-abbr">SOC 2</span>
-        <span class="cert-full">AICPA<br>Certified</span>
-      </div>
-      <div class="cert-logo">
-        <span class="cert-abbr">ISO</span>
-        <span class="cert-full">27001<br>Certified</span>
-      </div>
-      <div class="cert-logo">
-        <span class="cert-abbr">HIPAA</span>
-        <span class="cert-full">Health Data<br>Compliant</span>
+      <div class="cert-logo"><span class="cert-abbr">GDPR</span><span class="cert-full">EU Data<br>Protection</span></div>
+      <div class="cert-logo"><span class="cert-abbr">SOC 2</span><span class="cert-full">AICPA<br>Certified</span></div>
+      <div class="cert-logo"><span class="cert-abbr">ISO</span><span class="cert-full">27001<br>Certified</span></div>
+      <div class="cert-logo"><span class="cert-abbr">HIPAA</span><span class="cert-full">Health Data<br>Compliant</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ B — No divider, clean gap ══ -->
+<div class="slide">
+  <div class="slide-label">B — No divider <span class="var-badge">Clean</span></div>
+  <div class="cur-headline">Recognized by the<br>world's leading analysts.</div>
+  <div class="analysts-b" id="cards-b">
+    <div class="analyst-b">
+      <div class="logo-wrap-b"><img class="analyst-logo" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Enterprise/Gartner.svg" alt="Gartner"></div>
+      <div class="copy-b"><div class="copy-title-b">3× Magic Quadrant Leader</div><div class="copy-sub-b">Only work management platform recognized as Leader in 3 MQ reports</div></div>
+    </div>
+    <div class="analyst-b">
+      <div class="logo-wrap-b"><img class="analyst-logo" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Enterprise/Forster.svg" alt="Forrester"></div>
+      <div class="copy-b"><div class="copy-title-b">Motorola achieved 346% ROI</div><div class="copy-sub-b">according to Forrester's Total Economic Impact™ research</div></div>
+    </div>
+  </div>
+  <div class="security-b">
+    <div class="sec-label-b">
+      <svg class="shield-svg" width="13" height="13" viewBox="0 0 36 36" fill="none"><path d="M18 3L5 8.5V17c0 8.4 5.8 16.2 13 18C25.2 33.2 31 25.4 31 17V8.5L18 3z" fill="rgba(97,97,255,0.3)" stroke="rgba(97,97,255,0.6)" stroke-width="2"/><path d="M12 18l4 4 8-8" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Enterprise-grade security
+    </div>
+    <div class="cert-logos">
+      <div class="cert-logo"><span class="cert-abbr">GDPR</span><span class="cert-full">EU Data<br>Protection</span></div>
+      <div class="cert-logo"><span class="cert-abbr">SOC 2</span><span class="cert-full">AICPA<br>Certified</span></div>
+      <div class="cert-logo"><span class="cert-abbr">ISO</span><span class="cert-full">27001<br>Certified</span></div>
+      <div class="cert-logo"><span class="cert-abbr">HIPAA</span><span class="cert-full">Health Data<br>Compliant</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ C — Purple left accent ══ -->
+<div class="slide">
+  <div class="slide-label">C — Left accent <span class="var-badge">Bold</span></div>
+  <div class="cur-headline">Recognized by the<br>world's leading analysts.</div>
+  <div class="analysts-c" id="cards-c">
+    <div class="analyst-c">
+      <div class="logo-wrap-c"><img class="analyst-logo" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Enterprise/Gartner.svg" alt="Gartner"></div>
+      <div class="copy-c"><div class="copy-title-c">3× Magic Quadrant Leader</div><div class="copy-sub-c">Only work management platform recognized as Leader in 3 MQ reports</div></div>
+    </div>
+    <div class="analyst-c">
+      <div class="logo-wrap-c"><img class="analyst-logo" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Enterprise/Forster.svg" alt="Forrester"></div>
+      <div class="copy-c"><div class="copy-title-c">Motorola achieved 346% ROI</div><div class="copy-sub-c">according to Forrester's Total Economic Impact™ research</div></div>
+    </div>
+  </div>
+  <div class="security-c">
+    <div class="sec-label-c">
+      <svg class="shield-svg" width="13" height="13" viewBox="0 0 36 36" fill="none"><path d="M18 3L5 8.5V17c0 8.4 5.8 16.2 13 18C25.2 33.2 31 25.4 31 17V8.5L18 3z" fill="rgba(97,97,255,0.3)" stroke="rgba(97,97,255,0.6)" stroke-width="2"/><path d="M12 18l4 4 8-8" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Enterprise-grade security
+    </div>
+    <div class="cert-logos">
+      <div class="cert-logo"><span class="cert-abbr">GDPR</span><span class="cert-full">EU Data<br>Protection</span></div>
+      <div class="cert-logo"><span class="cert-abbr">SOC 2</span><span class="cert-full">AICPA<br>Certified</span></div>
+      <div class="cert-logo"><span class="cert-abbr">ISO</span><span class="cert-full">27001<br>Certified</span></div>
+      <div class="cert-logo"><span class="cert-abbr">HIPAA</span><span class="cert-full">Health Data<br>Compliant</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ D — Three unified cards ══ -->
+<div class="slide">
+  <div class="slide-label">D — Three equal cards <span class="var-badge">Unified</span></div>
+  <div class="cur-headline">Recognized by the<br>world's leading analysts.</div>
+  <div class="analysts-d" id="cards-d">
+    <div class="analyst-d">
+      <div class="logo-wrap-d"><img class="analyst-logo" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Enterprise/Gartner.svg" alt="Gartner"></div>
+      <div class="copy-d"><div class="copy-title-d">3× Magic Quadrant Leader</div><div class="copy-sub-d">Only work management platform recognized as Leader in 3 MQ reports</div></div>
+    </div>
+    <div class="analyst-d">
+      <div class="logo-wrap-d"><img class="analyst-logo" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Enterprise/Forster.svg" alt="Forrester"></div>
+      <div class="copy-d"><div class="copy-title-d">Motorola achieved 346% ROI</div><div class="copy-sub-d">according to Forrester's Total Economic Impact™ research</div></div>
+    </div>
+  </div>
+  <div class="security-card-d" id="sec-card-d">
+    <div class="sec-icon-wrap-d">
+      <svg width="28" height="28" viewBox="0 0 36 36" fill="none"><path d="M18 3L5 8.5V17c0 8.4 5.8 16.2 13 18C25.2 33.2 31 25.4 31 17V8.5L18 3z" fill="rgba(97,97,255,0.2)" stroke="rgba(97,97,255,0.5)" stroke-width="1.5"/><path d="M12 18l4 4 8-8" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+    <div class="sec-copy-d">
+      <div class="sec-title-d">Enterprise-grade security</div>
+      <div class="cert-logos" style="justify-content:flex-start;">
+        <div class="cert-logo"><span class="cert-abbr">GDPR</span><span class="cert-full">EU Data<br>Protection</span></div>
+        <div class="cert-logo"><span class="cert-abbr">SOC 2</span><span class="cert-full">AICPA<br>Certified</span></div>
+        <div class="cert-logo"><span class="cert-abbr">ISO</span><span class="cert-full">27001<br>Certified</span></div>
+        <div class="cert-logo"><span class="cert-abbr">HIPAA</span><span class="cert-full">Health Data<br>Compliant</span></div>
       </div>
     </div>
   </div>
-
 </div>
 
 <script>
-function equalizeCards() {
-  const cards = document.querySelectorAll('.analyst');
+function eq(selector) {
+  const cards = document.querySelectorAll(selector);
   cards.forEach(c => c.style.height = 'auto');
   let maxH = 0;
   cards.forEach(c => maxH = Math.max(maxH, c.offsetHeight));
   cards.forEach(c => c.style.height = maxH + 'px');
 }
-equalizeCards();
-window.addEventListener('resize', equalizeCards);
+function equalizeAll() {
+  eq('#cards-a .analyst-a');
+  eq('#cards-b .analyst-b');
+  eq('#cards-c .analyst-c');
+  eq('#cards-d .analyst-d');
+  // D: equalize all three cards including security
+  const allD = [...document.querySelectorAll('#cards-d .analyst-d'), document.getElementById('sec-card-d')];
+  allD.forEach(c => c.style.height = 'auto');
+  let maxH = 0;
+  allD.forEach(c => maxH = Math.max(maxH, c.offsetHeight));
+  allD.forEach(c => c.style.height = maxH + 'px');
+}
+equalizeAll();
+window.addEventListener('resize', equalizeAll);
 </script>
 
 </body>
