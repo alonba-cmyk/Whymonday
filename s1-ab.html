@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>S1 — A vs D with Strip</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+:root { --purple:#6161ff; }
+body { background:#111; font-family:'Poppins',sans-serif; color:#fff; padding:32px 16px; display:flex; flex-direction:column; gap:24px; }
+
+.page-label {
+  text-align:center; font-size:10px; font-weight:600; letter-spacing:5px;
+  text-transform:uppercase; color:rgba(255,255,255,0.25);
+}
+
+.v-block {
+  background:#000;
+  border:1px solid rgba(255,255,255,0.09);
+  border-radius:22px;
+  overflow:hidden;
+  max-width:480px;
+  margin:0 auto;
+  width:100%;
+}
+.v-label {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:13px 20px;
+  border-bottom:1px solid rgba(255,255,255,0.07);
+  font-size:9px; font-weight:600; letter-spacing:3px; text-transform:uppercase;
+  color:rgba(255,255,255,0.3);
+}
+.v-label .badge {
+  background:var(--purple); color:#fff;
+  font-size:8px; font-weight:700; letter-spacing:1px;
+  padding:3px 9px; border-radius:20px; text-transform:uppercase;
+}
+
+/* ── Strip shared ── */
+.strip-img {
+  width:100%;
+  display:block;
+  object-fit:contain;
+}
+
+/* ─────────── VARIANT A — Bold Manifesto ─────────── */
+.va .v-frame {
+  display:flex; flex-direction:column; align-items:center;
+  padding:40px 28px 36px;
+  gap:0;
+}
+.va-logo { height:22px; filter:brightness(0) invert(1); opacity:0.9; margin-bottom:32px; }
+.va-headline {
+  font-size:clamp(38px,9vw,54px); font-weight:900; line-height:1.0;
+  letter-spacing:-2px; text-align:center; margin-bottom:10px;
+  background:linear-gradient(140deg,#fff 45%,rgba(255,255,255,0.42));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+}
+.va-sub {
+  font-size:13px; font-weight:300; color:rgba(255,255,255,0.4);
+  text-align:center; margin-bottom:32px;
+}
+.va-strip-wrap {
+  width:calc(100% + 56px); margin-left:-28px;
+}
+.va-dept-list {
+  display:flex; flex-wrap:wrap; justify-content:center; gap:6px; margin-top:24px;
+}
+.va-dept {
+  font-size:8px; font-weight:600; letter-spacing:2px; text-transform:uppercase;
+  background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.09);
+  border-radius:20px; padding:4px 11px; color:rgba(255,255,255,0.45);
+}
+
+/* ─────────── VARIANT D — Editorial ─────────── */
+.vd .v-frame {
+  display:flex; flex-direction:column;
+  padding:0;
+}
+.vd-strip-wrap { width:100%; }
+.vd-body {
+  padding:32px 28px 36px;
+  display:flex; flex-direction:column; gap:0;
+}
+.vd-top { display:flex; align-items:center; justify-content:space-between; margin-bottom:28px; }
+.vd-logo { height:18px; filter:brightness(0) invert(1); opacity:0.75; }
+.vd-eyebrow { font-size:8px; font-weight:600; letter-spacing:4px; text-transform:uppercase; color:rgba(255,255,255,0.3); }
+.vd-headline {
+  font-size:clamp(34px,8vw,50px); font-weight:900; line-height:1.05;
+  letter-spacing:-1.5px; margin-bottom:10px;
+  background:linear-gradient(140deg,#fff 50%,rgba(255,255,255,0.4));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+}
+.vd-sub {
+  font-size:13px; font-weight:300; color:rgba(255,255,255,0.4); line-height:1.5;
+}
+</style>
+</head>
+<body>
+
+<p class="page-label">Slide 1 — A vs D with Strip</p>
+
+<!-- ── A ── -->
+<div class="v-block va">
+  <div class="v-label">A — Bold Manifesto <span class="badge">Headline first</span></div>
+  <div class="v-frame">
+    <img class="va-logo" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/monday%20Logo/monday.com%20Logo.png" alt="monday.com">
+    <h1 class="va-headline">People<br>and agents.</h1>
+    <p class="va-sub">Working together. Driving results.</p>
+    <div class="va-strip-wrap">
+      <img class="strip-img" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/Agents%20and%20People%20strip.png" alt="People and Agents">
+    </div>
+    <div class="va-dept-list">
+      <span class="va-dept" style="color:#F48FB1">Marketing</span>
+      <span class="va-dept" style="color:#F9D27A">Sales</span>
+      <span class="va-dept" style="color:#8ECEC0">HR</span>
+      <span class="va-dept" style="color:#A89BD9">IT</span>
+      <span class="va-dept" style="color:#85C1AE">Operations</span>
+      <span class="va-dept" style="color:#7FC8D4">Product</span>
+      <span class="va-dept" style="color:#93C6E7">Finance</span>
+      <span class="va-dept" style="color:#F6C27A">Legal</span>
+    </div>
+  </div>
+</div>
+
+<!-- ── D ── -->
+<div class="v-block vd">
+  <div class="v-label">D — Editorial <span class="badge">Image first</span></div>
+  <div class="v-frame">
+    <div class="vd-strip-wrap">
+      <img class="strip-img" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/Agents%20and%20People%20strip.png" alt="People and Agents">
+    </div>
+    <div class="vd-body">
+      <div class="vd-top">
+        <img class="vd-logo" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/monday%20Logo/monday.com%20Logo.png" alt="monday.com">
+        <span class="vd-eyebrow">AI Work Platform</span>
+      </div>
+      <h1 class="vd-headline">People<br>and agents.</h1>
+      <p class="vd-sub">Working together. Driving results.</p>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
