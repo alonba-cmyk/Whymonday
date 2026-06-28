@@ -98,6 +98,10 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
 .s1-info-card.visible { opacity:1; transform:translateY(0); }
 .s1-info-dept { font-size:12px; font-weight:700; letter-spacing:2px; text-transform:uppercase; }
 .s1-info-desc { font-size:13px; font-weight:300; color:rgba(255,255,255,0.5); text-align:center; line-height:1.5; }
+/* S1 desktop-only pieces (hidden by default) */
+.s1-left-panel { display:none; }
+.s1-right-orbit { display:contents; }
+.s1-center-dept { display:none; }
 
 /* AI Logos row */
 .ai-logos { display:flex; align-items:center; justify-content:center; gap:32px; margin:24px 0 32px; flex-wrap:wrap; }
@@ -444,6 +448,22 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
   .s0v-h2 { font-size: clamp(14px, 4vw, 20px); }
 }
 
+/* S1 – Desktop Variant C layout */
+@media (min-width: 769px) {
+  #s1 { padding: 0; }
+  .s1-orbit-inner { flex-direction:row; gap:0; padding:0 5% 0 6%; align-items:center; justify-content:center; }
+  .s1-eyebrow-mobile { display:none; }
+  .s1-left-panel { display:flex; flex-direction:column; justify-content:center; flex:1; padding-right:48px; border-right:1px solid rgba(255,255,255,0.06); align-self:center; height:65%; }
+  .s1-mission-heading { font-size:clamp(22px,2.6vw,36px); font-weight:700; line-height:1.3; color:#fff; margin-top:18px; }
+  .s1-right-orbit { display:flex; align-items:center; justify-content:center; flex:1.15; }
+  .s1-center-h2 { display:none; }
+  .s1-center-dept { display:flex; flex-direction:column; align-items:center; gap:8px; }
+  .s1-orbit-center { width:210px; }
+  .s1-center-name { font-size:11px; font-weight:700; letter-spacing:3px; text-transform:uppercase; transition:color 0.3s; }
+  .s1-center-desc { font-size:13px; font-weight:300; color:rgba(255,255,255,0.5); line-height:1.55; text-align:center; }
+  .s1-info-card { display:none !important; }
+}
+
 /* S5b – Desktop card layout */
 @media (min-width: 769px) {
   #s5b { padding: 0; justify-content: center; align-items: center; }
@@ -566,13 +586,23 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
 
 <div class="slide" id="s1">
   <div class="s1-orbit-inner">
-    <p class="eyebrow" style="margin-bottom:0">Our Mission</p>
+    <p class="eyebrow s1-eyebrow-mobile" style="margin-bottom:0">Our Mission</p>
 
+    <div class="s1-left-panel">
+      <p class="eyebrow" style="margin-bottom:18px">Our Mission</p>
+      <h2 class="s1-mission-heading">monday's mission has always been to help businesses achieve their goals.</h2>
+    </div>
+
+    <div class="s1-right-orbit">
     <div class="s1-orbit-wrap">
       <div class="s1-orbit-glow"></div>
       <div class="s1-ring"></div>
       <div class="s1-orbit-center">
-        <h2>monday's mission has always been to help businesses achieve their goals.</h2>
+        <h2 class="s1-center-h2">monday's mission has always been to help businesses achieve their goals.</h2>
+        <div class="s1-center-dept" id="s1CenterDept">
+          <span class="s1-center-name" id="s1CenterName"></span>
+          <span class="s1-center-desc" id="s1CenterDesc"></span>
+        </div>
       </div>
       <div class="s1-orbit-people" id="s1OrbitPeople">
         <!-- Desktop SVG lines (r=190, center=260, avatar=68→offset=34) -->
@@ -632,6 +662,7 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
         </div>
       </div>
     </div>
+    </div><!-- /s1-right-orbit -->
 
     <div class="s1-info-card" id="s1InfoCard">
       <span class="s1-info-dept" id="s1InfoDept"></span>
@@ -1275,9 +1306,11 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
     const orbitEl  = document.getElementById('s1OrbitPeople');
     if (!orbitEl) return;
     const people   = Array.from(orbitEl.querySelectorAll('.s1-orbit-person'));
-    const card     = document.getElementById('s1InfoCard');
-    const infoDept = document.getElementById('s1InfoDept');
-    const infoDesc = document.getElementById('s1InfoDesc');
+    const card       = document.getElementById('s1InfoCard');
+    const infoDept   = document.getElementById('s1InfoDept');
+    const infoDesc   = document.getElementById('s1InfoDesc');
+    const centerName = document.getElementById('s1CenterName');
+    const centerDesc = document.getElementById('s1CenterDesc');
     const startAngles = [0, 45, 90, 135, 180, 225, 270, 315];
     const SPEED = 360 / 45000;
     let angle = 0, lastActive = -1, lastTs = null;
@@ -1298,6 +1331,8 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
         infoDept.style.color = color;
         infoDesc.textContent = el.dataset.desc;
         card.classList.add('visible');
+        if (centerName) { centerName.textContent = el.dataset.name; centerName.style.color = color; }
+        if (centerDesc) { centerDesc.textContent = el.dataset.desc; }
       }, 160);
     }
 
