@@ -148,18 +148,17 @@
      K  H variant: scrolling carousel, dept name in divider
   ───────────────────────────────────────── */
   .vk-right  { flex:1; display:flex; flex-direction:column; justify-content:center; padding:5% 5% 4%; gap:14px; }
-  .vk-wrap   { position:relative; overflow:hidden; height:62px; }
-  .vk-strip  { display:flex; gap:14px; position:absolute; top:0; left:0; transition:transform 0.55s cubic-bezier(0.4,0,0.2,1); }
+  .vk-wrap   { position:relative; overflow:hidden; height:70px; }
+  .vk-strip  { display:flex; gap:14px; position:absolute; top:7px; left:0; transition:transform 0.55s cubic-bezier(0.4,0,0.2,1); }
   .vk-thumb  { display:flex; flex-direction:column; align-items:center; flex-shrink:0; cursor:pointer; }
-  .vk-av     { width:56px; height:56px; border-radius:50%; overflow:hidden; border:2px solid rgba(255,255,255,0.1); transition:border-color 0.35s, box-shadow 0.35s, transform 0.4s; }
+  .vk-av     { width:56px; height:56px; border-radius:50%; overflow:hidden; border:2px solid rgba(255,255,255,0.1); transition:border-color 0.35s, box-shadow 0.35s; }
   .vk-av img { width:100%; height:100%; object-fit:cover; object-position:top; }
-  .vk-thumb.active .vk-av { transform:scale(1.12); }
   .vk-fade-l { position:absolute; left:0; top:0; bottom:0; width:70px; background:linear-gradient(to right,#0a0a0a,transparent); pointer-events:none; }
   .vk-fade-r { position:absolute; right:0; top:0; bottom:0; width:70px; background:linear-gradient(to left,#0a0a0a,transparent); pointer-events:none; }
   .vk-divider { display:flex; align-items:center; gap:12px; }
   .vk-line   { flex:1; height:1px; background:rgba(255,255,255,0.07); }
   .vk-label  { font-size:10px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; flex-shrink:0; transition:color 0.35s, opacity 0.35s; }
-  .vk-desc   { font-size:clamp(11px,1.1vw,14px); font-weight:300; color:rgba(255,255,255,0.55); line-height:1.55; transition:opacity 0.35s; }
+  .vk-desc   { font-size:clamp(11px,1.1vw,14px); font-weight:300; color:rgba(255,255,255,0.55); line-height:1.55; transition:opacity 0.35s; text-align:center; }
 </style>
 </head>
 <body>
@@ -507,50 +506,93 @@ depts.forEach((d, i) => {
 
 /* ── K: scrolling carousel ── */
 (function() {
-  const vkStrip  = document.getElementById('vkStrip');
-  const vkLabel  = document.getElementById('vkLabel');
-  const vkDesc   = document.getElementById('vkDesc');
-  const VK_SIZE  = 56, VK_GAP = 14, VK_STEP = VK_SIZE + VK_GAP;
-  let vkThumbs = [], vkAvEls = [], vkIdx = 0, vkTimer;
+  const vkStrip = document.getElementById('vkStrip');
+  const vkLabel = document.getElementById('vkLabel');
+  const vkDesc  = document.getElementById('vkDesc');
+  const SZ = 56, GAP = 14, STEP = SZ + GAP, LEAD = 6, N = depts.length;
+  const TRANS    = 'transform 0.55s cubic-bezier(0.4,0,0.2,1)';
+  const AV_TRANS = 'border-color 0.35s, box-shadow 0.35s';
 
-  depts.forEach((d, i) => {
+  // 6 tail clones + all 8 real + 6 head clones = 20 total thumbs
+  const extDepts = [...depts.slice(-LEAD), ...depts, ...depts.slice(0, LEAD)];
+  let allAvEls = [];
+  let vkSI = LEAD, vkTimer;
+
+  extDepts.forEach((d, si) => {
     const thumb = document.createElement('div');
     thumb.className = 'vk-thumb';
     thumb.innerHTML = `<div class="vk-av"><img src="${d.img}" alt="${d.name}"></div>`;
-    thumb.onclick = () => vkActivate(i, true);
+    thumb.onclick = () => {
+      const realIdx = (si - LEAD + N * 100) % N;
+      vkGoTo(realIdx + LEAD, realIdx, true);
+    };
     vkStrip.appendChild(thumb);
-    vkThumbs.push(thumb);
-    vkAvEls.push(thumb.querySelector('.vk-av'));
+    allAvEls.push(thumb.querySelector('.vk-av'));
   });
 
-  function vkOffset(i) {
+  function vkGetX(si) {
     const W = vkStrip.parentElement.offsetWidth;
-    return W / 2 - VK_SIZE / 2 - i * VK_STEP;
+    return W / 2 - SZ / 2 - si * STEP;
   }
 
-  function vkActivate(i, manual) {
-    vkIdx = i;
-    const d = depts[i];
-    vkThumbs.forEach((t, j) => t.classList.toggle('active', j === i));
-    vkAvEls.forEach((av, j) => {
-      av.style.borderColor = j === i ? d.color : 'rgba(255,255,255,0.1)';
-      av.style.boxShadow   = j === i ? `0 0 0 3px ${d.color}60, 0 0 18px ${d.color}30` : 'none';
+  function vkMoveStrip(x, animate) {
+    vkStrip.style.transition = animate ? TRANS : 'none';
+    vkStrip.style.transform  = `translateX(${x}px)`;
+    if (!animate) {
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        vkStrip.style.transition = TRANS;
+      }));
+    }
+  }
+
+  function vkSetHighlight(si, d) {
+    allAvEls.forEach((av, j) => {
+      av.style.borderColor = j === si ? d.color : 'rgba(255,255,255,0.1)';
+      av.style.boxShadow   = j === si ? `0 0 0 3px ${d.color}60, 0 0 18px ${d.color}30` : 'none';
     });
-    vkStrip.style.transform = `translateX(${vkOffset(i)}px)`;
-    vkLabel.style.opacity = '0'; vkDesc.style.opacity = '0';
+  }
+
+  function vkGoTo(si, realIdx, manual) {
+    vkSI = si;
+    const d = depts[realIdx];
+    vkSetHighlight(si, d);
+    vkMoveStrip(vkGetX(si), true);
+    vkLabel.style.opacity = '0';
+    vkDesc.style.opacity  = '0';
     setTimeout(() => {
-      vkLabel.textContent = d.name; vkLabel.style.color = d.color;
+      vkLabel.textContent = d.name;
+      vkLabel.style.color = d.color;
       vkDesc.textContent  = d.desc;
-      vkLabel.style.opacity = '1'; vkDesc.style.opacity = '1';
+      vkLabel.style.opacity = '1';
+      vkDesc.style.opacity  = '1';
     }, 220);
     if (manual) { clearInterval(vkTimer); vkTimer = setInterval(vkNext, 2500); }
   }
-  function vkNext() { vkActivate((vkIdx + 1) % depts.length, false); }
+
+  function vkNext() {
+    const nextSI  = vkSI + 1;
+    const realIdx = (nextSI - LEAD + N * 100) % N;
+    vkGoTo(nextSI, realIdx, false);
+    if (nextSI >= LEAD + N) {
+      // animate to right clone, then snap back to real position
+      setTimeout(() => {
+        const snapSI = nextSI - N;
+        const d = depts[realIdx];
+        vkSI = snapSI;
+        allAvEls.forEach(av => { av.style.transition = 'none'; });
+        vkSetHighlight(snapSI, d);
+        vkMoveStrip(vkGetX(snapSI), false);
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          allAvEls.forEach(av => { av.style.transition = AV_TRANS; });
+        }));
+      }, 570);
+    }
+  }
 
   setTimeout(() => {
-    vkActivate(0, false);
+    vkGoTo(LEAD, 0, false);
     vkTimer = setInterval(vkNext, 2500);
-    window.addEventListener('resize', () => vkActivate(vkIdx, false));
+    window.addEventListener('resize', () => vkMoveStrip(vkGetX(vkSI), false));
   }, 80);
 })();
 
