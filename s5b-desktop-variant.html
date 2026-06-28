@@ -155,14 +155,11 @@ body {
   height: 2px;
   background: linear-gradient(90deg, var(--purple), transparent);
 }
-.vb-company {
-  font-size: 9px; font-weight: 600; letter-spacing: 2.5px;
-  text-transform: uppercase; color: rgba(255,255,255,0.3);
-}
+.vb-logo { display: flex; align-items: center; height: 32px; }
 .vb-num {
   font-size: clamp(48px,5vw,68px); font-weight: 800;
   color: var(--purple); line-height: 1; letter-spacing: -2px;
-  margin: 10px 0 4px;
+  margin: 14px 0 4px;
 }
 .vb-label {
   font-size: 11px; color: rgba(255,255,255,0.5); font-weight: 300; line-height: 1.5;
@@ -170,13 +167,19 @@ body {
 .vb-divider {
   height: 1px; background: #1e1e1e; margin: 18px 0;
 }
-.vb-quote-mark {
-  font-size: 32px; color: var(--purple); line-height: 0.7;
-  font-family: Georgia, serif; opacity: 0.5; margin-bottom: 8px;
-}
 .vb-quote-text {
   font-size: 12px; color: rgba(255,255,255,0.6);
   line-height: 1.7; font-weight: 300; font-style: italic; flex: 1;
+}
+.vb-quote-text::before {
+  content: '\201C';
+  font-size: 1.5em;
+  color: var(--purple);
+  font-family: Georgia, serif;
+  font-style: normal;
+  margin-right: 2px;
+  vertical-align: -4px;
+  opacity: 0.8;
 }
 .vb-person { margin-top: 16px; }
 .vb-name { font-size: 11px; font-weight: 700; color: #fff; }
@@ -355,42 +358,64 @@ body {
   <h2 class="sp-heading">Businesses like yours are already seeing the impact</h2>
 
   <div class="vb-cards">
+
+    <!-- VML -->
     <div class="vb-card">
-      <div class="vb-company">VML</div>
+      <div class="vb-logo">
+        <svg viewBox="0 0 72 28" width="72" height="28" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <text x="0" y="22" font-family="Poppins,sans-serif" font-weight="800" font-size="24" fill="white" letter-spacing="-0.5">V</text>
+          <text x="20" y="22" font-family="Poppins,sans-serif" font-weight="800" font-size="24" fill="white" letter-spacing="-0.5">M</text>
+          <text x="46" y="22" font-family="Poppins,sans-serif" font-weight="800" font-size="24" fill="white" letter-spacing="-0.5">L</text>
+          <rect x="0" y="25" width="64" height="2" rx="1" fill="#e8341c"/>
+        </svg>
+      </div>
       <div class="vb-num">98h</div>
       <div class="vb-label">Saved cutting project planning<br>time in half</div>
       <div class="vb-divider"></div>
-      <div class="vb-quote-mark">"</div>
       <p class="vb-quote-text">Our planning cycles used to eat entire weeks. monday's AI agents gave us that time back.</p>
       <div class="vb-person">
         <div class="vb-name">Sarah Luxemberg</div>
         <div class="vb-role">Operations Director, VML</div>
       </div>
     </div>
+
+    <!-- Arcaise -->
     <div class="vb-card">
-      <div class="vb-company">Arcaise</div>
+      <div class="vb-logo">
+        <svg viewBox="0 0 100 28" width="100" height="28" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="6" cy="14" r="5" fill="var(--purple)"/>
+          <text x="16" y="21" font-family="Poppins,sans-serif" font-weight="700" font-size="17" fill="white" letter-spacing="-0.3">arcaise</text>
+        </svg>
+      </div>
       <div class="vb-num">75%</div>
       <div class="vb-label">Reduction in internal<br>support requests</div>
       <div class="vb-divider"></div>
-      <div class="vb-quote-mark">"</div>
       <p class="vb-quote-text">monday brought AI to our data, and that changed everything.</p>
       <div class="vb-person">
         <div class="vb-name">Alex Boulder</div>
         <div class="vb-role">Director of Operations, Arcaise</div>
       </div>
     </div>
+
+    <!-- Agora -->
     <div class="vb-card">
-      <div class="vb-company">Agora</div>
+      <div class="vb-logo">
+        <svg viewBox="0 0 90 28" width="90" height="28" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Agora wave mark -->
+          <path d="M4 18 Q8 8 12 14 Q16 20 20 10 Q22 5 24 14" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+          <text x="30" y="21" font-family="Poppins,sans-serif" font-weight="700" font-size="17" fill="white" letter-spacing="-0.2">Agora</text>
+        </svg>
+      </div>
       <div class="vb-num">30h</div>
       <div class="vb-label">Saved surfacing OKR<br>metrics automatically</div>
       <div class="vb-divider"></div>
-      <div class="vb-quote-mark">"</div>
       <p class="vb-quote-text">We used to spend days pulling OKR data every quarter. Now it surfaces automatically — before we even ask.</p>
       <div class="vb-person">
         <div class="vb-name">Asaf Goldstof</div>
         <div class="vb-role">Director, Efficiency & AI, Agora</div>
       </div>
     </div>
+
   </div>
 </div>
 
