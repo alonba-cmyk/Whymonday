@@ -435,12 +435,41 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
   .sp-quote-text { font-size: 12px; line-height: 1.7; }
   .sp-q-name { font-size: 11px; margin-top: 10px; }
   .sp-q-role { font-size: 9px; }
+  .sp-row-quote { display: none; }
 
   /* S6 – CTA */
   .outcome-wrap h2 { font-size: clamp(22px, 7vw, 40px); }
   .cta { padding: 12px 24px; font-size: 11px; }
   .s0v-h1 { font-size: clamp(28px, 8vw, 42px); letter-spacing: -0.5px; }
   .s0v-h2 { font-size: clamp(14px, 4vw, 20px); }
+}
+
+/* S5b – Desktop card layout */
+@media (min-width: 769px) {
+  #s5b { padding: 4% 6%; }
+  .sp-body { display: flex; flex-direction: column; margin-top: 28px; gap: 0; flex: 1; }
+  .sp-companies { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; flex: 1; min-height: 0; }
+  .sp-right { display: none; }
+  .sp-row {
+    flex-direction: column; align-items: flex-start;
+    border: 1px solid #1e1e1e; border-radius: 16px;
+    padding: 28px 26px; position: relative; overflow: hidden;
+    border-bottom: 1px solid #1e1e1e;
+  }
+  .sp-row:first-child { border-top: 1px solid #1e1e1e; }
+  .sp-row::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--purple), transparent);
+  }
+  .sp-logo { flex: 0 0 auto; height: 32px; min-height: 0; margin-bottom: 0; }
+  .sp-stat-num { font-size: clamp(44px,4.8vw,66px); flex: 0 0 auto; margin: 14px 0 4px; }
+  .sp-stat-label { font-size: 11px; }
+  .sp-row-quote { display: flex; flex-direction: column; flex: 1; }
+  .sp-row-divider { height: 1px; background: #1e1e1e; margin: 16px 0; }
+  .sp-rq-text { font-size: 12px; color: rgba(255,255,255,0.6); line-height: 1.7; font-weight: 300; font-style: italic; flex: 1; }
+  .sp-rq-text::before { content: '\201C'; font-size: 1.5em; color: var(--purple); font-family: Georgia,serif; font-style: normal; margin-right: 2px; vertical-align: -4px; opacity: 0.8; }
+  .sp-rq-name { font-size: 11px; font-weight: 700; color: #fff; margin-top: 12px; }
+  .sp-rq-role { font-size: 9px; color: rgba(255,255,255,0.3); font-weight: 300; line-height: 1.4; margin-top: 2px; }
 }
 
 /* S0 Variants */
@@ -771,24 +800,59 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
   <div class="sp-body">
     <div class="sp-companies">
       <div class="sp-row">
-        <div class="sp-logo"><span class="sp-l-arcaise">VML</span></div>
-        <div>
+        <div class="sp-logo">
+          <svg viewBox="0 0 72 28" width="72" height="28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <text x="0" y="22" font-family="Poppins,sans-serif" font-weight="800" font-size="24" fill="white" letter-spacing="-0.5">V</text>
+            <text x="20" y="22" font-family="Poppins,sans-serif" font-weight="800" font-size="24" fill="white" letter-spacing="-0.5">M</text>
+            <text x="46" y="22" font-family="Poppins,sans-serif" font-weight="800" font-size="24" fill="white" letter-spacing="-0.5">L</text>
+            <rect x="0" y="25" width="64" height="2" rx="1" fill="#e8341c"/>
+          </svg>
+        </div>
+        <div class="sp-stat-group">
           <div class="sp-stat-num">98h</div>
           <div class="sp-stat-label">Saved cutting project<br>planning time in half</div>
         </div>
-      </div>
-      <div class="sp-row">
-        <div class="sp-logo"><span class="sp-l-arcaise">Arcaise</span></div>
-        <div>
-          <div class="sp-stat-num">75%</div>
-          <div class="sp-stat-label">Reduction in internal<br>support requests</div>
+        <div class="sp-row-quote">
+          <div class="sp-row-divider"></div>
+          <p class="sp-rq-text">Our planning cycles used to eat entire weeks. monday's AI agents gave us that time back.</p>
+          <div class="sp-rq-name">Sarah Luxemberg</div>
+          <div class="sp-rq-role">Operations Director, VML</div>
         </div>
       </div>
       <div class="sp-row">
-        <div class="sp-logo"><span class="sp-l-arcaise">Agora</span></div>
-        <div>
+        <div class="sp-logo">
+          <svg viewBox="0 0 100 28" width="100" height="28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="6" cy="14" r="5" fill="#6161ff"/>
+            <text x="16" y="21" font-family="Poppins,sans-serif" font-weight="700" font-size="17" fill="white" letter-spacing="-0.3">arcaise</text>
+          </svg>
+        </div>
+        <div class="sp-stat-group">
+          <div class="sp-stat-num">75%</div>
+          <div class="sp-stat-label">Reduction in internal<br>support requests</div>
+        </div>
+        <div class="sp-row-quote">
+          <div class="sp-row-divider"></div>
+          <p class="sp-rq-text">monday brought AI to our data, and that changed everything.</p>
+          <div class="sp-rq-name">Alex Boulder</div>
+          <div class="sp-rq-role">Director of Operations, Arcaise</div>
+        </div>
+      </div>
+      <div class="sp-row">
+        <div class="sp-logo">
+          <svg viewBox="0 0 90 28" width="90" height="28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 18 Q8 8 12 14 Q16 20 20 10 Q22 5 24 14" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+            <text x="30" y="21" font-family="Poppins,sans-serif" font-weight="700" font-size="17" fill="white" letter-spacing="-0.2">Agora</text>
+          </svg>
+        </div>
+        <div class="sp-stat-group">
           <div class="sp-stat-num">30h</div>
           <div class="sp-stat-label">Saved surfacing OKR<br>metrics automatically</div>
+        </div>
+        <div class="sp-row-quote">
+          <div class="sp-row-divider"></div>
+          <p class="sp-rq-text">We used to spend days pulling OKR data every quarter. Now it surfaces automatically — before we even ask.</p>
+          <div class="sp-rq-name">Asaf Goldstof</div>
+          <div class="sp-rq-role">Director, Efficiency & AI, Agora</div>
         </div>
       </div>
     </div>
