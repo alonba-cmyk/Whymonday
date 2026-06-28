@@ -119,7 +119,7 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
 .s2-desc { font-size:10px; color:var(--dim); font-weight:300; line-height:1.6; grid-column:2; grid-row:2; }
 .s2-mob-carousel { display:none; width:100%; overflow:hidden; }
 .s2-mob-track { display:flex; gap:10px; transition:transform 0.5s cubic-bezier(0.4,0,0.2,1); will-change:transform; padding:4px 0 6px; }
-.s2-mob-card { flex-shrink:0; width:calc(100% - 40px); background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-left:3px solid; border-radius:16px; padding:16px 18px; display:flex; align-items:center; gap:14px; }
+.s2-mob-card { flex-shrink:0; width:100%; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:16px; padding:16px 18px; display:flex; align-items:center; gap:14px; }
 .s2-mob-title { font-size:15px; font-weight:800; color:#fff; line-height:1.35; }
 
 /* S3 */
@@ -1213,7 +1213,6 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
     cards.forEach(c => {
       const el = document.createElement('div');
       el.className = 's2-mob-card';
-      el.style.borderLeftColor = c.color;
       el.innerHTML = `<div class="s2-card-top"><div class="s2-av" style="border-color:${c.color}90"><img src="${c.img}" alt="${c.dept}" loading="lazy"></div><span class="s2-dept-chip" style="color:${c.color}">${c.dept}</span></div><div class="s2-mob-title">${c.title}</div>`;
       track.appendChild(el);
     });
