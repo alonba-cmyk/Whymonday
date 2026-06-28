@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>S3 – The Gap · Desktop Variants</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #111;
+    font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    color: #fff;
+    padding: 40px 24px 80px;
+  }
+
+  h1.page-title {
+    text-align: center;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    margin-bottom: 48px;
+  }
+
+  .variant-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+    margin-bottom: 12px;
+    padding-left: 4px;
+  }
+
+  .slide-frame {
+    width: 100%;
+    max-width: 1280px;
+    aspect-ratio: 16 / 9;
+    margin: 0 auto 64px;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.08);
+    position: relative;
+  }
+
+  /* ─── Shared slide tokens ─── */
+  .slide {
+    width: 100%;
+    height: 100%;
+    background: #0a0a0a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .slide::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 55% at 50% 0%, rgba(100,78,248,0.12) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 80% 80%, rgba(100,78,248,0.05) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #644ef8;
+    margin-bottom: 16px;
+  }
+
+  /* ═══════════════════════════════════════════════
+     VARIANT A – Left/Right split
+     Left: headline + stats   Right: 3 blocker cards
+     ═══════════════════════════════════════════════ */
+  .va-wrap {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: stretch;
+    padding: 0 5% 0 6%;
+    gap: 5%;
+  }
+
+  .va-left {
+    flex: 0 0 38%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-right: 4%;
+    border-right: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .va-headline {
+    font-size: clamp(18px, 1.9vw, 28px);
+    font-weight: 700;
+    line-height: 1.3;
+    color: #fff;
+    margin-bottom: 24px;
+  }
+
+  .va-sub {
+    font-size: clamp(12px, 1.1vw, 16px);
+    font-weight: 400;
+    color: rgba(255,255,255,0.45);
+    margin-bottom: 32px;
+    line-height: 1.5;
+  }
+
+  .va-stats {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 4px;
+  }
+
+  .va-stat-box {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .va-stat-num {
+    font-size: clamp(36px, 3.8vw, 54px);
+    font-weight: 800;
+    line-height: 1;
+    background: linear-gradient(135deg, #fff 30%, rgba(255,255,255,0.35));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .va-stat-label {
+    font-size: 10px;
+    color: rgba(255,255,255,0.4);
+    font-weight: 300;
+    line-height: 1.5;
+    margin-top: 4px;
+    max-width: 120px;
+  }
+
+  .va-stat-yet {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+
+  .va-stat-yet-line {
+    width: 1px;
+    height: 20px;
+    background: rgba(255,255,255,0.15);
+  }
+
+  .va-stat-yet-text {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.25);
+  }
+
+  .va-source {
+    font-size: 8px;
+    color: rgba(255,255,255,0.2);
+    margin-top: 14px;
+    letter-spacing: 0.5px;
+  }
+
+  .va-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 12px;
+    padding: 5% 0;
+  }
+
+  .blocker-card {
+    flex: 1;
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 14px;
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    position: relative;
+    overflow: hidden;
+    background: rgba(255,255,255,0.02);
+    transition: border-color 0.2s;
+  }
+
+  .blocker-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, #644ef8, transparent 60%);
+    opacity: 0.6;
+  }
+
+  .blocker-icon {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: rgba(100,78,248,0.1);
+  }
+
+  .blocker-icon svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .blocker-body {}
+
+  .blocker-title {
+    font-size: clamp(12px, 1.1vw, 15px);
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 4px;
+  }
+
+  .blocker-desc {
+    font-size: clamp(9px, 0.85vw, 11px);
+    font-weight: 300;
+    color: rgba(255,255,255,0.45);
+    line-height: 1.6;
+  }
+
+  .blocker-num {
+    position: absolute;
+    top: 14px;
+    right: 18px;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: rgba(100,78,248,0.4);
+  }
+
+
+  /* ═══════════════════════════════════════════════
+     VARIANT B – Statement top + 3 column cards
+     ═══════════════════════════════════════════════ */
+  .vb-wrap {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 0 6%;
+    justify-content: center;
+    gap: 0;
+  }
+
+  .vb-header {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 18px;
+  }
+
+  .vb-headline {
+    font-size: clamp(20px, 2.2vw, 32px);
+    font-weight: 700;
+    line-height: 1.25;
+    color: #fff;
+    max-width: 640px;
+  }
+
+  .vb-sub {
+    font-size: clamp(13px, 1.2vw, 17px);
+    font-weight: 400;
+    color: rgba(255,255,255,0.35);
+    margin-top: 10px;
+  }
+
+  .vb-stats-bar {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin-bottom: 22px;
+    padding: 16px 24px;
+    background: rgba(255,255,255,0.025);
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .vb-stat {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex: 1;
+  }
+
+  .vb-stat-num {
+    font-size: clamp(32px, 3.2vw, 46px);
+    font-weight: 800;
+    line-height: 1;
+    background: linear-gradient(135deg, #fff 30%, rgba(255,255,255,0.3));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .vb-stat-label {
+    font-size: 10px;
+    color: rgba(255,255,255,0.4);
+    font-weight: 300;
+    line-height: 1.5;
+    max-width: 140px;
+  }
+
+  .vb-divider {
+    width: 1px;
+    height: 48px;
+    background: rgba(255,255,255,0.1);
+    flex-shrink: 0;
+    margin: 0 28px;
+    position: relative;
+  }
+
+  .vb-divider::after {
+    content: 'yet';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.2);
+    background: #0d0d0d;
+    padding: 2px 6px;
+  }
+
+  .vb-source {
+    font-size: 8px;
+    color: rgba(255,255,255,0.18);
+    letter-spacing: 0.5px;
+    margin-left: auto;
+    align-self: flex-end;
+    padding-bottom: 2px;
+  }
+
+  .vb-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    flex: 1;
+    min-height: 0;
+  }
+
+  .vb-card {
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 16px;
+    padding: 22px 22px 20px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    background: rgba(255,255,255,0.02);
+  }
+
+  .vb-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+  }
+
+  .vb-card:nth-child(1)::before { background: linear-gradient(90deg, #644ef8, transparent 70%); }
+  .vb-card:nth-child(2)::before { background: linear-gradient(90deg, #e8341c, transparent 70%); }
+  .vb-card:nth-child(3)::before { background: linear-gradient(90deg, #00b884, transparent 70%); }
+
+  .vb-card-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 14px;
+    flex-shrink: 0;
+  }
+
+  .vb-card:nth-child(1) .vb-card-icon { background: rgba(100,78,248,0.12); }
+  .vb-card:nth-child(2) .vb-card-icon { background: rgba(232,52,28,0.12); }
+  .vb-card:nth-child(3) .vb-card-icon { background: rgba(0,184,132,0.12); }
+
+  .vb-card-num {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .vb-card:nth-child(1) .vb-card-num { color: rgba(100,78,248,0.6); }
+  .vb-card:nth-child(2) .vb-card-num { color: rgba(232,52,28,0.6); }
+  .vb-card:nth-child(3) .vb-card-num { color: rgba(0,184,132,0.6); }
+
+  .vb-card-title {
+    font-size: clamp(14px, 1.3vw, 18px);
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 10px;
+    line-height: 1.2;
+  }
+
+  .vb-card-desc {
+    font-size: clamp(9px, 0.82vw, 11px);
+    font-weight: 300;
+    color: rgba(255,255,255,0.45);
+    line-height: 1.7;
+    flex: 1;
+  }
+
+
+  /* ═══════════════════════════════════════════════
+     VARIANT C – Dramatic: headline + 3 big items
+     ═══════════════════════════════════════════════ */
+  .vc-wrap {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 0 6%;
+    justify-content: center;
+  }
+
+  .vc-top {
+    margin-bottom: 24px;
+  }
+
+  .vc-headline {
+    font-size: clamp(22px, 2.5vw, 36px);
+    font-weight: 700;
+    line-height: 1.25;
+    color: #fff;
+    max-width: 700px;
+    margin-bottom: 6px;
+  }
+
+  .vc-sub {
+    font-size: clamp(13px, 1.2vw, 17px);
+    font-weight: 400;
+    color: rgba(255,255,255,0.3);
+  }
+
+  .vc-sub em {
+    color: rgba(255,255,255,0.6);
+    font-style: normal;
+    font-weight: 600;
+  }
+
+  .vc-body {
+    display: grid;
+    grid-template-columns: 1fr 1px 1fr 1px 1fr;
+    gap: 0;
+    flex: 1;
+    align-items: center;
+  }
+
+  .vc-divider-line {
+    width: 1px;
+    height: 60%;
+    background: rgba(255,255,255,0.07);
+    justify-self: center;
+  }
+
+  .vc-item {
+    padding: 24px 32px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .vc-item-icon {
+    margin-bottom: 16px;
+  }
+
+  .vc-item-num {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(100,78,248,0.5);
+    margin-bottom: 10px;
+  }
+
+  .vc-item-title {
+    font-size: clamp(16px, 1.6vw, 22px);
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+
+  .vc-item-desc {
+    font-size: clamp(10px, 0.88vw, 12px);
+    font-weight: 300;
+    color: rgba(255,255,255,0.45);
+    line-height: 1.7;
+  }
+
+  .vc-item-stat {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+  }
+
+  .vc-item-stat-num {
+    font-size: clamp(28px, 2.8vw, 40px);
+    font-weight: 800;
+    line-height: 1;
+    background: linear-gradient(135deg, #fff 30%, rgba(255,255,255,0.3));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .vc-item-stat-label {
+    font-size: 9px;
+    color: rgba(255,255,255,0.35);
+    font-weight: 300;
+    line-height: 1.5;
+    max-width: 100px;
+  }
+
+</style>
+</head>
+<body>
+
+<h1 class="page-title">S3 · The Gap · Desktop Redesign Variants</h1>
+
+<!-- ─── VARIANT A ─── -->
+<div class="variant-label">Variant A — Split: Stats Left / Blockers Right</div>
+<div class="slide-frame">
+  <div class="slide">
+    <div class="va-wrap">
+
+      <div class="va-left">
+        <p class="eyebrow">The Gap</p>
+        <h2 class="va-headline">But people and agents aren't reaching their full potential.</h2>
+        <p class="va-sub">The numbers tell the story:</p>
+        <div class="va-stats">
+          <div class="va-stat-box">
+            <div class="va-stat-num">90<sup style="font-size:0.55em">%</sup></div>
+            <div class="va-stat-label">of employees use personal AI tools at work</div>
+          </div>
+          <div class="va-stat-yet">
+            <div class="va-stat-yet-line"></div>
+            <div class="va-stat-yet-text">yet</div>
+            <div class="va-stat-yet-line"></div>
+          </div>
+          <div class="va-stat-box">
+            <div class="va-stat-num">5<sup style="font-size:0.55em">%</sup></div>
+            <div class="va-stat-label">of AI pilots deliver measurable business impact</div>
+          </div>
+        </div>
+        <p class="va-source">MIT Sloan Management Review</p>
+      </div>
+
+      <div class="va-right">
+        <p style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.25);margin-bottom:4px">What's standing in their way?</p>
+
+        <!-- Blocker 1 -->
+        <div class="blocker-card">
+          <div class="blocker-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#644ef8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="8" cy="8" r="3"/>
+              <circle cx="16" cy="8" r="3"/>
+              <path d="M3 20c0-3.3 2.2-6 5-6"/>
+              <path d="M21 20c0-3.3-2.2-6-5-6"/>
+              <path d="M11 20h2"/>
+              <line x1="11" y1="14" x2="13" y2="14" stroke-dasharray="2 2"/>
+            </svg>
+          </div>
+          <div class="blocker-body">
+            <div class="blocker-title">Siloed Agents</div>
+            <div class="blocker-desc">Most people use AI individually. Agents aren't connected to the team's work — so insights stay personal, not shared.</div>
+          </div>
+          <div class="blocker-num">01</div>
+        </div>
+
+        <!-- Blocker 2 -->
+        <div class="blocker-card">
+          <div class="blocker-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#644ef8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="9"/>
+              <path d="M9 12h6M12 9v6"/>
+              <circle cx="12" cy="12" r="3" stroke-dasharray="3 2" fill="rgba(100,78,248,0.1)"/>
+            </svg>
+          </div>
+          <div class="blocker-body">
+            <div class="blocker-title">Lack of Context</div>
+            <div class="blocker-desc">Agents don't know where things stand. Missing workplace context means generic outputs — not real, actionable results.</div>
+          </div>
+          <div class="blocker-num">02</div>
+        </div>
+
+        <!-- Blocker 3 -->
+        <div class="blocker-card">
+          <div class="blocker-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#644ef8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 3l8 4v5c0 4.4-3.4 8.5-8 9.5C7.4 20.5 4 16.4 4 12V7l8-4z"/>
+              <line x1="12" y1="10" x2="12" y2="14"/>
+              <circle cx="12" cy="16" r="0.5" fill="#644ef8"/>
+            </svg>
+          </div>
+          <div class="blocker-body">
+            <div class="blocker-title">Security</div>
+            <div class="blocker-desc">Enterprise AI requires enterprise-grade security. Shadow AI creates risk without visibility or governance.</div>
+          </div>
+          <div class="blocker-num">03</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- ─── VARIANT B ─── -->
+<div class="variant-label">Variant B — Statement Header + 3 Column Cards</div>
+<div class="slide-frame">
+  <div class="slide">
+    <div class="vb-wrap">
+
+      <div class="vb-header">
+        <p class="eyebrow">The Gap</p>
+        <h2 class="vb-headline">But people and agents aren't reaching their full potential.</h2>
+        <p class="vb-sub">What's standing in their way?</p>
+      </div>
+
+      <div class="vb-stats-bar">
+        <div class="vb-stat">
+          <div class="vb-stat-num">90<sup style="font-size:0.5em">%</sup></div>
+          <div class="vb-stat-label">of employees use personal AI tools at work</div>
+        </div>
+        <div class="vb-divider"></div>
+        <div class="vb-stat">
+          <div class="vb-stat-num">5<sup style="font-size:0.5em">%</sup></div>
+          <div class="vb-stat-label">of enterprise AI pilots deliver measurable impact</div>
+        </div>
+        <div class="vb-source">MIT Sloan Management Review</div>
+      </div>
+
+      <div class="vb-cards">
+
+        <!-- Card 1: Siloed Agents -->
+        <div class="vb-card">
+          <div class="vb-card-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#644ef8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="7" cy="8" r="3"/>
+              <circle cx="17" cy="8" r="3"/>
+              <path d="M3 21c0-3 1.8-5.5 4-5.5"/>
+              <path d="M21 21c0-3-1.8-5.5-4-5.5"/>
+              <line x1="10" y1="15.5" x2="14" y2="15.5" stroke-dasharray="2 2" stroke-opacity="0.4"/>
+            </svg>
+          </div>
+          <div class="vb-card-num">01</div>
+          <div class="vb-card-title">Siloed Agents</div>
+          <div class="vb-card-desc">Most people use AI individually. Agents aren't connected to the team's work — so insights stay personal, never shared across the organization.</div>
+        </div>
+
+        <!-- Card 2: Lack of Context -->
+        <div class="vb-card">
+          <div class="vb-card-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#e8341c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="8" height="8" rx="2"/>
+              <rect x="13" y="3" width="8" height="8" rx="2"/>
+              <rect x="3" y="13" width="8" height="8" rx="2"/>
+              <rect x="13" y="13" width="8" height="8" rx="2" stroke-dasharray="3 2" stroke-opacity="0.4"/>
+              <line x1="17" y1="17" x2="17" y2="17" stroke-width="0"/>
+              <path d="M17 15v4M15 17h4" stroke="#e8341c" stroke-opacity="0.5"/>
+            </svg>
+          </div>
+          <div class="vb-card-num">02</div>
+          <div class="vb-card-title">Lack of Context</div>
+          <div class="vb-card-desc">Most agents lack the context of your actual work. They don't know where things stand, so they produce generic outputs instead of real business results.</div>
+        </div>
+
+        <!-- Card 3: Security -->
+        <div class="vb-card">
+          <div class="vb-card-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00b884" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 3l8 4v5c0 4.4-3.4 8.5-8 9.5C7.4 20.5 4 16.4 4 12V7l8-4z"/>
+              <line x1="12" y1="10" x2="12" y2="13"/>
+              <circle cx="12" cy="15.5" r="0.7" fill="#00b884"/>
+            </svg>
+          </div>
+          <div class="vb-card-num">03</div>
+          <div class="vb-card-title">Security</div>
+          <div class="vb-card-desc">Enterprise AI requires enterprise-grade security. Shadow AI tools create compliance risk, data leakage, and loss of visibility — with zero governance.</div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- ─── VARIANT C ─── -->
+<div class="variant-label">Variant C — Full Width: Headline + 3 Columns with Stats</div>
+<div class="slide-frame">
+  <div class="slide">
+    <div class="vc-wrap">
+
+      <div class="vc-top">
+        <p class="eyebrow">The Gap</p>
+        <h2 class="vc-headline">But people and agents aren't reaching their full potential.</h2>
+        <p class="vc-sub">What's standing in their way? <em>3 things.</em></p>
+      </div>
+
+      <div class="vc-body">
+
+        <!-- Item 1 -->
+        <div class="vc-item">
+          <div class="vc-item-num">01</div>
+          <div class="vc-item-title">Siloed Agents</div>
+          <div class="vc-item-desc">Most people use AI as individuals. Agents aren't connected to the team's work — insights stay personal, never compounding across your organization.</div>
+          <div class="vc-item-stat">
+            <div class="vc-item-stat-num">90<sup style="font-size:0.55em">%</sup></div>
+            <div class="vc-item-stat-label">use AI tools individually, not as a team</div>
+          </div>
+        </div>
+
+        <div class="vc-divider-line"></div>
+
+        <!-- Item 2 -->
+        <div class="vc-item">
+          <div class="vc-item-num">02</div>
+          <div class="vc-item-title">Lack of Context</div>
+          <div class="vc-item-desc">Agents don't know where things stand. Without workplace context they produce generic outputs — not the specific, actionable results your business needs.</div>
+          <div class="vc-item-stat">
+            <div class="vc-item-stat-num">5<sup style="font-size:0.55em">%</sup></div>
+            <div class="vc-item-stat-label">of AI pilots deliver measurable business impact</div>
+          </div>
+        </div>
+
+        <div class="vc-divider-line"></div>
+
+        <!-- Item 3 -->
+        <div class="vc-item">
+          <div class="vc-item-num">03</div>
+          <div class="vc-item-title">Security</div>
+          <div class="vc-item-desc">Enterprise AI needs enterprise-grade security. Shadow AI creates compliance risk, data leakage, and zero governance — exactly what IT can't allow.</div>
+          <div class="vc-item-stat" style="border-color:transparent">
+            <div style="display:flex;align-items:center;gap:8px;margin-top:-6px">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" stroke-linecap="round">
+                <path d="M12 3l8 4v5c0 4.4-3.4 8.5-8 9.5C7.4 20.5 4 16.4 4 12V7l8-4z"/>
+              </svg>
+              <span style="font-size:9px;color:rgba(255,255,255,0.2);font-weight:300;line-height:1.5">Enterprise governance &amp; compliance required</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+    <!-- Source attribution -->
+    <div style="position:absolute;bottom:18px;right:24px;font-size:7.5px;color:rgba(255,255,255,0.15);letter-spacing:0.5px">MIT Sloan Management Review</div>
+  </div>
+</div>
+
+</body>
+</html>
