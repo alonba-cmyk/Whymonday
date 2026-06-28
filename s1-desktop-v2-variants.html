@@ -151,7 +151,7 @@
   .vk-wrap   { position:relative; overflow:hidden; height:70px; }
   .vk-strip  { display:flex; gap:14px; position:absolute; top:7px; left:0; transition:transform 0.55s cubic-bezier(0.4,0,0.2,1); }
   .vk-thumb  { display:flex; flex-direction:column; align-items:center; flex-shrink:0; cursor:pointer; }
-  .vk-av     { width:56px; height:56px; border-radius:50%; overflow:hidden; border:2px solid rgba(255,255,255,0.1); transition:border-color 0.35s, box-shadow 0.35s; }
+  .vk-av     { width:56px; height:56px; border-radius:50%; overflow:hidden; box-shadow:inset 0 0 0 2px rgba(255,255,255,0.1); transition:box-shadow 0.35s; transform:translateZ(0); }
   .vk-av img { width:100%; height:100%; object-fit:cover; object-position:top; }
   .vk-fade-l { position:absolute; left:0; top:0; bottom:0; width:70px; background:linear-gradient(to right,#0a0a0a,transparent); pointer-events:none; }
   .vk-fade-r { position:absolute; right:0; top:0; bottom:0; width:70px; background:linear-gradient(to left,#0a0a0a,transparent); pointer-events:none; }
@@ -511,7 +511,7 @@ depts.forEach((d, i) => {
   const vkDesc  = document.getElementById('vkDesc');
   const SZ = 56, GAP = 14, STEP = SZ + GAP, LEAD = 6, N = depts.length;
   const TRANS    = 'transform 0.55s cubic-bezier(0.4,0,0.2,1)';
-  const AV_TRANS = 'border-color 0.35s, box-shadow 0.35s';
+  const AV_TRANS = 'box-shadow 0.35s';
 
   // 6 tail clones + all 8 real + 6 head clones = 20 total thumbs
   const extDepts = [...depts.slice(-LEAD), ...depts, ...depts.slice(0, LEAD)];
@@ -547,8 +547,9 @@ depts.forEach((d, i) => {
 
   function vkSetHighlight(si, d) {
     allAvEls.forEach((av, j) => {
-      av.style.borderColor = j === si ? d.color : 'rgba(255,255,255,0.1)';
-      av.style.boxShadow   = j === si ? `0 0 0 3px ${d.color}60, 0 0 18px ${d.color}30` : 'none';
+      av.style.boxShadow = j === si
+        ? `inset 0 0 0 2px ${d.color}, 0 0 0 3px ${d.color}60, 0 0 18px ${d.color}30`
+        : 'inset 0 0 0 2px rgba(255,255,255,0.1)';
     });
   }
 
