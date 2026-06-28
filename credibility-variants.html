@@ -150,5 +150,17 @@ html, body { background:#000; font-family:'Poppins',sans-serif; color:#fff; }
 
 </div>
 
+<script>
+function equalizeCards() {
+  const cards = document.querySelectorAll('.analyst');
+  cards.forEach(c => c.style.height = 'auto');
+  let maxH = 0;
+  cards.forEach(c => maxH = Math.max(maxH, c.offsetHeight));
+  cards.forEach(c => c.style.height = maxH + 'px');
+}
+equalizeCards();
+window.addEventListener('resize', equalizeCards);
+</script>
+
 </body>
 </html>
