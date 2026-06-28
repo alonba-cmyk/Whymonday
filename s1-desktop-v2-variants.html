@@ -59,7 +59,7 @@
   .vb-thumb    { display:flex; flex-direction:column; align-items:center; gap:4px; cursor:pointer; transition:transform 0.2s; }
   .vb-thumb:hover { transform:translateY(-2px); }
   .vb-thumb.active { transform:translateY(-2px); }
-  .vb-thumb-av { width:46px; height:46px; border-radius:50%; overflow:hidden; border:2px solid rgba(255,255,255,0.12); transition:border-color 0.3s, box-shadow 0.3s; }
+  .vb-thumb-av { width:54px; height:54px; border-radius:50%; overflow:hidden; border:2px solid rgba(255,255,255,0.12); transition:border-color 0.3s, box-shadow 0.3s; }
   .vb-thumb-av img { width:100%; height:100%; object-fit:cover; object-position:top; }
   .vb-thumb.active .vb-thumb-av { box-shadow:0 0 0 3px rgba(100,78,248,0.3); }
   .vb-thumb-name { font-size:7.5px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:rgba(255,255,255,0.3); white-space:nowrap; transition:color 0.3s; }
@@ -178,6 +178,31 @@
   .vg-monday  { display:flex; align-items:center; justify-content:center; gap:8px; flex-shrink:0; }
   .vg-monday .hub-box { width:22px; height:22px; border-radius:7px; }
   .vg-monday-lbl { font-size:8px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:rgba(100,78,248,0.65); }
+
+  /* ─────────────────────────────────────────
+     H  B variant: dept strip centered, featured info below
+  ───────────────────────────────────────── */
+  .vh-right    { flex:1; display:flex; flex-direction:column; justify-content:center; padding:5% 5% 4%; gap:14px; }
+  .vh-strip    { display:flex; justify-content:space-around; }
+  .vh-thumb    { display:flex; flex-direction:column; align-items:center; gap:5px; cursor:pointer; transition:transform 0.2s; }
+  .vh-thumb:hover { transform:translateY(-2px); }
+  .vh-thumb.active { transform:translateY(-2px); }
+  .vh-thumb-av { width:56px; height:56px; border-radius:50%; overflow:hidden; border:2px solid rgba(255,255,255,0.12); transition:border-color 0.3s, box-shadow 0.3s; }
+  .vh-thumb-av img { width:100%; height:100%; object-fit:cover; object-position:top; }
+  .vh-thumb.active .vh-thumb-av { box-shadow:0 0 0 3px rgba(100,78,248,0.3); }
+  .vh-thumb-name { font-size:8px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:rgba(255,255,255,0.3); white-space:nowrap; transition:color 0.3s; }
+  .vh-thumb.active .vh-thumb-name { color:#fff; }
+  .vh-divider  { display:flex; align-items:center; gap:10px; }
+  .vh-div-line { flex:1; height:1px; background:rgba(255,255,255,0.07); }
+  .vh-div-badge { display:flex; align-items:center; gap:6px; flex-shrink:0; }
+  .vh-div-badge .hub-box { width:18px; height:18px; border-radius:5px; }
+  .vh-div-badge span { font-size:8px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:rgba(100,78,248,0.65); }
+  .vh-featured { display:flex; align-items:center; gap:14px; }
+  .vh-feat-av  { width:48px; height:48px; border-radius:50%; overflow:hidden; border:2px solid; flex-shrink:0; transition:border-color 0.3s; }
+  .vh-feat-av img { width:100%; height:100%; object-fit:cover; object-position:top; }
+  .vh-feat-info { flex:1; }
+  .vh-feat-name { font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; margin-bottom:4px; transition:color 0.3s; }
+  .vh-feat-desc { font-size:clamp(11px,1.1vw,14px); font-weight:300; color:rgba(255,255,255,0.55); line-height:1.55; }
 </style>
 </head>
 <body>
@@ -338,6 +363,45 @@
         <div class="ve-out-label">What gets unlocked</div>
         <div class="ve-out-name" id="veOutName" style="color:#F9D27A">Sales</div>
         <div class="ve-out-desc" id="veOutDesc">Faster revenue generation</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ H  B variant: strip centered ═══ -->
+<div class="variant-label">H — B Variant: dept strip centered, featured info below</div>
+<div class="slide-frame">
+  <div class="slide">
+    <div class="v-left">
+      <p class="eyebrow">Our Mission</p>
+      <h2 class="mission">monday's mission has always been to help teams get more done and achieve their business goals.</h2>
+      <p class="tagline">Every department. People and agents connected through one platform.</p>
+    </div>
+    <div class="vh-right">
+      <div class="vh-strip" id="vhStrip"></div>
+      <div class="vh-divider">
+        <div class="vh-div-line"></div>
+        <div class="vh-div-badge">
+          <div class="hub-box" style="width:18px;height:18px;border-radius:5px">
+            <svg width="9" height="9" viewBox="0 0 24 24" fill="none">
+              <circle cx="5" cy="12" r="3" fill="#644ef8"/>
+              <circle cx="12" cy="5" r="3" fill="#e8341c"/>
+              <circle cx="19" cy="12" r="3" fill="#ffcc00"/>
+              <circle cx="12" cy="19" r="3" fill="#00b884"/>
+            </svg>
+          </div>
+          <span>monday</span>
+        </div>
+        <div class="vh-div-line"></div>
+      </div>
+      <div class="vh-featured">
+        <div class="vh-feat-av" id="vhFeatAv" style="border-color:#F9D27A">
+          <img id="vhFeatImg" src="" alt="">
+        </div>
+        <div class="vh-feat-info">
+          <div class="vh-feat-name" id="vhFeatName" style="color:#F9D27A">Sales</div>
+          <div class="vh-feat-desc" id="vhFeatDesc">Faster revenue generation</div>
+        </div>
       </div>
     </div>
   </div>
@@ -516,6 +580,30 @@ depts.forEach((d, i) => {
   veConns.appendChild(conn);
   veConnEls.push(conn);
 });
+
+/* ── H: strip centered + featured below ── */
+const vhStrip    = document.getElementById('vhStrip');
+const vhFeatAv   = document.getElementById('vhFeatAv');
+const vhFeatImg  = document.getElementById('vhFeatImg');
+const vhFeatName = document.getElementById('vhFeatName');
+const vhFeatDesc = document.getElementById('vhFeatDesc');
+let vhThumbs = [];
+depts.forEach((d, i) => {
+  const thumb = document.createElement('div');
+  thumb.className = 'vh-thumb' + (i === 0 ? ' active' : '');
+  thumb.innerHTML = `<div class="vh-thumb-av" style="border-color:${d.color}80"><img src="${d.img}" alt="${d.name}"></div><span class="vh-thumb-name">${d.name}</span>`;
+  thumb.onclick = () => {
+    vhThumbs.forEach(t => t.classList.remove('active'));
+    thumb.classList.add('active');
+    vhFeatAv.style.borderColor = d.color;
+    vhFeatImg.src = d.img; vhFeatImg.alt = d.name;
+    vhFeatName.textContent = d.name; vhFeatName.style.color = d.color;
+    vhFeatDesc.textContent = d.desc;
+  };
+  vhStrip.appendChild(thumb);
+  vhThumbs.push(thumb);
+});
+vhFeatImg.src = depts[0].img;
 
 /* ── G: outcome top + dept grid ── */
 const vgGrid    = document.getElementById('vgGrid');
