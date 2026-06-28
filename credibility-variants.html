@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Credibility Slide — 4 Variants</title>
+<title>Credibility Slide — Variant B</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 :root { --purple:#6161ff; }
-html, body { background:#0a0a0a; font-family:'Poppins',sans-serif; color:#fff; }
+html, body { background:#000; font-family:'Poppins',sans-serif; color:#fff; }
 
 .slide {
   width:100%; min-height:100svh;
@@ -28,65 +28,16 @@ html, body { background:#0a0a0a; font-family:'Poppins',sans-serif; color:#fff; }
   padding:3px 9px; border-radius:20px; text-transform:uppercase;
 }
 
-/* ══════════════════════════════════════════════
-   VARIANT A — Security Hero + Analysts Below
-   Security badge image dominates. Analysts support.
-══════════════════════════════════════════════ */
-#sA { background:#000; }
-.va-wrap { display:flex; flex-direction:column; align-items:center; gap:0; width:100%; }
-
-.va-sec-label {
-  font-size:8px; font-weight:600; letter-spacing:4px; text-transform:uppercase;
-  color:rgba(255,255,255,0.3); margin-bottom:14px; text-align:center;
-}
-.va-badges-wrap {
-  background:#fff; border-radius:14px; padding:14px 22px;
-  display:flex; align-items:center; justify-content:center; width:100%;
-}
-.va-badges-img {
-  width:100%; max-width:240px; display:block;
-}
-.va-sec-desc {
-  font-size:11px; font-weight:300; color:rgba(255,255,255,0.35);
-  text-align:center; line-height:1.5; margin-top:10px; max-width:280px;
-}
-.va-divider {
-  width:100%; border:none; border-top:1px solid rgba(255,255,255,0.07);
-  margin:24px 0;
-}
-.va-analysts { display:flex; gap:12px; width:100%; }
-.va-analyst-card {
-  flex:1; display:flex; flex-direction:column; align-items:center; gap:10px;
-  padding:18px 12px;
-  background:rgba(255,255,255,0.04);
-  border:1px solid rgba(255,255,255,0.08);
-  border-radius:16px;
-}
-.va-analyst-logo {
-  height:20px; filter:brightness(0) invert(1); opacity:0.7; object-fit:contain;
-}
-.va-analyst-text {
-  font-size:10px; font-weight:300; color:rgba(255,255,255,0.38);
-  text-align:center; line-height:1.4;
-}
-.va-analyst-stat {
-  font-size:clamp(26px,7vw,34px); font-weight:900; letter-spacing:-2px; line-height:1;
-  background:linear-gradient(140deg,#fff 45%,rgba(255,255,255,0.4));
-  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
-}
-
-/* ══════════════════════════════════════════════
-   VARIANT B — Analysts First / Logos as Heroes
-   Gartner & Forrester logos are the visual stars.
-══════════════════════════════════════════════ */
-#sB { background:#000; }
+/* ── Headline ── */
 .vb-headline {
   font-size:clamp(22px,6vw,32px); font-weight:800; line-height:1.15;
   letter-spacing:-1px; margin-bottom:28px; text-align:center;
   background:linear-gradient(140deg,#fff 50%,rgba(255,255,255,0.45));
   -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
 }
-.vb-analyst-row { display:flex; flex-direction:column; gap:12px; width:100%; margin-bottom:24px; }
+
+/* ── Analyst cards ── */
+.vb-analyst-row { display:flex; flex-direction:column; gap:12px; width:100%; margin-bottom:12px; }
 .vb-analyst {
   display:flex; align-items:center; gap:16px;
   padding:16px 20px;
@@ -101,119 +52,29 @@ html, body { background:#0a0a0a; font-family:'Poppins',sans-serif; color:#fff; }
 .vb-analyst-copy { flex:1; }
 .vb-analyst-title { font-size:12px; font-weight:600; margin-bottom:2px; }
 .vb-analyst-sub { font-size:10px; font-weight:300; color:rgba(255,255,255,0.38); line-height:1.4; }
-.vb-badges-row {
-  display:flex; align-items:center; gap:8px; padding:14px 18px;
+
+/* ── Security row ── */
+.vb-security {
+  display:flex; align-items:center; gap:12px;
+  padding:14px 18px;
   background:rgba(255,255,255,0.03);
   border:1px solid rgba(255,255,255,0.06);
   border-radius:14px;
 }
-.vb-shield {
-  flex-shrink:0;
+.vb-shield { flex-shrink:0; }
+.vb-certs { display:flex; flex-wrap:wrap; gap:6px; flex:1; }
+.vb-cert {
+  font-size:9px; font-weight:600; letter-spacing:0.3px;
+  border:1px solid rgba(255,255,255,0.16);
+  border-radius:20px; padding:3px 10px;
+  color:rgba(255,255,255,0.55);
+  white-space:nowrap;
 }
-.vb-badges-wrap {
-  background:#fff; border-radius:10px; padding:8px 14px;
-  display:flex; align-items:center; justify-content:center; flex-shrink:0;
-}
-.vb-badges-img { height:22px; display:block; object-fit:contain; }
-.vb-badges-text { flex:1; font-size:10px; font-weight:300; color:rgba(255,255,255,0.35); line-height:1.4; }
-
-/* ══════════════════════════════════════════════
-   VARIANT C — Minimal / Logos Speak
-   Very spare. Logos large. Almost no copy.
-══════════════════════════════════════════════ */
-#sC { background:#000; }
-.vc-wrap { display:flex; flex-direction:column; align-items:center; gap:32px; width:100%; }
-.vc-eyebrow {
-  font-size:9px; font-weight:600; letter-spacing:5px; text-transform:uppercase;
-  color:rgba(255,255,255,0.25); text-align:center;
-}
-.vc-logo-group { display:flex; gap:24px; align-items:center; justify-content:center; }
-.vc-logo { height:28px; filter:brightness(0) invert(1); opacity:0.65; object-fit:contain; max-width:120px; }
-.vc-logo-divider { width:1px; height:28px; background:rgba(255,255,255,0.1); }
-.vc-stat-row { display:flex; gap:0; width:100%; }
-.vc-stat-col { flex:1; display:flex; flex-direction:column; align-items:center; text-align:center; padding:0 12px; }
-.vc-stat-col + .vc-stat-col { border-left:1px solid rgba(255,255,255,0.07); }
-.vc-num {
-  font-size:clamp(42px,11vw,60px); font-weight:900; letter-spacing:-3px; line-height:0.9;
-  background:linear-gradient(140deg,#fff 45%,rgba(255,255,255,0.3));
-  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
-}
-.vc-num-label { font-size:10px; font-weight:300; color:rgba(255,255,255,0.35); margin-top:6px; line-height:1.4; }
-.vc-sec-block { width:100%; display:flex; flex-direction:column; align-items:center; gap:10px; }
-.vc-sec-label { font-size:8px; font-weight:600; letter-spacing:3px; text-transform:uppercase; color:rgba(255,255,255,0.28); }
-.vc-badges-wrap {
-  background:#fff; border-radius:10px; padding:8px 16px;
-  display:flex; align-items:center; justify-content:center;
-}
-.vc-badges { height:28px; display:block; object-fit:contain; }
-
-/* ══════════════════════════════════════════════
-   VARIANT D — Dark Cards / Three Equal Panels
-   Each proof point gets its own card with logo.
-══════════════════════════════════════════════ */
-#sD::before {
-  content:''; position:absolute; top:-80px; left:50%; transform:translateX(-50%);
-  width:400px; height:300px;
-  background:radial-gradient(ellipse,rgba(97,97,255,0.12) 0%,transparent 70%);
-  pointer-events:none;
-}
-.vd-wrap { display:flex; flex-direction:column; gap:10px; width:100%; }
-.vd-card {
-  display:flex; flex-direction:column; align-items:flex-start; gap:10px;
-  padding:20px 20px;
-  background:rgba(255,255,255,0.04);
-  border:1px solid rgba(255,255,255,0.08);
-  border-radius:18px;
-}
-.vd-card-logo { height:20px; filter:brightness(0) invert(1); opacity:0.7; object-fit:contain; max-width:110px; }
-.vd-card-headline { font-size:15px; font-weight:700; line-height:1.2; }
-.vd-card-sub { font-size:11px; font-weight:300; color:rgba(255,255,255,0.38); line-height:1.45; }
-.vd-badges-wrap {
-  background:#fff; border-radius:10px; padding:10px 16px;
-  display:flex; align-items:center; justify-content:center; width:100%;
-}
-.vd-card-badges { height:26px; display:block; object-fit:contain; }
-.vd-sec-label { font-size:8px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,0.3); }
 </style>
 </head>
 <body>
 
-<!-- ══ VARIANT A — Security Hero + Analysts Below ══ -->
-<div class="slide" id="sA">
-  <div class="slide-label">A — Security First <span class="var-badge">Visual</span></div>
-  <div class="va-wrap">
-
-    <div class="va-sec-label">Enterprise Security</div>
-    <div class="va-badges-wrap">
-      <img class="va-badges-img"
-        src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Enterprise/6a046b460c7b44dca7b526dd_trust-badges.png"
-        alt="GDPR · SOC 2 · ISO 27001 · HIPAA">
-    </div>
-    <p class="va-sec-desc">Enterprise-grade AI infrastructure with built-in protection, data privacy, governance and compliance</p>
-
-    <hr class="va-divider">
-
-    <div class="va-analysts">
-      <div class="va-analyst-card">
-        <img class="va-analyst-logo"
-          src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Enterprise/Gartner.svg"
-          alt="Gartner">
-        <div class="va-analyst-stat">3</div>
-        <div class="va-analyst-text">Magic Quadrant Leader reports</div>
-      </div>
-      <div class="va-analyst-card">
-        <img class="va-analyst-logo"
-          src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Enterprise/Forster.svg"
-          alt="Forrester">
-        <div class="va-analyst-text">Total Economic Impact™ study validates ROI</div>
-      </div>
-    </div>
-
-  </div>
-</div>
-
-<!-- ══ VARIANT B — Analysts First / Logos as Heroes ══ -->
-<div class="slide" id="sB">
+<div class="slide">
   <div class="slide-label">B — Analysts First <span class="var-badge">Trust</span></div>
 
   <div class="vb-headline">Recognized by the<br>world's leading analysts.</div>
@@ -239,7 +100,7 @@ html, body { background:#0a0a0a; font-family:'Poppins',sans-serif; color:#fff; }
     </div>
   </div>
 
-  <div class="vb-badges-row">
+  <div class="vb-security">
     <div class="vb-shield">
       <svg width="22" height="22" viewBox="0 0 36 36" fill="none">
         <path d="M18 3L5 8.5V17c0 8.4 5.8 16.2 13 18C25.2 33.2 31 25.4 31 17V8.5L18 3z"
@@ -248,85 +109,14 @@ html, body { background:#0a0a0a; font-family:'Poppins',sans-serif; color:#fff; }
           stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     </div>
-    <div class="vb-badges-wrap">
-      <img class="vb-badges-img"
-        src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Enterprise/6a046b460c7b44dca7b526dd_trust-badges.png"
-        alt="Security badges">
+    <div class="vb-certs">
+      <span class="vb-cert">GDPR</span>
+      <span class="vb-cert">SOC 2</span>
+      <span class="vb-cert">ISO 27001</span>
+      <span class="vb-cert">HIPAA</span>
     </div>
-    <div class="vb-badges-text">GDPR · SOC 2 · ISO 27001 · HIPAA</div>
   </div>
 
-</div>
-
-<!-- ══ VARIANT C — Minimal / Logos Speak ══ -->
-<div class="slide" id="sC">
-  <div class="slide-label">C — Minimal <span class="var-badge">Spare</span></div>
-  <div class="vc-wrap">
-
-    <div class="vc-eyebrow">Trusted by enterprises and analysts</div>
-
-    <div class="vc-stat-row">
-      <div class="vc-stat-col">
-        <div class="vc-num">3</div>
-        <div class="vc-num-label">Gartner® Magic<br>Quadrant Leader</div>
-        <img class="vc-logo" style="margin-top:10px;"
-          src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Enterprise/Gartner.svg"
-          alt="Gartner">
-      </div>
-      <div class="vc-stat-col">
-        <img class="vc-logo"
-          src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Enterprise/Forster.svg"
-          alt="Forrester" style="margin-bottom:10px;">
-        <div class="vc-num-label">Total Economic<br>Impact™ study</div>
-      </div>
-    </div>
-
-    <div class="vc-sec-block">
-      <div class="vc-sec-label">Enterprise Security</div>
-      <div class="vc-badges-wrap">
-        <img class="vc-badges"
-          src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Enterprise/6a046b460c7b44dca7b526dd_trust-badges.png"
-          alt="GDPR · SOC 2 · ISO 27001 · HIPAA">
-      </div>
-    </div>
-
-  </div>
-</div>
-
-<!-- ══ VARIANT D — Three Cards ══ -->
-<div class="slide" id="sD">
-  <div class="slide-label">D — Cards <span class="var-badge">Editorial</span></div>
-  <div class="vd-wrap">
-
-    <div class="vd-card">
-      <div class="vd-sec-label">Analyst Recognition</div>
-      <img class="vd-card-logo"
-        src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Enterprise/Gartner.svg"
-        alt="Gartner">
-      <div class="vd-card-headline">3× Magic Quadrant Leader</div>
-      <div class="vd-card-sub">Only work management platform recognized as a Leader in 3 Gartner® Magic Quadrant™ reports</div>
-    </div>
-
-    <div class="vd-card">
-      <div class="vd-sec-label">Economic Impact</div>
-      <img class="vd-card-logo"
-        src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Enterprise/Forster.svg"
-        alt="Forrester">
-      <div class="vd-card-headline">Total Economic Impact™</div>
-      <div class="vd-card-sub">Independent Forrester research confirms measurable, enterprise-wide business impact</div>
-    </div>
-
-    <div class="vd-card">
-      <div class="vd-sec-label">Enterprise Security</div>
-      <div class="vd-badges-wrap">
-        <img class="vd-card-badges"
-          src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Enterprise/6a046b460c7b44dca7b526dd_trust-badges.png"
-          alt="Security badges">
-      </div>
-      <div class="vd-card-sub">GDPR · SOC 2 · ISO 27001 · HIPAA — enterprise-grade AI infrastructure with built-in compliance</div>
-    </div>
-
-  </div>
 </div>
 
 </body>
