@@ -3,30 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>S1 — A vs D</title>
+<title>S1 — Variant A</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 :root { --purple:#6161ff; }
 html, body { background:#000; font-family:'Poppins',sans-serif; color:#fff; }
 
-/* Each slide fills the viewport */
 .slide {
   width:100%;
   min-height:100svh;
   display:flex;
   flex-direction:column;
+  justify-content:center;
   position:relative;
   overflow:hidden;
 }
 
-/* Label bar */
 .slide-label {
   position:absolute; top:0; left:0; right:0;
   display:flex; align-items:center; justify-content:space-between;
   padding:14px 20px;
-  background:rgba(0,0,0,0.55);
-  backdrop-filter:blur(8px);
   z-index:10;
   font-size:9px; font-weight:600; letter-spacing:3px; text-transform:uppercase;
   color:rgba(255,255,255,0.3);
@@ -37,23 +34,12 @@ html, body { background:#000; font-family:'Poppins',sans-serif; color:#fff; }
   padding:3px 9px; border-radius:20px; text-transform:uppercase;
 }
 
-/* Divider between slides */
-.divider {
-  width:100%; height:1px;
-  background:rgba(255,255,255,0.08);
-}
-
 .strip-img { width:100%; display:block; }
 
-/* ─────────── VARIANT A ─────────── */
-.va {
-  justify-content:space-between;
-  padding-top:52px; /* clear label */
-}
+/* ── Body content ── */
 .va-body {
-  flex:1;
-  display:flex; flex-direction:column; align-items:center; justify-content:center;
-  padding:32px 28px 28px;
+  display:flex; flex-direction:column; align-items:center;
+  padding:0 28px 32px;
 }
 .va-logo { height:20px; filter:brightness(0) invert(1); opacity:0.9; margin-bottom:28px; }
 .va-headline {
@@ -66,65 +52,18 @@ html, body { background:#000; font-family:'Poppins',sans-serif; color:#fff; }
   font-size:13px; font-weight:300; color:rgba(255,255,255,0.4);
   text-align:center; line-height:1.5;
 }
-.va-strip { flex-shrink:0; }
-
-/* ─────────── VARIANT D ─────────── */
-.vd {
-  justify-content:flex-start;
-  padding-top:52px; /* clear label */
-}
-.vd-strip { flex-shrink:0; }
-.vd-body {
-  flex:1;
-  display:flex; flex-direction:column; justify-content:center;
-  padding:28px 28px 40px;
-}
-.vd-top {
-  display:flex; align-items:center; justify-content:space-between;
-  margin-bottom:28px;
-}
-.vd-logo { height:18px; filter:brightness(0) invert(1); opacity:0.8; }
-.vd-eyebrow { font-size:8px; font-weight:600; letter-spacing:4px; text-transform:uppercase; color:rgba(255,255,255,0.3); }
-.vd-headline {
-  font-size:clamp(38px,10vw,54px); font-weight:900; line-height:1.0;
-  letter-spacing:-2px; margin-bottom:12px;
-  background:linear-gradient(140deg,#fff 50%,rgba(255,255,255,0.4));
-  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
-}
-.vd-sub { font-size:13px; font-weight:300; color:rgba(255,255,255,0.4); line-height:1.5; }
 </style>
 </head>
 <body>
 
-<!-- ── A ── -->
-<div class="slide va">
+<div class="slide">
   <div class="slide-label">A — Headline First <span class="badge">Bold</span></div>
   <div class="va-body">
     <img class="va-logo" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/monday%20Logo/monday.com%20Logo.png" alt="monday.com">
     <h1 class="va-headline">People<br>and agents.</h1>
     <p class="va-sub">Working together. Driving results.</p>
   </div>
-  <div class="va-strip">
-    <img class="strip-img" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/Agents%20and%20People%20strip.png" alt="People and Agents">
-  </div>
-</div>
-
-<div class="divider"></div>
-
-<!-- ── D ── -->
-<div class="slide vd">
-  <div class="slide-label">D — Image First <span class="badge">Editorial</span></div>
-  <div class="vd-strip">
-    <img class="strip-img" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/Agents%20and%20People%20strip.png" alt="People and Agents">
-  </div>
-  <div class="vd-body">
-    <div class="vd-top">
-      <img class="vd-logo" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/monday%20Logo/monday.com%20Logo.png" alt="monday.com">
-      <span class="vd-eyebrow">AI Work Platform</span>
-    </div>
-    <h1 class="vd-headline">People<br>and agents.</h1>
-    <p class="vd-sub">Working together. Driving results.</p>
-  </div>
+  <img class="strip-img" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/Agents%20and%20People%20strip.png" alt="People and Agents">
 </div>
 
 </body>
