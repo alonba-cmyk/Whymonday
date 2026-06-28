@@ -56,6 +56,19 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
 .cursor.short { height:clamp(14px,2vw,28px); }
 @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
 
+/* S0 – Desktop (Variant E: logo → headline → strip → subtitle) */
+@media (min-width:769px) {
+  .s0-body { padding:4% 0 2%; width:100%; gap:0; }
+  .opening-brand { margin-bottom:2.5%; order:1; }
+  .s0-text { display:contents; }
+  .line1 { font-size:5.2vw; letter-spacing:-2.5px; margin-bottom:2%; order:2; min-height:auto; }
+  .s0-strip { order:3; width:62%; align-self:center; margin-bottom:0;
+    mask-image:linear-gradient(to right, transparent 0%, black 7%, black 93%, transparent 100%);
+    -webkit-mask-image:linear-gradient(to right, transparent 0%, black 7%, black 93%, transparent 100%);
+  }
+  .line2 { font-size:1.45vw; margin-top:2%; order:4; min-height:auto; }
+}
+
 /* S1 – Orbit */
 #s1 { padding:40px 0 30px; justify-content:center; }
 .s1-orbit-inner { display:flex; flex-direction:column; align-items:center; justify-content:center; width:100%; height:100%; gap:16px; }
@@ -299,6 +312,7 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
   .line1 { font-size: clamp(42px, 11vw, 56px); letter-spacing: -2px; }
   .line2 { font-size: clamp(13px, 3.5vw, 18px); margin-top: 1px; }
   .s0-text { gap: 8px; }
+  .s0-strip { width: calc(100% + 40px); margin-left: -20px; }
 
   /* S1 – Orbit (mobile) */
   #s1 { padding: 20px 0 12px; }
@@ -505,8 +519,8 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
       <span class="line1" id="line1"></span>
       <span class="line2" id="line2"></span>
     </div>
+    <img class="s0-strip" id="s0Strip" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/Agents%20and%20People%20strip.png" alt="">
   </div>
-  <img class="s0-strip" id="s0Strip" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/Agents%20and%20People%20strip.png" alt="">
 </div>
 
 <div class="slide" id="s1">
