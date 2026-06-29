@@ -276,8 +276,8 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
 .sbs-left { width:34%; display:flex; flex-direction:column; justify-content:center; padding:60px 28px 60px 72px; flex-shrink:0; }
 .sbs-eyebrow { font-size:10px; font-weight:600; letter-spacing:4px; text-transform:uppercase; color:var(--purple); margin-bottom:20px; }
 .sbs-heading { font-size:clamp(26px,2.8vw,40px); font-weight:600; line-height:1.3; color:#fff; margin:0; }
-.sbs-right { flex:1; display:flex; flex-direction:column; overflow:hidden; min-width:0; align-self:center; max-height:75vh; }
-.sbs-img-area { flex:1; position:relative; overflow:hidden; min-height:0; }
+.sbs-right { flex:1; display:flex; flex-direction:column; overflow:hidden; min-width:0; justify-content:center; }
+.sbs-img-area { position:relative; overflow:hidden; width:100%; aspect-ratio:3/2; }
 .sbs-img { position:absolute; inset:0 50px 0; width:calc(100% - 100px); height:100%; opacity:0; transition:opacity .5s ease; }
 .sbs-img img { width:100%; height:100%; object-fit:contain; border-radius:12px; }
 
