@@ -152,11 +152,16 @@
       <!-- red glow center-bottom (the wall) -->
       <div style="position:absolute;left:50%;bottom:5%;transform:translateX(-50%);width:60px;height:340px;background:#ef4444;border-radius:50%;filter:blur(40px);opacity:0.08;pointer-events:none;"></div>
 
-      <!-- Characters — bigger, separated to sides -->
-      <img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/Human.png"
-        style="position:absolute;left:-65px;bottom:0;height:50%;object-fit:contain;opacity:0.45;z-index:5;">
-      <img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/Agent.png"
-        style="position:absolute;right:-65px;bottom:0;height:50%;object-fit:contain;opacity:0.45;z-index:5;">
+      <!-- Left half clip → Human stays strictly in left 50% -->
+      <div style="position:absolute;left:0;bottom:0;width:50%;height:52%;overflow:hidden;z-index:5;">
+        <img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/Human.png"
+          style="position:absolute;right:-20px;bottom:0;height:100%;object-fit:contain;opacity:0.5;">
+      </div>
+      <!-- Right half clip → Agent stays strictly in right 50% -->
+      <div style="position:absolute;right:0;bottom:0;width:50%;height:52%;overflow:hidden;z-index:5;">
+        <img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/Agent.png"
+          style="position:absolute;left:-20px;bottom:0;height:100%;object-fit:contain;opacity:0.5;">
+      </div>
 
       <!-- Red wall — full height, glowing -->
       <div style="position:absolute;left:50%;top:0;bottom:0;width:2px;transform:translateX(-50%);background:linear-gradient(to bottom,transparent 0%,rgba(239,68,68,0.12) 20%,rgba(239,68,68,0.35) 45%,rgba(239,68,68,0.35) 100%);box-shadow:0 0 18px rgba(239,68,68,0.3);pointer-events:none;z-index:6;"></div>
