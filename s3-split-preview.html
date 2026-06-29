@@ -502,8 +502,12 @@
 </div>
 
 <!-- ── VARIANT G: Characters separated by the problem ── -->
-<div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:40px;">
   <p class="section-label">Variant G — Human &amp; Agent מופרדים (aha: מול העיניים)</p>
+
+  <!-- Desktop -->
+  <div>
+    <p style="font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.2);margin-bottom:10px;text-align:center;">Desktop</p>
   <div class="desktop" style="background:#000;position:relative;overflow:hidden;">
 
     <!-- bg glow -->
@@ -555,7 +559,63 @@
       </div>
     </div>
   </div>
-</div>
+  </div><!-- /desktop wrapper -->
+
+  <!-- Mobile -->
+  <div>
+    <p style="font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.2);margin-bottom:10px;text-align:center;">Mobile</p>
+    <div style="width:390px;height:844px;background:#000;border-radius:44px;overflow:hidden;border:1px solid rgba(255,255,255,0.1);position:relative;">
+
+      <!-- bg glows -->
+      <div style="position:absolute;left:10%;top:30%;width:200px;height:200px;background:#6161ff;border-radius:50%;filter:blur(80px);opacity:0.05;pointer-events:none;"></div>
+      <div style="position:absolute;right:10%;top:30%;width:200px;height:200px;background:#6161ff;border-radius:50%;filter:blur(80px);opacity:0.05;pointer-events:none;"></div>
+
+      <!-- Content -->
+      <div style="position:absolute;inset:0;display:flex;flex-direction:column;padding:52px 24px 40px;z-index:10;">
+        <p style="font-size:9px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#6161ff;margin-bottom:10px;text-align:center;">The Gap</p>
+        <h2 style="font-size:22px;font-weight:700;line-height:1.2;color:#fff;text-align:center;margin-bottom:28px;">What's standing<br>in their way?</h2>
+
+        <!-- Three barriers -->
+        <div style="display:flex;flex-direction:column;gap:10px;z-index:10;">
+          <div style="display:flex;align-items:center;gap:12px;background:rgba(239,68,68,0.07);border:1px solid rgba(239,68,68,0.22);border-radius:12px;padding:14px 16px;">
+            <div style="width:6px;height:6px;border-radius:50%;background:#ef4444;flex-shrink:0;"></div>
+            <div>
+              <div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:3px;">Siloed Agents</div>
+              <div style="font-size:11px;color:rgba(255,255,255,0.35);line-height:1.5;">AI stays personal. No shared output, no team impact.</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;background:rgba(239,68,68,0.07);border:1px solid rgba(239,68,68,0.22);border-radius:12px;padding:14px 16px;">
+            <div style="width:6px;height:6px;border-radius:50%;background:#ef4444;flex-shrink:0;"></div>
+            <div>
+              <div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:3px;">Lack of Context</div>
+              <div style="font-size:11px;color:rgba(255,255,255,0.35);line-height:1.5;">Agents don't know your business. Generic answers, not real action.</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;background:rgba(239,68,68,0.07);border:1px solid rgba(239,68,68,0.22);border-radius:12px;padding:14px 16px;">
+            <div style="width:6px;height:6px;border-radius:50%;background:#ef4444;flex-shrink:0;"></div>
+            <div>
+              <div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:3px;">Outside the Workflow</div>
+              <div style="font-size:11px;color:rgba(255,255,255,0.35);line-height:1.5;">AI lives in chat windows — not where the work actually happens.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Human (left, faded, bottom) -->
+      <img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/Human.png"
+        style="position:absolute;left:-30px;bottom:0;height:52%;object-fit:contain;opacity:0.3;filter:grayscale(0.3);z-index:1;">
+
+      <!-- Agent (right, faded, bottom) -->
+      <img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/Agent.png"
+        style="position:absolute;right:-30px;bottom:0;height:52%;object-fit:contain;opacity:0.3;filter:grayscale(0.3);z-index:1;">
+
+      <!-- Divider line -->
+      <div style="position:absolute;left:50%;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,transparent 55%,rgba(239,68,68,0.25) 65%,rgba(239,68,68,0.25) 90%,transparent);pointer-events:none;z-index:2;"></div>
+
+    </div>
+  </div>
+
+</div><!-- /variant G wrapper -->
 
 <!-- ── VARIANT H: Chat window trap ── -->
 <div>
