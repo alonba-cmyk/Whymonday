@@ -1093,6 +1093,16 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
     }, 1000);
   }
 
+  (function normalizeDeck() {
+    const BASE = 1440;
+    function apply() {
+      const scale = window.innerWidth > BASE ? (window.innerWidth / BASE).toFixed(3) : '';
+      document.documentElement.style.zoom = scale;
+    }
+    apply();
+    window.addEventListener('resize', apply);
+  })();
+
   function goTo(n) {
     if (n < 0 || n >= slides.length) return;
     slides[current].classList.remove('active');
