@@ -203,7 +203,7 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
 .lci-dots { display:flex; justify-content:center; gap:6px; margin-top:10px; }
 .lci-dot { width:5px; height:5px; border-radius:50%; background:rgba(255,255,255,0.2); border:none; padding:0; cursor:pointer; transition:all 0.3s; }
 .lci-dot.active { background:#fff; width:16px; border-radius:3px; }
-.layer-caps { display:flex; flex-wrap:wrap; gap:6px; margin-top:18px; padding-top:16px; border-top:1px solid rgba(255,255,255,0.07); }
+.layer-caps { display:flex; flex-wrap:wrap; gap:6px; margin-top:10px; margin-bottom:16px; }
 .layer-cap { display:inline-flex; align-items:center; gap:5px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:100px; padding:4px 10px 4px 5px; font-size:11px; color:rgba(255,255,255,0.65); white-space:nowrap; }
 .layer-cap img, .layer-cap svg { width:16px; height:16px; object-fit:contain; flex-shrink:0; }
 
@@ -774,10 +774,10 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
       <button class="layer-close" onclick="closeLayer()">✕</button>
       <div class="layer-card-num" id="layerNum"></div>
       <div class="layer-card-title" id="layerTitle"></div>
+      <div class="layer-caps" id="layerCaps"></div>
       <div class="layer-card-desc" id="layerDesc"></div>
       <div class="layer-card-points" id="layerPoints"></div>
       <div class="layer-card-imgs" id="layerImgs"></div>
-      <div class="layer-caps" id="layerCaps"></div>
     </div>
   </div>
 </div>
