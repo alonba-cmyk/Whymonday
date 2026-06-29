@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Customer Story — Variants</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #0a0a0f; font-family: 'Poppins', sans-serif; color: #fff; }
+
+  .variant-label {
+    text-align: center;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+    padding: 40px 0 12px;
+  }
+
+  /* ─── SHARED SLIDE FRAME ─── */
+  .slide {
+    width: 1200px;
+    height: 675px; /* 16:9 */
+    margin: 0 auto 80px;
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+
+  /* ════════════════════════════════════════
+     VARIANT A — BIG QUOTE + SPLIT PHOTO
+  ════════════════════════════════════════ */
+  .va { background: #09090f; display: flex; }
+
+  .va-left {
+    flex: 0 0 52%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 64px 56px 64px 72px;
+  }
+
+  .va-logo {
+    height: 32px;
+    object-fit: contain;
+    object-position: left center;
+    margin-bottom: 40px;
+    filter: brightness(0) invert(1);
+    opacity: 0.85;
+  }
+
+  .va-qmark {
+    font-size: 96px;
+    line-height: 0.6;
+    color: #6161ff;
+    font-family: Georgia, serif;
+    margin-bottom: 28px;
+  }
+
+  .va-quote {
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.85);
+    margin-bottom: 36px;
+  }
+
+  .va-quote em { color: #a78bfa; font-style: normal; font-weight: 600; }
+
+  .va-person { display: flex; align-items: center; gap: 14px; }
+  .va-avatar {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: linear-gradient(135deg,#6161ff,#a78bfa);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 700; flex-shrink: 0;
+  }
+  .va-name { font-size: 14px; font-weight: 600; color: #fff; }
+  .va-role { font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 2px; }
+
+  .va-right {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+  }
+  .va-right img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center top;
+  }
+  .va-right::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, #09090f 0%, transparent 30%);
+    z-index: 1;
+  }
+
+  /* ════════════════════════════════════════
+     VARIANT B — METRIC HERO
+  ════════════════════════════════════════ */
+  .vb {
+    background: #09090f;
+    display: flex;
+  }
+
+  .vb-left {
+    flex: 0 0 48%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 64px 48px 64px 72px;
+    position: relative;
+  }
+
+  .vb-eyebrow {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #6161ff;
+    margin-bottom: 24px;
+  }
+
+  .vb-metric {
+    font-size: 88px;
+    font-weight: 800;
+    line-height: 1;
+    background: linear-gradient(135deg, #ffffff 0%, #a78bfa 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 8px;
+  }
+
+  .vb-metric-sub {
+    font-size: 18px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 40px;
+  }
+
+  .vb-divider {
+    width: 40px; height: 2px;
+    background: #6161ff;
+    margin-bottom: 32px;
+    border-radius: 2px;
+  }
+
+  .vb-quote {
+    font-size: 15px;
+    line-height: 1.75;
+    color: rgba(255,255,255,0.65);
+    font-style: italic;
+    margin-bottom: 32px;
+  }
+
+  .vb-logo {
+    height: 28px;
+    object-fit: contain;
+    object-position: left;
+    filter: brightness(0) invert(1);
+    opacity: 0.6;
+    margin-bottom: 16px;
+  }
+
+  .vb-name { font-size: 13px; font-weight: 600; color: #fff; }
+  .vb-role { font-size: 11px; color: rgba(255,255,255,0.35); margin-top: 2px; }
+
+  .vb-right {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .vb-right img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  .vb-right::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, #09090f 0%, rgba(9,9,15,0.3) 40%, transparent 60%);
+    z-index: 1;
+  }
+
+  /* ════════════════════════════════════════
+     VARIANT C — STORY CARDS GRID
+  ════════════════════════════════════════ */
+  .vc {
+    background: #09090f;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 64px;
+    gap: 28px;
+  }
+
+  .vc-eyebrow {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #6161ff;
+    align-self: flex-start;
+    margin-bottom: 4px;
+  }
+
+  .vc-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #fff;
+    align-self: flex-start;
+    margin-bottom: 0;
+  }
+
+  .vc-cards {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+  }
+
+  .vc-card {
+    flex: 1;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 16px;
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    transition: border-color 0.2s;
+  }
+
+  .vc-card:first-child {
+    border-color: rgba(97,97,255,0.4);
+    background: rgba(97,97,255,0.04);
+  }
+
+  .vc-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .vc-card-logo {
+    height: 22px;
+    object-fit: contain;
+    object-position: left;
+    filter: brightness(0) invert(1);
+    opacity: 0.7;
+  }
+
+  .vc-card-metric {
+    font-size: 26px;
+    font-weight: 800;
+    color: #a78bfa;
+  }
+
+  .vc-card-quote {
+    font-size: 13px;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.6);
+    font-style: italic;
+    flex: 1;
+  }
+
+  .vc-card-person {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .vc-card-av {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: linear-gradient(135deg,#6161ff,#a78bfa);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700; flex-shrink: 0;
+    color: #fff;
+  }
+
+  .vc-card-name { font-size: 12px; font-weight: 600; color: #fff; }
+  .vc-card-role { font-size: 10px; color: rgba(255,255,255,0.35); margin-top: 1px; }
+</style>
+</head>
+<body>
+
+<p class="variant-label">Variant A — Big Quote + Split Photo</p>
+<div class="slide va">
+  <div class="va-left">
+    <img class="va-logo" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Enterprise/Arcaise.png" alt="Arcaise">
+    <div class="va-qmark">"</div>
+    <p class="va-quote">monday brought <em>AI to our data</em>, and that changed everything. Our planning cycles used to eat entire weeks — <em>now it surfaces automatically.</em></p>
+    <div class="va-person">
+      <div class="va-avatar">AB</div>
+      <div>
+        <div class="va-name">Alex Boulder</div>
+        <div class="va-role">Director of Operations, Arcaise</div>
+      </div>
+    </div>
+  </div>
+  <div class="va-right">
+    <img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/Operations.png" alt="">
+  </div>
+</div>
+
+<p class="variant-label">Variant B — Metric Hero</p>
+<div class="slide vb">
+  <div class="vb-left">
+    <p class="vb-eyebrow">Customer Story</p>
+    <div class="vb-metric">3×</div>
+    <div class="vb-metric-sub">faster project planning</div>
+    <div class="vb-divider"></div>
+    <p class="vb-quote">"monday brought AI to our data, and that changed everything. Our planning cycles used to eat entire weeks — now it surfaces automatically."</p>
+    <img class="vb-logo" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Enterprise/Arcaise.png" alt="Arcaise">
+    <div class="vb-name">Alex Boulder</div>
+    <div class="vb-role">Director of Operations, Arcaise</div>
+  </div>
+  <div class="vb-right">
+    <img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/Operations.png" alt="">
+  </div>
+</div>
+
+<p class="variant-label">Variant C — Story Cards Grid</p>
+<div class="slide vc">
+  <p class="vc-eyebrow">Customer Stories</p>
+  <p class="vc-title">Real teams. Real results.</p>
+  <div class="vc-cards">
+    <div class="vc-card">
+      <div class="vc-card-top">
+        <img class="vc-card-logo" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Enterprise/Arcaise.png" alt="">
+        <div class="vc-card-metric">50%</div>
+      </div>
+      <p class="vc-card-quote">"monday brought AI to our data, and that changed everything. Our planning cycles used to eat entire weeks."</p>
+      <div class="vc-card-person">
+        <div class="vc-card-av">AB</div>
+        <div>
+          <div class="vc-card-name">Alex Boulder</div>
+          <div class="vc-card-role">Director of Operations, Arcaise</div>
+        </div>
+      </div>
+    </div>
+    <div class="vc-card">
+      <div class="vc-card-top">
+        <img class="vc-card-logo" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Enterprise/Arcaise.png" alt="">
+        <div class="vc-card-metric">70%</div>
+      </div>
+      <p class="vc-card-quote">"We replaced a 15-minute screening call with an AI agent that does it in 5 minutes. The team hasn't looked back."</p>
+      <div class="vc-card-person">
+        <div class="vc-card-av">SR</div>
+        <div>
+          <div class="vc-card-name">Sarah Reeves</div>
+          <div class="vc-card-role">Head of HR, Meridian</div>
+        </div>
+      </div>
+    </div>
+    <div class="vc-card">
+      <div class="vc-card-top">
+        <img class="vc-card-logo" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Enterprise/Arcaise.png" alt="">
+        <div class="vc-card-metric">4×</div>
+      </div>
+      <p class="vc-card-quote">"Our pipeline reviews used to take all day. monday's AI agents surface the right deals automatically before we even open a tab."</p>
+      <div class="vc-card-person">
+        <div class="vc-card-av">MT</div>
+        <div>
+          <div class="vc-card-name">Marcus Torres</div>
+          <div class="vc-card-role">VP Sales, Kova Group</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
