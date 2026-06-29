@@ -279,19 +279,19 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
 .sbs-right { flex:1; display:flex; flex-direction:column; overflow:hidden; min-width:0; justify-content:center; }
 .sbs-img-area { position:relative; overflow:hidden; width:100%; aspect-ratio:3/2; }
 .sbs-img { position:absolute; inset:0 50px 0; width:calc(100% - 100px); height:100%; opacity:0; transition:opacity .5s ease; }
-.sbs-img img { width:100%; height:100%; object-fit:contain; border-radius:12px; }
+.sbs-img img { width:100%; height:100%; object-fit:contain; object-position:top center; border-radius:12px; }
 
 /* Marketing intro animation */
 .mkt-intro { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; z-index:2; transition:opacity 0.5s ease; }
 .mkt-intro.hidden { opacity:0; pointer-events:none; }
-.mkt-open-frame { width:100%; height:100%; object-fit:contain; border-radius:12px; }
+.mkt-open-frame { width:100%; height:100%; object-fit:contain; object-position:top center; border-radius:12px; }
 /* Text box overlay — positioned over Dan's card (center-bottom of open frame) */
 .mkt-textbox-wrap { position:absolute; left:50%; bottom:16%; transform:translateX(-50%); width:calc(42% + 1px); opacity:0; transition:opacity 0.4s ease; }
 .mkt-textbox-wrap.show { opacity:1; }
 .mkt-textbox-img { width:100%; display:block; }
 .mkt-textbox-text { position:absolute; top:18%; left:8%; right:8%; font-size:clamp(11px,1.1vw,15px); color:#333; font-family:'Poppins',sans-serif; line-height:1.5; }
 /* Video reveal */
-#mktVideo { position:absolute; inset:0; width:100%; height:100%; object-fit:contain; border-radius:12px; opacity:0; transition:opacity 0.7s ease; }
+#mktVideo { position:absolute; inset:0; width:100%; height:100%; object-fit:contain; object-position:top center; border-radius:12px; opacity:0; transition:opacity 0.7s ease; }
 #mktVideo.visible { opacity:1; }
 .sbs-img.active { opacity:1; }
 .sbs-card { background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:16px; display:flex; flex-direction:column; justify-content:center; padding:40px 48px; gap:32px; }
