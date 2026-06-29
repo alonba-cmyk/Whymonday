@@ -307,8 +307,8 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
 /* Customer Story slide */
 #sstory { background:#09090f; padding:0; }
 .cstory { display:flex; width:100%; height:100%; }
-.cstory-left { flex:0 0 50%; display:flex; flex-direction:column; justify-content:center; padding:64px 52px 64px 72px; }
-.cstory-logo { height:28px; object-fit:contain; object-position:left center; filter:brightness(0) invert(1); opacity:0.8; margin-bottom:36px; }
+.cstory-left { flex:0 0 50%; display:flex; flex-direction:column; justify-content:center; padding:64px 52px 64px 110px; }
+.cstory-logo { height:28px; margin-bottom:36px; }
 .cstory-qmark { font-size:80px; line-height:0.65; color:#6161ff; font-family:Georgia,serif; margin-bottom:24px; }
 .cstory-quote { font-size:clamp(16px,1.5vw,22px); font-weight:400; line-height:1.65; color:rgba(255,255,255,0.85); margin-bottom:32px; }
 .cstory-quote em { color:#a78bfa; font-style:normal; font-weight:600; }
@@ -927,7 +927,10 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
 <div class="slide" id="sstory">
   <div class="cstory">
     <div class="cstory-left">
-      <img class="cstory-logo" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Enterprise/Arcaise.png" alt="Arcaise">
+      <svg class="cstory-logo" viewBox="0 0 100 28" width="100" height="28" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="6" cy="14" r="5" fill="#6161ff"/>
+        <text x="16" y="21" font-family="Poppins,sans-serif" font-weight="700" font-size="17" fill="white" letter-spacing="-0.3">arcaise</text>
+      </svg>
       <div class="cstory-qmark">"</div>
       <p class="cstory-quote">monday brought <em>AI to our data</em>, and that changed everything. Our planning cycles used to eat entire weeks — <em>now it surfaces automatically.</em></p>
       <div class="cstory-person">
