@@ -144,6 +144,25 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
 .gap-right { display:none; }
 .gap-blocker-icon svg { width:20px; height:20px; }
 
+/* S3b – What's standing in their way? */
+#s3b { padding:0; }
+.s3b-glow { position:absolute; border-radius:50%; pointer-events:none; }
+.s3b-glow-l { left:18%; top:50%; transform:translate(-50%,-50%); width:360px; height:360px; background:#6161ff; filter:blur(130px); opacity:0.05; }
+.s3b-glow-r { right:18%; top:50%; transform:translate(50%,-50%); width:360px; height:360px; background:#6161ff; filter:blur(130px); opacity:0.05; }
+.s3b-char { position:absolute; bottom:0; height:85%; object-fit:contain; opacity:0.32; filter:grayscale(0.3); }
+.s3b-char-human { left:-30px; }
+.s3b-char-agent { right:-30px; }
+.s3b-divider { position:absolute; left:50%; top:0; bottom:0; width:1px; transform:translateX(-50%); background:linear-gradient(to bottom,transparent,rgba(239,68,68,0.28) 25%,rgba(239,68,68,0.28) 75%,transparent); pointer-events:none; z-index:1; }
+.s3b-content { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:20px; padding:0 clamp(200px,24vw,320px); z-index:10; }
+#s3b .eyebrow { color:var(--purple); margin-bottom:4px; text-align:center; }
+#s3b h2 { font-size:clamp(22px,2.6vw,38px); font-weight:700; line-height:1.2; text-align:center; margin-bottom:8px; }
+.s3b-cards { display:flex; flex-direction:column; gap:10px; width:100%; }
+.s3b-card { display:flex; align-items:center; gap:12px; background:rgba(239,68,68,0.06); border:1px solid rgba(239,68,68,0.2); border-radius:10px; padding:13px 16px; }
+.s3b-dot { width:6px; height:6px; border-radius:50%; background:#ef4444; flex-shrink:0; }
+.s3b-card-title { font-size:13px; font-weight:700; color:#fff; margin-bottom:2px; }
+.s3b-card-desc { font-size:11px; color:rgba(255,255,255,0.35); line-height:1.5; }
+.s3b-mob-half { display:none; }
+
 /* S4 */
 #s4 { text-align:center; }
 .answer-wrap { max-width:860px; }
@@ -387,6 +406,24 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
   #s3 { justify-content: center; }
   .gap-stat-num { font-size: clamp(52px, 16vw, 88px); }
 
+  /* S3b – What's standing in their way (mobile) */
+  #s3b { padding: 0; }
+  .s3b-char { display: none; }
+  .s3b-mob-half { display: block; position: absolute; bottom: 0; overflow: hidden; height: 42%; z-index: 5; }
+  .s3b-mob-half img { position: absolute; bottom: 0; height: 100%; object-fit: contain; opacity: 0.35; filter: grayscale(0.25); }
+  .s3b-mob-left { left: 0; width: 50%; }
+  .s3b-mob-left img { right: -20px; }
+  .s3b-mob-right { right: 0; width: 50%; }
+  .s3b-mob-right img { left: -20px; }
+  .s3b-divider { top: auto; height: 44%; bottom: 0; background: linear-gradient(to bottom, rgba(239,68,68,0.3), transparent); }
+  .s3b-glow-l { left: -20px; top: 35%; transform: none; width: 180px; height: 180px; filter: blur(70px); opacity: 0.06; }
+  .s3b-glow-r { right: -20px; top: 35%; transform: none; width: 180px; height: 180px; filter: blur(70px); opacity: 0.06; }
+  .s3b-content { padding: 52px 20px 0; justify-content: flex-start; align-items: stretch; gap: 0; }
+  #s3b .eyebrow { margin-bottom: 10px; }
+  #s3b h2 { font-size: 23px; margin-bottom: 22px; }
+  .s3b-card { align-items: flex-start; border-radius: 12px; gap: 12px; }
+  .s3b-dot { margin-top: 4px; }
+
   /* S4b – Department gallery */
   #s4b { padding: 0 !important; align-items: stretch; }
   .sbs-wrap { display: flex !important; flex-direction: column !important; align-items: stretch; justify-content: center; width: 100% !important; height: 100% !important; gap: 12px; }
@@ -530,6 +567,12 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
   .mkt-textbox-wrap { width: 42%; }
 }
 
+/* S3b – Laptop adjustments (769px–1400px) */
+@media (min-width: 769px) and (max-width: 1400px) {
+  .s3b-content { padding: 0 clamp(160px, 18vw, 260px); }
+  #s3b h2 { font-size: clamp(20px, 2.2vw, 32px); }
+}
+
 /* S5 – Laptop adjustments (769px–1400px) */
 @media (min-width: 769px) and (max-width: 1400px) {
   #s5 { padding: 20px 60px 0; }
@@ -651,7 +694,7 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
 
 <div class="progress" id="prog"></div>
 <nav class="nav-dots" id="navDots">
-  <button class="nav-dot active" onclick="goTo(0)"></button><button class="nav-dot" onclick="goTo(1)"></button><button class="nav-dot" onclick="goTo(2)"></button><button class="nav-dot" onclick="goTo(3)"></button><button class="nav-dot" onclick="goTo(4)"></button><button class="nav-dot" onclick="goTo(5)"></button><button class="nav-dot" onclick="goTo(6)"></button><button class="nav-dot" onclick="goTo(7)"></button><button class="nav-dot" onclick="goTo(8)"></button><button class="nav-dot" onclick="goTo(9)"></button>
+  <button class="nav-dot active" onclick="goTo(0)"></button><button class="nav-dot" onclick="goTo(1)"></button><button class="nav-dot" onclick="goTo(2)"></button><button class="nav-dot" onclick="goTo(3)"></button><button class="nav-dot" onclick="goTo(4)"></button><button class="nav-dot" onclick="goTo(5)"></button><button class="nav-dot" onclick="goTo(6)"></button><button class="nav-dot" onclick="goTo(7)"></button><button class="nav-dot" onclick="goTo(8)"></button><button class="nav-dot" onclick="goTo(9)"></button><button class="nav-dot" onclick="goTo(10)"></button>
 </nav>
 
 <div class="deck">
@@ -803,6 +846,25 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
         <div class="gap-blocker-title">Outside the Workflow</div>
         <div class="gap-blocker-desc">Agents live in a chat window, not where the work is done.<br>Every handoff is a gap where execution breaks down.</div>
       </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" id="s3b">
+  <div class="s3b-glow s3b-glow-l"></div>
+  <div class="s3b-glow s3b-glow-r"></div>
+  <img class="s3b-char s3b-char-human" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/Human.png" alt="">
+  <img class="s3b-char s3b-char-agent" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/Agent.png" alt="">
+  <div class="s3b-mob-half s3b-mob-left"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/Human.png" alt=""></div>
+  <div class="s3b-mob-half s3b-mob-right"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/Agent.png" alt=""></div>
+  <div class="s3b-divider"></div>
+  <div class="s3b-content">
+    <p class="eyebrow">The Gap</p>
+    <h2>What's standing<br>in their way?</h2>
+    <div class="s3b-cards">
+      <div class="s3b-card"><div class="s3b-dot"></div><div><div class="s3b-card-title">Siloed Agents</div><div class="s3b-card-desc">AI stays personal. No shared output, no team impact.</div></div></div>
+      <div class="s3b-card"><div class="s3b-dot"></div><div><div class="s3b-card-title">Lack of Context</div><div class="s3b-card-desc">Agents don't know your business. Generic answers, not real action.</div></div></div>
+      <div class="s3b-card"><div class="s3b-dot"></div><div><div class="s3b-card-title">Outside the Workflow</div><div class="s3b-card-desc">AI lives in chat windows — not where the work actually happens.</div></div></div>
     </div>
   </div>
 </div>
@@ -1202,16 +1264,16 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
 
   function onSlideEnter(n) {
     const navDots = document.getElementById('navDots');
-    if (n === 4 && window.innerWidth > 768) navDots.classList.add('bottom-center');
+    if (n === 5 && window.innerWidth > 768) navDots.classList.add('bottom-center');
     else navDots.classList.remove('bottom-center');
     if (n === 2) { if (window.innerWidth <= 768) { pcGoTo(0); pcStart(); } } else { pcStop(); }
-    if (n === 5) { mktPlayIntro(); } else { sbsStopAuto(); }
+    if (n === 6) { mktPlayIntro(); } else { sbsStopAuto(); }
     if (n === 3) {
       document.querySelectorAll('.gap-pt').forEach(el => {
         setTimeout(() => el.classList.add('show'), parseInt(el.dataset.delay));
       });
     }
-    if (n === 4 && !layersDone) {
+    if (n === 5 && !layersDone) {
       layersDone = true;
       setTimeout(() => {
         document.getElementById('charP').classList.add('spread');
