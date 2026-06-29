@@ -165,10 +165,10 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
 .char-p.spread { transform:translateX(-20px); }
 .char-a { right:-20px; left:auto; transform:translateX(-100px); filter:drop-shadow(0 16px 32px rgba(97,97,255,0.3)); }
 .char-a.spread { transform:translateX(20px); }
-/* S5 side labels */
-.char-labels { position:absolute; display:flex; flex-direction:column; gap:8px; z-index:15; top:48%; transform:translateY(-50%); }
-.char-labels-l { left:14%; align-items:flex-start; }
-.char-labels-r { right:12%; align-items:flex-end; }
+/* S5 side labels — positioned relative to #s5 (outer sides of characters) */
+.char-labels { position:absolute; display:flex; flex-direction:column; gap:8px; z-index:25; top:60%; transform:translateY(-50%); }
+.char-labels-l { left:20px; align-items:flex-start; }
+.char-labels-r { right:20px; align-items:flex-end; }
 .char-lbl { background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.09); border-radius:20px; padding:5px 14px; font-size:11px; font-weight:500; color:rgba(255,255,255,0.6); white-space:nowrap; opacity:0; transform:translateY(8px); transition:opacity 0.4s ease,transform 0.4s ease; }
 .char-lbl.cl-purple { background:rgba(97,97,255,0.08); border-color:rgba(97,97,255,0.22); color:rgba(200,200,255,0.85); }
 .char-lbl.cl-ghost { border-style:dashed; border-color:rgba(255,255,255,0.1); color:rgba(255,255,255,0.22); }
@@ -746,6 +746,15 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
 </div>
 
 <div class="slide" id="s5">
+  <div class="char-labels char-labels-l" id="labelsL">
+    <div class="char-lbl">Your team</div>
+    <div class="char-lbl">Freelancers</div>
+    <div class="char-lbl cl-ghost">?</div>
+  </div>
+  <div class="char-labels char-labels-r" id="labelsR">
+    <div class="char-lbl cl-purple">monday agents</div>
+    <div class="char-lbl cl-purple">Bring your own agent</div>
+  </div>
   <div class="layers-top">
     <p class="eyebrow">Why monday.com</p>
     <h2>Built for people and agents</h2>
@@ -754,15 +763,6 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
   <div class="layers-scene">
     <img id="charP" class="char char-p" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/Human.png" alt="Human">
     <img id="charA" class="char char-a" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/Agent.png" alt="Agent">
-    <div class="char-labels char-labels-l" id="labelsL">
-      <div class="char-lbl">Your team</div>
-      <div class="char-lbl">Freelancers</div>
-      <div class="char-lbl cl-ghost">?</div>
-    </div>
-    <div class="char-labels char-labels-r" id="labelsR">
-      <div class="char-lbl cl-purple">monday agents</div>
-      <div class="char-lbl cl-purple">Bring your own agent</div>
-    </div>
     <div class="pills" id="pills">
       <div class="pill" id="pill0" onclick="openLayer(0)"><div class="pill-num">01</div><div class="pill-title">Workspace</div><div class="pill-desc">One shared place for your team and agents to plan and execute together.</div></div><div class="pill" id="pill1" onclick="openLayer(1)"><div class="pill-num">02</div><div class="pill-title">Context</div><div class="pill-desc">Agents with full business context, acting like an experienced team member.</div></div><div class="pill" id="pill2" onclick="openLayer(2)"><div class="pill-num">03</div><div class="pill-title">Control</div><div class="pill-desc">You stay in the driver's seat. All enterprise-grade secure.</div></div><div class="pill" id="pill3" onclick="openLayer(3)"><div class="pill-num">04</div><div class="pill-title">Workflows</div><div class="pill-desc">People and agents handing off seamlessly, keeping things moving.</div></div><div class="pill" id="pill4" onclick="openLayer(4)"><div class="pill-num">05</div><div class="pill-title">Integrations</div><div class="pill-desc">200+ native integrations. Your entire stack, unified under one platform.</div></div><div class="pill" id="pill5" onclick="openLayer(5)"><div class="pill-num">06</div><div class="pill-title">Multi-Agent</div><div class="pill-desc">Connect agents from any AI provider and put them to work directly inside your workflows.</div></div>
     </div>
