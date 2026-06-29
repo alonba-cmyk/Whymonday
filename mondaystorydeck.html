@@ -377,10 +377,10 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
   .sbs-eyebrow { margin-bottom: 16px; font-size: 9px; letter-spacing: 3px; }
   .sbs-heading { font-size: 18px; line-height: 1.35; }
   /* sbs-right: explicit height so sbs-img-area's flex:1 resolves; tabs first (order:-1) */
-  .sbs-right { order: 2; width: 100% !important; flex: 0 0 auto !important; height: calc(70vw + 80px); display: flex !important; flex-direction: column !important; overflow: visible !important; padding-bottom: 16px; }
+  .sbs-right { order: 2; width: 100% !important; flex: 0 0 auto !important; height: calc(70vw + 80px); display: flex !important; flex-direction: column !important; overflow: visible !important; padding: 0 0 16px !important; }
   .sbs-tabs { order: -1; flex-shrink: 0; gap: 5px; padding: 8px 10px 16px; flex-wrap: wrap; }
   .sbs-tab { padding: 5px 11px; font-size: 10px; }
-  .sbs-img-area { order: 1; width: 100%; flex: 1; min-height: 0; position: relative; overflow: hidden; clip-path: inset(0); }
+  .sbs-img-area { order: 1; width: 100%; flex: 1; min-height: 0; position: relative; overflow: hidden; clip-path: inset(0); margin-top: 0 !important; }
   .sbs-img { position: absolute !important; inset: 0 !important; width: 100% !important; height: 100% !important; display: block !important; overflow: hidden; }
   .sbs-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center top; }
   #mktVideo { position: absolute !important; inset: 0 !important; width: 100% !important; height: 100% !important; object-fit: cover !important; object-position: center top !important; }
