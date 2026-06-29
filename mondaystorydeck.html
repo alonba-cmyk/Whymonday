@@ -186,7 +186,7 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
 /* S5 layer detail overlay */
 .layer-overlay { position:absolute; inset:0; background:rgba(0,0,0,0.88); z-index:50; display:flex; align-items:center; justify-content:center; opacity:0; pointer-events:none; transition:opacity 0.3s ease; }
 .layer-overlay.open { opacity:1; pointer-events:all; }
-.layer-card { background:rgba(18,18,28,0.65); border:1px solid rgba(255,255,255,0.12); border-radius:24px; padding:40px 48px; max-width:520px; width:90%; position:relative; transform:translateY(20px); transition:transform 0.35s cubic-bezier(0.4,0,0.2,1); }
+.layer-card { background:rgba(18,18,28,0.65); border:1px solid rgba(255,255,255,0.12); border-radius:24px; padding:40px 48px; max-width:520px; width:90%; position:relative; transform:translateY(20px); transition:transform 0.35s cubic-bezier(0.4,0,0.2,1); max-height:85vh; overflow-y:auto; }
 .layer-overlay.open .layer-card { transform:translateY(0); }
 .layer-close { position:absolute; top:16px; right:20px; background:none; border:none; color:rgba(255,255,255,0.35); font-size:20px; cursor:pointer; line-height:1; padding:6px; transition:color 0.2s; }
 .layer-close:hover { color:#fff; }
@@ -203,6 +203,9 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
 .lci-dots { display:flex; justify-content:center; gap:6px; margin-top:10px; }
 .lci-dot { width:5px; height:5px; border-radius:50%; background:rgba(255,255,255,0.2); border:none; padding:0; cursor:pointer; transition:all 0.3s; }
 .lci-dot.active { background:#fff; width:16px; border-radius:3px; }
+.layer-caps { display:flex; flex-wrap:wrap; gap:6px; margin-top:18px; padding-top:16px; border-top:1px solid rgba(255,255,255,0.07); }
+.layer-cap { display:inline-flex; align-items:center; gap:5px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:100px; padding:4px 10px 4px 5px; font-size:11px; color:rgba(255,255,255,0.65); white-space:nowrap; }
+.layer-cap img, .layer-cap svg { width:16px; height:16px; object-fit:contain; flex-shrink:0; }
 
 /* S5b – Social Proof */
 #s5b { padding: 40px 56px; justify-content: center; }
@@ -774,6 +777,7 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
       <div class="layer-card-desc" id="layerDesc"></div>
       <div class="layer-card-points" id="layerPoints"></div>
       <div class="layer-card-imgs" id="layerImgs"></div>
+      <div class="layer-caps" id="layerCaps"></div>
     </div>
   </div>
 </div>
@@ -1142,12 +1146,35 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
   });
 
   // S5 layer overlay
+  const C = {
+    aicol:  { img:'https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/monday%20Logo/Columns.png' },
+    vibe:   { img:'https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/monday%20Logo/Vibe.png' },
+    aiflow: { img:'https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/monday%20Logo/Workflows.png' },
+    boards: { svg:`<svg viewBox="0 0 16 16" fill="none"><rect x="1" y="2" width="14" height="1.5" rx=".75" fill="#644ef8"/><rect x="1" y="5.5" width="14" height="2" rx=".75" fill="rgba(255,255,255,.55)"/><rect x="1" y="9.5" width="14" height="2" rx=".75" fill="rgba(255,255,255,.35)"/><rect x="1" y="13" width="14" height="1.5" rx=".75" fill="rgba(255,255,255,.2)"/></svg>` },
+    dash:   { svg:`<svg viewBox="0 0 16 16" fill="none"><rect x="1" y="10" width="3.5" height="5" rx=".8" fill="rgba(255,255,255,.3)"/><rect x="6.25" y="6" width="3.5" height="9" rx=".8" fill="rgba(255,255,255,.5)"/><rect x="11.5" y="2" width="3.5" height="13" rx=".8" fill="#644ef8"/></svg>` },
+    gantt:  { svg:`<svg viewBox="0 0 16 16" fill="none"><rect x="1" y="3" width="8" height="2.5" rx="1" fill="#644ef8"/><rect x="4" y="7" width="9" height="2.5" rx="1" fill="rgba(255,255,255,.5)"/><rect x="2" y="11" width="6" height="2.5" rx="1" fill="rgba(255,255,255,.3)"/></svg>` },
+    db:     { svg:`<svg viewBox="0 0 16 16" fill="none"><ellipse cx="8" cy="4.5" rx="5.5" ry="1.8" stroke="rgba(255,255,255,.6)" stroke-width="1.2"/><path d="M2.5 4.5v7c0 1 2.46 1.8 5.5 1.8s5.5-.8 5.5-1.8v-7" stroke="rgba(255,255,255,.6)" stroke-width="1.2"/><path d="M2.5 8c0 1 2.46 1.8 5.5 1.8S13.5 9 13.5 8" stroke="rgba(255,255,255,.3)" stroke-width="1.2"/></svg>` },
+    admin:  { svg:`<svg viewBox="0 0 16 16" fill="none"><rect x="2" y="5.5" width="12" height="9.5" rx="1" stroke="rgba(255,255,255,.6)" stroke-width="1.2"/><path d="M5 5.5V3.5h6v2" stroke="rgba(255,255,255,.6)" stroke-width="1.2"/><rect x="5.5" y="9.5" width="2" height="5.5" rx=".3" fill="rgba(255,255,255,.2)"/><rect x="8.5" y="9.5" width="2" height="5.5" rx=".3" fill="rgba(255,255,255,.2)"/></svg>` },
+    perms:  { svg:`<svg viewBox="0 0 16 16" fill="none"><circle cx="6.5" cy="7" r="3.5" stroke="rgba(255,255,255,.6)" stroke-width="1.2"/><path d="M9 9.5L14 14.5" stroke="rgba(255,255,255,.6)" stroke-width="1.2" stroke-linecap="round"/><path d="M12 12.5l1.5 1.5" stroke="rgba(255,255,255,.35)" stroke-width="1.2" stroke-linecap="round"/></svg>` },
+    secure: { svg:`<svg viewBox="0 0 16 16" fill="none"><path d="M8 1.5L2 4.5v4c0 3 2.2 5.8 6 6.8 3.8-1 6-3.8 6-6.8v-4L8 1.5z" stroke="rgba(255,255,255,.6)" stroke-width="1.2" fill="#644ef8" fill-opacity=".15"/><path d="M5.5 8l2 2 3.5-3.5" stroke="rgba(255,255,255,.85)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>` },
+    auto:   { svg:`<svg viewBox="0 0 16 16" fill="none"><path d="M9.5 1.5L3.5 9h5L7 14.5l5.5-7.5H7L9.5 1.5z" fill="#644ef8" fill-opacity=".3" stroke="rgba(255,255,255,.65)" stroke-width="1.2" stroke-linejoin="round"/></svg>` },
+    slack:  { svg:`<svg viewBox="0 0 16 16"><rect x="2" y="2" width="5" height="5" rx="2.5" fill="#36C5F0"/><rect x="9" y="2" width="5" height="5" rx="2.5" fill="#2EB67D"/><rect x="2" y="9" width="5" height="5" rx="2.5" fill="#ECB22E"/><rect x="9" y="9" width="5" height="5" rx="2.5" fill="#E01E5A"/></svg>` },
+    gmail:  { svg:`<svg viewBox="0 0 16 16" fill="none"><rect x="1.5" y="3.5" width="13" height="9" rx="1.5" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.2)" stroke-width="1"/><path d="M1.5 5L8 9.5 14.5 5" stroke="#EA4335" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>` },
+    sf:     { svg:`<svg viewBox="0 0 16 16" fill="none"><path d="M6 12.5c-2.5 0-4.5-1.5-4.5-3.5C1.5 7 3 5.5 5 5.5c.4-1.5 1.7-2.5 3.3-2.5 1.4 0 2.6.8 3.2 2C13 5.2 14.5 6.5 14.5 8c0 2.2-1.8 4-4 4H6z" fill="#00A1E0" fill-opacity=".25" stroke="#00A1E0" stroke-width="1.1"/></svg>` },
+    jira:   { svg:`<svg viewBox="0 0 16 16" fill="none"><path d="M8 1.5L2 8l6 6.5 6-6.5L8 1.5z" fill="#0052CC" fill-opacity=".25" stroke="#0052CC" stroke-width="1"/><path d="M8 5L5 8l3 3.5L11 8 8 5z" fill="#0052CC" fill-opacity=".6"/></svg>` },
+    teams:  { svg:`<svg viewBox="0 0 16 16" fill="none"><circle cx="10.5" cy="4.5" r="1.8" fill="#5059C9" fill-opacity=".7"/><rect x="7.5" y="7" width="5.5" height="6" rx="1.5" fill="#5059C9" fill-opacity=".3" stroke="#5059C9" stroke-width=".7"/><circle cx="6" cy="5" r="2.3" fill="#7B83EB" fill-opacity=".6"/><rect x="2" y="7.5" width="8" height="6" rx="1.8" fill="#7B83EB" fill-opacity=".3" stroke="#7B83EB" stroke-width=".7"/></svg>` },
+  };
   const layerData = [
-    { num:'01', title:'Workspace', desc:'One shared place for your team and agents to plan and execute together.', points:['Boards, dashboards and docs — unified in one place','Agents work alongside people in the same workspace','Real-time visibility across every project and team'], images:['https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/5%20layers/Workspace%201.png','https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/5%20layers/Workspace%202.png'] },
-    { num:'02', title:'Context', desc:'Agents with full business context, acting like an experienced team member.', points:['Agents understand your data, processes and goals','No re-explaining — they learn your business over time','Responses grounded in your actual work, not generic answers'] },
-    { num:'03', title:'Control', desc:"You stay in the driver's seat. All enterprise-grade secure.", points:['Set exactly what agents can and cannot do','Full audit trail on every automated action','Enterprise-grade security, permissions and compliance'] },
-    { num:'04', title:'Workflows', desc:'Automate how work moves between people and agents — without dropping the ball.', points:['Automated triggers route tasks to the right person or agent','Agents handle the routine steps, people handle the decisions','Every handoff is tracked — no step gets lost'], images:['https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/5%20layers/AI%20Workflows.avif'] },
-    { num:'05', title:'Integrations', desc:'200+ native integrations. Your entire stack, unified under one platform.', points:['Connect your tools, data sources and systems in one place','Real-time sync across every app your team already uses','No switching context — everything works from inside monday'] },
+    { num:'01', title:'Workspace', desc:'One shared place for your team and agents to plan and execute together.', points:['Boards, dashboards and docs — unified in one place','Agents work alongside people in the same workspace','Real-time visibility across every project and team'], images:['https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/5%20layers/Workspace%201.png','https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/5%20layers/Workspace%202.png'],
+      caps:[{label:'AI Columns',...C.aicol},{label:'Boards',...C.boards},{label:'Dashboard',...C.dash},{label:'Gantt',...C.gantt},{label:'monday Vibe',...C.vibe}] },
+    { num:'02', title:'Context', desc:'Agents with full business context, acting like an experienced team member.', points:['Agents understand your data, processes and goals','No re-explaining — they learn your business over time','Responses grounded in your actual work, not generic answers'],
+      caps:[{label:'mondayDB',...C.db}] },
+    { num:'03', title:'Control', desc:"You stay in the driver's seat. All enterprise-grade secure.", points:['Set exactly what agents can and cannot do','Full audit trail on every automated action','Enterprise-grade security, permissions and compliance'],
+      caps:[{label:'Admin',...C.admin},{label:'Permissions',...C.perms},{label:'Enterprise Secure',...C.secure}] },
+    { num:'04', title:'Workflows', desc:'Automate how work moves between people and agents — without dropping the ball.', points:['Automated triggers route tasks to the right person or agent','Agents handle the routine steps, people handle the decisions','Every handoff is tracked — no step gets lost'], images:['https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/5%20layers/AI%20Workflows.avif'],
+      caps:[{label:'AI Workflows',...C.aiflow},{label:'Automations',...C.auto}] },
+    { num:'05', title:'Integrations', desc:'200+ native integrations. Your entire stack, unified under one platform.', points:['Connect your tools, data sources and systems in one place','Real-time sync across every app your team already uses','No switching context — everything works from inside monday'],
+      caps:[{label:'Slack',...C.slack},{label:'Gmail',...C.gmail},{label:'Salesforce',...C.sf},{label:'Jira',...C.jira},{label:'Teams',...C.teams}] },
     { num:'06', title:'Bring your own agent', desc:'Connect agents from any AI provider and put them to work directly inside your workflows.', points:['Works with Claude, ChatGPT, Gemini, Copilot and more','Ask your AI to get work done in monday — without switching context','Consider yourself limitless'], images:['https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/5%20layers/Bring%20your%20own%20agent%202.avif','https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/5%20layers/Bring%20your%20own%20agent.png','https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/5%20layers/Claude%20and%20monday.avif'] },
   ];
 
@@ -1184,6 +1211,17 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
     } else {
       imgsEl.innerHTML = '';
       imgsEl.style.display = 'none';
+    }
+    const capsEl = document.getElementById('layerCaps');
+    if (d.caps && d.caps.length) {
+      capsEl.innerHTML = d.caps.map(c => {
+        const ico = c.img ? `<img src="${c.img}" style="width:16px;height:16px;object-fit:contain;">` : c.svg;
+        return `<div class="layer-cap">${ico}<span>${c.label}</span></div>`;
+      }).join('');
+      capsEl.style.display = 'flex';
+    } else {
+      capsEl.innerHTML = '';
+      capsEl.style.display = 'none';
     }
     document.getElementById('layerOverlay').classList.add('open');
   }
