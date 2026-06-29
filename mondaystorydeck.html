@@ -1175,7 +1175,11 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
       caps:[{label:'AI Workflows',...C.aiflow},{label:'Automations',...C.auto}] },
     { num:'05', title:'Integrations', desc:'200+ native integrations. Your entire stack, unified under one platform.', points:['Connect your tools, data sources and systems in one place','Real-time sync across every app your team already uses','No switching context — everything works from inside monday'],
       caps:[{label:'Slack',...C.slack},{label:'Gmail',...C.gmail},{label:'Salesforce',...C.sf},{label:'Jira',...C.jira},{label:'Teams',...C.teams}] },
-    { num:'06', title:'Bring your own agent', desc:'Connect agents from any AI provider and put them to work directly inside your workflows.', points:['Works with Claude, ChatGPT, Gemini, Copilot and more','Ask your AI to get work done in monday — without switching context','Consider yourself limitless'], images:['https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/5%20layers/Bring%20your%20own%20agent%202.avif','https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/5%20layers/Bring%20your%20own%20agent.png','https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/5%20layers/Claude%20and%20monday.avif'] },
+    { num:'06', title:'Bring your own agent', desc:'Connect agents from any AI provider and put them to work directly inside your workflows.', points:['Works with Claude, ChatGPT, Gemini, Copilot and more','Ask your AI to get work done in monday — without switching context','Consider yourself limitless'],
+      slides:[
+        { title:'Bring your own agent', img:'https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/5%20layers/Bring%20your%20own%20agent%202.avif' },
+        { title:'Use your favorite AI tools', img:'https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/5%20layers/Claude%20and%20monday.avif' },
+      ] },
   ];
 
   function openLayer(idx) {
@@ -1186,7 +1190,30 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
     document.getElementById('layerPoints').innerHTML  =
       d.points.map(p => `<div class="layer-card-point"><div class="layer-card-dot"></div><span>${p}</span></div>`).join('');
     const imgsEl = document.getElementById('layerImgs');
-    if (d.images && d.images.length > 0) {
+    const titleEl = document.getElementById('layerTitle');
+    if (d.slides && d.slides.length) {
+      let cur = 0;
+      const dotsHtml = d.slides.length > 1
+        ? `<div class="lci-dots">${d.slides.map((_,i) => `<button class="lci-dot${i===0?' active':''}" data-i="${i}"></button>`).join('')}</div>`
+        : '';
+      imgsEl.innerHTML = `<div class="lci-viewport"><div class="lci-track" id="lciTrack">${d.slides.map(s=>`<img src="${s.img}" loading="lazy">`).join('')}</div></div>${dotsHtml}`;
+      imgsEl.style.display = 'block';
+      const track = imgsEl.querySelector('#lciTrack');
+      const sdots = imgsEl.querySelectorAll('.lci-dot');
+      function slideGo(n) {
+        cur = n;
+        titleEl.textContent = d.slides[n].title;
+        track.style.transform = `translateX(-${100*n}%)`;
+        sdots.forEach((dt,i) => dt.classList.toggle('active', i===n));
+      }
+      sdots.forEach(btn => btn.addEventListener('click', () => slideGo(+btn.dataset.i)));
+      let stx = 0;
+      track.addEventListener('touchstart', e => { stx = e.touches[0].clientX; }, {passive:true});
+      track.addEventListener('touchend', e => {
+        const dx = stx - e.changedTouches[0].clientX;
+        if (Math.abs(dx) > 30) slideGo(Math.max(0, Math.min(d.slides.length-1, cur+(dx>0?1:-1))));
+      }, {passive:true});
+    } else if (d.images && d.images.length > 0) {
       const imgs = d.images;
       let cur = 0;
       const dotsHtml = imgs.length > 1
@@ -1208,7 +1235,7 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
         const dx = tx - e.changedTouches[0].clientX;
         if (Math.abs(dx) > 30) lciGo(Math.max(0, Math.min(imgs.length-1, cur + (dx>0?1:-1))));
       }, {passive:true});
-    } else {
+    } else if (!d.slides) {
       imgsEl.innerHTML = '';
       imgsEl.style.display = 'none';
     }
