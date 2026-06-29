@@ -1329,8 +1329,8 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
       avEls.push(thumb.querySelector('.s1k-av'));
     });
 
-    function getStep() { return (window.innerWidth < 769 ? 52 : SZ) + (window.innerWidth < 769 ? 10 : GAP); }
-    function getX(si) { return strip.parentElement.offsetWidth / 2 - (window.innerWidth < 769 ? 26 : SZ/2) - si * getStep(); }
+    function getStep() { return (window.innerWidth < 769 ? 68 : SZ) + (window.innerWidth < 769 ? 10 : GAP); }
+    function getX(si) { return strip.parentElement.offsetWidth / 2 - (window.innerWidth < 769 ? 34 : SZ/2) - si * getStep(); }
 
     function moveStrip(x, animate) {
       strip.style.transition = animate ? TRANS : 'none';
