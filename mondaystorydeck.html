@@ -304,6 +304,22 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
 .sbs-tab.active { color:#fff; border-color:var(--purple); background:rgba(97,97,255,0.15); }
 .sbs-tab:hover:not(.active) { color:rgba(255,255,255,.75); border-color:rgba(255,255,255,0.4); }
 
+/* Customer Story slide */
+#sstory { background:#09090f; padding:0; }
+.cstory { display:flex; width:100%; height:100%; }
+.cstory-left { flex:0 0 50%; display:flex; flex-direction:column; justify-content:center; padding:64px 52px 64px 72px; }
+.cstory-logo { height:28px; object-fit:contain; object-position:left center; filter:brightness(0) invert(1); opacity:0.8; margin-bottom:36px; }
+.cstory-qmark { font-size:80px; line-height:0.65; color:#6161ff; font-family:Georgia,serif; margin-bottom:24px; }
+.cstory-quote { font-size:clamp(16px,1.5vw,22px); font-weight:400; line-height:1.65; color:rgba(255,255,255,0.85); margin-bottom:32px; }
+.cstory-quote em { color:#a78bfa; font-style:normal; font-weight:600; }
+.cstory-person { display:flex; align-items:center; gap:14px; }
+.cstory-av { width:44px; height:44px; border-radius:50%; background:linear-gradient(135deg,#6161ff,#a78bfa); display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:700; flex-shrink:0; color:#fff; }
+.cstory-name { font-size:14px; font-weight:600; color:#fff; }
+.cstory-role { font-size:11px; color:rgba(255,255,255,0.4); margin-top:2px; }
+.cstory-right { flex:1; position:relative; overflow:hidden; }
+.cstory-right img { width:100%; height:100%; object-fit:cover; object-position:center top; }
+.cstory-right::before { content:''; position:absolute; inset:0; background:linear-gradient(to right,#09090f 0%,transparent 28%); z-index:1; }
+
 /* ── MOBILE (≤ 768px) ─────────────────────────────────────────── */
 @media (max-width: 768px) {
 
@@ -439,6 +455,16 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
   .sp-q-name { font-size: 11px; margin-top: 10px; }
   .sp-q-role { font-size: 9px; }
   .sp-row-quote { display: none; }
+
+  /* Customer Story */
+  #sstory { padding: 0 !important; }
+  .cstory { flex-direction: column; }
+  .cstory-right { flex: 0 0 52%; position: relative; }
+  .cstory-right::before { background: linear-gradient(to bottom, transparent 50%, #09090f 100%); }
+  .cstory-logo { position: absolute; top: 20px; left: 20px; z-index: 2; margin-bottom: 0; }
+  .cstory-left { flex: 1; padding: 24px 28px 32px; justify-content: center; }
+  .cstory-qmark { font-size: 56px; margin-bottom: 16px; }
+  .cstory-quote { font-size: 16px; margin-bottom: 20px; }
 
   /* S6 – CTA */
   .outcome-wrap h2 { font-size: clamp(22px, 7vw, 40px); }
@@ -592,7 +618,7 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
 
 <div class="progress" id="prog"></div>
 <nav class="nav-dots" id="navDots">
-  <button class="nav-dot active" onclick="goTo(0)"></button><button class="nav-dot" onclick="goTo(1)"></button><button class="nav-dot" onclick="goTo(2)"></button><button class="nav-dot" onclick="goTo(3)"></button><button class="nav-dot" onclick="goTo(4)"></button><button class="nav-dot" onclick="goTo(5)"></button><button class="nav-dot" onclick="goTo(6)"></button><button class="nav-dot" onclick="goTo(7)"></button><button class="nav-dot" onclick="goTo(8)"></button>
+  <button class="nav-dot active" onclick="goTo(0)"></button><button class="nav-dot" onclick="goTo(1)"></button><button class="nav-dot" onclick="goTo(2)"></button><button class="nav-dot" onclick="goTo(3)"></button><button class="nav-dot" onclick="goTo(4)"></button><button class="nav-dot" onclick="goTo(5)"></button><button class="nav-dot" onclick="goTo(6)"></button><button class="nav-dot" onclick="goTo(7)"></button><button class="nav-dot" onclick="goTo(8)"></button><button class="nav-dot" onclick="goTo(9)"></button>
 </nav>
 
 <div class="deck">
@@ -896,6 +922,26 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
     </div>
   </div>
   </div><!-- /s5b-inner -->
+</div>
+
+<div class="slide" id="sstory">
+  <div class="cstory">
+    <div class="cstory-left">
+      <img class="cstory-logo" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Enterprise/Arcaise.png" alt="Arcaise">
+      <div class="cstory-qmark">"</div>
+      <p class="cstory-quote">monday brought <em>AI to our data</em>, and that changed everything. Our planning cycles used to eat entire weeks — <em>now it surfaces automatically.</em></p>
+      <div class="cstory-person">
+        <div class="cstory-av">AB</div>
+        <div>
+          <div class="cstory-name">Alex Boulder</div>
+          <div class="cstory-role">Director of Operations, Arcaise</div>
+        </div>
+      </div>
+    </div>
+    <div class="cstory-right">
+      <img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/Operations.png" alt="">
+    </div>
+  </div>
 </div>
 
 <div class="slide" id="scred">
