@@ -286,7 +286,7 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
 .mkt-intro.hidden { opacity:0; pointer-events:none; }
 .mkt-open-frame { width:100%; height:100%; object-fit:contain; border-radius:12px; }
 /* Text box overlay — positioned over Dan's card (center-bottom of open frame) */
-.mkt-textbox-wrap { position:absolute; left:50%; bottom:16%; transform:translateX(-50%); width:42%; opacity:0; transition:opacity 0.4s ease; }
+.mkt-textbox-wrap { position:absolute; left:50%; bottom:16%; transform:translateX(-50%); width:calc(42% + 1px); opacity:0; transition:opacity 0.4s ease; }
 .mkt-textbox-wrap.show { opacity:1; }
 .mkt-textbox-img { width:100%; display:block; }
 .mkt-textbox-text { position:absolute; top:18%; left:8%; right:8%; font-size:clamp(11px,1.1vw,15px); color:#333; font-family:'Poppins',sans-serif; line-height:1.5; }
