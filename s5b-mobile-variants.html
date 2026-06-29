@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>S5b Mobile Variants</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #111; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; padding: 40px 24px; display: flex; flex-direction: column; align-items: center; gap: 48px; }
+  .phone-wrap { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+  .label { font-size: 11px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.3); }
+  .phone { width: 375px; height: 720px; background: #000; border-radius: 40px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); display: flex; flex-direction: column; padding: 44px 24px 36px; }
+
+  /* Shared */
+  .eyebrow { font-size: 10px; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; color: #6161ff; margin-bottom: 12px; }
+  .heading { font-size: 20px; font-weight: 700; color: #fff; line-height: 1.25; }
+  .purple { color: #6161ff; }
+
+  /* ── Logos ── */
+  .logo-vml { display:inline-flex; flex-direction:column; }
+  .logo-vml-text { font-size:20px; font-weight:800; color:#fff; letter-spacing:-0.5px; line-height:1; }
+  .logo-vml-bar { width:52px; height:2px; background:#e8341c; border-radius:1px; margin-top:3px; }
+  .logo-arcaise { display:flex; align-items:center; gap:6px; }
+  .logo-arcaise-dot { width:8px; height:8px; border-radius:50%; background:#6161ff; flex-shrink:0; }
+  .logo-arcaise-text { font-size:15px; font-weight:700; color:#fff; }
+  .logo-agora { display:flex; align-items:center; gap:7px; }
+  .logo-agora-text { font-size:15px; font-weight:700; color:#fff; }
+
+  /* ═══════════════════════════════════════
+     VARIANT A — Stat rows + quote
+  ═══════════════════════════════════════ */
+  .va { display:flex; flex-direction:column; gap:20px; height:100%; }
+  .va-header { display:flex; flex-direction:column; gap:0; }
+  .va-rows { display:flex; flex-direction:column; gap:0; border-top:1px solid rgba(255,255,255,0.07); }
+  .va-row { display:flex; align-items:center; gap:14px; padding:14px 0; border-bottom:1px solid rgba(255,255,255,0.07); }
+  .va-logo { width:80px; flex-shrink:0; }
+  .va-stat-num { font-size:34px; font-weight:800; color:#6161ff; line-height:1; flex-shrink:0; width:72px; }
+  .va-stat-label { font-size:10px; color:rgba(255,255,255,0.45); font-weight:300; line-height:1.5; }
+  .va-quote { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.07); border-radius:14px; padding:16px; display:flex; flex-direction:column; gap:8px; margin-top:auto; }
+  .va-quote-mark { font-size:28px; color:#6161ff; line-height:0.7; font-family:Georgia,serif; }
+  .va-quote-text { font-size:12px; color:rgba(255,255,255,0.6); line-height:1.65; font-weight:300; }
+  .va-quote-name { font-size:11px; font-weight:700; color:#fff; }
+  .va-quote-role { font-size:10px; color:rgba(255,255,255,0.35); font-weight:300; }
+
+  /* ═══════════════════════════════════════
+     VARIANT B — Feature card (rotating)
+  ═══════════════════════════════════════ */
+  .vb { display:flex; flex-direction:column; gap:18px; height:100%; }
+  .vb-card { flex:1; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:18px; padding:22px 20px; display:flex; flex-direction:column; justify-content:space-between; min-height:0; }
+  .vb-card-top { display:flex; justify-content:space-between; align-items:flex-start; }
+  .vb-num { font-size:64px; font-weight:800; color:#6161ff; line-height:1; letter-spacing:-2px; }
+  .vb-lbl { font-size:11px; color:rgba(255,255,255,0.45); font-weight:300; line-height:1.55; margin-top:6px; max-width:160px; }
+  .vb-divider { height:1px; background:rgba(255,255,255,0.07); margin:16px 0; }
+  .vb-quote-text { font-size:12px; color:rgba(255,255,255,0.6); line-height:1.65; font-weight:300; font-style:italic; }
+  .vb-name { font-size:11px; font-weight:700; color:#fff; margin-top:10px; }
+  .vb-role { font-size:10px; color:rgba(255,255,255,0.35); font-weight:300; }
+  .vb-dots { display:flex; gap:6px; align-items:center; justify-content:center; margin-top:4px; }
+  .vb-dot { width:5px; height:5px; border-radius:50%; background:rgba(255,255,255,0.15); border:none; padding:0; cursor:pointer; transition:all 0.3s; }
+  .vb-dot.active { background:#6161ff; width:16px; border-radius:3px; }
+
+  /* ═══════════════════════════════════════
+     VARIANT C — Quote hero + stat pills
+  ═══════════════════════════════════════ */
+  .vc { display:flex; flex-direction:column; gap:20px; height:100%; }
+  .vc-quote-block { flex:1; display:flex; flex-direction:column; justify-content:center; min-height:0; }
+  .vc-qmark { font-size:52px; color:#6161ff; line-height:0.75; font-family:Georgia,serif; margin-bottom:10px; }
+  .vc-qtext { font-size:18px; font-weight:700; color:#fff; line-height:1.35; margin-bottom:16px; }
+  .vc-qname { font-size:12px; font-weight:700; color:#fff; }
+  .vc-qrole { font-size:10px; color:rgba(255,255,255,0.4); font-weight:300; margin-top:2px; }
+  .vc-pills { display:flex; flex-direction:column; gap:8px; }
+  .vc-pill { display:flex; align-items:center; gap:12px; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.07); border-radius:12px; padding:11px 14px; }
+  .vc-pill-logo { width:70px; flex-shrink:0; }
+  .vc-pill-num { font-size:22px; font-weight:800; color:#6161ff; line-height:1; margin-left:auto; flex-shrink:0; }
+  .vc-pill-label { font-size:9px; color:rgba(255,255,255,0.4); font-weight:300; line-height:1.4; text-align:right; max-width:80px; }
+</style>
+</head>
+<body>
+
+<!-- ══════════ VARIANT A ══════════ -->
+<div class="phone-wrap">
+  <div class="label">Variant A — Stat Rows + Quote</div>
+  <div class="phone">
+    <div class="va">
+      <div class="va-header">
+        <p class="eyebrow">Don't take our word</p>
+        <h2 class="heading">Businesses like yours are already seeing the impact</h2>
+      </div>
+      <div class="va-rows">
+        <div class="va-row">
+          <div class="va-logo"><div class="logo-vml"><span class="logo-vml-text">VML</span><div class="logo-vml-bar"></div></div></div>
+          <div class="va-stat-num">98h</div>
+          <div class="va-stat-label">Saved cutting project planning time in half</div>
+        </div>
+        <div class="va-row">
+          <div class="va-logo"><div class="logo-arcaise"><div class="logo-arcaise-dot"></div><span class="logo-arcaise-text">arcaise</span></div></div>
+          <div class="va-stat-num">75%</div>
+          <div class="va-stat-label">Reduction in internal support requests</div>
+        </div>
+        <div class="va-row">
+          <div class="va-logo"><div class="logo-agora"><svg viewBox="0 0 22 18" width="22" height="18" fill="none"><path d="M2 14 Q5 4 8 10 Q11 16 14 6 Q16 1 18 10" stroke="white" stroke-width="2" stroke-linecap="round" fill="none"/></svg><span class="logo-agora-text">Agora</span></div></div>
+          <div class="va-stat-num">30h</div>
+          <div class="va-stat-label">Saved surfacing OKR metrics automatically</div>
+        </div>
+      </div>
+      <div class="va-quote">
+        <div class="va-quote-mark">"</div>
+        <p class="va-quote-text">monday brought AI to our data, and that changed everything.</p>
+        <div>
+          <div class="va-quote-name">Alex Boulder</div>
+          <div class="va-quote-role">Director of Operations, Arcaise</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ VARIANT B ══════════ -->
+<div class="phone-wrap">
+  <div class="label">Variant B — Rotating Feature Card</div>
+  <div class="phone">
+    <div class="vb">
+      <div>
+        <p class="eyebrow">Don't take our word</p>
+        <h2 class="heading">Businesses like yours are already seeing the impact</h2>
+      </div>
+      <div class="vb-card" id="vbCard">
+        <div>
+          <div class="vb-card-top">
+            <div class="logo-vml" id="vbLogo">
+              <span class="logo-vml-text">VML</span>
+              <div class="logo-vml-bar"></div>
+            </div>
+          </div>
+          <div class="vb-num" id="vbNum">98h</div>
+          <div class="vb-lbl" id="vbLbl">Saved cutting project planning time in half</div>
+        </div>
+        <div>
+          <div class="vb-divider"></div>
+          <p class="vb-quote-text" id="vbQt">"Our planning cycles used to eat entire weeks. monday's AI agents gave us that time back."</p>
+          <div class="vb-name" id="vbName">Sarah Luxemberg</div>
+          <div class="vb-role" id="vbRole">Operations Director, VML</div>
+        </div>
+      </div>
+      <div class="vb-dots">
+        <button class="vb-dot active" onclick="vbGo(0)"></button>
+        <button class="vb-dot" onclick="vbGo(1)"></button>
+        <button class="vb-dot" onclick="vbGo(2)"></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ VARIANT C ══════════ -->
+<div class="phone-wrap">
+  <div class="label">Variant C — Quote Hero + Stat Pills</div>
+  <div class="phone">
+    <div class="vc">
+      <div>
+        <p class="eyebrow">Don't take our word</p>
+        <h2 class="heading">Businesses like yours are already seeing the impact</h2>
+      </div>
+      <div class="vc-quote-block">
+        <div class="vc-qmark">"</div>
+        <p class="vc-qtext">monday brought AI to our data, and that changed everything.</p>
+        <div class="vc-qname">Alex Boulder</div>
+        <div class="vc-qrole">Director of Operations, Arcaise</div>
+      </div>
+      <div class="vc-pills">
+        <div class="vc-pill">
+          <div class="vc-pill-logo"><div class="logo-vml"><span class="logo-vml-text">VML</span><div class="logo-vml-bar"></div></div></div>
+          <div class="vc-pill-label">Saved cutting project planning time in half</div>
+          <div class="vc-pill-num">98h</div>
+        </div>
+        <div class="vc-pill">
+          <div class="vc-pill-logo"><div class="logo-arcaise"><div class="logo-arcaise-dot"></div><span class="logo-arcaise-text">arcaise</span></div></div>
+          <div class="vc-pill-label">Reduction in internal support requests</div>
+          <div class="vc-pill-num">75%</div>
+        </div>
+        <div class="vc-pill">
+          <div class="vc-pill-logo"><div class="logo-agora"><svg viewBox="0 0 22 18" width="22" height="18" fill="none"><path d="M2 14 Q5 4 8 10 Q11 16 14 6 Q16 1 18 10" stroke="white" stroke-width="2" stroke-linecap="round" fill="none"/></svg><span class="logo-agora-text">Agora</span></div></div>
+          <div class="vc-pill-label">Saved surfacing OKR metrics automatically</div>
+          <div class="vc-pill-num">30h</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const vbData = [
+  {
+    logo: `<div class="logo-vml"><span class="logo-vml-text">VML</span><div class="logo-vml-bar"></div></div>`,
+    num:'98h', lbl:'Saved cutting project planning time in half',
+    qt:'"Our planning cycles used to eat entire weeks. monday\'s AI agents gave us that time back."',
+    name:'Sarah Luxemberg', role:'Operations Director, VML'
+  },
+  {
+    logo: `<div class="logo-arcaise"><div class="logo-arcaise-dot"></div><span class="logo-arcaise-text">arcaise</span></div>`,
+    num:'75%', lbl:'Reduction in internal support requests',
+    qt:'"monday brought AI to our data, and that changed everything."',
+    name:'Alex Boulder', role:'Director of Operations, Arcaise'
+  },
+  {
+    logo: `<div class="logo-agora"><svg viewBox="0 0 22 18" width="22" height="18" fill="none"><path d="M2 14 Q5 4 8 10 Q11 16 14 6 Q16 1 18 10" stroke="white" stroke-width="2" stroke-linecap="round" fill="none"/></svg><span class="logo-agora-text">Agora</span></div>`,
+    num:'30h', lbl:'Saved surfacing OKR metrics automatically',
+    qt:'"We used to spend days pulling OKR data every quarter. Now it surfaces automatically."',
+    name:'Asaf Goldstof', role:'Director, Efficiency & AI, Agora'
+  }
+];
+let vbCur = 0, vbTimer;
+function vbGo(i) {
+  vbCur = i;
+  const c = vbData[i];
+  const card = document.getElementById('vbCard');
+  card.style.opacity = '0';
+  setTimeout(() => {
+    document.getElementById('vbLogo').innerHTML = c.logo;
+    document.getElementById('vbNum').textContent = c.num;
+    document.getElementById('vbLbl').textContent = c.lbl;
+    document.getElementById('vbQt').textContent  = c.qt;
+    document.getElementById('vbName').textContent = c.name;
+    document.getElementById('vbRole').textContent = c.role;
+    card.style.opacity = '1';
+  }, 160);
+  document.querySelectorAll('.vb-dot').forEach((d,j) => d.classList.toggle('active', j===i));
+  clearInterval(vbTimer);
+  vbTimer = setInterval(() => vbGo((vbCur+1)%3), 3500);
+}
+document.getElementById('vbCard').style.transition = 'opacity 0.16s';
+vbTimer = setInterval(() => vbGo((vbCur+1)%3), 3500);
+</script>
+</body>
+</html>
