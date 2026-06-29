@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>S3 Mobile Variants</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #111; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; padding: 40px 24px; display: flex; flex-direction: column; align-items: center; gap: 48px; }
+  .phone-wrap { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+  .label { font-size: 11px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.3); }
+  .phone { width: 375px; height: 720px; background: #000; border-radius: 40px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 24px 32px; position: relative; }
+
+  /* ── Shared tokens ── */
+  .eyebrow { font-size: 10px; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; color: #6161ff; }
+  .source  { font-size: 9px; color: rgba(255,255,255,0.18); letter-spacing: 1px; text-transform: uppercase; }
+
+  /* ═══════════════════════════════════════
+     VARIANT A — Side-by-side stat cards
+  ═══════════════════════════════════════ */
+  .va-inner { display: flex; flex-direction: column; align-items: center; gap: 28px; width: 100%; text-align: center; }
+  .va-stmt { font-size: 17px; font-weight: 700; line-height: 1.3; color: #fff; }
+  .va-cards { display: flex; align-items: stretch; gap: 0; width: 100%; }
+  .va-card { flex: 1; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); padding: 20px 14px 18px; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .va-card:first-child { border-radius: 14px 0 0 14px; }
+  .va-card:last-child  { border-radius: 0 14px 14px 0; }
+  .va-num { font-size: 68px; font-weight: 800; line-height: 1; background: linear-gradient(135deg,#fff 30%,rgba(255,255,255,0.35)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .va-num sup { font-size: 36%; vertical-align: top; margin-top: 0.2em; }
+  .va-lbl { font-size: 10px; color: rgba(255,255,255,0.45); font-weight: 300; line-height: 1.55; max-width: 110px; }
+  .va-sep { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0 4px; gap: 6px; flex-shrink: 0; }
+  .va-sep-line { width: 1px; flex: 1; background: rgba(255,255,255,0.1); }
+  .va-sep-text { font-size: 8px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.22); }
+  .va-footer { display: flex; flex-direction: column; align-items: center; gap: 0; }
+
+  /* ═══════════════════════════════════════
+     VARIANT B — Large numbers, stacked
+  ═══════════════════════════════════════ */
+  .vb-inner { display: flex; flex-direction: column; align-items: center; gap: 20px; width: 100%; text-align: center; }
+  .vb-stmt { font-size: 16px; font-weight: 700; line-height: 1.3; color: rgba(255,255,255,0.7); }
+  .vb-stats { display: flex; flex-direction: column; align-items: center; gap: 0; width: 100%; }
+  .vb-stat { display: flex; flex-direction: row; align-items: center; gap: 16px; padding: 16px 0; width: 100%; border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .vb-stat:first-child { border-top: 1px solid rgba(255,255,255,0.06); }
+  .vb-num { font-size: 72px; font-weight: 800; line-height: 1; background: linear-gradient(135deg,#fff 30%,rgba(255,255,255,0.35)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; width: 130px; flex-shrink: 0; text-align: left; }
+  .vb-num sup { font-size: 34%; vertical-align: top; margin-top: 0.15em; }
+  .vb-lbl { font-size: 11px; color: rgba(255,255,255,0.5); font-weight: 300; line-height: 1.6; text-align: left; }
+  .vb-yet { display: flex; align-items: center; gap: 12px; width: 100%; padding: 10px 0; }
+  .vb-yet-line { flex: 1; height: 1px; background: rgba(255,255,255,0.08); }
+  .vb-yet-text { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.2); }
+
+  /* ═══════════════════════════════════════
+     VARIANT C — Compact highlight pill
+  ═══════════════════════════════════════ */
+  .vc-inner { display: flex; flex-direction: column; align-items: center; gap: 24px; width: 100%; text-align: center; }
+  .vc-stmt { font-size: 18px; font-weight: 700; line-height: 1.3; color: #fff; }
+  .vc-block { width: 100%; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 20px; padding: 24px 20px; display: flex; flex-direction: column; align-items: center; gap: 0; }
+  .vc-row { display: flex; align-items: center; justify-content: space-around; width: 100%; }
+  .vc-stat { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .vc-num { font-size: 80px; font-weight: 800; line-height: 1; background: linear-gradient(135deg,#fff 30%,rgba(255,255,255,0.3)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .vc-num sup { font-size: 32%; vertical-align: top; margin-top: 0.15em; }
+  .vc-lbl { font-size: 10px; color: rgba(255,255,255,0.4); font-weight: 300; line-height: 1.55; max-width: 110px; }
+  .vc-div { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 0 12px; }
+  .vc-div-line { width: 1px; height: 36px; background: rgba(255,255,255,0.1); }
+  .vc-div-text { font-size: 8px; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.22); }
+  .vc-pill { margin-top: 18px; padding: 5px 14px; border-radius: 100px; border: 1px solid rgba(255,255,255,0.08); font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.22); }
+</style>
+</head>
+<body>
+
+<!-- ══════════ VARIANT A ══════════ -->
+<div class="phone-wrap">
+  <div class="label">Variant A — Stat Cards</div>
+  <div class="phone">
+    <div class="va-inner">
+      <p class="eyebrow">The Gap</p>
+      <h2 class="va-stmt">But most businesses can't see the impact of people and agents working together on the bottom line.</h2>
+      <div class="va-cards">
+        <div class="va-card">
+          <div class="va-num">90<sup>%</sup></div>
+          <div class="va-lbl">of employees use personal AI tools at work</div>
+        </div>
+        <div class="va-sep">
+          <div class="va-sep-line"></div>
+          <div class="va-sep-text">yet</div>
+          <div class="va-sep-line"></div>
+        </div>
+        <div class="va-card">
+          <div class="va-num">5<sup>%</sup></div>
+          <div class="va-lbl">of enterprise AI pilots deliver measurable business impact</div>
+        </div>
+      </div>
+      <div class="va-footer">
+        <p class="source">MIT Sloan Management Review</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ VARIANT B ══════════ -->
+<div class="phone-wrap">
+  <div class="label">Variant B — Stacked Rows</div>
+  <div class="phone">
+    <div class="vb-inner">
+      <p class="eyebrow">The Gap</p>
+      <h2 class="vb-stmt">But most businesses can't see the impact of people and agents working together on the bottom line.</h2>
+      <div class="vb-stats">
+        <div class="vb-stat">
+          <div class="vb-num">90<sup>%</sup></div>
+          <div class="vb-lbl">of employees use personal AI tools at work</div>
+        </div>
+        <div class="vb-yet">
+          <div class="vb-yet-line"></div>
+          <div class="vb-yet-text">yet</div>
+          <div class="vb-yet-line"></div>
+        </div>
+        <div class="vb-stat">
+          <div class="vb-num">5<sup>%</sup></div>
+          <div class="vb-lbl">of enterprise AI pilots deliver measurable business impact</div>
+        </div>
+      </div>
+      <p class="source">MIT Sloan Management Review</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ VARIANT C ══════════ -->
+<div class="phone-wrap">
+  <div class="label">Variant C — Contained Block</div>
+  <div class="phone">
+    <div class="vc-inner">
+      <p class="eyebrow">The Gap</p>
+      <h2 class="vc-stmt">But most businesses can't see the impact of people and agents working together on the bottom line.</h2>
+      <div class="vc-block">
+        <div class="vc-row">
+          <div class="vc-stat">
+            <div class="vc-num">90<sup>%</sup></div>
+            <div class="vc-lbl">of employees use personal AI tools at work</div>
+          </div>
+          <div class="vc-div">
+            <div class="vc-div-line"></div>
+            <div class="vc-div-text">yet</div>
+            <div class="vc-div-line"></div>
+          </div>
+          <div class="vc-stat">
+            <div class="vc-num">5<sup>%</sup></div>
+            <div class="vc-lbl">of enterprise AI pilots deliver measurable business impact</div>
+          </div>
+        </div>
+        <div class="vc-pill">MIT Sloan Management Review</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
