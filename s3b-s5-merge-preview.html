@@ -95,7 +95,7 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
 </head>
 <body>
 
-<div class="note"><b>Prototype — desktop/laptop only.</b><br>Click anywhere to advance the sequence:<br>0) S3b blockers → 1) cards exit + chars converge + headline in → 2) chars spread + pills open.<br>Click again after state 2 to loop back to state 0.</div>
+<div class="note"><b>Prototype — desktop/laptop only.</b><br>Click or scroll to advance, scroll up to go back:<br>0) S3b blockers → 1) cards exit + chars converge + headline in → 2) chars spread + pills open.<br>Click again after state 2 to loop back to state 0.</div>
 <div class="state-badge" id="badge">state 0 — S3b</div>
 <button class="reset-btn" id="resetBtn">Reset</button>
 
@@ -173,8 +173,24 @@ function advance() {
   setTimeout(() => busy = false, 200);
 }
 
+function retreat() {
+  if (busy || state === 0) return;
+  busy = true;
+  setState(state - 1);
+  setTimeout(() => busy = false, 200);
+}
+
 stage.addEventListener('click', advance);
 document.getElementById('resetBtn').addEventListener('click', (e) => { e.stopPropagation(); setState(0); });
+
+let wLock = false;
+window.addEventListener('wheel', e => {
+  if (wLock) return;
+  wLock = true;
+  setTimeout(() => wLock = false, 900);
+  if (e.deltaY > 0) advance();
+  else retreat();
+}, { passive:true });
 </script>
 
 </body>
