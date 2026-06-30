@@ -306,6 +306,101 @@ html, body { width:100%; font-family:'Poppins',sans-serif; background:#0a0a0f; c
 .v14-more-name { font-size:12px; font-weight:600; color:#fff; }
 .v14-more-dept { font-size:10px; color:var(--dim); }
 
+/* ═══════════════════════════════════════
+   VARIANT 15 — "Our people" cinematic (V4 copy + real video)
+═══════════════════════════════════════ */
+.v15-video-bg { position:absolute; inset:0; z-index:0; }
+.v15-video-bg video { width:100%; height:100%; object-fit:cover; }
+.v15-overlay { position:absolute; inset:0; background:linear-gradient(100deg, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.78) 38%, rgba(0,0,0,0.35) 65%, rgba(0,0,0,0.15) 100%); }
+.v15-content { position:relative; z-index:1; width:100%; max-width:620px; margin-right:auto; padding:0 48px; }
+.v15-tagline { font-size:clamp(28px,3.6vw,48px); font-weight:700; line-height:1.25; color:#fff; margin-bottom:28px; }
+.v15-tagline em { color:var(--purple); font-style:normal; }
+.v15-stat { font-size:clamp(48px,6vw,76px); font-weight:800; line-height:1; background:linear-gradient(135deg,#fff 30%,rgba(255,255,255,0.35)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-bottom:6px; }
+.v15-stat-label { font-size:13px; color:rgba(255,255,255,0.55); line-height:1.5; max-width:320px; margin-bottom:28px; }
+.v15-credit { display:flex; align-items:center; gap:10px; }
+.v15-credit-avatar { width:34px; height:34px; border-radius:50%; overflow:hidden; flex-shrink:0; box-shadow:0 0 0 2px rgba(255,255,255,0.2); }
+.v15-credit-avatar img { width:100%; height:100%; object-fit:cover; }
+.v15-credit-text { font-size:12px; color:rgba(255,255,255,0.6); }
+.v15-credit-text strong { color:#fff; font-weight:600; }
+
+/* ═══════════════════════════════════════
+   VARIANT 16 — Product UI mockup ("built in")
+═══════════════════════════════════════ */
+.v16-wrap { max-width:1040px; width:100%; position:relative; z-index:1; }
+.v16-head { text-align:center; margin-bottom:36px; }
+.v16-headline { font-size:clamp(24px,3vw,44px); font-weight:700; line-height:1.2; margin-bottom:10px; }
+.v16-sub { font-size:clamp(13px,1.3vw,17px); color:rgba(255,255,255,0.5); }
+.v16-panel { position:relative; background:#0d0d14; border:1px solid rgba(255,255,255,0.1); border-radius:18px; overflow:hidden; box-shadow:0 24px 64px rgba(0,0,0,0.5); display:flex; min-height:340px; }
+.v16-chrome { position:absolute; top:0; left:0; right:0; height:36px; display:flex; align-items:center; gap:6px; padding:0 16px; }
+.v16-dot { width:9px; height:9px; border-radius:50%; background:rgba(255,255,255,0.15); }
+.v16-sidebar { width:200px; flex-shrink:0; background:rgba(255,255,255,0.02); border-right:1px solid rgba(255,255,255,0.07); padding:48px 12px 16px; display:flex; flex-direction:column; gap:4px; }
+.v16-dept-item { font-size:12px; color:rgba(255,255,255,0.45); padding:9px 14px; border-radius:8px; }
+.v16-dept-item.active { background:rgba(97,97,255,0.15); color:#fff; font-weight:600; }
+.v16-main { flex:1; padding:48px 36px 32px; display:flex; flex-direction:column; justify-content:center; }
+.v16-main-badge { font-size:9px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--purple); margin-bottom:10px; }
+.v16-main-title { font-size:24px; font-weight:700; color:#fff; margin-bottom:12px; }
+.v16-main-desc { font-size:14px; color:rgba(255,255,255,0.55); line-height:1.7; max-width:440px; margin-bottom:20px; }
+.v16-main-footer { display:flex; align-items:center; gap:10px; }
+.v16-main-avatar { width:28px; height:28px; border-radius:50%; overflow:hidden; flex-shrink:0; }
+.v16-main-avatar img { width:100%; height:100%; object-fit:cover; }
+.v16-main-footer-text { font-size:11px; color:var(--dim); }
+.v16-foot-stat { text-align:center; margin-top:28px; font-size:13px; color:var(--dim); }
+.v16-foot-stat strong { color:#fff; }
+
+/* ═══════════════════════════════════════
+   VARIANT 17 — Quote wall
+═══════════════════════════════════════ */
+.v17-wrap { max-width:1100px; width:100%; position:relative; z-index:1; }
+.v17-head { text-align:center; margin-bottom:36px; }
+.v17-headline { font-size:clamp(24px,3vw,44px); font-weight:700; line-height:1.2; margin-bottom:10px; }
+.v17-sub { font-size:clamp(13px,1.3vw,17px); color:rgba(255,255,255,0.5); }
+.v17-grid { columns:3 260px; column-gap:16px; }
+.v17-card { break-inside:avoid; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:16px; padding:20px; margin-bottom:16px; }
+.v17-card.featured { border-color:rgba(97,97,255,0.35); background:rgba(97,97,255,0.07); }
+.v17-quote { font-size:14px; color:#fff; line-height:1.55; margin-bottom:16px; }
+.v17-quote::before { content:'"'; color:var(--purple); font-weight:700; }
+.v17-card-foot { display:flex; align-items:center; gap:10px; }
+.v17-card-avatar { width:28px; height:28px; border-radius:50%; overflow:hidden; flex-shrink:0; background:rgba(255,255,255,0.08); }
+.v17-card-avatar img { width:100%; height:100%; object-fit:cover; }
+.v17-card-name { font-size:12px; font-weight:600; color:#fff; }
+.v17-card-dept { font-size:10px; color:var(--dim); }
+
+/* ═══════════════════════════════════════
+   VARIANT 18 — Before / After split
+═══════════════════════════════════════ */
+.v18-wrap { max-width:1080px; width:100%; position:relative; z-index:1; }
+.v18-head { text-align:center; margin-bottom:36px; }
+.v18-headline { font-size:clamp(24px,3vw,44px); font-weight:700; line-height:1.2; }
+.v18-split { display:grid; grid-template-columns:1fr 1fr; gap:0; border-radius:20px; overflow:hidden; border:1px solid rgba(255,255,255,0.08); }
+.v18-col { padding:32px 28px; }
+.v18-before { background:rgba(255,255,255,0.02); }
+.v18-after { background:rgba(97,97,255,0.07); border-left:1px solid rgba(97,97,255,0.2); }
+.v18-col-label { font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; margin-bottom:18px; }
+.v18-before .v18-col-label { color:var(--dimmer); }
+.v18-after .v18-col-label { color:var(--purple); }
+.v18-row { display:flex; gap:12px; padding:12px 0; border-bottom:1px solid rgba(255,255,255,0.06); align-items:flex-start; }
+.v18-row:last-child { border-bottom:none; }
+.v18-row-icon { font-size:14px; flex-shrink:0; margin-top:1px; }
+.v18-row-text { font-size:13px; color:rgba(255,255,255,0.55); line-height:1.5; }
+.v18-after .v18-row-text { color:rgba(255,255,255,0.8); }
+.v18-row-text strong { color:#fff; font-weight:600; }
+.v18-foot { text-align:center; margin-top:28px; }
+.v18-foot-num { font-size:clamp(28px,3vw,40px); font-weight:800; color:#fff; }
+.v18-foot-label { font-size:12px; color:var(--dim); }
+
+/* ═══════════════════════════════════════
+   VARIANT 19 — Minimal stat + marquee ticker
+═══════════════════════════════════════ */
+.v19-wrap { max-width:1100px; width:100%; position:relative; z-index:1; text-align:center; }
+.v19-stat { font-size:clamp(72px,12vw,180px); font-weight:800; line-height:1; background:linear-gradient(135deg,#fff 30%,rgba(255,255,255,0.3)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.v19-stat-label { font-size:clamp(14px,1.6vw,20px); color:rgba(255,255,255,0.55); margin-top:8px; margin-bottom:48px; }
+.v19-marquee { width:100%; overflow:hidden; border-top:1px solid rgba(255,255,255,0.08); border-bottom:1px solid rgba(255,255,255,0.08); padding:18px 0; }
+.v19-track { display:flex; gap:40px; width:max-content; animation:v19-scroll 28s linear infinite; }
+.v19-item { font-size:15px; color:rgba(255,255,255,0.5); white-space:nowrap; }
+.v19-item strong { color:#fff; font-weight:600; }
+.v19-dot { width:4px; height:4px; border-radius:50%; background:var(--purple); flex-shrink:0; }
+@keyframes v19-scroll { from { transform:translateX(0); } to { transform:translateX(-50%); } }
+
 @media (max-width: 768px) {
   .variant { padding:70px 20px 40px; min-height:auto; }
   .v2-grid { grid-template-columns:1fr 1fr; }
@@ -333,6 +428,15 @@ html, body { width:100%; font-family:'Poppins',sans-serif; background:#0a0a0f; c
   .v14-wrap { grid-template-columns:1fr; }
   .v14-photo { max-width:240px; margin:0 auto; }
   .v14-more { flex-direction:column; }
+  .v15-content { max-width:100%; padding:96px 20px 40px; }
+  .v16-panel { flex-direction:column; min-height:auto; }
+  .v16-sidebar { width:100%; flex-direction:row; overflow-x:auto; padding:44px 12px 12px; }
+  .v16-main { padding:24px 20px 28px; }
+  .v17-grid { columns:1 100%; }
+  .v18-split { grid-template-columns:1fr; }
+  .v18-after { border-left:none; border-top:1px solid rgba(97,97,255,0.2); }
+  .v19-marquee { padding:14px 0; }
+  .v19-track { gap:24px; animation-duration:20s; }
 }
 </style>
 </head>
@@ -1079,6 +1183,230 @@ html, body { width:100%; font-family:'Poppins',sans-serif; background:#0a0a0f; c
             <div class="v14-more-dept">Engineering · Petro</div>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ VARIANT 15 — "Our people" cinematic (V4 copy + real video) ═══ -->
+<div class="variant" style="background:#000; padding:0;">
+  <div class="label-bar" style="position:absolute;top:0;left:0;right:0;z-index:5;">
+    <span class="vnum">Variant 15</span>
+    <span class="vdesc">Same words as Variant 4 — "Our people built agents for the problems that frustrated them most" — but cinematic, full-bleed video.</span>
+  </div>
+  <div class="v15-video-bg">
+    <video src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Video/Moti.mp4" muted loop playsinline autoplay preload="metadata"></video>
+    <div class="v15-overlay"></div>
+  </div>
+  <div class="v15-content">
+    <p class="eyebrow">Monday on Monday</p>
+    <h2 class="v15-tagline">Our people built agents for<br><em>the problems that frustrated them most.</em></h2>
+    <div class="v15-stat">5,117</div>
+    <p class="v15-stat-label">agents built by monday employees in a single week — across 8 departments.</p>
+    <div class="v15-credit">
+      <div class="v15-credit-avatar">
+        <img src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/ran-levgoren.png" alt="Ran Levgoren">
+      </div>
+      <div class="v15-credit-text">Featured: <strong>Moti — The Silence Disruptor</strong>, built by Ran Levgoren (Sales)</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ VARIANT 16 — Product UI mockup ═══ -->
+<div class="variant" style="background:#03030a;">
+  <div class="label-bar" style="position:absolute;top:0;left:0;right:0;">
+    <span class="vnum">Variant 16</span>
+    <span class="vdesc">Product UI mockup — frame it as something built into monday, not a slide.</span>
+  </div>
+  <div class="glow"></div>
+  <div class="v16-wrap">
+    <div class="v16-head">
+      <p class="eyebrow">Monday on Monday</p>
+      <h2 class="v16-headline">Built into monday. Used by monday.</h2>
+      <p class="v16-sub">Not a slide deck — agents our own employees ship and run inside the product, every day.</p>
+    </div>
+    <div class="v16-panel">
+      <div class="v16-chrome">
+        <div class="v16-dot"></div><div class="v16-dot"></div><div class="v16-dot"></div>
+      </div>
+      <div class="v16-sidebar">
+        <div class="v16-dept-item active">Sales</div>
+        <div class="v16-dept-item">Customer Success</div>
+        <div class="v16-dept-item">DIT &amp; Security</div>
+        <div class="v16-dept-item">Engineering</div>
+        <div class="v16-dept-item">Finance</div>
+        <div class="v16-dept-item">People</div>
+        <div class="v16-dept-item">Marketing</div>
+        <div class="v16-dept-item">Product</div>
+      </div>
+      <div class="v16-main">
+        <div class="v16-main-badge">Sales · Live agent</div>
+        <div class="v16-main-title">Moti — The Silence Disruptor Agent</div>
+        <p class="v16-main-desc">Monitors every active deal daily. Flags who's gone quiet, what signal was missed, and what to do about it — before the next pipeline review.</p>
+        <div class="v16-main-footer">
+          <div class="v16-main-avatar"><img src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/ran-levgoren.png" alt="Ran Levgoren"></div>
+          <div class="v16-main-footer-text">Built by Ran Levgoren</div>
+        </div>
+      </div>
+    </div>
+    <p class="v16-foot-stat">1 of <strong>5,117</strong> agents running across 8 departments.</p>
+  </div>
+</div>
+
+<!-- ═══ VARIANT 17 — Quote wall ═══ -->
+<div class="variant" style="background:#000;">
+  <div class="label-bar" style="position:absolute;top:0;left:0;right:0;">
+    <span class="vnum">Variant 17</span>
+    <span class="vdesc">Quote wall — 5,117 agents, told through the builders' own words.</span>
+  </div>
+  <div class="glow"></div>
+  <div class="v17-wrap">
+    <div class="v17-head">
+      <p class="eyebrow">Monday on Monday</p>
+      <h2 class="v17-headline">5,117 agents. Every one solving a real frustration.</h2>
+      <p class="v17-sub">In their own words — what they built, and why.</p>
+    </div>
+    <div class="v17-grid">
+      <div class="v17-card featured">
+        <p class="v17-quote">Turning data insights into ready-to-ship campaign content required heavy manual coordination."</p>
+        <div class="v17-card-foot">
+          <div class="v17-card-avatar"><img src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/osher-mayor.png" alt="Osher Mayor"></div>
+          <div>
+            <div class="v17-card-name">Osher Mayor</div>
+            <div class="v17-card-dept">Marketing · built Riki Shula</div>
+          </div>
+        </div>
+      </div>
+      <div class="v17-card">
+        <p class="v17-quote">Monitors every active deal daily — flags who's gone quiet before the next pipeline review."</p>
+        <div class="v17-card-foot">
+          <div class="v17-card-avatar"><img src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/ran-levgoren.png" alt="Ran Levgoren"></div>
+          <div>
+            <div class="v17-card-name">Ran Levgoren</div>
+            <div class="v17-card-dept">Sales · built Moti</div>
+          </div>
+        </div>
+      </div>
+      <div class="v17-card">
+        <p class="v17-quote">Your candidates' companion — 24/7. Any language. Any timezone."</p>
+        <div class="v17-card-foot">
+          <div class="v17-card-avatar"></div>
+          <div>
+            <div class="v17-card-name">People team</div>
+            <div class="v17-card-dept">People · built Robin</div>
+          </div>
+        </div>
+      </div>
+      <div class="v17-card">
+        <p class="v17-quote">Brings mobile feature parity up to speed with desktop — automatically, every release."</p>
+        <div class="v17-card-foot">
+          <div class="v17-card-avatar"><img src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/amit-frishberg.png" alt="Amit Frishberg"></div>
+          <div>
+            <div class="v17-card-name">Amit Frishberg</div>
+            <div class="v17-card-dept">Engineering · built Petro</div>
+          </div>
+        </div>
+      </div>
+      <div class="v17-card">
+        <p class="v17-quote">Supercharges AI adoption across every customer success workflow."</p>
+        <div class="v17-card-foot">
+          <div class="v17-card-avatar"></div>
+          <div>
+            <div class="v17-card-name">Customer Success team</div>
+            <div class="v17-card-dept">Customer Success · built Trinity</div>
+          </div>
+        </div>
+      </div>
+      <div class="v17-card">
+        <p class="v17-quote">Plans and coordinates events end-to-end — from logistics to post-event follow-ups."</p>
+        <div class="v17-card-foot">
+          <div class="v17-card-avatar"></div>
+          <div>
+            <div class="v17-card-name">Marketing team</div>
+            <div class="v17-card-dept">Marketing · built Cher</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ VARIANT 18 — Before / After split ═══ -->
+<div class="variant" style="background:#03030a;">
+  <div class="label-bar" style="position:absolute;top:0;left:0;right:0;">
+    <span class="vnum">Variant 18</span>
+    <span class="vdesc">Before / After — the manual grind, side-by-side with what our people built to fix it.</span>
+  </div>
+  <div class="glow"></div>
+  <div class="v18-wrap">
+    <div class="v18-head">
+      <p class="eyebrow">Monday on Monday</p>
+      <h2 class="v18-headline">The frustration didn't wait for a roadmap. So we built the fix ourselves.</h2>
+    </div>
+    <div class="v18-split">
+      <div class="v18-col v18-before">
+        <div class="v18-col-label">Before</div>
+        <div class="v18-row"><div class="v18-row-icon">😤</div><div class="v18-row-text">Reps manually checking every deal for signs of a stalled conversation.</div></div>
+        <div class="v18-row"><div class="v18-row-icon">😤</div><div class="v18-row-text">Candidates waiting on replies across time zones and languages.</div></div>
+        <div class="v18-row"><div class="v18-row-icon">😤</div><div class="v18-row-text">Event logistics and follow-ups tracked across scattered spreadsheets.</div></div>
+        <div class="v18-row"><div class="v18-row-icon">😤</div><div class="v18-row-text">Mobile features quietly falling behind desktop, release after release.</div></div>
+      </div>
+      <div class="v18-col v18-after">
+        <div class="v18-col-label">After</div>
+        <div class="v18-row"><div class="v18-row-icon">✅</div><div class="v18-row-text"><strong>Moti</strong> flags it automatically, every day. <em>Sales</em></div></div>
+        <div class="v18-row"><div class="v18-row-icon">✅</div><div class="v18-row-text"><strong>Robin</strong> answers 24/7, in any language. <em>People</em></div></div>
+        <div class="v18-row"><div class="v18-row-icon">✅</div><div class="v18-row-text"><strong>Cher</strong> plans it end-to-end. <em>Marketing</em></div></div>
+        <div class="v18-row"><div class="v18-row-icon">✅</div><div class="v18-row-text"><strong>Petro</strong> keeps mobile in sync, automatically. <em>Engineering</em></div></div>
+      </div>
+    </div>
+    <div class="v18-foot">
+      <div class="v18-foot-num">5,117</div>
+      <div class="v18-foot-label">agents built by monday employees in a single week</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ VARIANT 19 — Minimal stat + marquee ticker ═══ -->
+<div class="variant" style="background:#000;">
+  <div class="label-bar" style="position:absolute;top:0;left:0;right:0;">
+    <span class="vnum">Variant 19</span>
+    <span class="vdesc">Minimal — one huge number, then a quiet ticker of every agent scrolling by.</span>
+  </div>
+  <div class="glow"></div>
+  <div class="v19-wrap">
+    <p class="eyebrow">Monday on Monday</p>
+    <div class="v19-stat">5,117</div>
+    <p class="v19-stat-label">agents built by monday employees in one week — across 8 departments.</p>
+    <div class="v19-marquee">
+      <div class="v19-track">
+        <div class="v19-item"><strong>Moti</strong> · Sales</div>
+        <div class="v19-dot"></div>
+        <div class="v19-item"><strong>Robin</strong> · People</div>
+        <div class="v19-dot"></div>
+        <div class="v19-item"><strong>Cher</strong> · Marketing</div>
+        <div class="v19-dot"></div>
+        <div class="v19-item"><strong>Trinity</strong> · Customer Success</div>
+        <div class="v19-dot"></div>
+        <div class="v19-item"><strong>Petro</strong> · Engineering</div>
+        <div class="v19-dot"></div>
+        <div class="v19-item"><strong>Yehuda</strong> · Marketing</div>
+        <div class="v19-dot"></div>
+        <div class="v19-item"><strong>Riki Shula</strong> · Marketing</div>
+        <div class="v19-dot"></div>
+        <div class="v19-item"><strong>Moti</strong> · Sales</div>
+        <div class="v19-dot"></div>
+        <div class="v19-item"><strong>Robin</strong> · People</div>
+        <div class="v19-dot"></div>
+        <div class="v19-item"><strong>Cher</strong> · Marketing</div>
+        <div class="v19-dot"></div>
+        <div class="v19-item"><strong>Trinity</strong> · Customer Success</div>
+        <div class="v19-dot"></div>
+        <div class="v19-item"><strong>Petro</strong> · Engineering</div>
+        <div class="v19-dot"></div>
+        <div class="v19-item"><strong>Yehuda</strong> · Marketing</div>
+        <div class="v19-dot"></div>
+        <div class="v19-item"><strong>Riki Shula</strong> · Marketing</div>
+        <div class="v19-dot"></div>
       </div>
     </div>
   </div>
