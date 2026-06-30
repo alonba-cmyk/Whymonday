@@ -1338,6 +1338,13 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
     }
   }
 
+  function transformX(el) {
+    const t = getComputedStyle(el).transform;
+    if (t === 'none') return 0;
+    const parts = t.match(/matrix\(([^)]+)\)/);
+    return parts ? parseFloat(parts[1].split(',')[4]) : 0;
+  }
+
   function enterLayersConverged() {
     if (layersConverged) return;
     layersConverged = true;
@@ -1348,11 +1355,11 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
     const s3bAgent = document.querySelector('.s3b-char-agent').getBoundingClientRect();
     const pBase = charP.getBoundingClientRect();
     const aBase = charA.getBoundingClientRect();
-    // charP/charA's resting transform is translateX(100px)/translateX(-100px) (see .char-p/.char-a
-    // above); offset from there by the gap to s3b's char position so the snap lands exactly where
-    // the s3b character was, instead of a fixed pose that doesn't line up across slides/viewports.
-    const dxP = 100 + (s3bHuman.left - pBase.left) / zoom;
-    const dxA = -100 + (s3bAgent.left - aBase.left) / zoom;
+    // Read charP/charA's actual resting transform (varies by breakpoint, e.g. desktop vs
+    // laptop) instead of assuming a fixed value, then offset from there by the gap to s3b's
+    // char position so the snap lands exactly where the s3b character was.
+    const dxP = transformX(charP) + (s3bHuman.left - pBase.left) / zoom;
+    const dxA = transformX(charA) + (s3bAgent.left - aBase.left) / zoom;
     charP.classList.add('no-t');
     charA.classList.add('no-t');
     charP.style.transform = `translateX(${dxP}px)`;
