@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Monday on Monday — 4 Slide Variants</title>
+<title>Monday on Monday — 8 Slide Variants</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -90,6 +90,99 @@ html, body { width:100%; font-family:'Poppins',sans-serif; background:#0a0a0f; c
 .v4-story-name { font-size:14px; font-weight:700; color:#fff; margin-bottom:6px; }
 .v4-story-text { font-size:12px; color:rgba(255,255,255,0.55); line-height:1.6; }
 
+/* ═══════════════════════════════════════
+   PLACEHOLDER SHARED
+═══════════════════════════════════════ */
+.ph {
+  background: rgba(97,97,255,0.07);
+  border: 1.5px dashed rgba(97,97,255,0.35);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: rgba(97,97,255,0.7);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-align: center;
+  padding: 16px;
+}
+.ph-icon { font-size: 22px; opacity: 0.6; }
+.ph-label { font-size: 10px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(97,97,255,0.5); margin-top: 2px; }
+.ph-round { border-radius: 50%; }
+
+/* ═══════════════════════════════════════
+   VARIANT 5 — Employee spotlight + headshot
+═══════════════════════════════════════ */
+.v5-wrap { max-width:1040px; width:100%; position:relative; z-index:1; display:grid; grid-template-columns:1fr 1fr; gap:clamp(40px,6vw,80px); align-items:center; }
+.v5-left { display:flex; flex-direction:column; gap:32px; }
+.v5-kicker { display:flex; align-items:center; gap:12px; }
+.v5-headline { font-size:clamp(26px,3vw,46px); font-weight:700; line-height:1.2; }
+.v5-headline em { color:var(--purple); font-style:normal; }
+.v5-quote { font-size:clamp(14px,1.5vw,19px); color:rgba(255,255,255,0.6); line-height:1.7; border-left:2px solid var(--purple); padding-left:18px; }
+.v5-person { display:flex; align-items:center; gap:14px; }
+.v5-avatar { flex-shrink:0; }
+.v5-person-name { font-size:14px; font-weight:600; color:#fff; }
+.v5-person-role { font-size:12px; color:var(--dim); margin-top:2px; }
+.v5-right { position:relative; }
+.v5-img-main { width:100%; aspect-ratio:3/4; border-radius:20px; overflow:hidden; }
+.v5-badge { position:absolute; bottom:-16px; left:-16px; background:#0a0a12; border:1px solid rgba(255,255,255,0.1); border-radius:14px; padding:14px 18px; }
+.v5-badge-num { font-size:28px; font-weight:800; color:#fff; line-height:1; }
+.v5-badge-label { font-size:10px; color:var(--dim); text-transform:uppercase; letter-spacing:1px; margin-top:3px; }
+
+/* ═══════════════════════════════════════
+   VARIANT 6 — Product screenshot hero
+═══════════════════════════════════════ */
+.v6-wrap { max-width:1060px; width:100%; position:relative; z-index:1; }
+.v6-top { display:grid; grid-template-columns:1fr 1.4fr; gap:clamp(32px,5vw,70px); align-items:center; margin-bottom:36px; }
+.v6-text { }
+.v6-headline { font-size:clamp(24px,2.8vw,40px); font-weight:700; line-height:1.25; margin-bottom:16px; }
+.v6-sub { font-size:clamp(13px,1.3vw,16px); color:rgba(255,255,255,0.55); line-height:1.7; margin-bottom:24px; }
+.v6-pill-row { display:flex; flex-wrap:wrap; gap:8px; }
+.v6-pill { font-size:11px; font-weight:500; letter-spacing:0.5px; color:rgba(255,255,255,0.7); background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); border-radius:100px; padding:5px 14px; }
+.v6-screen { width:100%; aspect-ratio:16/10; border-radius:16px; overflow:hidden; border:1px solid rgba(255,255,255,0.08); }
+.v6-agents-row { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
+.v6-mini-card { background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.07); border-radius:12px; padding:14px; }
+.v6-mini-dept { font-size:9px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--purple); margin-bottom:6px; }
+.v6-mini-name { font-size:12px; font-weight:600; color:#fff; }
+
+/* ═══════════════════════════════════════
+   VARIANT 7 — Faces collage + big number
+═══════════════════════════════════════ */
+.v7-wrap { max-width:1060px; width:100%; position:relative; z-index:1; display:grid; grid-template-columns:1.1fr 1fr; gap:clamp(40px,6vw,80px); align-items:center; }
+.v7-left { }
+.v7-headline { font-size:clamp(26px,3.2vw,50px); font-weight:700; line-height:1.2; margin-bottom:14px; }
+.v7-sub { font-size:clamp(14px,1.4vw,18px); color:rgba(255,255,255,0.55); line-height:1.65; margin-bottom:28px; max-width:420px; }
+.v7-stat-row { display:flex; align-items:baseline; gap:12px; margin-bottom:8px; }
+.v7-num { font-size:clamp(52px,6vw,80px); font-weight:800; line-height:1; background:linear-gradient(135deg,#fff 30%,rgba(255,255,255,0.35)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.v7-num-label { font-size:14px; color:var(--dim); }
+.v7-dept-label { font-size:11px; color:var(--dimmer); text-transform:uppercase; letter-spacing:1.5px; }
+.v7-right { }
+.v7-collage { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+.v7-face { aspect-ratio:1; border-radius:14px; overflow:hidden; }
+.v7-face:nth-child(2) { border-radius:50%; }
+.v7-face:nth-child(5) { border-radius:50%; }
+.v7-face.wide { grid-column:span 2; aspect-ratio:2/1; }
+
+/* ═══════════════════════════════════════
+   VARIANT 8 — Video hero + 2-col below
+═══════════════════════════════════════ */
+.v8-wrap { max-width:1060px; width:100%; position:relative; z-index:1; }
+.v8-head { text-align:center; margin-bottom:36px; }
+.v8-headline { font-size:clamp(24px,3vw,46px); font-weight:700; line-height:1.2; margin-bottom:10px; }
+.v8-sub { font-size:clamp(14px,1.4vw,18px); color:rgba(255,255,255,0.5); }
+.v8-video { width:100%; aspect-ratio:16/9; border-radius:20px; overflow:hidden; margin-bottom:28px; position:relative; }
+.v8-play { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; pointer-events:none; }
+.v8-play-btn { width:72px; height:72px; border-radius:50%; background:rgba(97,97,255,0.9); display:flex; align-items:center; justify-content:center; }
+.v8-play-btn svg { width:28px; height:28px; fill:#fff; margin-left:4px; }
+.v8-bottom { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.v8-stat-block { background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:16px; padding:24px; display:flex; align-items:center; gap:20px; }
+.v8-stat-num { font-size:clamp(36px,4vw,54px); font-weight:800; color:#fff; line-height:1; white-space:nowrap; }
+.v8-stat-desc { font-size:13px; color:rgba(255,255,255,0.55); line-height:1.6; }
+.v8-stat-desc strong { color:#fff; display:block; font-size:15px; margin-bottom:3px; }
+
 @media (max-width: 768px) {
   .variant { padding:70px 20px 40px; min-height:auto; }
   .v2-grid { grid-template-columns:1fr 1fr; }
@@ -97,6 +190,13 @@ html, body { width:100%; font-family:'Poppins',sans-serif; background:#0a0a0f; c
   .v3-head { flex-direction:column; align-items:flex-start; }
   .v3-counter { text-align:left; }
   .v4-wrap { grid-template-columns:1fr; }
+  .v5-wrap { grid-template-columns:1fr; }
+  .v5-right { display:none; }
+  .v6-top { grid-template-columns:1fr; }
+  .v6-agents-row { grid-template-columns:repeat(2,1fr); }
+  .v7-wrap { grid-template-columns:1fr; }
+  .v7-right { display:none; }
+  .v8-bottom { grid-template-columns:1fr; }
 }
 </style>
 </head>
@@ -269,6 +369,204 @@ html, body { width:100%; font-family:'Poppins',sans-serif; background:#0a0a0f; c
         <div class="v4-story-dept">Marketing · Cher</div>
         <div class="v4-story-name">Event Planning Agent</div>
         <div class="v4-story-text">Plans and coordinates events end-to-end — from logistics to post-event follow-ups.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ VARIANT 5 ═══ -->
+<div class="variant" style="background:#000;">
+  <div class="label-bar" style="position:absolute;top:0;left:0;right:0;">
+    <span class="vnum">Variant 5</span>
+    <span class="vdesc">Employee spotlight — one person, one agent, one quote. Personal and credible.</span>
+  </div>
+  <div class="glow"></div>
+  <div class="v5-wrap">
+    <div class="v5-left">
+      <div>
+        <p class="eyebrow">Monday on Monday</p>
+        <h2 class="v5-headline">Built by the people<br>who <em>use it every day.</em></h2>
+      </div>
+      <blockquote class="v5-quote">
+        "Monitors every active deal daily. Flags who's gone quiet, what signal was missed, and what to do about it — before the next pipeline review."
+      </blockquote>
+      <div class="v5-person">
+        <div class="v5-avatar">
+          <!-- PLACEHOLDER: headshot of Moti (Sales) -->
+          <div class="ph ph-round" style="width:52px;height:52px;font-size:9px;gap:4px;">
+            <span class="ph-icon">👤</span>
+            <span style="font-size:8px;">Moti</span>
+          </div>
+        </div>
+        <div>
+          <div class="v5-person-name">Moti</div>
+          <div class="v5-person-role">Sales · Built The Silence Disruptor Agent</div>
+        </div>
+      </div>
+      <p class="source-note">1 of 5,117 agents built by monday employees</p>
+    </div>
+    <div class="v5-right">
+      <!-- PLACEHOLDER: full-body or environment photo of Moti at work -->
+      <div class="ph v5-img-main" style="min-height:420px;">
+        <span class="ph-icon">📸</span>
+        <div style="font-weight:600;font-size:12px;">Employee photo</div>
+        <span class="ph-label">Portrait / candid of Moti<br>at work or at desk</span>
+      </div>
+      <div class="v5-badge">
+        <div class="v5-badge-num">5,117</div>
+        <div class="v5-badge-label">agents built in 1 week</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ VARIANT 6 ═══ -->
+<div class="variant" style="background:#03030a;">
+  <div class="label-bar" style="position:absolute;top:0;left:0;right:0;">
+    <span class="vnum">Variant 6</span>
+    <span class="vdesc">Product screenshot hero — show the platform in action, not just the concept.</span>
+  </div>
+  <div class="glow"></div>
+  <div class="v6-wrap">
+    <div class="v6-top">
+      <div class="v6-text">
+        <p class="eyebrow">Monday on Monday</p>
+        <h2 class="v6-headline">We built 5,117 agents.<br>On monday. For monday.</h2>
+        <p class="v6-sub">Every department runs on agents our own employees built — for the real problems they faced every day.</p>
+        <div class="v6-pill-row">
+          <span class="v6-pill">Sales</span>
+          <span class="v6-pill">Marketing</span>
+          <span class="v6-pill">Engineering</span>
+          <span class="v6-pill">People</span>
+          <span class="v6-pill">CS</span>
+          <span class="v6-pill">Finance</span>
+          <span class="v6-pill">Product</span>
+          <span class="v6-pill">DIT</span>
+        </div>
+      </div>
+      <!-- PLACEHOLDER: product screenshot — agent builder or agent running in a board -->
+      <div class="ph v6-screen">
+        <span class="ph-icon">🖥️</span>
+        <div style="font-weight:600;font-size:13px;">Product screenshot</div>
+        <span class="ph-label">Agent builder UI or<br>agent running in monday board</span>
+      </div>
+    </div>
+    <div class="v6-agents-row">
+      <div class="v6-mini-card">
+        <div class="v6-mini-dept">Sales</div>
+        <div class="v6-mini-name">The Silence Disruptor</div>
+      </div>
+      <div class="v6-mini-card">
+        <div class="v6-mini-dept">People</div>
+        <div class="v6-mini-name">Robin — Candidates' Companion</div>
+      </div>
+      <div class="v6-mini-card">
+        <div class="v6-mini-dept">Engineering</div>
+        <div class="v6-mini-name">Feature Parity Agent</div>
+      </div>
+      <div class="v6-mini-card">
+        <div class="v6-mini-dept">Marketing</div>
+        <div class="v6-mini-name">Data to Content System</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ VARIANT 7 ═══ -->
+<div class="variant" style="background:#000;">
+  <div class="label-bar" style="position:absolute;top:0;left:0;right:0;">
+    <span class="vnum">Variant 7</span>
+    <span class="vdesc">Faces collage — the scale becomes real when you see the people behind it.</span>
+  </div>
+  <div class="glow"></div>
+  <div class="v7-wrap">
+    <div class="v7-left">
+      <p class="eyebrow">Monday on Monday</p>
+      <h2 class="v7-headline">Every frustration.<br>Now an agent.</h2>
+      <p class="v7-sub">In one week, monday employees built 5,117 agents — one for every workflow that slowed them down.</p>
+      <div class="v7-stat-row">
+        <div class="v7-num">5,117</div>
+        <div class="v7-num-label">agents</div>
+      </div>
+      <div class="v7-dept-label">Sales · Marketing · Engineering · CS · People · Finance · Product · DIT</div>
+      <p class="source-note" style="margin-top:20px;">monday on monday · internal</p>
+    </div>
+    <div class="v7-right">
+      <div class="v7-collage">
+        <!-- PLACEHOLDER: 7 employee headshots in collage layout -->
+        <div class="ph v7-face">
+          <span class="ph-icon" style="font-size:16px;">👤</span>
+          <span class="ph-label" style="font-size:8px;">Moti<br>Sales</span>
+        </div>
+        <div class="ph v7-face">
+          <span class="ph-icon" style="font-size:16px;">👤</span>
+          <span class="ph-label" style="font-size:8px;">Robin<br>People</span>
+        </div>
+        <div class="ph v7-face">
+          <span class="ph-icon" style="font-size:16px;">👤</span>
+          <span class="ph-label" style="font-size:8px;">Cher<br>Marketing</span>
+        </div>
+        <div class="ph v7-face wide">
+          <span class="ph-icon" style="font-size:16px;">👥</span>
+          <span class="ph-label" style="font-size:8px;">Team photo or screenshot of agent in action</span>
+        </div>
+        <div class="ph v7-face">
+          <span class="ph-icon" style="font-size:16px;">👤</span>
+          <span class="ph-label" style="font-size:8px;">Trinity<br>CS</span>
+        </div>
+        <div class="ph v7-face">
+          <span class="ph-icon" style="font-size:16px;">👤</span>
+          <span class="ph-label" style="font-size:8px;">Petro<br>Eng</span>
+        </div>
+        <div class="ph v7-face">
+          <span class="ph-icon" style="font-size:16px;">👤</span>
+          <span class="ph-label" style="font-size:8px;">Yehuda<br>Marketing</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ VARIANT 8 ═══ -->
+<div class="variant" style="background:#03030a;">
+  <div class="label-bar" style="position:absolute;top:0;left:0;right:0;">
+    <span class="vnum">Variant 8</span>
+    <span class="vdesc">Video hero — let one agent demo speak for 5,117. Stats appear below as proof.</span>
+  </div>
+  <div class="glow"></div>
+  <div class="v8-wrap">
+    <div class="v8-head">
+      <p class="eyebrow">Monday on Monday</p>
+      <h2 class="v8-headline">This is what 5,117 agents look like.</h2>
+      <p class="v8-sub">Built in one week. By our own people. On monday.</p>
+    </div>
+    <!-- PLACEHOLDER: hero video / GIF of an agent running live -->
+    <div class="ph v8-video">
+      <span class="ph-icon" style="font-size:32px;">🎬</span>
+      <div style="font-weight:600;font-size:14px;">Hero video or screen recording</div>
+      <span class="ph-label" style="margin-top:4px;">e.g. Moti's "Silence Disruptor" agent<br>running live in a CRM board — 20–40 sec</span>
+    </div>
+    <div class="v8-bottom">
+      <div class="v8-stat-block">
+        <!-- PLACEHOLDER: 2–3 employee headshots side by side -->
+        <div class="ph" style="width:100px;min-width:100px;height:64px;flex-direction:row;gap:6px;border-radius:10px;">
+          <span style="font-size:20px;">👤</span>
+          <span style="font-size:20px;">👤</span>
+          <span style="font-size:20px;">👤</span>
+        </div>
+        <div>
+          <div class="v8-stat-num">5,117</div>
+          <div class="v8-stat-desc">agents built by monday employees in a single week</div>
+        </div>
+      </div>
+      <div class="v8-stat-block">
+        <div>
+          <div class="v8-stat-desc">
+            <strong>8 departments. Zero exceptions.</strong>
+            Sales, Marketing, Engineering, CS, People, Finance, Product & DIT — all running on agents they built themselves.
+          </div>
+        </div>
       </div>
     </div>
   </div>
