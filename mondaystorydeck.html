@@ -1543,12 +1543,11 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
   setTimeout(() => {
     typeWriter(line1El, 'People and agents.', 52, 'tall', () => {
       setTimeout(() => {
-        typeWriter(line2El, 'Working together. Driving results.', 42, 'short', () => {
-          setTimeout(() => {
-            const strip = document.getElementById('s0Strip');
-            if (strip) strip.classList.add('visible');
-          }, 300);
-        });
+        const strip = document.getElementById('s0Strip');
+        if (strip) strip.classList.add('visible');
+        setTimeout(() => {
+          typeWriter(line2El, 'Working together. Driving results.', 42, 'short');
+        }, 400);
       }, 350);
     });
   }, 500);
