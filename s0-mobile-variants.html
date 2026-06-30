@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>S0 Mobile Variants</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:#111; font-family:Arial,sans-serif; display:flex; flex-direction:column; align-items:center; padding:32px 16px 64px; gap:40px; }
+  h1 { color:#fff; font-size:18px; text-align:center; }
+  p.note { color:#999; font-size:12.5px; text-align:center; max-width:600px; }
+  .row { display:flex; flex-wrap:wrap; gap:28px; justify-content:center; }
+  .col { display:flex; flex-direction:column; align-items:center; gap:10px; }
+  .option-tag { background:#222; color:#a78bfa; font-size:11px; letter-spacing:1px; padding:5px 12px; border-radius:20px; font-weight:700; }
+  .desc { color:#ccc; font-size:12px; line-height:1.5; max-width:280px; text-align:center; }
+
+  /* Phone shell sized to real mobile aspect ratio (390x844) */
+  .phone { width:280px; height:605px; background:#000; border-radius:32px; overflow:hidden; border:2px solid #333; position:relative; }
+
+  .opening-brand { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px; }
+  .opening-brand img { height:16px; opacity:0.85; }
+  .opening-brand span { font-size:6px; font-weight:600; letter-spacing:4px; text-transform:uppercase; color:rgba(255,255,255,0.35); white-space:nowrap; }
+
+  .line1 { font-size:34px; font-weight:800; line-height:1.05; letter-spacing:-1.5px; display:block; text-align:center; background:linear-gradient(135deg,#fff 40%,rgba(255,255,255,0.6)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .line2 { font-size:12px; font-weight:300; line-height:1.2; color:rgba(255,255,255,0.45); display:block; text-align:center; margin-top:8px; }
+
+  .strip { width:100%; display:block; }
+
+  /* A - Bigger */
+  .a-body { height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:0 14px; gap:0; }
+  .a-body .opening-brand { margin-bottom:24px; }
+  .a-body .opening-brand img { height:20px; }
+  .a-body .opening-brand span { font-size:7px; letter-spacing:5px; }
+  .a-body .line1 { font-size:42px; }
+  .a-body .line2 { font-size:13px; margin-top:10px; }
+  .a-body .strip { margin-top:36px; }
+
+  /* B - Spread */
+  .b-body { height:100%; display:flex; flex-direction:column; justify-content:space-between; padding:9% 0 6%; }
+  .b-body .opening-brand { padding:0 14px; }
+  .b-body .line1 { font-size:30px; }
+  .b-body .line2 { font-size:11px; margin-top:6px; padding:0 14px; }
+
+  /* C - Hero strip */
+  .c-body { height:100%; display:flex; flex-direction:column; justify-content:space-between; padding:8% 0 0; }
+  .c-body .opening-brand { padding:0 14px; margin-bottom:14px; }
+  .c-body .line1 { font-size:30px; padding:0 14px; }
+  .c-body .line2 { font-size:11px; margin-top:6px; padding:0 14px; }
+  .c-body .strip { height:34%; width:100%; object-fit:cover; object-position:center; }
+
+  /* D - Ambient glow */
+  .d-frame { position:relative; }
+  .d-frame::before { content:''; position:absolute; top:-20%; left:50%; transform:translateX(-50%); width:160%; height:46%; background:radial-gradient(ellipse at center, rgba(97,97,255,0.35) 0%, rgba(255,61,87,0.14) 45%, transparent 70%); filter:blur(30px); pointer-events:none; z-index:0; }
+  .d-frame::after { content:''; position:absolute; bottom:-20%; left:50%; transform:translateX(-50%); width:160%; height:38%; background:radial-gradient(ellipse at center, rgba(255,203,0,0.2) 0%, transparent 70%); filter:blur(36px); pointer-events:none; z-index:0; }
+  .d-body { position:relative; z-index:1; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:0 14px; gap:0; }
+  .d-body .opening-brand { margin-bottom:20px; }
+  .d-body .line2 { font-size:12px; margin-top:8px; }
+  .d-body .strip { margin-top:28px; }
+</style>
+</head>
+<body>
+
+<h1>4 וריאנטים לסלייד הפותח — מובייל בלבד</h1>
+<p class="note">הבעיה המקורית: הרבה "אוויר מת" למעלה ולמטה כי כל התוכן מרוכז קומפקטי באמצע. כל וריאנט פותר את זה בצורה אחרת.</p>
+
+<div class="row">
+
+  <div class="col">
+    <div class="option-tag">A — Bigger</div>
+    <div class="phone">
+      <div class="a-body">
+        <div class="opening-brand">
+          <img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/monday%20Logo/monday.com%20Logo.png" alt="monday.com">
+          <span>AI Work Platform</span>
+        </div>
+        <span class="line1">People and<br>agents.</span>
+        <span class="line2">Working together. Driving results.</span>
+        <img class="strip" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/Agents%20and%20People%20strip.png" alt="">
+      </div>
+    </div>
+    <div class="desc">אותה פריסה ממורכזת, אבל הכל גדול יותר — לוגו, כותרת, רווחים — כך שהתוכן תופס יותר מהמסך.</div>
+  </div>
+
+  <div class="col">
+    <div class="option-tag">B — Spread</div>
+    <div class="phone">
+      <div class="b-body">
+        <div class="opening-brand">
+          <img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/monday%20Logo/monday.com%20Logo.png" alt="monday.com">
+          <span>AI Work Platform</span>
+        </div>
+        <div>
+          <span class="line1">People and<br>agents.</span>
+          <span class="line2">Working together. Driving results.</span>
+        </div>
+        <img class="strip" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/Agents%20and%20People%20strip.png" alt="">
+      </div>
+    </div>
+    <div class="desc">פיזור התוכן מלמעלה עד למטה: לוגו למעלה, כותרת באמצע, רצועת האווטארים יורדת עד התחתית.</div>
+  </div>
+
+  <div class="col">
+    <div class="option-tag">C — Hero strip</div>
+    <div class="phone">
+      <div class="c-body">
+        <div class="opening-brand">
+          <img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/monday%20Logo/monday.com%20Logo.png" alt="monday.com">
+          <span>AI Work Platform</span>
+        </div>
+        <div>
+          <span class="line1">People and<br>agents.</span>
+          <span class="line2">Working together. Driving results.</span>
+        </div>
+        <img class="strip" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/Agents%20and%20People%20strip.png" alt="">
+      </div>
+    </div>
+    <div class="desc">רצועת האווטארים הופכת לאלמנט "הירו" גדול שתופס כ-34% מהגובה למטה, הטקסט קומפקטי למעלה.</div>
+  </div>
+
+  <div class="col">
+    <div class="option-tag">D — Ambient glow</div>
+    <div class="phone d-frame">
+      <div class="d-body">
+        <div class="opening-brand">
+          <img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/monday%20Logo/monday.com%20Logo.png" alt="monday.com">
+          <span>AI Work Platform</span>
+        </div>
+        <span class="line1">People and<br>agents.</span>
+        <span class="line2">Working together. Driving results.</span>
+        <img class="strip" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/Agents%20and%20People%20strip.png" alt="">
+      </div>
+    </div>
+    <div class="desc">הכי שמרני: הפריסה המקורית נשארת, עם זוהר רקע מטושטש בצבעי המותג שממלא את האוויר המת.</div>
+  </div>
+
+</div>
+
+</body>
+</html>
