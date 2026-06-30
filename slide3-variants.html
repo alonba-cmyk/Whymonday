@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Slide 3 — 95% Stat Redesign Variants</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #000;
+  --purple: #6161ff;
+  --white: #fff;
+  --dim: rgba(255,255,255,0.4);
+  --border: rgba(255,255,255,0.08);
+}
+html, body { width:100%; font-family:'Poppins',sans-serif; background:#111; color:var(--white); }
+
+.label-bar { position:sticky; top:0; z-index:10; background:#111; border-bottom:1px solid var(--border); padding:14px 24px; display:flex; align-items:center; gap:12px; }
+.label-bar .vnum { font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--purple); background:rgba(97,97,255,0.12); border:1px solid rgba(97,97,255,0.3); border-radius:100px; padding:5px 14px; }
+.label-bar .vdesc { font-size:12px; color:var(--dim); font-weight:300; }
+
+.variant { position:relative; min-height:92vh; display:flex; align-items:center; justify-content:center; background:#000; overflow:hidden; padding:60px 40px; }
+.variant::before { content:''; position:absolute; top:-28%; left:50%; transform:translateX(-50%); width:55%; height:75%; background:radial-gradient(ellipse at center, rgba(97,97,255,0.26) 0%, rgba(255,61,87,0.1) 45%, transparent 70%); filter:blur(90px); pointer-events:none; z-index:0; }
+
+.eyebrow { font-size:10px; font-weight:600; letter-spacing:4px; text-transform:uppercase; color:var(--purple); margin-bottom:20px; }
+.gap-source { font-size:9px; color:rgba(255,255,255,0.3); letter-spacing:1px; text-transform:uppercase; margin-top:16px; }
+
+/* ── Variant 1: inline stat in headline ── */
+.v1-wrap { max-width:860px; width:100%; text-align:center; position:relative; z-index:1; }
+.v1-stmt { font-size:clamp(24px,3.2vw,42px); font-weight:700; line-height:1.3; color:#fff; }
+.v1-stat { font-size:1.2em; font-weight:800; color:#fff; background:linear-gradient(135deg,#fff 30%,rgba(255,255,255,0.5)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; padding:0 0.06em; }
+.v1-stat sup { font-size:55%; vertical-align:top; margin-top:0.1em; }
+
+/* ── Variant 2: hero number above headline ── */
+.v2-wrap { max-width:760px; width:100%; text-align:center; position:relative; z-index:1; display:flex; flex-direction:column; align-items:center; }
+.v2-num { font-size:clamp(90px,14vw,180px); font-weight:800; line-height:1; background:linear-gradient(135deg,#fff 30%,rgba(255,255,255,0.35)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-bottom:8px; }
+.v2-num sup { font-size:36%; vertical-align:top; margin-top:0.25em; }
+.v2-stmt { font-size:clamp(20px,2.4vw,32px); font-weight:600; line-height:1.35; color:rgba(255,255,255,0.65); max-width:600px; margin-top:12px; }
+
+/* ── Variant 3: side badge next to headline ── */
+.v3-wrap { max-width:1000px; width:100%; display:flex; align-items:center; justify-content:center; gap:clamp(32px,6vw,90px); position:relative; z-index:1; }
+.v3-badge { flex-shrink:0; width:clamp(150px,16vw,210px); height:clamp(150px,16vw,210px); border-radius:50%; display:flex; flex-direction:column; align-items:center; justify-content:center; position:relative; background:radial-gradient(circle at 35% 30%, rgba(97,97,255,0.18), rgba(97,97,255,0.02) 70%); }
+.v3-badge::before { content:''; position:absolute; inset:0; border-radius:50%; padding:2px; background:conic-gradient(from -90deg, var(--purple) 0deg, var(--purple) 342deg, rgba(255,255,255,0.1) 342deg, rgba(255,255,255,0.1) 360deg); -webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite:xor; mask-composite:exclude; }
+.v3-num { font-size:clamp(40px,4.5vw,56px); font-weight:800; color:#fff; line-height:1; }
+.v3-num sup { font-size:40%; vertical-align:top; margin-top:0.2em; }
+.v3-badge-label { font-size:9px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; color:var(--dim); margin-top:6px; text-align:center; }
+.v3-text { text-align:left; }
+.v3-stmt { font-size:clamp(22px,2.8vw,36px); font-weight:700; line-height:1.3; color:#fff; }
+
+@media (max-width: 768px) {
+  .variant { padding:50px 24px; min-height:auto; }
+  .v3-wrap { flex-direction:column; text-align:center; gap:28px; }
+  .v3-text { text-align:center; }
+}
+</style>
+</head>
+<body>
+
+<div class="variant">
+  <div class="label-bar" style="position:absolute; top:0; left:0; right:0;">
+    <span class="vnum">Variant 1</span>
+    <span class="vdesc">Stat woven directly into the headline sentence — no separate number, no extra visual element.</span>
+  </div>
+  <div class="v1-wrap">
+    <p class="eyebrow">The Gap</p>
+    <h2 class="v1-stmt">But <span class="v1-stat">95<sup>%</sup></span> of businesses aren't feeling the impact of agents on their bottom line.</h2>
+    <p class="gap-source">MIT Sloan Management Review</p>
+  </div>
+</div>
+
+<div class="variant">
+  <div class="label-bar" style="position:absolute; top:0; left:0; right:0;">
+    <span class="vnum">Variant 2</span>
+    <span class="vdesc">Same rhythm as today's slide — a giant hero number, with the headline as a supporting line underneath.</span>
+  </div>
+  <div class="v2-wrap">
+    <p class="eyebrow">The Gap</p>
+    <div class="v2-num">95<sup>%</sup></div>
+    <p class="v2-stmt">of businesses aren't feeling the impact of agents on their bottom line.</p>
+    <p class="gap-source">MIT Sloan Management Review</p>
+  </div>
+</div>
+
+<div class="variant">
+  <div class="label-bar" style="position:absolute; top:0; left:0; right:0;">
+    <span class="vnum">Variant 3</span>
+    <span class="vdesc">Stat as a circular badge (progress ring) beside the headline — more graphic, asymmetric layout.</span>
+  </div>
+  <div class="v3-wrap">
+    <div class="v3-badge">
+      <div class="v3-num">95<sup>%</sup></div>
+      <div class="v3-badge-label">of businesses</div>
+    </div>
+    <div class="v3-text">
+      <p class="eyebrow">The Gap</p>
+      <h2 class="v3-stmt">aren't feeling the impact of agents on their bottom line.</h2>
+      <p class="gap-source">MIT Sloan Management Review</p>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
