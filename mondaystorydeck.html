@@ -185,20 +185,11 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
 .layers-figure { height:100%; max-height:420px; width:auto; object-fit:contain; }
 .char { position:absolute; z-index:10; height:clamp(280px,62vh,680px); object-fit:contain; bottom:0; transition:transform 1.3s cubic-bezier(0.4,0,0.2,1); }
 .char.no-t { transition:none !important; }
-.char-p { left:-20px; transform:translateX(100px); filter:drop-shadow(0 16px 32px rgba(0,0,0,0.5)); }
-.char-p.spread { transform:translateX(-60px); }
-.char-a { right:-20px; left:auto; transform:translateX(-100px); filter:drop-shadow(0 16px 32px rgba(97,97,255,0.3)); }
-.char-a.spread { transform:translateX(20px); }
+.char-p { left:-20px; transform:translateX(40px); filter:drop-shadow(0 16px 32px rgba(0,0,0,0.5)); }
+.char-p.spread { transform:translateX(-120px); }
+.char-a { right:-20px; left:auto; transform:translateX(-40px); filter:drop-shadow(0 16px 32px rgba(97,97,255,0.3)); }
+.char-a.spread { transform:translateX(80px); }
 .s5-mob-half { display:none; }
-/* S5 side labels — positioned relative to #s5 (outer sides of characters) */
-.char-labels { position:absolute; display:flex; flex-direction:column; gap:8px; z-index:25; top:50%; transform:translateY(-50%); }
-.char-labels-l { left:64px; align-items:flex-end; }
-.char-labels-r { right:20px; align-items:flex-start; }
-.char-chip { height:40px; width:auto; opacity:0; transform:translateY(8px); transition:opacity 0.4s ease,transform 0.4s ease,filter 0.15s ease; cursor:pointer; border-radius:100px; box-shadow:0 0 0 1.5px rgba(255,255,255,0.15); }
-.char-chip:hover { filter:brightness(1.15) drop-shadow(0 4px 12px rgba(97,97,255,0.25)); transform:scale(1.04) !important; box-shadow:0 0 0 1.5px rgba(255,255,255,0.35); }
-.char-chip:active { transform:scale(0.97) !important; filter:brightness(0.95); }
-.char-labels.show .char-chip:nth-child(1) { opacity:1; transform:none; }
-.char-labels.show .char-chip:nth-child(2) { opacity:1; transform:none; transition-delay:0.18s; }
 .pills { position:absolute; left:50%; top:28%; transform:translate(-50%,-50%); display:flex; flex-direction:column; z-index:20; width:500px; }
 .pill { max-height:0; overflow:hidden; opacity:0; border-bottom:1px solid var(--border); transition:max-height 0.5s cubic-bezier(0.4,0,0.2,1),opacity 0.4s ease; display:flex; flex-direction:row; align-items:center; gap:16px; }
 .pill:first-child { border-top:1px solid var(--border); }
@@ -456,7 +447,6 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
 
   /* S5 – Platform layers */
   #s5 { padding: 36px 16px 0; justify-content: flex-start; }
-  .char-labels { display: none; }
   .mob-chip-bar { display: none; }
   #pill5 { display: flex; }
   .layers-top { margin-bottom: 4px; }
@@ -593,14 +583,10 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
   .layers-top h2 { font-size: clamp(22px, 2vw, 32px); line-height: 1.2; margin-bottom: 4px; }
   .layers-top p { font-size: 13px; }
   /* Characters move inward (human right, agent left) */
-  .char-p.spread { transform: translateX(10px); }
-  .char-a.spread { transform: translateX(-50px); }
+  .char-p.spread { transform: translateX(-50px); }
+  .char-a.spread { transform: translateX(10px); }
   /* Layers list moves down within the scene, narrower width */
   .pills { top: 44%; width: 460px; }
-  /* Chip labels pushed to outer edges */
-  .char-labels-l { left: 8px; }
-  .char-labels-r { right: 8px; }
-  .char-chip { height: 34px; }
 }
 
 /* S5b – Desktop card layout */
@@ -880,14 +866,6 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
 </div>
 
 <div class="slide" id="s5">
-  <div class="char-labels char-labels-l" id="labelsL">
-    <img class="char-chip" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/5%20layers/Human%20chip%201.png" alt="Your team">
-    <img class="char-chip" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/5%20layers/Human%20chip%202.png" alt="Freelancers">
-  </div>
-  <div class="char-labels char-labels-r" id="labelsR">
-    <img class="char-chip" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/5%20layers/Agents%20chip%201.png" alt="monday agents">
-    <img class="char-chip" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/5%20layers/Agents%20chip%202.png" alt="Bring your own agents" onclick="openLayer(5)">
-  </div>
   <div class="layers-top" id="layersTop">
     <p class="eyebrow">AI Work Platform</p>
     <h2>Where your people and agents <br>work as one team</h2>
@@ -1312,10 +1290,6 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
           document.getElementById('s5MobLeft').classList.add('together');
           document.getElementById('s5MobRight').classList.add('together');
         }, 200);
-        setTimeout(() => {
-          document.getElementById('labelsL').classList.add('show');
-          document.getElementById('labelsR').classList.add('show');
-        }, 700);
         [0,1,2,3,4,5].forEach((idx,step) => {
           setTimeout(() => document.getElementById('pill'+idx).classList.add('open'), 500 + step*220);
         });
@@ -1333,11 +1307,11 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
     const s3bAgent = document.querySelector('.s3b-char-agent').getBoundingClientRect();
     const pBase = charP.getBoundingClientRect();
     const aBase = charA.getBoundingClientRect();
-    // charP/charA's resting transform is translateX(100px)/translateX(-100px) (see .char-p/.char-a
+    // charP/charA's resting transform is translateX(40px)/translateX(-40px) (see .char-p/.char-a
     // above); offset from there by the gap to s3b's char position so the snap lands exactly where
     // the s3b character was, instead of a fixed pose that doesn't line up across slides/viewports.
-    const dxP = 100 + (s3bHuman.left - pBase.left) / zoom;
-    const dxA = -100 + (s3bAgent.left - aBase.left) / zoom;
+    const dxP = 40 + (s3bHuman.left - pBase.left) / zoom;
+    const dxA = -40 + (s3bAgent.left - aBase.left) / zoom;
     charP.classList.add('no-t');
     charA.classList.add('no-t');
     charP.style.transform = `translateX(${dxP}px)`;
@@ -1352,10 +1326,6 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
       });
     });
     document.getElementById('layersTop').classList.add('show');
-    setTimeout(() => {
-      document.getElementById('labelsL').classList.add('show');
-      document.getElementById('labelsR').classList.add('show');
-    }, 900);
   }
 
   function enterLayersSpread() {
