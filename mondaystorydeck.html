@@ -184,6 +184,7 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
 .layers-scene { position:relative; width:100%; max-width:1200px; flex:1; display:flex; align-items:center; justify-content:center; min-height:0; overflow:hidden; gap:40px; }
 .layers-figure { height:100%; max-height:420px; width:auto; object-fit:contain; }
 .char { position:absolute; z-index:10; height:clamp(280px,62vh,480px); object-fit:contain; bottom:0; transition:transform 1.3s cubic-bezier(0.4,0,0.2,1); }
+.char.no-t { transition:none !important; }
 .char-p { left:-20px; transform:translateX(100px); filter:drop-shadow(0 16px 32px rgba(0,0,0,0.5)); }
 .char-p.spread { transform:translateX(-60px); }
 .char-a { right:-20px; left:auto; transform:translateX(-100px); filter:drop-shadow(0 16px 32px rgba(97,97,255,0.3)); }
@@ -563,6 +564,16 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
   .gap-right { display: none; }
 }
 
+/* S3b → S5 merge sequence (desktop/laptop only) */
+@media (min-width: 769px) {
+  .s3b-card { transition: opacity 0.35s ease, transform 0.35s ease; }
+  .s3b-cards.s3b-exit .s3b-card { opacity: 0; transform: translateY(-10px); pointer-events: none; }
+  .s3b-cards.s3b-exit .s3b-card:nth-child(2) { transition-delay: 0.05s; }
+  .s3b-cards.s3b-exit .s3b-card:nth-child(3) { transition-delay: 0.1s; }
+  .layers-top { opacity: 0; transform: translateY(-10px); transition: opacity 0.5s ease, transform 0.5s ease; }
+  .layers-top.show { opacity: 1; transform: translateY(0); }
+}
+
 /* S4b – Laptop adjustments (769px–1400px) */
 @media (min-width: 769px) and (max-width: 1400px) {
   .sbs-right { padding: 3% 0 5%; }
@@ -864,7 +875,7 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
   <div class="s3b-content">
     <p class="eyebrow">The Gap</p>
     <h2>What's standing<br>in their way?</h2>
-    <div class="s3b-cards">
+    <div class="s3b-cards" id="s3bCards">
       <div class="s3b-card"><div class="s3b-dot"></div><div><div class="s3b-card-title">Siloed Agents</div><div class="s3b-card-desc">AI stays personal. No shared output, no team impact.</div></div></div>
       <div class="s3b-card"><div class="s3b-dot"></div><div><div class="s3b-card-title">Lack of Context</div><div class="s3b-card-desc">Agents don't know your business. Generic answers, not real action.</div></div></div>
       <div class="s3b-card"><div class="s3b-dot"></div><div><div class="s3b-card-title">Outside the Workflow</div><div class="s3b-card-desc">AI lives in chat windows — not where the work actually happens.</div></div></div>
@@ -881,7 +892,7 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
     <img class="char-chip" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/5%20layers/Agents%20chip%201.png" alt="monday agents">
     <img class="char-chip" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/5%20layers/Agents%20chip%202.png" alt="Bring your own agents" onclick="openLayer(5)">
   </div>
-  <div class="layers-top">
+  <div class="layers-top" id="layersTop">
     <p class="eyebrow">AI Work Platform</p>
     <h2>Where your people and agents <br>work as one team</h2>
     <p>Everything your business needs to make it real.</p>
@@ -1210,7 +1221,8 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
   equalizeScredCards();
   window.addEventListener('resize', equalizeScredCards);
   let current  = 0;
-  let layersDone = false;
+  let layersConverged = false;
+  let layersSpread = false;
   let mktDone = false;
 
   function mktPlayIntro() {
@@ -1258,6 +1270,12 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
 
   function goTo(n) {
     if (n < 0 || n >= slides.length) return;
+    if (window.innerWidth > 768 && slides[current].id === 's3b' && slides[n].id === 's5') {
+      document.getElementById('s3bCards').classList.add('s3b-exit');
+    }
+    if (slides[n].id === 's3b') {
+      document.getElementById('s3bCards').classList.remove('s3b-exit');
+    }
     slides[current].classList.remove('active');
     dots[current].classList.remove('active');
     current = n;
@@ -1265,6 +1283,14 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
     dots[current].classList.add('active');
     prog.style.width = (current / (slides.length - 1) * 100) + '%';
     onSlideEnter(current);
+  }
+
+  function goForward() {
+    if (window.innerWidth > 768 && slides[current].id === 's5' && layersConverged && !layersSpread) {
+      enterLayersSpread();
+      return;
+    }
+    goTo(current + 1);
   }
 
   function onSlideEnter(n) {
@@ -1278,22 +1304,62 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
         setTimeout(() => el.classList.add('show'), parseInt(el.dataset.delay));
       });
     }
-    if (n === 5 && !layersDone) {
-      layersDone = true;
-      setTimeout(() => {
-        document.getElementById('charP').classList.add('spread');
-        document.getElementById('charA').classList.add('spread');
-        document.getElementById('s5MobLeft').classList.add('together');
-        document.getElementById('s5MobRight').classList.add('together');
-      }, 200);
-      setTimeout(() => {
-        document.getElementById('labelsL').classList.add('show');
-        document.getElementById('labelsR').classList.add('show');
-      }, 700);
-      [0,1,2,3,4,5].forEach((idx,step) => {
-        setTimeout(() => document.getElementById('pill'+idx).classList.add('open'), 500 + step*220);
-      });
+    if (n === 5 && !layersSpread) {
+      if (window.innerWidth > 768) {
+        enterLayersConverged();
+      } else {
+        layersConverged = true;
+        layersSpread = true;
+        setTimeout(() => {
+          document.getElementById('charP').classList.add('spread');
+          document.getElementById('charA').classList.add('spread');
+          document.getElementById('s5MobLeft').classList.add('together');
+          document.getElementById('s5MobRight').classList.add('together');
+        }, 200);
+        setTimeout(() => {
+          document.getElementById('labelsL').classList.add('show');
+          document.getElementById('labelsR').classList.add('show');
+        }, 700);
+        [0,1,2,3,4,5].forEach((idx,step) => {
+          setTimeout(() => document.getElementById('pill'+idx).classList.add('open'), 500 + step*220);
+        });
+      }
     }
+  }
+
+  function enterLayersConverged() {
+    if (layersConverged) return;
+    layersConverged = true;
+    const charP = document.getElementById('charP');
+    const charA = document.getElementById('charA');
+    charP.classList.add('no-t');
+    charA.classList.add('no-t');
+    charP.classList.add('spread');
+    charA.classList.add('spread');
+    void charP.offsetWidth;
+    charP.classList.remove('no-t');
+    charA.classList.remove('no-t');
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        charP.classList.remove('spread');
+        charA.classList.remove('spread');
+      });
+    });
+    document.getElementById('layersTop').classList.add('show');
+    setTimeout(() => {
+      document.getElementById('labelsL').classList.add('show');
+      document.getElementById('labelsR').classList.add('show');
+    }, 900);
+  }
+
+  function enterLayersSpread() {
+    if (layersSpread) return;
+    layersSpread = true;
+    document.getElementById('charP').classList.add('spread');
+    document.getElementById('charA').classList.add('spread');
+    [0,1,2,3,4,5].forEach((idx,step) => {
+      setTimeout(() => document.getElementById('pill'+idx).classList.add('open'), step*180);
+    });
   }
 
   let wLock = false;
@@ -1301,12 +1367,12 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
     if (wLock) return;
     wLock = true;
     setTimeout(() => wLock = false, 900);
-    if (e.deltaY > 0) goTo(current + 1);
+    if (e.deltaY > 0) goForward();
     else goTo(current - 1);
   }, {passive:true});
 
   document.addEventListener('keydown', e => {
-    if (e.key === 'ArrowDown' || e.key === 'ArrowRight') goTo(current + 1);
+    if (e.key === 'ArrowDown' || e.key === 'ArrowRight') goForward();
     if (e.key === 'ArrowUp'   || e.key === 'ArrowLeft')  goTo(current - 1);
   });
 
