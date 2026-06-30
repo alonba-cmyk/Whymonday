@@ -250,6 +250,62 @@ html, body { width:100%; font-family:'Poppins',sans-serif; background:#0a0a0f; c
 .v11-grid .avc:nth-child(5) { grid-column:span 4; }
 .v11-grid .avc:nth-child(6) { grid-column:span 5; }
 
+/* ═══════════════════════════════════════
+   VARIANT 12 — Cinematic full-bleed video
+═══════════════════════════════════════ */
+.v12-video-bg { position:absolute; inset:0; z-index:0; }
+.v12-video-bg video { width:100%; height:100%; object-fit:cover; }
+.v12-overlay { position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.1) 38%, rgba(0,0,0,0.1) 55%, rgba(0,0,0,0.88) 100%); }
+.v12-content { position:relative; z-index:1; width:100%; max-width:1200px; height:100%; display:flex; flex-direction:column; justify-content:space-between; padding:96px 48px 56px; }
+.v12-headline { font-size:clamp(28px,4vw,56px); font-weight:700; line-height:1.15; color:#fff; max-width:620px; }
+.v12-bottom { display:flex; align-items:flex-end; justify-content:space-between; gap:24px; flex-wrap:wrap; }
+.v12-person { display:flex; align-items:center; gap:14px; }
+.v12-avatar { width:56px; height:56px; border-radius:50%; overflow:hidden; flex-shrink:0; box-shadow:0 0 0 2px rgba(255,255,255,0.25); }
+.v12-avatar img { width:100%; height:100%; object-fit:cover; }
+.v12-person-name { font-size:16px; font-weight:600; color:#fff; }
+.v12-person-role { font-size:12px; color:rgba(255,255,255,0.6); margin-top:2px; }
+.v12-stat { text-align:right; }
+.v12-stat-num { font-size:clamp(32px,4vw,52px); font-weight:800; color:#fff; line-height:1; }
+.v12-stat-label { font-size:11px; color:rgba(255,255,255,0.55); text-transform:uppercase; letter-spacing:1.5px; margin-top:2px; }
+
+/* ═══════════════════════════════════════
+   VARIANT 13 — Story-card strip
+═══════════════════════════════════════ */
+.v13-wrap { max-width:1000px; width:100%; position:relative; z-index:1; }
+.v13-head { text-align:center; margin-bottom:32px; }
+.v13-headline { font-size:clamp(24px,3vw,44px); font-weight:700; line-height:1.2; margin-bottom:10px; }
+.v13-sub { font-size:clamp(13px,1.3vw,17px); color:rgba(255,255,255,0.5); }
+.v13-strip { display:flex; gap:16px; justify-content:center; }
+.v13-card { position:relative; width:240px; aspect-ratio:3/4; border-radius:20px; overflow:hidden; flex-shrink:0; background:#0d0d1a; }
+.v13-card video { width:100%; height:100%; object-fit:cover; }
+.v13-card-overlay { position:absolute; inset:0; background:linear-gradient(180deg, transparent 45%, rgba(0,0,0,0.9) 100%); pointer-events:none; }
+.v13-card-meta { position:absolute; left:0; right:0; bottom:0; padding:16px; }
+.v13-card-dept { font-size:9px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:#fff; opacity:0.7; margin-bottom:4px; }
+.v13-card-name { font-size:15px; font-weight:700; color:#fff; line-height:1.25; }
+.v13-card-creator { font-size:11px; color:rgba(255,255,255,0.65); margin-top:6px; display:flex; align-items:center; gap:6px; }
+.v13-card-avatar { width:20px; height:20px; border-radius:50%; overflow:hidden; flex-shrink:0; }
+.v13-card-avatar img { width:100%; height:100%; object-fit:cover; }
+
+/* ═══════════════════════════════════════
+   VARIANT 14 — Challenge → Result proof slide
+═══════════════════════════════════════ */
+.v14-wrap { max-width:1100px; width:100%; position:relative; z-index:1; display:grid; grid-template-columns:1fr 1.3fr; gap:clamp(40px,6vw,80px); align-items:center; }
+.v14-photo { width:100%; aspect-ratio:1/1; border-radius:24px; overflow:hidden; position:relative; }
+.v14-photo img { width:100%; height:100%; object-fit:cover; }
+.v14-photo-badge { position:absolute; left:16px; bottom:16px; background:rgba(0,0,0,0.6); backdrop-filter:blur(8px); border-radius:100px; padding:6px 14px; font-size:11px; font-weight:600; color:#fff; }
+.v14-quote-label { font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--purple); margin-bottom:10px; }
+.v14-quote { font-size:clamp(18px,2.2vw,28px); font-weight:600; line-height:1.4; color:#fff; margin-bottom:24px; }
+.v14-result-row { display:flex; align-items:center; gap:16px; padding:18px 20px; background:rgba(97,97,255,0.08); border:1px solid rgba(97,97,255,0.25); border-radius:14px; margin-bottom:28px; }
+.v14-result-num { font-size:clamp(28px,3vw,40px); font-weight:800; color:var(--purple); white-space:nowrap; }
+.v14-result-desc { font-size:13px; color:rgba(255,255,255,0.6); line-height:1.5; }
+.v14-more-label { font-size:10px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--dim); margin-bottom:12px; }
+.v14-more { display:flex; gap:12px; }
+.v14-more-card { flex:1; display:flex; align-items:center; gap:10px; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:10px 12px; }
+.v14-more-avatar { width:32px; height:32px; border-radius:50%; overflow:hidden; flex-shrink:0; }
+.v14-more-avatar img { width:100%; height:100%; object-fit:cover; }
+.v14-more-name { font-size:12px; font-weight:600; color:#fff; }
+.v14-more-dept { font-size:10px; color:var(--dim); }
+
 @media (max-width: 768px) {
   .variant { padding:70px 20px 40px; min-height:auto; }
   .v2-grid { grid-template-columns:1fr 1fr; }
@@ -269,6 +325,14 @@ html, body { width:100%; font-family:'Poppins',sans-serif; background:#0a0a0f; c
   .v10-top { grid-template-columns:1fr; }
   .v10-row { grid-template-columns:1fr 1fr; }
   .v11-grid .avc:nth-child(n) { grid-column:span 6; }
+  .v12-content { padding:80px 20px 36px; }
+  .v12-bottom { flex-direction:column; align-items:flex-start; gap:20px; }
+  .v12-stat { text-align:left; }
+  .v13-strip { flex-direction:column; align-items:center; }
+  .v13-card { width:100%; max-width:320px; aspect-ratio:16/10; }
+  .v14-wrap { grid-template-columns:1fr; }
+  .v14-photo { max-width:240px; margin:0 auto; }
+  .v14-more { flex-direction:column; }
 }
 </style>
 </head>
@@ -884,6 +948,138 @@ html, body { width:100%; font-family:'Poppins',sans-serif; background:#0a0a0f; c
         </div>
       </div>
 
+    </div>
+  </div>
+</div>
+
+<!-- ═══ VARIANT 12 — Cinematic full-bleed video ═══ -->
+<div class="variant" style="background:#000; padding:0;">
+  <div class="label-bar" style="position:absolute;top:0;left:0;right:0;z-index:5;">
+    <span class="vnum">Variant 12</span>
+    <span class="vdesc">Cinematic full-bleed video — one builder's story fills the whole frame.</span>
+  </div>
+  <div class="v12-video-bg">
+    <video src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Video/Moti.mp4" muted loop playsinline autoplay preload="metadata"></video>
+    <div class="v12-overlay"></div>
+  </div>
+  <div class="v12-content">
+    <div>
+      <p class="eyebrow" style="color:#fff;">Monday on Monday</p>
+      <h2 class="v12-headline">5,117 agents. One week.<br>Built by us, for us.</h2>
+    </div>
+    <div class="v12-bottom">
+      <div class="v12-person">
+        <div class="v12-avatar">
+          <img src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/ran-levgoren.png" alt="Ran Levgoren">
+        </div>
+        <div>
+          <div class="v12-person-name">Ran Levgoren</div>
+          <div class="v12-person-role">Sales · Built Moti, the Silence Disruptor Agent</div>
+        </div>
+      </div>
+      <div class="v12-stat">
+        <div class="v12-stat-num">5,117</div>
+        <div class="v12-stat-label">agents · 8 departments · 1 week</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ VARIANT 13 — Story-card strip ═══ -->
+<div class="variant" style="background:#03030a;">
+  <div class="label-bar" style="position:absolute;top:0;left:0;right:0;">
+    <span class="vnum">Variant 13</span>
+    <span class="vdesc">Story-card strip — vertical, video-first cards, like a builder highlight reel.</span>
+  </div>
+  <div class="glow"></div>
+  <div class="v13-wrap">
+    <div class="v13-head">
+      <p class="eyebrow">Monday on Monday</p>
+      <h2 class="v13-headline">5,117 agents. These are 3 of the people who built them.</h2>
+      <p class="v13-sub">Built in one week, across 8 departments — to fix what frustrated them most.</p>
+    </div>
+    <div class="v13-strip">
+
+      <div class="v13-card">
+        <video src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Video/Moti.mp4" muted loop playsinline autoplay preload="metadata"></video>
+        <div class="v13-card-overlay"></div>
+        <div class="v13-card-meta">
+          <div class="v13-card-dept">Sales</div>
+          <div class="v13-card-name">Moti — The Silence Disruptor</div>
+          <div class="v13-card-creator">
+            <div class="v13-card-avatar"><img src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/ran-levgoren.png" alt="Ran Levgoren"></div>
+            Ran Levgoren
+          </div>
+        </div>
+      </div>
+
+      <div class="v13-card">
+        <video src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Video/Petro.mp4" muted loop playsinline autoplay preload="metadata"></video>
+        <div class="v13-card-overlay"></div>
+        <div class="v13-card-meta">
+          <div class="v13-card-dept">Engineering</div>
+          <div class="v13-card-name">Petro — Feature Parity Agent</div>
+          <div class="v13-card-creator">
+            <div class="v13-card-avatar"><img src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/amit-frishberg.png" alt="Amit Frishberg"></div>
+            Amit Frishberg
+          </div>
+        </div>
+      </div>
+
+      <div class="v13-card">
+        <video src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Video/Osher_shula_marketing.mp4" muted loop playsinline autoplay preload="metadata"></video>
+        <div class="v13-card-overlay"></div>
+        <div class="v13-card-meta">
+          <div class="v13-card-dept">Marketing</div>
+          <div class="v13-card-name">Riki Shula — Data to Content System</div>
+          <div class="v13-card-creator">
+            <div class="v13-card-avatar"><img src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/osher-mayor.png" alt="Osher Mayor"></div>
+            Osher Mayor
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ═══ VARIANT 14 — Challenge → Result proof slide ═══ -->
+<div class="variant" style="background:#000;">
+  <div class="label-bar" style="position:absolute;top:0;left:0;right:0;">
+    <span class="vnum">Variant 14</span>
+    <span class="vdesc">Challenge → Result — a real before/after proof point, not just a gallery.</span>
+  </div>
+  <div class="glow"></div>
+  <div class="v14-wrap">
+    <div class="v14-photo">
+      <img src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/osher-mayor.png" alt="Osher Mayor">
+      <div class="v14-photo-badge">Osher Mayor · Lifecycle Marketing</div>
+    </div>
+    <div class="v14-right">
+      <p class="eyebrow">Monday on Monday</p>
+      <div class="v14-quote-label">The challenge</div>
+      <p class="v14-quote">"Turning data insights into ready-to-ship campaign content required heavy manual coordination."</p>
+      <div class="v14-result-row">
+        <div class="v14-result-num">4x</div>
+        <div class="v14-result-desc">faster time to test. More campaigns running means more conversion opportunities.</div>
+      </div>
+      <div class="v14-more-label">More builders, more stories</div>
+      <div class="v14-more">
+        <div class="v14-more-card">
+          <div class="v14-more-avatar"><img src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/ran-levgoren.png" alt="Ran Levgoren"></div>
+          <div>
+            <div class="v14-more-name">Ran Levgoren</div>
+            <div class="v14-more-dept">Sales · Moti</div>
+          </div>
+        </div>
+        <div class="v14-more-card">
+          <div class="v14-more-avatar"><img src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/amit-frishberg.png" alt="Amit Frishberg"></div>
+          <div>
+            <div class="v14-more-name">Amit Frishberg</div>
+            <div class="v14-more-dept">Engineering · Petro</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
