@@ -341,7 +341,7 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
 .cstory { display:flex; width:100%; height:100%; }
 .cstory-left { flex:0 0 50%; display:flex; flex-direction:column; justify-content:center; padding:64px 52px 64px 110px; }
 .cstory-logo { height:28px; margin-bottom:36px; }
-.cstory-qmark { font-size:80px; line-height:0.65; color:#6161ff; font-family:Georgia,serif; margin-bottom:24px; }
+.cstory-qmark { display:block; width:48px; height:auto; margin-bottom:24px; }
 .cstory-quote { font-size:clamp(16px,1.5vw,22px); font-weight:400; line-height:1.65; color:rgba(255,255,255,0.85); margin-bottom:32px; }
 .cstory-quote em { color:inherit; font-style:normal; font-weight:600; }
 .cstory-person { display:flex; align-items:center; gap:14px; }
@@ -522,7 +522,7 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
   .cstory-right::before { background: linear-gradient(to bottom, transparent 50%, #09090f 100%); }
   .cstory-logo { position: absolute; top: 20px; left: 20px; z-index: 2; margin-bottom: 0; }
   .cstory-left { flex: 1; padding: 24px 28px 32px; justify-content: center; }
-  .cstory-qmark { font-size: 56px; line-height: 0.4; margin-top: 44px; margin-bottom: 4px; }
+  .cstory-qmark { width: 28px; margin-top: 40px; margin-bottom: 12px; }
   .cstory-quote { font-size: 16px; margin-bottom: 20px; }
   .cstory-av { display: none; }
 
@@ -1047,7 +1047,10 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
         <circle cx="6" cy="14" r="5" fill="#6161ff"/>
         <text x="16" y="21" font-family="Poppins,sans-serif" font-weight="700" font-size="17" fill="white" letter-spacing="-0.3">arcaise</text>
       </svg>
-      <div class="cstory-qmark">"</div>
+      <svg class="cstory-qmark" viewBox="0 0 26 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="0" y="0" width="9" height="22" rx="4.5" fill="#6161ff"/>
+        <rect x="14" y="0" width="9" height="22" rx="4.5" fill="#6161ff"/>
+      </svg>
       <p class="cstory-quote">monday brought <em>AI to our data</em>, and that changed everything. Our planning cycles used to eat entire weeks, <em>now it surfaces automatically.</em></p>
       <div class="cstory-person">
         <div class="cstory-av">AB</div>
