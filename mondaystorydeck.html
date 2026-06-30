@@ -1328,17 +1328,27 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
     layersConverged = true;
     const charP = document.getElementById('charP');
     const charA = document.getElementById('charA');
+    const zoom = parseFloat(document.documentElement.style.zoom) || 1;
+    const s3bHuman = document.querySelector('.s3b-char-human').getBoundingClientRect();
+    const s3bAgent = document.querySelector('.s3b-char-agent').getBoundingClientRect();
+    const pBase = charP.getBoundingClientRect();
+    const aBase = charA.getBoundingClientRect();
+    // charP/charA's resting transform is translateX(100px)/translateX(-100px) (see .char-p/.char-a
+    // above); offset from there by the gap to s3b's char position so the snap lands exactly where
+    // the s3b character was, instead of a fixed pose that doesn't line up across slides/viewports.
+    const dxP = 100 + (s3bHuman.left - pBase.left) / zoom;
+    const dxA = -100 + (s3bAgent.left - aBase.left) / zoom;
     charP.classList.add('no-t');
     charA.classList.add('no-t');
-    charP.classList.add('spread');
-    charA.classList.add('spread');
+    charP.style.transform = `translateX(${dxP}px)`;
+    charA.style.transform = `translateX(${dxA}px)`;
     void charP.offsetWidth;
     charP.classList.remove('no-t');
     charA.classList.remove('no-t');
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
-        charP.classList.remove('spread');
-        charA.classList.remove('spread');
+        charP.style.transform = '';
+        charA.style.transform = '';
       });
     });
     document.getElementById('layersTop').classList.add('show');
