@@ -7,328 +7,382 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-/* ── tokens ── */
 :root {
-  --purple: #6161ff;
-  --purple-lo: rgba(97,97,255,0.10);
-  --purple-mid: rgba(97,97,255,0.28);
-  --bg: #03030a;
-  --bg-el: #0a0a15;
-  --border: rgba(255,255,255,0.07);
-  --border-hi: rgba(255,255,255,0.12);
-  --dim: rgba(255,255,255,0.48);
-  --dimmer: rgba(255,255,255,0.26);
+  --purple:     #6161ff;
+  --purple-lo:  rgba(97,97,255,0.10);
+  --purple-mid: rgba(97,97,255,0.26);
+  --bg:         #03030a;
+  --bg-el:      #0a0a15;
+  --border:     rgba(255,255,255,0.07);
+  --border-hi:  rgba(255,255,255,0.13);
+  --dim:        rgba(255,255,255,0.50);
+  --dimmer:     rgba(255,255,255,0.28);
 }
-*,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+*, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
 body { font-family:'Poppins',sans-serif; background:#000; color:#fff; }
 
 /* ── shared chrome ── */
 .variant { position:relative; width:100%; overflow:hidden; }
-.label-bar { position:absolute; top:0; left:0; right:0; z-index:30; padding:12px 18px; display:flex; align-items:center; gap:10px; background:rgba(0,0,0,0.52); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); }
+.label-bar { position:absolute; top:0; left:0; right:0; z-index:30; padding:11px 18px; display:flex; align-items:center; gap:10px; background:rgba(0,0,0,0.55); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); }
 .vnum { font-size:10px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; background:var(--purple); color:#fff; padding:3px 10px; border-radius:100px; }
-.vdesc { font-size:11px; color:rgba(255,255,255,0.5); }
-.eyebrow { font-size:10px; font-weight:600; letter-spacing:4px; text-transform:uppercase; color:var(--purple); display:block; margin-bottom:10px; }
+.vdesc { font-size:11px; color:rgba(255,255,255,0.42); }
+.eyebrow { font-size:10px; font-weight:700; letter-spacing:4px; text-transform:uppercase; color:var(--purple); display:block; margin-bottom:16px; }
+.info-lbl { font-size:9px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; color:var(--purple); margin-bottom:7px; }
 
-/* ── shared: chyron (on-video overlay: builder avatar + dept + agent name + built-by) ── */
-.chyron { position:absolute; bottom:0; left:0; right:0; padding:56px 22px 20px; background:linear-gradient(transparent 0%, rgba(0,0,0,0.88) 55%); display:flex; align-items:center; gap:14px; pointer-events:none; z-index:2; }
-.ch-avatar { width:42px; height:42px; border-radius:50%; object-fit:cover; flex-shrink:0; border:2px solid rgba(255,255,255,0.25); }
-.ch-dept { font-size:9px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; color:var(--purple); margin-bottom:4px; }
-.ch-agent { font-size:15px; font-weight:700; color:#fff; line-height:1.2; }
-.ch-by { font-size:11px; color:rgba(255,255,255,0.52); margin-top:3px; }
-
-/* ── shared: nav arrow ── */
-.arr { width:44px; height:44px; border-radius:50%; border:1px solid var(--border-hi); background:var(--bg-el); color:#fff; font-size:18px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background 0.2s, border-color 0.2s; flex-shrink:0; }
+/* nav */
+.arr { width:44px; height:44px; border-radius:50%; border:1px solid var(--border-hi); background:var(--bg-el); color:#fff; font-size:18px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background .2s,border-color .2s; flex-shrink:0; }
 .arr:hover { background:var(--purple-lo); border-color:var(--purple); }
-
-/* ── shared: dots ── */
 .dots { display:flex; gap:7px; align-items:center; }
-.dot { width:6px; height:6px; border-radius:50%; background:rgba(255,255,255,0.22); border:none; padding:0; cursor:pointer; transition:background 0.2s, transform 0.2s; }
+.dot { width:6px; height:6px; border-radius:50%; background:rgba(255,255,255,0.22); border:none; padding:0; cursor:pointer; transition:background .2s,transform .2s; }
 .dot.active { background:#fff; transform:scale(1.4); }
-
-/* ── shared: info label ── */
-.info-lbl { font-size:9px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; color:var(--purple); margin-bottom:9px; }
-
-/* ── fade transition ── */
 .fading { opacity:0 !important; }
 
-
-/* ══════════════════════════════════════════════════════
-   VARIANT 1 — SPLIT LAYOUT
-   Left 44%: headline + challenge + outcome + builder + dots
-   Right 56%: full-height 16:9 video with chyron overlay
-   height: 100vh
-══════════════════════════════════════════════════════ */
-.s1-layout { display:grid; grid-template-columns:44% 56%; height:100vh; background:var(--bg); overflow:hidden; }
-
-/* left panel */
-.s1-left { display:flex; flex-direction:column; justify-content:center; padding:80px 48px 48px; overflow-y:auto; position:relative; }
-.s1-left::after { content:''; position:absolute; right:0; top:0; bottom:0; width:1px; background:var(--border); }
-.s1-headline { font-size:clamp(18px,1.8vw,28px); font-weight:700; line-height:1.3; margin-bottom:32px; }
-.s1-headline em { color:var(--purple); font-style:normal; }
-
-.s1-challenge { margin-bottom:16px; }
-.s1-challenge-text { font-size:13px; color:var(--dim); line-height:1.8; }
-
-.s1-outcome { background:var(--purple-lo); border:1px solid var(--purple-mid); border-radius:14px; padding:18px 20px; margin-bottom:28px; }
-.s1-outcome-text { font-size:13px; font-weight:600; color:#fff; line-height:1.65; }
-
-.s1-builder { display:flex; align-items:center; gap:12px; padding:16px 0; border-top:1px solid var(--border); transition:opacity 0.3s; }
-.s1-b-avatar { width:44px; height:44px; border-radius:50%; overflow:hidden; flex-shrink:0; border:2px solid var(--border-hi); }
-.s1-b-avatar img { width:100%; height:100%; object-fit:cover; }
-.s1-b-name { font-size:13px; font-weight:700; color:#fff; }
-.s1-b-meta { font-size:11px; color:var(--dim); margin-top:2px; }
-.s1-b-dept { font-size:9px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--purple); margin-top:4px; }
-
-.s1-nav { display:flex; align-items:center; gap:12px; margin-top:28px; }
-
-/* right panel */
-.s1-right { position:relative; overflow:hidden; background:#000; }
-.s1-video-wrap { position:absolute; inset:0; transition:opacity 0.26s ease; }
-.s1-video-wrap video { width:100%; height:100%; object-fit:cover; }
+/* ── on-video agent chyron ── */
+.chyron { position:absolute; bottom:0; left:0; right:0; padding:60px 26px 24px; background:linear-gradient(transparent, rgba(0,0,0,0.9) 60%); display:flex; align-items:center; gap:15px; pointer-events:none; z-index:2; }
+.ch-av { width:46px; height:46px; border-radius:50%; object-fit:cover; flex-shrink:0; border:2px solid rgba(255,255,255,0.22); }
+.ch-name { font-size:18px; font-weight:800; color:#fff; line-height:1.15; }
+.ch-desc { font-size:11px; color:rgba(255,255,255,0.55); margin-top:4px; letter-spacing:0.2px; }
 
 
-/* ══════════════════════════════════════════════════════
-   VARIANT 2 — REEL CARDS
-   Full viewport: header row + 4 portrait video cards side by side
-   Each card: 3:4 video with reel chyron (builder avatar + name + role + agent)
-   Detail panel below active card
-══════════════════════════════════════════════════════ */
-.s2-page { height:100vh; background:var(--bg); display:flex; flex-direction:column; padding-top:46px; overflow:hidden; }
-.s2-header { flex-shrink:0; padding:22px 36px 18px; }
-.s2-headline { font-size:clamp(16px,1.6vw,24px); font-weight:700; line-height:1.3; }
-.s2-headline em { color:var(--purple); font-style:normal; }
+/* ════════════════════════════════════════════════════════
+   V1 — ANCHOR SPLIT  (50 / 50)
+   Left: pure editorial. Right: video + bottom bar (builder | stat)
+════════════════════════════════════════════════════════ */
+.v1-layout { display:grid; grid-template-columns:50% 50%; height:100vh; background:var(--bg); }
 
-.s2-cards-row { flex-shrink:0; display:flex; gap:12px; padding:0 36px; height:calc(65vh - 80px); }
-.s2-card { position:relative; border-radius:16px; overflow:hidden; cursor:pointer; flex:1; background:#000; border:2px solid var(--border); transition:border-color 0.25s, box-shadow 0.25s; }
-.s2-card.active { border-color:var(--purple); box-shadow:0 0 0 4px rgba(97,97,255,0.18); }
-.s2-card video { width:100%; height:100%; object-fit:cover; display:block; }
+.v1-left { display:flex; flex-direction:column; justify-content:center; padding:86px 60px 56px; border-right:1px solid var(--border); }
+.v1-headline { font-size:clamp(26px,2.7vw,42px); font-weight:800; line-height:1.17; margin-bottom:20px; }
+.v1-headline em { color:var(--purple); font-style:normal; }
+.v1-sub { font-size:15px; color:var(--dim); line-height:1.74; max-width:420px; }
+.v1-nav { display:flex; align-items:center; gap:12px; margin-top:48px; }
 
-/* reel chyron */
-.s2-chyron { position:absolute; bottom:0; left:0; right:0; padding:44px 14px 14px; background:linear-gradient(transparent 0%, rgba(0,0,0,0.88) 50%); pointer-events:none; z-index:2; }
-.s2-ch-row { display:flex; align-items:center; gap:9px; }
-.s2-ch-avatar { width:30px; height:30px; border-radius:50%; object-fit:cover; flex-shrink:0; border:1.5px solid rgba(255,255,255,0.2); }
-.s2-ch-name { font-size:12px; font-weight:700; color:#fff; }
-.s2-ch-role { font-size:10px; color:rgba(255,255,255,0.5); margin-top:1px; }
-.s2-ch-agent { font-size:10px; color:var(--purple); font-weight:600; margin-top:5px; }
-
-/* detail strip */
-.s2-detail { flex:1; display:grid; grid-template-columns:1fr 1px 1fr; gap:0; margin:12px 36px 12px; background:var(--bg-el); border:1px solid var(--border); border-radius:14px; overflow:hidden; min-height:0; }
-.s2-d-sep { background:var(--border); }
-.s2-d-col { padding:18px 22px; overflow-y:auto; }
-.s2-d-text { font-size:12px; color:var(--dim); line-height:1.78; }
-.s2-d-outcome { font-size:13px; font-weight:600; color:#fff; line-height:1.65; }
+.v1-right { display:flex; flex-direction:column; }
+.v1-vwrap { position:relative; flex:1; overflow:hidden; background:#000; transition:opacity .26s; }
+.v1-vwrap video { width:100%; height:100%; object-fit:cover; display:block; }
+.v1-bar { display:grid; grid-template-columns:1fr 1fr; flex-shrink:0; border-top:1px solid var(--border); }
+.v1-builder { display:flex; align-items:center; gap:13px; padding:22px 28px; border-right:1px solid var(--border); transition:opacity .26s; }
+.v1-b-av { width:44px; height:44px; border-radius:50%; overflow:hidden; flex-shrink:0; border:2px solid var(--border-hi); }
+.v1-b-av img { width:100%; height:100%; object-fit:cover; }
+.v1-b-name { font-size:13px; font-weight:700; color:#fff; }
+.v1-b-meta { font-size:11px; color:var(--dim); margin-top:2px; }
+.v1-outcome { padding:22px 28px; background:var(--purple-lo); display:flex; flex-direction:column; justify-content:center; transition:opacity .26s; }
+.v1-stat { font-size:32px; font-weight:800; color:var(--purple); line-height:1; margin-bottom:6px; }
+.v1-stat-lbl { font-size:12px; color:var(--dim); line-height:1.55; }
 
 
-/* ══════════════════════════════════════════════════════
-   VARIANT 3 — CINEMA CARD
-   Centered, max 960px. Video full-width with chyron.
-   3-col body: builder | challenge | outcome.
-   Nav arrows + dots below.
-══════════════════════════════════════════════════════ */
-.s3-page { min-height:100vh; background:var(--bg); display:flex; flex-direction:column; align-items:center; padding:80px 32px 60px; }
-.s3-header { width:100%; max-width:960px; text-align:center; margin-bottom:28px; }
-.s3-headline { font-size:clamp(20px,2.2vw,34px); font-weight:700; line-height:1.28; }
-.s3-headline em { color:var(--purple); font-style:normal; }
+/* ════════════════════════════════════════════════════════
+   V2 — STAGE RIGHT  (34 / 66)
+   Narrow left pillar. Video dominates. Tight footer strip.
+════════════════════════════════════════════════════════ */
+.v2-layout { display:grid; grid-template-columns:34% 66%; height:100vh; background:var(--bg); }
 
-.s3-card { width:100%; max-width:960px; background:var(--bg-el); border:1px solid var(--border-hi); border-radius:20px; overflow:hidden; }
-.s3-video-wrap { position:relative; aspect-ratio:16/9; background:#08080f; transition:opacity 0.26s ease; }
-.s3-video-wrap video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+.v2-left { display:flex; flex-direction:column; justify-content:center; padding:86px 38px 52px; border-right:1px solid var(--border); }
+.v2-headline { font-size:clamp(20px,2vw,30px); font-weight:800; line-height:1.22; margin-bottom:16px; }
+.v2-headline em { color:var(--purple); font-style:normal; }
+.v2-sub { font-size:13px; color:var(--dim); line-height:1.72; }
+.v2-nav { display:flex; align-items:center; gap:10px; margin-top:40px; }
 
-.s3-card-body { display:grid; grid-template-columns:200px 1px 1fr 1px 1fr; min-height:180px; }
-.s3-sep { background:var(--border); }
-
-.s3-builder-col { padding:26px 22px; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:10px; }
-.s3-b-avatar { width:58px; height:58px; border-radius:50%; overflow:hidden; flex-shrink:0; border:2.5px solid var(--border-hi); }
-.s3-b-avatar img { width:100%; height:100%; object-fit:cover; }
-.s3-b-name { font-size:13px; font-weight:700; color:#fff; line-height:1.25; }
-.s3-b-meta { font-size:10px; color:var(--dim); margin-top:2px; }
-.s3-b-dept { display:inline-block; margin-top:6px; font-size:9px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--purple); background:var(--purple-lo); border:1px solid var(--purple-mid); border-radius:100px; padding:2px 10px; }
-
-.s3-usecase-col { padding:26px 24px; display:flex; flex-direction:column; justify-content:center; }
-.s3-usecase-text { font-size:13px; color:var(--dim); line-height:1.78; }
-
-.s3-outcome-col { padding:26px 24px; display:flex; flex-direction:column; justify-content:center; background:var(--purple-lo); }
-.s3-outcome-text { font-size:14px; font-weight:600; color:#fff; line-height:1.65; }
-
-.s3-nav { display:flex; align-items:center; gap:18px; margin-top:22px; }
+.v2-right { display:flex; flex-direction:column; }
+.v2-vwrap { position:relative; flex:1; overflow:hidden; background:#000; transition:opacity .26s; }
+.v2-vwrap video { width:100%; height:100%; object-fit:cover; display:block; }
+.v2-footer { display:flex; align-items:stretch; flex-shrink:0; border-top:1px solid var(--border); }
+.v2-builder { display:flex; align-items:center; gap:12px; padding:18px 26px; flex-shrink:0; transition:opacity .26s; }
+.v2-b-av { width:40px; height:40px; border-radius:50%; overflow:hidden; flex-shrink:0; border:2px solid var(--border-hi); }
+.v2-b-av img { width:100%; height:100%; object-fit:cover; }
+.v2-b-name { font-size:12px; font-weight:700; color:#fff; }
+.v2-b-meta { font-size:10px; color:var(--dim); margin-top:2px; }
+.v2-vsep { width:1px; background:var(--border); flex-shrink:0; }
+.v2-outcome { flex:1; display:flex; align-items:center; gap:18px; padding:18px 28px; background:var(--purple-lo); transition:opacity .26s; }
+.v2-stat { font-size:28px; font-weight:800; color:var(--purple); line-height:1; flex-shrink:0; }
+.v2-stat-lbl { font-size:12px; color:var(--dim); line-height:1.55; }
 
 
-/* ══════════════════════════════════════════════════════
-   MOBILE  (≤ 768px)
-══════════════════════════════════════════════════════ */
-@media (max-width: 768px) {
-  .variant { min-height:unset; }
+/* ════════════════════════════════════════════════════════
+   V3 — LEFT REVEAL  (46 / 54)
+   Outcome stat featured large on the left. Builder on right.
+════════════════════════════════════════════════════════ */
+.v3-layout { display:grid; grid-template-columns:46% 54%; height:100vh; background:var(--bg); }
 
-  /* V1 Split → stacked */
-  .s1-layout { grid-template-columns:1fr; height:auto; }
-  .s1-left { order:2; padding:24px 18px 48px; overflow-y:visible; }
-  .s1-left::after { display:none; }
-  .s1-right { order:1; height:56vw; }
-  .s1-video-wrap { position:relative; height:100%; }
-  .s1-nav { justify-content:center; }
+.v3-left { display:flex; flex-direction:column; justify-content:center; padding:86px 54px 52px; border-right:1px solid var(--border); }
+.v3-headline { font-size:clamp(22px,2.2vw,34px); font-weight:800; line-height:1.2; margin-bottom:16px; }
+.v3-headline em { color:var(--purple); font-style:normal; }
+.v3-sub { font-size:14px; color:var(--dim); line-height:1.72; }
+.v3-stat-block { margin-top:36px; padding:28px 30px; border:1px solid var(--border); border-left:3px solid var(--purple); border-radius:14px; background:var(--bg-el); transition:opacity .26s; }
+.v3-stat-num { font-size:52px; font-weight:800; color:var(--purple); line-height:1; }
+.v3-stat-lbl { font-size:13px; color:var(--dim); margin-top:9px; line-height:1.6; }
+.v3-nav { display:flex; align-items:center; gap:12px; margin-top:32px; }
 
-  /* V2 Reel → scrollable column of cards */
-  .s2-page { height:auto; overflow:visible; }
-  .s2-header { padding:68px 18px 14px; }
-  .s2-cards-row { flex-direction:column; height:auto; padding:0 14px; gap:10px; }
-  .s2-card { height:72vw; flex:none; }
-  .s2-detail { margin:10px 14px; grid-template-columns:1fr; }
-  .s2-d-sep { display:none; }
+.v3-right { display:flex; flex-direction:column; }
+.v3-vwrap { position:relative; flex:1; overflow:hidden; background:#000; transition:opacity .26s; }
+.v3-vwrap video { width:100%; height:100%; object-fit:cover; display:block; }
+.v3-builder { display:flex; align-items:center; gap:13px; padding:22px 28px; flex-shrink:0; border-top:1px solid var(--border); transition:opacity .26s; }
+.v3-b-av { width:46px; height:46px; border-radius:50%; overflow:hidden; flex-shrink:0; border:2px solid var(--border-hi); }
+.v3-b-av img { width:100%; height:100%; object-fit:cover; }
+.v3-b-name { font-size:13px; font-weight:700; color:#fff; }
+.v3-b-meta { font-size:11px; color:var(--dim); margin-top:2px; }
+.v3-b-dept { display:inline-block; margin-top:5px; font-size:9px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--purple); background:var(--purple-lo); border:1px solid var(--purple-mid); border-radius:100px; padding:2px 9px; }
 
-  /* V3 Cinema → stacked */
-  .s3-page { padding:68px 14px 48px; }
-  .s3-header { text-align:left; }
-  .s3-card-body { grid-template-columns:1fr; }
-  .s3-sep { display:none; }
-  .s3-builder-col { flex-direction:row; align-items:center; justify-content:flex-start; text-align:left; border-bottom:1px solid var(--border); }
-  .s3-usecase-col { border-bottom:1px solid var(--border); }
-  .s3-nav { justify-content:center; }
+
+/* ════════════════════════════════════════════════════════
+   V4 — CONTAINED CARD  (42 / 58)
+   Left: editorial. Right: floating card with 16:9 video +
+   bottom panel (builder | stat) inside a rounded card.
+════════════════════════════════════════════════════════ */
+.v4-layout { display:grid; grid-template-columns:42% 58%; height:100vh; background:var(--bg); }
+
+.v4-left { display:flex; flex-direction:column; justify-content:center; padding:86px 58px 56px; border-right:1px solid var(--border); }
+.v4-headline { font-size:clamp(26px,2.7vw,42px); font-weight:800; line-height:1.17; margin-bottom:20px; }
+.v4-headline em { color:var(--purple); font-style:normal; }
+.v4-sub { font-size:15px; color:var(--dim); line-height:1.74; max-width:420px; }
+.v4-nav { display:flex; align-items:center; gap:12px; margin-top:48px; }
+
+.v4-right { display:flex; align-items:center; justify-content:center; padding:56px 44px; }
+.v4-card { width:100%; background:var(--bg-el); border:1px solid var(--border-hi); border-radius:22px; overflow:hidden; box-shadow:0 28px 80px rgba(0,0,0,0.55), 0 0 0 1px rgba(97,97,255,0.08); }
+.v4-vwrap { position:relative; aspect-ratio:16/9; background:#000; transition:opacity .26s; }
+.v4-vwrap video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+.v4-card-bottom { display:grid; grid-template-columns:1fr 1px 1fr; }
+.v4-sep { background:var(--border); }
+.v4-builder { display:flex; align-items:center; gap:12px; padding:20px 24px; transition:opacity .26s; }
+.v4-b-av { width:42px; height:42px; border-radius:50%; overflow:hidden; flex-shrink:0; border:2px solid var(--border-hi); }
+.v4-b-av img { width:100%; height:100%; object-fit:cover; }
+.v4-b-name { font-size:13px; font-weight:700; color:#fff; }
+.v4-b-meta { font-size:11px; color:var(--dim); margin-top:2px; }
+.v4-outcome { display:flex; align-items:center; gap:14px; padding:20px 24px; background:var(--purple-lo); transition:opacity .26s; }
+.v4-stat { font-size:28px; font-weight:800; color:var(--purple); line-height:1; flex-shrink:0; }
+.v4-stat-lbl { font-size:12px; color:var(--dim); line-height:1.55; }
+
+
+/* ════════════════════════════════════════════════════════
+   MOBILE  ≤ 768px
+════════════════════════════════════════════════════════ */
+@media (max-width:768px) {
+  .v1-layout,.v2-layout,.v3-layout,.v4-layout { grid-template-columns:1fr; height:auto; }
+
+  /* video panels come first */
+  .v1-right  { order:-1; height:56vw; }
+  .v2-right  { order:-1; height:56vw; }
+  .v3-right  { order:-1; height:56vw; }
+  .v4-right  { order:-1; padding:16px; }
+
+  .v1-vwrap,.v2-vwrap,.v3-vwrap { flex:none; height:100%; }
+
+  /* left panels */
+  .v1-left,.v2-left,.v3-left,.v4-left { padding:24px 18px 48px; border-right:none; border-top:1px solid var(--border); }
+
+  /* bars */
+  .v1-bar { grid-template-columns:1fr; }
+  .v1-builder { border-right:none; border-bottom:1px solid var(--border); }
+  .v2-footer { flex-direction:column; }
+  .v2-vsep { width:100%; height:1px; }
+
+  .v4-card-bottom { grid-template-columns:1fr; }
+  .v4-sep { height:1px; }
+
+  .v3-stat-block { padding:20px 22px; }
+  .v3-stat-num { font-size:38px; }
 }
 </style>
 </head>
 <body>
 
 
-<!-- ═══ VARIANT 1 — SPLIT LAYOUT ═══ -->
+<!-- ═══════════════════ VARIANT 1 — ANCHOR SPLIT ═══════════════════ -->
 <div class="variant" id="v1">
   <div class="label-bar">
     <span class="vnum">Variant 1</span>
-    <span class="vdesc">Split layout — copy + challenge + outcome left, video with chyron right.</span>
+    <span class="vdesc">Anchor split — editorial left, video + builder + outcome bar right</span>
   </div>
+  <div class="v1-layout">
 
-  <div class="s1-layout">
-    <!-- LEFT -->
-    <div class="s1-left">
+    <div class="v1-left">
       <span class="eyebrow">Monday on Monday</span>
-      <h2 class="s1-headline">Our people built 5,000+ agents for the problems that <em>frustrated them most</em></h2>
-
-      <div class="s1-challenge">
-        <div class="info-lbl">The challenge</div>
-        <p class="s1-challenge-text" id="s1-usecase"></p>
-      </div>
-
-      <div class="s1-outcome">
-        <div class="info-lbl">The outcome</div>
-        <p class="s1-outcome-text" id="s1-outcome"></p>
-      </div>
-
-      <div class="s1-builder">
-        <div class="s1-b-avatar"><img id="s1-avatar" alt=""></div>
-        <div>
-          <div class="s1-b-name" id="s1-bname"></div>
-          <div class="s1-b-meta" id="s1-btitle"></div>
-          <div class="s1-b-dept" id="s1-bdept"></div>
-        </div>
-      </div>
-
-      <div class="s1-nav">
-        <button class="arr" id="s1-prev">&#8592;</button>
-        <div class="dots" id="s1-dots"></div>
-        <button class="arr" id="s1-next">&#8594;</button>
+      <h2 class="v1-headline">Our people built 5,000+ agents for the problems that <em>frustrated them most</em></h2>
+      <p class="v1-sub">Meet the monday builders who turned real work frustrations into working agents — and changed how their teams operate.</p>
+      <div class="v1-nav">
+        <button class="arr" id="v1-prev">&#8592;</button>
+        <div class="dots" id="v1-dots"></div>
+        <button class="arr" id="v1-next">&#8594;</button>
       </div>
     </div>
 
-    <!-- RIGHT: video with chyron -->
-    <div class="s1-right">
-      <div class="s1-video-wrap" id="s1-vwrap">
-        <video id="s1-video" muted loop playsinline autoplay preload="metadata"></video>
+    <div class="v1-right">
+      <div class="v1-vwrap" id="v1-vwrap">
+        <video id="v1-video" muted loop playsinline autoplay preload="metadata"></video>
         <div class="chyron">
-          <img class="ch-avatar" id="s1-ch-avatar" src="" alt="">
+          <img class="ch-av" id="v1-ch-av" src="" alt="">
           <div>
-            <div class="ch-dept" id="s1-ch-dept"></div>
-            <div class="ch-agent" id="s1-ch-agent"></div>
-            <div class="ch-by" id="s1-ch-by"></div>
+            <div class="ch-name" id="v1-ch-name"></div>
+            <div class="ch-desc" id="v1-ch-desc"></div>
           </div>
         </div>
       </div>
+      <div class="v1-bar">
+        <div class="v1-builder" id="v1-builder">
+          <div class="v1-b-av"><img id="v1-av" alt=""></div>
+          <div>
+            <div class="v1-b-name" id="v1-bname"></div>
+            <div class="v1-b-meta" id="v1-bmeta"></div>
+          </div>
+        </div>
+        <div class="v1-outcome" id="v1-outcome-el">
+          <div class="info-lbl">The outcome</div>
+          <div class="v1-stat" id="v1-stat"></div>
+          <div class="v1-stat-lbl" id="v1-stat-lbl"></div>
+        </div>
+      </div>
     </div>
+
   </div>
 </div>
 
 
-<!-- ═══ VARIANT 2 — REEL CARDS ═══ -->
+<!-- ═══════════════════ VARIANT 2 — STAGE RIGHT ═══════════════════ -->
 <div class="variant" id="v2">
   <div class="label-bar">
     <span class="vnum">Variant 2</span>
-    <span class="vdesc">Reel cards — 4 portrait videos, active highlighted, detail below.</span>
+    <span class="vdesc">Stage right — narrow left pillar, wide video, tight footer strip</span>
   </div>
+  <div class="v2-layout">
 
-  <div class="s2-page">
-    <header class="s2-header">
+    <div class="v2-left">
       <span class="eyebrow">Monday on Monday</span>
-      <h2 class="s2-headline">Our people built 5,000+ agents for the problems that <em>frustrated them most</em></h2>
-    </header>
-
-    <div class="s2-cards-row" id="s2-cards"></div>
-
-    <div class="s2-detail">
-      <div class="s2-d-col">
-        <div class="info-lbl">The challenge</div>
-        <p class="s2-d-text" id="s2-usecase"></p>
-      </div>
-      <div class="s2-d-sep"></div>
-      <div class="s2-d-col">
-        <div class="info-lbl">The outcome</div>
-        <p class="s2-d-outcome" id="s2-outcome"></p>
+      <h2 class="v2-headline">Our people built 5,000+ agents for the problems that <em>frustrated them most</em></h2>
+      <p class="v2-sub">Meet the monday builders who turned real work frustrations into working agents.</p>
+      <div class="v2-nav">
+        <button class="arr" id="v2-prev">&#8592;</button>
+        <div class="dots" id="v2-dots"></div>
+        <button class="arr" id="v2-next">&#8594;</button>
       </div>
     </div>
+
+    <div class="v2-right">
+      <div class="v2-vwrap" id="v2-vwrap">
+        <video id="v2-video" muted loop playsinline autoplay preload="metadata"></video>
+        <div class="chyron">
+          <img class="ch-av" id="v2-ch-av" src="" alt="">
+          <div>
+            <div class="ch-name" id="v2-ch-name"></div>
+            <div class="ch-desc" id="v2-ch-desc"></div>
+          </div>
+        </div>
+      </div>
+      <div class="v2-footer">
+        <div class="v2-builder" id="v2-builder">
+          <div class="v2-b-av"><img id="v2-av" alt=""></div>
+          <div>
+            <div class="v2-b-name" id="v2-bname"></div>
+            <div class="v2-b-meta" id="v2-bmeta"></div>
+          </div>
+        </div>
+        <div class="v2-vsep"></div>
+        <div class="v2-outcome" id="v2-outcome-el">
+          <div class="v2-stat" id="v2-stat"></div>
+          <div class="v2-stat-lbl" id="v2-stat-lbl"></div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
 
 
-<!-- ═══ VARIANT 3 — CINEMA CARD ═══ -->
+<!-- ═══════════════════ VARIANT 3 — LEFT REVEAL ═══════════════════ -->
 <div class="variant" id="v3">
   <div class="label-bar">
     <span class="vnum">Variant 3</span>
-    <span class="vdesc">Cinema card — video + chyron, 3-col body (builder · challenge · outcome), nav.</span>
+    <span class="vdesc">Left reveal — big outcome stat on left, video + builder right</span>
   </div>
+  <div class="v3-layout">
 
-  <div class="s3-page">
-    <header class="s3-header">
+    <div class="v3-left">
       <span class="eyebrow">Monday on Monday</span>
-      <h2 class="s3-headline">Our people built 5,000+ agents for the problems that <em>frustrated them most</em></h2>
-    </header>
+      <h2 class="v3-headline">Our people built 5,000+ agents for the problems that <em>frustrated them most</em></h2>
+      <p class="v3-sub">Real builders. Real frustrations. Working agents.</p>
+      <div class="v3-stat-block" id="v3-stat-block">
+        <div class="info-lbl">The outcome</div>
+        <div class="v3-stat-num" id="v3-stat-num"></div>
+        <div class="v3-stat-lbl" id="v3-stat-lbl"></div>
+      </div>
+      <div class="v3-nav">
+        <button class="arr" id="v3-prev">&#8592;</button>
+        <div class="dots" id="v3-dots"></div>
+        <button class="arr" id="v3-next">&#8594;</button>
+      </div>
+    </div>
 
-    <div class="s3-card">
-      <div class="s3-video-wrap" id="s3-vwrap">
-        <video id="s3-video" muted loop playsinline autoplay preload="metadata"></video>
+    <div class="v3-right">
+      <div class="v3-vwrap" id="v3-vwrap">
+        <video id="v3-video" muted loop playsinline autoplay preload="metadata"></video>
         <div class="chyron">
-          <img class="ch-avatar" id="s3-ch-avatar" src="" alt="">
+          <img class="ch-av" id="v3-ch-av" src="" alt="">
           <div>
-            <div class="ch-dept" id="s3-ch-dept"></div>
-            <div class="ch-agent" id="s3-ch-agent"></div>
-            <div class="ch-by" id="s3-ch-by"></div>
+            <div class="ch-name" id="v3-ch-name"></div>
+            <div class="ch-desc" id="v3-ch-desc"></div>
           </div>
         </div>
       </div>
-
-      <div class="s3-card-body">
-        <div class="s3-builder-col">
-          <div class="s3-b-avatar"><img id="s3-avatar" alt=""></div>
-          <div>
-            <div class="s3-b-name" id="s3-bname"></div>
-            <div class="s3-b-meta" id="s3-btitle"></div>
-            <div class="s3-b-dept" id="s3-bdept"></div>
-          </div>
-        </div>
-        <div class="s3-sep"></div>
-        <div class="s3-usecase-col">
-          <div class="info-lbl">The challenge</div>
-          <p class="s3-usecase-text" id="s3-usecase"></p>
-        </div>
-        <div class="s3-sep"></div>
-        <div class="s3-outcome-col">
-          <div class="info-lbl">The outcome</div>
-          <p class="s3-outcome-text" id="s3-outcome"></p>
+      <div class="v3-builder" id="v3-builder">
+        <div class="v3-b-av"><img id="v3-av" alt=""></div>
+        <div>
+          <div class="v3-b-name" id="v3-bname"></div>
+          <div class="v3-b-meta" id="v3-bmeta"></div>
+          <div class="v3-b-dept" id="v3-bdept"></div>
         </div>
       </div>
     </div>
 
-    <div class="s3-nav">
-      <button class="arr" id="s3-prev">&#8592;</button>
-      <div class="dots" id="s3-dots"></div>
-      <button class="arr" id="s3-next">&#8594;</button>
+  </div>
+</div>
+
+
+<!-- ═══════════════════ VARIANT 4 — CONTAINED CARD ═══════════════════ -->
+<div class="variant" id="v4">
+  <div class="label-bar">
+    <span class="vnum">Variant 4</span>
+    <span class="vdesc">Contained card — editorial left, floating card right (video + builder + stat)</span>
+  </div>
+  <div class="v4-layout">
+
+    <div class="v4-left">
+      <span class="eyebrow">Monday on Monday</span>
+      <h2 class="v4-headline">Our people built 5,000+ agents for the problems that <em>frustrated them most</em></h2>
+      <p class="v4-sub">Meet the monday builders who turned real work frustrations into working agents — and changed how their teams operate.</p>
+      <div class="v4-nav">
+        <button class="arr" id="v4-prev">&#8592;</button>
+        <div class="dots" id="v4-dots"></div>
+        <button class="arr" id="v4-next">&#8594;</button>
+      </div>
     </div>
+
+    <div class="v4-right">
+      <div class="v4-card">
+        <div class="v4-vwrap" id="v4-vwrap">
+          <video id="v4-video" muted loop playsinline autoplay preload="metadata"></video>
+          <div class="chyron">
+            <img class="ch-av" id="v4-ch-av" src="" alt="">
+            <div>
+              <div class="ch-name" id="v4-ch-name"></div>
+              <div class="ch-desc" id="v4-ch-desc"></div>
+            </div>
+          </div>
+        </div>
+        <div class="v4-card-bottom">
+          <div class="v4-builder" id="v4-builder">
+            <div class="v4-b-av"><img id="v4-av" alt=""></div>
+            <div>
+              <div class="v4-b-name" id="v4-bname"></div>
+              <div class="v4-b-meta" id="v4-bmeta"></div>
+            </div>
+          </div>
+          <div class="v4-sep"></div>
+          <div class="v4-outcome" id="v4-outcome-el">
+            <div class="v4-stat" id="v4-stat"></div>
+            <div class="v4-stat-lbl" id="v4-stat-lbl"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
 
@@ -336,226 +390,240 @@ body { font-family:'Poppins',sans-serif; background:#000; color:#fff; }
 <script>
 const BUILDERS = [
   {
-    name: "Ran Levgoren",
-    title: "Account Executive",
-    dept: "Sales",
-    agentName: "Moti — The Silence Disruptor",
-    usecase: "Deals going quiet after a strong first call. Moti monitors deal activity, detects silence, and automatically crafts personalized re-engagement messages at the right moment — before the lead goes cold.",
-    outcome: "23% of silent deals revived within 2 weeks. Reps save 3 hours a week on manual follow-up.",
-    video: "https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Video/Moti.mp4",
+    name:      "Ran Levgoren",
+    title:     "Account Executive",
+    dept:      "Sales",
+    agentName: "Moti",
+    agentDesc: "The Silence Disruptor",
+    statNum:   "23%",
+    statLabel: "of silent deals revived within 2 weeks",
+    video:  "https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Video/Moti.mp4",
     avatar: "https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/ran-levgoren.png"
   },
   {
-    name: "Osher Mayor",
-    title: "Lifecycle Marketing Manager",
-    dept: "Marketing",
-    agentName: "Riki Shula — Data to Content",
-    usecase: "Campaign content required days of manual data pulls and copywriting. Riki Shula takes raw audience segments from the CRM and generates ready-to-send campaign copy — in minutes.",
-    outcome: "Campaign production time cut from 3 days to 4 hours. 10× more A/B tests per quarter.",
-    video: "https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Video/Osher_shula_marketing.mp4",
+    name:      "Osher Mayor",
+    title:     "Lifecycle Marketing Manager",
+    dept:      "Marketing",
+    agentName: "Riki Shula",
+    agentDesc: "Data to Content",
+    statNum:   "10×",
+    statLabel: "more A/B tests per quarter",
+    video:  "https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Video/Osher_shula_marketing.mp4",
     avatar: "https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/osher-mayor.png"
   },
   {
-    name: "Amit Frishberg",
-    title: "Tech Lead, CRM",
-    dept: "Engineering",
-    agentName: "Petro — Mobile Feature Parity",
-    usecase: "The mobile app kept falling behind the web product. Petro monitors every new web feature, identifies parity gaps automatically, and creates prioritized tickets for the mobile team.",
-    outcome: "Mobile parity backlog cut by 60% in one quarter. Zero missed features across the last three sprints.",
-    video: "https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Video/Petro.mp4",
+    name:      "Amit Frishberg",
+    title:     "Tech Lead, CRM",
+    dept:      "Engineering",
+    agentName: "Petro",
+    agentDesc: "Mobile Feature Parity",
+    statNum:   "60%",
+    statLabel: "reduction in mobile parity backlog",
+    video:  "https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Video/Petro.mp4",
     avatar: "https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/amit-frishberg.png"
   },
   {
-    name: "Roni Rebish",
-    title: "Product Manager",
-    dept: "Product",
-    agentName: "Allison — Accessibility Pipeline",
-    usecase: "Accessibility issues were found too late — in QA or after launch. Allison reviews every new screen at design handoff, flags WCAG violations, and suggests fixes before a single line of code is written.",
-    outcome: "A11y issues caught 4× earlier. Accessibility rework cost dropped by 70% in six months.",
-    video: "https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Video/roni_allison_product.mp4",
+    name:      "Roni Rebish",
+    title:     "Product Manager",
+    dept:      "Product",
+    agentName: "Allison",
+    agentDesc: "Accessibility Pipeline",
+    statNum:   "70%",
+    statLabel: "drop in accessibility rework cost",
+    video:  "https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Video/roni_allison_product.mp4",
     avatar: "https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/roni-rebish.png"
   }
 ];
 
-/* ─── Variant 1: Split Layout ─── */
-(function () {
-  let cur = 0;
-  const vwrap   = document.getElementById('s1-vwrap');
-  const video   = document.getElementById('s1-video');
-  const dotsEl  = document.getElementById('s1-dots');
-  const ucEl    = document.getElementById('s1-usecase');
-  const outEl   = document.getElementById('s1-outcome');
-  const avatarEl= document.getElementById('s1-avatar');
-  const bnameEl = document.getElementById('s1-bname');
-  const btitleEl= document.getElementById('s1-btitle');
-  const bdeptEl = document.getElementById('s1-bdept');
-  const chAvatarEl = document.getElementById('s1-ch-avatar');
-  const chDeptEl   = document.getElementById('s1-ch-dept');
-  const chAgentEl  = document.getElementById('s1-ch-agent');
-  const chByEl     = document.getElementById('s1-ch-by');
-
-  BUILDERS.forEach((_, i) => {
+function makeDots(el, n, cb) {
+  for (let i = 0; i < n; i++) {
     const d = document.createElement('button');
     d.className = 'dot';
-    d.setAttribute('aria-label', `Builder ${i + 1}`);
-    d.onclick = () => go(i);
-    dotsEl.appendChild(d);
-  });
+    d.setAttribute('aria-label', `Builder ${i+1}`);
+    d.onclick = () => cb(i);
+    el.appendChild(d);
+  }
+}
+function syncDots(el, cur) {
+  el.querySelectorAll('.dot').forEach((d,i) => d.classList.toggle('active', i === cur));
+}
+
+/* ── V1: Anchor Split ── */
+(function () {
+  let cur = 0;
+  const vwrap    = document.getElementById('v1-vwrap');
+  const video    = document.getElementById('v1-video');
+  const dotsEl   = document.getElementById('v1-dots');
+  const builderEl= document.getElementById('v1-builder');
+  const outcomeEl= document.getElementById('v1-outcome-el');
+
+  makeDots(dotsEl, BUILDERS.length, i => go(i));
 
   function go(idx) {
     vwrap.classList.add('fading');
+    builderEl.classList.add('fading');
+    outcomeEl.classList.add('fading');
     setTimeout(() => {
       cur = (idx + BUILDERS.length) % BUILDERS.length;
       const b = BUILDERS[cur];
-      video.src = b.video; video.play().catch(() => {});
-      ucEl.textContent     = b.usecase;
-      outEl.textContent    = b.outcome;
-      avatarEl.src         = b.avatar;
-      bnameEl.textContent  = b.name;
-      btitleEl.textContent = b.title;
-      bdeptEl.textContent  = b.dept;
-      chAvatarEl.src       = b.avatar;
-      chDeptEl.textContent = b.dept;
-      chAgentEl.textContent= b.agentName;
-      chByEl.textContent   = `Built by ${b.name}`;
-      dotsEl.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === cur));
+      video.src = b.video; video.play().catch(()=>{});
+      document.getElementById('v1-ch-av').src    = b.avatar;
+      document.getElementById('v1-ch-name').textContent = b.agentName;
+      document.getElementById('v1-ch-desc').textContent = b.agentDesc;
+      document.getElementById('v1-av').src        = b.avatar;
+      document.getElementById('v1-bname').textContent   = b.name;
+      document.getElementById('v1-bmeta').textContent   = `${b.title} · ${b.dept}`;
+      document.getElementById('v1-stat').textContent    = b.statNum;
+      document.getElementById('v1-stat-lbl').textContent= b.statLabel;
+      syncDots(dotsEl, cur);
       vwrap.classList.remove('fading');
+      builderEl.classList.remove('fading');
+      outcomeEl.classList.remove('fading');
     }, 260);
   }
 
-  document.getElementById('s1-prev').onclick = () => go(cur - 1);
-  document.getElementById('s1-next').onclick = () => go(cur + 1);
-
-  let tx = 0;
+  document.getElementById('v1-prev').onclick = () => go(cur - 1);
+  document.getElementById('v1-next').onclick = () => go(cur + 1);
   const sect = document.getElementById('v1');
+  let tx = 0;
   sect.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, {passive:true});
-  sect.addEventListener('touchend', e => {
-    const dx = e.changedTouches[0].clientX - tx;
-    if (Math.abs(dx) > 44) go(cur + (dx < 0 ? 1 : -1));
-  }, {passive:true});
-
+  sect.addEventListener('touchend',   e => { const dx = e.changedTouches[0].clientX - tx; if (Math.abs(dx) > 44) go(cur + (dx < 0 ? 1 : -1)); }, {passive:true});
   let timer = setInterval(() => go(cur + 1), 7000);
   sect.addEventListener('pointerdown', () => { clearInterval(timer); timer = null; });
   go(0);
 })();
 
-/* ─── Variant 2: Reel Cards ─── */
+/* ── V2: Stage Right ── */
 (function () {
   let cur = 0;
-  const cardsRow = document.getElementById('s2-cards');
-  const ucEl     = document.getElementById('s2-usecase');
-  const outEl    = document.getElementById('s2-outcome');
-  const cards = [];
+  const vwrap     = document.getElementById('v2-vwrap');
+  const video     = document.getElementById('v2-video');
+  const dotsEl    = document.getElementById('v2-dots');
+  const builderEl = document.getElementById('v2-builder');
+  const outcomeEl = document.getElementById('v2-outcome-el');
 
-  BUILDERS.forEach((b, i) => {
-    const card = document.createElement('div');
-    card.className = 's2-card';
-
-    const vid = document.createElement('video');
-    vid.src = b.video;
-    vid.muted = true;
-    vid.loop = true;
-    vid.playsInline = true;
-    vid.preload = 'metadata';
-    card.appendChild(vid);
-
-    const chyron = document.createElement('div');
-    chyron.className = 's2-chyron';
-    chyron.innerHTML = `
-      <div class="s2-ch-row">
-        <img class="s2-ch-avatar" src="${b.avatar}" alt="${b.name}">
-        <div>
-          <div class="s2-ch-name">${b.name}</div>
-          <div class="s2-ch-role">${b.title} · ${b.dept}</div>
-        </div>
-      </div>
-      <div class="s2-ch-agent">Built ${b.agentName}</div>
-    `;
-    card.appendChild(chyron);
-
-    card.onclick = () => select(i);
-    cardsRow.appendChild(card);
-    cards.push({ card, vid });
-  });
-
-  function select(idx) {
-    cur = idx;
-    cards.forEach(({ card, vid }, i) => {
-      const active = i === cur;
-      card.classList.toggle('active', active);
-      if (active) {
-        vid.play().catch(() => {});
-      } else {
-        vid.pause();
-      }
-    });
-    const b = BUILDERS[cur];
-    ucEl.textContent  = b.usecase;
-    outEl.textContent = b.outcome;
-  }
-
-  let timer = setInterval(() => select((cur + 1) % BUILDERS.length), 6000);
-  cardsRow.addEventListener('pointerdown', () => { clearInterval(timer); timer = null; });
-  select(0);
-})();
-
-/* ─── Variant 3: Cinema Card ─── */
-(function () {
-  let cur = 0;
-  const vwrap   = document.getElementById('s3-vwrap');
-  const video   = document.getElementById('s3-video');
-  const dotsEl  = document.getElementById('s3-dots');
-  const avatarEl= document.getElementById('s3-avatar');
-  const bnameEl = document.getElementById('s3-bname');
-  const btitleEl= document.getElementById('s3-btitle');
-  const bdeptEl = document.getElementById('s3-bdept');
-  const ucEl    = document.getElementById('s3-usecase');
-  const outEl   = document.getElementById('s3-outcome');
-  const chAvatarEl = document.getElementById('s3-ch-avatar');
-  const chDeptEl   = document.getElementById('s3-ch-dept');
-  const chAgentEl  = document.getElementById('s3-ch-agent');
-  const chByEl     = document.getElementById('s3-ch-by');
-
-  BUILDERS.forEach((_, i) => {
-    const d = document.createElement('button');
-    d.className = 'dot';
-    d.setAttribute('aria-label', `Builder ${i + 1}`);
-    d.onclick = () => go(i);
-    dotsEl.appendChild(d);
-  });
+  makeDots(dotsEl, BUILDERS.length, i => go(i));
 
   function go(idx) {
     vwrap.classList.add('fading');
+    builderEl.classList.add('fading');
+    outcomeEl.classList.add('fading');
     setTimeout(() => {
       cur = (idx + BUILDERS.length) % BUILDERS.length;
       const b = BUILDERS[cur];
-      video.src = b.video; video.play().catch(() => {});
-      avatarEl.src         = b.avatar;
-      bnameEl.textContent  = b.name;
-      btitleEl.textContent = b.title;
-      bdeptEl.textContent  = b.dept;
-      ucEl.textContent     = b.usecase;
-      outEl.textContent    = b.outcome;
-      chAvatarEl.src       = b.avatar;
-      chDeptEl.textContent = b.dept;
-      chAgentEl.textContent= b.agentName;
-      chByEl.textContent   = `Built by ${b.name}`;
-      dotsEl.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === cur));
+      video.src = b.video; video.play().catch(()=>{});
+      document.getElementById('v2-ch-av').src    = b.avatar;
+      document.getElementById('v2-ch-name').textContent = b.agentName;
+      document.getElementById('v2-ch-desc').textContent = b.agentDesc;
+      document.getElementById('v2-av').src        = b.avatar;
+      document.getElementById('v2-bname').textContent   = b.name;
+      document.getElementById('v2-bmeta').textContent   = `${b.title} · ${b.dept}`;
+      document.getElementById('v2-stat').textContent    = b.statNum;
+      document.getElementById('v2-stat-lbl').textContent= b.statLabel;
+      syncDots(dotsEl, cur);
       vwrap.classList.remove('fading');
+      builderEl.classList.remove('fading');
+      outcomeEl.classList.remove('fading');
     }, 260);
   }
 
-  document.getElementById('s3-prev').onclick = () => go(cur - 1);
-  document.getElementById('s3-next').onclick = () => go(cur + 1);
-
+  document.getElementById('v2-prev').onclick = () => go(cur - 1);
+  document.getElementById('v2-next').onclick = () => go(cur + 1);
+  const sect = document.getElementById('v2');
   let tx = 0;
-  const sect = document.getElementById('v3');
   sect.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, {passive:true});
-  sect.addEventListener('touchend', e => {
-    const dx = e.changedTouches[0].clientX - tx;
-    if (Math.abs(dx) > 44) go(cur + (dx < 0 ? 1 : -1));
-  }, {passive:true});
+  sect.addEventListener('touchend',   e => { const dx = e.changedTouches[0].clientX - tx; if (Math.abs(dx) > 44) go(cur + (dx < 0 ? 1 : -1)); }, {passive:true});
+  let timer = setInterval(() => go(cur + 1), 7000);
+  sect.addEventListener('pointerdown', () => { clearInterval(timer); timer = null; });
+  go(0);
+})();
 
+/* ── V3: Left Reveal ── */
+(function () {
+  let cur = 0;
+  const vwrap      = document.getElementById('v3-vwrap');
+  const video      = document.getElementById('v3-video');
+  const dotsEl     = document.getElementById('v3-dots');
+  const statBlock  = document.getElementById('v3-stat-block');
+  const builderEl  = document.getElementById('v3-builder');
+
+  makeDots(dotsEl, BUILDERS.length, i => go(i));
+
+  function go(idx) {
+    vwrap.classList.add('fading');
+    statBlock.classList.add('fading');
+    builderEl.classList.add('fading');
+    setTimeout(() => {
+      cur = (idx + BUILDERS.length) % BUILDERS.length;
+      const b = BUILDERS[cur];
+      video.src = b.video; video.play().catch(()=>{});
+      document.getElementById('v3-ch-av').src    = b.avatar;
+      document.getElementById('v3-ch-name').textContent = b.agentName;
+      document.getElementById('v3-ch-desc').textContent = b.agentDesc;
+      document.getElementById('v3-stat-num').textContent = b.statNum;
+      document.getElementById('v3-stat-lbl').textContent = b.statLabel;
+      document.getElementById('v3-av').src        = b.avatar;
+      document.getElementById('v3-bname').textContent   = b.name;
+      document.getElementById('v3-bmeta').textContent   = `${b.title} · ${b.dept}`;
+      document.getElementById('v3-bdept').textContent   = b.dept;
+      syncDots(dotsEl, cur);
+      vwrap.classList.remove('fading');
+      statBlock.classList.remove('fading');
+      builderEl.classList.remove('fading');
+    }, 260);
+  }
+
+  document.getElementById('v3-prev').onclick = () => go(cur - 1);
+  document.getElementById('v3-next').onclick = () => go(cur + 1);
+  const sect = document.getElementById('v3');
+  let tx = 0;
+  sect.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, {passive:true});
+  sect.addEventListener('touchend',   e => { const dx = e.changedTouches[0].clientX - tx; if (Math.abs(dx) > 44) go(cur + (dx < 0 ? 1 : -1)); }, {passive:true});
+  let timer = setInterval(() => go(cur + 1), 7000);
+  sect.addEventListener('pointerdown', () => { clearInterval(timer); timer = null; });
+  go(0);
+})();
+
+/* ── V4: Contained Card ── */
+(function () {
+  let cur = 0;
+  const vwrap     = document.getElementById('v4-vwrap');
+  const video     = document.getElementById('v4-video');
+  const dotsEl    = document.getElementById('v4-dots');
+  const builderEl = document.getElementById('v4-builder');
+  const outcomeEl = document.getElementById('v4-outcome-el');
+
+  makeDots(dotsEl, BUILDERS.length, i => go(i));
+
+  function go(idx) {
+    vwrap.classList.add('fading');
+    builderEl.classList.add('fading');
+    outcomeEl.classList.add('fading');
+    setTimeout(() => {
+      cur = (idx + BUILDERS.length) % BUILDERS.length;
+      const b = BUILDERS[cur];
+      video.src = b.video; video.play().catch(()=>{});
+      document.getElementById('v4-ch-av').src    = b.avatar;
+      document.getElementById('v4-ch-name').textContent = b.agentName;
+      document.getElementById('v4-ch-desc').textContent = b.agentDesc;
+      document.getElementById('v4-av').src        = b.avatar;
+      document.getElementById('v4-bname').textContent   = b.name;
+      document.getElementById('v4-bmeta').textContent   = `${b.title} · ${b.dept}`;
+      document.getElementById('v4-stat').textContent    = b.statNum;
+      document.getElementById('v4-stat-lbl').textContent= b.statLabel;
+      syncDots(dotsEl, cur);
+      vwrap.classList.remove('fading');
+      builderEl.classList.remove('fading');
+      outcomeEl.classList.remove('fading');
+    }, 260);
+  }
+
+  document.getElementById('v4-prev').onclick = () => go(cur - 1);
+  document.getElementById('v4-next').onclick = () => go(cur + 1);
+  const sect = document.getElementById('v4');
+  let tx = 0;
+  sect.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, {passive:true});
+  sect.addEventListener('touchend',   e => { const dx = e.changedTouches[0].clientX - tx; if (Math.abs(dx) > 44) go(cur + (dx < 0 ? 1 : -1)); }, {passive:true});
   let timer = setInterval(() => go(cur + 1), 7000);
   sect.addEventListener('pointerdown', () => { clearInterval(timer); timer = null; });
   go(0);
