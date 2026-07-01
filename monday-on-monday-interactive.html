@@ -55,6 +55,10 @@ body { font-family:'Poppins',sans-serif; background:var(--bg); color:#fff; }
 /* ── video ── */
 .card-video { position:relative; aspect-ratio:16/9; background:#000; overflow:hidden; transition:opacity .26s; }
 .card-video video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+.vplay-btn { position:absolute; bottom:12px; right:12px; z-index:2; width:38px; height:38px; border-radius:50%; background:rgba(0,0,0,0.52); border:1px solid rgba(255,255,255,0.22); color:#fff; display:flex; align-items:center; justify-content:center; cursor:pointer; opacity:0; transition:opacity .22s,background .2s; backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); }
+.card-video:hover .vplay-btn { opacity:1; }
+.vplay-btn:hover { background:rgba(0,0,0,0.80); border-color:rgba(255,255,255,0.40); }
+.vplay-btn svg { width:13px; height:13px; fill:#fff; pointer-events:none; }
 
 /* ── info bar ── */
 .info-bar { display:grid; grid-template-columns:1fr 1px 1fr 1px 1fr; border-top:1px solid var(--border); }
@@ -72,7 +76,8 @@ body { font-family:'Poppins',sans-serif; background:var(--bg); color:#fff; }
 .ib-lbl { font-size:9px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; color:var(--purple); margin-bottom:5px; }
 .ib-a-name { font-size:14px; font-weight:700; color:#fff; }
 .ib-a-desc { font-size:11px; color:var(--dim); margin-top:3px; }
-.ib-outcome { display:flex; align-items:center; gap:12px; padding:18px 22px; background:var(--purple-lo); transition:opacity .26s; }
+.ib-outcome { display:flex; flex-direction:column; justify-content:center; gap:6px; padding:18px 22px; background:var(--purple-lo); transition:opacity .26s; }
+.ib-outcome-nums { display:flex; align-items:center; gap:10px; }
 .ib-stat { font-size:26px; font-weight:800; color:var(--purple); line-height:1; flex-shrink:0; }
 .ib-stat-lbl { font-size:11px; color:var(--dim); line-height:1.55; }
 
@@ -125,6 +130,10 @@ body { font-family:'Poppins',sans-serif; background:var(--bg); color:#fff; }
       <div class="card">
         <div class="card-video" id="s1-vwrap">
           <video id="s1-video" muted loop playsinline autoplay preload="metadata"></video>
+          <button class="vplay-btn" id="s1-playbtn" aria-label="Play/Pause">
+            <svg id="s1-icon-play" viewBox="0 0 16 16"><polygon points="4,2 14,8 4,14"/></svg>
+            <svg id="s1-icon-pause" viewBox="0 0 16 16" style="display:none"><rect x="3" y="2" width="4" height="12"/><rect x="9" y="2" width="4" height="12"/></svg>
+          </button>
         </div>
         <div class="info-bar">
           <div class="ib-builder" id="s1-builder">
@@ -146,8 +155,11 @@ body { font-family:'Poppins',sans-serif; background:var(--bg); color:#fff; }
           </div>
           <div class="ib-sep"></div>
           <div class="ib-outcome" id="s1-outcome">
-            <div class="ib-stat" id="s1-stat"></div>
-            <div class="ib-stat-lbl" id="s1-statlbl"></div>
+            <div class="ib-lbl">The outcome</div>
+            <div class="ib-outcome-nums">
+              <div class="ib-stat" id="s1-stat"></div>
+              <div class="ib-stat-lbl" id="s1-statlbl"></div>
+            </div>
           </div>
         </div>
       </div>
@@ -178,6 +190,10 @@ body { font-family:'Poppins',sans-serif; background:var(--bg); color:#fff; }
       <div class="card">
         <div class="card-video" id="s2-vwrap">
           <video id="s2-video" muted loop playsinline autoplay preload="metadata"></video>
+          <button class="vplay-btn" id="s2-playbtn" aria-label="Play/Pause">
+            <svg id="s2-icon-play" viewBox="0 0 16 16"><polygon points="4,2 14,8 4,14"/></svg>
+            <svg id="s2-icon-pause" viewBox="0 0 16 16" style="display:none"><rect x="3" y="2" width="4" height="12"/><rect x="9" y="2" width="4" height="12"/></svg>
+          </button>
         </div>
         <div class="info-bar">
           <div class="ib-builder" id="s2-builder">
@@ -199,8 +215,11 @@ body { font-family:'Poppins',sans-serif; background:var(--bg); color:#fff; }
           </div>
           <div class="ib-sep"></div>
           <div class="ib-outcome" id="s2-outcome">
-            <div class="ib-stat" id="s2-stat"></div>
-            <div class="ib-stat-lbl" id="s2-statlbl"></div>
+            <div class="ib-lbl">The outcome</div>
+            <div class="ib-outcome-nums">
+              <div class="ib-stat" id="s2-stat"></div>
+              <div class="ib-stat-lbl" id="s2-statlbl"></div>
+            </div>
           </div>
         </div>
       </div>
@@ -226,6 +245,21 @@ function wireSection(prefix, { hasDots = false } = {}) {
   const agentEl   = document.getElementById(`${prefix}-agent`);
   const outcomeEl = document.getElementById(`${prefix}-outcome`);
   const dotsEl    = hasDots ? document.getElementById(`${prefix}-dots`) : null;
+  const playBtn   = document.getElementById(`${prefix}-playbtn`);
+  const iconPlay  = document.getElementById(`${prefix}-icon-play`);
+  const iconPause = document.getElementById(`${prefix}-icon-pause`);
+
+  function syncPlayIcon() {
+    const paused = video.paused;
+    iconPlay.style.display  = paused ? '' : 'none';
+    iconPause.style.display = paused ? 'none' : '';
+  }
+  playBtn.addEventListener('click', () => {
+    if (video.paused) { video.play().catch(() => {}); } else { video.pause(); }
+    syncPlayIcon();
+  });
+  video.addEventListener('play',  syncPlayIcon);
+  video.addEventListener('pause', syncPlayIcon);
 
   if (hasDots) {
     BUILDERS.forEach((_, i) => {
