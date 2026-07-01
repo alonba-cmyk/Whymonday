@@ -380,7 +380,7 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
   .s1k-inner { padding: 32px 20px 28px; gap: 20px; }
   .s1k-left { display: flex; flex-direction: column; align-items: center; padding: 0; border: none; }
   .s1k-left-eyebrow { margin-bottom: 10px; text-align: center; }
-  .s1k-mission { font-size: clamp(20px, 4vw, 30px); text-align: center; line-height: 1.2; letter-spacing: 0.2px; word-spacing: 1px; }
+  .s1k-mission { font-size: clamp(20px, 4vw, 30px); text-align: center; line-height: 1.2; letter-spacing: 0; }
   .s1k-right { gap: 10px; }
   .s1k-line { display: none; }
   .s1k-divider { justify-content: center; margin-top: -8px; }
@@ -395,7 +395,7 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
   .ai-logos { gap: 12px; margin: 12px 0 16px; flex-wrap: nowrap; justify-content: space-around; }
   .ai-logo svg { width: 22px; height: 22px; }
   .ai-logo span { font-size: 8px; }
-  .shift-wrap h2 { font-size: clamp(20px, 4vw, 30px); margin-bottom: 20px; text-align: center; letter-spacing: 0.2px; word-spacing: 1px; }
+  .shift-wrap h2 { font-size: clamp(20px, 4vw, 30px); margin-bottom: 20px; text-align: center; letter-spacing: 0; }
   .shift-wrap h2 br { display: none; }
   .pillars { display: none; }
   .pillars-carousel { display: none; }
@@ -446,7 +446,7 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
   /* text on top, then image below */
   .sbs-left { order: 1; width: 100% !important; flex: 0 0 auto !important; padding: 0 20px; text-align: center; }
   .sbs-eyebrow { margin-bottom: 16px; font-size: 9px; letter-spacing: 3px; }
-  .sbs-heading { font-size: clamp(20px,4vw,30px); font-weight: 800; line-height: 1.15; letter-spacing: 0.2px; word-spacing: 1px; text-align: center; }
+  .sbs-heading { font-size: clamp(20px,4vw,30px); font-weight: 800; line-height: 1.15; letter-spacing: 0; text-align: center; }
   /* sbs-right: explicit height so sbs-img-area's flex:1 resolves; tabs first (order:-1) */
   .sbs-right { order: 2; width: 100% !important; flex: 0 0 auto !important; height: calc(70vw + 80px); display: flex !important; flex-direction: column !important; overflow: visible !important; padding: 0 0 16px !important; }
   .sbs-tabs { order: -1; flex-shrink: 0; gap: 5px; padding: 8px 10px 16px; flex-wrap: wrap; }
@@ -471,7 +471,7 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
   .mob-chip-bar { display: none; }
   #pill5 { display: flex; }
   .layers-top { margin-bottom: 4px; }
-  .layers-top h2 { font-size: clamp(18px, 5vw, 26px); margin-bottom: 10px; line-height: 1.2; letter-spacing: 0.2px; word-spacing: 1px; }
+  .layers-top h2 { font-size: clamp(18px, 5vw, 26px); margin-bottom: 10px; line-height: 1.2; letter-spacing: 0; }
   .layers-top p { font-size: 12px; }
   .char { display: none; }
   .s5-mob-half { display: block; position: absolute; bottom: 0; overflow: visible; height: 42%; z-index: 5; transition: transform 1.3s cubic-bezier(0.4,0,0.2,1); }
@@ -498,7 +498,7 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
   /* S5b – Social Proof */
   #s5b { padding: 28px 22px; justify-content: center; }
   .sp-eyebrow { text-align: center; }
-  .sp-heading { font-size: clamp(20px, 4vw, 30px); text-align: center; letter-spacing: 0.2px; word-spacing: 1px; }
+  .sp-heading { font-size: clamp(20px, 4vw, 30px); text-align: center; letter-spacing: 0; }
   .sp-body { grid-template-columns: 1fr; gap: 10px; margin-top: 18px; flex: none; }
   /* Companies → 3-col centered grid */
   .sp-companies { display: grid; grid-template-columns: repeat(3,1fr); gap: 0; border-top: 1px solid #1a1a1a; border-bottom: 1px solid #1a1a1a; align-items: stretch; }
@@ -687,7 +687,7 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
 #scred { padding:60px 28px 44px; justify-content:center; }
 .scred-headline {
   font-size:clamp(20px,4vw,30px); font-weight:800; line-height:1.15;
-  letter-spacing:-1px; margin-bottom:28px; text-align:center;
+  letter-spacing:0; margin-bottom:28px; text-align:center;
   background:linear-gradient(140deg,#fff 50%,rgba(255,255,255,0.45));
   -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
 }
@@ -778,7 +778,7 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
 .mom-mobile { display:none; height:100%; overflow-y:auto; flex-direction:column; scrollbar-width:none; gap:8px; }
 .mom-mobile::-webkit-scrollbar { display:none; }
 .mom-mob-header { padding:52px 20px 4px; text-align:center; }
-.mom-mob-hl { font-size:clamp(20px,4vw,30px); font-weight:800; line-height:1.15; letter-spacing:-1px; margin-top:8px; background:linear-gradient(140deg,#fff 50%,rgba(255,255,255,0.45)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.mom-mob-hl { font-size:clamp(20px,4vw,30px); font-weight:800; line-height:1.15; letter-spacing:0; margin-top:8px; background:linear-gradient(140deg,#fff 50%,rgba(255,255,255,0.45)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
 .mom-people-nav { display:flex; gap:4px; padding:14px 10px; overflow-x:auto; scrollbar-width:none; justify-content:space-around; }
 .mom-people-nav::-webkit-scrollbar { display:none; }
 .mom-person-btn { display:flex; flex-direction:column; align-items:center; gap:3px; cursor:pointer; background:none; border:none; color:inherit; font-family:inherit; padding:4px 2px; border-radius:10px; flex-shrink:0; width:76px; }
