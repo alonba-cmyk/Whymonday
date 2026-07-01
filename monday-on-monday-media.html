@@ -130,6 +130,120 @@ body { font-family:'Poppins',sans-serif; background:#000; color:#fff; }
 .v5-center-sub { font-size:13px; color:var(--dim); margin-top:10px; }
 .v5-center-stat { font-size:clamp(44px,6vw,72px); font-weight:800; color:#fff; line-height:1; margin:12px 0 4px; background:linear-gradient(135deg,#fff 30%,rgba(255,255,255,0.4)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
 
+/* ══════════════════════════════════════════════
+   VARIANT 6 — Broadcast lower-third
+   Full-bleed video. Builder ID like a TV chyron.
+═══════════════════════════════════════════════ */
+.v6-video-bg { position:absolute; inset:0; z-index:0; }
+.v6-video-bg video { width:100%; height:100%; object-fit:cover; }
+.v6-cinematic-overlay { position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,0.25) 0%, transparent 25%, transparent 45%, rgba(0,0,0,0.88) 100%); z-index:1; }
+.v6-top-row { position:absolute; top:64px; right:48px; z-index:3; text-align:right; }
+.v6-top-num { font-size:clamp(32px,3.8vw,52px); font-weight:800; color:#fff; line-height:1; }
+.v6-top-label { font-size:9px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,0.45); margin-top:4px; }
+.v6-lower-third { position:absolute; bottom:52px; left:0; right:0; z-index:3; padding:0 48px; display:flex; align-items:flex-end; justify-content:space-between; gap:24px; }
+.v6-id { display:flex; align-items:center; gap:0; }
+.v6-id-bar { width:4px; height:72px; background:var(--purple); border-radius:2px; flex-shrink:0; }
+.v6-id-inner { padding:0 0 0 18px; display:flex; align-items:center; gap:16px; }
+.v6-id-avatar { width:52px; height:52px; border-radius:50%; overflow:hidden; flex-shrink:0; border:2.5px solid rgba(255,255,255,0.3); }
+.v6-id-avatar img { width:100%; height:100%; object-fit:cover; }
+.v6-id-text .id-name { font-size:clamp(22px,2.4vw,32px); font-weight:700; color:#fff; line-height:1.1; }
+.v6-id-text .id-role { font-size:12px; color:rgba(255,255,255,0.55); margin-top:3px; }
+.v6-id-text .id-built { font-size:12px; color:var(--purple); margin-top:6px; font-weight:600; letter-spacing:0.3px; }
+.v6-others { display:flex; flex-direction:column; gap:10px; align-items:flex-end; padding-bottom:4px; }
+.v6-other-chip { display:flex; align-items:center; gap:8px; background:rgba(0,0,0,0.5); backdrop-filter:blur(12px); border:1px solid rgba(255,255,255,0.12); border-radius:100px; padding:6px 14px 6px 6px; }
+.v6-other-avatar { width:28px; height:28px; border-radius:50%; overflow:hidden; flex-shrink:0; }
+.v6-other-avatar img { width:100%; height:100%; object-fit:cover; }
+.v6-other-info .other-name { font-size:11px; font-weight:600; color:rgba(255,255,255,0.85); }
+.v6-other-info .other-dept { font-size:9px; color:var(--dim); }
+
+/* ══════════════════════════════════════════════
+   VARIANT 7 — Builder reel cards
+   4 portrait cards, each: video + identity below.
+═══════════════════════════════════════════════ */
+.v7-wrap { max-width:1120px; width:100%; position:relative; z-index:1; }
+.v7-head { text-align:center; margin-bottom:28px; }
+.v7-headline { font-size:clamp(22px,2.6vw,36px); font-weight:700; }
+.v7-sub { font-size:13px; color:var(--dim); margin-top:8px; }
+.v7-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; }
+.v7-card { background:#0c0c15; border:1px solid rgba(255,255,255,0.07); border-radius:16px; overflow:hidden; display:flex; flex-direction:column; }
+.v7-card-video { position:relative; aspect-ratio:9/14; flex-shrink:0; }
+.v7-card-video video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+.v7-card-video-overlay { position:absolute; inset:0; background:linear-gradient(180deg, transparent 55%, rgba(0,0,0,0.6) 100%); z-index:1; }
+.v7-card-info { padding:14px 16px 16px; border-top:1px solid rgba(255,255,255,0.06); display:flex; align-items:center; gap:12px; }
+.v7-card-avatar { width:38px; height:38px; border-radius:50%; overflow:hidden; flex-shrink:0; }
+.v7-card-avatar img { width:100%; height:100%; object-fit:cover; }
+.v7-card-name { font-size:13px; font-weight:700; color:#fff; line-height:1.2; }
+.v7-card-role { font-size:10px; color:var(--dim); margin-top:2px; }
+.v7-card-agent { font-size:10px; color:var(--purple); font-weight:600; margin-top:5px; }
+
+/* ══════════════════════════════════════════════
+   VARIANT 8 — 2×2 identity grid
+   All 4 videos playing. Each has a nameplate.
+═══════════════════════════════════════════════ */
+.v8-grid { display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr; width:100%; height:100vh; gap:2px; position:absolute; inset:0; }
+.v8-cell { position:relative; overflow:hidden; }
+.v8-cell video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+.v8-cell-overlay { position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,0.1) 0%, transparent 25%, transparent 48%, rgba(0,0,0,0.88) 100%); z-index:1; }
+.v8-nameplate { position:absolute; bottom:0; left:0; right:0; padding:16px 20px 20px; z-index:2; display:flex; align-items:center; gap:12px; }
+.v8-np-avatar { width:44px; height:44px; border-radius:50%; overflow:hidden; flex-shrink:0; border:2px solid rgba(255,255,255,0.2); }
+.v8-np-avatar img { width:100%; height:100%; object-fit:cover; }
+.v8-np-name { font-size:15px; font-weight:700; color:#fff; line-height:1.2; }
+.v8-np-role { font-size:10px; color:rgba(255,255,255,0.5); margin-top:1px; }
+.v8-np-agent { font-size:10px; color:var(--purple); font-weight:600; margin-top:5px; }
+.v8-center-badge { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); z-index:10; background:rgba(0,0,0,0.6); backdrop-filter:blur(16px); border:1px solid rgba(255,255,255,0.1); border-radius:16px; padding:14px 22px; text-align:center; pointer-events:none; }
+.v8-center-num { font-size:clamp(28px,3vw,40px); font-weight:800; color:#fff; line-height:1; }
+.v8-center-label { font-size:9px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,0.45); margin-top:5px; }
+
+/* ══════════════════════════════════════════════
+   VARIANT 9 — Documentary speaker ID
+   Full-bleed video. Frosted ID card, TV-doc style.
+═══════════════════════════════════════════════ */
+.v9-video-bg { position:absolute; inset:0; z-index:0; }
+.v9-video-bg video { width:100%; height:100%; object-fit:cover; }
+.v9-vignette { position:absolute; inset:0; background:radial-gradient(ellipse 120% 100% at 30% 50%, transparent 30%, rgba(0,0,0,0.6) 100%); z-index:1; }
+.v9-dark-bottom { position:absolute; inset:0; background:linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.7) 100%); z-index:1; }
+.v9-top-row { position:absolute; top:64px; left:0; right:0; z-index:3; padding:0 56px; display:flex; justify-content:space-between; align-items:flex-start; }
+.v9-eyebrow { font-size:10px; font-weight:600; letter-spacing:4px; text-transform:uppercase; color:var(--purple); }
+.v9-counter { text-align:right; }
+.v9-counter-num { font-size:clamp(28px,3.2vw,42px); font-weight:800; color:#fff; line-height:1; }
+.v9-counter-label { font-size:9px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,0.4); margin-top:4px; }
+.v9-speaker-id { position:absolute; bottom:72px; left:56px; z-index:3; display:flex; align-items:stretch; }
+.v9-id-accent { width:5px; background:var(--purple); border-radius:3px 0 0 3px; }
+.v9-id-card { padding:16px 22px; background:rgba(0,0,0,0.58); backdrop-filter:blur(18px); -webkit-backdrop-filter:blur(18px); border:1px solid rgba(255,255,255,0.1); border-left:none; border-radius:0 14px 14px 0; display:flex; align-items:center; gap:16px; }
+.v9-id-photo { width:56px; height:56px; border-radius:50%; overflow:hidden; flex-shrink:0; border:2px solid rgba(255,255,255,0.2); }
+.v9-id-photo img { width:100%; height:100%; object-fit:cover; }
+.v9-id-name { font-size:22px; font-weight:700; color:#fff; line-height:1.15; }
+.v9-id-role { font-size:11px; color:rgba(255,255,255,0.5); margin-top:3px; }
+.v9-id-built { font-size:11px; color:var(--purple); margin-top:7px; font-weight:600; }
+.v9-others { position:absolute; bottom:72px; right:56px; z-index:3; display:flex; flex-direction:column; gap:9px; }
+.v9-other { display:flex; align-items:center; gap:10px; background:rgba(0,0,0,0.5); backdrop-filter:blur(12px); border:1px solid rgba(255,255,255,0.09); border-radius:100px; padding:7px 16px 7px 7px; }
+.v9-other-avatar { width:30px; height:30px; border-radius:50%; overflow:hidden; flex-shrink:0; }
+.v9-other-avatar img { width:100%; height:100%; object-fit:cover; }
+.v9-other-name { font-size:11px; font-weight:600; color:rgba(255,255,255,0.85); }
+.v9-other-dept { font-size:9px; color:var(--dim); margin-top:1px; }
+
+/* ══════════════════════════════════════════════
+   VARIANT 10 — Customer story cards
+   2×2 cards: landscape video + builder identity.
+═══════════════════════════════════════════════ */
+.v10-wrap { max-width:1060px; width:100%; position:relative; z-index:1; }
+.v10-head { text-align:center; margin-bottom:28px; }
+.v10-headline { font-size:clamp(22px,2.6vw,36px); font-weight:700; }
+.v10-sub { font-size:13px; color:var(--dim); margin-top:8px; }
+.v10-grid { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+.v10-card { background:#0d0d16; border:1px solid rgba(255,255,255,0.07); border-radius:18px; overflow:hidden; }
+.v10-card-video { position:relative; aspect-ratio:16/9; }
+.v10-card-video video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+.v10-card-video-overlay { position:absolute; inset:0; background:linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.55) 100%); z-index:1; }
+.v10-card-body { padding:18px 20px; display:flex; align-items:flex-start; gap:14px; }
+.v10-card-avatar { width:44px; height:44px; border-radius:50%; overflow:hidden; flex-shrink:0; margin-top:1px; }
+.v10-card-avatar img { width:100%; height:100%; object-fit:cover; }
+.v10-card-name { font-size:15px; font-weight:700; color:#fff; }
+.v10-card-role { font-size:11px; color:var(--dim); margin-top:2px; }
+.v10-card-agent { display:inline-flex; align-items:center; gap:6px; margin-top:10px; background:rgba(97,97,255,0.1); border:1px solid rgba(97,97,255,0.25); border-radius:100px; padding:4px 12px 4px 8px; }
+.v10-card-agent-dot { width:5px; height:5px; border-radius:50%; background:var(--purple); flex-shrink:0; }
+.v10-card-agent-name { font-size:11px; font-weight:600; color:var(--purple); }
+
 /* ─── mobile ─── */
 @media (max-width: 768px) {
   .v1-wall { flex-direction:column; }
@@ -149,6 +263,18 @@ body { font-family:'Poppins',sans-serif; background:#000; color:#fff; }
   .v5-pin img { aspect-ratio:1/1; }
   .v5-center { position:relative; top:auto; left:auto; transform:none; grid-column:1/-1; padding:20px 24px; }
   .variant.v5-variant { align-items:flex-start; }
+  .v6-lower-third { flex-direction:column; align-items:flex-start; gap:16px; padding:0 20px; bottom:28px; }
+  .v6-others { flex-direction:row; flex-wrap:wrap; align-items:flex-start; }
+  .v6-top-row { right:20px; top:52px; }
+  .v6-id-text .id-name { font-size:20px; }
+  .v7-grid { grid-template-columns:1fr 1fr; }
+  .v8-grid { grid-template-rows:1fr 1fr; }
+  .v8-center-badge { padding:10px 16px; }
+  .v9-speaker-id { bottom:40px; left:20px; right:20px; }
+  .v9-id-name { font-size:18px; }
+  .v9-others { display:none; }
+  .v9-top-row { padding:0 20px; top:52px; }
+  .v10-grid { grid-template-columns:1fr; }
 }
 </style>
 </head>
@@ -380,6 +506,317 @@ body { font-family:'Poppins',sans-serif; background:#000; color:#fff; }
       <div class="v5-center-stat">5,117</div>
       <h2 class="v5-center-headline">Our people built agents<br>for the problems that<br>frustrated them most.</h2>
       <p class="v5-center-sub">8 departments · 1 week</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ VARIANT 6 — Broadcast lower-third ═══ -->
+<div class="variant" style="background:#000; padding:0;">
+  <div class="label-bar">
+    <span class="vnum">Variant 6</span>
+    <span class="vdesc">Lower-third — builder identity overlaid like a broadcast chyron. Name and role always visible.</span>
+  </div>
+  <div class="v6-video-bg">
+    <video src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Video/Moti.mp4" muted loop playsinline autoplay preload="metadata"></video>
+    <div class="v6-cinematic-overlay"></div>
+  </div>
+  <div class="v6-top-row">
+    <div class="v6-top-num">5,117</div>
+    <div class="v6-top-label">agents · 8 depts · 1 week</div>
+  </div>
+  <div class="v6-lower-third">
+    <div class="v6-id">
+      <div class="v6-id-bar"></div>
+      <div class="v6-id-inner">
+        <div class="v6-id-avatar"><img src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/ran-levgoren.png" alt="Ran Levgoren"></div>
+        <div class="v6-id-text">
+          <div class="id-name">Ran Levgoren</div>
+          <div class="id-role">Sales · monday.com</div>
+          <div class="id-built">Built Moti — The Silence Disruptor Agent</div>
+        </div>
+      </div>
+    </div>
+    <div class="v6-others">
+      <div class="v6-other-chip">
+        <div class="v6-other-avatar"><img src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/osher-mayor.png" alt="Osher Mayor"></div>
+        <div class="v6-other-info"><div class="other-name">Osher Mayor</div><div class="other-dept">Marketing · Riki Shula</div></div>
+      </div>
+      <div class="v6-other-chip">
+        <div class="v6-other-avatar"><img src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/amit-frishberg.png" alt="Amit Frishberg"></div>
+        <div class="v6-other-info"><div class="other-name">Amit Frishberg</div><div class="other-dept">Engineering · Petro</div></div>
+      </div>
+      <div class="v6-other-chip">
+        <div class="v6-other-avatar"><img src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/roni-rebish.png" alt="Roni Rebish"></div>
+        <div class="v6-other-info"><div class="other-name">Roni Rebish</div><div class="other-dept">Product · Allison</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ VARIANT 7 — Builder reel cards ═══ -->
+<div class="variant" style="background:#03030a; padding:80px 40px 60px;">
+  <div class="label-bar">
+    <span class="vnum">Variant 7</span>
+    <span class="vdesc">Reel cards — portrait video + builder photo + name + role, one card per person.</span>
+  </div>
+  <div class="v7-wrap">
+    <div class="v7-head">
+      <span class="eyebrow">Monday on Monday</span>
+      <h2 class="v7-headline">5,117 agents. These are 4 of the people who built them.</h2>
+      <p class="v7-sub">Each solved a problem that frustrated them personally — in one week.</p>
+    </div>
+    <div class="v7-grid">
+
+      <div class="v7-card">
+        <div class="v7-card-video">
+          <video src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Video/Moti.mp4" muted loop playsinline autoplay preload="metadata"></video>
+          <div class="v7-card-video-overlay"></div>
+        </div>
+        <div class="v7-card-info">
+          <div class="v7-card-avatar"><img src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/ran-levgoren.png" alt="Ran Levgoren"></div>
+          <div>
+            <div class="v7-card-name">Ran Levgoren</div>
+            <div class="v7-card-role">Sales · monday.com</div>
+            <div class="v7-card-agent">Built Moti</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="v7-card">
+        <div class="v7-card-video">
+          <video src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Video/Osher_shula_marketing.mp4" muted loop playsinline autoplay preload="metadata"></video>
+          <div class="v7-card-video-overlay"></div>
+        </div>
+        <div class="v7-card-info">
+          <div class="v7-card-avatar"><img src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/osher-mayor.png" alt="Osher Mayor"></div>
+          <div>
+            <div class="v7-card-name">Osher Mayor</div>
+            <div class="v7-card-role">Lifecycle Marketing · monday.com</div>
+            <div class="v7-card-agent">Built Riki Shula</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="v7-card">
+        <div class="v7-card-video">
+          <video src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Video/Petro.mp4" muted loop playsinline autoplay preload="metadata"></video>
+          <div class="v7-card-video-overlay"></div>
+        </div>
+        <div class="v7-card-info">
+          <div class="v7-card-avatar"><img src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/amit-frishberg.png" alt="Amit Frishberg"></div>
+          <div>
+            <div class="v7-card-name">Amit Frishberg</div>
+            <div class="v7-card-role">Tech Lead, CRM · monday.com</div>
+            <div class="v7-card-agent">Built Petro</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="v7-card">
+        <div class="v7-card-video">
+          <video src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Video/roni_allison_product.mp4" muted loop playsinline autoplay preload="metadata"></video>
+          <div class="v7-card-video-overlay"></div>
+        </div>
+        <div class="v7-card-info">
+          <div class="v7-card-avatar"><img src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/roni-rebish.png" alt="Roni Rebish"></div>
+          <div>
+            <div class="v7-card-name">Roni Rebish</div>
+            <div class="v7-card-role">Product Manager · monday.com</div>
+            <div class="v7-card-agent">Built Allison</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ═══ VARIANT 8 — 2×2 identity grid ═══ -->
+<div class="variant" style="background:#000; padding:0;">
+  <div class="label-bar">
+    <span class="vnum">Variant 8</span>
+    <span class="vdesc">Identity grid — all 4 agents playing at once, each with its builder's nameplate.</span>
+  </div>
+  <div class="v8-grid">
+
+    <div class="v8-cell">
+      <video src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Video/Moti.mp4" muted loop playsinline autoplay preload="metadata"></video>
+      <div class="v8-cell-overlay"></div>
+      <div class="v8-nameplate">
+        <div class="v8-np-avatar"><img src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/ran-levgoren.png" alt="Ran Levgoren"></div>
+        <div>
+          <div class="v8-np-name">Ran Levgoren</div>
+          <div class="v8-np-role">Sales · monday.com</div>
+          <div class="v8-np-agent">→ Built Moti</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="v8-cell">
+      <video src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Video/Osher_shula_marketing.mp4" muted loop playsinline autoplay preload="metadata"></video>
+      <div class="v8-cell-overlay"></div>
+      <div class="v8-nameplate">
+        <div class="v8-np-avatar"><img src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/osher-mayor.png" alt="Osher Mayor"></div>
+        <div>
+          <div class="v8-np-name">Osher Mayor</div>
+          <div class="v8-np-role">Lifecycle Marketing · monday.com</div>
+          <div class="v8-np-agent">→ Built Riki Shula</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="v8-cell">
+      <video src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Video/Petro.mp4" muted loop playsinline autoplay preload="metadata"></video>
+      <div class="v8-cell-overlay"></div>
+      <div class="v8-nameplate">
+        <div class="v8-np-avatar"><img src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/amit-frishberg.png" alt="Amit Frishberg"></div>
+        <div>
+          <div class="v8-np-name">Amit Frishberg</div>
+          <div class="v8-np-role">Tech Lead, CRM · monday.com</div>
+          <div class="v8-np-agent">→ Built Petro</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="v8-cell">
+      <video src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Video/roni_allison_product.mp4" muted loop playsinline autoplay preload="metadata"></video>
+      <div class="v8-cell-overlay"></div>
+      <div class="v8-nameplate">
+        <div class="v8-np-avatar"><img src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/roni-rebish.png" alt="Roni Rebish"></div>
+        <div>
+          <div class="v8-np-name">Roni Rebish</div>
+          <div class="v8-np-role">Product Manager · monday.com</div>
+          <div class="v8-np-agent">→ Built Allison</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="v8-center-badge">
+    <div class="v8-center-num">5,117</div>
+    <div class="v8-center-label">agents · 1 week</div>
+  </div>
+</div>
+
+<!-- ═══ VARIANT 9 — Documentary speaker ID ═══ -->
+<div class="variant" style="background:#000; padding:0;">
+  <div class="label-bar">
+    <span class="vnum">Variant 9</span>
+    <span class="vdesc">Documentary — frosted ID card like a TV speaker credit. The person's identity is the story.</span>
+  </div>
+  <div class="v9-video-bg">
+    <video src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Video/roni_allison_product.mp4" muted loop playsinline autoplay preload="metadata"></video>
+    <div class="v9-vignette"></div>
+    <div class="v9-dark-bottom"></div>
+  </div>
+  <div class="v9-top-row">
+    <div class="v9-eyebrow">Monday on Monday</div>
+    <div class="v9-counter">
+      <div class="v9-counter-num">5,117</div>
+      <div class="v9-counter-label">agents · 8 depts · 1 week</div>
+    </div>
+  </div>
+  <div class="v9-speaker-id">
+    <div class="v9-id-accent"></div>
+    <div class="v9-id-card">
+      <div class="v9-id-photo"><img src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/roni-rebish.png" alt="Roni Rebish"></div>
+      <div>
+        <div class="v9-id-name">Roni Rebish</div>
+        <div class="v9-id-role">Product Manager · monday.com</div>
+        <div class="v9-id-built">Built Allison — Accessibility Pipeline: Audit → Code → PR</div>
+      </div>
+    </div>
+  </div>
+  <div class="v9-others">
+    <div class="v9-other">
+      <div class="v9-other-avatar"><img src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/ran-levgoren.png" alt="Ran Levgoren"></div>
+      <div><div class="v9-other-name">Ran Levgoren</div><div class="v9-other-dept">Sales · Moti</div></div>
+    </div>
+    <div class="v9-other">
+      <div class="v9-other-avatar"><img src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/osher-mayor.png" alt="Osher Mayor"></div>
+      <div><div class="v9-other-name">Osher Mayor</div><div class="v9-other-dept">Marketing · Riki Shula</div></div>
+    </div>
+    <div class="v9-other">
+      <div class="v9-other-avatar"><img src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/amit-frishberg.png" alt="Amit Frishberg"></div>
+      <div><div class="v9-other-name">Amit Frishberg</div><div class="v9-other-dept">Engineering · Petro</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ VARIANT 10 — Customer story cards ═══ -->
+<div class="variant" style="background:#03030a; padding:80px 40px 60px;">
+  <div class="label-bar">
+    <span class="vnum">Variant 10</span>
+    <span class="vdesc">Story cards — landscape video + builder photo + name + role. Built for identification.</span>
+  </div>
+  <div class="v10-wrap">
+    <div class="v10-head">
+      <span class="eyebrow">Monday on Monday</span>
+      <h2 class="v10-headline">Real people. Real roles. Real agents.</h2>
+      <p class="v10-sub">5,117 built in one week — these are 4 of the people who did it.</p>
+    </div>
+    <div class="v10-grid">
+
+      <div class="v10-card">
+        <div class="v10-card-video">
+          <video src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Video/Moti.mp4" muted loop playsinline autoplay preload="metadata"></video>
+          <div class="v10-card-video-overlay"></div>
+        </div>
+        <div class="v10-card-body">
+          <div class="v10-card-avatar"><img src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/ran-levgoren.png" alt="Ran Levgoren"></div>
+          <div>
+            <div class="v10-card-name">Ran Levgoren</div>
+            <div class="v10-card-role">Sales · monday.com</div>
+            <div class="v10-card-agent"><div class="v10-card-agent-dot"></div><span class="v10-card-agent-name">Moti — The Silence Disruptor</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="v10-card">
+        <div class="v10-card-video">
+          <video src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Video/Osher_shula_marketing.mp4" muted loop playsinline autoplay preload="metadata"></video>
+          <div class="v10-card-video-overlay"></div>
+        </div>
+        <div class="v10-card-body">
+          <div class="v10-card-avatar"><img src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/osher-mayor.png" alt="Osher Mayor"></div>
+          <div>
+            <div class="v10-card-name">Osher Mayor</div>
+            <div class="v10-card-role">Lifecycle Marketing · monday.com</div>
+            <div class="v10-card-agent"><div class="v10-card-agent-dot"></div><span class="v10-card-agent-name">Riki Shula — Data to Content</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="v10-card">
+        <div class="v10-card-video">
+          <video src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Video/Petro.mp4" muted loop playsinline autoplay preload="metadata"></video>
+          <div class="v10-card-video-overlay"></div>
+        </div>
+        <div class="v10-card-body">
+          <div class="v10-card-avatar"><img src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/amit-frishberg.png" alt="Amit Frishberg"></div>
+          <div>
+            <div class="v10-card-name">Amit Frishberg</div>
+            <div class="v10-card-role">Tech Lead, CRM · monday.com</div>
+            <div class="v10-card-agent"><div class="v10-card-agent-dot"></div><span class="v10-card-agent-name">Petro — Mobile Feature Parity</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="v10-card">
+        <div class="v10-card-video">
+          <video src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Video/roni_allison_product.mp4" muted loop playsinline autoplay preload="metadata"></video>
+          <div class="v10-card-video-overlay"></div>
+        </div>
+        <div class="v10-card-body">
+          <div class="v10-card-avatar"><img src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/roni-rebish.png" alt="Roni Rebish"></div>
+          <div>
+            <div class="v10-card-name">Roni Rebish</div>
+            <div class="v10-card-role">Product Manager · monday.com</div>
+            <div class="v10-card-agent"><div class="v10-card-agent-dot"></div><span class="v10-card-agent-name">Allison — Accessibility Pipeline</span></div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>
