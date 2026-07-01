@@ -101,16 +101,39 @@ body { font-family:'Poppins',sans-serif; background:var(--bg); color:#fff; }
 .la-sub { font-size:14px; color:var(--dim); line-height:1.78; max-width:400px; }
 .la-nav { margin-top:44px; }
 
-/* ── mobile ── */
+/* ── mobile responsive ── */
 @media (max-width:768px) {
   .layout { grid-template-columns:1fr; height:auto; }
-  .right { order:-1; padding:14px; }
-  .left { border-right:none; border-top:1px solid var(--border); padding:24px 20px 48px; }
+  .right { order:-1; padding:14px 14px 0; }
+  .left { border-right:none; border-top:1px solid var(--border); padding:28px 20px 52px; }
   .info-bar { grid-template-columns:1fr; }
   .ib-sep { height:1px; }
+  .vplay-btn { opacity:0.8; }
   .v10-hl { font-size:clamp(28px, 8vw, 42px); }
   .v10-count { font-size:clamp(44px, 12vw, 64px); }
+  .la-hl { font-size:clamp(22px, 7vw, 34px); }
+  .la-nav { margin-top:28px; }
 }
+
+/* ══════════════════════════════════════════
+   SECTION 4 — Mobile preview (phone frame)
+══════════════════════════════════════════ */
+.mob-scene { display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:100vh; padding:60px 24px; position:relative; z-index:1; }
+.mob-label { font-size:9px; font-weight:700; letter-spacing:4px; text-transform:uppercase; color:var(--dimmer); margin-bottom:28px; }
+.mob-frame { width:390px; border-radius:44px; border:1.5px solid var(--border-hi); background:var(--bg); overflow:hidden; box-shadow:0 48px 120px rgba(0,0,0,0.75), 0 0 0 1px rgba(97,97,255,0.12); max-height:820px; overflow-y:auto; scrollbar-width:none; }
+.mob-frame::-webkit-scrollbar { display:none; }
+.mob-card-area { padding:14px 14px 0; }
+.mob-text-area { padding:26px 20px 52px; border-top:1px solid var(--border); }
+.mob-eyebrow { font-size:9px; font-weight:700; letter-spacing:4px; text-transform:uppercase; color:var(--purple); display:block; margin-bottom:14px; }
+.mob-hl { font-size:22px; font-weight:800; line-height:1.2; margin-bottom:14px; }
+.mob-sub { font-size:12px; color:var(--dim); line-height:1.72; }
+.mob-nav { display:flex; align-items:center; gap:10px; margin-top:28px; }
+/* info-bar inside mob-frame: single column */
+.mob-frame .info-bar { grid-template-columns:1fr; }
+.mob-frame .ib-sep { height:1px; }
+.mob-frame .vplay-btn { opacity:0.8; }
+.mob-frame .dept-row { flex-wrap:nowrap; overflow-x:auto; scrollbar-width:none; }
+.mob-frame .dept-row::-webkit-scrollbar { display:none; }
 </style>
 </head>
 <body>
@@ -236,6 +259,69 @@ body { font-family:'Poppins',sans-serif; background:var(--bg); color:#fff; }
 
 
 <!-- ══════════════════════════════════════════════════
+     SECTION 4 — Mobile preview (phone frame)
+══════════════════════════════════════════════════ -->
+<div class="sect" id="s4">
+  <div class="mob-scene">
+    <div class="mob-label">Mobile</div>
+    <div class="mob-frame">
+      <!-- card -->
+      <div class="mob-card-area">
+        <div class="card">
+          <div class="dept-row clickable" id="sm-deptrow"></div>
+          <div class="card-video" id="sm-vwrap">
+            <video id="sm-video" muted loop playsinline preload="metadata"></video>
+            <button class="vplay-btn" id="sm-playbtn" aria-label="Play/Pause">
+              <svg id="sm-icon-play" viewBox="0 0 16 16"><polygon points="4,2 14,8 4,14"/></svg>
+              <svg id="sm-icon-pause" viewBox="0 0 16 16" style="display:none"><rect x="3" y="2" width="4" height="12"/><rect x="9" y="2" width="4" height="12"/></svg>
+            </button>
+          </div>
+          <div class="info-bar">
+            <div class="ib-builder" id="sm-builder">
+              <div class="ib-av"><img id="sm-av" alt=""></div>
+              <div>
+                <div class="ib-dept" id="sm-dept"></div>
+                <div class="ib-b-name" id="sm-bname"></div>
+                <div class="ib-b-meta" id="sm-bmeta"></div>
+              </div>
+            </div>
+            <div class="ib-sep"></div>
+            <div class="ib-agent" id="sm-agent">
+              <div class="ib-agent-av" id="sm-agent-av"><img id="sm-agentimg" alt=""></div>
+              <div>
+                <div class="ib-lbl">The agent</div>
+                <div class="ib-a-name" id="sm-aname"></div>
+                <div class="ib-a-desc" id="sm-adesc"></div>
+              </div>
+            </div>
+            <div class="ib-sep"></div>
+            <div class="ib-outcome" id="sm-outcome">
+              <div class="ib-lbl">The outcome</div>
+              <div class="ib-outcome-nums">
+                <div class="ib-stat" id="sm-stat"></div>
+                <div class="ib-stat-lbl" id="sm-statlbl"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- text + nav -->
+      <div class="mob-text-area">
+        <span class="mob-eyebrow">MONDAY'S AI TRANSFORMATION</span>
+        <h2 class="mob-hl">How monday teams turned real work challenges into working agents</h2>
+        <p class="mob-sub">5,117 agents built by monday people, each one started as someone's daily frustration.</p>
+        <div class="mob-nav">
+          <button class="arr" id="sm-prev">&#8592;</button>
+          <div class="dots" id="sm-dots"></div>
+          <button class="arr" id="sm-next">&#8594;</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════
      SECTION 3 — "How monday teams turned…"
 ══════════════════════════════════════════════════ -->
 <div class="sect" id="s3">
@@ -304,7 +390,7 @@ const BUILDERS = [
   { name:"Roni Rebish",    title:"Product Manager",             dept:"Product",     agentName:"Allison",    agentDesc:"Accessibility Pipeline", statNum:"70%", statLabel:"drop in accessibility rework cost",       video:"https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Video/roni_allison_product.mp4",   avatar:"https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/roni-rebish.png",    agentImg:"https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/New%20agents%20images/agent-marketing-competitor-research-agent.webp" }
 ];
 
-function wireSection(prefix, { hasDots = false, builders = BUILDERS, clickableDepts = false, noAutoAdvance = false } = {}) {
+function wireSection(prefix, { hasDots = false, builders = BUILDERS, clickableDepts = false, noAutoAdvance = false, sectId = null } = {}) {
   let cur = 0;
   const vwrap     = document.getElementById(`${prefix}-vwrap`);
   const video     = document.getElementById(`${prefix}-video`);
@@ -372,7 +458,7 @@ function wireSection(prefix, { hasDots = false, builders = BUILDERS, clickableDe
     }, 260);
   }
 
-  const sect = document.getElementById(prefix);
+  const sect = document.getElementById(sectId || prefix);
   let tx = 0;
   sect.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive:true });
   sect.addEventListener('touchend',   e => { const dx = e.changedTouches[0].clientX - tx; if (Math.abs(dx) > 44) go(cur + (dx < 0 ? 1 : -1)); }, { passive:true });
@@ -389,6 +475,7 @@ const BUILDERS_S3 = [BUILDERS[3], BUILDERS[0], BUILDERS[1], BUILDERS[2]];
 
 wireSection('s1');
 wireSection('s2', { hasDots: true });
+wireSection('sm', { hasDots: true, builders: BUILDERS_S3, clickableDepts: true, noAutoAdvance: true, sectId: 's4' });
 wireSection('s3', { hasDots: true, builders: BUILDERS_S3, clickableDepts: true, noAutoAdvance: true });
 </script>
 </body>
