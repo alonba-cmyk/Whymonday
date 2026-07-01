@@ -211,6 +211,11 @@ body { font-family:'Poppins',sans-serif; background:var(--bg); color:#fff; }
 .mvd .info-bar > :nth-child(3) { display:none; }
 .mvd .ib-outcome { background:var(--purple-lo); }
 
+/* s3 mobile E variant — hidden on desktop, shown on mobile */
+.s3-mobile { display:none; flex-direction:column; min-height:100vh; position:relative; z-index:1; }
+.s3m-header { padding:36px 22px 14px; text-align:center; }
+.s3m-hl { font-size:clamp(20px, 5.5vw, 26px); font-weight:800; line-height:1.22; margin-top:10px; }
+
 /* ── mobile responsive ── */
 @media (max-width:768px) {
   .layout { grid-template-columns:1fr; height:auto; }
@@ -223,6 +228,21 @@ body { font-family:'Poppins',sans-serif; background:var(--bg); color:#fff; }
   .v10-count { font-size:clamp(44px, 12vw, 64px); }
   .la-hl { font-size:clamp(22px, 7vw, 34px); }
   .la-nav { margin-top:28px; }
+
+  /* s3: hide desktop layout, show E variant */
+  .s3-desktop { display:none !important; }
+  .s3-mobile { display:flex; }
+  .s3-mobile .mve-people-nav { padding:14px 10px; gap:6px; justify-content:space-around; }
+  .s3-mobile .mve-person-btn { width:76px; }
+  .s3-mobile .mve-person-photo { width:68px; height:68px; }
+  .s3-mobile .mve-person-name { font-size:9px; max-width:76px; }
+  .s3-mobile .mve-person-title { font-size:7.5px; max-width:76px; }
+  .s3-mobile .mve-person-dept { font-size:7.5px; }
+  .s3-mobile .mve-outcome { padding:16px 20px; }
+  .s3-mobile .mve-outcome-agent { width:48px; height:48px; border-radius:10px; }
+  .s3-mobile .mve-outcome-num { font-size:28px; }
+  .s3-mobile .mve-outcome-lbl { font-size:11px; }
+  .s3-mobile .vplay-btn { opacity:0.8; }
 }
 
 /* ══════════════════════════════════════════
@@ -623,7 +643,33 @@ body { font-family:'Poppins',sans-serif; background:var(--bg); color:#fff; }
      SECTION 3 — "How monday teams turned…"
 ══════════════════════════════════════════════════ -->
 <div class="sect" id="s3">
-  <div class="layout">
+
+  <!-- Mobile: E variant (people carousel) -->
+  <div class="s3-mobile">
+    <div class="s3m-header">
+      <span class="eyebrow">MONDAY'S AI TRANSFORMATION</span>
+      <h2 class="s3m-hl">How monday teams turned real work challenges into working agents</h2>
+    </div>
+    <div class="mve-people-nav" id="s3m-people-nav"></div>
+    <div class="mve-video-wrap" id="s3m-vwrap">
+      <video id="s3m-video" muted loop playsinline preload="metadata"></video>
+      <button class="vplay-btn" id="s3m-playbtn" aria-label="Play/Pause">
+        <svg id="s3m-icon-play" viewBox="0 0 16 16"><polygon points="4,2 14,8 4,14"/></svg>
+        <svg id="s3m-icon-pause" viewBox="0 0 16 16" style="display:none"><rect x="3" y="2" width="4" height="12"/><rect x="9" y="2" width="4" height="12"/></svg>
+      </button>
+    </div>
+    <div class="mve-outcome" id="s3m-outcome">
+      <div class="mve-outcome-agent"><img id="s3m-agentimg" alt=""></div>
+      <div class="mve-outcome-info">
+        <div class="mve-outcome-tag">The outcome</div>
+        <div class="mve-outcome-num" id="s3m-stat"></div>
+        <div class="mve-outcome-lbl" id="s3m-statlbl"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Desktop: left/right layout -->
+  <div class="layout s3-desktop">
 
     <div class="left">
       <span class="eyebrow">MONDAY'S AI TRANSFORMATION</span>
@@ -842,6 +888,7 @@ wireSection('mc', { hasDots:true, builders:BUILDERS_S3, clickableDepts:true, noA
 wireSection('md', { hasDots:true, builders:BUILDERS_S3, clickableDepts:true, noAutoAdvance:true, noTouch:true });
 wireSection('sm', { hasDots: true, builders: BUILDERS_S3, clickableDepts: true, noAutoAdvance: true, sectId: 's4' });
 wireSection('s3', { hasDots: true, builders: BUILDERS_S3, clickableDepts: true, noAutoAdvance: true });
+wireMve('s3m');
 wireMve('me');
 wireMve('se');
 </script>
