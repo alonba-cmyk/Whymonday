@@ -119,12 +119,6 @@ body { font-family:'Poppins',sans-serif; background:var(--bg); color:#fff; }
 
     <div class="right">
       <div class="card">
-        <div class="dept-bar" id="s1-dept-bar">
-          <button class="dept-pill" data-idx="0">Sales</button>
-          <button class="dept-pill" data-idx="1">Marketing</button>
-          <button class="dept-pill" data-idx="2">Engineering</button>
-          <button class="dept-pill" data-idx="3">Product</button>
-        </div>
         <div class="card-video" id="s1-vwrap">
           <video id="s1-video" muted loop playsinline autoplay preload="metadata"></video>
         </div>
@@ -174,12 +168,6 @@ body { font-family:'Poppins',sans-serif; background:var(--bg); color:#fff; }
 
     <div class="right">
       <div class="card">
-        <div class="dept-bar" id="s2-dept-bar">
-          <button class="dept-pill" data-idx="0">Sales</button>
-          <button class="dept-pill" data-idx="1">Marketing</button>
-          <button class="dept-pill" data-idx="2">Engineering</button>
-          <button class="dept-pill" data-idx="3">Product</button>
-        </div>
         <div class="card-video" id="s2-vwrap">
           <video id="s2-video" muted loop playsinline autoplay preload="metadata"></video>
         </div>
@@ -225,8 +213,6 @@ function wireSection(prefix, { hasDots = false } = {}) {
   const builderEl = document.getElementById(`${prefix}-builder`);
   const agentEl   = document.getElementById(`${prefix}-agent`);
   const outcomeEl = document.getElementById(`${prefix}-outcome`);
-  const deptBar   = document.getElementById(`${prefix}-dept-bar`);
-  const pills     = deptBar.querySelectorAll('.dept-pill');
   const dotsEl    = hasDots ? document.getElementById(`${prefix}-dots`) : null;
 
   if (hasDots) {
@@ -240,8 +226,6 @@ function wireSection(prefix, { hasDots = false } = {}) {
     document.getElementById(`${prefix}-prev`).onclick = () => go(cur - 1);
     document.getElementById(`${prefix}-next`).onclick = () => go(cur + 1);
   }
-
-  pills.forEach((btn, i) => btn.onclick = () => go(i));
 
   function go(idx) {
     [vwrap, builderEl, agentEl, outcomeEl].forEach(el => el.classList.add('fading'));
@@ -257,7 +241,6 @@ function wireSection(prefix, { hasDots = false } = {}) {
       document.getElementById(`${prefix}-stat`).textContent  = b.statNum;
       document.getElementById(`${prefix}-statlbl`).textContent = b.statLabel;
       if (dotsEl) dotsEl.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === cur));
-      pills.forEach((p, i) => p.classList.toggle('active', i === cur));
       [vwrap, builderEl, agentEl, outcomeEl].forEach(el => el.classList.remove('fading'));
     }, 260);
   }
