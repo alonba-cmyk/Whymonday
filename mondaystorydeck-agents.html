@@ -1141,45 +1141,6 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
   </div>
 </div>
 
-<div class="slide" id="scred">
-  <div class="scred-headline">Recognized by the<br>world's leading analysts.</div>
-  <div class="scred-cards" id="scredCards">
-    <div class="scred-card">
-      <div class="scred-logo-wrap">
-        <img class="scred-logo" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Enterprise/Gartner.svg" alt="Gartner">
-      </div>
-      <div class="scred-copy">
-        <div class="scred-title">3× Magic Quadrant Leader</div>
-        <div class="scred-sub">Only work management platform recognized as Leader in 3 MQ reports</div>
-      </div>
-    </div>
-    <div class="scred-card">
-      <div class="scred-logo-wrap">
-        <img class="scred-logo" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Enterprise/Forster.svg" alt="Forrester">
-      </div>
-      <div class="scred-copy">
-        <div class="scred-title">Motorola achieved 346% ROI</div>
-        <div class="scred-sub">according to Forrester's Total Economic Impact™ research</div>
-      </div>
-    </div>
-  </div>
-  <div class="scred-security">
-    <div class="scred-sec-label">
-      <svg width="12" height="12" viewBox="0 0 36 36" fill="none">
-        <path d="M18 3L5 8.5V17c0 8.4 5.8 16.2 13 18C25.2 33.2 31 25.4 31 17V8.5L18 3z" fill="rgba(97,97,255,0.3)" stroke="rgba(97,97,255,0.6)" stroke-width="2"/>
-        <path d="M12 18l4 4 8-8" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-      Enterprise-grade security
-    </div>
-    <div class="scred-certs">
-      <div class="scred-cert"><span class="scred-cert-abbr">GDPR</span><span class="scred-cert-full">EU Data<br>Protection</span></div>
-      <div class="scred-cert"><span class="scred-cert-abbr">SOC 2</span><span class="scred-cert-full">AICPA<br>Certified</span></div>
-      <div class="scred-cert"><span class="scred-cert-abbr">ISO</span><span class="scred-cert-full">27001<br>Certified</span></div>
-      <div class="scred-cert"><span class="scred-cert-abbr">HIPAA</span><span class="scred-cert-full">Health Data<br>Compliant</span></div>
-    </div>
-  </div>
-</div>
-
 <div class="slide" id="smom">
   <!-- Desktop layout -->
   <div class="mom-layout">
@@ -1254,6 +1215,45 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
           <div class="mom-mob-outcome-lbl" id="smom-mob-statlbl"></div>
         </div>
       </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" id="scred">
+  <div class="scred-headline">Recognized by the<br>world's leading analysts.</div>
+  <div class="scred-cards" id="scredCards">
+    <div class="scred-card">
+      <div class="scred-logo-wrap">
+        <img class="scred-logo" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Enterprise/Gartner.svg" alt="Gartner">
+      </div>
+      <div class="scred-copy">
+        <div class="scred-title">3× Magic Quadrant Leader</div>
+        <div class="scred-sub">Only work management platform recognized as Leader in 3 MQ reports</div>
+      </div>
+    </div>
+    <div class="scred-card">
+      <div class="scred-logo-wrap">
+        <img class="scred-logo" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Enterprise/Forster.svg" alt="Forrester">
+      </div>
+      <div class="scred-copy">
+        <div class="scred-title">Motorola achieved 346% ROI</div>
+        <div class="scred-sub">according to Forrester's Total Economic Impact™ research</div>
+      </div>
+    </div>
+  </div>
+  <div class="scred-security">
+    <div class="scred-sec-label">
+      <svg width="12" height="12" viewBox="0 0 36 36" fill="none">
+        <path d="M18 3L5 8.5V17c0 8.4 5.8 16.2 13 18C25.2 33.2 31 25.4 31 17V8.5L18 3z" fill="rgba(97,97,255,0.3)" stroke="rgba(97,97,255,0.6)" stroke-width="2"/>
+        <path d="M12 18l4 4 8-8" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Enterprise-grade security
+    </div>
+    <div class="scred-certs">
+      <div class="scred-cert"><span class="scred-cert-abbr">GDPR</span><span class="scred-cert-full">EU Data<br>Protection</span></div>
+      <div class="scred-cert"><span class="scred-cert-abbr">SOC 2</span><span class="scred-cert-full">AICPA<br>Certified</span></div>
+      <div class="scred-cert"><span class="scred-cert-abbr">ISO</span><span class="scred-cert-full">27001<br>Certified</span></div>
+      <div class="scred-cert"><span class="scred-cert-abbr">HIPAA</span><span class="scred-cert-full">Health Data<br>Compliant</span></div>
     </div>
   </div>
 </div>
@@ -1454,7 +1454,7 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
     const navDots = document.getElementById('navDots');
     if (n === 5 && window.innerWidth > 768) navDots.classList.add('bottom-center');
     else navDots.classList.remove('bottom-center');
-    if (n === 10 && window._momSmomEnter) window._momSmomEnter();
+    if (n === 9 && window._momSmomEnter) window._momSmomEnter();
     if (n === 2) { if (window.innerWidth <= 768) { pcGoTo(0); pcStart(); } } else { pcStop(); }
     if (n === 6) { mktPlayIntro(); } else { sbsStopAuto(); }
     if (n === 3) {
