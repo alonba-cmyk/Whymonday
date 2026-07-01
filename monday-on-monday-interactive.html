@@ -46,11 +46,10 @@ body { font-family:'Poppins',sans-serif; background:var(--bg); color:#fff; }
 /* ── card ── */
 .card { width:100%; background:var(--bg-el); border:1px solid var(--border-hi); border-radius:22px; overflow:hidden; box-shadow:0 32px 90px rgba(0,0,0,0.60), 0 0 0 1px rgba(97,97,255,0.10); }
 
-/* ── dept bar ── */
-.dept-bar { display:flex; gap:7px; flex-wrap:wrap; padding:14px 18px; border-bottom:1px solid var(--border); }
-.dept-pill { font-family:'Poppins',sans-serif; font-size:10px; font-weight:600; padding:5px 13px; border-radius:100px; border:1px solid var(--border-hi); background:transparent; color:var(--dim); cursor:pointer; transition:background .2s,border-color .2s,color .2s; }
-.dept-pill.active { background:var(--purple-lo); border-color:var(--purple); color:#fff; }
-.dept-pill:hover:not(.active) { border-color:rgba(255,255,255,0.30); color:#fff; }
+/* ── dept row (above video) ── */
+.dept-row { display:flex; gap:6px; flex-wrap:wrap; padding:12px 16px; border-bottom:1px solid var(--border); }
+.dept-tag { font-size:10px; font-weight:600; letter-spacing:0.4px; padding:4px 12px; border-radius:100px; border:1px solid var(--border-hi); color:var(--dimmer); transition:background .26s,border-color .26s,color .26s; }
+.dept-tag.active { background:var(--purple-lo); border-color:var(--purple); color:#fff; }
 
 /* ── video ── */
 .card-video { position:relative; aspect-ratio:16/9; background:#000; overflow:hidden; transition:opacity .26s; }
@@ -128,6 +127,7 @@ body { font-family:'Poppins',sans-serif; background:var(--bg); color:#fff; }
 
     <div class="right">
       <div class="card">
+        <div class="dept-row" id="s1-deptrow"></div>
         <div class="card-video" id="s1-vwrap">
           <video id="s1-video" muted loop playsinline autoplay preload="metadata"></video>
           <button class="vplay-btn" id="s1-playbtn" aria-label="Play/Pause">
@@ -188,6 +188,7 @@ body { font-family:'Poppins',sans-serif; background:var(--bg); color:#fff; }
 
     <div class="right">
       <div class="card">
+        <div class="dept-row" id="s2-deptrow"></div>
         <div class="card-video" id="s2-vwrap">
           <video id="s2-video" muted loop playsinline autoplay preload="metadata"></video>
           <button class="vplay-btn" id="s2-playbtn" aria-label="Play/Pause">
@@ -248,6 +249,14 @@ function wireSection(prefix, { hasDots = false } = {}) {
   const playBtn   = document.getElementById(`${prefix}-playbtn`);
   const iconPlay  = document.getElementById(`${prefix}-icon-play`);
   const iconPause = document.getElementById(`${prefix}-icon-pause`);
+  const deptRow   = document.getElementById(`${prefix}-deptrow`);
+
+  BUILDERS.forEach(b => {
+    const tag = document.createElement('span');
+    tag.className = 'dept-tag';
+    tag.textContent = b.dept;
+    deptRow.appendChild(tag);
+  });
 
   function syncPlayIcon() {
     const paused = video.paused;
@@ -291,6 +300,7 @@ function wireSection(prefix, { hasDots = false } = {}) {
       document.getElementById(`${prefix}-stat`).textContent  = b.statNum;
       document.getElementById(`${prefix}-statlbl`).textContent = b.statLabel;
       if (dotsEl) dotsEl.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === cur));
+      deptRow.querySelectorAll('.dept-tag').forEach((t, i) => t.classList.toggle('active', i === cur));
       [vwrap, builderEl, agentEl, outcomeEl].forEach(el => el.classList.remove('fading'));
     }, 260);
   }
