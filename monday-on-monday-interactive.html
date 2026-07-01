@@ -123,7 +123,8 @@ body { font-family:'Poppins',sans-serif; background:var(--bg); color:#fff; }
 .mob-frame { width:390px; border-radius:44px; border:1.5px solid var(--border-hi); background:var(--bg); overflow:hidden; box-shadow:0 48px 120px rgba(0,0,0,0.75), 0 0 0 1px rgba(97,97,255,0.12); max-height:820px; overflow-y:auto; scrollbar-width:none; }
 .mob-frame::-webkit-scrollbar { display:none; }
 .mob-card-area { padding:14px 14px 0; }
-.mob-text-area { padding:26px 20px 52px; border-top:1px solid var(--border); }
+.mob-text-area { padding:28px 20px 20px; }
+.mob-card-area { padding:0 14px 14px; border-top:1px solid var(--border); padding-top:16px; }
 .mob-eyebrow { font-size:9px; font-weight:700; letter-spacing:4px; text-transform:uppercase; color:var(--purple); display:block; margin-bottom:14px; }
 .mob-hl { font-size:22px; font-weight:800; line-height:1.2; margin-bottom:14px; }
 .mob-sub { font-size:12px; color:var(--dim); line-height:1.72; }
@@ -265,6 +266,17 @@ body { font-family:'Poppins',sans-serif; background:var(--bg); color:#fff; }
   <div class="mob-scene">
     <div class="mob-label">Mobile</div>
     <div class="mob-frame">
+      <!-- text + nav -->
+      <div class="mob-text-area">
+        <span class="mob-eyebrow">MONDAY'S AI TRANSFORMATION</span>
+        <h2 class="mob-hl">How monday teams turned real work challenges into working agents</h2>
+        <p class="mob-sub">5,117 agents built by monday people, each one started as someone's daily frustration.</p>
+        <div class="mob-nav">
+          <button class="arr" id="sm-prev">&#8592;</button>
+          <div class="dots" id="sm-dots"></div>
+          <button class="arr" id="sm-next">&#8594;</button>
+        </div>
+      </div>
       <!-- card -->
       <div class="mob-card-area">
         <div class="card">
@@ -303,17 +315,6 @@ body { font-family:'Poppins',sans-serif; background:var(--bg); color:#fff; }
               </div>
             </div>
           </div>
-        </div>
-      </div>
-      <!-- text + nav -->
-      <div class="mob-text-area">
-        <span class="mob-eyebrow">MONDAY'S AI TRANSFORMATION</span>
-        <h2 class="mob-hl">How monday teams turned real work challenges into working agents</h2>
-        <p class="mob-sub">5,117 agents built by monday people, each one started as someone's daily frustration.</p>
-        <div class="mob-nav">
-          <button class="arr" id="sm-prev">&#8592;</button>
-          <div class="dots" id="sm-dots"></div>
-          <button class="arr" id="sm-next">&#8594;</button>
         </div>
       </div>
     </div>
