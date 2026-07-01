@@ -173,12 +173,32 @@ body { font-family:'Poppins',sans-serif; background:var(--bg); color:#fff; }
 .mve-video-wrap { position:relative; aspect-ratio:16/9; background:#000; overflow:hidden; transition:opacity .26s; }
 .mve-video-wrap video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
 
-.mve-vid-overlay { position:absolute; bottom:10px; left:10px; z-index:2; display:flex; align-items:center; gap:8px; background:rgba(3,3,10,0.68); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); border-radius:12px; padding:6px 10px 6px 6px; border:1px solid rgba(255,255,255,0.10); }
-.mve-agent-thumb { width:36px; height:36px; border-radius:8px; overflow:hidden; flex-shrink:0; border:1px solid rgba(97,97,255,0.45); }
-.mve-agent-thumb img { width:100%; height:100%; object-fit:cover; display:block; }
-.mve-overlay-stat { display:flex; flex-direction:column; }
-.mve-overlay-num { font-size:18px; font-weight:800; color:#fff; line-height:1; }
-.mve-overlay-lbl { font-size:8px; color:var(--dim); line-height:1.3; max-width:110px; }
+/* outcome strip below video */
+.mve-outcome { display:flex; align-items:center; gap:12px; padding:12px 14px; background:var(--purple-lo); border-top:1px solid var(--border); transition:opacity .26s; }
+.mve-outcome-agent { width:40px; height:40px; border-radius:9px; overflow:hidden; flex-shrink:0; border:1px solid rgba(97,97,255,0.45); }
+.mve-outcome-agent img { width:100%; height:100%; object-fit:cover; display:block; }
+.mve-outcome-info { display:flex; flex-direction:column; gap:1px; }
+.mve-outcome-tag { font-size:8px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--purple); }
+.mve-outcome-num { font-size:20px; font-weight:800; color:#fff; line-height:1.1; }
+.mve-outcome-lbl { font-size:9px; color:var(--dim); line-height:1.4; }
+
+/* standalone section 6 — larger phone frame for E variant */
+.s6-scene { display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:100vh; padding:52px 24px; position:relative; z-index:1; }
+.s6-frame { width:390px; border-radius:44px; border:1.5px solid var(--border-hi); background:var(--bg); overflow:hidden; box-shadow:0 48px 120px rgba(0,0,0,0.75), 0 0 0 1px rgba(97,97,255,0.12); max-height:820px; overflow-y:auto; scrollbar-width:none; }
+.s6-frame::-webkit-scrollbar { display:none; }
+.s6-header { padding:26px 22px 16px; text-align:center; }
+.s6-hl { font-size:22px; font-weight:800; line-height:1.22; margin-top:10px; }
+/* bigger person cards inside s6 */
+.s6-frame .mve-people-nav { padding:12px 10px; gap:6px; }
+.s6-frame .mve-person-btn  { width:76px; }
+.s6-frame .mve-person-photo { width:68px; height:68px; }
+.s6-frame .mve-person-name  { font-size:8.5px; max-width:76px; }
+.s6-frame .mve-person-title { font-size:7.5px; max-width:76px; }
+.s6-frame .mve-person-dept  { font-size:7.5px; }
+.s6-frame .mve-outcome { padding:14px 18px; }
+.s6-frame .mve-outcome-agent { width:46px; height:46px; border-radius:10px; }
+.s6-frame .mve-outcome-num { font-size:26px; }
+.s6-frame .mve-outcome-lbl { font-size:10px; }
 
 /* D — Pill tabs: dept as pill buttons, builder+outcome side-by-side */
 .mvd .mv-txt { padding-bottom:4px; }
@@ -476,24 +496,61 @@ body { font-family:'Poppins',sans-serif; background:var(--bg); color:#fff; }
           </div>
           <!-- people nav: photo + name + title + dept -->
           <div class="mve-people-nav" id="me-people-nav"></div>
-          <!-- agent video + overlay -->
+          <!-- agent video -->
           <div class="mve-video-wrap" id="me-vwrap">
             <video id="me-video" muted loop playsinline preload="metadata"></video>
-            <div class="mve-vid-overlay">
-              <div class="mve-agent-thumb"><img id="me-agentimg" alt=""></div>
-              <div class="mve-overlay-stat">
-                <div class="mve-overlay-num" id="me-stat"></div>
-                <div class="mve-overlay-lbl" id="me-statlbl"></div>
-              </div>
-            </div>
             <button class="vplay-btn" id="me-playbtn" aria-label="Play/Pause">
               <svg id="me-icon-play" viewBox="0 0 16 16"><polygon points="4,2 14,8 4,14"/></svg>
               <svg id="me-icon-pause" viewBox="0 0 16 16" style="display:none"><rect x="3" y="2" width="4" height="12"/><rect x="9" y="2" width="4" height="12"/></svg>
             </button>
           </div>
+          <!-- outcome strip below video -->
+          <div class="mve-outcome" id="me-outcome">
+            <div class="mve-outcome-agent"><img id="me-agentimg" alt=""></div>
+            <div class="mve-outcome-info">
+              <div class="mve-outcome-tag">The outcome</div>
+              <div class="mve-outcome-num" id="me-stat"></div>
+              <div class="mve-outcome-lbl" id="me-statlbl"></div>
+            </div>
+          </div>
         </div>
       </div>
 
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════
+     SECTION 6 — People First variant (standalone)
+══════════════════════════════════════════════════ -->
+<div class="sect" id="s6">
+  <div class="s6-scene">
+    <div class="s6-frame">
+      <!-- header -->
+      <div class="s6-header">
+        <span class="eyebrow">MONDAY'S AI TRANSFORMATION</span>
+        <h2 class="s6-hl">How monday teams turned real work challenges into working agents</h2>
+      </div>
+      <!-- people nav -->
+      <div class="mve-people-nav" id="se-people-nav"></div>
+      <!-- agent video -->
+      <div class="mve-video-wrap" id="se-vwrap">
+        <video id="se-video" muted loop playsinline preload="metadata"></video>
+        <button class="vplay-btn" id="se-playbtn" aria-label="Play/Pause">
+          <svg id="se-icon-play" viewBox="0 0 16 16"><polygon points="4,2 14,8 4,14"/></svg>
+          <svg id="se-icon-pause" viewBox="0 0 16 16" style="display:none"><rect x="3" y="2" width="4" height="12"/><rect x="9" y="2" width="4" height="12"/></svg>
+        </button>
+      </div>
+      <!-- outcome strip below video -->
+      <div class="mve-outcome" id="se-outcome">
+        <div class="mve-outcome-agent"><img id="se-agentimg" alt=""></div>
+        <div class="mve-outcome-info">
+          <div class="mve-outcome-tag">The outcome</div>
+          <div class="mve-outcome-num" id="se-stat"></div>
+          <div class="mve-outcome-lbl" id="se-statlbl"></div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -721,6 +778,7 @@ function wireMve(prefix, { builders = BUILDERS_S3 } = {}) {
   let cur = 0;
   const video      = document.getElementById(`${prefix}-video`);
   const vwrap      = document.getElementById(`${prefix}-vwrap`);
+  const outcomeEl  = document.getElementById(`${prefix}-outcome`);
   const agentImg   = document.getElementById(`${prefix}-agentimg`);
   const statEl     = document.getElementById(`${prefix}-stat`);
   const statLblEl  = document.getElementById(`${prefix}-statlbl`);
@@ -754,7 +812,8 @@ function wireMve(prefix, { builders = BUILDERS_S3 } = {}) {
   video.addEventListener('pause', syncPlayIcon);
 
   function go(idx) {
-    vwrap.classList.add('fading');
+    const fadeEls = [vwrap, outcomeEl].filter(Boolean);
+    fadeEls.forEach(el => el.classList.add('fading'));
     setTimeout(() => {
       cur = (idx + builders.length) % builders.length;
       const b = builders[cur];
@@ -763,7 +822,7 @@ function wireMve(prefix, { builders = BUILDERS_S3 } = {}) {
       statEl.textContent    = b.statNum;
       statLblEl.textContent = b.statLabel;
       peopleNav.querySelectorAll('.mve-person-btn').forEach((btn, i) => btn.classList.toggle('active', i === cur));
-      vwrap.classList.remove('fading');
+      fadeEls.forEach(el => el.classList.remove('fading'));
     }, 260);
   }
 
@@ -784,6 +843,7 @@ wireSection('md', { hasDots:true, builders:BUILDERS_S3, clickableDepts:true, noA
 wireSection('sm', { hasDots: true, builders: BUILDERS_S3, clickableDepts: true, noAutoAdvance: true, sectId: 's4' });
 wireSection('s3', { hasDots: true, builders: BUILDERS_S3, clickableDepts: true, noAutoAdvance: true });
 wireMve('me');
+wireMve('se');
 </script>
 </body>
 </html>
