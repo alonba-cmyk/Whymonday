@@ -714,13 +714,87 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
 }
 .scred-cert-abbr { font-size:9px; font-weight:700; color:rgba(255,255,255,0.68); }
 .scred-cert-full { font-size:6px; font-weight:400; text-transform:uppercase; letter-spacing:0.3px; color:rgba(255,255,255,0.26); text-align:center; line-height:1.3; }
+
+/* ══ Monday on Monday slide ══ */
+#smom { padding:0; overflow:hidden; }
+.mom-layout { display:grid; grid-template-columns:44% 56%; height:100%; }
+.mom-left { display:flex; flex-direction:column; justify-content:center; padding:56px 56px 48px; border-right:1px solid rgba(255,255,255,0.07); }
+.mom-right { display:flex; align-items:center; justify-content:center; padding:36px 40px; }
+.mom-eyebrow { font-size:10px; font-weight:700; letter-spacing:5px; text-transform:uppercase; color:var(--purple); display:block; margin-bottom:14px; }
+.mom-hl { font-size:clamp(22px,2.4vw,36px); font-weight:800; line-height:1.15; margin-bottom:14px; }
+.mom-sub { font-size:13px; color:rgba(255,255,255,0.5); line-height:1.78; max-width:380px; }
+.mom-nav-row { display:flex; align-items:center; gap:12px; margin-top:32px; }
+.mom-arr { width:42px; height:42px; border-radius:50%; border:1px solid rgba(255,255,255,0.13); background:rgba(255,255,255,0.04); color:#fff; font-size:16px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background .2s,border-color .2s; flex-shrink:0; }
+.mom-arr:hover { background:rgba(97,97,255,0.10); border-color:var(--purple); }
+.mom-dots { display:flex; gap:7px; align-items:center; }
+.mom-dot { width:6px; height:6px; border-radius:50%; background:rgba(255,255,255,0.22); border:none; padding:0; cursor:pointer; transition:background .2s,transform .2s; }
+.mom-dot.active { background:#fff; transform:scale(1.4); }
+.mom-fading { opacity:0 !important; }
+.mom-card { width:100%; background:#0d0d1a; border:1px solid rgba(255,255,255,0.13); border-radius:22px; overflow:hidden; box-shadow:0 32px 90px rgba(0,0,0,0.60),0 0 0 1px rgba(97,97,255,0.10); }
+.mom-dept-row { display:flex; gap:0; align-items:center; flex-wrap:wrap; padding:10px 16px; border-bottom:1px solid rgba(255,255,255,0.07); }
+.mom-dept-tag { font-size:10px; font-weight:600; letter-spacing:1px; text-transform:uppercase; color:rgba(255,255,255,0.26); transition:color .26s; position:relative; padding:0 14px 0 0; cursor:pointer; }
+.mom-dept-tag::after { content:'·'; position:absolute; right:5px; color:rgba(255,255,255,0.15); }
+.mom-dept-tag:last-child { padding-right:0; }
+.mom-dept-tag:last-child::after { display:none; }
+.mom-dept-tag.active { color:#fff; }
+.mom-dept-tag:hover:not(.active) { color:rgba(255,255,255,0.65); }
+.mom-video-wrap { position:relative; aspect-ratio:16/9; background:#000; overflow:hidden; transition:opacity .26s; }
+.mom-video-wrap video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+.mom-vplay-btn { position:absolute; bottom:10px; right:10px; z-index:2; width:36px; height:36px; border-radius:50%; background:rgba(0,0,0,0.52); border:1px solid rgba(255,255,255,0.22); color:#fff; display:flex; align-items:center; justify-content:center; cursor:pointer; opacity:0; transition:opacity .22s,background .2s; backdrop-filter:blur(6px); }
+.mom-video-wrap:hover .mom-vplay-btn { opacity:1; }
+.mom-vplay-btn.always-vis { opacity:0.8; }
+.mom-vplay-btn svg { width:12px; height:12px; fill:#fff; pointer-events:none; }
+.mom-info-bar { display:grid; grid-template-columns:1fr 1px 1fr 1px 1fr; border-top:1px solid rgba(255,255,255,0.07); }
+.mom-ib-sep { background:rgba(255,255,255,0.07); }
+.mom-ib-builder, .mom-ib-agent, .mom-ib-outcome { transition:opacity .26s; }
+.mom-ib-builder { display:flex; align-items:center; gap:12px; padding:16px 18px; }
+.mom-ib-av { width:48px; height:48px; border-radius:50%; overflow:hidden; flex-shrink:0; border:2px solid rgba(255,255,255,0.13); }
+.mom-ib-av img { width:100%; height:100%; object-fit:cover; }
+.mom-ib-dept { font-size:9px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--purple); margin-bottom:2px; }
+.mom-ib-name { font-size:12px; font-weight:700; color:#fff; }
+.mom-ib-meta { font-size:10px; color:rgba(255,255,255,0.5); margin-top:2px; }
+.mom-ib-agent { display:flex; align-items:center; gap:10px; padding:16px 18px; }
+.mom-ib-agent-av { width:38px; height:38px; border-radius:9px; overflow:hidden; flex-shrink:0; border:1px solid rgba(255,255,255,0.13); }
+.mom-ib-agent-av img { width:100%; height:100%; object-fit:cover; }
+.mom-ib-lbl { font-size:8px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; color:var(--purple); margin-bottom:4px; }
+.mom-ib-aname { font-size:13px; font-weight:700; color:#fff; }
+.mom-ib-adesc { font-size:10px; color:rgba(255,255,255,0.5); margin-top:2px; }
+.mom-ib-outcome { display:flex; flex-direction:column; justify-content:center; gap:5px; padding:16px 18px; background:rgba(97,97,255,0.10); }
+.mom-ib-stat { font-size:24px; font-weight:800; color:#fff; line-height:1; flex-shrink:0; }
+.mom-ib-statlbl { font-size:10px; color:rgba(255,255,255,0.5); line-height:1.55; }
+/* Mobile E variant */
+.mom-mobile { display:none; height:100%; overflow-y:auto; flex-direction:column; scrollbar-width:none; }
+.mom-mobile::-webkit-scrollbar { display:none; }
+.mom-mob-header { padding:28px 20px 10px; text-align:center; }
+.mom-mob-hl { font-size:clamp(17px,4.5vw,22px); font-weight:800; line-height:1.22; margin-top:8px; }
+.mom-people-nav { display:flex; gap:4px; padding:10px 10px; border-top:1px solid rgba(255,255,255,0.07); overflow-x:auto; scrollbar-width:none; justify-content:space-around; }
+.mom-people-nav::-webkit-scrollbar { display:none; }
+.mom-person-btn { display:flex; flex-direction:column; align-items:center; gap:3px; cursor:pointer; background:none; border:none; color:inherit; font-family:inherit; padding:4px 2px; border-radius:10px; flex-shrink:0; width:76px; }
+.mom-person-photo { width:64px; height:64px; border-radius:14px; overflow:hidden; border:2.5px solid transparent; transition:border-color .26s,box-shadow .26s; }
+.mom-person-photo img { width:100%; height:100%; object-fit:cover; display:block; }
+.mom-person-btn.active .mom-person-photo { border-color:var(--purple); box-shadow:0 0 0 2px rgba(97,97,255,0.25); }
+.mom-person-name  { font-size:9px; font-weight:700; color:#fff; text-align:center; line-height:1.2; max-width:76px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; width:100%; }
+.mom-person-title { font-size:7.5px; color:rgba(255,255,255,0.5); text-align:center; line-height:1.2; max-width:76px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; width:100%; }
+.mom-person-dept  { font-size:7.5px; font-weight:700; letter-spacing:0.5px; text-transform:uppercase; color:var(--purple); text-align:center; }
+.mom-mob-vwrap { position:relative; aspect-ratio:16/9; background:#000; overflow:hidden; transition:opacity .26s; }
+.mom-mob-vwrap video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+.mom-mob-outcome { display:flex; align-items:center; gap:12px; padding:14px 18px; background:rgba(97,97,255,0.10); border-top:1px solid rgba(255,255,255,0.07); transition:opacity .26s; }
+.mom-mob-agent-thumb { width:44px; height:44px; border-radius:10px; overflow:hidden; flex-shrink:0; border:1px solid rgba(97,97,255,0.45); }
+.mom-mob-agent-thumb img { width:100%; height:100%; object-fit:cover; display:block; }
+.mom-mob-outcome-tag { font-size:8px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--purple); }
+.mom-mob-outcome-num { font-size:26px; font-weight:800; color:#fff; line-height:1.1; }
+.mom-mob-outcome-lbl { font-size:10px; color:rgba(255,255,255,0.5); line-height:1.4; }
+@media (max-width:768px) {
+  #smom .mom-layout { display:none; }
+  #smom .mom-mobile { display:flex; }
+}
 </style>
 </head>
 <body>
 
 <div class="progress" id="prog"></div>
 <nav class="nav-dots" id="navDots">
-  <button class="nav-dot active" onclick="goTo(0)"></button><button class="nav-dot" onclick="goTo(1)"></button><button class="nav-dot" onclick="goTo(2)"></button><button class="nav-dot" onclick="goTo(3)"></button><button class="nav-dot" onclick="goTo(4)"></button><button class="nav-dot" onclick="goTo(5)"></button><button class="nav-dot" onclick="goTo(6)"></button><button class="nav-dot" onclick="goTo(7)"></button><button class="nav-dot" onclick="goTo(8)"></button><button class="nav-dot" onclick="goTo(9)"></button><button class="nav-dot" onclick="goTo(10)"></button>
+  <button class="nav-dot active" onclick="goTo(0)"></button><button class="nav-dot" onclick="goTo(1)"></button><button class="nav-dot" onclick="goTo(2)"></button><button class="nav-dot" onclick="goTo(3)"></button><button class="nav-dot" onclick="goTo(4)"></button><button class="nav-dot" onclick="goTo(5)"></button><button class="nav-dot" onclick="goTo(6)"></button><button class="nav-dot" onclick="goTo(7)"></button><button class="nav-dot" onclick="goTo(8)"></button><button class="nav-dot" onclick="goTo(9)"></button><button class="nav-dot" onclick="goTo(10)"></button><button class="nav-dot" onclick="goTo(11)"></button>
 </nav>
 
 <div class="deck">
@@ -1113,6 +1187,82 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
   </div>
 </div>
 
+<div class="slide" id="smom">
+  <!-- Desktop layout -->
+  <div class="mom-layout">
+    <div class="mom-left">
+      <span class="mom-eyebrow">MONDAY'S AI TRANSFORMATION</span>
+      <h2 class="mom-hl">How monday teams turned real work challenges into working agents</h2>
+      <p class="mom-sub">5,117 agents built by monday people, each one started as someone's daily frustration.</p>
+      <div class="mom-nav-row">
+        <button class="mom-arr" id="smom-prev">&#8592;</button>
+        <div class="mom-dots" id="smom-dots"></div>
+        <button class="mom-arr" id="smom-next">&#8594;</button>
+      </div>
+    </div>
+    <div class="mom-right">
+      <div class="mom-card">
+        <div class="mom-dept-row" id="smom-deptrow"></div>
+        <div class="mom-video-wrap" id="smom-vwrap">
+          <video id="smom-video" muted loop playsinline preload="metadata"></video>
+          <button class="mom-vplay-btn" id="smom-playbtn" aria-label="Play/Pause">
+            <svg id="smom-icon-play" viewBox="0 0 16 16"><polygon points="4,2 14,8 4,14" fill="#fff"/></svg>
+            <svg id="smom-icon-pause" viewBox="0 0 16 16" style="display:none"><rect x="3" y="2" width="4" height="12" fill="#fff"/><rect x="9" y="2" width="4" height="12" fill="#fff"/></svg>
+          </button>
+        </div>
+        <div class="mom-info-bar">
+          <div class="mom-ib-builder" id="smom-builder">
+            <div class="mom-ib-av"><img id="smom-av" alt=""></div>
+            <div>
+              <div class="mom-ib-dept" id="smom-dept"></div>
+              <div class="mom-ib-name" id="smom-bname"></div>
+              <div class="mom-ib-meta" id="smom-bmeta"></div>
+            </div>
+          </div>
+          <div class="mom-ib-sep"></div>
+          <div class="mom-ib-agent" id="smom-agent">
+            <div class="mom-ib-agent-av" id="smom-agent-av"><img id="smom-agentimg" alt=""></div>
+            <div>
+              <div class="mom-ib-lbl">Agent</div>
+              <div class="mom-ib-aname" id="smom-aname"></div>
+              <div class="mom-ib-adesc" id="smom-adesc"></div>
+            </div>
+          </div>
+          <div class="mom-ib-sep"></div>
+          <div class="mom-ib-outcome" id="smom-outcome">
+            <div class="mom-ib-lbl">Impact</div>
+            <div class="mom-ib-stat" id="smom-stat"></div>
+            <div class="mom-ib-statlbl" id="smom-statlbl"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Mobile E variant -->
+  <div class="mom-mobile">
+    <div class="mom-mob-header">
+      <span class="mom-eyebrow">MONDAY'S AI TRANSFORMATION</span>
+      <h2 class="mom-mob-hl">How monday teams turned real work challenges into working agents</h2>
+    </div>
+    <div class="mom-people-nav" id="smom-mob-people-nav"></div>
+    <div class="mom-mob-vwrap" id="smom-mob-vwrap">
+      <video id="smom-mob-video" muted loop playsinline preload="metadata"></video>
+      <button class="mom-vplay-btn always-vis" id="smom-mob-playbtn" aria-label="Play/Pause">
+        <svg id="smom-mob-icon-play" viewBox="0 0 16 16"><polygon points="4,2 14,8 4,14" fill="#fff"/></svg>
+        <svg id="smom-mob-icon-pause" viewBox="0 0 16 16" style="display:none"><rect x="3" y="2" width="4" height="12" fill="#fff"/><rect x="9" y="2" width="4" height="12" fill="#fff"/></svg>
+      </button>
+    </div>
+    <div class="mom-mob-outcome" id="smom-mob-outcome">
+      <div class="mom-mob-agent-thumb"><img id="smom-mob-agentimg" alt=""></div>
+      <div>
+        <div class="mom-mob-outcome-tag">Impact</div>
+        <div class="mom-mob-outcome-num" id="smom-mob-stat"></div>
+        <div class="mom-mob-outcome-lbl" id="smom-mob-statlbl"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="slide" id="s6">
   <div class="outcome-wrap">
     <p class="eyebrow" style="color:var(--teal)">The Result</p>
@@ -1309,6 +1459,7 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
     const navDots = document.getElementById('navDots');
     if (n === 5 && window.innerWidth > 768) navDots.classList.add('bottom-center');
     else navDots.classList.remove('bottom-center');
+    if (n === 10 && window._momSmomEnter) window._momSmomEnter();
     if (n === 2) { if (window.innerWidth <= 768) { pcGoTo(0); pcStart(); } } else { pcStop(); }
     if (n === 6) { mktPlayIntro(); } else { sbsStopAuto(); }
     if (n === 3) {
@@ -1735,6 +1886,121 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
       vkTimer = setInterval(next, 2500);
       window.addEventListener('resize', () => moveStrip(getX(vkSI), false));
     }, 80);
+  })();
+
+  // ── Monday on Monday slide (smom) ──
+  (function() {
+    const MOM_BUILDERS = [
+      { name:"Roni Rebish",    title:"Product Manager",             dept:"Product",     agentName:"Allison",    agentDesc:"Accessibility Pipeline", statNum:"70%", statLabel:"drop in accessibility rework cost",      video:"https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Video/roni_allison_product.mp4",  avatar:"https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/roni-rebish.png",    agentImg:"https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/New%20agents%20images/agent-marketing-competitor-research-agent.webp" },
+      { name:"Ran Levgoren",   title:"Account Executive",           dept:"Sales",       agentName:"Moti",       agentDesc:"The Silence Disruptor",  statNum:"23%", statLabel:"of silent deals revived within 2 weeks", video:"https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Video/Moti.mp4",                    avatar:"https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/ran-levgoren.png",   agentImg:"https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/New%20agents%20images/agent-sales-contact-duplicates-finder.webp" },
+      { name:"Osher Mayor",    title:"Lifecycle Marketing Manager", dept:"Marketing",   agentName:"Riki Shula", agentDesc:"Data to Content",        statNum:"10×", statLabel:"more A/B tests per quarter",             video:"https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Video/Osher_shula_marketing.mp4", avatar:"https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/osher-mayor.png",    agentImg:"https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/New%20agents%20images/agent-marketing-marketing-image-generator.webp" },
+      { name:"Amit Frishberg", title:"Tech Lead, CRM",              dept:"Engineering", agentName:"Petro",      agentDesc:"Mobile Feature Parity",  statNum:"60%", statLabel:"reduction in mobile parity backlog",     video:"https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Video/Petro.mp4",                  avatar:"https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/amit-frishberg.png",  agentImg:"https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/New%20agents%20images/agent-engineering-competitor-research-agent.webp" }
+    ];
+
+    // Desktop wiring
+    let dCur = 0;
+    const dVwrap   = document.getElementById('smom-vwrap');
+    const dVideo   = document.getElementById('smom-video');
+    const dBuilder = document.getElementById('smom-builder');
+    const dAgent   = document.getElementById('smom-agent');
+    const dOutcome = document.getElementById('smom-outcome');
+    const dPlayBtn = document.getElementById('smom-playbtn');
+    const dIconPl  = document.getElementById('smom-icon-play');
+    const dIconPa  = document.getElementById('smom-icon-pause');
+    const dDeptRow = document.getElementById('smom-deptrow');
+    const dDotsEl  = document.getElementById('smom-dots');
+
+    MOM_BUILDERS.forEach((b, i) => {
+      const tag = document.createElement('span');
+      tag.className = 'mom-dept-tag';
+      tag.textContent = b.dept;
+      tag.onclick = () => dGo(i);
+      dDeptRow.appendChild(tag);
+      const dot = document.createElement('button');
+      dot.className = 'mom-dot';
+      dot.onclick = () => dGo(i);
+      dDotsEl.appendChild(dot);
+    });
+
+    document.getElementById('smom-prev').onclick = () => dGo(dCur - 1);
+    document.getElementById('smom-next').onclick = () => dGo(dCur + 1);
+
+    function dSyncPlay() {
+      dIconPl.style.display = dVideo.paused ? '' : 'none';
+      dIconPa.style.display = dVideo.paused ? 'none' : '';
+    }
+    dPlayBtn.addEventListener('click', () => { dVideo.paused ? dVideo.play().catch(()=>{}) : dVideo.pause(); dSyncPlay(); });
+    dVideo.addEventListener('play',  dSyncPlay);
+    dVideo.addEventListener('pause', dSyncPlay);
+
+    function dGo(idx) {
+      [dVwrap, dBuilder, dAgent, dOutcome].forEach(el => el.classList.add('mom-fading'));
+      setTimeout(() => {
+        dCur = (idx + MOM_BUILDERS.length) % MOM_BUILDERS.length;
+        const b = MOM_BUILDERS[dCur];
+        dVideo.src = b.video; dVideo.play().catch(()=>{});
+        document.getElementById('smom-av').src             = b.avatar;
+        document.getElementById('smom-dept').textContent   = b.dept;
+        document.getElementById('smom-bname').textContent  = b.name;
+        document.getElementById('smom-bmeta').textContent  = b.title;
+        document.getElementById('smom-agentimg').src       = b.agentImg;
+        document.getElementById('smom-aname').textContent  = b.agentName;
+        document.getElementById('smom-adesc').textContent  = b.agentDesc;
+        document.getElementById('smom-stat').textContent   = b.statNum;
+        document.getElementById('smom-statlbl').textContent = b.statLabel;
+        dDotsEl.querySelectorAll('.mom-dot').forEach((d,i) => d.classList.toggle('active', i===dCur));
+        dDeptRow.querySelectorAll('.mom-dept-tag').forEach((t,i) => t.classList.toggle('active', i===dCur));
+        [dVwrap, dBuilder, dAgent, dOutcome].forEach(el => el.classList.remove('mom-fading'));
+      }, 260);
+    }
+
+    // Mobile E-variant wiring
+    let mCur = 0;
+    const mVwrap   = document.getElementById('smom-mob-vwrap');
+    const mVideo   = document.getElementById('smom-mob-video');
+    const mOutcome = document.getElementById('smom-mob-outcome');
+    const mPlayBtn = document.getElementById('smom-mob-playbtn');
+    const mIconPl  = document.getElementById('smom-mob-icon-play');
+    const mIconPa  = document.getElementById('smom-mob-icon-pause');
+    const mNav     = document.getElementById('smom-mob-people-nav');
+
+    MOM_BUILDERS.forEach((b, i) => {
+      const btn = document.createElement('button');
+      btn.className = 'mom-person-btn';
+      btn.innerHTML = `<div class="mom-person-photo"><img src="${b.avatar}" alt="${b.name}"></div><div class="mom-person-name">${b.name.split(' ')[0]}</div><div class="mom-person-title">${b.title}</div><div class="mom-person-dept">${b.dept}</div>`;
+      btn.onclick = () => mGo(i);
+      mNav.appendChild(btn);
+    });
+
+    function mSyncPlay() {
+      mIconPl.style.display = mVideo.paused ? '' : 'none';
+      mIconPa.style.display = mVideo.paused ? 'none' : '';
+    }
+    mPlayBtn.addEventListener('click', () => { mVideo.paused ? mVideo.play().catch(()=>{}) : mVideo.pause(); mSyncPlay(); });
+    mVideo.addEventListener('play',  mSyncPlay);
+    mVideo.addEventListener('pause', mSyncPlay);
+
+    function mGo(idx) {
+      [mVwrap, mOutcome].forEach(el => el.classList.add('mom-fading'));
+      setTimeout(() => {
+        mCur = (idx + MOM_BUILDERS.length) % MOM_BUILDERS.length;
+        const b = MOM_BUILDERS[mCur];
+        mVideo.src = b.video; mVideo.play().catch(()=>{});
+        document.getElementById('smom-mob-agentimg').src        = b.agentImg;
+        document.getElementById('smom-mob-stat').textContent    = b.statNum;
+        document.getElementById('smom-mob-statlbl').textContent = b.statLabel;
+        mNav.querySelectorAll('.mom-person-btn').forEach((btn,i) => btn.classList.toggle('active', i===mCur));
+        [mVwrap, mOutcome].forEach(el => el.classList.remove('mom-fading'));
+      }, 260);
+    }
+
+    window._momSmomEnter = function() {
+      if (window.innerWidth <= 768) { if (mVideo.paused) mVideo.play().catch(()=>{}); }
+      else { if (dVideo.paused) dVideo.play().catch(()=>{}); }
+    };
+
+    dGo(0);
+    mGo(0);
   })();
 </script>
 </body>
