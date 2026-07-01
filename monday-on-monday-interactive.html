@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Monday on Monday — Interactive</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --purple: #6161ff;
+  --dim: rgba(255,255,255,0.45);
+  --dimmer: rgba(255,255,255,0.22);
+  --border: rgba(255,255,255,0.08);
+}
+*, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+body { font-family:'Poppins',sans-serif; background:#000; color:#fff; }
+
+.variant { position:relative; width:100%; min-height:100vh; overflow:hidden; }
+
+.label-bar { position:absolute; top:0; left:0; right:0; z-index:20; padding:14px 20px; display:flex; align-items:center; gap:10px; background:rgba(0,0,0,0.45); backdrop-filter:blur(10px); }
+.vnum { font-size:10px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; background:var(--purple); color:#fff; padding:4px 10px; border-radius:100px; }
+.vdesc { font-size:12px; color:rgba(255,255,255,0.6); }
+
+.eyebrow { font-size:10px; font-weight:600; letter-spacing:4px; text-transform:uppercase; color:var(--purple); display:block; margin-bottom:16px; }
+
+/* ── shared fade transition for videos ── */
+.fading { opacity:0 !important; }
+
+/* ══════════════════════════════════════════
+   VARIANT 1 — Split-panel carousel
+   Message stays left. Video cycles right.
+═══════════════════════════════════════════ */
+.v1-grid { display:grid; grid-template-columns:44% 56%; min-height:100vh; }
+
+.v1-left { display:flex; flex-direction:column; justify-content:center; padding:96px 52px 60px 52px; background:#03030a; position:relative; z-index:2; }
+.v1-left::after { content:''; position:absolute; right:0; top:0; bottom:0; width:1px; background:rgba(255,255,255,0.07); }
+.v1-headline { font-size:clamp(26px,3vw,44px); font-weight:700; line-height:1.25; color:#fff; margin-bottom:36px; }
+.v1-headline em { color:var(--purple); font-style:normal; }
+.v1-builder-id { display:flex; align-items:center; gap:14px; margin-top:auto; padding-top:36px; border-top:1px solid rgba(255,255,255,0.08); }
+.v1-bid-avatar { width:46px; height:46px; border-radius:50%; overflow:hidden; flex-shrink:0; border:2px solid rgba(255,255,255,0.15); transition:opacity 0.25s; }
+.v1-bid-avatar img { width:100%; height:100%; object-fit:cover; }
+.v1-bid-name { font-size:15px; font-weight:700; color:#fff; }
+.v1-bid-role { font-size:11px; color:var(--dim); margin-top:2px; }
+.v1-bid-agent { font-size:11px; color:var(--purple); font-weight:600; margin-top:5px; }
+
+.v1-right { position:relative; background:#000; }
+.v1-video-wrap { position:absolute; inset:0; transition:opacity 0.3s ease; }
+.v1-video-wrap video { width:100%; height:100%; object-fit:cover; }
+.v1-video-overlay { position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,0.3) 0%, transparent 30%, transparent 55%, rgba(0,0,0,0.7) 100%); }
+
+.v1-controls { position:absolute; bottom:40px; left:0; right:0; z-index:5; display:flex; align-items:center; justify-content:center; gap:16px; }
+.v1-arrow { width:40px; height:40px; border-radius:50%; border:1px solid rgba(255,255,255,0.2); background:rgba(0,0,0,0.4); backdrop-filter:blur(8px); color:#fff; font-size:16px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background 0.2s, border-color 0.2s; }
+.v1-arrow:hover { background:rgba(97,97,255,0.3); border-color:var(--purple); }
+.v1-dots { display:flex; gap:8px; align-items:center; }
+.v1-dot { width:7px; height:7px; border-radius:50%; border:none; background:rgba(255,255,255,0.3); cursor:pointer; transition:background 0.2s, transform 0.2s; padding:0; }
+.v1-dot.active { background:#fff; transform:scale(1.3); }
+
+/* ══════════════════════════════════════════
+   VARIANT 2 — Featured + avatar row
+   Message top. Video center. Switch via avatars.
+═══════════════════════════════════════════ */
+.v2-layout { display:flex; flex-direction:column; min-height:100vh; background:#03030a; }
+
+.v2-header { padding:72px 60px 0; flex-shrink:0; }
+.v2-headline { font-size:clamp(20px,2.4vw,34px); font-weight:700; line-height:1.3; color:#fff; max-width:740px; }
+.v2-headline em { color:var(--purple); font-style:normal; }
+
+.v2-stage { flex:1; display:flex; align-items:center; justify-content:center; padding:32px 60px 16px; gap:40px; }
+.v2-video-col { position:relative; flex:1; max-width:680px; aspect-ratio:16/9; border-radius:16px; overflow:hidden; background:#0a0a12; box-shadow:0 24px 64px rgba(0,0,0,0.6); }
+.v2-video-col video { width:100%; height:100%; object-fit:cover; transition:opacity 0.3s ease; }
+.v2-video-overlay { position:absolute; inset:0; background:linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.65) 100%); pointer-events:none; }
+.v2-video-meta { position:absolute; bottom:20px; left:20px; right:20px; z-index:2; display:flex; align-items:center; gap:12px; }
+.v2-meta-avatar { width:36px; height:36px; border-radius:50%; overflow:hidden; flex-shrink:0; border:2px solid rgba(255,255,255,0.2); transition:opacity 0.3s; }
+.v2-meta-avatar img { width:100%; height:100%; object-fit:cover; }
+.v2-meta-name { font-size:13px; font-weight:700; color:#fff; }
+.v2-meta-role { font-size:10px; color:rgba(255,255,255,0.55); margin-top:1px; }
+.v2-meta-agent { font-size:10px; color:var(--purple); font-weight:600; margin-top:4px; }
+.v2-side-arrows { display:flex; flex-direction:column; gap:10px; flex-shrink:0; }
+.v2-side-arrow { width:44px; height:44px; border-radius:50%; border:1px solid rgba(255,255,255,0.15); background:rgba(255,255,255,0.04); color:#fff; font-size:18px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all 0.2s; }
+.v2-side-arrow:hover { background:rgba(97,97,255,0.25); border-color:var(--purple); }
+
+.v2-avatar-row { flex-shrink:0; padding:0 60px 40px; display:flex; justify-content:center; gap:20px; }
+.v2-avatar-btn { display:flex; flex-direction:column; align-items:center; gap:8px; cursor:pointer; background:none; border:none; padding:4px; border-radius:12px; transition:transform 0.2s; }
+.v2-avatar-btn:hover { transform:translateY(-2px); }
+.v2-avatar-img { width:52px; height:52px; border-radius:50%; overflow:hidden; border:2.5px solid transparent; transition:border-color 0.2s, box-shadow 0.2s; }
+.v2-avatar-img img { width:100%; height:100%; object-fit:cover; }
+.v2-avatar-btn.active .v2-avatar-img { border-color:var(--purple); box-shadow:0 0 0 3px rgba(97,97,255,0.2); }
+.v2-avatar-label { font-size:10px; font-weight:600; color:rgba(255,255,255,0.5); transition:color 0.2s; white-space:nowrap; }
+.v2-avatar-btn.active .v2-avatar-label { color:#fff; }
+
+/* ══════════════════════════════════════════
+   VARIANT 3 — Sidebar builder index
+   Video fills left. Builder list on right.
+═══════════════════════════════════════════ */
+.v3-layout { display:grid; grid-template-rows:auto 1fr; min-height:100vh; background:#000; }
+
+.v3-header { padding:72px 52px 28px; border-bottom:1px solid rgba(255,255,255,0.06); background:#03030a; }
+.v3-header-inner { display:flex; align-items:flex-end; justify-content:space-between; gap:40px; }
+.v3-headline { font-size:clamp(18px,2vw,28px); font-weight:700; line-height:1.35; color:#fff; max-width:560px; }
+.v3-headline em { color:var(--purple); font-style:normal; }
+.v3-header-stat { text-align:right; flex-shrink:0; }
+.v3-stat-num { font-size:clamp(32px,3.5vw,48px); font-weight:800; color:#fff; line-height:1; }
+.v3-stat-label { font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,0.4); margin-top:4px; }
+
+.v3-body { display:grid; grid-template-columns:1fr 320px; overflow:hidden; }
+
+.v3-video-panel { position:relative; background:#000; }
+.v3-video-panel video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:opacity 0.35s ease; }
+.v3-video-overlay { position:absolute; inset:0; background:linear-gradient(90deg, transparent 60%, rgba(0,0,0,0.35) 100%), linear-gradient(180deg, transparent 60%, rgba(0,0,0,0.6) 100%); z-index:1; }
+.v3-video-chyron { position:absolute; bottom:36px; left:36px; right:36px; z-index:2; display:flex; align-items:center; gap:14px; }
+.v3-chyron-bar { width:4px; height:60px; background:var(--purple); border-radius:2px; flex-shrink:0; }
+.v3-chyron-avatar { width:48px; height:48px; border-radius:50%; overflow:hidden; flex-shrink:0; border:2px solid rgba(255,255,255,0.2); transition:opacity 0.3s; }
+.v3-chyron-avatar img { width:100%; height:100%; object-fit:cover; }
+.v3-chyron-name { font-size:20px; font-weight:700; color:#fff; }
+.v3-chyron-role { font-size:11px; color:rgba(255,255,255,0.55); margin-top:2px; }
+.v3-chyron-agent { font-size:11px; color:var(--purple); font-weight:600; margin-top:5px; }
+
+.v3-sidebar { background:#0a0a12; border-left:1px solid rgba(255,255,255,0.07); display:flex; flex-direction:column; padding:24px 0; overflow-y:auto; }
+.v3-sidebar-label { font-size:9px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; color:rgba(255,255,255,0.3); padding:0 24px 16px; }
+.v3-builder-item { display:flex; align-items:center; gap:14px; padding:16px 24px; cursor:pointer; border-left:3px solid transparent; transition:background 0.15s, border-color 0.15s; }
+.v3-builder-item:hover { background:rgba(255,255,255,0.04); }
+.v3-builder-item.active { background:rgba(97,97,255,0.08); border-left-color:var(--purple); }
+.v3-item-avatar { width:40px; height:40px; border-radius:50%; overflow:hidden; flex-shrink:0; }
+.v3-item-avatar img { width:100%; height:100%; object-fit:cover; filter:grayscale(0.3); transition:filter 0.2s; }
+.v3-builder-item.active .v3-item-avatar img { filter:none; }
+.v3-item-name { font-size:13px; font-weight:600; color:rgba(255,255,255,0.7); transition:color 0.15s; }
+.v3-item-role { font-size:10px; color:rgba(255,255,255,0.35); margin-top:2px; }
+.v3-item-agent { font-size:10px; color:var(--purple); margin-top:4px; opacity:0; transition:opacity 0.15s; }
+.v3-builder-item.active .v3-item-name { color:#fff; }
+.v3-builder-item.active .v3-item-agent { opacity:1; }
+.v3-sidebar-play { flex:1; display:flex; align-items:flex-end; padding:24px; }
+.v3-sidebar-hint { font-size:10px; color:rgba(255,255,255,0.2); line-height:1.5; }
+
+/* ── mobile ── */
+@media (max-width: 768px) {
+  .v1-grid { grid-template-columns:1fr; grid-template-rows:auto 1fr; }
+  .v1-left { padding:80px 24px 28px; }
+  .v1-right { min-height:55vh; }
+  .v2-header { padding:72px 24px 0; }
+  .v2-stage { flex-direction:column; padding:20px 24px 12px; gap:16px; }
+  .v2-video-col { max-width:100%; width:100%; }
+  .v2-side-arrows { flex-direction:row; }
+  .v2-avatar-row { padding:0 24px 32px; gap:12px; }
+  .v2-avatar-img { width:44px; height:44px; }
+  .v3-layout { grid-template-rows:auto 1fr; }
+  .v3-header { padding:72px 20px 20px; }
+  .v3-header-inner { flex-direction:column; align-items:flex-start; gap:16px; }
+  .v3-header-stat { text-align:left; }
+  .v3-body { grid-template-columns:1fr; grid-template-rows:55vh auto; }
+  .v3-sidebar { max-height:none; overflow:visible; }
+  .v3-sidebar-play { display:none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ VARIANT 1 — Split-panel carousel ═══ -->
+<div class="variant" id="v1">
+  <div class="label-bar">
+    <span class="vnum">Variant 1</span>
+    <span class="vdesc">Split-panel — message stays left, one builder plays right. Arrows or dots to cycle.</span>
+  </div>
+  <div class="v1-grid">
+
+    <div class="v1-left">
+      <span class="eyebrow">Monday on Monday</span>
+      <h2 class="v1-headline">5,117 agents<br>built by monday employees<br>to solve the problems<br>that <em>frustrated them most.</em></h2>
+      <div class="v1-builder-id">
+        <div class="v1-bid-avatar"><img id="v1-avatar" alt=""></div>
+        <div>
+          <div class="v1-bid-name" id="v1-name"></div>
+          <div class="v1-bid-role" id="v1-role"></div>
+          <div class="v1-bid-agent" id="v1-agent"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="v1-right">
+      <div class="v1-video-wrap" id="v1-vwrap">
+        <video id="v1-video" muted loop playsinline autoplay preload="metadata"></video>
+        <div class="v1-video-overlay"></div>
+      </div>
+      <div class="v1-controls">
+        <button class="v1-arrow" id="v1-prev">&#8592;</button>
+        <div class="v1-dots" id="v1-dots"></div>
+        <button class="v1-arrow" id="v1-next">&#8594;</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══ VARIANT 2 — Featured + avatar row ═══ -->
+<div class="variant" id="v2">
+  <div class="label-bar">
+    <span class="vnum">Variant 2</span>
+    <span class="vdesc">Featured + switcher — message at top, one video featured, avatar row to switch builders.</span>
+  </div>
+  <div class="v2-layout">
+    <div class="v2-header">
+      <span class="eyebrow">Monday on Monday</span>
+      <h2 class="v2-headline">5,117 agents built by monday employees<br>to solve the problems that <em>frustrated them most.</em></h2>
+    </div>
+    <div class="v2-stage">
+      <button class="v2-side-arrow" id="v2-prev">&#8592;</button>
+      <div class="v2-video-col">
+        <video id="v2-video" muted loop playsinline autoplay preload="metadata"></video>
+        <div class="v2-video-overlay"></div>
+        <div class="v2-video-meta">
+          <div class="v2-meta-avatar"><img id="v2-meta-avatar" alt=""></div>
+          <div>
+            <div class="v2-meta-name" id="v2-meta-name"></div>
+            <div class="v2-meta-role" id="v2-meta-role"></div>
+            <div class="v2-meta-agent" id="v2-meta-agent"></div>
+          </div>
+        </div>
+      </div>
+      <button class="v2-side-arrow" id="v2-next">&#8594;</button>
+    </div>
+    <div class="v2-avatar-row" id="v2-avatar-row"></div>
+  </div>
+</div>
+
+<!-- ═══ VARIANT 3 — Sidebar builder index ═══ -->
+<div class="variant" id="v3">
+  <div class="label-bar">
+    <span class="vnum">Variant 3</span>
+    <span class="vdesc">Sidebar index — message + stat at top, video on left, click a builder on the right to switch.</span>
+  </div>
+  <div class="v3-layout">
+    <div class="v3-header">
+      <div class="v3-header-inner">
+        <div>
+          <span class="eyebrow">Monday on Monday</span>
+          <h2 class="v3-headline">Built by monday employees<br>to solve the problems that <em>frustrated them most.</em></h2>
+        </div>
+        <div class="v3-header-stat">
+          <div class="v3-stat-num">5,117</div>
+          <div class="v3-stat-label">agents · 8 depts · 1 week</div>
+        </div>
+      </div>
+    </div>
+    <div class="v3-body">
+      <div class="v3-video-panel">
+        <video id="v3-video" muted loop playsinline autoplay preload="metadata"></video>
+        <div class="v3-video-overlay"></div>
+        <div class="v3-video-chyron">
+          <div class="v3-chyron-bar"></div>
+          <div class="v3-chyron-avatar"><img id="v3-chyron-avatar" alt=""></div>
+          <div>
+            <div class="v3-chyron-name" id="v3-chyron-name"></div>
+            <div class="v3-chyron-role" id="v3-chyron-role"></div>
+            <div class="v3-chyron-agent" id="v3-chyron-agent"></div>
+          </div>
+        </div>
+      </div>
+      <div class="v3-sidebar">
+        <div class="v3-sidebar-label">Builders</div>
+        <div id="v3-list"></div>
+        <div class="v3-sidebar-play">
+          <p class="v3-sidebar-hint">Click any builder<br>to watch their agent.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const BUILDERS = [
+  {
+    name: "Ran Levgoren",
+    role: "Sales · monday.com",
+    dept: "Sales",
+    agent: "Moti — The Silence Disruptor",
+    video: "https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Video/Moti.mp4",
+    avatar: "https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/ran-levgoren.png"
+  },
+  {
+    name: "Osher Mayor",
+    role: "Lifecycle Marketing · monday.com",
+    dept: "Marketing",
+    agent: "Riki Shula — Data to Content",
+    video: "https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Video/Osher_shula_marketing.mp4",
+    avatar: "https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/osher-mayor.png"
+  },
+  {
+    name: "Amit Frishberg",
+    role: "Tech Lead, CRM · monday.com",
+    dept: "Engineering",
+    agent: "Petro — Mobile Feature Parity",
+    video: "https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Video/Petro.mp4",
+    avatar: "https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/amit-frishberg.png"
+  },
+  {
+    name: "Roni Rebish",
+    role: "Product Manager · monday.com",
+    dept: "Product",
+    agent: "Allison — Accessibility Pipeline",
+    video: "https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Video/roni_allison_product.mp4",
+    avatar: "https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/roni-rebish.png"
+  }
+];
+
+/* ── Variant 1: Split-panel carousel ── */
+(function () {
+  let cur = 0;
+  const video   = document.getElementById('v1-video');
+  const vwrap   = document.getElementById('v1-vwrap');
+  const dotsEl  = document.getElementById('v1-dots');
+  const nameEl  = document.getElementById('v1-name');
+  const roleEl  = document.getElementById('v1-role');
+  const agentEl = document.getElementById('v1-agent');
+  const avatarEl= document.getElementById('v1-avatar');
+
+  BUILDERS.forEach((_, i) => {
+    const d = document.createElement('button');
+    d.className = 'v1-dot';
+    d.setAttribute('aria-label', BUILDERS[i].name);
+    d.onclick = () => go(i);
+    dotsEl.appendChild(d);
+  });
+
+  function go(idx) {
+    vwrap.classList.add('fading');
+    setTimeout(() => {
+      cur = (idx + BUILDERS.length) % BUILDERS.length;
+      const b = BUILDERS[cur];
+      video.src = b.video;
+      video.play().catch(() => {});
+      nameEl.textContent  = b.name;
+      roleEl.textContent  = b.role;
+      agentEl.textContent = b.agent;
+      avatarEl.src        = b.avatar;
+      dotsEl.querySelectorAll('.v1-dot').forEach((d, i) => d.classList.toggle('active', i === cur));
+      vwrap.classList.remove('fading');
+    }, 280);
+  }
+
+  document.getElementById('v1-prev').onclick = () => go(cur - 1);
+  document.getElementById('v1-next').onclick = () => go(cur + 1);
+
+  let timer = setInterval(() => go(cur + 1), 5500);
+  document.getElementById('v1').addEventListener('pointerdown', () => { clearInterval(timer); });
+
+  go(0);
+})();
+
+/* ── Variant 2: Featured + avatar row ── */
+(function () {
+  let cur = 0;
+  const video    = document.getElementById('v2-video');
+  const nameEl   = document.getElementById('v2-meta-name');
+  const roleEl   = document.getElementById('v2-meta-role');
+  const agentEl  = document.getElementById('v2-meta-agent');
+  const avatarEl = document.getElementById('v2-meta-avatar');
+  const rowEl    = document.getElementById('v2-avatar-row');
+
+  BUILDERS.forEach((b, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'v2-avatar-btn';
+    btn.innerHTML = `
+      <div class="v2-avatar-img"><img src="${b.avatar}" alt="${b.name}"></div>
+      <span class="v2-avatar-label">${b.name.split(' ')[0]}</span>`;
+    btn.onclick = () => go(i);
+    rowEl.appendChild(btn);
+  });
+
+  function go(idx) {
+    video.style.opacity = '0';
+    setTimeout(() => {
+      cur = (idx + BUILDERS.length) % BUILDERS.length;
+      const b = BUILDERS[cur];
+      video.src = b.video;
+      video.play().catch(() => {});
+      nameEl.textContent  = b.name;
+      roleEl.textContent  = b.role;
+      agentEl.textContent = b.agent;
+      avatarEl.src        = b.avatar;
+      video.style.transition = 'opacity 0.3s';
+      video.style.opacity = '1';
+      rowEl.querySelectorAll('.v2-avatar-btn').forEach((el, i) => el.classList.toggle('active', i === cur));
+    }, 280);
+  }
+
+  document.getElementById('v2-prev').onclick = () => go(cur - 1);
+  document.getElementById('v2-next').onclick = () => go(cur + 1);
+
+  let timer = setInterval(() => go(cur + 1), 6000);
+  document.getElementById('v2').addEventListener('pointerdown', () => { clearInterval(timer); });
+
+  go(0);
+})();
+
+/* ── Variant 3: Sidebar index ── */
+(function () {
+  let cur = 0;
+  const video      = document.getElementById('v3-video');
+  const listEl     = document.getElementById('v3-list');
+  const nameEl     = document.getElementById('v3-chyron-name');
+  const roleEl     = document.getElementById('v3-chyron-role');
+  const agentEl    = document.getElementById('v3-chyron-agent');
+  const avatarEl   = document.getElementById('v3-chyron-avatar');
+
+  BUILDERS.forEach((b, i) => {
+    const item = document.createElement('div');
+    item.className = 'v3-builder-item';
+    item.innerHTML = `
+      <div class="v3-item-avatar"><img src="${b.avatar}" alt="${b.name}"></div>
+      <div>
+        <div class="v3-item-name">${b.name}</div>
+        <div class="v3-item-role">${b.role}</div>
+        <div class="v3-item-agent">${b.agent}</div>
+      </div>`;
+    item.onclick = () => go(i);
+    listEl.appendChild(item);
+  });
+
+  function go(idx) {
+    video.style.opacity = '0';
+    setTimeout(() => {
+      cur = idx;
+      const b = BUILDERS[cur];
+      video.src = b.video;
+      video.play().catch(() => {});
+      nameEl.textContent  = b.name;
+      roleEl.textContent  = b.role;
+      agentEl.textContent = b.agent;
+      avatarEl.src        = b.avatar;
+      video.style.transition = 'opacity 0.35s';
+      video.style.opacity = '1';
+      listEl.querySelectorAll('.v3-builder-item').forEach((el, i) => el.classList.toggle('active', i === cur));
+    }, 300);
+  }
+
+  go(0);
+})();
+</script>
+</body>
+</html>
