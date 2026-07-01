@@ -47,11 +47,14 @@ body { font-family:'Poppins',sans-serif; background:var(--bg); color:#fff; }
 .card { width:100%; background:var(--bg-el); border:1px solid var(--border-hi); border-radius:22px; overflow:hidden; box-shadow:0 32px 90px rgba(0,0,0,0.60), 0 0 0 1px rgba(97,97,255,0.10); }
 
 /* ── dept row (above video) ── */
-.dept-row { display:flex; gap:6px; flex-wrap:wrap; padding:12px 16px; border-bottom:1px solid var(--border); }
-.dept-tag { font-size:10px; font-weight:600; letter-spacing:0.4px; padding:4px 12px; border-radius:100px; border:1px solid var(--border-hi); color:var(--dimmer); transition:background .26s,border-color .26s,color .26s; }
-.dept-tag.active { background:var(--purple-lo); border-color:var(--purple); color:#fff; }
+.dept-row { display:flex; gap:0; align-items:center; flex-wrap:wrap; padding:11px 18px; border-bottom:1px solid var(--border); }
+.dept-tag { font-size:10px; font-weight:600; letter-spacing:1px; text-transform:uppercase; color:var(--dimmer); transition:color .26s; position:relative; padding:0 14px 0 0; }
+.dept-tag::after { content:'·'; position:absolute; right:5px; color:rgba(255,255,255,0.15); }
+.dept-tag:last-child { padding-right:0; }
+.dept-tag:last-child::after { display:none; }
+.dept-tag.active { color:#fff; }
 .dept-row.clickable .dept-tag { cursor:pointer; }
-.dept-row.clickable .dept-tag:hover:not(.active) { border-color:rgba(255,255,255,0.28); color:rgba(255,255,255,0.75); }
+.dept-row.clickable .dept-tag:hover:not(.active) { color:rgba(255,255,255,0.65); }
 
 /* ── video ── */
 .card-video { position:relative; aspect-ratio:16/9; background:#000; overflow:hidden; transition:opacity .26s; }
@@ -180,7 +183,7 @@ body { font-family:'Poppins',sans-serif; background:var(--bg); color:#fff; }
     <div class="left">
       <span class="eyebrow">MONDAY'S AI TRANSFORMATION</span>
       <h2 class="la-hl">Our people built agents for the problems that frustrated them most</h2>
-      <p class="la-sub">5,117 agents built by monday people, each one started as someone's daily frustration. These are four of them.</p>
+      <p class="la-sub">5,117 agents built by monday people, each one started as someone's daily frustration.</p>
       <div class="nav-row la-nav">
         <button class="arr" id="s2-prev">&#8592;</button>
         <div class="dots" id="s2-dots"></div>
@@ -241,7 +244,7 @@ body { font-family:'Poppins',sans-serif; background:var(--bg); color:#fff; }
     <div class="left">
       <span class="eyebrow">MONDAY'S AI TRANSFORMATION</span>
       <h2 class="la-hl">How monday teams turned real work challenges into working agents</h2>
-      <p class="la-sub">5,117 agents built by monday people, each one started as someone's daily frustration. These are four of them.</p>
+      <p class="la-sub">5,117 agents built by monday people, each one started as someone's daily frustration.</p>
       <div class="nav-row la-nav">
         <button class="arr" id="s3-prev">&#8592;</button>
         <div class="dots" id="s3-dots"></div>
