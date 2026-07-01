@@ -19,10 +19,11 @@
   --dimmer:     rgba(255,255,255,0.26);
 }
 *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
-body { font-family:'Poppins',sans-serif; background:#000; color:#fff; }
+body { font-family:'Poppins',sans-serif; background:var(--bg); color:#fff; }
 
 /* ── variant wrapper ── */
 .variant { position:relative; width:100%; overflow:hidden; }
+.variant::before { content:''; position:absolute; top:-22%; left:50%; transform:translateX(-50%); width:80%; height:85%; background:radial-gradient(ellipse at center, rgba(97,97,255,0.20) 0%, rgba(255,61,87,0.07) 45%, transparent 70%); filter:blur(110px); pointer-events:none; z-index:0; }
 .label-bar { position:absolute; top:0; left:0; right:0; z-index:30; padding:11px 18px; display:flex; align-items:center; gap:10px; background:rgba(0,0,0,0.55); backdrop-filter:blur(12px); }
 .vnum { font-size:10px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; background:var(--purple); color:#fff; padding:3px 10px; border-radius:100px; }
 .vdesc { font-size:11px; color:rgba(255,255,255,0.42); }
@@ -37,7 +38,7 @@ body { font-family:'Poppins',sans-serif; background:#000; color:#fff; }
 .fading { opacity:0 !important; }
 
 /* ── shared grid ── */
-.layout { display:grid; grid-template-columns:44% 56%; height:100vh; background:var(--bg); }
+.layout { display:grid; grid-template-columns:44% 56%; height:100vh; background:transparent; position:relative; z-index:1; }
 
 /* ── shared right panel ── */
 .right { display:flex; align-items:center; justify-content:center; padding:52px 44px; }
@@ -73,6 +74,10 @@ body { font-family:'Poppins',sans-serif; background:#000; color:#fff; }
 .la-hl em { font-style:normal; }
 .la-sub { font-size:15px; color:var(--dim); line-height:1.74; max-width:400px; }
 .la-nav { margin-top:48px; }
+.la-dept-bar { position:absolute; top:14px; left:14px; right:14px; z-index:10; display:flex; gap:7px; flex-wrap:wrap; }
+.la-dept-pill { font-family:'Poppins',sans-serif; font-size:10px; font-weight:600; letter-spacing:0.3px; padding:5px 13px; border-radius:100px; border:1px solid rgba(255,255,255,0.18); background:rgba(3,3,10,0.55); backdrop-filter:blur(12px); color:rgba(255,255,255,0.6); cursor:pointer; transition:background .2s,border-color .2s,color .2s; }
+.la-dept-pill.active { background:rgba(97,97,255,0.28); border-color:rgba(97,97,255,0.55); color:#fff; }
+.la-dept-pill:hover:not(.active) { background:rgba(255,255,255,0.1); border-color:rgba(255,255,255,0.3); color:#fff; }
 
 
 /* ════════════════════════════════════════════════════
@@ -144,7 +149,7 @@ body { font-family:'Poppins',sans-serif; background:#000; color:#fff; }
     <div class="left la">
       <span class="eyebrow">Monday on Monday</span>
       <h2 class="la-hl">Our people built agents for the problems that <em>frustrated them most</em></h2>
-      <p class="la-sub">Meet the monday builders who turned real work frustrations into working agents — and changed how their teams operate.</p>
+      <p class="la-sub">5,117 agents built by monday people — each one started as someone's daily frustration. These are four of them.</p>
       <div class="nav-row la-nav">
         <button class="arr" id="la-prev">&#8592;</button>
         <div class="dots" id="la-dots"></div>
@@ -153,7 +158,15 @@ body { font-family:'Poppins',sans-serif; background:#000; color:#fff; }
     </div>
     <div class="right">
       <div class="card">
-        <div class="card-video" id="la-vwrap"><video id="la-video" muted loop playsinline autoplay preload="metadata"></video></div>
+        <div class="card-video" id="la-vwrap">
+          <video id="la-video" muted loop playsinline autoplay preload="metadata"></video>
+          <div class="la-dept-bar" id="la-dept-bar">
+            <button class="la-dept-pill" data-idx="0">Sales</button>
+            <button class="la-dept-pill" data-idx="1">Marketing</button>
+            <button class="la-dept-pill" data-idx="2">Engineering</button>
+            <button class="la-dept-pill" data-idx="3">Product</button>
+          </div>
+        </div>
         <div class="info-bar">
           <div class="ib-builder" id="la-builder"><div class="ib-av"><img id="la-av" alt=""></div><div><div class="ib-b-name" id="la-bname"></div><div class="ib-b-meta" id="la-bmeta"></div></div></div>
           <div class="ib-sep"></div>
@@ -334,9 +347,18 @@ function wire(prefix, onGo) {
   let timer = setInterval(() => go(cur + 1), 7000);
   sect.addEventListener('pointerdown', () => { clearInterval(timer); timer = null; });
   go(0);
+  return go;
 }
 
-wire('la');
+/* A: dept pills on video + subtext */
+const laGo = wire('la', (phase, idx) => {
+  const pills = document.querySelectorAll('#la-dept-bar .la-dept-pill');
+  if (phase === 'done') pills.forEach((p, i) => p.classList.toggle('active', i === idx));
+});
+document.querySelectorAll('#la-dept-bar .la-dept-pill').forEach((btn, i) => {
+  btn.onclick = () => laGo(i);
+});
+
 wire('lb');
 wire('lc');
 
