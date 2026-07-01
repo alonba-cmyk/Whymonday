@@ -12,9 +12,9 @@
   --purple-lo:  rgba(97,97,255,0.10);
   --purple-mid: rgba(97,97,255,0.26);
   --bg:         #03030a;
-  --bg-el:      #0a0a15;
+  --bg-el:      #0d0d1a;
   --border:     rgba(255,255,255,0.07);
-  --border-hi:  rgba(255,255,255,0.13);
+  --border-hi:  rgba(255,255,255,0.12);
   --dim:        rgba(255,255,255,0.50);
   --dimmer:     rgba(255,255,255,0.28);
 }
@@ -26,10 +26,13 @@ body { font-family:'Poppins',sans-serif; background:#000; color:#fff; }
 .label-bar { position:absolute; top:0; left:0; right:0; z-index:30; padding:11px 18px; display:flex; align-items:center; gap:10px; background:rgba(0,0,0,0.55); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); }
 .vnum { font-size:10px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; background:var(--purple); color:#fff; padding:3px 10px; border-radius:100px; }
 .vdesc { font-size:11px; color:rgba(255,255,255,0.42); }
-.eyebrow { font-size:10px; font-weight:700; letter-spacing:4px; text-transform:uppercase; color:var(--purple); display:block; margin-bottom:16px; }
-.info-lbl { font-size:9px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; color:var(--purple); margin-bottom:7px; }
 
-/* nav */
+/* ── shared editorial ── */
+.eyebrow { font-size:10px; font-weight:700; letter-spacing:4px; text-transform:uppercase; color:var(--purple); display:block; margin-bottom:16px; }
+.info-lbl { font-size:9px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; color:var(--purple); margin-bottom:6px; }
+.hl em { color:var(--purple); font-style:normal; }
+
+/* ── shared nav ── */
 .arr { width:44px; height:44px; border-radius:50%; border:1px solid var(--border-hi); background:var(--bg-el); color:#fff; font-size:18px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background .2s,border-color .2s; flex-shrink:0; }
 .arr:hover { background:var(--purple-lo); border-color:var(--purple); }
 .dots { display:flex; gap:7px; align-items:center; }
@@ -37,355 +40,233 @@ body { font-family:'Poppins',sans-serif; background:#000; color:#fff; }
 .dot.active { background:#fff; transform:scale(1.4); }
 .fading { opacity:0 !important; }
 
-/* ── on-video agent chyron ── */
-.chyron { position:absolute; bottom:0; left:0; right:0; padding:60px 26px 24px; background:linear-gradient(transparent, rgba(0,0,0,0.9) 60%); display:flex; align-items:center; gap:15px; pointer-events:none; z-index:2; }
-.ch-av { width:46px; height:46px; border-radius:50%; object-fit:cover; flex-shrink:0; border:2px solid rgba(255,255,255,0.22); }
-.ch-name { font-size:18px; font-weight:800; color:#fff; line-height:1.15; }
-.ch-desc { font-size:11px; color:rgba(255,255,255,0.55); margin-top:4px; letter-spacing:0.2px; }
+/* ── shared card ── */
+.card-video { position:relative; aspect-ratio:16/9; background:#000; overflow:hidden; transition:opacity .26s; }
+.card-video video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+
+/* ── shared info bar (3 cols: builder | agent | outcome) ── */
+.info-bar { display:grid; grid-template-columns:1fr 1px 1fr 1px 1fr; border-top:1px solid var(--border); }
+.ib-sep { background:var(--border); }
+.ib-builder { display:flex; align-items:center; gap:12px; padding:18px 22px; transition:opacity .26s; }
+.ib-av { width:38px; height:38px; border-radius:50%; overflow:hidden; flex-shrink:0; border:2px solid var(--border-hi); }
+.ib-av img { width:100%; height:100%; object-fit:cover; }
+.ib-b-name { font-size:13px; font-weight:700; color:#fff; }
+.ib-b-meta { font-size:10px; color:var(--dim); margin-top:2px; }
+.ib-agent { display:flex; flex-direction:column; justify-content:center; padding:18px 22px; transition:opacity .26s; }
+.ib-a-name { font-size:14px; font-weight:700; color:#fff; }
+.ib-a-desc { font-size:11px; color:var(--dim); margin-top:3px; }
+.ib-outcome { display:flex; align-items:center; gap:12px; padding:18px 22px; background:var(--purple-lo); transition:opacity .26s; }
+.ib-stat { font-size:26px; font-weight:800; color:var(--purple); line-height:1; flex-shrink:0; }
+.ib-stat-lbl { font-size:11px; color:var(--dim); line-height:1.55; }
 
 
 /* ════════════════════════════════════════════════════════
-   V1 — ANCHOR SPLIT  (50 / 50)
-   Left: pure editorial. Right: video + bottom bar (builder | stat)
+   VARIANT A — BALANCED  (44 / 56)
+   Standard proportion. Card floats with generous padding.
 ════════════════════════════════════════════════════════ */
-.v1-layout { display:grid; grid-template-columns:50% 50%; height:100vh; background:var(--bg); }
-
-.v1-left { display:flex; flex-direction:column; justify-content:center; padding:86px 60px 56px; border-right:1px solid var(--border); }
-.v1-headline { font-size:clamp(26px,2.7vw,42px); font-weight:800; line-height:1.17; margin-bottom:20px; }
-.v1-headline em { color:var(--purple); font-style:normal; }
-.v1-sub { font-size:15px; color:var(--dim); line-height:1.74; max-width:420px; }
-.v1-nav { display:flex; align-items:center; gap:12px; margin-top:48px; }
-
-.v1-right { display:flex; flex-direction:column; }
-.v1-vwrap { position:relative; flex:1; overflow:hidden; background:#000; transition:opacity .26s; }
-.v1-vwrap video { width:100%; height:100%; object-fit:cover; display:block; }
-.v1-bar { display:grid; grid-template-columns:1fr 1fr; flex-shrink:0; border-top:1px solid var(--border); }
-.v1-builder { display:flex; align-items:center; gap:13px; padding:22px 28px; border-right:1px solid var(--border); transition:opacity .26s; }
-.v1-b-av { width:44px; height:44px; border-radius:50%; overflow:hidden; flex-shrink:0; border:2px solid var(--border-hi); }
-.v1-b-av img { width:100%; height:100%; object-fit:cover; }
-.v1-b-name { font-size:13px; font-weight:700; color:#fff; }
-.v1-b-meta { font-size:11px; color:var(--dim); margin-top:2px; }
-.v1-outcome { padding:22px 28px; background:var(--purple-lo); display:flex; flex-direction:column; justify-content:center; transition:opacity .26s; }
-.v1-stat { font-size:32px; font-weight:800; color:var(--purple); line-height:1; margin-bottom:6px; }
-.v1-stat-lbl { font-size:12px; color:var(--dim); line-height:1.55; }
+.va-layout { display:grid; grid-template-columns:44% 56%; height:100vh; background:var(--bg); }
+.va-left { display:flex; flex-direction:column; justify-content:center; padding:86px 60px 56px; border-right:1px solid var(--border); }
+.va-hl { font-size:clamp(26px,2.7vw,42px); font-weight:800; line-height:1.17; margin-bottom:20px; }
+.va-sub { font-size:15px; color:var(--dim); line-height:1.74; max-width:400px; }
+.va-nav { display:flex; align-items:center; gap:12px; margin-top:48px; }
+.va-right { display:flex; align-items:center; justify-content:center; padding:52px 44px; }
+.va-card { width:100%; background:var(--bg-el); border:1px solid var(--border-hi); border-radius:22px; overflow:hidden; box-shadow:0 28px 80px rgba(0,0,0,0.55), 0 0 0 1px rgba(97,97,255,0.08); }
 
 
 /* ════════════════════════════════════════════════════════
-   V2 — STAGE RIGHT  (34 / 66)
-   Narrow left pillar. Video dominates. Tight footer strip.
+   VARIANT B — VIDEO-FIRST  (30 / 70)
+   Ultra-thin copy column. Card is massive, near edge-to-edge.
 ════════════════════════════════════════════════════════ */
-.v2-layout { display:grid; grid-template-columns:34% 66%; height:100vh; background:var(--bg); }
-
-.v2-left { display:flex; flex-direction:column; justify-content:center; padding:86px 38px 52px; border-right:1px solid var(--border); }
-.v2-headline { font-size:clamp(20px,2vw,30px); font-weight:800; line-height:1.22; margin-bottom:16px; }
-.v2-headline em { color:var(--purple); font-style:normal; }
-.v2-sub { font-size:13px; color:var(--dim); line-height:1.72; }
-.v2-nav { display:flex; align-items:center; gap:10px; margin-top:40px; }
-
-.v2-right { display:flex; flex-direction:column; }
-.v2-vwrap { position:relative; flex:1; overflow:hidden; background:#000; transition:opacity .26s; }
-.v2-vwrap video { width:100%; height:100%; object-fit:cover; display:block; }
-.v2-footer { display:flex; align-items:stretch; flex-shrink:0; border-top:1px solid var(--border); }
-.v2-builder { display:flex; align-items:center; gap:12px; padding:18px 26px; flex-shrink:0; transition:opacity .26s; }
-.v2-b-av { width:40px; height:40px; border-radius:50%; overflow:hidden; flex-shrink:0; border:2px solid var(--border-hi); }
-.v2-b-av img { width:100%; height:100%; object-fit:cover; }
-.v2-b-name { font-size:12px; font-weight:700; color:#fff; }
-.v2-b-meta { font-size:10px; color:var(--dim); margin-top:2px; }
-.v2-vsep { width:1px; background:var(--border); flex-shrink:0; }
-.v2-outcome { flex:1; display:flex; align-items:center; gap:18px; padding:18px 28px; background:var(--purple-lo); transition:opacity .26s; }
-.v2-stat { font-size:28px; font-weight:800; color:var(--purple); line-height:1; flex-shrink:0; }
-.v2-stat-lbl { font-size:12px; color:var(--dim); line-height:1.55; }
+.vb-layout { display:grid; grid-template-columns:30% 70%; height:100vh; background:var(--bg); }
+.vb-left { display:flex; flex-direction:column; justify-content:center; padding:86px 36px 52px; border-right:1px solid var(--border); }
+.vb-hl { font-size:clamp(18px,1.9vw,28px); font-weight:800; line-height:1.22; margin-bottom:16px; }
+.vb-sub { font-size:12px; color:var(--dim); line-height:1.72; }
+.vb-nav { display:flex; align-items:center; gap:10px; margin-top:40px; }
+.vb-right { display:flex; align-items:center; justify-content:center; padding:40px 40px 40px 28px; }
+.vb-card { width:100%; background:var(--bg-el); border:1px solid var(--border-hi); border-radius:22px; overflow:hidden; box-shadow:0 32px 90px rgba(0,0,0,0.6), 0 0 0 1px rgba(97,97,255,0.08); }
 
 
 /* ════════════════════════════════════════════════════════
-   V3 — LEFT REVEAL  (46 / 54)
-   Outcome stat featured large on the left. Builder on right.
+   VARIANT C — CARD LEFT  (58 / 42)
+   Card on the left. Copy stacks naturally on the right.
 ════════════════════════════════════════════════════════ */
-.v3-layout { display:grid; grid-template-columns:46% 54%; height:100vh; background:var(--bg); }
-
-.v3-left { display:flex; flex-direction:column; justify-content:center; padding:86px 54px 52px; border-right:1px solid var(--border); }
-.v3-headline { font-size:clamp(22px,2.2vw,34px); font-weight:800; line-height:1.2; margin-bottom:16px; }
-.v3-headline em { color:var(--purple); font-style:normal; }
-.v3-sub { font-size:14px; color:var(--dim); line-height:1.72; }
-.v3-stat-block { margin-top:36px; padding:28px 30px; border:1px solid var(--border); border-left:3px solid var(--purple); border-radius:14px; background:var(--bg-el); transition:opacity .26s; }
-.v3-stat-num { font-size:52px; font-weight:800; color:var(--purple); line-height:1; }
-.v3-stat-lbl { font-size:13px; color:var(--dim); margin-top:9px; line-height:1.6; }
-.v3-nav { display:flex; align-items:center; gap:12px; margin-top:32px; }
-
-.v3-right { display:flex; flex-direction:column; }
-.v3-vwrap { position:relative; flex:1; overflow:hidden; background:#000; transition:opacity .26s; }
-.v3-vwrap video { width:100%; height:100%; object-fit:cover; display:block; }
-.v3-builder { display:flex; align-items:center; gap:13px; padding:22px 28px; flex-shrink:0; border-top:1px solid var(--border); transition:opacity .26s; }
-.v3-b-av { width:46px; height:46px; border-radius:50%; overflow:hidden; flex-shrink:0; border:2px solid var(--border-hi); }
-.v3-b-av img { width:100%; height:100%; object-fit:cover; }
-.v3-b-name { font-size:13px; font-weight:700; color:#fff; }
-.v3-b-meta { font-size:11px; color:var(--dim); margin-top:2px; }
-.v3-b-dept { display:inline-block; margin-top:5px; font-size:9px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--purple); background:var(--purple-lo); border:1px solid var(--purple-mid); border-radius:100px; padding:2px 9px; }
+.vc-layout { display:grid; grid-template-columns:58% 42%; height:100vh; background:var(--bg); }
+.vc-left { display:flex; align-items:center; justify-content:center; padding:40px 28px 40px 44px; }
+.vc-card { width:100%; background:var(--bg-el); border:1px solid var(--border-hi); border-radius:22px; overflow:hidden; box-shadow:0 28px 80px rgba(0,0,0,0.55), 0 0 0 1px rgba(97,97,255,0.08); }
+.vc-right { display:flex; flex-direction:column; justify-content:center; padding:86px 58px 56px; border-left:1px solid var(--border); }
+.vc-hl { font-size:clamp(24px,2.4vw,36px); font-weight:800; line-height:1.2; margin-bottom:20px; }
+.vc-sub { font-size:14px; color:var(--dim); line-height:1.74; max-width:360px; }
+.vc-nav { display:flex; align-items:center; gap:12px; margin-top:48px; }
 
 
 /* ════════════════════════════════════════════════════════
-   V4 — CONTAINED CARD  (42 / 58)
-   Left: editorial. Right: floating card with 16:9 video +
-   bottom panel (builder | stat) inside a rounded card.
+   VARIANT D — TALL CARD  (40 / 60)
+   Card stretches closer to full height (less padding top/bot).
+   Info bar is more spacious — stat number bigger.
 ════════════════════════════════════════════════════════ */
-.v4-layout { display:grid; grid-template-columns:42% 58%; height:100vh; background:var(--bg); }
-
-.v4-left { display:flex; flex-direction:column; justify-content:center; padding:86px 58px 56px; border-right:1px solid var(--border); }
-.v4-headline { font-size:clamp(26px,2.7vw,42px); font-weight:800; line-height:1.17; margin-bottom:20px; }
-.v4-headline em { color:var(--purple); font-style:normal; }
-.v4-sub { font-size:15px; color:var(--dim); line-height:1.74; max-width:420px; }
-.v4-nav { display:flex; align-items:center; gap:12px; margin-top:48px; }
-
-.v4-right { display:flex; align-items:center; justify-content:center; padding:56px 44px; }
-.v4-card { width:100%; background:var(--bg-el); border:1px solid var(--border-hi); border-radius:22px; overflow:hidden; box-shadow:0 28px 80px rgba(0,0,0,0.55), 0 0 0 1px rgba(97,97,255,0.08); }
-.v4-vwrap { position:relative; aspect-ratio:16/9; background:#000; transition:opacity .26s; }
-.v4-vwrap video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
-.v4-card-bottom { display:grid; grid-template-columns:1fr 1px 1fr 1px 1fr; border-top:1px solid var(--border); }
-.v4-sep { background:var(--border); }
-.v4-builder { display:flex; align-items:center; gap:12px; padding:20px 22px; transition:opacity .26s; }
-.v4-b-av { width:40px; height:40px; border-radius:50%; overflow:hidden; flex-shrink:0; border:2px solid var(--border-hi); }
-.v4-b-av img { width:100%; height:100%; object-fit:cover; }
-.v4-b-name { font-size:13px; font-weight:700; color:#fff; }
-.v4-b-meta { font-size:11px; color:var(--dim); margin-top:2px; }
-.v4-agent { display:flex; flex-direction:column; justify-content:center; padding:20px 22px; transition:opacity .26s; }
-.v4-agent-name { font-size:15px; font-weight:700; color:#fff; }
-.v4-agent-desc { font-size:11px; color:var(--dim); margin-top:3px; }
-.v4-outcome { display:flex; align-items:center; gap:14px; padding:20px 22px; background:var(--purple-lo); transition:opacity .26s; }
-.v4-stat { font-size:28px; font-weight:800; color:var(--purple); line-height:1; flex-shrink:0; }
-.v4-stat-lbl { font-size:12px; color:var(--dim); line-height:1.55; }
+.vd-layout { display:grid; grid-template-columns:40% 60%; height:100vh; background:var(--bg); }
+.vd-left { display:flex; flex-direction:column; justify-content:center; padding:86px 52px 56px; border-right:1px solid var(--border); }
+.vd-hl { font-size:clamp(28px,2.9vw,44px); font-weight:800; line-height:1.14; margin-bottom:22px; }
+.vd-sub { font-size:15px; color:var(--dim); line-height:1.74; max-width:390px; }
+.vd-nav { display:flex; align-items:center; gap:12px; margin-top:48px; }
+.vd-right { display:flex; align-items:center; justify-content:center; padding:24px 36px; }
+.vd-card { width:100%; background:var(--bg-el); border:1px solid var(--border-hi); border-radius:22px; overflow:hidden; box-shadow:0 28px 80px rgba(0,0,0,0.55), 0 0 0 1px rgba(97,97,255,0.08); }
+/* override info bar stat for this variant */
+#vd .ib-stat { font-size:32px; }
+#vd .ib-builder { padding:22px 24px; }
+#vd .ib-agent  { padding:22px 24px; }
+#vd .ib-outcome{ padding:22px 24px; }
 
 
 /* ════════════════════════════════════════════════════════
    MOBILE  ≤ 768px
 ════════════════════════════════════════════════════════ */
 @media (max-width:768px) {
-  .v1-layout,.v2-layout,.v3-layout,.v4-layout { grid-template-columns:1fr; height:auto; }
+  .va-layout,.vb-layout,.vc-layout,.vd-layout { grid-template-columns:1fr; height:auto; }
 
-  /* video panels come first */
-  .v1-right  { order:-1; height:56vw; }
-  .v2-right  { order:-1; height:56vw; }
-  .v3-right  { order:-1; height:56vw; }
-  .v4-right  { order:-1; padding:16px; }
+  .va-right,.vb-right,.vd-right { order:-1; padding:16px 14px; }
+  .vc-left { order:-1; padding:16px 14px; }
 
-  .v1-vwrap,.v2-vwrap,.v3-vwrap { flex:none; height:100%; }
+  .va-left,.vb-left,.vc-right,.vd-left { padding:22px 18px 48px; border-right:none; border-left:none; border-top:1px solid var(--border); }
 
-  /* left panels */
-  .v1-left,.v2-left,.v3-left,.v4-left { padding:24px 18px 48px; border-right:none; border-top:1px solid var(--border); }
-
-  /* bars */
-  .v1-bar { grid-template-columns:1fr; }
-  .v1-builder { border-right:none; border-bottom:1px solid var(--border); }
-  .v2-footer { flex-direction:column; }
-  .v2-vsep { width:100%; height:1px; }
-
-  .v4-card-bottom { grid-template-columns:1fr; }
-  .v4-sep { height:1px; width:100%; }
-  .v4-agent { border-bottom:1px solid var(--border); }
-
-  .v3-stat-block { padding:20px 22px; }
-  .v3-stat-num { font-size:38px; }
+  .info-bar { grid-template-columns:1fr; }
+  .ib-sep { height:1px; }
+  #vd .ib-stat { font-size:26px; }
+  #vd .ib-builder,#vd .ib-agent,#vd .ib-outcome { padding:16px 20px; }
 }
 </style>
 </head>
 <body>
 
 
-<!-- ═══════════════════ VARIANT 1 — ANCHOR SPLIT ═══════════════════ -->
-<div class="variant" id="v1">
+<!-- ═══ VARIANT A — BALANCED ═══ -->
+<div class="variant" id="va">
   <div class="label-bar">
-    <span class="vnum">Variant 1</span>
-    <span class="vdesc">Anchor split — editorial left, video + builder + outcome bar right</span>
+    <span class="vnum">A</span>
+    <span class="vdesc">Balanced — 44/56, card floats with generous padding</span>
   </div>
-  <div class="v1-layout">
-
-    <div class="v1-left">
+  <div class="va-layout">
+    <div class="va-left">
       <span class="eyebrow">Monday on Monday</span>
-      <h2 class="v1-headline">Our people built 5,000+ agents for the problems that <em>frustrated them most</em></h2>
-      <p class="v1-sub">Meet the monday builders who turned real work frustrations into working agents — and changed how their teams operate.</p>
-      <div class="v1-nav">
-        <button class="arr" id="v1-prev">&#8592;</button>
-        <div class="dots" id="v1-dots"></div>
-        <button class="arr" id="v1-next">&#8594;</button>
+      <h2 class="va-hl hl">Our people built agents for the problems that <em>frustrated them most</em></h2>
+      <p class="va-sub">Meet the monday builders who turned real work frustrations into working agents — and changed how their teams operate.</p>
+      <div class="va-nav">
+        <button class="arr" id="va-prev">&#8592;</button>
+        <div class="dots" id="va-dots"></div>
+        <button class="arr" id="va-next">&#8594;</button>
       </div>
     </div>
-
-    <div class="v1-right">
-      <div class="v1-vwrap" id="v1-vwrap">
-        <video id="v1-video" muted loop playsinline autoplay preload="metadata"></video>
-        <div class="chyron">
-          <img class="ch-av" id="v1-ch-av" src="" alt="">
-          <div>
-            <div class="ch-name" id="v1-ch-name"></div>
-            <div class="ch-desc" id="v1-ch-desc"></div>
-          </div>
-        </div>
-      </div>
-      <div class="v1-bar">
-        <div class="v1-builder" id="v1-builder">
-          <div class="v1-b-av"><img id="v1-av" alt=""></div>
-          <div>
-            <div class="v1-b-name" id="v1-bname"></div>
-            <div class="v1-b-meta" id="v1-bmeta"></div>
-          </div>
-        </div>
-        <div class="v1-outcome" id="v1-outcome-el">
-          <div class="info-lbl">The outcome</div>
-          <div class="v1-stat" id="v1-stat"></div>
-          <div class="v1-stat-lbl" id="v1-stat-lbl"></div>
+    <div class="va-right">
+      <div class="va-card">
+        <div class="card-video" id="va-vwrap"><video id="va-video" muted loop playsinline autoplay preload="metadata"></video></div>
+        <div class="info-bar">
+          <div class="ib-builder" id="va-builder"><div class="ib-av"><img id="va-av" alt=""></div><div><div class="ib-b-name" id="va-bname"></div><div class="ib-b-meta" id="va-bmeta"></div></div></div>
+          <div class="ib-sep"></div>
+          <div class="ib-agent" id="va-agent"><div class="info-lbl">The agent</div><div class="ib-a-name" id="va-aname"></div><div class="ib-a-desc" id="va-adesc"></div></div>
+          <div class="ib-sep"></div>
+          <div class="ib-outcome" id="va-outcome"><div class="ib-stat" id="va-stat"></div><div class="ib-stat-lbl" id="va-statlbl"></div></div>
         </div>
       </div>
     </div>
-
   </div>
 </div>
 
 
-<!-- ═══════════════════ VARIANT 2 — STAGE RIGHT ═══════════════════ -->
-<div class="variant" id="v2">
+<!-- ═══ VARIANT B — VIDEO-FIRST ═══ -->
+<div class="variant" id="vb">
   <div class="label-bar">
-    <span class="vnum">Variant 2</span>
-    <span class="vdesc">Stage right — narrow left pillar, wide video, tight footer strip</span>
+    <span class="vnum">B</span>
+    <span class="vdesc">Video-first — 30/70, ultra-thin copy, wide card</span>
   </div>
-  <div class="v2-layout">
-
-    <div class="v2-left">
+  <div class="vb-layout">
+    <div class="vb-left">
       <span class="eyebrow">Monday on Monday</span>
-      <h2 class="v2-headline">Our people built 5,000+ agents for the problems that <em>frustrated them most</em></h2>
-      <p class="v2-sub">Meet the monday builders who turned real work frustrations into working agents.</p>
-      <div class="v2-nav">
-        <button class="arr" id="v2-prev">&#8592;</button>
-        <div class="dots" id="v2-dots"></div>
-        <button class="arr" id="v2-next">&#8594;</button>
+      <h2 class="vb-hl hl">Our people built agents for the problems that <em>frustrated them most</em></h2>
+      <p class="vb-sub">Real builders. Real frustrations. Working agents.</p>
+      <div class="vb-nav">
+        <button class="arr" id="vb-prev">&#8592;</button>
+        <div class="dots" id="vb-dots"></div>
+        <button class="arr" id="vb-next">&#8594;</button>
       </div>
     </div>
-
-    <div class="v2-right">
-      <div class="v2-vwrap" id="v2-vwrap">
-        <video id="v2-video" muted loop playsinline autoplay preload="metadata"></video>
-        <div class="chyron">
-          <img class="ch-av" id="v2-ch-av" src="" alt="">
-          <div>
-            <div class="ch-name" id="v2-ch-name"></div>
-            <div class="ch-desc" id="v2-ch-desc"></div>
-          </div>
-        </div>
-      </div>
-      <div class="v2-footer">
-        <div class="v2-builder" id="v2-builder">
-          <div class="v2-b-av"><img id="v2-av" alt=""></div>
-          <div>
-            <div class="v2-b-name" id="v2-bname"></div>
-            <div class="v2-b-meta" id="v2-bmeta"></div>
-          </div>
-        </div>
-        <div class="v2-vsep"></div>
-        <div class="v2-outcome" id="v2-outcome-el">
-          <div class="v2-stat" id="v2-stat"></div>
-          <div class="v2-stat-lbl" id="v2-stat-lbl"></div>
+    <div class="vb-right">
+      <div class="vb-card">
+        <div class="card-video" id="vb-vwrap"><video id="vb-video" muted loop playsinline autoplay preload="metadata"></video></div>
+        <div class="info-bar">
+          <div class="ib-builder" id="vb-builder"><div class="ib-av"><img id="vb-av" alt=""></div><div><div class="ib-b-name" id="vb-bname"></div><div class="ib-b-meta" id="vb-bmeta"></div></div></div>
+          <div class="ib-sep"></div>
+          <div class="ib-agent" id="vb-agent"><div class="info-lbl">The agent</div><div class="ib-a-name" id="vb-aname"></div><div class="ib-a-desc" id="vb-adesc"></div></div>
+          <div class="ib-sep"></div>
+          <div class="ib-outcome" id="vb-outcome"><div class="ib-stat" id="vb-stat"></div><div class="ib-stat-lbl" id="vb-statlbl"></div></div>
         </div>
       </div>
     </div>
-
   </div>
 </div>
 
 
-<!-- ═══════════════════ VARIANT 3 — LEFT REVEAL ═══════════════════ -->
-<div class="variant" id="v3">
+<!-- ═══ VARIANT C — CARD LEFT ═══ -->
+<div class="variant" id="vc">
   <div class="label-bar">
-    <span class="vnum">Variant 3</span>
-    <span class="vdesc">Left reveal — big outcome stat on left, video + builder right</span>
+    <span class="vnum">C</span>
+    <span class="vdesc">Card left — 58/42, card on left, copy on right</span>
   </div>
-  <div class="v3-layout">
-
-    <div class="v3-left">
+  <div class="vc-layout">
+    <div class="vc-left">
+      <div class="vc-card">
+        <div class="card-video" id="vc-vwrap"><video id="vc-video" muted loop playsinline autoplay preload="metadata"></video></div>
+        <div class="info-bar">
+          <div class="ib-builder" id="vc-builder"><div class="ib-av"><img id="vc-av" alt=""></div><div><div class="ib-b-name" id="vc-bname"></div><div class="ib-b-meta" id="vc-bmeta"></div></div></div>
+          <div class="ib-sep"></div>
+          <div class="ib-agent" id="vc-agent"><div class="info-lbl">The agent</div><div class="ib-a-name" id="vc-aname"></div><div class="ib-a-desc" id="vc-adesc"></div></div>
+          <div class="ib-sep"></div>
+          <div class="ib-outcome" id="vc-outcome"><div class="ib-stat" id="vc-stat"></div><div class="ib-stat-lbl" id="vc-statlbl"></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="vc-right">
       <span class="eyebrow">Monday on Monday</span>
-      <h2 class="v3-headline">Our people built 5,000+ agents for the problems that <em>frustrated them most</em></h2>
-      <p class="v3-sub">Real builders. Real frustrations. Working agents.</p>
-      <div class="v3-stat-block" id="v3-stat-block">
-        <div class="info-lbl">The outcome</div>
-        <div class="v3-stat-num" id="v3-stat-num"></div>
-        <div class="v3-stat-lbl" id="v3-stat-lbl"></div>
-      </div>
-      <div class="v3-nav">
-        <button class="arr" id="v3-prev">&#8592;</button>
-        <div class="dots" id="v3-dots"></div>
-        <button class="arr" id="v3-next">&#8594;</button>
+      <h2 class="vc-hl hl">Our people built agents for the problems that <em>frustrated them most</em></h2>
+      <p class="vc-sub">Meet the monday builders who turned real work frustrations into working agents — and changed how their teams operate.</p>
+      <div class="vc-nav">
+        <button class="arr" id="vc-prev">&#8592;</button>
+        <div class="dots" id="vc-dots"></div>
+        <button class="arr" id="vc-next">&#8594;</button>
       </div>
     </div>
-
-    <div class="v3-right">
-      <div class="v3-vwrap" id="v3-vwrap">
-        <video id="v3-video" muted loop playsinline autoplay preload="metadata"></video>
-        <div class="chyron">
-          <img class="ch-av" id="v3-ch-av" src="" alt="">
-          <div>
-            <div class="ch-name" id="v3-ch-name"></div>
-            <div class="ch-desc" id="v3-ch-desc"></div>
-          </div>
-        </div>
-      </div>
-      <div class="v3-builder" id="v3-builder">
-        <div class="v3-b-av"><img id="v3-av" alt=""></div>
-        <div>
-          <div class="v3-b-name" id="v3-bname"></div>
-          <div class="v3-b-meta" id="v3-bmeta"></div>
-          <div class="v3-b-dept" id="v3-bdept"></div>
-        </div>
-      </div>
-    </div>
-
   </div>
 </div>
 
 
-<!-- ═══════════════════ VARIANT 4 — CONTAINED CARD ═══════════════════ -->
-<div class="variant" id="v4">
+<!-- ═══ VARIANT D — TALL CARD ═══ -->
+<div class="variant" id="vd">
   <div class="label-bar">
-    <span class="vnum">Variant 4</span>
-    <span class="vdesc">Contained card — editorial left, floating card right (video + builder + stat)</span>
+    <span class="vnum">D</span>
+    <span class="vdesc">Tall card — 40/60, card near full height, bigger type and stat</span>
   </div>
-  <div class="v4-layout">
-
-    <div class="v4-left">
+  <div class="vd-layout">
+    <div class="vd-left">
       <span class="eyebrow">Monday on Monday</span>
-      <h2 class="v4-headline">Our people built 5,000+ agents for the problems that <em>frustrated them most</em></h2>
-      <p class="v4-sub">Meet the monday builders who turned real work frustrations into working agents — and changed how their teams operate.</p>
-      <div class="v4-nav">
-        <button class="arr" id="v4-prev">&#8592;</button>
-        <div class="dots" id="v4-dots"></div>
-        <button class="arr" id="v4-next">&#8594;</button>
+      <h2 class="vd-hl hl">Our people built agents for the problems that <em>frustrated them most</em></h2>
+      <p class="vd-sub">Meet the monday builders who turned real work frustrations into working agents — and changed how their teams operate.</p>
+      <div class="vd-nav">
+        <button class="arr" id="vd-prev">&#8592;</button>
+        <div class="dots" id="vd-dots"></div>
+        <button class="arr" id="vd-next">&#8594;</button>
       </div>
     </div>
-
-    <div class="v4-right">
-      <div class="v4-card">
-        <div class="v4-vwrap" id="v4-vwrap">
-          <video id="v4-video" muted loop playsinline autoplay preload="metadata"></video>
-        </div>
-        <div class="v4-card-bottom">
-          <div class="v4-builder" id="v4-builder">
-            <div class="v4-b-av"><img id="v4-av" alt=""></div>
-            <div>
-              <div class="v4-b-name" id="v4-bname"></div>
-              <div class="v4-b-meta" id="v4-bmeta"></div>
-            </div>
-          </div>
-          <div class="v4-sep"></div>
-          <div class="v4-agent" id="v4-agent">
-            <div class="info-lbl">The agent</div>
-            <div class="v4-agent-name" id="v4-agent-name"></div>
-            <div class="v4-agent-desc" id="v4-agent-desc"></div>
-          </div>
-          <div class="v4-sep"></div>
-          <div class="v4-outcome" id="v4-outcome-el">
-            <div class="v4-stat" id="v4-stat"></div>
-            <div class="v4-stat-lbl" id="v4-stat-lbl"></div>
-          </div>
+    <div class="vd-right">
+      <div class="vd-card">
+        <div class="card-video" id="vd-vwrap"><video id="vd-video" muted loop playsinline autoplay preload="metadata"></video></div>
+        <div class="info-bar">
+          <div class="ib-builder" id="vd-builder"><div class="ib-av"><img id="vd-av" alt=""></div><div><div class="ib-b-name" id="vd-bname"></div><div class="ib-b-meta" id="vd-bmeta"></div></div></div>
+          <div class="ib-sep"></div>
+          <div class="ib-agent" id="vd-agent"><div class="info-lbl">The agent</div><div class="ib-a-name" id="vd-aname"></div><div class="ib-a-desc" id="vd-adesc"></div></div>
+          <div class="ib-sep"></div>
+          <div class="ib-outcome" id="vd-outcome"><div class="ib-stat" id="vd-stat"></div><div class="ib-stat-lbl" id="vd-statlbl"></div></div>
         </div>
       </div>
     </div>
-
   </div>
 </div>
 
@@ -438,166 +319,22 @@ const BUILDERS = [
   }
 ];
 
-function makeDots(el, n, cb) {
-  for (let i = 0; i < n; i++) {
+function wire(prefix) {
+  let cur = 0;
+  const vwrap     = document.getElementById(`${prefix}-vwrap`);
+  const video     = document.getElementById(`${prefix}-video`);
+  const dotsEl    = document.getElementById(`${prefix}-dots`);
+  const builderEl = document.getElementById(`${prefix}-builder`);
+  const agentEl   = document.getElementById(`${prefix}-agent`);
+  const outcomeEl = document.getElementById(`${prefix}-outcome`);
+
+  BUILDERS.forEach((_, i) => {
     const d = document.createElement('button');
     d.className = 'dot';
     d.setAttribute('aria-label', `Builder ${i+1}`);
-    d.onclick = () => cb(i);
-    el.appendChild(d);
-  }
-}
-function syncDots(el, cur) {
-  el.querySelectorAll('.dot').forEach((d,i) => d.classList.toggle('active', i === cur));
-}
-
-/* ── V1: Anchor Split ── */
-(function () {
-  let cur = 0;
-  const vwrap    = document.getElementById('v1-vwrap');
-  const video    = document.getElementById('v1-video');
-  const dotsEl   = document.getElementById('v1-dots');
-  const builderEl= document.getElementById('v1-builder');
-  const outcomeEl= document.getElementById('v1-outcome-el');
-
-  makeDots(dotsEl, BUILDERS.length, i => go(i));
-
-  function go(idx) {
-    vwrap.classList.add('fading');
-    builderEl.classList.add('fading');
-    outcomeEl.classList.add('fading');
-    setTimeout(() => {
-      cur = (idx + BUILDERS.length) % BUILDERS.length;
-      const b = BUILDERS[cur];
-      video.src = b.video; video.play().catch(()=>{});
-      document.getElementById('v1-ch-av').src    = b.avatar;
-      document.getElementById('v1-ch-name').textContent = b.agentName;
-      document.getElementById('v1-ch-desc').textContent = b.agentDesc;
-      document.getElementById('v1-av').src        = b.avatar;
-      document.getElementById('v1-bname').textContent   = b.name;
-      document.getElementById('v1-bmeta').textContent   = `${b.title} · ${b.dept}`;
-      document.getElementById('v1-stat').textContent    = b.statNum;
-      document.getElementById('v1-stat-lbl').textContent= b.statLabel;
-      syncDots(dotsEl, cur);
-      vwrap.classList.remove('fading');
-      builderEl.classList.remove('fading');
-      outcomeEl.classList.remove('fading');
-    }, 260);
-  }
-
-  document.getElementById('v1-prev').onclick = () => go(cur - 1);
-  document.getElementById('v1-next').onclick = () => go(cur + 1);
-  const sect = document.getElementById('v1');
-  let tx = 0;
-  sect.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, {passive:true});
-  sect.addEventListener('touchend',   e => { const dx = e.changedTouches[0].clientX - tx; if (Math.abs(dx) > 44) go(cur + (dx < 0 ? 1 : -1)); }, {passive:true});
-  let timer = setInterval(() => go(cur + 1), 7000);
-  sect.addEventListener('pointerdown', () => { clearInterval(timer); timer = null; });
-  go(0);
-})();
-
-/* ── V2: Stage Right ── */
-(function () {
-  let cur = 0;
-  const vwrap     = document.getElementById('v2-vwrap');
-  const video     = document.getElementById('v2-video');
-  const dotsEl    = document.getElementById('v2-dots');
-  const builderEl = document.getElementById('v2-builder');
-  const outcomeEl = document.getElementById('v2-outcome-el');
-
-  makeDots(dotsEl, BUILDERS.length, i => go(i));
-
-  function go(idx) {
-    vwrap.classList.add('fading');
-    builderEl.classList.add('fading');
-    outcomeEl.classList.add('fading');
-    setTimeout(() => {
-      cur = (idx + BUILDERS.length) % BUILDERS.length;
-      const b = BUILDERS[cur];
-      video.src = b.video; video.play().catch(()=>{});
-      document.getElementById('v2-ch-av').src    = b.avatar;
-      document.getElementById('v2-ch-name').textContent = b.agentName;
-      document.getElementById('v2-ch-desc').textContent = b.agentDesc;
-      document.getElementById('v2-av').src        = b.avatar;
-      document.getElementById('v2-bname').textContent   = b.name;
-      document.getElementById('v2-bmeta').textContent   = `${b.title} · ${b.dept}`;
-      document.getElementById('v2-stat').textContent    = b.statNum;
-      document.getElementById('v2-stat-lbl').textContent= b.statLabel;
-      syncDots(dotsEl, cur);
-      vwrap.classList.remove('fading');
-      builderEl.classList.remove('fading');
-      outcomeEl.classList.remove('fading');
-    }, 260);
-  }
-
-  document.getElementById('v2-prev').onclick = () => go(cur - 1);
-  document.getElementById('v2-next').onclick = () => go(cur + 1);
-  const sect = document.getElementById('v2');
-  let tx = 0;
-  sect.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, {passive:true});
-  sect.addEventListener('touchend',   e => { const dx = e.changedTouches[0].clientX - tx; if (Math.abs(dx) > 44) go(cur + (dx < 0 ? 1 : -1)); }, {passive:true});
-  let timer = setInterval(() => go(cur + 1), 7000);
-  sect.addEventListener('pointerdown', () => { clearInterval(timer); timer = null; });
-  go(0);
-})();
-
-/* ── V3: Left Reveal ── */
-(function () {
-  let cur = 0;
-  const vwrap      = document.getElementById('v3-vwrap');
-  const video      = document.getElementById('v3-video');
-  const dotsEl     = document.getElementById('v3-dots');
-  const statBlock  = document.getElementById('v3-stat-block');
-  const builderEl  = document.getElementById('v3-builder');
-
-  makeDots(dotsEl, BUILDERS.length, i => go(i));
-
-  function go(idx) {
-    vwrap.classList.add('fading');
-    statBlock.classList.add('fading');
-    builderEl.classList.add('fading');
-    setTimeout(() => {
-      cur = (idx + BUILDERS.length) % BUILDERS.length;
-      const b = BUILDERS[cur];
-      video.src = b.video; video.play().catch(()=>{});
-      document.getElementById('v3-ch-av').src    = b.avatar;
-      document.getElementById('v3-ch-name').textContent = b.agentName;
-      document.getElementById('v3-ch-desc').textContent = b.agentDesc;
-      document.getElementById('v3-stat-num').textContent = b.statNum;
-      document.getElementById('v3-stat-lbl').textContent = b.statLabel;
-      document.getElementById('v3-av').src        = b.avatar;
-      document.getElementById('v3-bname').textContent   = b.name;
-      document.getElementById('v3-bmeta').textContent   = `${b.title} · ${b.dept}`;
-      document.getElementById('v3-bdept').textContent   = b.dept;
-      syncDots(dotsEl, cur);
-      vwrap.classList.remove('fading');
-      statBlock.classList.remove('fading');
-      builderEl.classList.remove('fading');
-    }, 260);
-  }
-
-  document.getElementById('v3-prev').onclick = () => go(cur - 1);
-  document.getElementById('v3-next').onclick = () => go(cur + 1);
-  const sect = document.getElementById('v3');
-  let tx = 0;
-  sect.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, {passive:true});
-  sect.addEventListener('touchend',   e => { const dx = e.changedTouches[0].clientX - tx; if (Math.abs(dx) > 44) go(cur + (dx < 0 ? 1 : -1)); }, {passive:true});
-  let timer = setInterval(() => go(cur + 1), 7000);
-  sect.addEventListener('pointerdown', () => { clearInterval(timer); timer = null; });
-  go(0);
-})();
-
-/* ── V4: Contained Card ── */
-(function () {
-  let cur = 0;
-  const vwrap     = document.getElementById('v4-vwrap');
-  const video     = document.getElementById('v4-video');
-  const dotsEl    = document.getElementById('v4-dots');
-  const builderEl = document.getElementById('v4-builder');
-  const agentEl   = document.getElementById('v4-agent');
-  const outcomeEl = document.getElementById('v4-outcome-el');
-
-  makeDots(dotsEl, BUILDERS.length, i => go(i));
+    d.onclick = () => go(i);
+    dotsEl.appendChild(d);
+  });
 
   function go(idx) {
     vwrap.classList.add('fading');
@@ -608,14 +345,14 @@ function syncDots(el, cur) {
       cur = (idx + BUILDERS.length) % BUILDERS.length;
       const b = BUILDERS[cur];
       video.src = b.video; video.play().catch(()=>{});
-      document.getElementById('v4-av').src               = b.avatar;
-      document.getElementById('v4-bname').textContent    = b.name;
-      document.getElementById('v4-bmeta').textContent    = `${b.title} · ${b.dept}`;
-      document.getElementById('v4-agent-name').textContent = b.agentName;
-      document.getElementById('v4-agent-desc').textContent = b.agentDesc;
-      document.getElementById('v4-stat').textContent     = b.statNum;
-      document.getElementById('v4-stat-lbl').textContent = b.statLabel;
-      syncDots(dotsEl, cur);
+      document.getElementById(`${prefix}-av`).src            = b.avatar;
+      document.getElementById(`${prefix}-bname`).textContent = b.name;
+      document.getElementById(`${prefix}-bmeta`).textContent = `${b.title} · ${b.dept}`;
+      document.getElementById(`${prefix}-aname`).textContent = b.agentName;
+      document.getElementById(`${prefix}-adesc`).textContent = b.agentDesc;
+      document.getElementById(`${prefix}-stat`).textContent  = b.statNum;
+      document.getElementById(`${prefix}-statlbl`).textContent = b.statLabel;
+      dotsEl.querySelectorAll('.dot').forEach((d,i) => d.classList.toggle('active', i === cur));
       vwrap.classList.remove('fading');
       builderEl.classList.remove('fading');
       agentEl.classList.remove('fading');
@@ -623,16 +360,21 @@ function syncDots(el, cur) {
     }, 260);
   }
 
-  document.getElementById('v4-prev').onclick = () => go(cur - 1);
-  document.getElementById('v4-next').onclick = () => go(cur + 1);
-  const sect = document.getElementById('v4');
+  document.getElementById(`${prefix}-prev`).onclick = () => go(cur - 1);
+  document.getElementById(`${prefix}-next`).onclick = () => go(cur + 1);
+  const sect = document.getElementById(prefix);
   let tx = 0;
   sect.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, {passive:true});
   sect.addEventListener('touchend',   e => { const dx = e.changedTouches[0].clientX - tx; if (Math.abs(dx) > 44) go(cur + (dx < 0 ? 1 : -1)); }, {passive:true});
   let timer = setInterval(() => go(cur + 1), 7000);
   sect.addEventListener('pointerdown', () => { clearInterval(timer); timer = null; });
   go(0);
-})();
+}
+
+wire('va');
+wire('vb');
+wire('vc');
+wire('vd');
 </script>
 </body>
 </html>
