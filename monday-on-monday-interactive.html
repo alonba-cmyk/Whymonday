@@ -101,6 +101,69 @@ body { font-family:'Poppins',sans-serif; background:var(--bg); color:#fff; }
 .la-sub { font-size:14px; color:var(--dim); line-height:1.78; max-width:400px; }
 .la-nav { margin-top:44px; }
 
+/* ══════════════════════════════════════════
+   SECTION 5 — 4 mobile variants showcase
+══════════════════════════════════════════ */
+.mvs-scene { display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:100vh; padding:52px 32px; position:relative; z-index:1; gap:24px; }
+.mvs-lbl { font-size:9px; font-weight:700; letter-spacing:4px; text-transform:uppercase; color:var(--dimmer); }
+.mvs-row { display:flex; gap:16px; align-items:flex-start; justify-content:center; width:100%; overflow-x:auto; scrollbar-width:none; }
+.mvs-row::-webkit-scrollbar { display:none; }
+.mvp { display:flex; flex-direction:column; align-items:center; gap:8px; flex-shrink:0; }
+.mvp-lbl { font-size:9px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--dimmer); }
+.mvp-ph { width:282px; border-radius:38px; border:1.5px solid var(--border-hi); background:var(--bg); overflow:hidden; box-shadow:0 24px 64px rgba(0,0,0,0.65), 0 0 0 1px rgba(97,97,255,0.10); }
+
+/* shared resets inside all phones */
+.mvp-ph .card { border-radius:0; border:none; border-top:1px solid var(--border); box-shadow:none; background:transparent; }
+.mvp-ph .info-bar { grid-template-columns:1fr; }
+.mvp-ph .ib-sep { height:1px; }
+.mvp-ph .vplay-btn { opacity:0.75; }
+.mvp-ph .dept-row { overflow-x:auto; scrollbar-width:none; }
+.mvp-ph .dept-row::-webkit-scrollbar { display:none; }
+.mvp-ph .ib-builder, .mvp-ph .ib-agent, .mvp-ph .ib-outcome { padding:12px 15px; }
+.mvp-ph .ib-av { width:38px; height:38px; }
+.mvp-ph .ib-stat { font-size:20px; }
+.mvp-ph .ib-a-name { font-size:12px; }
+.mvp-ph .ib-agent-av { width:34px; height:34px; border-radius:8px; }
+.mvp-ph .eyebrow { display:block; text-align:center; }
+
+/* shared text + nav classes */
+.mv-txt { padding:22px 18px 16px; text-align:center; }
+.mv-hl  { font-size:17px; font-weight:800; line-height:1.25; margin:8px 0 0; }
+.mv-nav { display:flex; justify-content:center; align-items:center; gap:8px; padding:12px 16px; border-top:1px solid var(--border); }
+.mv-nav .arr { width:36px; height:36px; font-size:14px; }
+
+/* A — Minimal: nav inline under headline, dept text centered */
+.mva .mv-txt  { padding-bottom:0; }
+.mva .mv-nav  { border-top:none; padding:14px 0 0; }
+.mva .dept-row { justify-content:center; }
+
+/* B — Video first: video at top, dept below video, nav at bottom */
+.mvb .card { display:flex; flex-direction:column; }
+.mvb .card .dept-row  { order:2; border-top:1px solid var(--border); border-bottom:none; }
+.mvb .card .card-video { order:1; }
+.mvb .card .info-bar  { order:3; }
+.mvb .mv-txt { padding-bottom:0; }
+
+/* C — Stat hero: big number between headline and video */
+.mvc .mv-txt { padding-bottom:0; }
+.mvc .mvc-hero { text-align:center; padding:14px 16px 16px; border-bottom:1px solid var(--border); }
+.mvc .mvc-hero-num { font-size:48px; font-weight:800; color:#fff; line-height:1; }
+.mvc .mvc-hero-lbl { font-size:10px; color:var(--dim); margin-top:4px; line-height:1.5; }
+.mvc .card { border-top:none; }
+.mvc .dept-row { display:none; }
+.mvc .info-bar > :nth-child(4), .mvc .info-bar > :nth-child(5) { display:none; }
+
+/* D — Pill tabs: dept as pill buttons, builder+outcome side-by-side */
+.mvd .mv-txt { padding-bottom:4px; }
+.mvd .dept-row { gap:6px; padding:0 12px 10px; flex-wrap:nowrap; }
+.mvd .dept-tag { border:1px solid var(--border-hi); padding:4px 11px; border-radius:100px; color:var(--dimmer); }
+.mvd .dept-tag::after { display:none; }
+.mvd .dept-tag.active { background:var(--purple-lo); border-color:var(--purple); color:#fff; }
+.mvd .info-bar { grid-template-columns:1fr 1px 1fr; }
+.mvd .info-bar > :nth-child(2) { display:none; }
+.mvd .info-bar > :nth-child(3) { display:none; }
+.mvd .ib-outcome { background:var(--purple-lo); }
+
 /* ── mobile responsive ── */
 @media (max-width:768px) {
   .layout { grid-template-columns:1fr; height:auto; }
@@ -260,6 +323,127 @@ body { font-family:'Poppins',sans-serif; background:var(--bg); color:#fff; }
 
 
 <!-- ══════════════════════════════════════════════════
+     SECTION 5 — 4 mobile variants showcase
+══════════════════════════════════════════════════ -->
+<div class="sect" id="s5">
+  <div class="mvs-scene">
+    <div class="mvs-lbl">Mobile Variants</div>
+    <div class="mvs-row">
+
+      <!-- A: Minimal centered -->
+      <div class="mvp">
+        <div class="mvp-lbl">A — Minimal</div>
+        <div class="mvp-ph mva">
+          <div class="mv-txt">
+            <span class="eyebrow">MONDAY'S AI TRANSFORMATION</span>
+            <h2 class="mv-hl">How monday teams turned real work challenges into working agents</h2>
+            <div class="mv-nav"><button class="arr" id="ma-prev">&#8592;</button><div class="dots" id="ma-dots"></div><button class="arr" id="ma-next">&#8594;</button></div>
+          </div>
+          <div class="card">
+            <div class="dept-row clickable" id="ma-deptrow"></div>
+            <div class="card-video" id="ma-vwrap">
+              <video id="ma-video" muted loop playsinline preload="metadata"></video>
+              <button class="vplay-btn" id="ma-playbtn" aria-label="Play/Pause"><svg id="ma-icon-play" viewBox="0 0 16 16"><polygon points="4,2 14,8 4,14"/></svg><svg id="ma-icon-pause" viewBox="0 0 16 16" style="display:none"><rect x="3" y="2" width="4" height="12"/><rect x="9" y="2" width="4" height="12"/></svg></button>
+            </div>
+            <div class="info-bar">
+              <div class="ib-builder" id="ma-builder"><div class="ib-av"><img id="ma-av" alt=""></div><div><div class="ib-dept" id="ma-dept"></div><div class="ib-b-name" id="ma-bname"></div><div class="ib-b-meta" id="ma-bmeta"></div></div></div>
+              <div class="ib-sep"></div>
+              <div class="ib-agent" id="ma-agent"><div class="ib-agent-av" id="ma-agent-av"><img id="ma-agentimg" alt=""></div><div><div class="ib-lbl">The agent</div><div class="ib-a-name" id="ma-aname"></div><div class="ib-a-desc" id="ma-adesc"></div></div></div>
+              <div class="ib-sep"></div>
+              <div class="ib-outcome" id="ma-outcome"><div class="ib-lbl">The outcome</div><div class="ib-outcome-nums"><div class="ib-stat" id="ma-stat"></div><div class="ib-stat-lbl" id="ma-statlbl"></div></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- B: Video first -->
+      <div class="mvp">
+        <div class="mvp-lbl">B — Video First</div>
+        <div class="mvp-ph mvb">
+          <div class="mv-txt">
+            <span class="eyebrow">MONDAY'S AI TRANSFORMATION</span>
+            <h2 class="mv-hl">How monday teams turned real work challenges into working agents</h2>
+          </div>
+          <div class="card">
+            <div class="dept-row clickable" id="mb-deptrow"></div>
+            <div class="card-video" id="mb-vwrap">
+              <video id="mb-video" muted loop playsinline preload="metadata"></video>
+              <button class="vplay-btn" id="mb-playbtn" aria-label="Play/Pause"><svg id="mb-icon-play" viewBox="0 0 16 16"><polygon points="4,2 14,8 4,14"/></svg><svg id="mb-icon-pause" viewBox="0 0 16 16" style="display:none"><rect x="3" y="2" width="4" height="12"/><rect x="9" y="2" width="4" height="12"/></svg></button>
+            </div>
+            <div class="info-bar">
+              <div class="ib-builder" id="mb-builder"><div class="ib-av"><img id="mb-av" alt=""></div><div><div class="ib-dept" id="mb-dept"></div><div class="ib-b-name" id="mb-bname"></div><div class="ib-b-meta" id="mb-bmeta"></div></div></div>
+              <div class="ib-sep"></div>
+              <div class="ib-agent" id="mb-agent"><div class="ib-agent-av" id="mb-agent-av"><img id="mb-agentimg" alt=""></div><div><div class="ib-lbl">The agent</div><div class="ib-a-name" id="mb-aname"></div><div class="ib-a-desc" id="mb-adesc"></div></div></div>
+              <div class="ib-sep"></div>
+              <div class="ib-outcome" id="mb-outcome"><div class="ib-lbl">The outcome</div><div class="ib-outcome-nums"><div class="ib-stat" id="mb-stat"></div><div class="ib-stat-lbl" id="mb-statlbl"></div></div></div>
+            </div>
+          </div>
+          <div class="mv-nav"><button class="arr" id="mb-prev">&#8592;</button><div class="dots" id="mb-dots"></div><button class="arr" id="mb-next">&#8594;</button></div>
+        </div>
+      </div>
+
+      <!-- C: Stat hero -->
+      <div class="mvp">
+        <div class="mvp-lbl">C — Stat Hero</div>
+        <div class="mvp-ph mvc">
+          <div class="mv-txt">
+            <span class="eyebrow">MONDAY'S AI TRANSFORMATION</span>
+            <h2 class="mv-hl">How monday teams turned real work challenges into working agents</h2>
+          </div>
+          <div class="mvc-hero">
+            <div class="mvc-hero-num" id="mc-hero-num"></div>
+            <div class="mvc-hero-lbl" id="mc-hero-lbl"></div>
+          </div>
+          <div class="card">
+            <div class="dept-row clickable" id="mc-deptrow"></div>
+            <div class="card-video" id="mc-vwrap">
+              <video id="mc-video" muted loop playsinline preload="metadata"></video>
+              <button class="vplay-btn" id="mc-playbtn" aria-label="Play/Pause"><svg id="mc-icon-play" viewBox="0 0 16 16"><polygon points="4,2 14,8 4,14"/></svg><svg id="mc-icon-pause" viewBox="0 0 16 16" style="display:none"><rect x="3" y="2" width="4" height="12"/><rect x="9" y="2" width="4" height="12"/></svg></button>
+            </div>
+            <div class="info-bar">
+              <div class="ib-builder" id="mc-builder"><div class="ib-av"><img id="mc-av" alt=""></div><div><div class="ib-dept" id="mc-dept"></div><div class="ib-b-name" id="mc-bname"></div><div class="ib-b-meta" id="mc-bmeta"></div></div></div>
+              <div class="ib-sep"></div>
+              <div class="ib-agent" id="mc-agent"><div class="ib-agent-av" id="mc-agent-av"><img id="mc-agentimg" alt=""></div><div><div class="ib-lbl">The agent</div><div class="ib-a-name" id="mc-aname"></div><div class="ib-a-desc" id="mc-adesc"></div></div></div>
+              <div class="ib-sep"></div>
+              <div class="ib-outcome" id="mc-outcome"><div class="ib-lbl">The outcome</div><div class="ib-outcome-nums"><div class="ib-stat" id="mc-stat"></div><div class="ib-stat-lbl" id="mc-statlbl"></div></div></div>
+            </div>
+          </div>
+          <div class="mv-nav"><button class="arr" id="mc-prev">&#8592;</button><div class="dots" id="mc-dots"></div><button class="arr" id="mc-next">&#8594;</button></div>
+        </div>
+      </div>
+
+      <!-- D: Pill tabs + builder/outcome side-by-side -->
+      <div class="mvp">
+        <div class="mvp-lbl">D — Pill Tabs</div>
+        <div class="mvp-ph mvd">
+          <div class="mv-txt">
+            <span class="eyebrow">MONDAY'S AI TRANSFORMATION</span>
+            <h2 class="mv-hl">How monday teams turned real work challenges into working agents</h2>
+          </div>
+          <div class="card">
+            <div class="dept-row clickable" id="md-deptrow"></div>
+            <div class="card-video" id="md-vwrap">
+              <video id="md-video" muted loop playsinline preload="metadata"></video>
+              <button class="vplay-btn" id="md-playbtn" aria-label="Play/Pause"><svg id="md-icon-play" viewBox="0 0 16 16"><polygon points="4,2 14,8 4,14"/></svg><svg id="md-icon-pause" viewBox="0 0 16 16" style="display:none"><rect x="3" y="2" width="4" height="12"/><rect x="9" y="2" width="4" height="12"/></svg></button>
+            </div>
+            <div class="info-bar">
+              <div class="ib-builder" id="md-builder"><div class="ib-av"><img id="md-av" alt=""></div><div><div class="ib-dept" id="md-dept"></div><div class="ib-b-name" id="md-bname"></div><div class="ib-b-meta" id="md-bmeta"></div></div></div>
+              <div class="ib-sep"></div>
+              <div class="ib-agent" id="md-agent"><div class="ib-agent-av" id="md-agent-av"><img id="md-agentimg" alt=""></div><div><div class="ib-lbl">The agent</div><div class="ib-a-name" id="md-aname"></div><div class="ib-a-desc" id="md-adesc"></div></div></div>
+              <div class="ib-sep"></div>
+              <div class="ib-outcome" id="md-outcome"><div class="ib-lbl">The outcome</div><div class="ib-outcome-nums"><div class="ib-stat" id="md-stat"></div><div class="ib-stat-lbl" id="md-statlbl"></div></div></div>
+            </div>
+          </div>
+          <div class="mv-nav"><button class="arr" id="md-prev">&#8592;</button><div class="dots" id="md-dots"></div><button class="arr" id="md-next">&#8594;</button></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════
      SECTION 4 — Mobile preview (phone frame)
 ══════════════════════════════════════════════════ -->
 <div class="sect" id="s4">
@@ -391,7 +575,7 @@ const BUILDERS = [
   { name:"Roni Rebish",    title:"Product Manager",             dept:"Product",     agentName:"Allison",    agentDesc:"Accessibility Pipeline", statNum:"70%", statLabel:"drop in accessibility rework cost",       video:"https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Video/roni_allison_product.mp4",   avatar:"https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/roni-rebish.png",    agentImg:"https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/New%20agents%20images/agent-marketing-competitor-research-agent.webp" }
 ];
 
-function wireSection(prefix, { hasDots = false, builders = BUILDERS, clickableDepts = false, noAutoAdvance = false, sectId = null } = {}) {
+function wireSection(prefix, { hasDots = false, builders = BUILDERS, clickableDepts = false, noAutoAdvance = false, sectId = null, noTouch = false, onGo = null } = {}) {
   let cur = 0;
   const vwrap     = document.getElementById(`${prefix}-vwrap`);
   const video     = document.getElementById(`${prefix}-video`);
@@ -455,18 +639,21 @@ function wireSection(prefix, { hasDots = false, builders = BUILDERS, clickableDe
       document.getElementById(`${prefix}-statlbl`).textContent  = b.statLabel;
       if (dotsEl) dotsEl.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === cur));
       deptRow.querySelectorAll('.dept-tag').forEach((t, i) => t.classList.toggle('active', i === cur));
+      if (onGo) onGo(b);
       [vwrap, builderEl, agentEl, outcomeEl].forEach(el => el.classList.remove('fading'));
     }, 260);
   }
 
   const sect = document.getElementById(sectId || prefix);
-  let tx = 0;
-  sect.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive:true });
-  sect.addEventListener('touchend',   e => { const dx = e.changedTouches[0].clientX - tx; if (Math.abs(dx) > 44) go(cur + (dx < 0 ? 1 : -1)); }, { passive:true });
+  if (!noTouch && sect) {
+    let tx = 0;
+    sect.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive:true });
+    sect.addEventListener('touchend',   e => { const dx = e.changedTouches[0].clientX - tx; if (Math.abs(dx) > 44) go(cur + (dx < 0 ? 1 : -1)); }, { passive:true });
+  }
 
   if (!noAutoAdvance) {
     let timer = setInterval(() => go(cur + 1), 7000);
-    sect.addEventListener('pointerdown', () => { clearInterval(timer); timer = null; });
+    if (sect) sect.addEventListener('pointerdown', () => { clearInterval(timer); timer = null; });
   }
 
   go(0);
@@ -476,6 +663,15 @@ const BUILDERS_S3 = [BUILDERS[3], BUILDERS[0], BUILDERS[1], BUILDERS[2]];
 
 wireSection('s1');
 wireSection('s2', { hasDots: true });
+wireSection('ma', { hasDots:true, builders:BUILDERS_S3, clickableDepts:true, noAutoAdvance:true, noTouch:true });
+wireSection('mb', { hasDots:true, builders:BUILDERS_S3, clickableDepts:true, noAutoAdvance:true, noTouch:true });
+wireSection('mc', { hasDots:true, builders:BUILDERS_S3, clickableDepts:true, noAutoAdvance:true, noTouch:true,
+  onGo: b => {
+    document.getElementById('mc-hero-num').textContent = b.statNum;
+    document.getElementById('mc-hero-lbl').textContent = b.statLabel;
+  }
+});
+wireSection('md', { hasDots:true, builders:BUILDERS_S3, clickableDepts:true, noAutoAdvance:true, noTouch:true });
 wireSection('sm', { hasDots: true, builders: BUILDERS_S3, clickableDepts: true, noAutoAdvance: true, sectId: 's4' });
 wireSection('s3', { hasDots: true, builders: BUILDERS_S3, clickableDepts: true, noAutoAdvance: true });
 </script>
