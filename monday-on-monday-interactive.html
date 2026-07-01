@@ -3,48 +3,62 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Monday on Monday — Left Panel Variants</title>
+<title>Monday on Monday</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root {
   --purple:     #6161ff;
   --purple-lo:  rgba(97,97,255,0.10);
-  --purple-mid: rgba(97,97,255,0.26);
   --bg:         #03030a;
   --bg-el:      #0d0d1a;
   --border:     rgba(255,255,255,0.07);
-  --border-hi:  rgba(255,255,255,0.12);
+  --border-hi:  rgba(255,255,255,0.13);
   --dim:        rgba(255,255,255,0.50);
   --dimmer:     rgba(255,255,255,0.26);
 }
 *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
 body { font-family:'Poppins',sans-serif; background:var(--bg); color:#fff; }
 
-/* ── variant wrapper ── */
-.variant { position:relative; width:100%; overflow:hidden; }
-.variant::before { content:''; position:absolute; top:-22%; left:50%; transform:translateX(-50%); width:80%; height:85%; background:radial-gradient(ellipse at center, rgba(97,97,255,0.20) 0%, rgba(255,61,87,0.07) 45%, transparent 70%); filter:blur(110px); pointer-events:none; z-index:0; }
-.label-bar { position:absolute; top:0; left:0; right:0; z-index:30; padding:11px 18px; display:flex; align-items:center; gap:10px; background:rgba(0,0,0,0.55); backdrop-filter:blur(12px); }
-.vnum { font-size:10px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; background:var(--purple); color:#fff; padding:3px 10px; border-radius:100px; }
-.vdesc { font-size:11px; color:rgba(255,255,255,0.42); }
+/* ── glow ── */
+#la { position:relative; overflow:hidden; }
+#la::before { content:''; position:absolute; top:-22%; left:50%; transform:translateX(-50%); width:80%; height:85%; background:radial-gradient(ellipse at center, rgba(97,97,255,0.20) 0%, rgba(255,61,87,0.07) 45%, transparent 70%); filter:blur(110px); pointer-events:none; z-index:0; }
 
-/* ── shared nav ── */
+/* ── layout ── */
+.layout { display:grid; grid-template-columns:44% 56%; height:100vh; background:transparent; position:relative; z-index:1; }
+
+/* ── left ── */
+.left { display:flex; flex-direction:column; justify-content:center; padding:96px 68px 64px; border-right:1px solid var(--border); }
+.eyebrow { font-size:10px; font-weight:700; letter-spacing:5px; text-transform:uppercase; color:rgba(255,255,255,0.50); display:block; }
+.la-hl { font-size:clamp(28px, 3vw, 46px); font-weight:800; line-height:1.15; margin:18px 0 20px; }
+.la-sub { font-size:14px; color:var(--dim); line-height:1.78; max-width:400px; }
+.la-nav { margin-top:44px; display:flex; align-items:center; gap:12px; }
+
+/* ── nav ── */
 .arr { width:44px; height:44px; border-radius:50%; border:1px solid var(--border-hi); background:var(--bg-el); color:#fff; font-size:18px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background .2s,border-color .2s; flex-shrink:0; }
 .arr:hover { background:var(--purple-lo); border-color:var(--purple); }
 .dots { display:flex; gap:7px; align-items:center; }
 .dot { width:6px; height:6px; border-radius:50%; background:rgba(255,255,255,0.22); border:none; padding:0; cursor:pointer; transition:background .2s,transform .2s; }
 .dot.active { background:#fff; transform:scale(1.4); }
-.nav-row { display:flex; align-items:center; gap:12px; }
 .fading { opacity:0 !important; }
 
-/* ── shared grid ── */
-.layout { display:grid; grid-template-columns:44% 56%; height:100vh; background:transparent; position:relative; z-index:1; }
+/* ── right ── */
+.right { display:flex; align-items:center; justify-content:center; padding:52px 48px; }
 
-/* ── shared right panel ── */
-.right { display:flex; align-items:center; justify-content:center; padding:52px 44px; }
-.card { width:100%; background:var(--bg-el); border:1px solid var(--border-hi); border-radius:22px; overflow:hidden; box-shadow:0 28px 80px rgba(0,0,0,0.55), 0 0 0 1px rgba(97,97,255,0.08); }
+/* ── card ── */
+.card { width:100%; background:var(--bg-el); border:1px solid var(--border-hi); border-radius:22px; overflow:hidden; box-shadow:0 32px 90px rgba(0,0,0,0.60), 0 0 0 1px rgba(97,97,255,0.10); }
+
+/* ── dept bar (above video) ── */
+.dept-bar { display:flex; gap:7px; flex-wrap:wrap; padding:14px 18px; border-bottom:1px solid var(--border); }
+.dept-pill { font-family:'Poppins',sans-serif; font-size:10px; font-weight:600; padding:5px 13px; border-radius:100px; border:1px solid var(--border-hi); background:transparent; color:var(--dim); cursor:pointer; transition:background .2s,border-color .2s,color .2s; }
+.dept-pill.active { background:var(--purple-lo); border-color:var(--purple); color:#fff; }
+.dept-pill:hover:not(.active) { border-color:rgba(255,255,255,0.30); color:#fff; }
+
+/* ── video ── */
 .card-video { position:relative; aspect-ratio:16/9; background:#000; overflow:hidden; transition:opacity .26s; }
 .card-video video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+
+/* ── info bar ── */
 .info-bar { display:grid; grid-template-columns:1fr 1px 1fr 1px 1fr; border-top:1px solid var(--border); }
 .ib-sep { background:var(--border); }
 .ib-builder { display:flex; align-items:center; gap:12px; padding:18px 22px; transition:opacity .26s; }
@@ -60,132 +74,11 @@ body { font-family:'Poppins',sans-serif; background:var(--bg); color:#fff; }
 .ib-stat { font-size:26px; font-weight:800; color:var(--purple); line-height:1; flex-shrink:0; }
 .ib-stat-lbl { font-size:11px; color:var(--dim); line-height:1.55; }
 
-/* ── shared left base ── */
-.left { display:flex; flex-direction:column; justify-content:center; border-right:1px solid var(--border); }
-.eyebrow { font-size:10px; font-weight:700; letter-spacing:4px; text-transform:uppercase; color:rgba(255,255,255,0.55); display:block; }
-
-
-/* ════════════════════════════════════════════════════
-   A — CURRENT (for reference)
-   Eyebrow · Headline · Sub · Nav
-════════════════════════════════════════════════════ */
-.la { padding:86px 60px 56px; }
-.la-hl { font-size:clamp(26px,2.7vw,40px); font-weight:800; line-height:1.17; margin:16px 0 18px; }
-.la-hl em { font-style:normal; }
-.la-sub { font-size:15px; color:var(--dim); line-height:1.74; max-width:400px; }
-.la-nav { margin-top:48px; }
-.la-dept-bar { display:flex; gap:7px; flex-wrap:wrap; padding:14px 18px; border-bottom:1px solid var(--border); }
-.la-dept-pill { font-family:'Poppins',sans-serif; font-size:10px; font-weight:600; letter-spacing:0.3px; padding:5px 13px; border-radius:100px; border:1px solid var(--border-hi); background:transparent; color:var(--dim); cursor:pointer; transition:background .2s,border-color .2s,color .2s; }
-.la-dept-pill.active { background:var(--purple-lo); border-color:var(--purple); color:#fff; }
-.la-dept-pill:hover:not(.active) { border-color:rgba(255,255,255,0.3); color:#fff; }
-
-
-/* ════════════════════════════════════════════════════
-   B — BOLD & MINIMAL
-   Eyebrow at top · Giant headline fills the panel ·
-   No sub · Nav pinned to bottom
-════════════════════════════════════════════════════ */
-.lb { padding:86px 60px 56px; justify-content:space-between; }
-.lb-top { }
-.lb-hl { font-size:clamp(36px,3.8vw,58px); font-weight:800; line-height:1.08; margin-top:20px; }
-.lb-hl em { font-style:normal; display:block; }
-
-
-/* ════════════════════════════════════════════════════
-   C — STAT AS HERO
-   Eyebrow · Huge "5,000+" in purple as visual anchor ·
-   Headline below it · Nav
-════════════════════════════════════════════════════ */
-.lc { padding:86px 60px 56px; }
-.lc-num { font-size:clamp(64px,6.5vw,96px); font-weight:800; color:var(--purple); line-height:1; margin:16px 0 0; letter-spacing:-2px; }
-.lc-num-lbl { font-size:13px; color:var(--dimmer); margin-top:6px; margin-bottom:28px; letter-spacing:0.5px; }
-.lc-hl { font-size:clamp(18px,1.8vw,26px); font-weight:700; line-height:1.3; color:#fff; max-width:380px; }
-.lc-hl em { font-style:normal; }
-.lc-nav { margin-top:44px; }
-
-
-/* ════════════════════════════════════════════════════
-   D — WITH DEPT TAGS
-   Eyebrow · Headline · Sub ·
-   Dept pills (Sales · Marketing · Engineering · Product) ·
-   Nav
-════════════════════════════════════════════════════ */
-.ld { padding:86px 60px 56px; }
-.ld-hl { font-size:clamp(24px,2.5vw,38px); font-weight:800; line-height:1.17; margin:16px 0 18px; }
-.ld-hl em { font-style:normal; }
-.ld-sub { font-size:14px; color:var(--dim); line-height:1.72; max-width:400px; }
-.ld-pills { display:flex; flex-wrap:wrap; gap:8px; margin-top:28px; }
-.ld-pill { font-size:11px; font-weight:600; color:var(--dim); border:1px solid var(--border-hi); border-radius:100px; padding:5px 14px; }
-.ld-pill.active { color:#fff; border-color:var(--purple); background:var(--purple-lo); }
-.ld-nav { margin-top:32px; }
-
-
-/* ════════════════════════════════════════════════════
-   RB — Builder-first right panel
-   Full-width builder row · Agent + stat inline below
-════════════════════════════════════════════════════ */
-.rb-builder-row { display:flex; align-items:center; gap:14px; padding:18px 22px; border-bottom:1px solid var(--border); transition:opacity .26s; }
-.rb-av { width:44px; height:44px; border-radius:50%; overflow:hidden; flex-shrink:0; border:2px solid var(--border-hi); }
-.rb-av img { width:100%; height:100%; object-fit:cover; }
-.rb-bname { font-size:14px; font-weight:700; color:#fff; }
-.rb-bmeta { font-size:11px; color:var(--dim); margin-top:2px; }
-.rb-bottom-row { display:flex; align-items:center; justify-content:space-between; padding:14px 22px; }
-.rb-albl { font-size:8px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; color:var(--purple); margin-bottom:4px; }
-.rb-aname { font-size:13px; font-weight:700; color:#fff; }
-.rb-adesc { font-size:11px; color:var(--dim); margin-top:2px; }
-.rb-stat-side { text-align:right; flex-shrink:0; }
-.rb-stat { font-size:30px; font-weight:800; color:var(--purple); line-height:1; }
-.rb-stat-lbl { font-size:10px; color:var(--dim); line-height:1.5; max-width:110px; margin-top:4px; }
-
-/* ════════════════════════════════════════════════════
-   RC — Outcome-first right panel
-   Stat on LEFT (purple bg) · Builder center · Agent right
-════════════════════════════════════════════════════ */
-.rc-bar { display:grid; grid-template-columns:auto 1px 1fr 1px 1fr; border-top:1px solid var(--border); }
-.rc-outcome { display:flex; flex-direction:column; justify-content:center; padding:18px 22px; background:var(--purple-lo); transition:opacity .26s; min-width:120px; }
-.rc-stat { font-size:28px; font-weight:800; color:var(--purple); line-height:1; }
-.rc-stat-lbl { font-size:10px; color:var(--dim); line-height:1.5; margin-top:5px; }
-.rc-sep { background:var(--border); }
-.rc-builder { display:flex; align-items:center; gap:12px; padding:18px 20px; transition:opacity .26s; }
-.rc-av { width:36px; height:36px; border-radius:50%; overflow:hidden; flex-shrink:0; border:2px solid var(--border-hi); }
-.rc-av img { width:100%; height:100%; object-fit:cover; }
-.rc-bname { font-size:13px; font-weight:700; color:#fff; }
-.rc-bmeta { font-size:10px; color:var(--dim); margin-top:2px; }
-.rc-agent { display:flex; flex-direction:column; justify-content:center; padding:18px 20px; transition:opacity .26s; }
-.rc-albl { font-size:8px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; color:var(--purple); margin-bottom:4px; }
-.rc-aname { font-size:13px; font-weight:700; color:#fff; }
-.rc-adesc { font-size:11px; color:var(--dim); margin-top:2px; }
-
-/* ════════════════════════════════════════════════════
-   RD — Split panel right
-   Builder left half · Agent + stat right half (purple)
-════════════════════════════════════════════════════ */
-.rd-below { display:grid; grid-template-columns:1fr 1fr; border-top:1px solid var(--border); }
-.rd-builder { display:flex; align-items:center; gap:12px; padding:18px 20px; border-right:1px solid var(--border); transition:opacity .26s; }
-.rd-av { width:40px; height:40px; border-radius:50%; overflow:hidden; flex-shrink:0; border:2px solid var(--border-hi); }
-.rd-av img { width:100%; height:100%; object-fit:cover; }
-.rd-bname { font-size:13px; font-weight:700; color:#fff; }
-.rd-bmeta { font-size:10px; color:var(--dim); margin-top:2px; }
-.rd-right-panel { display:flex; flex-direction:column; background:var(--purple-lo); }
-.rd-agent-block { display:flex; flex-direction:column; justify-content:center; padding:12px 18px; flex:1; border-bottom:1px solid rgba(97,97,255,0.18); transition:opacity .26s; }
-.rd-albl { font-size:8px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; color:var(--purple); margin-bottom:4px; }
-.rd-aname { font-size:13px; font-weight:700; color:#fff; }
-.rd-adesc { font-size:11px; color:rgba(255,255,255,0.6); margin-top:2px; }
-.rd-outcome-block { display:flex; align-items:center; gap:10px; padding:12px 18px; transition:opacity .26s; }
-.rd-stat { font-size:24px; font-weight:800; color:var(--purple); line-height:1; }
-.rd-stat-lbl { font-size:10px; color:var(--dim); line-height:1.45; }
-
-/* ════════════════════════════════════════════════════
-   MOBILE
-════════════════════════════════════════════════════ */
+/* ── mobile ── */
 @media (max-width:768px) {
   .layout { grid-template-columns:1fr; height:auto; }
   .right { order:-1; padding:14px; }
-  .left { border-right:none; border-top:1px solid var(--border); }
-  .la,.lb,.lc,.ld { padding:24px 18px 48px; }
-  .lb { justify-content:flex-start; }
-  .lb-hl { font-size:clamp(30px,8vw,44px); }
-  .lc-num { font-size:clamp(52px,14vw,72px); }
+  .left { border-right:none; border-top:1px solid var(--border); padding:24px 20px 48px; }
   .info-bar { grid-template-columns:1fr; }
   .ib-sep { height:1px; }
 }
@@ -193,399 +86,116 @@ body { font-family:'Poppins',sans-serif; background:var(--bg); color:#fff; }
 </head>
 <body>
 
-
-<!-- ═══ A — CURRENT (REFERENCE) ═══ -->
-<div class="variant" id="la">
-  <div class="label-bar">
-    <span class="vnum">A</span>
-    <span class="vdesc">Current — eyebrow · headline · sub · nav</span>
-  </div>
+<div id="la">
   <div class="layout">
-    <div class="left la">
+
+    <div class="left">
       <span class="eyebrow">Monday on Monday</span>
-      <h2 class="la-hl">Our people built agents for the problems that <em>frustrated them most</em></h2>
+      <h2 class="la-hl">Our people built agents for the problems that frustrated them most</h2>
       <p class="la-sub">5,117 agents built by monday people — each one started as someone's daily frustration. These are four of them.</p>
-      <div class="nav-row la-nav">
+      <div class="la-nav">
         <button class="arr" id="la-prev">&#8592;</button>
         <div class="dots" id="la-dots"></div>
         <button class="arr" id="la-next">&#8594;</button>
       </div>
     </div>
+
     <div class="right">
       <div class="card">
-        <div class="la-dept-bar" id="la-dept-bar">
-          <button class="la-dept-pill" data-idx="0">Sales</button>
-          <button class="la-dept-pill" data-idx="1">Marketing</button>
-          <button class="la-dept-pill" data-idx="2">Engineering</button>
-          <button class="la-dept-pill" data-idx="3">Product</button>
+        <div class="dept-bar" id="la-dept-bar">
+          <button class="dept-pill" data-idx="0">Sales</button>
+          <button class="dept-pill" data-idx="1">Marketing</button>
+          <button class="dept-pill" data-idx="2">Engineering</button>
+          <button class="dept-pill" data-idx="3">Product</button>
         </div>
         <div class="card-video" id="la-vwrap">
           <video id="la-video" muted loop playsinline autoplay preload="metadata"></video>
         </div>
         <div class="info-bar">
-          <div class="ib-builder" id="la-builder"><div class="ib-av"><img id="la-av" alt=""></div><div><div class="ib-b-name" id="la-bname"></div><div class="ib-b-meta" id="la-bmeta"></div></div></div>
-          <div class="ib-sep"></div>
-          <div class="ib-agent" id="la-agent"><div class="ib-lbl">The agent</div><div class="ib-a-name" id="la-aname"></div><div class="ib-a-desc" id="la-adesc"></div></div>
-          <div class="ib-sep"></div>
-          <div class="ib-outcome" id="la-outcome"><div class="ib-stat" id="la-stat"></div><div class="ib-stat-lbl" id="la-statlbl"></div></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<!-- ═══ B — BOLD & MINIMAL ═══ -->
-<div class="variant" id="lb">
-  <div class="label-bar">
-    <span class="vnum">B</span>
-    <span class="vdesc">Bold & minimal — giant headline fills the panel, no sub</span>
-  </div>
-  <div class="layout">
-    <div class="left lb">
-      <div class="lb-top">
-        <span class="eyebrow">Monday on Monday</span>
-        <h2 class="lb-hl">Our people built agents for the problems that <em>frustrated them most</em></h2>
-      </div>
-      <div class="nav-row">
-        <button class="arr" id="lb-prev">&#8592;</button>
-        <div class="dots" id="lb-dots"></div>
-        <button class="arr" id="lb-next">&#8594;</button>
-      </div>
-    </div>
-    <div class="right">
-      <div class="card">
-        <div class="card-video" id="lb-vwrap"><video id="lb-video" muted loop playsinline autoplay preload="metadata"></video></div>
-        <div class="info-bar">
-          <div class="ib-builder" id="lb-builder"><div class="ib-av"><img id="lb-av" alt=""></div><div><div class="ib-b-name" id="lb-bname"></div><div class="ib-b-meta" id="lb-bmeta"></div></div></div>
-          <div class="ib-sep"></div>
-          <div class="ib-agent" id="lb-agent"><div class="ib-lbl">The agent</div><div class="ib-a-name" id="lb-aname"></div><div class="ib-a-desc" id="lb-adesc"></div></div>
-          <div class="ib-sep"></div>
-          <div class="ib-outcome" id="lb-outcome"><div class="ib-stat" id="lb-stat"></div><div class="ib-stat-lbl" id="lb-statlbl"></div></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<!-- ═══ C — STAT AS HERO ═══ -->
-<div class="variant" id="lc">
-  <div class="label-bar">
-    <span class="vnum">C</span>
-    <span class="vdesc">Stat as hero — "5,000+" anchors the left, headline below</span>
-  </div>
-  <div class="layout">
-    <div class="left lc">
-      <span class="eyebrow">Monday on Monday</span>
-      <div class="lc-num">5,000+</div>
-      <div class="lc-num-lbl">agents built by monday people</div>
-      <h2 class="lc-hl">for the problems that <em>frustrated them most</em></h2>
-      <div class="nav-row lc-nav">
-        <button class="arr" id="lc-prev">&#8592;</button>
-        <div class="dots" id="lc-dots"></div>
-        <button class="arr" id="lc-next">&#8594;</button>
-      </div>
-    </div>
-    <div class="right">
-      <div class="card">
-        <div class="card-video" id="lc-vwrap"><video id="lc-video" muted loop playsinline autoplay preload="metadata"></video></div>
-        <div class="info-bar">
-          <div class="ib-builder" id="lc-builder"><div class="ib-av"><img id="lc-av" alt=""></div><div><div class="ib-b-name" id="lc-bname"></div><div class="ib-b-meta" id="lc-bmeta"></div></div></div>
-          <div class="ib-sep"></div>
-          <div class="ib-agent" id="lc-agent"><div class="ib-lbl">The agent</div><div class="ib-a-name" id="lc-aname"></div><div class="ib-a-desc" id="lc-adesc"></div></div>
-          <div class="ib-sep"></div>
-          <div class="ib-outcome" id="lc-outcome"><div class="ib-stat" id="lc-stat"></div><div class="ib-stat-lbl" id="lc-statlbl"></div></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<!-- ═══ D — WITH DEPT TAGS ═══ -->
-<div class="variant" id="ld">
-  <div class="label-bar">
-    <span class="vnum">D</span>
-    <span class="vdesc">With dept tags — headline · sub · dept pills that highlight on change</span>
-  </div>
-  <div class="layout">
-    <div class="left ld">
-      <span class="eyebrow">Monday on Monday</span>
-      <h2 class="ld-hl">Our people built agents for the problems that <em>frustrated them most</em></h2>
-      <p class="ld-sub">Meet the monday builders who turned real work frustrations into working agents.</p>
-      <div class="ld-pills" id="ld-pills">
-        <span class="ld-pill" data-idx="0">Sales</span>
-        <span class="ld-pill" data-idx="1">Marketing</span>
-        <span class="ld-pill" data-idx="2">Engineering</span>
-        <span class="ld-pill" data-idx="3">Product</span>
-      </div>
-      <div class="nav-row ld-nav">
-        <button class="arr" id="ld-prev">&#8592;</button>
-        <div class="dots" id="ld-dots"></div>
-        <button class="arr" id="ld-next">&#8594;</button>
-      </div>
-    </div>
-    <div class="right">
-      <div class="card">
-        <div class="card-video" id="ld-vwrap"><video id="ld-video" muted loop playsinline autoplay preload="metadata"></video></div>
-        <div class="info-bar">
-          <div class="ib-builder" id="ld-builder"><div class="ib-av"><img id="ld-av" alt=""></div><div><div class="ib-b-name" id="ld-bname"></div><div class="ib-b-meta" id="ld-bmeta"></div></div></div>
-          <div class="ib-sep"></div>
-          <div class="ib-agent" id="ld-agent"><div class="ib-lbl">The agent</div><div class="ib-a-name" id="ld-aname"></div><div class="ib-a-desc" id="ld-adesc"></div></div>
-          <div class="ib-sep"></div>
-          <div class="ib-outcome" id="ld-outcome"><div class="ib-stat" id="ld-stat"></div><div class="ib-stat-lbl" id="ld-statlbl"></div></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<!-- ═══ RB — BUILDER-FIRST RIGHT PANEL ═══ -->
-<div class="variant" id="rb">
-  <div class="label-bar">
-    <span class="vnum">Right B</span>
-    <span class="vdesc">Builder-first — full-width builder row, agent + stat below</span>
-  </div>
-  <div class="layout">
-    <div class="left la">
-      <span class="eyebrow">Monday on Monday</span>
-      <h2 class="la-hl">Our people built agents for the problems that <em>frustrated them most</em></h2>
-      <p class="la-sub">5,117 agents built by monday people — each one started as someone's daily frustration. These are four of them.</p>
-      <div class="nav-row la-nav">
-        <button class="arr" id="rb-prev">&#8592;</button>
-        <div class="dots" id="rb-dots"></div>
-        <button class="arr" id="rb-next">&#8594;</button>
-      </div>
-    </div>
-    <div class="right">
-      <div class="card">
-        <div class="la-dept-bar" id="rb-dept-bar">
-          <button class="la-dept-pill" data-idx="0">Sales</button>
-          <button class="la-dept-pill" data-idx="1">Marketing</button>
-          <button class="la-dept-pill" data-idx="2">Engineering</button>
-          <button class="la-dept-pill" data-idx="3">Product</button>
-        </div>
-        <div class="card-video" id="rb-vwrap"><video id="rb-video" muted loop playsinline autoplay preload="metadata"></video></div>
-        <div id="rb-builder" class="rb-builder-row">
-          <div class="rb-av"><img id="rb-av" alt=""></div>
-          <div><div class="rb-bname" id="rb-bname"></div><div class="rb-bmeta" id="rb-bmeta"></div></div>
-        </div>
-        <div class="rb-bottom-row">
-          <div id="rb-agent">
-            <div class="rb-albl">The agent</div>
-            <div class="rb-aname" id="rb-aname"></div>
-            <div class="rb-adesc" id="rb-adesc"></div>
-          </div>
-          <div id="rb-outcome" class="rb-stat-side">
-            <div class="rb-stat" id="rb-stat"></div>
-            <div class="rb-stat-lbl" id="rb-statlbl"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<!-- ═══ RC — OUTCOME-FIRST RIGHT PANEL ═══ -->
-<div class="variant" id="rc">
-  <div class="label-bar">
-    <span class="vnum">Right C</span>
-    <span class="vdesc">Outcome-first — stat left (purple), builder center, agent right</span>
-  </div>
-  <div class="layout">
-    <div class="left la">
-      <span class="eyebrow">Monday on Monday</span>
-      <h2 class="la-hl">Our people built agents for the problems that <em>frustrated them most</em></h2>
-      <p class="la-sub">5,117 agents built by monday people — each one started as someone's daily frustration. These are four of them.</p>
-      <div class="nav-row la-nav">
-        <button class="arr" id="rc-prev">&#8592;</button>
-        <div class="dots" id="rc-dots"></div>
-        <button class="arr" id="rc-next">&#8594;</button>
-      </div>
-    </div>
-    <div class="right">
-      <div class="card">
-        <div class="la-dept-bar" id="rc-dept-bar">
-          <button class="la-dept-pill" data-idx="0">Sales</button>
-          <button class="la-dept-pill" data-idx="1">Marketing</button>
-          <button class="la-dept-pill" data-idx="2">Engineering</button>
-          <button class="la-dept-pill" data-idx="3">Product</button>
-        </div>
-        <div class="card-video" id="rc-vwrap"><video id="rc-video" muted loop playsinline autoplay preload="metadata"></video></div>
-        <div class="rc-bar">
-          <div id="rc-outcome" class="rc-outcome">
-            <div class="rc-stat" id="rc-stat"></div>
-            <div class="rc-stat-lbl" id="rc-statlbl"></div>
-          </div>
-          <div class="rc-sep"></div>
-          <div id="rc-builder" class="rc-builder">
-            <div class="rc-av"><img id="rc-av" alt=""></div>
-            <div><div class="rc-bname" id="rc-bname"></div><div class="rc-bmeta" id="rc-bmeta"></div></div>
-          </div>
-          <div class="rc-sep"></div>
-          <div id="rc-agent" class="rc-agent">
-            <div class="rc-albl">The agent</div>
-            <div class="rc-aname" id="rc-aname"></div>
-            <div class="rc-adesc" id="rc-adesc"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<!-- ═══ RD — SPLIT PANEL RIGHT ═══ -->
-<div class="variant" id="rd">
-  <div class="label-bar">
-    <span class="vnum">Right D</span>
-    <span class="vdesc">Split panel — builder left, agent + stat right (purple accent)</span>
-  </div>
-  <div class="layout">
-    <div class="left la">
-      <span class="eyebrow">Monday on Monday</span>
-      <h2 class="la-hl">Our people built agents for the problems that <em>frustrated them most</em></h2>
-      <p class="la-sub">5,117 agents built by monday people — each one started as someone's daily frustration. These are four of them.</p>
-      <div class="nav-row la-nav">
-        <button class="arr" id="rd-prev">&#8592;</button>
-        <div class="dots" id="rd-dots"></div>
-        <button class="arr" id="rd-next">&#8594;</button>
-      </div>
-    </div>
-    <div class="right">
-      <div class="card">
-        <div class="la-dept-bar" id="rd-dept-bar">
-          <button class="la-dept-pill" data-idx="0">Sales</button>
-          <button class="la-dept-pill" data-idx="1">Marketing</button>
-          <button class="la-dept-pill" data-idx="2">Engineering</button>
-          <button class="la-dept-pill" data-idx="3">Product</button>
-        </div>
-        <div class="card-video" id="rd-vwrap"><video id="rd-video" muted loop playsinline autoplay preload="metadata"></video></div>
-        <div class="rd-below">
-          <div id="rd-builder" class="rd-builder">
-            <div class="rd-av"><img id="rd-av" alt=""></div>
-            <div><div class="rd-bname" id="rd-bname"></div><div class="rd-bmeta" id="rd-bmeta"></div></div>
-          </div>
-          <div class="rd-right-panel">
-            <div id="rd-agent" class="rd-agent-block">
-              <div class="rd-albl">The agent</div>
-              <div class="rd-aname" id="rd-aname"></div>
-              <div class="rd-adesc" id="rd-adesc"></div>
-            </div>
-            <div id="rd-outcome" class="rd-outcome-block">
-              <div class="rd-stat" id="rd-stat"></div>
-              <div class="rd-stat-lbl" id="rd-statlbl"></div>
+          <div class="ib-builder" id="la-builder">
+            <div class="ib-av"><img id="la-av" alt=""></div>
+            <div>
+              <div class="ib-b-name" id="la-bname"></div>
+              <div class="ib-b-meta" id="la-bmeta"></div>
             </div>
           </div>
+          <div class="ib-sep"></div>
+          <div class="ib-agent" id="la-agent">
+            <div class="ib-lbl">The agent</div>
+            <div class="ib-a-name" id="la-aname"></div>
+            <div class="ib-a-desc" id="la-adesc"></div>
+          </div>
+          <div class="ib-sep"></div>
+          <div class="ib-outcome" id="la-outcome">
+            <div class="ib-stat" id="la-stat"></div>
+            <div class="ib-stat-lbl" id="la-statlbl"></div>
+          </div>
         </div>
       </div>
     </div>
+
   </div>
 </div>
-
 
 <script>
 const BUILDERS = [
-  { name:"Ran Levgoren",  title:"Account Executive",          dept:"Sales",        agentName:"Moti",       agentDesc:"The Silence Disruptor",    statNum:"23%",  statLabel:"of silent deals revived within 2 weeks",  video:"https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Video/Moti.mp4",                      avatar:"https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/ran-levgoren.png" },
-  { name:"Osher Mayor",   title:"Lifecycle Marketing Manager", dept:"Marketing",    agentName:"Riki Shula", agentDesc:"Data to Content",          statNum:"10×",  statLabel:"more A/B tests per quarter",              video:"https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Video/Osher_shula_marketing.mp4",   avatar:"https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/osher-mayor.png" },
-  { name:"Amit Frishberg", title:"Tech Lead, CRM",            dept:"Engineering",  agentName:"Petro",      agentDesc:"Mobile Feature Parity",    statNum:"60%",  statLabel:"reduction in mobile parity backlog",      video:"https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Video/Petro.mp4",                    avatar:"https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/amit-frishberg.png" },
-  { name:"Roni Rebish",   title:"Product Manager",            dept:"Product",      agentName:"Allison",    agentDesc:"Accessibility Pipeline",   statNum:"70%",  statLabel:"drop in accessibility rework cost",       video:"https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Video/roni_allison_product.mp4",    avatar:"https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/roni-rebish.png" }
+  { name:"Ran Levgoren",   title:"Account Executive",           dept:"Sales",       agentName:"Moti",       agentDesc:"The Silence Disruptor",  statNum:"23%", statLabel:"of silent deals revived within 2 weeks",  video:"https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Video/Moti.mp4",                     avatar:"https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/ran-levgoren.png" },
+  { name:"Osher Mayor",    title:"Lifecycle Marketing Manager", dept:"Marketing",   agentName:"Riki Shula", agentDesc:"Data to Content",        statNum:"10×", statLabel:"more A/B tests per quarter",              video:"https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Video/Osher_shula_marketing.mp4",  avatar:"https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/osher-mayor.png" },
+  { name:"Amit Frishberg", title:"Tech Lead, CRM",              dept:"Engineering", agentName:"Petro",      agentDesc:"Mobile Feature Parity",  statNum:"60%", statLabel:"reduction in mobile parity backlog",      video:"https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Video/Petro.mp4",                   avatar:"https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/amit-frishberg.png" },
+  { name:"Roni Rebish",    title:"Product Manager",             dept:"Product",     agentName:"Allison",    agentDesc:"Accessibility Pipeline", statNum:"70%", statLabel:"drop in accessibility rework cost",       video:"https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Video/roni_allison_product.mp4",   avatar:"https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/roni-rebish.png" }
 ];
 
-function wire(prefix, onGo) {
-  let cur = 0;
-  const vwrap     = document.getElementById(`${prefix}-vwrap`);
-  const video     = document.getElementById(`${prefix}-video`);
-  const dotsEl    = document.getElementById(`${prefix}-dots`);
-  const builderEl = document.getElementById(`${prefix}-builder`);
-  const agentEl   = document.getElementById(`${prefix}-agent`);
-  const outcomeEl = document.getElementById(`${prefix}-outcome`);
+let cur = 0;
+const vwrap     = document.getElementById('la-vwrap');
+const video     = document.getElementById('la-video');
+const dotsEl    = document.getElementById('la-dots');
+const builderEl = document.getElementById('la-builder');
+const agentEl   = document.getElementById('la-agent');
+const outcomeEl = document.getElementById('la-outcome');
+const deptBar   = document.getElementById('la-dept-bar');
+const pills     = deptBar.querySelectorAll('.dept-pill');
 
-  BUILDERS.forEach((_, i) => {
-    const d = document.createElement('button');
-    d.className = 'dot';
-    d.setAttribute('aria-label', `Builder ${i+1}`);
-    d.onclick = () => go(i);
-    dotsEl.appendChild(d);
-  });
-
-  function go(idx) {
-    vwrap.classList.add('fading');
-    builderEl.classList.add('fading');
-    agentEl.classList.add('fading');
-    outcomeEl.classList.add('fading');
-    if (onGo) onGo('fading', idx);
-    setTimeout(() => {
-      cur = (idx + BUILDERS.length) % BUILDERS.length;
-      const b = BUILDERS[cur];
-      video.src = b.video; video.play().catch(()=>{});
-      document.getElementById(`${prefix}-av`).src              = b.avatar;
-      document.getElementById(`${prefix}-bname`).textContent   = b.name;
-      document.getElementById(`${prefix}-bmeta`).textContent   = `${b.title} · ${b.dept}`;
-      document.getElementById(`${prefix}-aname`).textContent   = b.agentName;
-      document.getElementById(`${prefix}-adesc`).textContent   = b.agentDesc;
-      document.getElementById(`${prefix}-stat`).textContent    = b.statNum;
-      document.getElementById(`${prefix}-statlbl`).textContent = b.statLabel;
-      dotsEl.querySelectorAll('.dot').forEach((d,i) => d.classList.toggle('active', i === cur));
-      vwrap.classList.remove('fading');
-      builderEl.classList.remove('fading');
-      agentEl.classList.remove('fading');
-      outcomeEl.classList.remove('fading');
-      if (onGo) onGo('done', cur);
-    }, 260);
-  }
-
-  document.getElementById(`${prefix}-prev`).onclick = () => go(cur - 1);
-  document.getElementById(`${prefix}-next`).onclick = () => go(cur + 1);
-  const sect = document.getElementById(prefix);
-  let tx = 0;
-  sect.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, {passive:true});
-  sect.addEventListener('touchend',   e => { const dx = e.changedTouches[0].clientX - tx; if (Math.abs(dx) > 44) go(cur + (dx < 0 ? 1 : -1)); }, {passive:true});
-  let timer = setInterval(() => go(cur + 1), 7000);
-  sect.addEventListener('pointerdown', () => { clearInterval(timer); timer = null; });
-  go(0);
-  return go;
-}
-
-/* A: dept pills on video + subtext */
-const laGo = wire('la', (phase, idx) => {
-  const pills = document.querySelectorAll('#la-dept-bar .la-dept-pill');
-  if (phase === 'done') pills.forEach((p, i) => p.classList.toggle('active', i === idx));
-});
-document.querySelectorAll('#la-dept-bar .la-dept-pill').forEach((btn, i) => {
-  btn.onclick = () => laGo(i);
+BUILDERS.forEach((_, i) => {
+  const d = document.createElement('button');
+  d.className = 'dot';
+  d.setAttribute('aria-label', `Builder ${i+1}`);
+  d.onclick = () => go(i);
+  dotsEl.appendChild(d);
 });
 
-wire('lb');
-wire('lc');
+pills.forEach((btn, i) => btn.onclick = () => go(i));
 
-/* D: also update dept pills */
-wire('ld', (phase, idx) => {
-  const pills = document.querySelectorAll('#ld-pills .ld-pill');
-  if (phase === 'done') {
-    pills.forEach((p, i) => p.classList.toggle('active', i === idx));
-  }
-});
-
-function wireDeptBar(go, barId) {
-  document.querySelectorAll(`#${barId} .la-dept-pill`).forEach((btn, i) => {
-    btn.onclick = () => go(i);
-  });
-}
-function deptCallback(barId) {
-  return (phase, idx) => {
-    if (phase === 'done') {
-      document.querySelectorAll(`#${barId} .la-dept-pill`).forEach((p, i) => p.classList.toggle('active', i === idx));
-    }
-  };
+function go(idx) {
+  [vwrap, builderEl, agentEl, outcomeEl].forEach(el => el.classList.add('fading'));
+  setTimeout(() => {
+    cur = (idx + BUILDERS.length) % BUILDERS.length;
+    const b = BUILDERS[cur];
+    video.src = b.video; video.play().catch(() => {});
+    document.getElementById('la-av').src       = b.avatar;
+    document.getElementById('la-bname').textContent  = b.name;
+    document.getElementById('la-bmeta').textContent  = `${b.title} · ${b.dept}`;
+    document.getElementById('la-aname').textContent  = b.agentName;
+    document.getElementById('la-adesc').textContent  = b.agentDesc;
+    document.getElementById('la-stat').textContent   = b.statNum;
+    document.getElementById('la-statlbl').textContent = b.statLabel;
+    dotsEl.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === cur));
+    pills.forEach((p, i) => p.classList.toggle('active', i === cur));
+    [vwrap, builderEl, agentEl, outcomeEl].forEach(el => el.classList.remove('fading'));
+  }, 260);
 }
 
-const rbGo = wire('rb', deptCallback('rb-dept-bar')); wireDeptBar(rbGo, 'rb-dept-bar');
-const rcGo = wire('rc', deptCallback('rc-dept-bar')); wireDeptBar(rcGo, 'rc-dept-bar');
-const rdGo = wire('rd', deptCallback('rd-dept-bar')); wireDeptBar(rdGo, 'rd-dept-bar');
+document.getElementById('la-prev').onclick = () => go(cur - 1);
+document.getElementById('la-next').onclick = () => go(cur + 1);
+
+let tx = 0;
+const sect = document.getElementById('la');
+sect.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive:true });
+sect.addEventListener('touchend',   e => { const dx = e.changedTouches[0].clientX - tx; if (Math.abs(dx) > 44) go(cur + (dx < 0 ? 1 : -1)); }, { passive:true });
+
+let timer = setInterval(() => go(cur + 1), 7000);
+sect.addEventListener('pointerdown', () => { clearInterval(timer); timer = null; });
+
+go(0);
 </script>
 </body>
 </html>
