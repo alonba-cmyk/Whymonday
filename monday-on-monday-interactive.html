@@ -140,14 +140,17 @@ body { font-family:'Poppins',sans-serif; background:#000; color:#fff; }
 .v4-card { width:100%; background:var(--bg-el); border:1px solid var(--border-hi); border-radius:22px; overflow:hidden; box-shadow:0 28px 80px rgba(0,0,0,0.55), 0 0 0 1px rgba(97,97,255,0.08); }
 .v4-vwrap { position:relative; aspect-ratio:16/9; background:#000; transition:opacity .26s; }
 .v4-vwrap video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
-.v4-card-bottom { display:grid; grid-template-columns:1fr 1px 1fr; }
+.v4-card-bottom { display:grid; grid-template-columns:1fr 1px 1fr 1px 1fr; border-top:1px solid var(--border); }
 .v4-sep { background:var(--border); }
-.v4-builder { display:flex; align-items:center; gap:12px; padding:20px 24px; transition:opacity .26s; }
-.v4-b-av { width:42px; height:42px; border-radius:50%; overflow:hidden; flex-shrink:0; border:2px solid var(--border-hi); }
+.v4-builder { display:flex; align-items:center; gap:12px; padding:20px 22px; transition:opacity .26s; }
+.v4-b-av { width:40px; height:40px; border-radius:50%; overflow:hidden; flex-shrink:0; border:2px solid var(--border-hi); }
 .v4-b-av img { width:100%; height:100%; object-fit:cover; }
 .v4-b-name { font-size:13px; font-weight:700; color:#fff; }
 .v4-b-meta { font-size:11px; color:var(--dim); margin-top:2px; }
-.v4-outcome { display:flex; align-items:center; gap:14px; padding:20px 24px; background:var(--purple-lo); transition:opacity .26s; }
+.v4-agent { display:flex; flex-direction:column; justify-content:center; padding:20px 22px; transition:opacity .26s; }
+.v4-agent-name { font-size:15px; font-weight:700; color:#fff; }
+.v4-agent-desc { font-size:11px; color:var(--dim); margin-top:3px; }
+.v4-outcome { display:flex; align-items:center; gap:14px; padding:20px 22px; background:var(--purple-lo); transition:opacity .26s; }
 .v4-stat { font-size:28px; font-weight:800; color:var(--purple); line-height:1; flex-shrink:0; }
 .v4-stat-lbl { font-size:12px; color:var(--dim); line-height:1.55; }
 
@@ -176,7 +179,8 @@ body { font-family:'Poppins',sans-serif; background:#000; color:#fff; }
   .v2-vsep { width:100%; height:1px; }
 
   .v4-card-bottom { grid-template-columns:1fr; }
-  .v4-sep { height:1px; }
+  .v4-sep { height:1px; width:100%; }
+  .v4-agent { border-bottom:1px solid var(--border); }
 
   .v3-stat-block { padding:20px 22px; }
   .v3-stat-num { font-size:38px; }
@@ -358,13 +362,6 @@ body { font-family:'Poppins',sans-serif; background:#000; color:#fff; }
       <div class="v4-card">
         <div class="v4-vwrap" id="v4-vwrap">
           <video id="v4-video" muted loop playsinline autoplay preload="metadata"></video>
-          <div class="chyron">
-            <img class="ch-av" id="v4-ch-av" src="" alt="">
-            <div>
-              <div class="ch-name" id="v4-ch-name"></div>
-              <div class="ch-desc" id="v4-ch-desc"></div>
-            </div>
-          </div>
         </div>
         <div class="v4-card-bottom">
           <div class="v4-builder" id="v4-builder">
@@ -373,6 +370,12 @@ body { font-family:'Poppins',sans-serif; background:#000; color:#fff; }
               <div class="v4-b-name" id="v4-bname"></div>
               <div class="v4-b-meta" id="v4-bmeta"></div>
             </div>
+          </div>
+          <div class="v4-sep"></div>
+          <div class="v4-agent" id="v4-agent">
+            <div class="info-lbl">The agent</div>
+            <div class="v4-agent-name" id="v4-agent-name"></div>
+            <div class="v4-agent-desc" id="v4-agent-desc"></div>
           </div>
           <div class="v4-sep"></div>
           <div class="v4-outcome" id="v4-outcome-el">
@@ -591,6 +594,7 @@ function syncDots(el, cur) {
   const video     = document.getElementById('v4-video');
   const dotsEl    = document.getElementById('v4-dots');
   const builderEl = document.getElementById('v4-builder');
+  const agentEl   = document.getElementById('v4-agent');
   const outcomeEl = document.getElementById('v4-outcome-el');
 
   makeDots(dotsEl, BUILDERS.length, i => go(i));
@@ -598,22 +602,23 @@ function syncDots(el, cur) {
   function go(idx) {
     vwrap.classList.add('fading');
     builderEl.classList.add('fading');
+    agentEl.classList.add('fading');
     outcomeEl.classList.add('fading');
     setTimeout(() => {
       cur = (idx + BUILDERS.length) % BUILDERS.length;
       const b = BUILDERS[cur];
       video.src = b.video; video.play().catch(()=>{});
-      document.getElementById('v4-ch-av').src    = b.avatar;
-      document.getElementById('v4-ch-name').textContent = b.agentName;
-      document.getElementById('v4-ch-desc').textContent = b.agentDesc;
-      document.getElementById('v4-av').src        = b.avatar;
-      document.getElementById('v4-bname').textContent   = b.name;
-      document.getElementById('v4-bmeta').textContent   = `${b.title} · ${b.dept}`;
-      document.getElementById('v4-stat').textContent    = b.statNum;
-      document.getElementById('v4-stat-lbl').textContent= b.statLabel;
+      document.getElementById('v4-av').src               = b.avatar;
+      document.getElementById('v4-bname').textContent    = b.name;
+      document.getElementById('v4-bmeta').textContent    = `${b.title} · ${b.dept}`;
+      document.getElementById('v4-agent-name').textContent = b.agentName;
+      document.getElementById('v4-agent-desc').textContent = b.agentDesc;
+      document.getElementById('v4-stat').textContent     = b.statNum;
+      document.getElementById('v4-stat-lbl').textContent = b.statLabel;
       syncDots(dotsEl, cur);
       vwrap.classList.remove('fading');
       builderEl.classList.remove('fading');
+      agentEl.classList.remove('fading');
       outcomeEl.classList.remove('fading');
     }, 260);
   }
