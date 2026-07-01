@@ -160,7 +160,174 @@ body { font-family:'Poppins',sans-serif; background:#000; color:#fff; }
   .v3-video-panel { aspect-ratio:16/9; }
   .v3-sidebar { max-height:none; overflow:visible; }
   .v3-sidebar-play { display:none; }
+
+  /* V4 mobile */
+  .v4-card { margin:80px 20px 100px; padding:28px; max-width:none; }
+
+  /* V5 mobile */
+  .v5-header { padding:80px 20px 24px; }
+  .v5-tabs-row { padding:0 8px; overflow-x:auto; -webkit-overflow-scrolling:touch; }
+  .v5-tab { padding:14px 16px; font-size:12px; }
+  .v5-stage { padding:20px 20px 32px; }
+
+  /* V6 mobile */
+  .v6-layout { grid-template-columns:1fr; }
+  .v6-left { padding:80px 24px 32px; justify-content:flex-start; }
+  .v6-right { padding:16px 20px 40px; }
+
+  /* V7 mobile */
+  .v7-top { flex-direction:column; align-items:flex-start; padding:80px 24px 20px; gap:12px; }
+  .v7-player { padding:0 20px 16px; }
+  .v7-selector { padding:0 20px 40px; gap:10px; }
+  .v7-sel-btn { padding:12px 8px; }
+  .v7-sel-avatar { width:38px; height:38px; }
+  .v7-sel-name { font-size:11px; }
+
+  /* V8 mobile */
+  .v8-ui { padding:20px 20px 28px; }
 }
+
+/* ══════════════════════════════════════════════════
+   VARIANT 4 — Full-bleed hero + glass card
+   Video fills screen. Message card floats left.
+   New copy.
+══════════════════════════════════════════════════ */
+.v4-wrap { position:relative; min-height:100vh; overflow:hidden; background:#000; display:flex; align-items:center; }
+.v4-wrap > video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:opacity 0.4s ease; }
+.v4-overlay { position:absolute; inset:0; background:linear-gradient(108deg, rgba(0,0,0,0.84) 0%, rgba(0,0,0,0.48) 55%, rgba(0,0,0,0.18) 100%); }
+.v4-card { position:relative; z-index:2; margin-left:64px; max-width:460px; background:rgba(4,4,15,0.72); backdrop-filter:blur(28px); -webkit-backdrop-filter:blur(28px); border:1px solid rgba(255,255,255,0.1); border-radius:24px; padding:40px; }
+.v4-headline { font-size:clamp(20px,2.2vw,32px); font-weight:700; line-height:1.25; color:#fff; margin-bottom:12px; }
+.v4-headline em { color:var(--purple); font-style:normal; }
+.v4-sub { font-size:13px; color:rgba(255,255,255,0.5); line-height:1.7; margin-bottom:28px; }
+.v4-sub em { color:var(--purple); font-style:normal; }
+.v4-builder { display:flex; align-items:center; gap:12px; padding-top:20px; border-top:1px solid rgba(255,255,255,0.1); }
+.v4-builder-avatar { width:40px; height:40px; border-radius:50%; overflow:hidden; flex-shrink:0; border:2px solid rgba(97,97,255,0.35); }
+.v4-builder-avatar img { width:100%; height:100%; object-fit:cover; }
+.v4-builder-name { font-size:13px; font-weight:700; color:#fff; }
+.v4-builder-role { font-size:10px; color:rgba(255,255,255,0.5); margin-top:2px; }
+.v4-builder-agent { font-size:10px; color:var(--purple); font-weight:600; margin-top:4px; }
+.v4-nav { position:absolute; bottom:40px; left:0; right:0; z-index:3; display:flex; align-items:center; justify-content:center; gap:16px; }
+.v4-nav-arrow { width:40px; height:40px; border-radius:50%; border:1px solid rgba(255,255,255,0.25); background:rgba(0,0,0,0.4); backdrop-filter:blur(8px); color:#fff; font-size:16px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all 0.2s; }
+.v4-nav-arrow:hover { background:rgba(97,97,255,0.35); border-color:var(--purple); }
+.v4-nav-dots { display:flex; gap:8px; }
+.v4-nav-dot { width:7px; height:7px; border-radius:50%; border:none; background:rgba(255,255,255,0.35); cursor:pointer; padding:0; transition:background 0.2s, transform 0.2s; }
+.v4-nav-dot.active { background:#fff; transform:scale(1.3); }
+
+/* ══════════════════════════════════════════════════
+   VARIANT 5 — Tab switcher
+   Old copy big at top. Tabs select builder + video.
+══════════════════════════════════════════════════ */
+.v5-layout { display:flex; flex-direction:column; min-height:100vh; background:#000; }
+.v5-header { padding:80px 60px 24px; flex-shrink:0; background:#03030a; }
+.v5-headline { font-size:clamp(22px,2.8vw,40px); font-weight:800; line-height:1.18; color:#fff; }
+.v5-headline em { color:var(--purple); font-style:normal; }
+.v5-tabs-row { display:flex; background:#03030a; border-bottom:1px solid rgba(255,255,255,0.07); padding:0 60px; flex-shrink:0; }
+.v5-tab { padding:16px 24px; font-size:13px; font-weight:600; color:rgba(255,255,255,0.38); cursor:pointer; border:none; background:none; border-bottom:2px solid transparent; margin-bottom:-1px; transition:color 0.2s, border-color 0.2s; white-space:nowrap; }
+.v5-tab.active { color:#fff; border-bottom-color:var(--purple); }
+.v5-stage { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:32px 40px 40px; gap:20px; }
+.v5-video-wrap { position:relative; width:100%; max-width:820px; aspect-ratio:16/9; border-radius:16px; overflow:hidden; background:#0a0a12; box-shadow:0 20px 56px rgba(0,0,0,0.6); }
+.v5-video-wrap video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:opacity 0.3s; }
+.v5-video-overlay { position:absolute; inset:0; background:linear-gradient(180deg, transparent 60%, rgba(0,0,0,0.55) 100%); pointer-events:none; }
+.v5-info { display:flex; align-items:center; gap:16px; width:100%; max-width:820px; }
+.v5-info-avatar { width:48px; height:48px; border-radius:50%; overflow:hidden; flex-shrink:0; border:2px solid rgba(255,255,255,0.15); transition:opacity 0.3s; }
+.v5-info-avatar img { width:100%; height:100%; object-fit:cover; }
+.v5-info-name { font-size:15px; font-weight:700; color:#fff; }
+.v5-info-role { font-size:11px; color:var(--dim); margin-top:2px; }
+.v5-info-agent { font-size:11px; color:var(--purple); font-weight:600; margin-top:5px; }
+
+/* ══════════════════════════════════════════════════
+   VARIANT 6 — Numbered list left + video right
+   New copy. Click a builder to switch.
+══════════════════════════════════════════════════ */
+.v6-layout { display:grid; grid-template-columns:360px 1fr; min-height:100vh; background:#000; }
+.v6-left { background:#03030a; border-right:1px solid rgba(255,255,255,0.06); padding:80px 40px 60px; display:flex; flex-direction:column; justify-content:center; }
+.v6-headline { font-size:clamp(18px,1.8vw,26px); font-weight:700; line-height:1.3; color:#fff; margin-bottom:10px; }
+.v6-headline em { color:var(--purple); font-style:normal; }
+.v6-sub { font-size:12px; color:rgba(255,255,255,0.42); line-height:1.65; margin-bottom:36px; }
+.v6-sub em { color:var(--purple); font-style:normal; }
+.v6-list-item { display:flex; align-items:center; gap:16px; padding:14px 0; border-top:1px solid rgba(255,255,255,0.06); cursor:pointer; }
+.v6-list-item:last-child { border-bottom:1px solid rgba(255,255,255,0.06); }
+.v6-num { font-size:26px; font-weight:800; color:rgba(255,255,255,0.14); line-height:1; width:32px; flex-shrink:0; transition:color 0.2s; }
+.v6-list-item.active .v6-num { color:var(--purple); }
+.v6-li-avatar { width:40px; height:40px; border-radius:50%; overflow:hidden; flex-shrink:0; border:2px solid transparent; transition:border-color 0.2s; }
+.v6-li-avatar img { width:100%; height:100%; object-fit:cover; filter:grayscale(0.4); transition:filter 0.2s; }
+.v6-list-item.active .v6-li-avatar { border-color:var(--purple); }
+.v6-list-item.active .v6-li-avatar img { filter:none; }
+.v6-li-name { font-size:13px; font-weight:600; color:rgba(255,255,255,0.55); transition:color 0.2s; }
+.v6-li-role { font-size:10px; color:rgba(255,255,255,0.28); margin-top:2px; }
+.v6-li-agent { font-size:10px; color:var(--purple); margin-top:3px; opacity:0; transition:opacity 0.2s; }
+.v6-list-item.active .v6-li-name { color:#fff; }
+.v6-list-item.active .v6-li-agent { opacity:1; }
+.v6-right { display:flex; align-items:center; justify-content:center; padding:40px; }
+.v6-video-box { position:relative; width:100%; aspect-ratio:16/9; border-radius:16px; overflow:hidden; background:#0a0a12; box-shadow:0 20px 56px rgba(0,0,0,0.6); transition:opacity 0.32s ease; }
+.v6-video-box video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+.v6-video-overlay { position:absolute; inset:0; background:linear-gradient(180deg, transparent 55%, rgba(0,0,0,0.65) 100%); pointer-events:none; }
+.v6-chyron { position:absolute; bottom:20px; left:20px; right:20px; z-index:2; display:flex; align-items:center; gap:10px; }
+.v6-chyron-bar { width:3px; height:44px; background:var(--purple); border-radius:2px; flex-shrink:0; }
+.v6-chyron-name { font-size:14px; font-weight:700; color:#fff; }
+.v6-chyron-role { font-size:10px; color:rgba(255,255,255,0.55); margin-top:2px; }
+.v6-chyron-agent { font-size:10px; color:var(--purple); font-weight:600; margin-top:4px; }
+
+/* ══════════════════════════════════════════════════
+   VARIANT 7 — Big stat + builder card selector
+   Old copy. 5,117 hero. Cards switch the video.
+══════════════════════════════════════════════════ */
+.v7-layout { display:flex; flex-direction:column; min-height:100vh; background:#03030a; }
+.v7-top { padding:80px 60px 24px; display:flex; align-items:flex-end; gap:40px; flex-shrink:0; }
+.v7-stat-num { font-size:clamp(60px,8vw,108px); font-weight:800; line-height:1; color:#fff; letter-spacing:-2px; }
+.v7-stat-label { font-size:10px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--purple); margin-top:6px; }
+.v7-copy { max-width:440px; padding-bottom:8px; }
+.v7-copy-line { font-size:clamp(13px,1.3vw,17px); font-weight:500; line-height:1.55; color:rgba(255,255,255,0.6); }
+.v7-copy-line em { color:var(--purple); font-style:normal; }
+.v7-player { flex:1; display:flex; align-items:center; justify-content:center; padding:0 60px 16px; min-height:0; }
+.v7-video-box { position:relative; width:100%; max-width:760px; aspect-ratio:16/9; border-radius:16px; overflow:hidden; background:#0a0a12; box-shadow:0 20px 56px rgba(0,0,0,0.6); transition:opacity 0.3s ease; }
+.v7-video-box video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+.v7-video-overlay { position:absolute; inset:0; background:linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.6) 100%); pointer-events:none; }
+.v7-chyron { position:absolute; bottom:16px; left:20px; right:20px; z-index:2; display:flex; align-items:center; gap:10px; }
+.v7-chyron-avatar { width:32px; height:32px; border-radius:50%; overflow:hidden; flex-shrink:0; border:2px solid rgba(255,255,255,0.2); }
+.v7-chyron-avatar img { width:100%; height:100%; object-fit:cover; }
+.v7-chyron-name { font-size:13px; font-weight:700; color:#fff; }
+.v7-chyron-role { font-size:10px; color:rgba(255,255,255,0.5); margin-top:1px; }
+.v7-selector { padding:0 60px 44px; display:flex; gap:14px; flex-shrink:0; }
+.v7-sel-btn { flex:1; display:flex; flex-direction:column; align-items:center; gap:10px; cursor:pointer; border:1px solid rgba(255,255,255,0.08); background:rgba(255,255,255,0.03); border-radius:16px; padding:16px 10px; transition:all 0.2s; }
+.v7-sel-btn:hover { background:rgba(255,255,255,0.06); border-color:rgba(255,255,255,0.15); }
+.v7-sel-btn.active { background:rgba(97,97,255,0.1); border-color:rgba(97,97,255,0.4); }
+.v7-sel-avatar { width:48px; height:48px; border-radius:50%; overflow:hidden; border:2px solid transparent; transition:border-color 0.2s; }
+.v7-sel-avatar img { width:100%; height:100%; object-fit:cover; }
+.v7-sel-btn.active .v7-sel-avatar { border-color:var(--purple); }
+.v7-sel-name { font-size:12px; font-weight:600; color:rgba(255,255,255,0.55); text-align:center; transition:color 0.2s; }
+.v7-sel-btn.active .v7-sel-name { color:#fff; }
+.v7-sel-dept { font-size:10px; color:rgba(255,255,255,0.28); text-align:center; }
+
+/* ══════════════════════════════════════════════════
+   VARIANT 8 — Instagram-story progress bars
+   New copy. Full-bleed. Auto-advances w/ fill bars.
+══════════════════════════════════════════════════ */
+.v8-wrap { position:relative; min-height:100vh; overflow:hidden; background:#000; }
+.v8-wrap > video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:opacity 0.4s ease; }
+.v8-overlay { position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.15) 40%, rgba(0,0,0,0.15) 60%, rgba(0,0,0,0.75) 100%); }
+.v8-ui { position:relative; z-index:2; min-height:100vh; display:flex; flex-direction:column; padding:60px 52px 48px; }
+.v8-bars { display:flex; gap:6px; margin-bottom:28px; }
+.v8-bar-track { flex:1; height:2px; background:rgba(255,255,255,0.25); border-radius:2px; overflow:hidden; cursor:pointer; }
+.v8-bar-fill { height:100%; background:rgba(255,255,255,0.6); width:0%; border-radius:2px; }
+.v8-bar-track.done .v8-bar-fill { width:100%; background:rgba(255,255,255,0.6); }
+.v8-bar-track.active .v8-bar-fill { background:#fff; }
+.v8-msg { max-width:580px; }
+.v8-msg-headline { font-size:clamp(20px,2.2vw,34px); font-weight:700; line-height:1.25; color:#fff; margin-bottom:10px; }
+.v8-msg-headline em { color:var(--purple); font-style:normal; }
+.v8-msg-sub { font-size:13px; color:rgba(255,255,255,0.52); line-height:1.65; }
+.v8-msg-sub em { color:var(--purple); font-style:normal; }
+.v8-spacer { flex:1; }
+.v8-bottom { display:flex; align-items:flex-end; justify-content:space-between; gap:20px; }
+.v8-id { display:flex; align-items:center; gap:14px; }
+.v8-id-avatar { width:52px; height:52px; border-radius:50%; overflow:hidden; flex-shrink:0; border:2px solid rgba(255,255,255,0.2); transition:opacity 0.3s; }
+.v8-id-avatar img { width:100%; height:100%; object-fit:cover; }
+.v8-id-name { font-size:17px; font-weight:700; color:#fff; }
+.v8-id-role { font-size:11px; color:rgba(255,255,255,0.55); margin-top:3px; }
+.v8-id-agent { font-size:11px; color:var(--purple); font-weight:600; margin-top:5px; }
+.v8-controls { display:flex; gap:10px; flex-shrink:0; }
+.v8-ctrl { width:44px; height:44px; border-radius:50%; border:1px solid rgba(255,255,255,0.25); background:rgba(0,0,0,0.3); backdrop-filter:blur(8px); color:#fff; font-size:16px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all 0.2s; }
+.v8-ctrl:hover { background:rgba(97,97,255,0.35); border-color:var(--purple); }
 </style>
 </head>
 <body>
@@ -273,6 +440,163 @@ body { font-family:'Poppins',sans-serif; background:#000; color:#fff; }
         <div id="v3-list"></div>
         <div class="v3-sidebar-play">
           <p class="v3-sidebar-hint">Click any builder<br>to watch their agent.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ VARIANT 4 — Full-bleed hero + glass card ═══ -->
+<div class="variant" id="v4">
+  <div class="label-bar">
+    <span class="vnum">Variant 4</span>
+    <span class="vdesc">Full-bleed video — glass card floats left with new message copy.</span>
+  </div>
+  <div class="v4-wrap">
+    <video id="v4-video" muted loop playsinline autoplay preload="metadata"></video>
+    <div class="v4-overlay"></div>
+    <div class="v4-card">
+      <span class="eyebrow">Monday on Monday</span>
+      <h2 class="v4-headline">How monday teams turned<br>real work challenges into <em>working agents</em></h2>
+      <p class="v4-sub">Our people, across 8 departments, built 5,117 agents for the problems that <em>frustrated them most.</em></p>
+      <div class="v4-builder">
+        <div class="v4-builder-avatar"><img id="v4-avatar" alt=""></div>
+        <div>
+          <div class="v4-builder-name" id="v4-name"></div>
+          <div class="v4-builder-role" id="v4-role"></div>
+          <div class="v4-builder-agent" id="v4-agent"></div>
+        </div>
+      </div>
+    </div>
+    <div class="v4-nav">
+      <button class="v4-nav-arrow" id="v4-prev">&#8592;</button>
+      <div class="v4-nav-dots" id="v4-dots"></div>
+      <button class="v4-nav-arrow" id="v4-next">&#8594;</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ VARIANT 5 — Tab switcher ═══ -->
+<div class="variant" id="v5">
+  <div class="label-bar">
+    <span class="vnum">Variant 5</span>
+    <span class="vdesc">Tab switcher — original stat-forward message, tabs select builder + video.</span>
+  </div>
+  <div class="v5-layout">
+    <div class="v5-header">
+      <span class="eyebrow">Monday on Monday</span>
+      <h2 class="v5-headline">5,117 agents built by monday employees<br>to solve the problems that <em>frustrated them most.</em></h2>
+    </div>
+    <div class="v5-tabs-row" id="v5-tabs"></div>
+    <div class="v5-stage">
+      <div class="v5-video-wrap">
+        <video id="v5-video" muted loop playsinline autoplay preload="metadata"></video>
+        <div class="v5-video-overlay"></div>
+      </div>
+      <div class="v5-info">
+        <div class="v5-info-avatar"><img id="v5-avatar" alt=""></div>
+        <div>
+          <div class="v5-info-name" id="v5-name"></div>
+          <div class="v5-info-role" id="v5-role"></div>
+          <div class="v5-info-agent" id="v5-agent"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ VARIANT 6 — Numbered list + video ═══ -->
+<div class="variant" id="v6">
+  <div class="label-bar">
+    <span class="vnum">Variant 6</span>
+    <span class="vdesc">Numbered list left — new copy + builder list, video fills right.</span>
+  </div>
+  <div class="v6-layout">
+    <div class="v6-left">
+      <span class="eyebrow">Monday on Monday</span>
+      <h2 class="v6-headline">How monday teams turned real work challenges into <em>working agents</em></h2>
+      <p class="v6-sub">Our people, across 8 departments, built 5,117 agents for the problems that <em>frustrated them most.</em></p>
+      <div class="v6-list" id="v6-list"></div>
+    </div>
+    <div class="v6-right">
+      <div class="v6-video-box" id="v6-vbox">
+        <video id="v6-video" muted loop playsinline autoplay preload="metadata"></video>
+        <div class="v6-video-overlay"></div>
+        <div class="v6-chyron">
+          <div class="v6-chyron-bar"></div>
+          <div>
+            <div class="v6-chyron-name" id="v6-chyron-name"></div>
+            <div class="v6-chyron-role" id="v6-chyron-role"></div>
+            <div class="v6-chyron-agent" id="v6-chyron-agent"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ VARIANT 7 — Big stat + builder card selector ═══ -->
+<div class="variant" id="v7">
+  <div class="label-bar">
+    <span class="vnum">Variant 7</span>
+    <span class="vdesc">Stat hero — "5,117" dominates top, builder cards below select the video.</span>
+  </div>
+  <div class="v7-layout">
+    <div class="v7-top">
+      <div>
+        <div class="v7-stat-num">5,117</div>
+        <div class="v7-stat-label">Monday on Monday</div>
+      </div>
+      <div class="v7-copy">
+        <p class="v7-copy-line">Agents built by monday employees to solve the problems that <em>frustrated them most.</em></p>
+      </div>
+    </div>
+    <div class="v7-player">
+      <div class="v7-video-box" id="v7-vbox">
+        <video id="v7-video" muted loop playsinline autoplay preload="metadata"></video>
+        <div class="v7-video-overlay"></div>
+        <div class="v7-chyron">
+          <div class="v7-chyron-avatar"><img id="v7-chyron-avatar" alt=""></div>
+          <div>
+            <div class="v7-chyron-name" id="v7-chyron-name"></div>
+            <div class="v7-chyron-role" id="v7-chyron-role"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="v7-selector" id="v7-selector"></div>
+  </div>
+</div>
+
+<!-- ═══ VARIANT 8 — Story progress bars ═══ -->
+<div class="variant" id="v8">
+  <div class="label-bar">
+    <span class="vnum">Variant 8</span>
+    <span class="vdesc">Story mode — auto-advances through builders with Instagram-style progress bars.</span>
+  </div>
+  <div class="v8-wrap">
+    <video id="v8-video" muted loop playsinline autoplay preload="metadata"></video>
+    <div class="v8-overlay"></div>
+    <div class="v8-ui">
+      <div class="v8-bars" id="v8-bars"></div>
+      <div class="v8-msg">
+        <span class="eyebrow">Monday on Monday</span>
+        <h2 class="v8-msg-headline">How monday teams turned<br>real work challenges into <em>working agents</em></h2>
+        <p class="v8-msg-sub">Our people, across 8 departments, built 5,117 agents for the problems that <em>frustrated them most.</em></p>
+      </div>
+      <div class="v8-spacer"></div>
+      <div class="v8-bottom">
+        <div class="v8-id">
+          <div class="v8-id-avatar"><img id="v8-id-avatar" alt=""></div>
+          <div>
+            <div class="v8-id-name" id="v8-id-name"></div>
+            <div class="v8-id-role" id="v8-id-role"></div>
+            <div class="v8-id-agent" id="v8-id-agent"></div>
+          </div>
+        </div>
+        <div class="v8-controls">
+          <button class="v8-ctrl" id="v8-prev">&#8592;</button>
+          <button class="v8-ctrl" id="v8-next">&#8594;</button>
         </div>
       </div>
     </div>
@@ -445,6 +769,243 @@ const BUILDERS = [
       listEl.querySelectorAll('.v3-builder-item').forEach((el, i) => el.classList.toggle('active', i === cur));
     }, 300);
   }
+
+  go(0);
+})();
+
+/* ── Variant 4: Full-bleed + glass card ── */
+(function () {
+  let cur = 0;
+  const video   = document.getElementById('v4-video');
+  const dotsEl  = document.getElementById('v4-dots');
+  const nameEl  = document.getElementById('v4-name');
+  const roleEl  = document.getElementById('v4-role');
+  const agentEl = document.getElementById('v4-agent');
+  const avatarEl= document.getElementById('v4-avatar');
+
+  BUILDERS.forEach((_, i) => {
+    const d = document.createElement('button');
+    d.className = 'v4-nav-dot';
+    d.onclick = () => go(i);
+    dotsEl.appendChild(d);
+  });
+
+  function go(idx) {
+    video.style.opacity = '0';
+    setTimeout(() => {
+      cur = (idx + BUILDERS.length) % BUILDERS.length;
+      const b = BUILDERS[cur];
+      video.src = b.video;
+      video.play().catch(() => {});
+      nameEl.textContent  = b.name;
+      roleEl.textContent  = b.role;
+      agentEl.textContent = b.agent;
+      avatarEl.src        = b.avatar;
+      video.style.transition = 'opacity 0.4s';
+      video.style.opacity = '1';
+      dotsEl.querySelectorAll('.v4-nav-dot').forEach((d, i) => d.classList.toggle('active', i === cur));
+    }, 280);
+  }
+
+  document.getElementById('v4-prev').onclick = () => go(cur - 1);
+  document.getElementById('v4-next').onclick = () => go(cur + 1);
+
+  let timer = setInterval(() => go(cur + 1), 6000);
+  document.getElementById('v4').addEventListener('pointerdown', () => clearInterval(timer));
+
+  go(0);
+})();
+
+/* ── Variant 5: Tab switcher ── */
+(function () {
+  let cur = 0;
+  const video   = document.getElementById('v5-video');
+  const tabsEl  = document.getElementById('v5-tabs');
+  const nameEl  = document.getElementById('v5-name');
+  const roleEl  = document.getElementById('v5-role');
+  const agentEl = document.getElementById('v5-agent');
+  const avatarEl= document.getElementById('v5-avatar');
+
+  BUILDERS.forEach((b, i) => {
+    const tab = document.createElement('button');
+    tab.className = 'v5-tab';
+    tab.textContent = b.name.split(' ')[0];
+    tab.onclick = () => go(i);
+    tabsEl.appendChild(tab);
+  });
+
+  function go(idx) {
+    video.style.opacity = '0';
+    setTimeout(() => {
+      cur = idx;
+      const b = BUILDERS[cur];
+      video.src = b.video;
+      video.play().catch(() => {});
+      nameEl.textContent  = b.name;
+      roleEl.textContent  = b.role;
+      agentEl.textContent = b.agent;
+      avatarEl.src        = b.avatar;
+      video.style.transition = 'opacity 0.3s';
+      video.style.opacity = '1';
+      tabsEl.querySelectorAll('.v5-tab').forEach((t, i) => t.classList.toggle('active', i === cur));
+    }, 280);
+  }
+
+  go(0);
+})();
+
+/* ── Variant 6: Numbered list + video ── */
+(function () {
+  let cur = 0;
+  const video   = document.getElementById('v6-video');
+  const vbox    = document.getElementById('v6-vbox');
+  const listEl  = document.getElementById('v6-list');
+  const nameEl  = document.getElementById('v6-chyron-name');
+  const roleEl  = document.getElementById('v6-chyron-role');
+  const agentEl = document.getElementById('v6-chyron-agent');
+
+  BUILDERS.forEach((b, i) => {
+    const item = document.createElement('div');
+    item.className = 'v6-list-item';
+    item.innerHTML = `
+      <span class="v6-num">${i + 1}</span>
+      <div class="v6-li-avatar"><img src="${b.avatar}" alt="${b.name}"></div>
+      <div>
+        <div class="v6-li-name">${b.name}</div>
+        <div class="v6-li-role">${b.role}</div>
+        <div class="v6-li-agent">${b.agent}</div>
+      </div>`;
+    item.onclick = () => go(i);
+    listEl.appendChild(item);
+  });
+
+  function go(idx) {
+    vbox.classList.add('fading');
+    setTimeout(() => {
+      cur = idx;
+      const b = BUILDERS[cur];
+      video.src = b.video;
+      video.play().catch(() => {});
+      nameEl.textContent  = b.name;
+      roleEl.textContent  = b.role;
+      agentEl.textContent = b.agent;
+      listEl.querySelectorAll('.v6-list-item').forEach((el, i) => el.classList.toggle('active', i === cur));
+      vbox.classList.remove('fading');
+    }, 300);
+  }
+
+  let timer = setInterval(() => go((cur + 1) % BUILDERS.length), 7000);
+  document.getElementById('v6').addEventListener('pointerdown', () => clearInterval(timer));
+
+  go(0);
+})();
+
+/* ── Variant 7: Big stat + builder card selector ── */
+(function () {
+  let cur = 0;
+  const video   = document.getElementById('v7-video');
+  const vbox    = document.getElementById('v7-vbox');
+  const selEl   = document.getElementById('v7-selector');
+  const nameEl  = document.getElementById('v7-chyron-name');
+  const roleEl  = document.getElementById('v7-chyron-role');
+  const avatarEl= document.getElementById('v7-chyron-avatar');
+
+  BUILDERS.forEach((b, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'v7-sel-btn';
+    btn.innerHTML = `
+      <div class="v7-sel-avatar"><img src="${b.avatar}" alt="${b.name}"></div>
+      <span class="v7-sel-name">${b.name.split(' ')[0]}</span>
+      <span class="v7-sel-dept">${b.dept}</span>`;
+    btn.onclick = () => go(i);
+    selEl.appendChild(btn);
+  });
+
+  function go(idx) {
+    vbox.classList.add('fading');
+    setTimeout(() => {
+      cur = idx;
+      const b = BUILDERS[cur];
+      video.src = b.video;
+      video.play().catch(() => {});
+      nameEl.textContent  = b.name;
+      roleEl.textContent  = b.role;
+      avatarEl.src        = b.avatar;
+      selEl.querySelectorAll('.v7-sel-btn').forEach((el, i) => el.classList.toggle('active', i === cur));
+      vbox.classList.remove('fading');
+    }, 280);
+  }
+
+  let timer = setInterval(() => go((cur + 1) % BUILDERS.length), 6000);
+  document.getElementById('v7').addEventListener('pointerdown', () => clearInterval(timer));
+
+  go(0);
+})();
+
+/* ── Variant 8: Story progress bars ── */
+(function () {
+  let cur = 0, fillPct = 0;
+  const DURATION = 8000, TICK = 100;
+  const video   = document.getElementById('v8-video');
+  const barsEl  = document.getElementById('v8-bars');
+  const nameEl  = document.getElementById('v8-id-name');
+  const roleEl  = document.getElementById('v8-id-role');
+  const agentEl = document.getElementById('v8-id-agent');
+  const avatarEl= document.getElementById('v8-id-avatar');
+  let interval  = null;
+  const bars    = [];
+
+  BUILDERS.forEach((_, i) => {
+    const track = document.createElement('div');
+    track.className = 'v8-bar-track';
+    const fill = document.createElement('div');
+    fill.className = 'v8-bar-fill';
+    track.appendChild(fill);
+    track.addEventListener('click', () => go(i));
+    barsEl.appendChild(track);
+    bars.push({ track, fill });
+  });
+
+  function updateBars() {
+    bars.forEach(({ track, fill }, i) => {
+      track.classList.toggle('done', i < cur);
+      track.classList.toggle('active', i === cur);
+      fill.style.width = i < cur ? '100%' : i === cur ? fillPct + '%' : '0%';
+    });
+  }
+
+  function go(idx) {
+    clearInterval(interval);
+    cur = (idx + BUILDERS.length) % BUILDERS.length;
+    fillPct = 0;
+    video.style.opacity = '0';
+    setTimeout(() => {
+      const b = BUILDERS[cur];
+      video.src = b.video;
+      video.play().catch(() => {});
+      nameEl.textContent  = b.name;
+      roleEl.textContent  = b.role;
+      agentEl.textContent = b.agent;
+      avatarEl.src        = b.avatar;
+      video.style.transition = 'opacity 0.4s';
+      video.style.opacity = '1';
+      updateBars();
+      interval = setInterval(() => {
+        fillPct += (TICK / DURATION) * 100;
+        if (fillPct >= 100) {
+          fillPct = 100;
+          updateBars();
+          clearInterval(interval);
+          setTimeout(() => go(cur + 1), 200);
+        } else {
+          updateBars();
+        }
+      }, TICK);
+    }, 300);
+  }
+
+  document.getElementById('v8-prev').onclick = () => go(cur - 1);
+  document.getElementById('v8-next').onclick = () => go(cur + 1);
 
   go(0);
 })();
