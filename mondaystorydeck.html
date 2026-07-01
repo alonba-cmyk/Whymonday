@@ -776,6 +776,7 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
 .mom-person-name  { font-size:9px; font-weight:700; color:#fff; text-align:center; line-height:1.2; max-width:76px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; width:100%; }
 .mom-person-title { font-size:7.5px; color:rgba(255,255,255,0.5); text-align:center; line-height:1.2; max-width:76px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; width:100%; }
 .mom-person-dept  { font-size:7.5px; font-weight:700; letter-spacing:0.5px; text-transform:uppercase; color:var(--purple); text-align:center; }
+.mom-mob-card { margin:0 16px; border-radius:18px; border:1.5px solid var(--purple); overflow:hidden; box-shadow:0 0 0 1px rgba(97,97,255,0.15),0 8px 32px rgba(97,97,255,0.18); }
 .mom-mob-vwrap { position:relative; aspect-ratio:16/9; background:#000; overflow:hidden; transition:opacity .26s; }
 .mom-mob-vwrap video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
 .mom-mob-outcome { display:flex; align-items:center; gap:12px; padding:14px 18px; background:rgba(255,255,255,0.04); border-top:1px solid rgba(255,255,255,0.07); transition:opacity .26s; }
@@ -1245,19 +1246,21 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
       <h2 class="mom-mob-hl">How monday teams turned real work challenges into working agents</h2>
     </div>
     <div class="mom-people-nav" id="smom-mob-people-nav"></div>
-    <div class="mom-mob-vwrap" id="smom-mob-vwrap">
-      <video id="smom-mob-video" muted loop playsinline preload="metadata"></video>
-      <button class="mom-vplay-btn always-vis" id="smom-mob-playbtn" aria-label="Play/Pause">
-        <svg id="smom-mob-icon-play" viewBox="0 0 16 16"><polygon points="4,2 14,8 4,14" fill="#fff"/></svg>
-        <svg id="smom-mob-icon-pause" viewBox="0 0 16 16" style="display:none"><rect x="3" y="2" width="4" height="12" fill="#fff"/><rect x="9" y="2" width="4" height="12" fill="#fff"/></svg>
-      </button>
-    </div>
-    <div class="mom-mob-outcome" id="smom-mob-outcome">
-      <div class="mom-mob-agent-thumb"><img id="smom-mob-agentimg" alt=""></div>
-      <div>
-        <div class="mom-mob-outcome-tag">Impact</div>
-        <div class="mom-mob-outcome-num" id="smom-mob-stat"></div>
-        <div class="mom-mob-outcome-lbl" id="smom-mob-statlbl"></div>
+    <div class="mom-mob-card">
+      <div class="mom-mob-vwrap" id="smom-mob-vwrap">
+        <video id="smom-mob-video" muted loop playsinline preload="metadata"></video>
+        <button class="mom-vplay-btn always-vis" id="smom-mob-playbtn" aria-label="Play/Pause">
+          <svg id="smom-mob-icon-play" viewBox="0 0 16 16"><polygon points="4,2 14,8 4,14" fill="#fff"/></svg>
+          <svg id="smom-mob-icon-pause" viewBox="0 0 16 16" style="display:none"><rect x="3" y="2" width="4" height="12" fill="#fff"/><rect x="9" y="2" width="4" height="12" fill="#fff"/></svg>
+        </button>
+      </div>
+      <div class="mom-mob-outcome" id="smom-mob-outcome">
+        <div class="mom-mob-agent-thumb"><img id="smom-mob-agentimg" alt=""></div>
+        <div>
+          <div class="mom-mob-outcome-tag">Impact</div>
+          <div class="mom-mob-outcome-num" id="smom-mob-stat"></div>
+          <div class="mom-mob-outcome-lbl" id="smom-mob-statlbl"></div>
+        </div>
       </div>
     </div>
   </div>
