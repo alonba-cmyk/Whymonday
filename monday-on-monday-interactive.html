@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Monday on Monday</title>
+<title>Monday on Monday — Left Panel Variants</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -16,21 +16,16 @@
   --border:     rgba(255,255,255,0.07);
   --border-hi:  rgba(255,255,255,0.12);
   --dim:        rgba(255,255,255,0.50);
-  --dimmer:     rgba(255,255,255,0.28);
+  --dimmer:     rgba(255,255,255,0.26);
 }
 *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
 body { font-family:'Poppins',sans-serif; background:#000; color:#fff; }
 
-/* ── shared chrome ── */
+/* ── variant wrapper ── */
 .variant { position:relative; width:100%; overflow:hidden; }
-.label-bar { position:absolute; top:0; left:0; right:0; z-index:30; padding:11px 18px; display:flex; align-items:center; gap:10px; background:rgba(0,0,0,0.55); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); }
+.label-bar { position:absolute; top:0; left:0; right:0; z-index:30; padding:11px 18px; display:flex; align-items:center; gap:10px; background:rgba(0,0,0,0.55); backdrop-filter:blur(12px); }
 .vnum { font-size:10px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; background:var(--purple); color:#fff; padding:3px 10px; border-radius:100px; }
 .vdesc { font-size:11px; color:rgba(255,255,255,0.42); }
-
-/* ── shared editorial ── */
-.eyebrow { font-size:10px; font-weight:700; letter-spacing:4px; text-transform:uppercase; color:var(--purple); display:block; margin-bottom:16px; }
-.info-lbl { font-size:9px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; color:var(--purple); margin-bottom:6px; }
-.hl em { color:var(--purple); font-style:normal; }
 
 /* ── shared nav ── */
 .arr { width:44px; height:44px; border-radius:50%; border:1px solid var(--border-hi); background:var(--bg-el); color:#fff; font-size:18px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background .2s,border-color .2s; flex-shrink:0; }
@@ -38,13 +33,17 @@ body { font-family:'Poppins',sans-serif; background:#000; color:#fff; }
 .dots { display:flex; gap:7px; align-items:center; }
 .dot { width:6px; height:6px; border-radius:50%; background:rgba(255,255,255,0.22); border:none; padding:0; cursor:pointer; transition:background .2s,transform .2s; }
 .dot.active { background:#fff; transform:scale(1.4); }
+.nav-row { display:flex; align-items:center; gap:12px; }
 .fading { opacity:0 !important; }
 
-/* ── shared card ── */
+/* ── shared grid ── */
+.layout { display:grid; grid-template-columns:44% 56%; height:100vh; background:var(--bg); }
+
+/* ── shared right panel ── */
+.right { display:flex; align-items:center; justify-content:center; padding:52px 44px; }
+.card { width:100%; background:var(--bg-el); border:1px solid var(--border-hi); border-radius:22px; overflow:hidden; box-shadow:0 28px 80px rgba(0,0,0,0.55), 0 0 0 1px rgba(97,97,255,0.08); }
 .card-video { position:relative; aspect-ratio:16/9; background:#000; overflow:hidden; transition:opacity .26s; }
 .card-video video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
-
-/* ── shared info bar (3 cols: builder | agent | outcome) ── */
 .info-bar { display:grid; grid-template-columns:1fr 1px 1fr 1px 1fr; border-top:1px solid var(--border); }
 .ib-sep { background:var(--border); }
 .ib-builder { display:flex; align-items:center; gap:12px; padding:18px 22px; transition:opacity .26s; }
@@ -53,118 +52,114 @@ body { font-family:'Poppins',sans-serif; background:#000; color:#fff; }
 .ib-b-name { font-size:13px; font-weight:700; color:#fff; }
 .ib-b-meta { font-size:10px; color:var(--dim); margin-top:2px; }
 .ib-agent { display:flex; flex-direction:column; justify-content:center; padding:18px 22px; transition:opacity .26s; }
+.ib-lbl { font-size:9px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; color:var(--purple); margin-bottom:5px; }
 .ib-a-name { font-size:14px; font-weight:700; color:#fff; }
 .ib-a-desc { font-size:11px; color:var(--dim); margin-top:3px; }
 .ib-outcome { display:flex; align-items:center; gap:12px; padding:18px 22px; background:var(--purple-lo); transition:opacity .26s; }
 .ib-stat { font-size:26px; font-weight:800; color:var(--purple); line-height:1; flex-shrink:0; }
 .ib-stat-lbl { font-size:11px; color:var(--dim); line-height:1.55; }
 
-
-/* ════════════════════════════════════════════════════════
-   VARIANT A — BALANCED  (44 / 56)
-   Standard proportion. Card floats with generous padding.
-════════════════════════════════════════════════════════ */
-.va-layout { display:grid; grid-template-columns:44% 56%; height:100vh; background:var(--bg); }
-.va-left { display:flex; flex-direction:column; justify-content:center; padding:86px 60px 56px; border-right:1px solid var(--border); }
-.va-hl { font-size:clamp(26px,2.7vw,42px); font-weight:800; line-height:1.17; margin-bottom:20px; }
-.va-sub { font-size:15px; color:var(--dim); line-height:1.74; max-width:400px; }
-.va-nav { display:flex; align-items:center; gap:12px; margin-top:48px; }
-.va-right { display:flex; align-items:center; justify-content:center; padding:52px 44px; }
-.va-card { width:100%; background:var(--bg-el); border:1px solid var(--border-hi); border-radius:22px; overflow:hidden; box-shadow:0 28px 80px rgba(0,0,0,0.55), 0 0 0 1px rgba(97,97,255,0.08); }
+/* ── shared left base ── */
+.left { display:flex; flex-direction:column; justify-content:center; border-right:1px solid var(--border); }
+.eyebrow { font-size:10px; font-weight:700; letter-spacing:4px; text-transform:uppercase; color:var(--purple); display:block; }
 
 
-/* ════════════════════════════════════════════════════════
-   VARIANT B — VIDEO-FIRST  (30 / 70)
-   Ultra-thin copy column. Card is massive, near edge-to-edge.
-════════════════════════════════════════════════════════ */
-.vb-layout { display:grid; grid-template-columns:30% 70%; height:100vh; background:var(--bg); }
-.vb-left { display:flex; flex-direction:column; justify-content:center; padding:86px 36px 52px; border-right:1px solid var(--border); }
-.vb-hl { font-size:clamp(18px,1.9vw,28px); font-weight:800; line-height:1.22; margin-bottom:16px; }
-.vb-sub { font-size:12px; color:var(--dim); line-height:1.72; }
-.vb-nav { display:flex; align-items:center; gap:10px; margin-top:40px; }
-.vb-right { display:flex; align-items:center; justify-content:center; padding:40px 40px 40px 28px; }
-.vb-card { width:100%; background:var(--bg-el); border:1px solid var(--border-hi); border-radius:22px; overflow:hidden; box-shadow:0 32px 90px rgba(0,0,0,0.6), 0 0 0 1px rgba(97,97,255,0.08); }
+/* ════════════════════════════════════════════════════
+   A — CURRENT (for reference)
+   Eyebrow · Headline · Sub · Nav
+════════════════════════════════════════════════════ */
+.la { padding:86px 60px 56px; }
+.la-hl { font-size:clamp(26px,2.7vw,40px); font-weight:800; line-height:1.17; margin:16px 0 18px; }
+.la-hl em { color:var(--purple); font-style:normal; }
+.la-sub { font-size:15px; color:var(--dim); line-height:1.74; max-width:400px; }
+.la-nav { margin-top:48px; }
 
 
-/* ════════════════════════════════════════════════════════
-   VARIANT C — CARD LEFT  (58 / 42)
-   Card on the left. Copy stacks naturally on the right.
-════════════════════════════════════════════════════════ */
-.vc-layout { display:grid; grid-template-columns:58% 42%; height:100vh; background:var(--bg); }
-.vc-left { display:flex; align-items:center; justify-content:center; padding:40px 28px 40px 44px; }
-.vc-card { width:100%; background:var(--bg-el); border:1px solid var(--border-hi); border-radius:22px; overflow:hidden; box-shadow:0 28px 80px rgba(0,0,0,0.55), 0 0 0 1px rgba(97,97,255,0.08); }
-.vc-right { display:flex; flex-direction:column; justify-content:center; padding:86px 58px 56px; border-left:1px solid var(--border); }
-.vc-hl { font-size:clamp(24px,2.4vw,36px); font-weight:800; line-height:1.2; margin-bottom:20px; }
-.vc-sub { font-size:14px; color:var(--dim); line-height:1.74; max-width:360px; }
-.vc-nav { display:flex; align-items:center; gap:12px; margin-top:48px; }
+/* ════════════════════════════════════════════════════
+   B — BOLD & MINIMAL
+   Eyebrow at top · Giant headline fills the panel ·
+   No sub · Nav pinned to bottom
+════════════════════════════════════════════════════ */
+.lb { padding:86px 60px 56px; justify-content:space-between; }
+.lb-top { }
+.lb-hl { font-size:clamp(36px,3.8vw,58px); font-weight:800; line-height:1.08; margin-top:20px; }
+.lb-hl em { color:var(--purple); font-style:normal; display:block; }
 
 
-/* ════════════════════════════════════════════════════════
-   VARIANT D — TALL CARD  (40 / 60)
-   Card stretches closer to full height (less padding top/bot).
-   Info bar is more spacious — stat number bigger.
-════════════════════════════════════════════════════════ */
-.vd-layout { display:grid; grid-template-columns:40% 60%; height:100vh; background:var(--bg); }
-.vd-left { display:flex; flex-direction:column; justify-content:center; padding:86px 52px 56px; border-right:1px solid var(--border); }
-.vd-hl { font-size:clamp(28px,2.9vw,44px); font-weight:800; line-height:1.14; margin-bottom:22px; }
-.vd-sub { font-size:15px; color:var(--dim); line-height:1.74; max-width:390px; }
-.vd-nav { display:flex; align-items:center; gap:12px; margin-top:48px; }
-.vd-right { display:flex; align-items:center; justify-content:center; padding:24px 36px; }
-.vd-card { width:100%; background:var(--bg-el); border:1px solid var(--border-hi); border-radius:22px; overflow:hidden; box-shadow:0 28px 80px rgba(0,0,0,0.55), 0 0 0 1px rgba(97,97,255,0.08); }
-/* override info bar stat for this variant */
-#vd .ib-stat { font-size:32px; }
-#vd .ib-builder { padding:22px 24px; }
-#vd .ib-agent  { padding:22px 24px; }
-#vd .ib-outcome{ padding:22px 24px; }
+/* ════════════════════════════════════════════════════
+   C — STAT AS HERO
+   Eyebrow · Huge "5,000+" in purple as visual anchor ·
+   Headline below it · Nav
+════════════════════════════════════════════════════ */
+.lc { padding:86px 60px 56px; }
+.lc-num { font-size:clamp(64px,6.5vw,96px); font-weight:800; color:var(--purple); line-height:1; margin:16px 0 0; letter-spacing:-2px; }
+.lc-num-lbl { font-size:13px; color:var(--dimmer); margin-top:6px; margin-bottom:28px; letter-spacing:0.5px; }
+.lc-hl { font-size:clamp(18px,1.8vw,26px); font-weight:700; line-height:1.3; color:#fff; max-width:380px; }
+.lc-hl em { color:var(--purple); font-style:normal; }
+.lc-nav { margin-top:44px; }
 
 
-/* ════════════════════════════════════════════════════════
-   MOBILE  ≤ 768px
-════════════════════════════════════════════════════════ */
+/* ════════════════════════════════════════════════════
+   D — WITH DEPT TAGS
+   Eyebrow · Headline · Sub ·
+   Dept pills (Sales · Marketing · Engineering · Product) ·
+   Nav
+════════════════════════════════════════════════════ */
+.ld { padding:86px 60px 56px; }
+.ld-hl { font-size:clamp(24px,2.5vw,38px); font-weight:800; line-height:1.17; margin:16px 0 18px; }
+.ld-hl em { color:var(--purple); font-style:normal; }
+.ld-sub { font-size:14px; color:var(--dim); line-height:1.72; max-width:400px; }
+.ld-pills { display:flex; flex-wrap:wrap; gap:8px; margin-top:28px; }
+.ld-pill { font-size:11px; font-weight:600; color:var(--dim); border:1px solid var(--border-hi); border-radius:100px; padding:5px 14px; }
+.ld-pill.active { color:#fff; border-color:var(--purple); background:var(--purple-lo); }
+.ld-nav { margin-top:32px; }
+
+
+/* ════════════════════════════════════════════════════
+   MOBILE
+════════════════════════════════════════════════════ */
 @media (max-width:768px) {
-  .va-layout,.vb-layout,.vc-layout,.vd-layout { grid-template-columns:1fr; height:auto; }
-
-  .va-right,.vb-right,.vd-right { order:-1; padding:16px 14px; }
-  .vc-left { order:-1; padding:16px 14px; }
-
-  .va-left,.vb-left,.vc-right,.vd-left { padding:22px 18px 48px; border-right:none; border-left:none; border-top:1px solid var(--border); }
-
+  .layout { grid-template-columns:1fr; height:auto; }
+  .right { order:-1; padding:14px; }
+  .left { border-right:none; border-top:1px solid var(--border); }
+  .la,.lb,.lc,.ld { padding:24px 18px 48px; }
+  .lb { justify-content:flex-start; }
+  .lb-hl { font-size:clamp(30px,8vw,44px); }
+  .lc-num { font-size:clamp(52px,14vw,72px); }
   .info-bar { grid-template-columns:1fr; }
   .ib-sep { height:1px; }
-  #vd .ib-stat { font-size:26px; }
-  #vd .ib-builder,#vd .ib-agent,#vd .ib-outcome { padding:16px 20px; }
 }
 </style>
 </head>
 <body>
 
 
-<!-- ═══ VARIANT A — BALANCED ═══ -->
-<div class="variant" id="va">
+<!-- ═══ A — CURRENT (REFERENCE) ═══ -->
+<div class="variant" id="la">
   <div class="label-bar">
     <span class="vnum">A</span>
-    <span class="vdesc">Balanced — 44/56, card floats with generous padding</span>
+    <span class="vdesc">Current — eyebrow · headline · sub · nav</span>
   </div>
-  <div class="va-layout">
-    <div class="va-left">
+  <div class="layout">
+    <div class="left la">
       <span class="eyebrow">Monday on Monday</span>
-      <h2 class="va-hl hl">Our people built agents for the problems that <em>frustrated them most</em></h2>
-      <p class="va-sub">Meet the monday builders who turned real work frustrations into working agents — and changed how their teams operate.</p>
-      <div class="va-nav">
-        <button class="arr" id="va-prev">&#8592;</button>
-        <div class="dots" id="va-dots"></div>
-        <button class="arr" id="va-next">&#8594;</button>
+      <h2 class="la-hl">Our people built agents for the problems that <em>frustrated them most</em></h2>
+      <p class="la-sub">Meet the monday builders who turned real work frustrations into working agents — and changed how their teams operate.</p>
+      <div class="nav-row la-nav">
+        <button class="arr" id="la-prev">&#8592;</button>
+        <div class="dots" id="la-dots"></div>
+        <button class="arr" id="la-next">&#8594;</button>
       </div>
     </div>
-    <div class="va-right">
-      <div class="va-card">
-        <div class="card-video" id="va-vwrap"><video id="va-video" muted loop playsinline autoplay preload="metadata"></video></div>
+    <div class="right">
+      <div class="card">
+        <div class="card-video" id="la-vwrap"><video id="la-video" muted loop playsinline autoplay preload="metadata"></video></div>
         <div class="info-bar">
-          <div class="ib-builder" id="va-builder"><div class="ib-av"><img id="va-av" alt=""></div><div><div class="ib-b-name" id="va-bname"></div><div class="ib-b-meta" id="va-bmeta"></div></div></div>
+          <div class="ib-builder" id="la-builder"><div class="ib-av"><img id="la-av" alt=""></div><div><div class="ib-b-name" id="la-bname"></div><div class="ib-b-meta" id="la-bmeta"></div></div></div>
           <div class="ib-sep"></div>
-          <div class="ib-agent" id="va-agent"><div class="info-lbl">The agent</div><div class="ib-a-name" id="va-aname"></div><div class="ib-a-desc" id="va-adesc"></div></div>
+          <div class="ib-agent" id="la-agent"><div class="ib-lbl">The agent</div><div class="ib-a-name" id="la-aname"></div><div class="ib-a-desc" id="la-adesc"></div></div>
           <div class="ib-sep"></div>
-          <div class="ib-outcome" id="va-outcome"><div class="ib-stat" id="va-stat"></div><div class="ib-stat-lbl" id="va-statlbl"></div></div>
+          <div class="ib-outcome" id="la-outcome"><div class="ib-stat" id="la-stat"></div><div class="ib-stat-lbl" id="la-statlbl"></div></div>
         </div>
       </div>
     </div>
@@ -172,32 +167,33 @@ body { font-family:'Poppins',sans-serif; background:#000; color:#fff; }
 </div>
 
 
-<!-- ═══ VARIANT B — VIDEO-FIRST ═══ -->
-<div class="variant" id="vb">
+<!-- ═══ B — BOLD & MINIMAL ═══ -->
+<div class="variant" id="lb">
   <div class="label-bar">
     <span class="vnum">B</span>
-    <span class="vdesc">Video-first — 30/70, ultra-thin copy, wide card</span>
+    <span class="vdesc">Bold & minimal — giant headline fills the panel, no sub</span>
   </div>
-  <div class="vb-layout">
-    <div class="vb-left">
-      <span class="eyebrow">Monday on Monday</span>
-      <h2 class="vb-hl hl">Our people built agents for the problems that <em>frustrated them most</em></h2>
-      <p class="vb-sub">Real builders. Real frustrations. Working agents.</p>
-      <div class="vb-nav">
-        <button class="arr" id="vb-prev">&#8592;</button>
-        <div class="dots" id="vb-dots"></div>
-        <button class="arr" id="vb-next">&#8594;</button>
+  <div class="layout">
+    <div class="left lb">
+      <div class="lb-top">
+        <span class="eyebrow">Monday on Monday</span>
+        <h2 class="lb-hl">Our people built agents for the problems that <em>frustrated them most</em></h2>
+      </div>
+      <div class="nav-row">
+        <button class="arr" id="lb-prev">&#8592;</button>
+        <div class="dots" id="lb-dots"></div>
+        <button class="arr" id="lb-next">&#8594;</button>
       </div>
     </div>
-    <div class="vb-right">
-      <div class="vb-card">
-        <div class="card-video" id="vb-vwrap"><video id="vb-video" muted loop playsinline autoplay preload="metadata"></video></div>
+    <div class="right">
+      <div class="card">
+        <div class="card-video" id="lb-vwrap"><video id="lb-video" muted loop playsinline autoplay preload="metadata"></video></div>
         <div class="info-bar">
-          <div class="ib-builder" id="vb-builder"><div class="ib-av"><img id="vb-av" alt=""></div><div><div class="ib-b-name" id="vb-bname"></div><div class="ib-b-meta" id="vb-bmeta"></div></div></div>
+          <div class="ib-builder" id="lb-builder"><div class="ib-av"><img id="lb-av" alt=""></div><div><div class="ib-b-name" id="lb-bname"></div><div class="ib-b-meta" id="lb-bmeta"></div></div></div>
           <div class="ib-sep"></div>
-          <div class="ib-agent" id="vb-agent"><div class="info-lbl">The agent</div><div class="ib-a-name" id="vb-aname"></div><div class="ib-a-desc" id="vb-adesc"></div></div>
+          <div class="ib-agent" id="lb-agent"><div class="ib-lbl">The agent</div><div class="ib-a-name" id="lb-aname"></div><div class="ib-a-desc" id="lb-adesc"></div></div>
           <div class="ib-sep"></div>
-          <div class="ib-outcome" id="vb-outcome"><div class="ib-stat" id="vb-stat"></div><div class="ib-stat-lbl" id="vb-statlbl"></div></div>
+          <div class="ib-outcome" id="lb-outcome"><div class="ib-stat" id="lb-stat"></div><div class="ib-stat-lbl" id="lb-statlbl"></div></div>
         </div>
       </div>
     </div>
@@ -205,65 +201,72 @@ body { font-family:'Poppins',sans-serif; background:#000; color:#fff; }
 </div>
 
 
-<!-- ═══ VARIANT C — CARD LEFT ═══ -->
-<div class="variant" id="vc">
+<!-- ═══ C — STAT AS HERO ═══ -->
+<div class="variant" id="lc">
   <div class="label-bar">
     <span class="vnum">C</span>
-    <span class="vdesc">Card left — 58/42, card on left, copy on right</span>
+    <span class="vdesc">Stat as hero — "5,000+" anchors the left, headline below</span>
   </div>
-  <div class="vc-layout">
-    <div class="vc-left">
-      <div class="vc-card">
-        <div class="card-video" id="vc-vwrap"><video id="vc-video" muted loop playsinline autoplay preload="metadata"></video></div>
-        <div class="info-bar">
-          <div class="ib-builder" id="vc-builder"><div class="ib-av"><img id="vc-av" alt=""></div><div><div class="ib-b-name" id="vc-bname"></div><div class="ib-b-meta" id="vc-bmeta"></div></div></div>
-          <div class="ib-sep"></div>
-          <div class="ib-agent" id="vc-agent"><div class="info-lbl">The agent</div><div class="ib-a-name" id="vc-aname"></div><div class="ib-a-desc" id="vc-adesc"></div></div>
-          <div class="ib-sep"></div>
-          <div class="ib-outcome" id="vc-outcome"><div class="ib-stat" id="vc-stat"></div><div class="ib-stat-lbl" id="vc-statlbl"></div></div>
-        </div>
+  <div class="layout">
+    <div class="left lc">
+      <span class="eyebrow">Monday on Monday</span>
+      <div class="lc-num">5,000+</div>
+      <div class="lc-num-lbl">agents built by monday people</div>
+      <h2 class="lc-hl">for the problems that <em>frustrated them most</em></h2>
+      <div class="nav-row lc-nav">
+        <button class="arr" id="lc-prev">&#8592;</button>
+        <div class="dots" id="lc-dots"></div>
+        <button class="arr" id="lc-next">&#8594;</button>
       </div>
     </div>
-    <div class="vc-right">
-      <span class="eyebrow">Monday on Monday</span>
-      <h2 class="vc-hl hl">Our people built agents for the problems that <em>frustrated them most</em></h2>
-      <p class="vc-sub">Meet the monday builders who turned real work frustrations into working agents — and changed how their teams operate.</p>
-      <div class="vc-nav">
-        <button class="arr" id="vc-prev">&#8592;</button>
-        <div class="dots" id="vc-dots"></div>
-        <button class="arr" id="vc-next">&#8594;</button>
+    <div class="right">
+      <div class="card">
+        <div class="card-video" id="lc-vwrap"><video id="lc-video" muted loop playsinline autoplay preload="metadata"></video></div>
+        <div class="info-bar">
+          <div class="ib-builder" id="lc-builder"><div class="ib-av"><img id="lc-av" alt=""></div><div><div class="ib-b-name" id="lc-bname"></div><div class="ib-b-meta" id="lc-bmeta"></div></div></div>
+          <div class="ib-sep"></div>
+          <div class="ib-agent" id="lc-agent"><div class="ib-lbl">The agent</div><div class="ib-a-name" id="lc-aname"></div><div class="ib-a-desc" id="lc-adesc"></div></div>
+          <div class="ib-sep"></div>
+          <div class="ib-outcome" id="lc-outcome"><div class="ib-stat" id="lc-stat"></div><div class="ib-stat-lbl" id="lc-statlbl"></div></div>
+        </div>
       </div>
     </div>
   </div>
 </div>
 
 
-<!-- ═══ VARIANT D — TALL CARD ═══ -->
-<div class="variant" id="vd">
+<!-- ═══ D — WITH DEPT TAGS ═══ -->
+<div class="variant" id="ld">
   <div class="label-bar">
     <span class="vnum">D</span>
-    <span class="vdesc">Tall card — 40/60, card near full height, bigger type and stat</span>
+    <span class="vdesc">With dept tags — headline · sub · dept pills that highlight on change</span>
   </div>
-  <div class="vd-layout">
-    <div class="vd-left">
+  <div class="layout">
+    <div class="left ld">
       <span class="eyebrow">Monday on Monday</span>
-      <h2 class="vd-hl hl">Our people built agents for the problems that <em>frustrated them most</em></h2>
-      <p class="vd-sub">Meet the monday builders who turned real work frustrations into working agents — and changed how their teams operate.</p>
-      <div class="vd-nav">
-        <button class="arr" id="vd-prev">&#8592;</button>
-        <div class="dots" id="vd-dots"></div>
-        <button class="arr" id="vd-next">&#8594;</button>
+      <h2 class="ld-hl">Our people built agents for the problems that <em>frustrated them most</em></h2>
+      <p class="ld-sub">Meet the monday builders who turned real work frustrations into working agents.</p>
+      <div class="ld-pills" id="ld-pills">
+        <span class="ld-pill" data-idx="0">Sales</span>
+        <span class="ld-pill" data-idx="1">Marketing</span>
+        <span class="ld-pill" data-idx="2">Engineering</span>
+        <span class="ld-pill" data-idx="3">Product</span>
+      </div>
+      <div class="nav-row ld-nav">
+        <button class="arr" id="ld-prev">&#8592;</button>
+        <div class="dots" id="ld-dots"></div>
+        <button class="arr" id="ld-next">&#8594;</button>
       </div>
     </div>
-    <div class="vd-right">
-      <div class="vd-card">
-        <div class="card-video" id="vd-vwrap"><video id="vd-video" muted loop playsinline autoplay preload="metadata"></video></div>
+    <div class="right">
+      <div class="card">
+        <div class="card-video" id="ld-vwrap"><video id="ld-video" muted loop playsinline autoplay preload="metadata"></video></div>
         <div class="info-bar">
-          <div class="ib-builder" id="vd-builder"><div class="ib-av"><img id="vd-av" alt=""></div><div><div class="ib-b-name" id="vd-bname"></div><div class="ib-b-meta" id="vd-bmeta"></div></div></div>
+          <div class="ib-builder" id="ld-builder"><div class="ib-av"><img id="ld-av" alt=""></div><div><div class="ib-b-name" id="ld-bname"></div><div class="ib-b-meta" id="ld-bmeta"></div></div></div>
           <div class="ib-sep"></div>
-          <div class="ib-agent" id="vd-agent"><div class="info-lbl">The agent</div><div class="ib-a-name" id="vd-aname"></div><div class="ib-a-desc" id="vd-adesc"></div></div>
+          <div class="ib-agent" id="ld-agent"><div class="ib-lbl">The agent</div><div class="ib-a-name" id="ld-aname"></div><div class="ib-a-desc" id="ld-adesc"></div></div>
           <div class="ib-sep"></div>
-          <div class="ib-outcome" id="vd-outcome"><div class="ib-stat" id="vd-stat"></div><div class="ib-stat-lbl" id="vd-statlbl"></div></div>
+          <div class="ib-outcome" id="ld-outcome"><div class="ib-stat" id="ld-stat"></div><div class="ib-stat-lbl" id="ld-statlbl"></div></div>
         </div>
       </div>
     </div>
@@ -273,53 +276,13 @@ body { font-family:'Poppins',sans-serif; background:#000; color:#fff; }
 
 <script>
 const BUILDERS = [
-  {
-    name:      "Ran Levgoren",
-    title:     "Account Executive",
-    dept:      "Sales",
-    agentName: "Moti",
-    agentDesc: "The Silence Disruptor",
-    statNum:   "23%",
-    statLabel: "of silent deals revived within 2 weeks",
-    video:  "https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Video/Moti.mp4",
-    avatar: "https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/ran-levgoren.png"
-  },
-  {
-    name:      "Osher Mayor",
-    title:     "Lifecycle Marketing Manager",
-    dept:      "Marketing",
-    agentName: "Riki Shula",
-    agentDesc: "Data to Content",
-    statNum:   "10×",
-    statLabel: "more A/B tests per quarter",
-    video:  "https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Video/Osher_shula_marketing.mp4",
-    avatar: "https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/osher-mayor.png"
-  },
-  {
-    name:      "Amit Frishberg",
-    title:     "Tech Lead, CRM",
-    dept:      "Engineering",
-    agentName: "Petro",
-    agentDesc: "Mobile Feature Parity",
-    statNum:   "60%",
-    statLabel: "reduction in mobile parity backlog",
-    video:  "https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Video/Petro.mp4",
-    avatar: "https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/amit-frishberg.png"
-  },
-  {
-    name:      "Roni Rebish",
-    title:     "Product Manager",
-    dept:      "Product",
-    agentName: "Allison",
-    agentDesc: "Accessibility Pipeline",
-    statNum:   "70%",
-    statLabel: "drop in accessibility rework cost",
-    video:  "https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Video/roni_allison_product.mp4",
-    avatar: "https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/roni-rebish.png"
-  }
+  { name:"Ran Levgoren",  title:"Account Executive",          dept:"Sales",        agentName:"Moti",       agentDesc:"The Silence Disruptor",    statNum:"23%",  statLabel:"of silent deals revived within 2 weeks",  video:"https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Video/Moti.mp4",                      avatar:"https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/ran-levgoren.png" },
+  { name:"Osher Mayor",   title:"Lifecycle Marketing Manager", dept:"Marketing",    agentName:"Riki Shula", agentDesc:"Data to Content",          statNum:"10×",  statLabel:"more A/B tests per quarter",              video:"https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Video/Osher_shula_marketing.mp4",   avatar:"https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/osher-mayor.png" },
+  { name:"Amit Frishberg", title:"Tech Lead, CRM",            dept:"Engineering",  agentName:"Petro",      agentDesc:"Mobile Feature Parity",    statNum:"60%",  statLabel:"reduction in mobile parity backlog",      video:"https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Video/Petro.mp4",                    avatar:"https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/amit-frishberg.png" },
+  { name:"Roni Rebish",   title:"Product Manager",            dept:"Product",      agentName:"Allison",    agentDesc:"Accessibility Pipeline",   statNum:"70%",  statLabel:"drop in accessibility rework cost",       video:"https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Video/roni_allison_product.mp4",    avatar:"https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/roni-rebish.png" }
 ];
 
-function wire(prefix) {
+function wire(prefix, onGo) {
   let cur = 0;
   const vwrap     = document.getElementById(`${prefix}-vwrap`);
   const video     = document.getElementById(`${prefix}-video`);
@@ -341,22 +304,24 @@ function wire(prefix) {
     builderEl.classList.add('fading');
     agentEl.classList.add('fading');
     outcomeEl.classList.add('fading');
+    if (onGo) onGo('fading', idx);
     setTimeout(() => {
       cur = (idx + BUILDERS.length) % BUILDERS.length;
       const b = BUILDERS[cur];
       video.src = b.video; video.play().catch(()=>{});
-      document.getElementById(`${prefix}-av`).src            = b.avatar;
-      document.getElementById(`${prefix}-bname`).textContent = b.name;
-      document.getElementById(`${prefix}-bmeta`).textContent = `${b.title} · ${b.dept}`;
-      document.getElementById(`${prefix}-aname`).textContent = b.agentName;
-      document.getElementById(`${prefix}-adesc`).textContent = b.agentDesc;
-      document.getElementById(`${prefix}-stat`).textContent  = b.statNum;
+      document.getElementById(`${prefix}-av`).src              = b.avatar;
+      document.getElementById(`${prefix}-bname`).textContent   = b.name;
+      document.getElementById(`${prefix}-bmeta`).textContent   = `${b.title} · ${b.dept}`;
+      document.getElementById(`${prefix}-aname`).textContent   = b.agentName;
+      document.getElementById(`${prefix}-adesc`).textContent   = b.agentDesc;
+      document.getElementById(`${prefix}-stat`).textContent    = b.statNum;
       document.getElementById(`${prefix}-statlbl`).textContent = b.statLabel;
       dotsEl.querySelectorAll('.dot').forEach((d,i) => d.classList.toggle('active', i === cur));
       vwrap.classList.remove('fading');
       builderEl.classList.remove('fading');
       agentEl.classList.remove('fading');
       outcomeEl.classList.remove('fading');
+      if (onGo) onGo('done', cur);
     }, 260);
   }
 
@@ -371,10 +336,17 @@ function wire(prefix) {
   go(0);
 }
 
-wire('va');
-wire('vb');
-wire('vc');
-wire('vd');
+wire('la');
+wire('lb');
+wire('lc');
+
+/* D: also update dept pills */
+wire('ld', (phase, idx) => {
+  const pills = document.querySelectorAll('#ld-pills .ld-pill');
+  if (phase === 'done') {
+    pills.forEach((p, i) => p.classList.toggle('active', i === idx));
+  }
+});
 </script>
 </body>
 </html>
