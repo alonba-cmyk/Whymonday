@@ -50,6 +50,8 @@ body { font-family:'Poppins',sans-serif; background:var(--bg); color:#fff; }
 .dept-row { display:flex; gap:6px; flex-wrap:wrap; padding:12px 16px; border-bottom:1px solid var(--border); }
 .dept-tag { font-size:10px; font-weight:600; letter-spacing:0.4px; padding:4px 12px; border-radius:100px; border:1px solid var(--border-hi); color:var(--dimmer); transition:background .26s,border-color .26s,color .26s; }
 .dept-tag.active { background:var(--purple-lo); border-color:var(--purple); color:#fff; }
+.dept-row.clickable .dept-tag { cursor:pointer; }
+.dept-row.clickable .dept-tag:hover:not(.active) { border-color:rgba(255,255,255,0.28); color:rgba(255,255,255,0.75); }
 
 /* ── video ── */
 .card-video { position:relative; aspect-ratio:16/9; background:#000; overflow:hidden; transition:opacity .26s; }
@@ -230,6 +232,67 @@ body { font-family:'Poppins',sans-serif; background:var(--bg); color:#fff; }
 </div>
 
 
+<!-- ══════════════════════════════════════════════════
+     SECTION 3 — "How monday teams turned…"
+══════════════════════════════════════════════════ -->
+<div class="sect" id="s3">
+  <div class="layout">
+
+    <div class="left">
+      <span class="eyebrow">Monday on Monday</span>
+      <h2 class="la-hl">How monday teams turned real work challenges into working agents</h2>
+      <p class="la-sub">5,117 agents built by monday people — each one started as someone's daily frustration. These are four of them.</p>
+      <div class="nav-row la-nav">
+        <button class="arr" id="s3-prev">&#8592;</button>
+        <div class="dots" id="s3-dots"></div>
+        <button class="arr" id="s3-next">&#8594;</button>
+      </div>
+    </div>
+
+    <div class="right">
+      <div class="card">
+        <div class="dept-row clickable" id="s3-deptrow"></div>
+        <div class="card-video" id="s3-vwrap">
+          <video id="s3-video" muted loop playsinline preload="metadata"></video>
+          <button class="vplay-btn" id="s3-playbtn" aria-label="Play/Pause">
+            <svg id="s3-icon-play" viewBox="0 0 16 16"><polygon points="4,2 14,8 4,14"/></svg>
+            <svg id="s3-icon-pause" viewBox="0 0 16 16" style="display:none"><rect x="3" y="2" width="4" height="12"/><rect x="9" y="2" width="4" height="12"/></svg>
+          </button>
+        </div>
+        <div class="info-bar">
+          <div class="ib-builder" id="s3-builder">
+            <div class="ib-av"><img id="s3-av" alt=""></div>
+            <div>
+              <div class="ib-dept" id="s3-dept"></div>
+              <div class="ib-b-name" id="s3-bname"></div>
+              <div class="ib-b-meta" id="s3-bmeta"></div>
+            </div>
+          </div>
+          <div class="ib-sep"></div>
+          <div class="ib-agent" id="s3-agent">
+            <div class="ib-agent-av" id="s3-agent-av"><img id="s3-agentimg" alt=""></div>
+            <div>
+              <div class="ib-lbl">The agent</div>
+              <div class="ib-a-name" id="s3-aname"></div>
+              <div class="ib-a-desc" id="s3-adesc"></div>
+            </div>
+          </div>
+          <div class="ib-sep"></div>
+          <div class="ib-outcome" id="s3-outcome">
+            <div class="ib-lbl">The outcome</div>
+            <div class="ib-outcome-nums">
+              <div class="ib-stat" id="s3-stat"></div>
+              <div class="ib-stat-lbl" id="s3-statlbl"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
 <script>
 const BUILDERS = [
   { name:"Ran Levgoren",   title:"Account Executive",           dept:"Sales",       agentName:"Moti",       agentDesc:"The Silence Disruptor",  statNum:"23%", statLabel:"of silent deals revived within 2 weeks",  video:"https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Video/Moti.mp4",                     avatar:"https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/ran-levgoren.png",   agentImg:"" },
@@ -238,7 +301,7 @@ const BUILDERS = [
   { name:"Roni Rebish",    title:"Product Manager",             dept:"Product",     agentName:"Allison",    agentDesc:"Accessibility Pipeline", statNum:"70%", statLabel:"drop in accessibility rework cost",       video:"https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Video/roni_allison_product.mp4",   avatar:"https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/roni-rebish.png",    agentImg:"" }
 ];
 
-function wireSection(prefix, { hasDots = false } = {}) {
+function wireSection(prefix, { hasDots = false, builders = BUILDERS, clickableDepts = false, noAutoAdvance = false } = {}) {
   let cur = 0;
   const vwrap     = document.getElementById(`${prefix}-vwrap`);
   const video     = document.getElementById(`${prefix}-video`);
@@ -251,10 +314,11 @@ function wireSection(prefix, { hasDots = false } = {}) {
   const iconPause = document.getElementById(`${prefix}-icon-pause`);
   const deptRow   = document.getElementById(`${prefix}-deptrow`);
 
-  BUILDERS.forEach(b => {
+  builders.forEach((b, i) => {
     const tag = document.createElement('span');
     tag.className = 'dept-tag';
     tag.textContent = b.dept;
+    if (clickableDepts) tag.onclick = () => go(i);
     deptRow.appendChild(tag);
   });
 
@@ -271,7 +335,7 @@ function wireSection(prefix, { hasDots = false } = {}) {
   video.addEventListener('pause', syncPlayIcon);
 
   if (hasDots) {
-    BUILDERS.forEach((_, i) => {
+    builders.forEach((_, i) => {
       const d = document.createElement('button');
       d.className = 'dot';
       d.setAttribute('aria-label', `Builder ${i+1}`);
@@ -285,20 +349,20 @@ function wireSection(prefix, { hasDots = false } = {}) {
   function go(idx) {
     [vwrap, builderEl, agentEl, outcomeEl].forEach(el => el.classList.add('fading'));
     setTimeout(() => {
-      cur = (idx + BUILDERS.length) % BUILDERS.length;
-      const b = BUILDERS[cur];
+      cur = (idx + builders.length) % builders.length;
+      const b = builders[cur];
       video.src = b.video; video.play().catch(() => {});
       document.getElementById(`${prefix}-av`).src            = b.avatar;
       document.getElementById(`${prefix}-dept`).textContent  = b.dept;
       document.getElementById(`${prefix}-bname`).textContent = b.name;
       document.getElementById(`${prefix}-bmeta`).textContent = b.title;
-      const agentAvEl = document.getElementById(`${prefix}-agent-av`);
+      const agentAvEl  = document.getElementById(`${prefix}-agent-av`);
       const agentImgEl = document.getElementById(`${prefix}-agentimg`);
       if (b.agentImg) { agentImgEl.src = b.agentImg; agentAvEl.classList.remove('hidden'); } else { agentAvEl.classList.add('hidden'); }
-      document.getElementById(`${prefix}-aname`).textContent = b.agentName;
-      document.getElementById(`${prefix}-adesc`).textContent = b.agentDesc;
-      document.getElementById(`${prefix}-stat`).textContent  = b.statNum;
-      document.getElementById(`${prefix}-statlbl`).textContent = b.statLabel;
+      document.getElementById(`${prefix}-aname`).textContent    = b.agentName;
+      document.getElementById(`${prefix}-adesc`).textContent    = b.agentDesc;
+      document.getElementById(`${prefix}-stat`).textContent     = b.statNum;
+      document.getElementById(`${prefix}-statlbl`).textContent  = b.statLabel;
       if (dotsEl) dotsEl.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === cur));
       deptRow.querySelectorAll('.dept-tag').forEach((t, i) => t.classList.toggle('active', i === cur));
       [vwrap, builderEl, agentEl, outcomeEl].forEach(el => el.classList.remove('fading'));
@@ -310,14 +374,19 @@ function wireSection(prefix, { hasDots = false } = {}) {
   sect.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive:true });
   sect.addEventListener('touchend',   e => { const dx = e.changedTouches[0].clientX - tx; if (Math.abs(dx) > 44) go(cur + (dx < 0 ? 1 : -1)); }, { passive:true });
 
-  let timer = setInterval(() => go(cur + 1), 7000);
-  sect.addEventListener('pointerdown', () => { clearInterval(timer); timer = null; });
+  if (!noAutoAdvance) {
+    let timer = setInterval(() => go(cur + 1), 7000);
+    sect.addEventListener('pointerdown', () => { clearInterval(timer); timer = null; });
+  }
 
   go(0);
 }
 
+const BUILDERS_S3 = [BUILDERS[3], BUILDERS[0], BUILDERS[1], BUILDERS[2]];
+
 wireSection('s1');
 wireSection('s2', { hasDots: true });
+wireSection('s3', { hasDots: true, builders: BUILDERS_S3, clickableDepts: true, noAutoAdvance: true });
 </script>
 </body>
 </html>
