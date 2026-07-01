@@ -59,12 +59,16 @@ body { font-family:'Poppins',sans-serif; background:var(--bg); color:#fff; }
 /* ── info bar ── */
 .info-bar { display:grid; grid-template-columns:1fr 1px 1fr 1px 1fr; border-top:1px solid var(--border); }
 .ib-sep { background:var(--border); }
-.ib-builder { display:flex; align-items:center; gap:12px; padding:18px 22px; transition:opacity .26s; }
-.ib-av { width:38px; height:38px; border-radius:50%; overflow:hidden; flex-shrink:0; border:2px solid var(--border-hi); }
+.ib-builder { display:flex; align-items:center; gap:14px; padding:18px 22px; transition:opacity .26s; }
+.ib-av { width:52px; height:52px; border-radius:50%; overflow:hidden; flex-shrink:0; border:2px solid var(--border-hi); }
 .ib-av img { width:100%; height:100%; object-fit:cover; }
+.ib-dept { font-size:9px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--purple); margin-bottom:3px; }
 .ib-b-name { font-size:13px; font-weight:700; color:#fff; }
 .ib-b-meta { font-size:10px; color:var(--dim); margin-top:2px; }
-.ib-agent { display:flex; flex-direction:column; justify-content:center; padding:18px 22px; transition:opacity .26s; }
+.ib-agent { display:flex; align-items:center; gap:12px; padding:18px 22px; transition:opacity .26s; }
+.ib-agent-av { width:42px; height:42px; border-radius:10px; overflow:hidden; flex-shrink:0; border:1px solid var(--border-hi); background:var(--bg); }
+.ib-agent-av img { width:100%; height:100%; object-fit:cover; }
+.ib-agent-av:empty, .ib-agent-av.hidden { display:none; }
 .ib-lbl { font-size:9px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; color:var(--purple); margin-bottom:5px; }
 .ib-a-name { font-size:14px; font-weight:700; color:#fff; }
 .ib-a-desc { font-size:11px; color:var(--dim); margin-top:3px; }
@@ -126,15 +130,19 @@ body { font-family:'Poppins',sans-serif; background:var(--bg); color:#fff; }
           <div class="ib-builder" id="s1-builder">
             <div class="ib-av"><img id="s1-av" alt=""></div>
             <div>
+              <div class="ib-dept" id="s1-dept"></div>
               <div class="ib-b-name" id="s1-bname"></div>
               <div class="ib-b-meta" id="s1-bmeta"></div>
             </div>
           </div>
           <div class="ib-sep"></div>
           <div class="ib-agent" id="s1-agent">
-            <div class="ib-lbl">The agent</div>
-            <div class="ib-a-name" id="s1-aname"></div>
-            <div class="ib-a-desc" id="s1-adesc"></div>
+            <div class="ib-agent-av" id="s1-agent-av"><img id="s1-agentimg" alt=""></div>
+            <div>
+              <div class="ib-lbl">The agent</div>
+              <div class="ib-a-name" id="s1-aname"></div>
+              <div class="ib-a-desc" id="s1-adesc"></div>
+            </div>
           </div>
           <div class="ib-sep"></div>
           <div class="ib-outcome" id="s1-outcome">
@@ -175,15 +183,19 @@ body { font-family:'Poppins',sans-serif; background:var(--bg); color:#fff; }
           <div class="ib-builder" id="s2-builder">
             <div class="ib-av"><img id="s2-av" alt=""></div>
             <div>
+              <div class="ib-dept" id="s2-dept"></div>
               <div class="ib-b-name" id="s2-bname"></div>
               <div class="ib-b-meta" id="s2-bmeta"></div>
             </div>
           </div>
           <div class="ib-sep"></div>
           <div class="ib-agent" id="s2-agent">
-            <div class="ib-lbl">The agent</div>
-            <div class="ib-a-name" id="s2-aname"></div>
-            <div class="ib-a-desc" id="s2-adesc"></div>
+            <div class="ib-agent-av" id="s2-agent-av"><img id="s2-agentimg" alt=""></div>
+            <div>
+              <div class="ib-lbl">The agent</div>
+              <div class="ib-a-name" id="s2-aname"></div>
+              <div class="ib-a-desc" id="s2-adesc"></div>
+            </div>
           </div>
           <div class="ib-sep"></div>
           <div class="ib-outcome" id="s2-outcome">
@@ -200,10 +212,10 @@ body { font-family:'Poppins',sans-serif; background:var(--bg); color:#fff; }
 
 <script>
 const BUILDERS = [
-  { name:"Ran Levgoren",   title:"Account Executive",           dept:"Sales",       agentName:"Moti",       agentDesc:"The Silence Disruptor",  statNum:"23%", statLabel:"of silent deals revived within 2 weeks",  video:"https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Video/Moti.mp4",                     avatar:"https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/ran-levgoren.png" },
-  { name:"Osher Mayor",    title:"Lifecycle Marketing Manager", dept:"Marketing",   agentName:"Riki Shula", agentDesc:"Data to Content",        statNum:"10×", statLabel:"more A/B tests per quarter",              video:"https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Video/Osher_shula_marketing.mp4",  avatar:"https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/osher-mayor.png" },
-  { name:"Amit Frishberg", title:"Tech Lead, CRM",              dept:"Engineering", agentName:"Petro",      agentDesc:"Mobile Feature Parity",  statNum:"60%", statLabel:"reduction in mobile parity backlog",      video:"https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Video/Petro.mp4",                   avatar:"https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/amit-frishberg.png" },
-  { name:"Roni Rebish",    title:"Product Manager",             dept:"Product",     agentName:"Allison",    agentDesc:"Accessibility Pipeline", statNum:"70%", statLabel:"drop in accessibility rework cost",       video:"https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Video/roni_allison_product.mp4",   avatar:"https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/roni-rebish.png" }
+  { name:"Ran Levgoren",   title:"Account Executive",           dept:"Sales",       agentName:"Moti",       agentDesc:"The Silence Disruptor",  statNum:"23%", statLabel:"of silent deals revived within 2 weeks",  video:"https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Video/Moti.mp4",                     avatar:"https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/ran-levgoren.png",   agentImg:"" },
+  { name:"Osher Mayor",    title:"Lifecycle Marketing Manager", dept:"Marketing",   agentName:"Riki Shula", agentDesc:"Data to Content",        statNum:"10×", statLabel:"more A/B tests per quarter",              video:"https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Video/Osher_shula_marketing.mp4",  avatar:"https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/osher-mayor.png",    agentImg:"" },
+  { name:"Amit Frishberg", title:"Tech Lead, CRM",              dept:"Engineering", agentName:"Petro",      agentDesc:"Mobile Feature Parity",  statNum:"60%", statLabel:"reduction in mobile parity backlog",      video:"https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Video/Petro.mp4",                   avatar:"https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/amit-frishberg.png",  agentImg:"" },
+  { name:"Roni Rebish",    title:"Product Manager",             dept:"Product",     agentName:"Allison",    agentDesc:"Accessibility Pipeline", statNum:"70%", statLabel:"drop in accessibility rework cost",       video:"https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Video/roni_allison_product.mp4",   avatar:"https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/roni-rebish.png",    agentImg:"" }
 ];
 
 function wireSection(prefix, { hasDots = false } = {}) {
@@ -234,8 +246,12 @@ function wireSection(prefix, { hasDots = false } = {}) {
       const b = BUILDERS[cur];
       video.src = b.video; video.play().catch(() => {});
       document.getElementById(`${prefix}-av`).src            = b.avatar;
+      document.getElementById(`${prefix}-dept`).textContent  = b.dept;
       document.getElementById(`${prefix}-bname`).textContent = b.name;
-      document.getElementById(`${prefix}-bmeta`).textContent = `${b.title} · ${b.dept}`;
+      document.getElementById(`${prefix}-bmeta`).textContent = b.title;
+      const agentAvEl = document.getElementById(`${prefix}-agent-av`);
+      const agentImgEl = document.getElementById(`${prefix}-agentimg`);
+      if (b.agentImg) { agentImgEl.src = b.agentImg; agentAvEl.classList.remove('hidden'); } else { agentAvEl.classList.add('hidden'); }
       document.getElementById(`${prefix}-aname`).textContent = b.agentName;
       document.getElementById(`${prefix}-adesc`).textContent = b.agentDesc;
       document.getElementById(`${prefix}-stat`).textContent  = b.statNum;
