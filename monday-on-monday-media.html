@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Monday on Monday — Media Variants</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --purple: #6161ff;
+  --dim: rgba(255,255,255,0.45);
+  --dimmer: rgba(255,255,255,0.22);
+  --border: rgba(255,255,255,0.08);
+}
+*, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+body { font-family:'Poppins',sans-serif; background:#000; color:#fff; }
+
+.variant { position:relative; width:100%; min-height:100vh; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+
+.label-bar { position:absolute; top:0; left:0; right:0; z-index:20; padding:14px 20px; display:flex; align-items:center; gap:10px; background:rgba(0,0,0,0.45); backdrop-filter:blur(10px); }
+.vnum { font-size:10px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; background:var(--purple); color:#fff; padding:4px 10px; border-radius:100px; }
+.vdesc { font-size:12px; color:rgba(255,255,255,0.6); }
+
+.eyebrow { font-size:10px; font-weight:600; letter-spacing:4px; text-transform:uppercase; color:var(--purple); margin-bottom:14px; display:block; }
+
+/* ══════════════════════════════════════════════
+   VARIANT 1 — Tri-screen video wall
+   Three videos fill the full slide side-by-side.
+═══════════════════════════════════════════════ */
+.v1-wall { display:flex; width:100%; height:100vh; }
+.v1-col { flex:1; position:relative; overflow:hidden; }
+.v1-col + .v1-col { border-left:2px solid rgba(0,0,0,0.6); }
+.v1-col video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+.v1-col-overlay { position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,0.35) 0%, transparent 25%, transparent 52%, rgba(0,0,0,0.88) 100%); z-index:1; }
+.v1-col-meta { position:absolute; bottom:0; left:0; right:0; padding:28px 22px 32px; z-index:2; }
+.v1-col-dept { font-size:8px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,0.55); margin-bottom:5px; }
+.v1-col-name { font-size:17px; font-weight:700; color:#fff; line-height:1.25; }
+.v1-col-tagline { font-size:11px; color:rgba(255,255,255,0.5); margin-top:4px; line-height:1.4; }
+.v1-col-creator { display:flex; align-items:center; gap:8px; margin-top:14px; }
+.v1-col-avatar { width:26px; height:26px; border-radius:50%; overflow:hidden; flex-shrink:0; border:1.5px solid rgba(255,255,255,0.25); }
+.v1-col-avatar img { width:100%; height:100%; object-fit:cover; }
+.v1-col-creator-name { font-size:11px; color:rgba(255,255,255,0.65); }
+.v1-center-stat { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); z-index:10; text-align:center; pointer-events:none; }
+.v1-center-num { font-size:clamp(40px,4.5vw,68px); font-weight:800; color:#fff; line-height:1; text-shadow:0 2px 24px rgba(0,0,0,0.9); }
+.v1-center-label { font-size:9px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; color:rgba(255,255,255,0.5); margin-top:8px; text-shadow:0 1px 8px rgba(0,0,0,0.9); }
+
+/* ══════════════════════════════════════════════
+   VARIANT 2 — Builder portrait diptych
+   Half the slide is the builder's face.
+   Half is their agent's video.
+═══════════════════════════════════════════════ */
+.v2-diptych { display:grid; grid-template-columns:42% 1fr; width:100%; height:100vh; }
+.v2-photo-side { position:relative; overflow:hidden; }
+.v2-photo-side img { width:100%; height:100%; object-fit:cover; object-position:top center; }
+.v2-photo-overlay { position:absolute; inset:0; background:linear-gradient(90deg, transparent 55%, rgba(0,0,0,0.5) 100%), linear-gradient(180deg, rgba(0,0,0,0.15) 0%, transparent 35%, transparent 60%, rgba(0,0,0,0.75) 100%); }
+.v2-photo-info { position:absolute; bottom:36px; left:28px; right:16px; z-index:2; }
+.v2-photo-name { font-size:20px; font-weight:700; color:#fff; line-height:1.2; }
+.v2-photo-role { font-size:12px; color:rgba(255,255,255,0.55); margin-top:3px; }
+.v2-divider { width:2px; background:linear-gradient(180deg, transparent, rgba(255,255,255,0.15) 30%, rgba(255,255,255,0.15) 70%, transparent); flex-shrink:0; z-index:5; }
+.v2-video-side { position:relative; overflow:hidden; background:#050508; }
+.v2-video-side video { width:100%; height:100%; object-fit:cover; }
+.v2-video-overlay { position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.05) 30%, rgba(0,0,0,0.05) 55%, rgba(0,0,0,0.88) 100%); z-index:1; }
+.v2-video-top { position:absolute; top:68px; left:28px; right:28px; z-index:2; }
+.v2-agent-badge { display:inline-flex; align-items:center; gap:7px; background:rgba(97,97,255,0.18); border:1px solid rgba(97,97,255,0.4); border-radius:100px; padding:5px 14px; margin-bottom:14px; }
+.v2-agent-badge-dot { width:5px; height:5px; border-radius:50%; background:var(--purple); }
+.v2-agent-badge-text { font-size:10px; font-weight:700; color:var(--purple); letter-spacing:0.5px; }
+.v2-agent-name { font-size:clamp(22px,2.8vw,38px); font-weight:700; color:#fff; line-height:1.2; }
+.v2-agent-desc { font-size:13px; color:rgba(255,255,255,0.5); line-height:1.65; margin-top:10px; max-width:360px; }
+.v2-video-bottom { position:absolute; bottom:36px; left:28px; right:28px; z-index:2; border-top:1px solid rgba(255,255,255,0.1); padding-top:18px; display:flex; justify-content:space-between; align-items:flex-end; }
+.v2-stat-num { font-size:clamp(28px,3.2vw,44px); font-weight:800; color:#fff; line-height:1; }
+.v2-stat-label { font-size:10px; color:var(--dim); letter-spacing:1px; text-transform:uppercase; margin-top:3px; }
+.v2-monday-tag { font-size:10px; color:var(--dimmer); }
+
+/* ══════════════════════════════════════════════
+   VARIANT 3 — Photo mosaic + frosted stat
+   All 4 builders fill the slide. Stat floats above.
+═══════════════════════════════════════════════ */
+.v3-mosaic { display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr; width:100%; height:100vh; gap:2px; position:absolute; inset:0; }
+.v3-cell { position:relative; overflow:hidden; }
+.v3-cell img { width:100%; height:100%; object-fit:cover; object-position:top center; filter:brightness(0.75); }
+.v3-cell-overlay { position:absolute; inset:0; background:linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.6) 100%); }
+.v3-cell-info { position:absolute; bottom:16px; left:18px; right:18px; z-index:2; }
+.v3-cell-name { font-size:13px; font-weight:700; color:#fff; text-shadow:0 1px 6px rgba(0,0,0,0.7); }
+.v3-cell-agent { font-size:10px; color:rgba(255,255,255,0.6); margin-top:2px; }
+.v3-center-panel { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); z-index:10; text-align:center; background:rgba(0,0,0,0.6); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); border:1px solid rgba(255,255,255,0.12); border-radius:24px; padding:28px 44px; min-width:260px; }
+.v3-panel-eyebrow { font-size:9px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--purple); margin-bottom:10px; }
+.v3-panel-num { font-size:clamp(52px,7vw,84px); font-weight:800; line-height:1; color:#fff; }
+.v3-panel-label { font-size:11px; color:rgba(255,255,255,0.5); margin-top:8px; line-height:1.6; max-width:200px; margin-left:auto; margin-right:auto; }
+
+/* ══════════════════════════════════════════════
+   VARIANT 4 — Phone frame portrait videos
+   3 agents shown in device frames — product-native.
+═══════════════════════════════════════════════ */
+.v4-wrap { position:relative; z-index:1; display:flex; flex-direction:column; align-items:center; gap:40px; padding-top:32px; }
+.v4-glow { position:absolute; width:70%; aspect-ratio:1; background:radial-gradient(ellipse at center, rgba(97,97,255,0.14) 0%, transparent 70%); top:50%; left:50%; transform:translate(-50%,-50%); pointer-events:none; z-index:0; }
+.v4-head { text-align:center; }
+.v4-headline { font-size:clamp(22px,2.8vw,38px); font-weight:700; line-height:1.2; }
+.v4-sub { font-size:13px; color:var(--dim); margin-top:8px; }
+.v4-phones { display:flex; align-items:flex-end; justify-content:center; gap:24px; }
+.v4-phone-unit { display:flex; flex-direction:column; align-items:center; gap:14px; }
+.v4-phone-unit.featured { transform:translateY(-24px); }
+.v4-phone { width:168px; aspect-ratio:9/19.5; border-radius:34px; border:8px solid #181820; box-shadow:0 0 0 1.5px rgba(255,255,255,0.1), 0 28px 56px rgba(0,0,0,0.65); overflow:hidden; position:relative; background:#0d0d14; flex-shrink:0; }
+.v4-phone.featured-frame { border-color:#252532; box-shadow:0 0 0 1.5px rgba(97,97,255,0.35), 0 36px 72px rgba(0,0,0,0.7), 0 0 40px rgba(97,97,255,0.12); }
+.v4-phone::before { content:''; position:absolute; top:7px; left:50%; transform:translateX(-50%); width:42px; height:5px; background:#0d0d14; border-radius:3px; z-index:3; }
+.v4-phone video { width:100%; height:100%; object-fit:cover; }
+.v4-phone-overlay { position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,0.35) 0%, transparent 20%, transparent 58%, rgba(0,0,0,0.85) 100%); z-index:2; }
+.v4-phone-meta { position:absolute; bottom:14px; left:12px; right:12px; z-index:3; }
+.v4-phone-dept { font-size:7.5px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:rgba(255,255,255,0.55); margin-bottom:3px; }
+.v4-phone-name { font-size:11.5px; font-weight:700; color:#fff; line-height:1.2; }
+.v4-phone-caption { font-size:11px; color:var(--dim); text-align:center; max-width:168px; }
+
+/* ══════════════════════════════════════════════
+   VARIANT 5 — Scattered pinboard
+   Builder photos pinned at angles, stat in center.
+═══════════════════════════════════════════════ */
+.v5-board { position:absolute; inset:0; }
+.v5-pin { position:absolute; border-radius:3px; overflow:hidden; box-shadow:0 10px 32px rgba(0,0,0,0.7), 0 2px 8px rgba(0,0,0,0.5); background:#111115; }
+.v5-pin img { display:block; width:100%; aspect-ratio:3/4; object-fit:cover; object-position:top center; filter:brightness(0.9); }
+.v5-pin-label { padding:8px 12px 10px; }
+.v5-pin-label strong { font-size:12px; font-weight:700; color:#fff; display:block; }
+.v5-pin-label span { font-size:10px; color:rgba(255,255,255,0.55); }
+.v5-pin-1 { width:200px; top:8%; left:4%; transform:rotate(-5deg); }
+.v5-pin-2 { width:190px; top:6%; right:6%; transform:rotate(4.5deg); }
+.v5-pin-3 { width:195px; bottom:8%; left:7%; transform:rotate(3deg); }
+.v5-pin-4 { width:185px; bottom:6%; right:5%; transform:rotate(-4deg); }
+.v5-center { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); z-index:10; text-align:center; background:rgba(2,2,10,0.72); backdrop-filter:blur(22px); -webkit-backdrop-filter:blur(22px); border:1px solid rgba(255,255,255,0.1); border-radius:22px; padding:32px 52px; }
+.v5-center-eyebrow { font-size:9px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--purple); margin-bottom:10px; }
+.v5-center-headline { font-size:clamp(20px,2.6vw,34px); font-weight:700; color:#fff; line-height:1.3; }
+.v5-center-sub { font-size:13px; color:var(--dim); margin-top:10px; }
+.v5-center-stat { font-size:clamp(44px,6vw,72px); font-weight:800; color:#fff; line-height:1; margin:12px 0 4px; background:linear-gradient(135deg,#fff 30%,rgba(255,255,255,0.4)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+
+/* ─── mobile ─── */
+@media (max-width: 768px) {
+  .v1-wall { flex-direction:column; }
+  .v1-col { flex:none; height:33.33vh; }
+  .v1-col + .v1-col { border-left:none; border-top:2px solid rgba(0,0,0,0.6); }
+  .v1-center-stat { display:none; }
+  .v2-diptych { grid-template-columns:1fr; grid-template-rows:44vh 56vh; }
+  .v2-divider { display:none; }
+  .v3-cell-name { font-size:11px; }
+  .v3-center-panel { padding:20px 28px; }
+  .v4-phones { gap:12px; }
+  .v4-phone { width:120px; }
+  .v4-phone-unit.featured { transform:translateY(-16px); }
+  .v4-phone-caption { max-width:120px; font-size:10px; }
+  .v5-board { position:relative; display:grid; grid-template-columns:1fr 1fr; gap:10px; padding:80px 12px 20px; }
+  .v5-pin { position:relative !important; top:auto !important; left:auto !important; right:auto !important; bottom:auto !important; width:100% !important; transform:none !important; }
+  .v5-pin img { aspect-ratio:1/1; }
+  .v5-center { position:relative; top:auto; left:auto; transform:none; grid-column:1/-1; padding:20px 24px; }
+  .variant.v5-variant { align-items:flex-start; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ VARIANT 1 — Tri-screen video wall ═══ -->
+<div class="variant" style="background:#000; padding:0; align-items:stretch;">
+  <div class="label-bar">
+    <span class="vnum">Variant 1</span>
+    <span class="vdesc">Tri-screen — three agents playing simultaneously, side by side, full height.</span>
+  </div>
+  <div class="v1-wall">
+
+    <div class="v1-col">
+      <video src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Video/Moti.mp4" muted loop playsinline autoplay preload="metadata"></video>
+      <div class="v1-col-overlay"></div>
+      <div class="v1-col-meta">
+        <div class="v1-col-dept">Sales</div>
+        <div class="v1-col-name">Moti</div>
+        <div class="v1-col-tagline">The Silence Disruptor Agent</div>
+        <div class="v1-col-creator">
+          <div class="v1-col-avatar"><img src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/ran-levgoren.png" alt="Ran Levgoren"></div>
+          <div class="v1-col-creator-name">Ran Levgoren</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="v1-col">
+      <video src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Video/Osher_shula_marketing.mp4" muted loop playsinline autoplay preload="metadata"></video>
+      <div class="v1-col-overlay"></div>
+      <div class="v1-col-meta">
+        <div class="v1-col-dept">Marketing</div>
+        <div class="v1-col-name">Riki Shula</div>
+        <div class="v1-col-tagline">Data to Content System</div>
+        <div class="v1-col-creator">
+          <div class="v1-col-avatar"><img src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/osher-mayor.png" alt="Osher Mayor"></div>
+          <div class="v1-col-creator-name">Osher Mayor</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="v1-col">
+      <video src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Video/Petro.mp4" muted loop playsinline autoplay preload="metadata"></video>
+      <div class="v1-col-overlay"></div>
+      <div class="v1-col-meta">
+        <div class="v1-col-dept">Engineering</div>
+        <div class="v1-col-name">Petro</div>
+        <div class="v1-col-tagline">Web to Mobile Feature Parity</div>
+        <div class="v1-col-creator">
+          <div class="v1-col-avatar"><img src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/amit-frishberg.png" alt="Amit Frishberg"></div>
+          <div class="v1-col-creator-name">Amit Frishberg</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="v1-center-stat">
+    <div class="v1-center-num">5,117</div>
+    <div class="v1-center-label">agents · 8 depts · 1 week</div>
+  </div>
+</div>
+
+<!-- ═══ VARIANT 2 — Builder portrait diptych ═══ -->
+<div class="variant" style="background:#000; padding:0; align-items:stretch;">
+  <div class="label-bar">
+    <span class="vnum">Variant 2</span>
+    <span class="vdesc">Diptych — the builder's face on the left, their agent's video on the right.</span>
+  </div>
+  <div class="v2-diptych">
+    <div class="v2-photo-side">
+      <img src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/ran-levgoren.png" alt="Ran Levgoren">
+      <div class="v2-photo-overlay"></div>
+      <div class="v2-photo-info">
+        <div class="v2-photo-name">Ran Levgoren</div>
+        <div class="v2-photo-role">Sales — monday.com</div>
+      </div>
+    </div>
+    <div class="v2-divider"></div>
+    <div class="v2-video-side">
+      <video src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Video/Moti.mp4" muted loop playsinline autoplay preload="metadata"></video>
+      <div class="v2-video-overlay"></div>
+      <div class="v2-video-top">
+        <span class="eyebrow">Monday on Monday</span>
+        <div class="v2-agent-badge">
+          <div class="v2-agent-badge-dot"></div>
+          <span class="v2-agent-badge-text">Sales · Live agent</span>
+        </div>
+        <div class="v2-agent-name">Moti — The Silence<br>Disruptor Agent</div>
+        <p class="v2-agent-desc">Monitors every active deal daily. Flags who's gone quiet, what signal was missed, and what to do about it — before the next pipeline review.</p>
+      </div>
+      <div class="v2-video-bottom">
+        <div>
+          <div class="v2-stat-num">5,117</div>
+          <div class="v2-stat-label">agents · 8 departments · 1 week</div>
+        </div>
+        <div class="v2-monday-tag">monday on monday</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ VARIANT 3 — Photo mosaic + frosted stat ═══ -->
+<div class="variant" style="background:#000; padding:0;">
+  <div class="label-bar">
+    <span class="vnum">Variant 3</span>
+    <span class="vdesc">Photo mosaic — all 4 builders fill the slide. The number floats above.</span>
+  </div>
+  <div class="v3-mosaic">
+    <div class="v3-cell">
+      <img src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/ran-levgoren.png" alt="Ran Levgoren">
+      <div class="v3-cell-overlay"></div>
+      <div class="v3-cell-info">
+        <div class="v3-cell-name">Ran Levgoren</div>
+        <div class="v3-cell-agent">Sales · Moti</div>
+      </div>
+    </div>
+    <div class="v3-cell">
+      <img src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/amit-frishberg.png" alt="Amit Frishberg">
+      <div class="v3-cell-overlay"></div>
+      <div class="v3-cell-info">
+        <div class="v3-cell-name">Amit Frishberg</div>
+        <div class="v3-cell-agent">Engineering · Petro</div>
+      </div>
+    </div>
+    <div class="v3-cell">
+      <img src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/osher-mayor.png" alt="Osher Mayor">
+      <div class="v3-cell-overlay"></div>
+      <div class="v3-cell-info">
+        <div class="v3-cell-name">Osher Mayor</div>
+        <div class="v3-cell-agent">Marketing · Riki Shula</div>
+      </div>
+    </div>
+    <div class="v3-cell">
+      <img src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/roni-rebish.png" alt="Roni Rebish">
+      <div class="v3-cell-overlay"></div>
+      <div class="v3-cell-info">
+        <div class="v3-cell-name">Roni Rebish</div>
+        <div class="v3-cell-agent">Product · Allison</div>
+      </div>
+    </div>
+  </div>
+  <div class="v3-center-panel">
+    <div class="v3-panel-eyebrow">Monday on Monday</div>
+    <div class="v3-panel-num">5,117</div>
+    <p class="v3-panel-label">agents built by our own people in a single week</p>
+  </div>
+</div>
+
+<!-- ═══ VARIANT 4 — Phone frame portrait videos ═══ -->
+<div class="variant" style="background:#03030a;">
+  <div class="label-bar">
+    <span class="vnum">Variant 4</span>
+    <span class="vdesc">Phone frames — agents shown inside device frames, like a real product demo.</span>
+  </div>
+  <div class="v4-glow"></div>
+  <div class="v4-wrap">
+    <div class="v4-head">
+      <span class="eyebrow">Monday on Monday</span>
+      <h2 class="v4-headline">5,117 agents. Built inside monday.<br>Used inside monday.</h2>
+      <p class="v4-sub">Our people solved their own frustrations — in one week, across 8 departments.</p>
+    </div>
+    <div class="v4-phones">
+
+      <div class="v4-phone-unit">
+        <div class="v4-phone">
+          <video src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Video/Petro.mp4" muted loop playsinline autoplay preload="metadata"></video>
+          <div class="v4-phone-overlay"></div>
+          <div class="v4-phone-meta">
+            <div class="v4-phone-dept">Engineering</div>
+            <div class="v4-phone-name">Petro</div>
+          </div>
+        </div>
+        <div class="v4-phone-caption">Web to Mobile Parity</div>
+      </div>
+
+      <div class="v4-phone-unit featured">
+        <div class="v4-phone featured-frame">
+          <video src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Video/Moti.mp4" muted loop playsinline autoplay preload="metadata"></video>
+          <div class="v4-phone-overlay"></div>
+          <div class="v4-phone-meta">
+            <div class="v4-phone-dept">Sales</div>
+            <div class="v4-phone-name">Moti</div>
+          </div>
+        </div>
+        <div class="v4-phone-caption">The Silence Disruptor</div>
+      </div>
+
+      <div class="v4-phone-unit">
+        <div class="v4-phone">
+          <video src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Video/Osher_shula_marketing.mp4" muted loop playsinline autoplay preload="metadata"></video>
+          <div class="v4-phone-overlay"></div>
+          <div class="v4-phone-meta">
+            <div class="v4-phone-dept">Marketing</div>
+            <div class="v4-phone-name">Riki Shula</div>
+          </div>
+        </div>
+        <div class="v4-phone-caption">Data to Content System</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ═══ VARIANT 5 — Scattered pinboard ═══ -->
+<div class="variant v5-variant" style="background:#03030a;">
+  <div class="label-bar">
+    <span class="vnum">Variant 5</span>
+    <span class="vdesc">Pinboard — builder photos scattered at angles, like a physical mood board.</span>
+  </div>
+  <div class="v5-board">
+    <div class="v5-pin v5-pin-1">
+      <img src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/ran-levgoren.png" alt="Ran Levgoren">
+      <div class="v5-pin-label"><strong>Ran Levgoren</strong><span>Sales · built Moti</span></div>
+    </div>
+    <div class="v5-pin v5-pin-2">
+      <img src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/amit-frishberg.png" alt="Amit Frishberg">
+      <div class="v5-pin-label"><strong>Amit Frishberg</strong><span>Engineering · built Petro</span></div>
+    </div>
+    <div class="v5-pin v5-pin-3">
+      <img src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/osher-mayor.png" alt="Osher Mayor">
+      <div class="v5-pin-label"><strong>Osher Mayor</strong><span>Marketing · built Riki Shula</span></div>
+    </div>
+    <div class="v5-pin v5-pin-4">
+      <img src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/roni-rebish.png" alt="Roni Rebish">
+      <div class="v5-pin-label"><strong>Roni Rebish</strong><span>Product · built Allison</span></div>
+    </div>
+    <div class="v5-center">
+      <div class="v5-center-eyebrow">Monday on Monday</div>
+      <div class="v5-center-stat">5,117</div>
+      <h2 class="v5-center-headline">Our people built agents<br>for the problems that<br>frustrated them most.</h2>
+      <p class="v5-center-sub">8 departments · 1 week</p>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
