@@ -20,19 +20,16 @@
 *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
 body { font-family:'Poppins',sans-serif; background:var(--bg); color:#fff; }
 
-/* ── glow ── */
-#la { position:relative; overflow:hidden; }
-#la::before { content:''; position:absolute; top:-22%; left:50%; transform:translateX(-50%); width:80%; height:85%; background:radial-gradient(ellipse at center, rgba(97,97,255,0.20) 0%, rgba(255,61,87,0.07) 45%, transparent 70%); filter:blur(110px); pointer-events:none; z-index:0; }
+/* ── glow (shared) ── */
+.sect { position:relative; overflow:hidden; }
+.sect::before { content:''; position:absolute; top:-22%; left:50%; transform:translateX(-50%); width:80%; height:85%; background:radial-gradient(ellipse at center, rgba(97,97,255,0.20) 0%, rgba(255,61,87,0.07) 45%, transparent 70%); filter:blur(110px); pointer-events:none; z-index:0; }
 
-/* ── layout ── */
+/* ── grid ── */
 .layout { display:grid; grid-template-columns:44% 56%; height:100vh; background:transparent; position:relative; z-index:1; }
 
-/* ── left ── */
+/* ── left shared ── */
 .left { display:flex; flex-direction:column; justify-content:center; padding:96px 68px 64px; border-right:1px solid var(--border); }
 .eyebrow { font-size:10px; font-weight:700; letter-spacing:5px; text-transform:uppercase; color:rgba(255,255,255,0.50); display:block; }
-.la-hl { font-size:clamp(28px, 3vw, 46px); font-weight:800; line-height:1.15; margin:18px 0 20px; }
-.la-sub { font-size:14px; color:var(--dim); line-height:1.78; max-width:400px; }
-.la-nav { margin-top:44px; display:flex; align-items:center; gap:12px; }
 
 /* ── nav ── */
 .arr { width:44px; height:44px; border-radius:50%; border:1px solid var(--border-hi); background:var(--bg-el); color:#fff; font-size:18px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background .2s,border-color .2s; flex-shrink:0; }
@@ -40,6 +37,7 @@ body { font-family:'Poppins',sans-serif; background:var(--bg); color:#fff; }
 .dots { display:flex; gap:7px; align-items:center; }
 .dot { width:6px; height:6px; border-radius:50%; background:rgba(255,255,255,0.22); border:none; padding:0; cursor:pointer; transition:background .2s,transform .2s; }
 .dot.active { background:#fff; transform:scale(1.4); }
+.nav-row { display:flex; align-items:center; gap:12px; }
 .fading { opacity:0 !important; }
 
 /* ── right ── */
@@ -48,7 +46,7 @@ body { font-family:'Poppins',sans-serif; background:var(--bg); color:#fff; }
 /* ── card ── */
 .card { width:100%; background:var(--bg-el); border:1px solid var(--border-hi); border-radius:22px; overflow:hidden; box-shadow:0 32px 90px rgba(0,0,0,0.60), 0 0 0 1px rgba(97,97,255,0.10); }
 
-/* ── dept bar (above video) ── */
+/* ── dept bar ── */
 .dept-bar { display:flex; gap:7px; flex-wrap:wrap; padding:14px 18px; border-bottom:1px solid var(--border); }
 .dept-pill { font-family:'Poppins',sans-serif; font-size:10px; font-weight:600; padding:5px 13px; border-radius:100px; border:1px solid var(--border-hi); background:transparent; color:var(--dim); cursor:pointer; transition:background .2s,border-color .2s,color .2s; }
 .dept-pill.active { background:var(--purple-lo); border-color:var(--purple); color:#fff; }
@@ -74,6 +72,22 @@ body { font-family:'Poppins',sans-serif; background:var(--bg); color:#fff; }
 .ib-stat { font-size:26px; font-weight:800; color:var(--purple); line-height:1; flex-shrink:0; }
 .ib-stat-lbl { font-size:11px; color:var(--dim); line-height:1.55; }
 
+/* ══════════════════════════════════════════
+   SECTION 1 — "We built it. We run on it."
+══════════════════════════════════════════ */
+.v10-hl { font-size:clamp(34px, 4.2vw, 62px); font-weight:800; line-height:1.08; margin:18px 0 22px; }
+.v10-hl em { color:var(--purple); font-style:normal; }
+.v10-sub { font-size:14px; color:var(--dim); line-height:1.78; max-width:380px; }
+.v10-count { font-size:clamp(56px, 6vw, 84px); font-weight:800; line-height:1; margin-top:36px; letter-spacing:-2px; }
+.v10-count-lbl { font-size:12px; color:var(--dimmer); margin-top:7px; letter-spacing:0.3px; }
+
+/* ══════════════════════════════════════════
+   SECTION 2 — "Our people built agents…"
+══════════════════════════════════════════ */
+.la-hl { font-size:clamp(28px, 3vw, 46px); font-weight:800; line-height:1.15; margin:18px 0 20px; }
+.la-sub { font-size:14px; color:var(--dim); line-height:1.78; max-width:400px; }
+.la-nav { margin-top:44px; }
+
 /* ── mobile ── */
 @media (max-width:768px) {
   .layout { grid-template-columns:1fr; height:auto; }
@@ -81,54 +95,57 @@ body { font-family:'Poppins',sans-serif; background:var(--bg); color:#fff; }
   .left { border-right:none; border-top:1px solid var(--border); padding:24px 20px 48px; }
   .info-bar { grid-template-columns:1fr; }
   .ib-sep { height:1px; }
+  .v10-hl { font-size:clamp(28px, 8vw, 42px); }
+  .v10-count { font-size:clamp(44px, 12vw, 64px); }
 }
 </style>
 </head>
 <body>
 
-<div id="la">
+
+<!-- ══════════════════════════════════════════════════
+     SECTION 1 — "We built it. We run on it."
+══════════════════════════════════════════════════ -->
+<div class="sect" id="s1">
   <div class="layout">
 
     <div class="left">
       <span class="eyebrow">Monday on Monday</span>
-      <h2 class="la-hl">Our people built agents for the problems that frustrated them most</h2>
-      <p class="la-sub">5,117 agents built by monday people — each one started as someone's daily frustration. These are four of them.</p>
-      <div class="la-nav">
-        <button class="arr" id="la-prev">&#8592;</button>
-        <div class="dots" id="la-dots"></div>
-        <button class="arr" id="la-next">&#8594;</button>
-      </div>
+      <h2 class="v10-hl">We built it.<br>We <em>run on it.</em></h2>
+      <p class="v10-sub">monday employees built agents for the frustrations they faced every single day — across every department.</p>
+      <div class="v10-count">5,117</div>
+      <div class="v10-count-lbl">agents · 8 departments · 1 week</div>
     </div>
 
     <div class="right">
       <div class="card">
-        <div class="dept-bar" id="la-dept-bar">
+        <div class="dept-bar" id="s1-dept-bar">
           <button class="dept-pill" data-idx="0">Sales</button>
           <button class="dept-pill" data-idx="1">Marketing</button>
           <button class="dept-pill" data-idx="2">Engineering</button>
           <button class="dept-pill" data-idx="3">Product</button>
         </div>
-        <div class="card-video" id="la-vwrap">
-          <video id="la-video" muted loop playsinline autoplay preload="metadata"></video>
+        <div class="card-video" id="s1-vwrap">
+          <video id="s1-video" muted loop playsinline autoplay preload="metadata"></video>
         </div>
         <div class="info-bar">
-          <div class="ib-builder" id="la-builder">
-            <div class="ib-av"><img id="la-av" alt=""></div>
+          <div class="ib-builder" id="s1-builder">
+            <div class="ib-av"><img id="s1-av" alt=""></div>
             <div>
-              <div class="ib-b-name" id="la-bname"></div>
-              <div class="ib-b-meta" id="la-bmeta"></div>
+              <div class="ib-b-name" id="s1-bname"></div>
+              <div class="ib-b-meta" id="s1-bmeta"></div>
             </div>
           </div>
           <div class="ib-sep"></div>
-          <div class="ib-agent" id="la-agent">
+          <div class="ib-agent" id="s1-agent">
             <div class="ib-lbl">The agent</div>
-            <div class="ib-a-name" id="la-aname"></div>
-            <div class="ib-a-desc" id="la-adesc"></div>
+            <div class="ib-a-name" id="s1-aname"></div>
+            <div class="ib-a-desc" id="s1-adesc"></div>
           </div>
           <div class="ib-sep"></div>
-          <div class="ib-outcome" id="la-outcome">
-            <div class="ib-stat" id="la-stat"></div>
-            <div class="ib-stat-lbl" id="la-statlbl"></div>
+          <div class="ib-outcome" id="s1-outcome">
+            <div class="ib-stat" id="s1-stat"></div>
+            <div class="ib-stat-lbl" id="s1-statlbl"></div>
           </div>
         </div>
       </div>
@@ -136,6 +153,62 @@ body { font-family:'Poppins',sans-serif; background:var(--bg); color:#fff; }
 
   </div>
 </div>
+
+
+<!-- ══════════════════════════════════════════════════
+     SECTION 2 — "Our people built agents…"
+══════════════════════════════════════════════════ -->
+<div class="sect" id="s2">
+  <div class="layout">
+
+    <div class="left">
+      <span class="eyebrow">Monday on Monday</span>
+      <h2 class="la-hl">Our people built agents for the problems that frustrated them most</h2>
+      <p class="la-sub">5,117 agents built by monday people — each one started as someone's daily frustration. These are four of them.</p>
+      <div class="nav-row la-nav">
+        <button class="arr" id="s2-prev">&#8592;</button>
+        <div class="dots" id="s2-dots"></div>
+        <button class="arr" id="s2-next">&#8594;</button>
+      </div>
+    </div>
+
+    <div class="right">
+      <div class="card">
+        <div class="dept-bar" id="s2-dept-bar">
+          <button class="dept-pill" data-idx="0">Sales</button>
+          <button class="dept-pill" data-idx="1">Marketing</button>
+          <button class="dept-pill" data-idx="2">Engineering</button>
+          <button class="dept-pill" data-idx="3">Product</button>
+        </div>
+        <div class="card-video" id="s2-vwrap">
+          <video id="s2-video" muted loop playsinline autoplay preload="metadata"></video>
+        </div>
+        <div class="info-bar">
+          <div class="ib-builder" id="s2-builder">
+            <div class="ib-av"><img id="s2-av" alt=""></div>
+            <div>
+              <div class="ib-b-name" id="s2-bname"></div>
+              <div class="ib-b-meta" id="s2-bmeta"></div>
+            </div>
+          </div>
+          <div class="ib-sep"></div>
+          <div class="ib-agent" id="s2-agent">
+            <div class="ib-lbl">The agent</div>
+            <div class="ib-a-name" id="s2-aname"></div>
+            <div class="ib-a-desc" id="s2-adesc"></div>
+          </div>
+          <div class="ib-sep"></div>
+          <div class="ib-outcome" id="s2-outcome">
+            <div class="ib-stat" id="s2-stat"></div>
+            <div class="ib-stat-lbl" id="s2-statlbl"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
 
 <script>
 const BUILDERS = [
@@ -145,57 +218,63 @@ const BUILDERS = [
   { name:"Roni Rebish",    title:"Product Manager",             dept:"Product",     agentName:"Allison",    agentDesc:"Accessibility Pipeline", statNum:"70%", statLabel:"drop in accessibility rework cost",       video:"https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Video/roni_allison_product.mp4",   avatar:"https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/roni-rebish.png" }
 ];
 
-let cur = 0;
-const vwrap     = document.getElementById('la-vwrap');
-const video     = document.getElementById('la-video');
-const dotsEl    = document.getElementById('la-dots');
-const builderEl = document.getElementById('la-builder');
-const agentEl   = document.getElementById('la-agent');
-const outcomeEl = document.getElementById('la-outcome');
-const deptBar   = document.getElementById('la-dept-bar');
-const pills     = deptBar.querySelectorAll('.dept-pill');
+function wireSection(prefix, { hasDots = false } = {}) {
+  let cur = 0;
+  const vwrap     = document.getElementById(`${prefix}-vwrap`);
+  const video     = document.getElementById(`${prefix}-video`);
+  const builderEl = document.getElementById(`${prefix}-builder`);
+  const agentEl   = document.getElementById(`${prefix}-agent`);
+  const outcomeEl = document.getElementById(`${prefix}-outcome`);
+  const deptBar   = document.getElementById(`${prefix}-dept-bar`);
+  const pills     = deptBar.querySelectorAll('.dept-pill');
+  const dotsEl    = hasDots ? document.getElementById(`${prefix}-dots`) : null;
 
-BUILDERS.forEach((_, i) => {
-  const d = document.createElement('button');
-  d.className = 'dot';
-  d.setAttribute('aria-label', `Builder ${i+1}`);
-  d.onclick = () => go(i);
-  dotsEl.appendChild(d);
-});
+  if (hasDots) {
+    BUILDERS.forEach((_, i) => {
+      const d = document.createElement('button');
+      d.className = 'dot';
+      d.setAttribute('aria-label', `Builder ${i+1}`);
+      d.onclick = () => go(i);
+      dotsEl.appendChild(d);
+    });
+    document.getElementById(`${prefix}-prev`).onclick = () => go(cur - 1);
+    document.getElementById(`${prefix}-next`).onclick = () => go(cur + 1);
+  }
 
-pills.forEach((btn, i) => btn.onclick = () => go(i));
+  pills.forEach((btn, i) => btn.onclick = () => go(i));
 
-function go(idx) {
-  [vwrap, builderEl, agentEl, outcomeEl].forEach(el => el.classList.add('fading'));
-  setTimeout(() => {
-    cur = (idx + BUILDERS.length) % BUILDERS.length;
-    const b = BUILDERS[cur];
-    video.src = b.video; video.play().catch(() => {});
-    document.getElementById('la-av').src       = b.avatar;
-    document.getElementById('la-bname').textContent  = b.name;
-    document.getElementById('la-bmeta').textContent  = `${b.title} · ${b.dept}`;
-    document.getElementById('la-aname').textContent  = b.agentName;
-    document.getElementById('la-adesc').textContent  = b.agentDesc;
-    document.getElementById('la-stat').textContent   = b.statNum;
-    document.getElementById('la-statlbl').textContent = b.statLabel;
-    dotsEl.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === cur));
-    pills.forEach((p, i) => p.classList.toggle('active', i === cur));
-    [vwrap, builderEl, agentEl, outcomeEl].forEach(el => el.classList.remove('fading'));
-  }, 260);
+  function go(idx) {
+    [vwrap, builderEl, agentEl, outcomeEl].forEach(el => el.classList.add('fading'));
+    setTimeout(() => {
+      cur = (idx + BUILDERS.length) % BUILDERS.length;
+      const b = BUILDERS[cur];
+      video.src = b.video; video.play().catch(() => {});
+      document.getElementById(`${prefix}-av`).src            = b.avatar;
+      document.getElementById(`${prefix}-bname`).textContent = b.name;
+      document.getElementById(`${prefix}-bmeta`).textContent = `${b.title} · ${b.dept}`;
+      document.getElementById(`${prefix}-aname`).textContent = b.agentName;
+      document.getElementById(`${prefix}-adesc`).textContent = b.agentDesc;
+      document.getElementById(`${prefix}-stat`).textContent  = b.statNum;
+      document.getElementById(`${prefix}-statlbl`).textContent = b.statLabel;
+      if (dotsEl) dotsEl.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === cur));
+      pills.forEach((p, i) => p.classList.toggle('active', i === cur));
+      [vwrap, builderEl, agentEl, outcomeEl].forEach(el => el.classList.remove('fading'));
+    }, 260);
+  }
+
+  const sect = document.getElementById(prefix);
+  let tx = 0;
+  sect.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive:true });
+  sect.addEventListener('touchend',   e => { const dx = e.changedTouches[0].clientX - tx; if (Math.abs(dx) > 44) go(cur + (dx < 0 ? 1 : -1)); }, { passive:true });
+
+  let timer = setInterval(() => go(cur + 1), 7000);
+  sect.addEventListener('pointerdown', () => { clearInterval(timer); timer = null; });
+
+  go(0);
 }
 
-document.getElementById('la-prev').onclick = () => go(cur - 1);
-document.getElementById('la-next').onclick = () => go(cur + 1);
-
-let tx = 0;
-const sect = document.getElementById('la');
-sect.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive:true });
-sect.addEventListener('touchend',   e => { const dx = e.changedTouches[0].clientX - tx; if (Math.abs(dx) > 44) go(cur + (dx < 0 ? 1 : -1)); }, { passive:true });
-
-let timer = setInterval(() => go(cur + 1), 7000);
-sect.addEventListener('pointerdown', () => { clearInterval(timer); timer = null; });
-
-go(0);
+wireSection('s1');
+wireSection('s2', { hasDots: true });
 </script>
 </body>
 </html>
