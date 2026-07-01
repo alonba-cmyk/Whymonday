@@ -74,10 +74,10 @@ body { font-family:'Poppins',sans-serif; background:var(--bg); color:#fff; }
 .la-hl em { font-style:normal; }
 .la-sub { font-size:15px; color:var(--dim); line-height:1.74; max-width:400px; }
 .la-nav { margin-top:48px; }
-.la-dept-bar { position:absolute; top:14px; left:14px; right:14px; z-index:10; display:flex; gap:7px; flex-wrap:wrap; }
-.la-dept-pill { font-family:'Poppins',sans-serif; font-size:10px; font-weight:600; letter-spacing:0.3px; padding:5px 13px; border-radius:100px; border:1px solid rgba(255,255,255,0.18); background:rgba(3,3,10,0.55); backdrop-filter:blur(12px); color:rgba(255,255,255,0.6); cursor:pointer; transition:background .2s,border-color .2s,color .2s; }
-.la-dept-pill.active { background:rgba(97,97,255,0.28); border-color:rgba(97,97,255,0.55); color:#fff; }
-.la-dept-pill:hover:not(.active) { background:rgba(255,255,255,0.1); border-color:rgba(255,255,255,0.3); color:#fff; }
+.la-dept-bar { display:flex; gap:7px; flex-wrap:wrap; padding:14px 18px; border-bottom:1px solid var(--border); }
+.la-dept-pill { font-family:'Poppins',sans-serif; font-size:10px; font-weight:600; letter-spacing:0.3px; padding:5px 13px; border-radius:100px; border:1px solid var(--border-hi); background:transparent; color:var(--dim); cursor:pointer; transition:background .2s,border-color .2s,color .2s; }
+.la-dept-pill.active { background:var(--purple-lo); border-color:var(--purple); color:#fff; }
+.la-dept-pill:hover:not(.active) { border-color:rgba(255,255,255,0.3); color:#fff; }
 
 
 /* ════════════════════════════════════════════════════
@@ -158,14 +158,14 @@ body { font-family:'Poppins',sans-serif; background:var(--bg); color:#fff; }
     </div>
     <div class="right">
       <div class="card">
+        <div class="la-dept-bar" id="la-dept-bar">
+          <button class="la-dept-pill" data-idx="0">Sales</button>
+          <button class="la-dept-pill" data-idx="1">Marketing</button>
+          <button class="la-dept-pill" data-idx="2">Engineering</button>
+          <button class="la-dept-pill" data-idx="3">Product</button>
+        </div>
         <div class="card-video" id="la-vwrap">
           <video id="la-video" muted loop playsinline autoplay preload="metadata"></video>
-          <div class="la-dept-bar" id="la-dept-bar">
-            <button class="la-dept-pill" data-idx="0">Sales</button>
-            <button class="la-dept-pill" data-idx="1">Marketing</button>
-            <button class="la-dept-pill" data-idx="2">Engineering</button>
-            <button class="la-dept-pill" data-idx="3">Product</button>
-          </div>
         </div>
         <div class="info-bar">
           <div class="ib-builder" id="la-builder"><div class="ib-av"><img id="la-av" alt=""></div><div><div class="ib-b-name" id="la-bname"></div><div class="ib-b-meta" id="la-bmeta"></div></div></div>
