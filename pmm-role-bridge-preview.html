@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PMM role &amp; Impact — Outline preview (bridge slide)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com/">
+<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&family=Crimson+Text:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --color-text: #f8fafc; --color-text-muted: #e0e7ff; --color-text-soft: #a5b4fc;
+    --color-bg: #06060c; --color-bg-deep: #02020a; --color-surface: #0e0e18; --color-surface-2: #14141f;
+    --color-border: rgba(165,180,252,.14); --color-border-strong: rgba(165,180,252,.28);
+    --c-violet: #a58aff; --c-indigo: #6366f1; --c-monday: #6161ff; --c-sky: #38bdf8;
+    --c-emerald: #34d399; --c-amber: #fbbf24; --c-pink: #fb7185;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--color-bg); color: var(--color-text);
+    font-family: Figtree, system-ui, -apple-system, sans-serif; -webkit-font-smoothing: antialiased; }
+  .serif { font-family: "Crimson Text", Georgia, serif; font-style: italic; }
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 0 2rem; }
+  .tag {
+    display: inline-flex; align-items: center; gap: .4rem; font-size: 11px; font-weight: 600;
+    letter-spacing: .04em; text-transform: uppercase; padding: .35rem .75rem; border-radius: 999px;
+  }
+  .tag.new { background: rgba(52,211,153,.12); color: var(--c-emerald); border: 0.5px solid rgba(52,211,153,.35); }
+  .tag.kept { background: rgba(165,180,252,.08); color: var(--color-text-soft); border: 0.5px solid var(--color-border); }
+  .tag.changed { background: rgba(251,191,36,.1); color: var(--c-amber); border: 0.5px solid rgba(251,191,36,.3); }
+
+  header.top {
+    position: sticky; top: 0; z-index: 20; backdrop-filter: blur(10px);
+    background: rgba(6,6,12,.75); border-bottom: 0.5px solid var(--color-border);
+    padding: 1rem 0;
+  }
+  header.top .wrap { display: flex; align-items: center; justify-content: space-between; }
+  header.top h1 { font-size: 15px; font-weight: 600; margin: 0; color: var(--color-text-muted); }
+  header.top .nav { display: flex; gap: 1.2rem; font-size: 13px; }
+  header.top .nav a { color: var(--color-text-soft); text-decoration: none; opacity: .8; }
+  header.top .nav a:hover { opacity: 1; }
+
+  section.block { padding: 5.5rem 0 3rem; border-bottom: 0.5px solid var(--color-border); }
+  section.block:last-of-type { border-bottom: none; }
+
+  .eyebrow { font-size: 12px; color: var(--color-text-soft); margin: 0 0 .6rem; letter-spacing: .02em; }
+  h2.title { font-size: clamp(28px, 4vw, 42px); font-weight: 500; margin: 0 0 .5rem; letter-spacing: -0.01em; }
+  p.sub { font-size: 16px; color: var(--color-text-soft); max-width: 640px; margin: 0 0 2.5rem; line-height: 1.5; }
+
+  .gradient-frame {
+    position: relative; border-radius: 20px; background: var(--color-surface); isolation: isolate;
+  }
+  .gradient-frame::before {
+    content: ""; position: absolute; inset: 0; border-radius: 20px; padding: 1px;
+    background: linear-gradient(135deg, rgba(165,138,255,.6), rgba(99,102,241,.4) 30%, rgba(56,189,248,.4) 70%, rgba(165,138,255,.6));
+    mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+    pointer-events: none; z-index: 0;
+  }
+  .card { position: relative; z-index: 1; padding: 1.4rem 1.5rem; }
+
+  /* Slide 2 layout */
+  .goal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .col h3.h { font-size: 13px; text-transform: uppercase; letter-spacing: .06em; color: var(--color-text-soft); margin: 0 0 1rem; font-weight: 600; }
+  .pill-row { display: flex; flex-wrap: wrap; gap: .5rem; }
+  .pill {
+    padding: .55rem .9rem; border-radius: 10px; background: var(--color-surface-2);
+    border: 0.5px solid var(--color-border); font-size: 14px; font-weight: 500;
+  }
+  .mech-center {
+    grid-column: 1 / -1; text-align: center; margin: 1rem 0 .5rem; padding: 1.6rem;
+  }
+  .mech-center .big { font-size: 22px; font-weight: 600; background: linear-gradient(135deg,var(--c-violet),var(--c-indigo) 50%,var(--c-sky)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .owns-influences { display: flex; gap: 1rem; justify-content: center; margin-top: .9rem; }
+  .oi { display: flex; align-items: center; gap: .4rem; font-size: 13px; color: var(--color-text-soft); }
+  .dot { width: 8px; height: 8px; border-radius: 50%; }
+  .dot.owns { background: var(--c-emerald); }
+  .dot.infl { background: var(--c-sky); opacity: .6; }
+
+  .funnel-row { display: flex; flex-direction: column; gap: .6rem; }
+  .funnel-item { display: flex; align-items: baseline; gap: .6rem; font-size: 14px; }
+  .funnel-item .stage { min-width: 90px; font-size: 11px; text-transform: uppercase; letter-spacing: .05em; color: var(--color-text-soft); }
+  .funnel-item .chans { color: var(--color-text-muted); }
+  .funnel-item .badge { margin-left: auto; font-size: 10px; padding: .15rem .5rem; border-radius: 999px; }
+  .funnel-item .badge.owns { background: rgba(52,211,153,.14); color: var(--c-emerald); }
+  .funnel-item .badge.infl { background: rgba(56,189,248,.14); color: var(--c-sky); }
+
+  /* Bridge slide */
+  .bridge-example {
+    display: inline-flex; align-items: center; gap: .5rem; font-size: 13px; color: var(--color-text-soft);
+    background: var(--color-surface-2); border: 0.5px solid var(--color-border); border-radius: 999px;
+    padding: .4rem .9rem; margin-bottom: 2rem;
+  }
+  .bridge-example b { color: var(--color-text); font-weight: 600; }
+  .flow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.1rem; align-items: stretch; }
+  .flow .step { display: flex; flex-direction: column; gap: .8rem; }
+  .flow .num { font-size: 11px; color: var(--color-text-soft); font-variant-numeric: tabular-nums; }
+  .flow h4 { font-size: 17px; font-weight: 600; margin: 0; letter-spacing: -0.005em; }
+  .flow .desc { font-size: 13.5px; color: var(--color-text-muted); line-height: 1.45; margin: 0; }
+  .flow .artifacts { display: flex; flex-direction: column; gap: .35rem; margin-top: auto; padding-top: .8rem; border-top: 0.5px solid var(--color-border); }
+  .flow .artifacts span { font-size: 12.5px; color: var(--color-text-soft); }
+  .flow .arrow { display: none; }
+  @media (min-width: 900px) {
+    .flow-wrap { position: relative; }
+  }
+  .connector { text-align: center; color: var(--color-text-soft); font-size: 20px; opacity: .5; }
+
+  /* Slide 4 light */
+  .deliv-cats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+  .deliv-cat { padding: 1rem 1.2rem; }
+  .deliv-cat h4 { font-size: 15px; margin: 0 0 .5rem; font-weight: 600; }
+  .deliv-cat ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: .3rem; }
+  .deliv-cat li { font-size: 12.5px; color: var(--color-text-muted); }
+  .deliv-cat li.active { color: var(--c-violet); font-weight: 600; }
+
+  .footnote { font-size: 12.5px; color: var(--color-text-soft); opacity: .8; margin-top: 1.5rem; line-height: 1.5; }
+
+  @media (max-width: 900px) {
+    .goal-grid, .flow, .deliv-cats { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <h1>PMM role &amp; Impact — outline preview</h1>
+    <nav class="nav">
+      <a href="#s2">02 · Goal</a>
+      <a href="#s2b">02.5 · Bridge (new)</a>
+      <a href="#s3">03 · Deliverables</a>
+    </nav>
+  </div>
+</header>
+
+<section class="block" id="s2">
+  <div class="wrap">
+    <span class="tag changed">Slide 2 · Reworked</span>
+    <p class="eyebrow serif" style="margin-top:1rem;">→ What is our goal?</p>
+    <h2 class="title">Turn our product capabilities into value customers choose us for</h2>
+    <p class="sub">Same diagram as today, split so a first-time viewer can tell "who we work with" apart from "who we sell to" — and see PMM's translation role as the headline, not a small label.</p>
+
+    <div class="gradient-frame">
+      <div class="card">
+        <div class="goal-grid">
+          <div class="col">
+            <h3 class="h">Product capabilities</h3>
+            <div class="pill-row">
+              <span class="pill">Agents</span><span class="pill">Vibe</span><span class="pill">Workflows</span>
+              <span class="pill">Sidekick</span><span class="pill">Notetaker</span><span class="pill">AI Blocks</span>
+            </div>
+          </div>
+          <div class="col">
+            <h3 class="h">Who we partner with (internal)</h3>
+            <div class="pill-row">
+              <span class="pill">Sales</span><span class="pill">Marketing</span><span class="pill">Customer Success</span><span class="pill">Product</span>
+            </div>
+          </div>
+
+          <div class="mech-center gradient-frame">
+            <div class="card" style="text-align:center;">
+              <div class="big">PMM translates value</div>
+              <div class="owns-influences">
+                <span class="oi"><span class="dot owns"></span>PMM owns</span>
+                <span class="oi"><span class="dot infl"></span>PMM influences</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col">
+            <h3 class="h">Who we sell to (customer segments)</h3>
+            <div class="pill-row">
+              <span class="pill">IT</span><span class="pill">HR</span><span class="pill">PMO</span><span class="pill">Marketing</span>
+            </div>
+          </div>
+          <div class="col">
+            <h3 class="h">Where it shows up (funnel)</h3>
+            <div class="funnel-row">
+              <div class="funnel-item"><span class="stage">Top</span><span class="chans">Homepage, Acquisition campaigns</span><span class="badge owns">owns</span></div>
+              <div class="funnel-item"><span class="stage">Middle</span><span class="chans">Gartner &amp; G2, Regional events, Sales collateral</span><span class="badge infl">influences</span></div>
+              <div class="funnel-item"><span class="stage">Bottom</span><span class="chans">Cross/upsell campaigns, Lifecycle</span><span class="badge owns">owns</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="footnote">Change from current build: the "Marketing / IT / HR / PMO" row used to sit next to the internal capabilities with no label, so it read as ambiguous — is PMM connecting to internal teams or to customer segments? Now it's two explicit rows, and "PMM translates value" + owns/influences moved from a small caption into the visual center.</p>
+  </div>
+</section>
+
+<section class="block" id="s2b">
+  <div class="wrap">
+    <span class="tag new">New · fills the gap you flagged</span>
+    <p class="eyebrow serif" style="margin-top:1rem;">→ How this actually happens</p>
+    <h2 class="title">From one capability to market, in one thread</h2>
+    <p class="sub">This is the missing link between the framework (slide 2) and the deliverable list (slide 3): one real capability, walked through the same four stages every time.</p>
+
+    <div class="bridge-example">Running example: <b>Notetaker</b></div>
+
+    <div class="gradient-frame">
+      <div class="card">
+        <div class="flow">
+          <div class="step">
+            <div class="num">01</div>
+            <h4>Product Launch</h4>
+            <p class="desc">The capability ships.</p>
+            <div class="artifacts">
+              <span>Take notes</span>
+              <span>Record calls</span>
+              <span>Summarize</span>
+            </div>
+          </div>
+          <div class="step">
+            <div class="num">02</div>
+            <h4>Product value</h4>
+            <p class="desc">Distilled into why it matters to the customer.</p>
+            <div class="artifacts">
+              <span>"Turns every meeting into an insightful summary with clear action items"</span>
+            </div>
+          </div>
+          <div class="step">
+            <div class="num">03</div>
+            <h4>Segment Packaging</h4>
+            <p class="desc">Repackaged per team / use case.</p>
+            <div class="artifacts">
+              <span>Sales: call insights &amp; follow-ups</span>
+              <span>CS: renewal signals</span>
+              <span>PMO: meeting audit trail</span>
+            </div>
+          </div>
+          <div class="step">
+            <div class="num">04</div>
+            <h4>Marketing launch &amp; Sales enablement</h4>
+            <p class="desc">What actually goes out the door.</p>
+            <div class="artifacts">
+              <span>Sales enablement doc</span>
+              <span>Product video</span>
+              <span>PR announcement</span>
+              <span>Social post</span>
+              <span>Web &amp; LP update</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="footnote">This mirrors the "How this transition happen?" walkthrough from the earlier build (with Notetaker) — reinstated here as its own slide so it's not skipped over, sitting between the framework and the breadth of examples.</p>
+  </div>
+</section>
+
+<section class="block" id="s3">
+  <div class="wrap">
+    <span class="tag kept">Slide 3 · Kept, reframed</span>
+    <p class="eyebrow serif" style="margin-top:1rem;">→ And this happens across the whole portfolio</p>
+    <h2 class="title">A glimpse to our deliverables</h2>
+    <p class="sub">Same accordion you already built (with the live Customer Zero preview). Only the framing line changes — after seeing the mechanism once in depth, this slide is read as "not a one-off," not as a fresh list.</p>
+
+    <div class="gradient-frame">
+      <div class="card">
+        <div class="deliv-cats">
+          <div class="deliv-cat">
+            <h4>Capture AI Demand</h4>
+            <ul>
+              <li class="active">01 Customer Zero</li>
+              <li>02 Template center</li>
+              <li>03 Departments offering</li>
+              <li>04 Cross-sell campaign</li>
+            </ul>
+          </div>
+          <div class="deliv-cat"><h4>Enable Sales &amp; CS</h4><ul><li>…</li></ul></div>
+          <div class="deliv-cat"><h4>Positioning</h4><ul><li>…</li></ul></div>
+          <div class="deliv-cat"><h4>AI acquisition</h4><ul><li>…</li></ul></div>
+        </div>
+      </div>
+    </div>
+    <p class="footnote">Not rebuilt here — this is a placeholder for the existing interactive accordion + image carousel, which stays as-is on the live site.</p>
+  </div>
+</section>
+
+</body>
+</html>
