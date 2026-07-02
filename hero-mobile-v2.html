@@ -51,34 +51,27 @@
 
     /* Characters — large ghosted background layer */
     .chars-bg {
-      position: absolute;
-      bottom: 0;
-      left: 50%; transform: translateX(-50%);
-      display: flex; align-items: flex-end;
-      z-index: 1;
-      pointer-events: none;
+      position: absolute; inset: 0;
+      z-index: 1; pointer-events: none;
     }
     .char-h {
-      height: 82vh;
-      width: auto;
-      flex-shrink: 0;
+      position: absolute;
+      bottom: 0; right: 44%;
+      height: 80vh; width: auto;
       object-fit: contain; object-position: bottom;
-      margin-right: -72px;
-      transform: translateX(-120%);
-      opacity: 0;
+      transform: translateX(-130%); opacity: 0;
       transition: transform 1.05s cubic-bezier(.22,.9,.36,1), opacity .85s ease;
     }
     .char-a {
-      height: 82vh;
-      width: auto;
-      flex-shrink: 0;
+      position: absolute;
+      bottom: 0; left: 44%;
+      height: 80vh; width: auto;
       object-fit: contain; object-position: bottom;
-      transform: translateX(120%);
-      opacity: 0;
+      transform: translateX(130%); opacity: 0;
       transition: transform 1.05s cubic-bezier(.22,.9,.36,1), opacity .85s ease;
     }
-    .chars-bg.entered .char-h { transform: translateX(0); opacity: 0.28; }
-    .chars-bg.entered .char-a { transform: translateX(0); opacity: 0.28; }
+    .chars-bg.entered .char-h { transform: translateX(0); opacity: 0.32; }
+    .chars-bg.entered .char-a { transform: translateX(0); opacity: 0.32; }
 
     /* Radial vignette dims chars in the text zone */
     .vignette {
@@ -114,11 +107,11 @@
       animation: fadeIn .6s ease forwards .5s;
     }
     .hl {
-      font-size: clamp(22px, 5.6vw, 30px);
+      font-size: clamp(22px, 6vw, 36px);
       font-weight: 800;
       line-height: 1.18;
       letter-spacing: 0;
-      background: linear-gradient(140deg, #fff 50%, rgba(255,255,255,0.45));
+      background: linear-gradient(140deg, #fff 45%, rgba(255,255,255,0.45));
       -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     }
 
