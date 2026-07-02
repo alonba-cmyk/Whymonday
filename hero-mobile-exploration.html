@@ -15,6 +15,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      min-height: 100vh;
       padding: 32px 20px 64px;
     }
 
@@ -26,7 +27,7 @@
     .page-title { font-size: 24px; font-weight: 800; text-align: center; letter-spacing: -.5px; margin-bottom: 6px; }
     .page-sub { font-size: 13px; color: var(--dim); text-align: center; line-height: 1.6; margin-bottom: 40px; }
 
-    /* ── Hero shell ── */
+    /* ── Hero shell — flex column ── */
     .hero {
       width: 100%;
       max-width: 420px;
@@ -36,26 +37,32 @@
       border: 1px solid rgba(255,255,255,0.07);
       overflow: hidden;
       position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
-    /* Glows */
+    /* Glows — absolute, decorative only */
     .glow-l {
-      position: absolute; left: -80px; top: 32%;
+      position: absolute; left: -80px; top: 28%;
       width: 280px; height: 280px;
       background: #6161ff; filter: blur(110px); opacity: .10; border-radius: 50%;
       pointer-events: none;
     }
     .glow-r {
-      position: absolute; right: -80px; top: 22%;
+      position: absolute; right: -80px; top: 18%;
       width: 280px; height: 280px;
       background: #a855f7; filter: blur(110px); opacity: .09; border-radius: 50%;
       pointer-events: none;
     }
 
-    /* Logo bar */
+    /* Logo bar — in flow */
     .top-bar {
-      position: absolute; top: 36px; left: 0; right: 0;
+      width: 100%;
+      padding-top: 36px;
       display: flex; flex-direction: column; align-items: center; gap: 7px;
+      flex-shrink: 0;
+      position: relative; z-index: 1;
       opacity: 0;
       animation: fadeUp .5s ease forwards .2s;
     }
@@ -65,52 +72,57 @@
       text-transform: uppercase; color: var(--purple);
     }
 
-    /* Characters — slide in from sides after typing */
+    /* Characters container — takes remaining space, chars sit at bottom */
+    .chars-wrap {
+      flex: 1;
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+    }
     .chars {
-      position: absolute; bottom: 170px; left: 0; right: 0;
+      position: absolute; bottom: 0; left: 0; right: 0;
       display: flex; align-items: flex-end; justify-content: center;
     }
     .char-h {
-      width: 190px; object-fit: contain; object-position: bottom;
-      transform: translateX(-140%);
+      width: 200px; object-fit: contain; object-position: bottom;
+      transform: translateX(-130%);
       opacity: 0;
-      transition: transform .8s cubic-bezier(.22,.9,.36,1), opacity .6s ease;
+      transition: transform .85s cubic-bezier(.22,.9,.36,1), opacity .65s ease;
     }
     .char-a {
-      width: 190px; object-fit: contain; object-position: bottom;
-      margin-left: -32px;
-      transform: translateX(140%);
+      width: 200px; object-fit: contain; object-position: bottom;
+      margin-left: -36px;
+      transform: translateX(130%);
       opacity: 0;
-      transition: transform .8s cubic-bezier(.22,.9,.36,1), opacity .6s ease;
+      transition: transform .85s cubic-bezier(.22,.9,.36,1), opacity .65s ease;
     }
-    .chars.entered .char-h {
-      transform: translateX(0);
-      opacity: 1;
-    }
-    .chars.entered .char-a {
-      transform: translateX(0);
-      opacity: 1;
-    }
+    .chars.entered .char-h { transform: translateX(0); opacity: 1; }
+    .chars.entered .char-a { transform: translateX(0); opacity: 1; }
 
-    /* Text copy */
+    /* Text copy — in flow, below characters */
     .copy {
-      position: absolute; bottom: 44px; left: 0; right: 0;
-      text-align: center; padding: 0 28px;
+      width: 100%;
+      padding: 20px 32px 36px;
+      text-align: center;
+      flex-shrink: 0;
+      position: relative; z-index: 1;
       opacity: 0;
       animation: fadeUp .5s ease forwards .7s;
     }
     .hl {
-      font-size: 36px; font-weight: 800;
-      line-height: 1.08; letter-spacing: -1px;
+      font-size: clamp(26px, 7vw, 34px);
+      font-weight: 800;
+      line-height: 1.12;
+      letter-spacing: -0.5px;
       background: linear-gradient(140deg, #fff 50%, rgba(255,255,255,0.5));
       -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-      min-height: 4.5em; /* reserve space so layout doesn't jump */
+      min-height: 5em;
     }
 
     /* Cursor */
     .cursor {
       display: inline-block;
-      width: 2px; height: 1em;
+      width: 2px; height: .85em;
       background: var(--purple);
       vertical-align: middle;
       margin-left: 2px;
@@ -118,7 +130,7 @@
     }
     .cursor.done { animation: none; opacity: 0; }
 
-    /* Replay button */
+    /* Replay */
     .replay {
       position: absolute; bottom: 12px; right: 14px;
       background: rgba(97,97,255,.15); border: 1px solid rgba(97,97,255,.3);
@@ -154,9 +166,11 @@
       <span class="eyebrow-tag">AI Work Platform</span>
     </div>
 
-    <div class="chars" id="chars">
-      <img class="char-h" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/Human.png" alt="Human">
-      <img class="char-a" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/Agent.png" alt="Agent">
+    <div class="chars-wrap">
+      <div class="chars" id="chars">
+        <img class="char-h" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/Human.png" alt="Human">
+        <img class="char-a" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/Agent.png" alt="Agent">
+      </div>
     </div>
 
     <div class="copy">
@@ -168,61 +182,44 @@
 
   <script>
     const TEXT = 'People and agents\nworking together\ndriving business\nresults.';
-    const CHAR_DELAY = 52;   // ms per character
-    const START_DELAY = 900; // ms before typing begins (logo settles first)
+    const CHAR_DELAY = 52;
+    const START_DELAY = 900;
 
-    const hlEl     = document.getElementById('hl');
-    const cursor   = document.getElementById('cursor');
-    const charsEl  = document.getElementById('chars');
+    const hlEl      = document.getElementById('hl');
+    const cursor    = document.getElementById('cursor');
+    const charsEl   = document.getElementById('chars');
     const replayBtn = document.getElementById('replayBtn');
 
     let timer = null;
 
     function reset() {
       clearTimeout(timer);
-      // Reset text
       hlEl.innerHTML = '';
       hlEl.appendChild(cursor);
       cursor.classList.remove('done');
-      // Reset characters
       charsEl.classList.remove('entered');
     }
 
     function type(fullText, i = 0) {
-      if (i === 0) {
-        // Place cursor at start
-        hlEl.innerHTML = '';
-        hlEl.appendChild(cursor);
-      }
+      if (i === 0) { hlEl.innerHTML = ''; hlEl.appendChild(cursor); }
 
       if (i < fullText.length) {
         const ch = fullText[i];
-        // Insert character before cursor
-        const textNode = document.createTextNode(ch === '\n' ? '' : ch);
         if (ch === '\n') {
-          const br = document.createElement('br');
-          hlEl.insertBefore(br, cursor);
+          hlEl.insertBefore(document.createElement('br'), cursor);
         } else {
-          hlEl.insertBefore(textNode, cursor);
+          hlEl.insertBefore(document.createTextNode(ch), cursor);
         }
         timer = setTimeout(() => type(fullText, i + 1), CHAR_DELAY);
       } else {
-        // Typing done — hide cursor, slide in characters
         cursor.classList.add('done');
-        timer = setTimeout(() => {
-          charsEl.classList.add('entered');
-        }, 200);
+        timer = setTimeout(() => charsEl.classList.add('entered'), 200);
       }
     }
 
-    function start() {
-      reset();
-      timer = setTimeout(() => type(TEXT), START_DELAY);
-    }
+    function start() { reset(); timer = setTimeout(() => type(TEXT), START_DELAY); }
 
     replayBtn.addEventListener('click', start);
-
-    // Auto-start
     start();
   </script>
 
