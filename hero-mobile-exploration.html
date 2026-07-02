@@ -189,40 +189,9 @@
     .hero-a3 .char-h { width: 185px; object-fit: contain; object-position: bottom; }
     .hero-a3 .char-a { width: 185px; object-fit: contain; object-position: bottom; margin-left: -28px; }
 
-    /* Avatar strip — people + agents interleaved */
-    .hero-a3 .strip {
-      position: absolute; bottom: 60px; left: 0; right: 0;
-      display: flex; align-items: center;
-      gap: 0;
-      overflow: visible;
-      justify-content: center;
-    }
-    .hero-a3 .av {
-      width: 52px; height: 52px; border-radius: 50%;
-      border: 2.5px solid var(--bg);
-      margin-left: -12px; object-fit: cover;
-      flex-shrink: 0;
-    }
-    .hero-a3 .av:first-child { margin-left: 0; }
-    /* Agent avatars get a purple ring */
-    .hero-a3 .av.ag { border-color: rgba(97,97,255,.7); }
-
-    /* Fade edges */
-    .hero-a3 .strip-fade-l {
-      position: absolute; bottom: 42px; left: 0;
-      width: 60px; height: 72px;
-      background: linear-gradient(to right, var(--bg), transparent);
-      z-index: 2; pointer-events: none;
-    }
-    .hero-a3 .strip-fade-r {
-      position: absolute; bottom: 42px; right: 0;
-      width: 60px; height: 72px;
-      background: linear-gradient(to left, var(--bg), transparent);
-      z-index: 2; pointer-events: none;
-    }
 
     .hero-a3 .copy {
-      position: absolute; bottom: 128px; left: 0; right: 0;
+      position: absolute; bottom: 38px; left: 0; right: 0;
       text-align: center; padding: 0 28px;
     }
     .hero-a3 .hl {
@@ -333,20 +302,6 @@
         </div>
 
         <!-- People + agent avatars interleaved -->
-        <div class="strip">
-          <img class="av" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/Marketing.png" alt="">
-          <img class="av ag" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/5%20layers/Agents%20chip%201.png" alt="">
-          <img class="av" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/Sales.png" alt="">
-          <img class="av ag" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/5%20layers/Agents%20chip%202.png" alt="">
-          <img class="av" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/HR.png" alt="">
-          <img class="av ag" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/5%20layers/Human%20chip%201.png" alt="">
-          <img class="av" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/IT.png" alt="">
-          <img class="av ag" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/5%20layers/Human%20chip%202.png" alt="">
-          <img class="av" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/Operations.png" alt="">
-        </div>
-        <div class="strip-fade-l"></div>
-        <div class="strip-fade-r"></div>
-
         <div class="copy">
           <div class="hl hl-grad">People and agents<br>working together<br>driving business<br>results.</div>
         </div>
