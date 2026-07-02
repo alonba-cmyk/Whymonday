@@ -90,18 +90,36 @@
     padding: .4rem .9rem; margin-bottom: 2rem;
   }
   .bridge-example b { color: var(--color-text); font-weight: 600; }
-  .flow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.1rem; align-items: stretch; }
-  .flow .step { display: flex; flex-direction: column; gap: .8rem; }
-  .flow .num { font-size: 11px; color: var(--color-text-soft); font-variant-numeric: tabular-nums; }
-  .flow h4 { font-size: 17px; font-weight: 600; margin: 0; letter-spacing: -0.005em; }
-  .flow .desc { font-size: 13.5px; color: var(--color-text-muted); line-height: 1.45; margin: 0; }
-  .flow .artifacts { display: flex; flex-direction: column; gap: .35rem; margin-top: auto; padding-top: .8rem; border-top: 0.5px solid var(--color-border); }
-  .flow .artifacts span { font-size: 12.5px; color: var(--color-text-soft); }
-  .flow .arrow { display: none; }
-  @media (min-width: 900px) {
-    .flow-wrap { position: relative; }
+
+  .flow-visual { display: flex; align-items: stretch; gap: .6rem; }
+  .fv-step { flex: 1; display: flex; flex-direction: column; gap: .7rem; min-width: 0; }
+  .fv-visual {
+    position: relative; border-radius: 16px; overflow: hidden; aspect-ratio: 4 / 3;
+    background: var(--color-surface-2); border: 0.5px solid var(--color-border);
   }
-  .connector { text-align: center; color: var(--color-text-soft); font-size: 20px; opacity: .5; }
+  .fv-visual img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .fv-avatar {
+    position: absolute; bottom: 8px; right: 8px; width: 34px; height: 34px; border-radius: 50%;
+    border: 2px solid var(--color-bg-deep); object-fit: cover; box-shadow: 0 4px 10px rgba(0,0,0,.4);
+  }
+  .fv-stat {
+    display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
+    padding: 1rem; background: linear-gradient(135deg, rgba(97,97,255,.18), rgba(56,189,248,.08));
+  }
+  .fv-stat-num {
+    font-size: 46px; font-weight: 800; line-height: 1;
+    background: linear-gradient(135deg, var(--c-violet), var(--c-indigo) 50%, var(--c-sky));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .fv-stat-label { font-size: 12.5px; color: var(--color-text-muted); margin-top: .6rem; max-width: 150px; line-height: 1.35; }
+  .fv-cap { display: flex; flex-direction: column; gap: .15rem; }
+  .fv-num { font-size: 10.5px; text-transform: uppercase; letter-spacing: .05em; color: var(--color-text-soft); font-weight: 600; }
+  .fv-label { font-size: 13px; color: var(--color-text-muted); }
+  .connector { display: flex; align-items: center; padding-top: 50px; color: var(--color-text-soft); font-size: 18px; opacity: .4; }
+  @media (max-width: 900px) {
+    .flow-visual { flex-direction: column; }
+    .connector { display: none; }
+  }
 
   /* Slide 4 light */
   .deliv-cats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
@@ -188,60 +206,55 @@
 
 <section class="block" id="s2b">
   <div class="wrap">
-    <span class="tag new">New · fills the gap you flagged</span>
+    <span class="tag new">New · v2, visual</span>
     <p class="eyebrow serif" style="margin-top:1rem;">→ How this actually happens</p>
     <h2 class="title">From one capability to market, in one thread</h2>
-    <p class="sub">This is the missing link between the framework (slide 2) and the deliverable list (slide 3): one real capability, walked through the same four stages every time.</p>
+    <p class="sub">Same four stages, now told through the real assets — one engineer, one agent, one number, then the pattern at scale and the page it became.</p>
 
-    <div class="bridge-example">Running example: <b>Notetaker</b></div>
+    <div class="bridge-example">Running example: <b>Agents</b> — Petro, built by Amit (Engineering)</div>
 
     <div class="gradient-frame">
       <div class="card">
-        <div class="flow">
-          <div class="step">
-            <div class="num">01</div>
-            <h4>Product Launch</h4>
-            <p class="desc">The capability ships.</p>
-            <div class="artifacts">
-              <span>Take notes</span>
-              <span>Record calls</span>
-              <span>Summarize</span>
+        <div class="flow-visual">
+          <div class="fv-step">
+            <div class="fv-visual">
+              <img src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/New%20agents%20images/agent-engineering-competitor-research-agent.webp" alt="Petro agent, built by Amit Frishberg">
+              <img class="fv-avatar" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/amit-frishberg.png" alt="Amit Frishberg">
             </div>
+            <div class="fv-cap"><span class="fv-num">01 Product Launch</span><span class="fv-label">Amit builds "Petro"</span></div>
           </div>
-          <div class="step">
-            <div class="num">02</div>
-            <h4>Product value</h4>
-            <p class="desc">Distilled into why it matters to the customer.</p>
-            <div class="artifacts">
-              <span>"Turns every meeting into an insightful summary with clear action items"</span>
+
+          <div class="connector">→</div>
+
+          <div class="fv-step">
+            <div class="fv-visual fv-stat">
+              <span class="fv-stat-num">60%</span>
+              <span class="fv-stat-label">reduction in mobile parity backlog</span>
             </div>
+            <div class="fv-cap"><span class="fv-num">02 Product value</span><span class="fv-label">The result speaks for itself</span></div>
           </div>
-          <div class="step">
-            <div class="num">03</div>
-            <h4>Segment Packaging</h4>
-            <p class="desc">Repackaged per team / use case.</p>
-            <div class="artifacts">
-              <span>Sales: call insights &amp; follow-ups</span>
-              <span>CS: renewal signals</span>
-              <span>PMO: meeting audit trail</span>
+
+          <div class="connector">→</div>
+
+          <div class="fv-step">
+            <div class="fv-visual">
+              <img src="assets/pmm-preview/agents-builder-carousel.png" alt="Carousel of employee-built agents by department">
             </div>
+            <div class="fv-cap"><span class="fv-num">03 Segment Packaging</span><span class="fv-label">Same pattern, every team</span></div>
           </div>
-          <div class="step">
-            <div class="num">04</div>
-            <h4>Marketing launch &amp; Sales enablement</h4>
-            <p class="desc">What actually goes out the door.</p>
-            <div class="artifacts">
-              <span>Sales enablement doc</span>
-              <span>Product video</span>
-              <span>PR announcement</span>
-              <span>Social post</span>
-              <span>Web &amp; LP update</span>
+
+          <div class="connector">→</div>
+
+          <div class="fv-step">
+            <div class="fv-visual">
+              <img src="assets/pmm-preview/agents-launch-hero.png" alt="monday on monday landing page hero">
             </div>
+            <div class="fv-cap"><span class="fv-num">04 Marketing launch</span><span class="fv-label">Ships as "monday on monday"</span></div>
           </div>
         </div>
       </div>
     </div>
-    <p class="footnote">This mirrors the "How this transition happen?" walkthrough from the earlier build (with Notetaker) — reinstated here as its own slide so it's not skipped over, sitting between the framework and the breadth of examples.</p>
+    <p class="footnote">Assets are real — the agent card and Amit's photo are live product/team assets already used in the other decks in this repo; the carousel and hero screenshots are the actual "monday on monday" page. Swap in a different builder story (Ran/Moti, Osher/Riki Shula, Roni/Allison) if Petro isn't the right lead example.</p>
   </div>
 </section>
 
