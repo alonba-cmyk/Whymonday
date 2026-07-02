@@ -9,32 +9,18 @@
     :root { --purple: #6161ff; --dim: rgba(255,255,255,0.42); --bg: #09090f; }
 
     body {
-      background: #070710;
+      background: var(--bg);
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       color: #fff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
-      padding: 32px 20px 64px;
+      margin: 0;
+      padding: 0;
     }
 
-    .page-eyebrow {
-      font-size: 9px; font-weight: 700; letter-spacing: 5px;
-      text-transform: uppercase; color: var(--purple);
-      text-align: center; margin-bottom: 10px;
-    }
-    .page-title { font-size: 24px; font-weight: 800; text-align: center; letter-spacing: -.5px; margin-bottom: 6px; }
-    .page-sub { font-size: 13px; color: var(--dim); text-align: center; line-height: 1.6; margin-bottom: 40px; }
-
-    /* ── Hero shell — flex column ── */
+    /* ── Hero shell — full screen ── */
     .hero {
-      width: 100%;
-      max-width: 420px;
-      height: 640px;
+      width: 100vw;
+      height: 100vh;
       background: var(--bg);
-      border-radius: 22px;
-      border: 1px solid rgba(255,255,255,0.07);
       overflow: hidden;
       position: relative;
       display: flex;
@@ -152,10 +138,6 @@
   </style>
 </head>
 <body>
-
-  <p class="page-eyebrow">Mobile Hero · Exploration</p>
-  <h1 class="page-title">Hero Concept</h1>
-  <p class="page-sub">Text types first — then people and agents arrive</p>
 
   <div class="hero" id="hero">
     <div class="glow-l"></div>
