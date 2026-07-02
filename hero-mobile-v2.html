@@ -56,7 +56,7 @@
     }
     .char-h {
       position: absolute;
-      bottom: 8%; left: -52vw;
+      bottom: 22%; left: -52vw;
       width: 120vw; height: auto;
       object-fit: contain; object-position: bottom;
       transform: translateX(-40px); opacity: 0;
@@ -64,14 +64,14 @@
     }
     .char-a {
       position: absolute;
-      bottom: 8%; right: -52vw;
+      bottom: 22%; right: -52vw;
       width: 120vw; height: auto;
       object-fit: contain; object-position: bottom;
       transform: translateX(40px); opacity: 0;
       transition: transform 1.6s cubic-bezier(.25,.46,.45,.94) .12s, opacity 1.3s ease .12s;
     }
-    .chars-bg.entered .char-h { transform: translateX(0); opacity: 0.38; }
-    .chars-bg.entered .char-a { transform: translateX(0); opacity: 0.38; }
+    .chars-bg.entered .char-h { transform: translateX(0); opacity: 0.26; }
+    .chars-bg.entered .char-a { transform: translateX(0); opacity: 0.26; }
 
     /* Radial vignette dims chars in the text zone */
     .vignette {
@@ -179,43 +179,62 @@
   </div>
 
   <script>
-    const TEXT = 'People and agents\nworking together\ndriving business results.';
-    const CHAR_DELAY = 52;
-    const START_DELAY = 850;
+    const LINES = ['People and agents', 'working together', 'driving business results.'];
+    const WORD_DELAY = 110;
+    const LINE_DELAY = 260;
+    const START_DELAY = 600;
 
     const hlEl      = document.getElementById('hl');
     const cursor    = document.getElementById('cursor');
     const charsEl   = document.getElementById('chars');
     const replayBtn = document.getElementById('replayBtn');
 
-    let timer = null;
+    let timers = [];
+
+    function clearTimers() { timers.forEach(clearTimeout); timers = []; }
 
     function reset() {
-      clearTimeout(timer);
+      clearTimers();
       hlEl.innerHTML = '';
       hlEl.appendChild(cursor);
       cursor.classList.remove('done');
       charsEl.classList.remove('entered');
     }
 
-    function type(fullText, i = 0) {
-      if (i === 0) { hlEl.innerHTML = ''; hlEl.appendChild(cursor); }
-
-      if (i < fullText.length) {
-        const ch = fullText[i];
-        if (ch === '\n') {
-          hlEl.insertBefore(document.createElement('br'), cursor);
-        } else {
-          hlEl.insertBefore(document.createTextNode(ch), cursor);
-        }
-        timer = setTimeout(() => type(fullText, i + 1), CHAR_DELAY);
-      } else {
-        cursor.classList.add('done');
-        timer = setTimeout(() => charsEl.classList.add('entered'), 150);
+    function addWord(word, fade) {
+      const span = document.createElement('span');
+      span.textContent = word + ' ';
+      if (fade) {
+        span.style.opacity = '0';
+        span.style.transition = 'opacity 0.18s ease';
+        requestAnimationFrame(() => requestAnimationFrame(() => { span.style.opacity = '1'; }));
       }
+      hlEl.insertBefore(span, cursor);
     }
 
-    function start() { reset(); timer = setTimeout(() => type(TEXT), START_DELAY); }
+    function typeLines(lines) {
+      let t = 0;
+      lines.forEach((line, li) => {
+        const words = line.split(' ');
+        words.forEach((word, wi) => {
+          timers.push(setTimeout(() => addWord(word, true), t));
+          t += WORD_DELAY;
+        });
+        if (li < lines.length - 1) {
+          timers.push(setTimeout(() => hlEl.insertBefore(document.createElement('br'), cursor), t));
+          t += LINE_DELAY;
+        }
+      });
+      timers.push(setTimeout(() => {
+        cursor.classList.add('done');
+        timers.push(setTimeout(() => charsEl.classList.add('entered'), 100));
+      }, t + 80));
+    }
+
+    function start() {
+      reset();
+      timers.push(setTimeout(() => typeLines(LINES), START_DELAY));
+    }
 
     replayBtn.addEventListener('click', start);
     start();
