@@ -56,30 +56,30 @@
     }
     .char-h {
       position: absolute;
-      bottom: 0; right: 44%;
+      bottom: 0; right: 36%;
       height: 80vh; width: auto;
       object-fit: contain; object-position: bottom;
-      transform: translateX(-130%); opacity: 0;
-      transition: transform 1.05s cubic-bezier(.22,.9,.36,1), opacity .85s ease;
+      transform: translateX(-55px); opacity: 0;
+      transition: transform 1.6s cubic-bezier(.25,.46,.45,.94), opacity 1.3s ease;
     }
     .char-a {
       position: absolute;
-      bottom: 0; left: 44%;
+      bottom: 0; left: 36%;
       height: 80vh; width: auto;
       object-fit: contain; object-position: bottom;
-      transform: translateX(130%); opacity: 0;
-      transition: transform 1.05s cubic-bezier(.22,.9,.36,1), opacity .85s ease;
+      transform: translateX(55px); opacity: 0;
+      transition: transform 1.6s cubic-bezier(.25,.46,.45,.94) .12s, opacity 1.3s ease .12s;
     }
-    .chars-bg.entered .char-h { transform: translateX(0); opacity: 0.32; }
-    .chars-bg.entered .char-a { transform: translateX(0); opacity: 0.32; }
+    .chars-bg.entered .char-h { transform: translateX(0); opacity: 0.35; }
+    .chars-bg.entered .char-a { transform: translateX(0); opacity: 0.35; }
 
     /* Radial vignette dims chars in the text zone */
     .vignette {
       position: absolute; inset: 0;
-      background: radial-gradient(ellipse 58% 42% at 50% 52%,
-        rgba(9,9,15,0.88) 0%,
-        rgba(9,9,15,0.60) 38%,
-        transparent 68%);
+      background: radial-gradient(ellipse 54% 38% at 50% 52%,
+        rgba(9,9,15,0.93) 0%,
+        rgba(9,9,15,0.68) 36%,
+        transparent 64%);
       z-index: 2;
       pointer-events: none;
     }
@@ -102,12 +102,12 @@
     }
     .copy {
       text-align: center;
-      padding: 0 24px;
+      padding: 0 18px;
       opacity: 0;
       animation: fadeIn .6s ease forwards .5s;
     }
     .hl {
-      font-size: clamp(22px, 6vw, 36px);
+      font-size: clamp(26px, 6.8vw, 40px);
       font-weight: 800;
       line-height: 1.18;
       letter-spacing: 0;
