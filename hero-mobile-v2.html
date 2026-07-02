@@ -56,22 +56,22 @@
     }
     .char-h {
       position: absolute;
-      bottom: 0; right: 36%;
-      height: 80vh; width: auto;
-      object-fit: contain; object-position: bottom;
-      transform: translateX(-55px); opacity: 0;
+      bottom: 0; left: 0;
+      width: 82vw; height: auto;
+      object-fit: contain; object-position: bottom left;
+      transform: translateX(-50px); opacity: 0;
       transition: transform 1.6s cubic-bezier(.25,.46,.45,.94), opacity 1.3s ease;
     }
     .char-a {
       position: absolute;
-      bottom: 0; left: 36%;
-      height: 80vh; width: auto;
-      object-fit: contain; object-position: bottom;
-      transform: translateX(55px); opacity: 0;
+      bottom: 0; right: 0;
+      width: 82vw; height: auto;
+      object-fit: contain; object-position: bottom right;
+      transform: translateX(50px); opacity: 0;
       transition: transform 1.6s cubic-bezier(.25,.46,.45,.94) .12s, opacity 1.3s ease .12s;
     }
-    .chars-bg.entered .char-h { transform: translateX(0); opacity: 0.35; }
-    .chars-bg.entered .char-a { transform: translateX(0); opacity: 0.35; }
+    .chars-bg.entered .char-h { transform: translateX(0); opacity: 0.33; }
+    .chars-bg.entered .char-a { transform: translateX(0); opacity: 0.33; }
 
     /* Radial vignette dims chars in the text zone */
     .vignette {
