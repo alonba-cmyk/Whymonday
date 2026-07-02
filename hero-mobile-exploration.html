@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mobile Hero — Exploration</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --purple: #6161ff; --dim: rgba(255,255,255,0.42); --bg: #09090f; }
+
+    body {
+      background: #070710;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      color: #fff;
+      padding: 32px 20px 64px;
+    }
+
+    .page-eyebrow {
+      font-size: 9px; font-weight: 700; letter-spacing: 5px;
+      text-transform: uppercase; color: var(--purple);
+      text-align: center; margin-bottom: 10px;
+    }
+    .page-title {
+      font-size: 24px; font-weight: 800; text-align: center;
+      letter-spacing: -0.5px; margin-bottom: 6px;
+    }
+    .page-sub {
+      font-size: 13px; color: var(--dim); text-align: center;
+      line-height: 1.6; margin-bottom: 52px;
+    }
+
+    .grid { display: flex; flex-direction: column; gap: 48px; max-width: 420px; margin: 0 auto; }
+
+    /* Card shell */
+    .card { border-radius: 22px; overflow: hidden; border: 1px solid rgba(255,255,255,0.07); }
+    .card-meta { padding: 14px 20px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; gap: 10px; }
+    .card-tag { font-size: 9px; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; color: var(--purple); }
+    .card-name { font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.65); }
+    .card-desc { padding: 12px 20px 16px; font-size: 12px; color: rgba(255,255,255,0.38); line-height: 1.6; border-top: 1px solid rgba(255,255,255,0.05); }
+
+    /* Shared hero styles */
+    .logo-img { height: 26px; }
+    .eyebrow-tag { font-size: 9px; font-weight: 700; letter-spacing: 5px; text-transform: uppercase; color: var(--purple); }
+    .hl-grad {
+      background: linear-gradient(140deg, #fff 45%, rgba(255,255,255,0.5));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+
+    /* ══════════════════════════════════════
+       A — The Duo (Characters facing each other)
+    ══════════════════════════════════════ */
+    .hero-a {
+      background: var(--bg);
+      height: 600px;
+      position: relative;
+      display: flex; flex-direction: column;
+      align-items: center;
+      overflow: hidden;
+    }
+    .hero-a .glow-l {
+      position: absolute; left: -80px; top: 35%;
+      width: 280px; height: 280px;
+      background: #6161ff; filter: blur(110px); opacity: .10; border-radius: 50%;
+    }
+    .hero-a .glow-r {
+      position: absolute; right: -80px; top: 25%;
+      width: 280px; height: 280px;
+      background: #a855f7; filter: blur(110px); opacity: .09; border-radius: 50%;
+    }
+    .hero-a .top-bar {
+      position: absolute; top: 36px;
+      display: flex; flex-direction: column; align-items: center; gap: 7px;
+    }
+    .hero-a .chars {
+      position: absolute; bottom: 160px; left: 0; right: 0;
+      display: flex; align-items: flex-end; justify-content: center;
+    }
+    .hero-a .char-h {
+      width: 195px; object-fit: contain; object-position: bottom;
+      filter: drop-shadow(0 0 50px rgba(97,97,255,.3));
+    }
+    .hero-a .char-a {
+      width: 195px; object-fit: contain; object-position: bottom;
+      filter: drop-shadow(0 0 50px rgba(168,85,247,.3));
+      margin-left: -28px;
+    }
+    /* Spark between them */
+    .hero-a .spark {
+      position: absolute; bottom: 280px; left: 50%; transform: translateX(-50%);
+      width: 1px; height: 48px;
+      background: linear-gradient(to bottom, transparent, #6161ff 50%, transparent);
+    }
+    .hero-a .spark::after {
+      content: ''; position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 8px; height: 8px;
+      background: #6161ff;
+      border-radius: 50%;
+      box-shadow: 0 0 14px 4px rgba(97,97,255,.6);
+    }
+    .hero-a .copy {
+      position: absolute; bottom: 44px; left: 0; right: 0;
+      text-align: center; padding: 0 28px;
+    }
+    .hero-a .hl {
+      font-size: 48px; font-weight: 800; line-height: 0.95; letter-spacing: -2px;
+      margin-bottom: 12px;
+    }
+    .hero-a .sub { font-size: 15px; color: var(--dim); line-height: 1.55; }
+    .hero-a .sub strong { color: rgba(255,255,255,.85); font-weight: 600; }
+
+    /* ══════════════════════════════════════
+       B — Stat First (5,117 as the aha moment)
+    ══════════════════════════════════════ */
+    .hero-b {
+      background: var(--bg);
+      min-height: 580px;
+      position: relative;
+      display: flex; flex-direction: column;
+      padding: 44px 28px 40px;
+      overflow: hidden;
+    }
+    .hero-b .grid-bg {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(97,97,255,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(97,97,255,.04) 1px, transparent 1px);
+      background-size: 38px 38px;
+      -webkit-mask-image: radial-gradient(ellipse 90% 60% at 50% 0%, black, transparent);
+      mask-image: radial-gradient(ellipse 90% 60% at 50% 0%, black, transparent);
+    }
+    .hero-b .glow {
+      position: absolute; top: -80px; left: 50%; transform: translateX(-50%);
+      width: 320px; height: 320px;
+      background: var(--purple); filter: blur(130px); opacity: .11; border-radius: 50%;
+    }
+    .hero-b .tag { margin-bottom: 28px; }
+    .hero-b .big-num {
+      font-size: 88px; font-weight: 800; line-height: .88; letter-spacing: -4px;
+    }
+    .hero-b .num-label {
+      font-size: 13px; color: rgba(255,255,255,.45); margin-top: 8px; line-height: 1.55;
+    }
+    .hero-b .num-label b { color: rgba(255,255,255,.8); font-weight: 600; }
+    .hero-b .rule {
+      width: 36px; height: 2px; background: var(--purple);
+      border-radius: 2px; margin: 28px 0;
+    }
+    .hero-b .hl {
+      font-size: 34px; font-weight: 800; line-height: 1.08; letter-spacing: -.5px;
+      margin-bottom: 14px;
+    }
+    .hero-b .sub { font-size: 14px; color: var(--dim); line-height: 1.7; margin-bottom: 32px; }
+    .hero-b .av-row { display: flex; }
+    .hero-b .av {
+      width: 38px; height: 38px; border-radius: 50%;
+      border: 2px solid var(--bg); margin-left: -10px; object-fit: cover;
+    }
+    .hero-b .av:first-child { margin-left: 0; }
+    .hero-b .av-more {
+      width: 38px; height: 38px; border-radius: 50%;
+      border: 2px solid var(--bg); margin-left: -10px;
+      background: rgba(97,97,255,.18);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px; font-weight: 700; color: var(--purple);
+    }
+
+    /* ══════════════════════════════════════
+       C — Convergence (People + Agents = Results)
+    ══════════════════════════════════════ */
+    .hero-c {
+      background: linear-gradient(170deg, #0c0c1a 0%, var(--bg) 55%);
+      min-height: 600px;
+      position: relative;
+      display: flex; flex-direction: column; align-items: center;
+      padding: 44px 24px 44px;
+      overflow: hidden;
+    }
+    .hero-c .glow-top {
+      position: absolute; top: -60px; left: 50%; transform: translateX(-50%);
+      width: 260px; height: 260px;
+      background: var(--purple); filter: blur(100px); opacity: .13; border-radius: 50%;
+    }
+    .hero-c .top { margin-bottom: 40px; display: flex; flex-direction: column; align-items: center; gap: 7px; }
+    .hero-c .equation {
+      width: 100%; display: flex; align-items: center;
+      gap: 10px; margin-bottom: 36px; justify-content: center;
+    }
+    .hero-c .chip {
+      display: flex; align-items: center; gap: 9px;
+      background: rgba(255,255,255,.055); border: 1px solid rgba(255,255,255,.1);
+      border-radius: 50px; padding: 9px 16px 9px 9px;
+    }
+    .hero-c .chip img { width: 34px; height: 34px; border-radius: 50%; object-fit: cover; }
+    .hero-c .chip-text .name { font-size: 12px; font-weight: 600; color: rgba(255,255,255,.85); }
+    .hero-c .chip-text .role { font-size: 10px; color: rgba(255,255,255,.38); }
+    .hero-c .op {
+      width: 30px; height: 30px; border-radius: 50%;
+      background: var(--purple); display: flex; align-items: center; justify-content: center;
+      font-size: 18px; font-weight: 300; color: #fff;
+      box-shadow: 0 0 22px rgba(97,97,255,.55); flex-shrink: 0;
+    }
+    .hero-c .result-pill {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: rgba(97,97,255,.13); border: 1px solid rgba(97,97,255,.28);
+      border-radius: 50px; padding: 6px 16px;
+      font-size: 12px; font-weight: 600; color: #a5a5ff;
+      margin-bottom: 20px;
+    }
+    .hero-c .result-dot { width: 6px; height: 6px; background: var(--purple); border-radius: 50%; }
+    .hero-c .hl {
+      font-size: 44px; font-weight: 800; line-height: 1.0;
+      letter-spacing: -1.5px; text-align: center; margin-bottom: 14px;
+    }
+    .hero-c .sub { font-size: 15px; color: var(--dim); text-align: center; line-height: 1.65; }
+    .hero-c .sub em { font-style: normal; color: rgba(255,255,255,.72); }
+
+    /* ══════════════════════════════════════
+       D — Real Story (video + proof)
+    ══════════════════════════════════════ */
+    .hero-d {
+      background: var(--bg);
+      min-height: 580px;
+      display: flex; flex-direction: column;
+      overflow: hidden;
+    }
+    .hero-d .vid-wrap {
+      position: relative; height: 260px; flex-shrink: 0; overflow: hidden;
+    }
+    .hero-d video {
+      width: 100%; height: 100%; object-fit: cover;
+      filter: brightness(.55) saturate(.85);
+    }
+    .hero-d .vid-fade {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, transparent 30%, var(--bg) 100%);
+    }
+    .hero-d .vid-chip {
+      position: absolute; bottom: 14px; left: 14px;
+      background: rgba(9,9,15,.75); backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,.1); border-radius: 8px;
+      padding: 6px 12px; font-size: 11px; color: rgba(255,255,255,.65);
+    }
+    .hero-d .vid-chip b { color: #fff; font-weight: 700; }
+    .hero-d .copy { padding: 24px 28px 36px; flex: 1; display: flex; flex-direction: column; }
+    .hero-d .tag { margin-bottom: 14px; }
+    .hero-d .hl {
+      font-size: 38px; font-weight: 800; line-height: 1.03;
+      letter-spacing: -1px; margin-bottom: 14px;
+    }
+    .hero-d .sub { font-size: 14px; color: var(--dim); line-height: 1.7; margin-bottom: 26px; }
+    .hero-d .stats { display: flex; gap: 0; }
+    .hero-d .stat { flex: 1; }
+    .hero-d .stat-num { font-size: 28px; font-weight: 800; color: #fff; letter-spacing: -1px; }
+    .hero-d .stat-lbl { font-size: 10px; color: rgba(255,255,255,.38); line-height: 1.5; margin-top: 2px; }
+    .hero-d .stat-sep { width: 1px; background: rgba(255,255,255,.08); margin: 0 20px; align-self: stretch; }
+  </style>
+</head>
+<body>
+
+  <p class="page-eyebrow">Mobile Hero · Exploration</p>
+  <h1 class="page-title">4 Alternatives</h1>
+  <p class="page-sub">People and agents working together,<br>driving business results</p>
+
+  <div class="grid">
+
+    <!-- ─── A: THE DUO ─── -->
+    <div class="card">
+      <div class="card-meta">
+        <span class="card-tag">A</span>
+        <span class="card-name">The Duo — Characters as equals</span>
+      </div>
+      <div class="hero-a">
+        <div class="glow-l"></div>
+        <div class="glow-r"></div>
+        <div class="top-bar">
+          <img class="logo-img" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/monday%20Logo/monday.com%20Logo.png" alt="monday.com">
+          <span class="eyebrow-tag">AI Work Platform</span>
+        </div>
+        <div class="chars">
+          <img class="char-h" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/Human.png" alt="Human">
+          <img class="char-a" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/Agent.png" alt="Agent">
+        </div>
+        <div class="spark"></div>
+        <div class="copy">
+          <div class="hl hl-grad">People +<br>Agents.</div>
+          <div class="sub"><strong>Working together.</strong><br>Driving business results.</div>
+        </div>
+      </div>
+      <p class="card-desc">ה-aha moment: הניצוץ (spark) בין הדמויות — הרגע שבו שני העולמות נפגשים. פשוט, חזותי, מיידי.</p>
+    </div>
+
+    <!-- ─── B: STAT FIRST ─── -->
+    <div class="card">
+      <div class="card-meta">
+        <span class="card-tag">B</span>
+        <span class="card-name">Stat First — Proof as the hook</span>
+      </div>
+      <div class="hero-b">
+        <div class="grid-bg"></div>
+        <div class="glow"></div>
+        <p class="eyebrow-tag tag">Monday on Monday</p>
+        <div class="big-num hl-grad">5,117</div>
+        <div class="num-label"><b>agents built</b> by monday people —<br>not just engineers. Everyone.</div>
+        <div class="rule"></div>
+        <div class="hl hl-grad">That's what people<br>and agents do<br>together.</div>
+        <div class="sub">When your team and AI agents work as one,<br>the results compound across every department.</div>
+        <div class="av-row">
+          <img class="av" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/Marketing.png" alt="">
+          <img class="av" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/Sales.png" alt="">
+          <img class="av" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/HR.png" alt="">
+          <img class="av" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/IT.png" alt="">
+          <div class="av-more">+5k</div>
+        </div>
+      </div>
+      <p class="card-desc">ה-aha moment: 5,117 — המספר הוא הטיעון. Proof שזה קורה עכשיו, בתוך monday עצמה.</p>
+    </div>
+
+    <!-- ─── C: CONVERGENCE ─── -->
+    <div class="card">
+      <div class="card-meta">
+        <span class="card-tag">C</span>
+        <span class="card-name">Convergence — The equation</span>
+      </div>
+      <div class="hero-c">
+        <div class="glow-top"></div>
+        <div class="top">
+          <img class="logo-img" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/monday%20Logo/monday.com%20Logo.png" alt="monday.com">
+          <span class="eyebrow-tag">AI Work Platform</span>
+        </div>
+        <div class="equation">
+          <div class="chip">
+            <img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/5%20layers/Human%20chip%201.png" alt="Human">
+            <div class="chip-text">
+              <div class="name">Your team</div>
+              <div class="role">People</div>
+            </div>
+          </div>
+          <div class="op">+</div>
+          <div class="chip">
+            <img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/5%20layers/Agents%20chip%201.png" alt="Agent">
+            <div class="chip-text">
+              <div class="name">AI Agents</div>
+              <div class="role">Always on</div>
+            </div>
+          </div>
+        </div>
+        <div class="result-pill">
+          <span class="result-dot"></span>
+          Business results
+        </div>
+        <div class="hl hl-grad">Better together<br>than apart.</div>
+        <div class="sub" style="margin-top:14px">
+          People bring <em>judgment</em>.<br>
+          Agents bring <em>scale</em>.<br>
+          monday brings them <em>together</em>.
+        </div>
+      </div>
+      <p class="card-desc">ה-aha moment: הנוסחה — People + Agents = Results. ה-pill הסגול מוציא את ה-outcome ויזואלית.</p>
+    </div>
+
+    <!-- ─── D: REAL STORY ─── -->
+    <div class="card">
+      <div class="card-meta">
+        <span class="card-tag">D</span>
+        <span class="card-name">Real Story — Video + proof</span>
+      </div>
+      <div class="hero-d">
+        <div class="vid-wrap">
+          <video autoplay muted loop playsinline>
+            <source src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Video/roni_allison_product.mp4" type="video/mp4">
+          </video>
+          <div class="vid-fade"></div>
+          <div class="vid-chip">Roni &amp; Allison · <b>Product</b></div>
+        </div>
+        <div class="copy">
+          <p class="eyebrow-tag tag">Monday on Monday</p>
+          <div class="hl hl-grad">Real people.<br>Real agents.<br>Real results.</div>
+          <div class="sub">See how monday's own teams turned everyday work challenges into working agents — across every department.</div>
+          <div class="stats">
+            <div class="stat">
+              <div class="stat-num">5,117</div>
+              <div class="stat-lbl">agents built<br>internally</div>
+            </div>
+            <div class="stat-sep"></div>
+            <div class="stat">
+              <div class="stat-num">4</div>
+              <div class="stat-lbl">departments<br>transformed</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="card-desc">ה-aha moment: הוידאו האמיתי — אנשים שאתה מזהה, תוצאות שאתה מאמין להן. הכי אותנטי.</p>
+    </div>
+
+  </div>
+</body>
+</html>
