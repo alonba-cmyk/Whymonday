@@ -103,8 +103,6 @@
     .copy {
       text-align: center;
       padding: 0 18px;
-      opacity: 0;
-      animation: fadeIn .6s ease forwards .5s;
     }
     .hl {
       font-size: clamp(26px, 6.8vw, 40px);
@@ -114,17 +112,15 @@
       background: linear-gradient(140deg, #fff 45%, rgba(255,255,255,0.45));
       -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     }
-
-    /* Cursor */
-    .cursor {
-      display: inline-block;
-      width: 2px; height: .85em;
-      background: var(--purple);
-      vertical-align: middle;
-      margin-left: 2px;
-      animation: blink .7s step-end infinite;
+    .hl-line {
+      display: block;
+      opacity: 0;
+      transform: translateY(5px);
+      animation: lineIn .6s ease forwards;
     }
-    .cursor.done { animation: none; opacity: 0; }
+    .hl-line:nth-child(1) { animation-delay: .35s; }
+    .hl-line:nth-child(2) { animation-delay: .5s; }
+    .hl-line:nth-child(3) { animation-delay: .65s; }
 
     /* Replay — ghost */
     .replay {
@@ -140,13 +136,8 @@
       from { opacity: 0; transform: translateY(10px); }
       to   { opacity: 1; transform: translateY(0); }
     }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to   { opacity: 1; }
-    }
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50%       { opacity: 0; }
+    @keyframes lineIn {
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
@@ -171,7 +162,11 @@
 
     <div class="copy-wrap">
       <div class="copy">
-        <div class="hl" id="hl"><span class="cursor" id="cursor"></span></div>
+        <div class="hl" id="hl">
+          <span class="hl-line">People and agents</span>
+          <span class="hl-line">working together</span>
+          <span class="hl-line">driving business results.</span>
+        </div>
       </div>
     </div>
 
@@ -179,45 +174,24 @@
   </div>
 
   <script>
-    const TEXT = 'People and agents\nworking together\ndriving business results.';
-    const CHAR_DELAY = 40;
-    const START_DELAY = 600;
-
-    const hlEl      = document.getElementById('hl');
-    const cursor    = document.getElementById('cursor');
     const charsEl   = document.getElementById('chars');
     const replayBtn = document.getElementById('replayBtn');
-
+    const lines     = document.querySelectorAll('.hl-line');
     let timer = null;
 
-    function reset() {
+    function start() {
       clearTimeout(timer);
-      hlEl.innerHTML = '';
-      hlEl.appendChild(cursor);
-      cursor.classList.remove('done');
       charsEl.classList.remove('entered');
-    }
 
-    function type(fullText, i = 0) {
-      if (i === 0) { hlEl.innerHTML = ''; hlEl.appendChild(cursor); }
-      if (i < fullText.length) {
-        const ch = fullText[i];
-        if (ch === '\n') {
-          hlEl.insertBefore(document.createElement('br'), cursor);
-        } else {
-          hlEl.insertBefore(document.createTextNode(ch), cursor);
-        }
-        timer = setTimeout(() => type(fullText, i + 1), CHAR_DELAY);
-      } else {
-        cursor.classList.add('done');
-        timer = setTimeout(() => charsEl.classList.add('entered'), 120);
-      }
-    }
+      lines.forEach(el => { el.style.animationName = 'none'; });
+      void lines[0].offsetWidth; // force reflow
+      lines.forEach(el => { el.style.animationName = ''; });
 
-    function start() { reset(); timer = setTimeout(() => type(TEXT), START_DELAY); }
+      timer = setTimeout(() => charsEl.classList.add('entered'), 900);
+    }
 
     replayBtn.addEventListener('click', start);
-    start();
+    setTimeout(() => charsEl.classList.add('entered'), 900);
   </script>
 
 </body>
