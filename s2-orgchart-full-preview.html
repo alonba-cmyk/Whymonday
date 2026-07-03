@@ -116,6 +116,9 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
 .silo-box { background:rgba(255,255,255,.02); border:1px solid rgba(255,255,255,.09); border-radius:12px; padding:12px 14px 14px; display:flex; flex-direction:column; align-items:center; gap:8px; }
 .silo-label { font-size:8.5px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:rgba(255,255,255,.32); margin:0; }
 .silo-divider { align-self:center; width:1px; height:64px; margin:0 16px; background:repeating-linear-gradient(to bottom, rgba(255,255,255,.2) 0 4px, transparent 4px 9px); }
+.s3b-reasons { display:flex; flex-wrap:wrap; justify-content:center; gap:8px; margin-top:16px; }
+.s3b-reason { display:inline-flex; align-items:center; gap:6px; font-size:10px; color:rgba(255,255,255,.55); background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.1); border-radius:100px; padding:5px 12px; }
+.s3b-reason-dot { width:5px; height:5px; border-radius:50%; background:var(--purple); flex-shrink:0; }
 /* S2 */
 #s2 { text-align:center; }
 .shift-wrap { max-width:1060px; width:100%; }
@@ -421,6 +424,8 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
   .pair-dept { font-size: 7px; }
   .pair-agent { font-size: 7px; }
   .org-caption { font-size: 10px; margin-top: 14px; padding: 0 12px; }
+  .s3b-reasons { gap: 6px; margin-top: 12px; padding: 0 12px; }
+  .s3b-reason { font-size: 8.5px; padding: 4px 9px; }
   .shift-wrap h2 { font-size: clamp(20px, 4vw, 30px); margin-bottom: 20px; text-align: center; letter-spacing: 0; }
   .shift-wrap h2 br { display: none; }
   .pillars { display: none; }
@@ -937,6 +942,12 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
         </div>
       </div>
       <p class="org-caption warn">Different tools. Different silos. No shared context.</p>
+      <div class="s3b-reasons">
+        <span class="s3b-reason"><span class="s3b-reason-dot"></span>No shared workspace</span>
+        <span class="s3b-reason"><span class="s3b-reason-dot"></span>No one managing them</span>
+        <span class="s3b-reason"><span class="s3b-reason-dot"></span>Lack of context</span>
+        <span class="s3b-reason"><span class="s3b-reason-dot"></span>Siloed output</span>
+      </div>
     </div>
   </div>
 </div>
