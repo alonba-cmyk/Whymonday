@@ -161,13 +161,13 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
 .s3b-char { position:absolute; bottom:0; height:clamp(280px,62vh,680px); object-fit:contain; opacity:0.32; filter:grayscale(0.3); }
 .s3b-char-human { left:-30px; }
 .s3b-char-agent { right:-30px; }
-.s3b-divider { position:absolute; left:50%; top:0; bottom:0; width:1px; transform:translateX(-50%); background:linear-gradient(to bottom,transparent,rgba(239,68,68,0.28) 25%,rgba(239,68,68,0.28) 75%,transparent); pointer-events:none; z-index:1; }
+.s3b-divider { position:absolute; left:50%; top:0; bottom:0; width:1px; transform:translateX(-50%); background:linear-gradient(to bottom,transparent,rgba(97,97,255,0.28) 25%,rgba(97,97,255,0.28) 75%,transparent); pointer-events:none; z-index:1; }
 .s3b-content { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:20px; padding:0 clamp(200px,24vw,320px); z-index:10; }
 #s3b .eyebrow { color:var(--purple); margin-bottom:4px; text-align:center; }
 #s3b h2 { font-size:clamp(22px,2.6vw,38px); font-weight:700; line-height:1.2; text-align:center; margin-bottom:8px; }
 .s3b-cards { display:flex; flex-direction:column; gap:10px; width:100%; }
-.s3b-card { display:flex; align-items:center; gap:12px; background:rgba(10,10,14,0.62); border:1px solid rgba(239,68,68,0.4); border-radius:10px; padding:13px 16px; box-shadow:0 4px 18px rgba(0,0,0,0.35); }
-.s3b-dot { width:6px; height:6px; border-radius:50%; background:#ef4444; flex-shrink:0; }
+.s3b-card { display:flex; align-items:center; gap:12px; background:rgba(10,10,14,0.62); border:1px solid rgba(97,97,255,0.35); border-radius:10px; padding:13px 16px; box-shadow:0 4px 18px rgba(0,0,0,0.35); }
+.s3b-dot { width:6px; height:6px; border-radius:50%; background:var(--purple); flex-shrink:0; }
 .s3b-card-title { font-size:13px; font-weight:700; color:#fff; margin-bottom:2px; }
 .s3b-card-desc { font-size:11px; color:rgba(255,255,255,0.55); line-height:1.5; }
 .s3b-mob-half { display:none; }
@@ -394,7 +394,7 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
   .s3b-mob-left img { right: -20px; }
   .s3b-mob-right { right: 0; width: 50%; }
   .s3b-mob-right img { left: 22px; }
-  .s3b-divider { top: auto; height: 44%; bottom: 0; background: linear-gradient(to bottom, rgba(239,68,68,0.3), transparent); }
+  .s3b-divider { top: auto; height: 44%; bottom: 0; background: linear-gradient(to bottom, rgba(97,97,255,0.3), transparent); }
   .s3b-glow-l { left: -20px; top: 35%; transform: none; width: 180px; height: 180px; filter: blur(70px); opacity: 0.06; }
   .s3b-glow-r { right: -20px; top: 35%; transform: none; width: 180px; height: 180px; filter: blur(70px); opacity: 0.06; }
   .s3b-content { padding: 52px 20px 0; justify-content: flex-start; align-items: stretch; gap: 0; text-align: center; }
@@ -725,7 +725,7 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
 
 <div class="slide" id="s2">
   <div class="shift-wrap">
-    <p class="eyebrow">What's changed</p>
+    <p class="eyebrow">Agents Change That</p>
     <h2>Meet your new teammates.</h2>
     <p class="shift-sub">Agents aren't tools you prompt — they join your team, take on tasks, and scale your capacity.</p>
     <div class="ai-logos">
@@ -793,51 +793,13 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
   <div class="s3b-mob-half s3b-mob-right"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/Agent.png" alt=""></div>
   <div class="s3b-divider"></div>
   <div class="s3b-content">
-    <p class="eyebrow">The Gap</p>
-    <h2>Why aren't agents<br>making a difference?</h2>
+    <p class="eyebrow">Like Any Teammate</p>
+    <h2>But agents can't<br>work alone.</h2>
     <div class="s3b-cards" id="s3bCards">
       <div class="s3b-card"><div class="s3b-dot"></div><div><div class="s3b-card-title">No shared workspace</div><div class="s3b-card-desc">Agents work in isolation, disconnected from where the team actually gets things done.</div></div></div>
       <div class="s3b-card"><div class="s3b-dot"></div><div><div class="s3b-card-title">No one managing them</div><div class="s3b-card-desc">Nobody owns them, tracks them, or keeps them aligned with what the business needs.</div></div></div>
       <div class="s3b-card"><div class="s3b-dot"></div><div><div class="s3b-card-title">Lack of context</div><div class="s3b-card-desc">Agents without business context can't act with real purpose.</div></div></div>
       <div class="s3b-card"><div class="s3b-dot"></div><div><div class="s3b-card-title">Siloed Output</div><div class="s3b-card-desc">Agent output stays isolated, with no impact on the organization.</div></div></div>
-    </div>
-  </div>
-</div>
-
-<div class="slide" id="s4b">
-  <div class="sbs-wrap">
-    <div class="sbs-left">
-      <p class="sbs-eyebrow">The AI Work Platform</p>
-      <h2 class="sbs-heading">How people and agents work together in every department</h2>
-    </div>
-    <div class="sbs-right">
-      <div class="sbs-img-area">
-        <div class="sbs-img active" id="mkt-panel">
-          <div class="mkt-intro" id="mktIntro">
-            <img class="mkt-open-frame" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/Animation/Open%20frame%202.png" alt="">
-            <div class="mkt-textbox-wrap" id="mktChat">
-              <img class="mkt-textbox-img" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/Animation/Text%20box%20empty.png" alt="">
-              <div class="mkt-textbox-text" id="mktChatText"></div>
-            </div>
-          </div>
-          <video id="mktVideo" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/Marketing%20video.mp4" muted playsinline></video>
-        </div>
-        <div class="sbs-img"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/HR.png" alt="HR"></div>
-        <div class="sbs-img"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/IT.png" alt="IT"></div>
-        <div class="sbs-img"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/Sales.png" alt="Sales"></div>
-        <div class="sbs-img"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/OPERATIONS.png" alt="Operations"></div>
-        <div class="sbs-img"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/PRODUCT.png" alt="Product"></div>
-        <div class="sbs-img"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/PMO.png" alt="PMO"></div>
-      </div>
-      <div class="sbs-tabs">
-        <button class="sbs-tab active" onclick="sbsGo(0)">Marketing</button>
-        <button class="sbs-tab" onclick="sbsGo(1)">HR</button>
-        <button class="sbs-tab" onclick="sbsGo(2)">IT</button>
-        <button class="sbs-tab" onclick="sbsGo(3)">Sales</button>
-        <button class="sbs-tab" onclick="sbsGo(4)">Operations</button>
-        <button class="sbs-tab" onclick="sbsGo(5)">Product</button>
-        <button class="sbs-tab" onclick="sbsGo(6)">PMO</button>
-      </div>
     </div>
   </div>
 </div>
@@ -878,6 +840,44 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
       <div class="layer-card-desc" id="layerDesc"></div>
       <div class="layer-card-points" id="layerPoints"></div>
       <div class="layer-card-imgs" id="layerImgs"></div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" id="s4b">
+  <div class="sbs-wrap">
+    <div class="sbs-left">
+      <p class="sbs-eyebrow">The AI Work Platform</p>
+      <h2 class="sbs-heading">How people and agents work together in every department</h2>
+    </div>
+    <div class="sbs-right">
+      <div class="sbs-img-area">
+        <div class="sbs-img active" id="mkt-panel">
+          <div class="mkt-intro" id="mktIntro">
+            <img class="mkt-open-frame" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/Animation/Open%20frame%202.png" alt="">
+            <div class="mkt-textbox-wrap" id="mktChat">
+              <img class="mkt-textbox-img" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/Animation/Text%20box%20empty.png" alt="">
+              <div class="mkt-textbox-text" id="mktChatText"></div>
+            </div>
+          </div>
+          <video id="mktVideo" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/Marketing%20video.mp4" muted playsinline></video>
+        </div>
+        <div class="sbs-img"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/HR.png" alt="HR"></div>
+        <div class="sbs-img"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/IT.png" alt="IT"></div>
+        <div class="sbs-img"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/Sales.png" alt="Sales"></div>
+        <div class="sbs-img"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/OPERATIONS.png" alt="Operations"></div>
+        <div class="sbs-img"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/PRODUCT.png" alt="Product"></div>
+        <div class="sbs-img"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/PMO.png" alt="PMO"></div>
+      </div>
+      <div class="sbs-tabs">
+        <button class="sbs-tab active" onclick="sbsGo(0)">Marketing</button>
+        <button class="sbs-tab" onclick="sbsGo(1)">HR</button>
+        <button class="sbs-tab" onclick="sbsGo(2)">IT</button>
+        <button class="sbs-tab" onclick="sbsGo(3)">Sales</button>
+        <button class="sbs-tab" onclick="sbsGo(4)">Operations</button>
+        <button class="sbs-tab" onclick="sbsGo(5)">Product</button>
+        <button class="sbs-tab" onclick="sbsGo(6)">PMO</button>
+      </div>
     </div>
   </div>
 </div>
@@ -1283,13 +1283,13 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
 
   function onSlideEnter(n) {
     const navDots = document.getElementById('navDots');
-    if (n === 5 && window.innerWidth > 768) navDots.classList.add('bottom-center');
+    if (n === 4 && window.innerWidth > 768) navDots.classList.add('bottom-center');
     else navDots.classList.remove('bottom-center');
     if (n === 8 && window._momSmomEnter) window._momSmomEnter();
     if (n === 2) { if (window.innerWidth <= 768) { pcGoTo(0); pcStart(); } } else { pcStop(); }
-    if (n === 4) { mktPlayIntro(); } else { sbsStopAuto(); }
+    if (n === 5) { mktPlayIntro(); } else { sbsStopAuto(); }
     if (n === 6) { buildDemoPlay(); }
-    if (n === 5 && !layersSpread) {
+    if (n === 4 && !layersSpread) {
       if (window.innerWidth > 768) {
         enterLayersConverged();
       } else {
