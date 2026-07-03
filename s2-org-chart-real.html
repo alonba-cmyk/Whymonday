@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>S2 — Org Chart (Real Assets)</title>
+<style>
+:root{
+  --bg:#f3f3f6; --surface:#ffffff; --ink:#15161c; --muted:#6b6d7a; --line:rgba(20,20,30,.10);
+  --accent:#6161ff; --accent-ink:#4a4ade;
+  --mono-sans: -apple-system, "SF Pro Text", "Segoe UI", system-ui, "Helvetica Neue", Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root{ --bg:#0b0c10; --surface:#111219; --ink:#e9eaf0; --muted:#8f909d; --line:rgba(255,255,255,.09); --accent:#8a8aff; --accent-ink:#a9a9ff; }
+}
+:root[data-theme="dark"]{ --bg:#0b0c10; --surface:#111219; --ink:#e9eaf0; --muted:#8f909d; --line:rgba(255,255,255,.09); --accent:#8a8aff; --accent-ink:#a9a9ff; }
+:root[data-theme="light"]{ --bg:#f3f3f6; --surface:#ffffff; --ink:#15161c; --muted:#6b6d7a; --line:rgba(20,20,30,.10); --accent:#6161ff; --accent-ink:#4a4ade; }
+*,*::before,*::after{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{ background:var(--bg); color:var(--ink); font-family:var(--mono-sans); padding: clamp(24px,5vw,72px) clamp(16px,5vw,32px) 100px; }
+.wrap{ max-width:820px; margin:0 auto; }
+.rtl{ direction:rtl; text-align:right; }
+.kicker{ font-size:11px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--accent-ink); margin-bottom:14px; }
+h1{ font-size:clamp(24px,4vw,34px); font-weight:700; letter-spacing:-0.5px; line-height:1.18; margin:0 0 16px; text-wrap:balance; }
+.brief-box{ border-inline-end:2px solid var(--line); padding-inline-end:16px; margin: 0 0 40px; }
+.brief{ font-size:15px; line-height:1.75; color:var(--muted); max-width:640px; margin:0 0 8px; }
+.brief b{ color:var(--ink); font-weight:600; }
+
+.frame-shell{ border-radius:16px; overflow:hidden; border:1px solid var(--line); background:var(--surface); margin: 0 0 24px; box-shadow: 0 1px 2px rgba(0,0,0,.04); }
+.frame-bar{ display:flex; align-items:center; gap:6px; padding:10px 14px; border-bottom:1px solid var(--line); direction:ltr; }
+.frame-dot{ width:7px; height:7px; border-radius:50%; background:var(--line); }
+.frame-label{ margin-inline-start:8px; font-size:11px; color:var(--muted); font-weight:500; }
+
+.slide-mock{
+  position:relative; aspect-ratio:16/10; background:#000; color:#fff;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  padding: 5% 6%; text-align:center; overflow:hidden; isolation:isolate;
+  font-family: ui-rounded, var(--mono-sans); direction:ltr;
+}
+.slide-mock::before{
+  content:''; position:absolute; top:-30%; left:50%; transform:translateX(-50%);
+  width:60%; height:80%; border-radius:50%;
+  background:radial-gradient(ellipse at center, rgba(97,97,255,.30) 0%, rgba(255,61,87,.10) 45%, transparent 70%);
+  filter:blur(50px); z-index:-1;
+}
+.sm-eyebrow{ font-size:11px; font-weight:700; letter-spacing:3.5px; text-transform:uppercase; color:#6161ff; margin-bottom:12px; }
+.sm-h2{ font-size:clamp(19px,3.2vw,30px); font-weight:700; line-height:1.18; margin:0 0 8px;
+  background:linear-gradient(140deg,#fff 50%,rgba(255,255,255,.45)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.sm-sub{ font-size:clamp(10.5px,1.15vw,13px); font-weight:300; color:rgba(255,255,255,.5); max-width:460px; margin:0 auto 26px; line-height:1.6; }
+
+/* ---- Org chart with real pairs ---- */
+.org-wrap{ display:flex; flex-direction:column; align-items:center; }
+.org-root{
+  font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase;
+  color:#fff; background:rgba(97,97,255,.14); border:1px solid rgba(97,97,255,.5);
+  border-radius:100px; padding:8px 20px;
+}
+.org-stem{ width:1px; height:16px; background:rgba(255,255,255,.2); }
+.org-children{ display:flex; justify-content:center; gap:18px; position:relative; padding-top:16px; flex-wrap:wrap; }
+.org-children::before{ content:''; position:absolute; top:0; left:6%; right:6%; height:1px; background:rgba(255,255,255,.2); }
+.org-child{ display:flex; flex-direction:column; align-items:center; }
+.org-child::before{ content:''; width:1px; height:16px; background:rgba(255,255,255,.2); }
+
+.pair-card{
+  display:flex; align-items:center; gap:0; background:rgba(255,255,255,.045);
+  border:1px solid rgba(255,255,255,.14); border-radius:12px; padding:10px 14px 10px 10px;
+  text-align:left;
+}
+.pair-avs{ display:flex; align-items:center; flex-shrink:0; margin-inline-end:10px; }
+.pair-av{ width:38px; height:38px; border-radius:50%; object-fit:cover; display:block; border:2px solid #0a0a0e; background:#222; }
+.pair-av.person{ position:relative; z-index:2; }
+.pair-av.agent{ margin-left:-12px; z-index:1; border-color:#00d2d2; }
+.pair-text{ display:flex; flex-direction:column; gap:1px; }
+.pair-name{ font-size:10.5px; font-weight:700; color:#fff; line-height:1.25; }
+.pair-dept{ font-size:7.5px; font-weight:600; letter-spacing:.5px; text-transform:uppercase; color:rgba(255,255,255,.4); }
+.pair-agent{ font-size:8.5px; color:#00d2d2; font-weight:600; margin-top:2px; }
+
+.org-caption{ margin-top:20px; font-size:11px; color:rgba(255,255,255,.5); max-width:380px; line-height:1.6; }
+.org-caption b{ color:#fff; font-weight:700; }
+
+.rationale{ display:grid; grid-template-columns: auto 1fr; gap:8px 14px; font-size:13.5px; line-height:1.65; }
+.rationale dt{ font-weight:700; color:var(--ink); white-space:nowrap; }
+.rationale dd{ margin:0; color:var(--muted); }
+.rationale dd b{ color:var(--ink); font-weight:600; }
+
+@media (max-width:640px){
+  .rationale{ grid-template-columns: 1fr; gap:2px 0; }
+  .rationale dt{ margin-top:8px; }
+  .org-children{ gap:10px; }
+  .pair-card{ padding:8px 10px 8px 8px; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <p class="kicker">S2 — Org Chart, Real Pairs</p>
+  <h1>Variant E, rebuilt with the deck's real builders and their real agents.</h1>
+  <div class="brief-box rtl" dir="rtl">
+    <p class="brief">אותו רעיון של E — עץ ארגוני שטוח, "Your Team" למעלה — אבל במקום ראשי-תיבות בעיגול צבעוני, ארבעה <b>זוגות אמיתיים</b>: אנשים אמיתיים מ-monday עם התמונות שלהם, כל אחד לצד הסוכן האמיתי שהם בנו (מ-<i>Monday on Monday</i>, smom). זו לא דוגמה היפותטית — זה קורה כבר.</p>
+  </div>
+
+  <div class="frame-shell">
+    <div class="frame-bar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-label">mondaystorydeck — S2</span></div>
+    <div class="slide-mock">
+      <p class="sm-eyebrow">Agents Change That</p>
+      <h2 class="sm-h2">Meet your new teammates.</h2>
+      <p class="sm-sub">Agents aren't tools you prompt — they join your team, take on tasks, and scale your capacity.</p>
+
+      <div class="org-wrap">
+        <div class="org-root">Your Team</div>
+        <div class="org-stem"></div>
+        <div class="org-children">
+
+          <div class="org-child">
+            <div class="pair-card">
+              <div class="pair-avs">
+                <img class="pair-av person" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/roni-rebish.png" alt="Roni Rebish">
+                <img class="pair-av agent" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/New%20agents%20images/agent-marketing-competitor-research-agent.webp" alt="Allison">
+              </div>
+              <div class="pair-text">
+                <span class="pair-name">Roni Rebish</span>
+                <span class="pair-dept">Product</span>
+                <span class="pair-agent">+ Allison</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="org-child">
+            <div class="pair-card">
+              <div class="pair-avs">
+                <img class="pair-av person" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/ran-levgoren.png" alt="Ran Levgoren">
+                <img class="pair-av agent" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/New%20agents%20images/agent-sales-contact-duplicates-finder.webp" alt="Moti">
+              </div>
+              <div class="pair-text">
+                <span class="pair-name">Ran Levgoren</span>
+                <span class="pair-dept">Sales</span>
+                <span class="pair-agent">+ Moti</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="org-child">
+            <div class="pair-card">
+              <div class="pair-avs">
+                <img class="pair-av person" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/osher-mayor.png" alt="Osher Mayor">
+                <img class="pair-av agent" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/New%20agents%20images/agent-marketing-marketing-image-generator.webp" alt="Riki Shula">
+              </div>
+              <div class="pair-text">
+                <span class="pair-name">Osher Mayor</span>
+                <span class="pair-dept">Marketing</span>
+                <span class="pair-agent">+ Riki Shula</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="org-child">
+            <div class="pair-card">
+              <div class="pair-avs">
+                <img class="pair-av person" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/amit-frishberg.png" alt="Amit Frishberg">
+                <img class="pair-av agent" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/New%20agents%20images/agent-engineering-competitor-research-agent.webp" alt="Petro">
+              </div>
+              <div class="pair-text">
+                <span class="pair-name">Amit Frishberg</span>
+                <span class="pair-dept">Engineering</span>
+                <span class="pair-agent">+ Petro</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <p class="org-caption">Four of <b>5,117 agents</b> built by monday people — each one started as someone's daily frustration.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <dl class="rationale rtl" dir="rtl">
+    <dt>הרעיון</dt><dd>אותו עץ ארגוני שטוח כמו E, אבל כל "ילד" הוא זוג אמיתי — <b>תמונה אמיתית של עובד monday + התמונה האמיתית של הסוכן שהוא בנה</b> (בדיוק הדאטה של סליידת smom בהמשך הדק). הכיתוב התחתון מצטט את הסטטיסטיקה האמיתית משם: 5,117 סוכנים.</dd>
+    <dt>מה זה פותר</dt><dd>ה"aha" לא מגיע מהעיצוב — הוא מגיע מזה שהצופה קולט שזה <b>לא קונספט, זה כבר קרה</b>. זה גם שותל ציפייה: מי שרואה את הזוגות פה, יזהה אותם שוב ב-smom ויקבל "רגע הכרה" שני.</dd>
+    <dt>המחיר</dt><dd>קושר את הסליידה לזהות ספציפית של 4 אנשים אמיתיים — אם מישהו מהם עוזב את החברה או שהסוכן מוחלף, הסליידה צריכה עדכון (בניגוד לגרסה עם שמות פיקטיביים).</dd>
+  </dl>
+
+</div>
+</body>
+</html>

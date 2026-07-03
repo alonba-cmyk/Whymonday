@@ -1,0 +1,461 @@
+<title>S2 Visual Variants — "Meet Your New Teammates"</title>
+<style>
+:root{
+  --bg:#f3f3f6; --surface:#ffffff; --ink:#15161c; --muted:#6b6d7a; --line:rgba(20,20,30,.10);
+  --accent:#6161ff; --accent-ink:#4a4ade;
+  --mono-sans: -apple-system, "SF Pro Text", "Segoe UI", system-ui, "Helvetica Neue", Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root{ --bg:#0b0c10; --surface:#111219; --ink:#e9eaf0; --muted:#8f909d; --line:rgba(255,255,255,.09); --accent:#8a8aff; --accent-ink:#a9a9ff; }
+}
+:root[data-theme="dark"]{ --bg:#0b0c10; --surface:#111219; --ink:#e9eaf0; --muted:#8f909d; --line:rgba(255,255,255,.09); --accent:#8a8aff; --accent-ink:#a9a9ff; }
+:root[data-theme="light"]{ --bg:#f3f3f6; --surface:#ffffff; --ink:#15161c; --muted:#6b6d7a; --line:rgba(20,20,30,.10); --accent:#6161ff; --accent-ink:#4a4ade; }
+
+*,*::before,*::after{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  background:var(--bg); color:var(--ink); font-family:var(--mono-sans);
+  padding: clamp(24px,5vw,72px) clamp(16px,5vw,32px) 100px;
+}
+.wrap{ max-width:920px; margin:0 auto; }
+.rtl{ direction:rtl; text-align:right; }
+.brief-box.rtl{ border-inline-start:none; border-inline-end:2px solid var(--line); padding-inline-start:0; padding-inline-end:16px; }
+.rationale.rtl{ direction:rtl; }
+.variant-tag.rtl{ direction:rtl; }
+
+/* ---- Intro ---- */
+.kicker{ font-size:11px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--accent-ink); margin-bottom:14px; }
+h1{ font-size:clamp(26px,4vw,38px); font-weight:700; letter-spacing:-0.5px; line-height:1.15; margin:0 0 14px; text-wrap:balance; }
+.brief{ font-size:15px; line-height:1.7; color:var(--muted); max-width:640px; margin:0 0 8px; }
+.brief b{ color:var(--ink); font-weight:600; }
+.brief-box{ border-inline-start:2px solid var(--line); padding-inline-start:16px; margin: 22px 0 40px; }
+
+.jumpnav{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom:56px; }
+.jumpnav a{
+  font-size:12px; font-weight:600; color:var(--ink); text-decoration:none;
+  border:1px solid var(--line); border-radius:100px; padding:7px 14px;
+  transition:border-color .15s, color .15s;
+}
+.jumpnav a:hover, .jumpnav a:focus-visible{ border-color:var(--accent); color:var(--accent-ink); outline:none; }
+
+/* ---- Variant block ---- */
+.variant{ margin-bottom:76px; scroll-margin-top:24px; }
+.variant-head{ display:flex; align-items:baseline; gap:12px; margin-bottom:6px; flex-wrap:wrap; }
+.variant-letter{
+  font-size:12px; font-weight:800; color:var(--surface); background:var(--accent);
+  width:22px; height:22px; border-radius:6px; display:inline-flex; align-items:center; justify-content:center;
+  flex-shrink:0;
+}
+.variant-name{ font-size:18px; font-weight:700; letter-spacing:-0.2px; }
+.variant-tag{ font-size:11px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); }
+
+/* Browser-chrome frame around each mockup */
+.frame-shell{
+  border-radius:16px; overflow:hidden; border:1px solid var(--line);
+  background:var(--surface); margin: 18px 0 16px;
+  box-shadow: 0 1px 2px rgba(0,0,0,.04);
+}
+.frame-bar{
+  display:flex; align-items:center; gap:6px; padding:10px 14px; border-bottom:1px solid var(--line);
+}
+.frame-dot{ width:7px; height:7px; border-radius:50%; background:var(--line); }
+.frame-label{ margin-inline-start:8px; font-size:11px; color:var(--muted); font-weight:500; }
+
+/* The actual dark slide recreation — fixed dark theme regardless of page theme */
+.slide-mock{
+  --sm-purple:#6161ff; --sm-teal:#00d2d2; --sm-dim:rgba(255,255,255,.45); --sm-border:rgba(255,255,255,.09); --sm-card:rgba(255,255,255,.045);
+  position:relative; aspect-ratio:16/9.6; background:#000; color:#fff;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  padding: 6% 7%; text-align:center; overflow:hidden; isolation:isolate;
+  font-family: ui-rounded, var(--mono-sans);
+}
+.slide-mock::before{
+  content:''; position:absolute; top:-30%; left:50%; transform:translateX(-50%);
+  width:60%; height:80%; border-radius:50%;
+  background:radial-gradient(ellipse at center, rgba(97,97,255,.30) 0%, rgba(255,61,87,.10) 45%, transparent 70%);
+  filter:blur(50px); z-index:-1;
+}
+.sm-eyebrow{ font-size:10px; font-weight:700; letter-spacing:3.5px; text-transform:uppercase; color:var(--sm-purple); margin-bottom:12px; }
+.sm-h2{
+  font-size:clamp(17px,3vw,27px); font-weight:700; line-height:1.18; margin:0 0 8px;
+  background:linear-gradient(140deg,#fff 50%,rgba(255,255,255,.45));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+}
+.sm-sub{ font-size:clamp(9.5px,1.05vw,12px); font-weight:300; color:rgba(255,255,255,.5); max-width:430px; margin:0 auto 22px; line-height:1.6; }
+
+/* Rationale */
+.rationale{ display:grid; grid-template-columns: auto 1fr; gap:8px 14px; font-size:13.5px; line-height:1.65; }
+.rationale dt{ font-weight:700; color:var(--ink); white-space:nowrap; }
+.rationale dd{ margin:0; color:var(--muted); }
+.rationale dd b{ color:var(--ink); font-weight:600; }
+
+/* ============ Variant A: Roster ============ */
+.roster-row{ display:flex; gap:14px; justify-content:center; flex-wrap:wrap; max-width:520px; }
+.roster-chip{ display:flex; flex-direction:column; align-items:center; gap:6px; width:66px; }
+.roster-av{
+  width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  font-size:12px; font-weight:700; color:#fff; flex-shrink:0; position:relative;
+}
+.roster-av::after{
+  content:''; position:absolute; right:-1px; bottom:-1px; width:12px; height:12px; border-radius:50%;
+  background:#00d2d2; border:2px solid #000;
+}
+.roster-name{ font-size:9.5px; font-weight:700; color:#fff; line-height:1.2; }
+.roster-role{ font-size:7.5px; color:rgba(255,255,255,.42); line-height:1.2; }
+
+/* ============ Variant B: Handoff ============ */
+.handoff-row{ display:flex; align-items:center; gap:10px; }
+.ho-node{ display:flex; flex-direction:column; align-items:center; gap:7px; }
+.ho-av{ width:46px; height:46px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; color:#fff; }
+.ho-label{ font-size:9px; color:rgba(255,255,255,.55); font-weight:600; }
+.ho-arrow{ display:flex; flex-direction:column; align-items:center; gap:4px; padding:0 2px; }
+.ho-arrow svg{ width:26px; height:10px; opacity:.5; }
+.ho-arrow span{ font-size:7.5px; color:rgba(255,255,255,.4); white-space:nowrap; }
+.ho-outcome{ font-size:9px; font-weight:700; color:#00d2d2; background:rgba(0,210,210,.1); border:1px solid rgba(0,210,210,.3); border-radius:100px; padding:4px 10px; margin-top:6px; }
+
+/* ============ Variant C: Team wall ============ */
+.wall-stack{ display:flex; }
+.wall-av{
+  width:44px; height:44px; border-radius:50%; border:2.5px solid #000; margin-left:-12px;
+  display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:700; color:#fff;
+}
+.wall-stack .wall-av:first-child{ margin-left:0; }
+.wall-caption{ margin-top:16px; font-size:10.5px; color:rgba(255,255,255,.5); }
+.wall-caption b{ color:#fff; font-weight:700; }
+
+/* ============ Variant D: Capacity meter ============ */
+.meter-wrap{ display:flex; flex-direction:column; gap:10px; width:100%; max-width:400px; }
+.meter-row{ display:grid; grid-template-columns: 74px 1fr auto; align-items:center; gap:10px; }
+.meter-tag{ font-size:8.5px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:rgba(255,255,255,.4); text-align:right; }
+.meter-track{ height:16px; border-radius:5px; background:rgba(255,255,255,.06); overflow:hidden; display:flex; }
+.meter-seg{ height:100%; }
+.meter-val{ font-size:12px; font-weight:800; color:#fff; font-variant-numeric:tabular-nums; }
+.meter-big{ margin-top:16px; font-size:26px; font-weight:800; color:#fff; }
+.meter-big span{ color:#00d2d2; }
+
+/* ============ Variant E/F: Org chart ============ */
+.org-wrap{ display:flex; flex-direction:column; align-items:center; }
+.org-node{
+  display:flex; align-items:center; gap:8px; background:rgba(255,255,255,.045);
+  border:1px solid rgba(255,255,255,.14); border-radius:9px; padding:7px 12px;
+}
+.org-node.root{ border-color:rgba(97,97,255,.5); background:rgba(97,97,255,.09); padding:8px 16px; }
+.org-node-av{
+  width:24px; height:24px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  font-size:9.5px; font-weight:700; color:#fff; flex-shrink:0; position:relative;
+}
+.org-node-av.is-agent::after{
+  content:''; position:absolute; right:-1px; bottom:-1px; width:7px; height:7px; border-radius:50%;
+  background:#00d2d2; border:1.5px solid #000;
+}
+.org-node-text{ text-align:left; }
+.org-node-name{ font-size:9px; font-weight:700; color:#fff; line-height:1.2; }
+.org-node-role{ font-size:6.8px; color:rgba(255,255,255,.42); line-height:1.2; }
+.org-node-title{ font-size:9.5px; font-weight:700; color:#fff; }
+
+.org-stem{ width:1px; height:14px; background:rgba(255,255,255,.2); }
+.org-stem.short{ height:10px; }
+
+.org-children{ display:flex; justify-content:center; gap:16px; position:relative; padding-top:14px; }
+.org-children::before{
+  content:''; position:absolute; top:0; left:8%; right:8%; height:1px; background:rgba(255,255,255,.2);
+}
+.org-children.two::before{ left:20%; right:20%; }
+.org-child{ display:flex; flex-direction:column; align-items:center; gap:0; }
+.org-child::before{ content:''; width:1px; height:14px; background:rgba(255,255,255,.2); }
+
+.org-branch{ display:flex; flex-direction:column; align-items:center; }
+.org-branch-label{
+  font-size:7.5px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase;
+  color:rgba(255,255,255,.55); background:rgba(255,255,255,.06); border-radius:100px;
+  padding:3px 10px; margin-bottom:0;
+}
+.org-branch .org-children{ gap:10px; }
+.org-branch .org-children::before{ left:15%; right:15%; }
+
+.org-unify{
+  margin-top:14px; font-size:9.5px; font-weight:700; color:#00d2d2;
+  border:1px solid rgba(0,210,210,.3); background:rgba(0,210,210,.08);
+  border-radius:100px; padding:5px 14px;
+}
+
+@media (max-width:640px){
+  .rationale{ grid-template-columns: 1fr; gap:2px 0; }
+  .rationale dt{ margin-top:8px; }
+}
+</style>
+
+<div class="wrap">
+
+  <p class="kicker">S2 — Slide Redesign Review</p>
+  <h1>The AI-logo row doesn't say "teammate." Here are six ways it could.</h1>
+  <div class="brief-box rtl" dir="rtl">
+    <p class="brief">כותרת הסליידה השתנתה ל-<b>"Meet your new teammates"</b>, אבל הוויזואל מתחתיה — שורת לוגואים של monday / ChatGPT / Gemini / Claude / Copilot — נשאר מהמסר הישן ("אילו מודלים אנחנו תומכים"). זה לא מדגים "חבר צוות", וגם חופף לתוכן שכבר מופיע בהמשך (שכבת ה-Multi Agent ב-S5).</p>
+    <p class="brief">שישה כיוונים חלופיים לאותו מקום בסליידה — כותרת ותת-כותרת נשארות זהות בכולם, כדי להשוות רק את הוויזואל. E ו-F הם שני הגרסאות של "org chart".</p>
+  </div>
+
+  <nav class="jumpnav">
+    <a href="#a">A · The Roster</a>
+    <a href="#b">B · The Handoff</a>
+    <a href="#c">C · The Team Wall</a>
+    <a href="#d">D · The Capacity Meter</a>
+    <a href="#e">E · Org Chart — Flat</a>
+    <a href="#f">F · Org Chart — Two Branches</a>
+  </nav>
+
+  <!-- ============ VARIANT A ============ -->
+  <section class="variant" id="a">
+    <div class="variant-head">
+      <span class="variant-letter">A</span>
+      <span class="variant-name">The Roster</span>
+      <span class="variant-tag rtl" dir="rtl">שמות אמיתיים במקום לוגואים</span>
+    </div>
+
+    <div class="frame-shell">
+      <div class="frame-bar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-label">mondaystorydeck — S2</span></div>
+      <div class="slide-mock">
+        <p class="sm-eyebrow">Agents Change That</p>
+        <h2 class="sm-h2">Meet your new teammates.</h2>
+        <p class="sm-sub">Agents aren't tools you prompt — they join your team, take on tasks, and scale your capacity.</p>
+        <div class="roster-row">
+          <div class="roster-chip"><div class="roster-av" style="background:linear-gradient(160deg,#f48fb1,#c2185b)">J</div><div class="roster-name">Jade</div><div class="roster-role">Brief Creator</div></div>
+          <div class="roster-chip"><div class="roster-av" style="background:linear-gradient(160deg,#7fc8d4,#0d7f92)">K</div><div class="roster-name">Kate</div><div class="roster-role">Roadmap Builder</div></div>
+          <div class="roster-chip"><div class="roster-av" style="background:linear-gradient(160deg,#a89bd9,#4b3b96)">H</div><div class="roster-name">Hugo</div><div class="roster-role">Ticket Triage</div></div>
+          <div class="roster-chip"><div class="roster-av" style="background:linear-gradient(160deg,#f9d27a,#c47f00)">Z</div><div class="roster-name">Zara</div><div class="roster-role">Deal Scorer</div></div>
+          <div class="roster-chip"><div class="roster-av" style="background:linear-gradient(160deg,#85c1ae,#1c6e52)">N</div><div class="roster-name">Nia</div><div class="roster-role">Vendor Research</div></div>
+          <div class="roster-chip"><div class="roster-av" style="background:linear-gradient(160deg,#93c6e7,#1a5f8f)">A</div><div class="roster-name">Allison</div><div class="roster-role">Accessibility</div></div>
+        </div>
+      </div>
+    </div>
+
+    <dl class="rationale rtl" dir="rtl">
+      <dt>הרעיון</dt><dd>שורת לוגואים גנרית → שורת <b>עמיתים בשם פרטי ותפקיד</b>, בדיוק כמו שהיית מציג צוות אנושי. הנקודה הטורקיז מסמנת "סוכן", לא אנושי — אבל הפורמט זהה לגמרי.</dd>
+      <dt>מה זה פותר</dt><dd>הופך את "teammates" ממטאפורה למשהו מוחשי — יש להם שם, תפקיד, ומחלקה. אין בלבול עם "אילו AI providers נתמכים" (זה כבר מכוסה ב-S5).</dd>
+      <dt>המחיר</dt><dd>דורש 6 שמות/תפקידים עקביים — כבר קיימים בדאטה של הדק (S4b), אז אין בעיית תוכן, רק החלטה איזה שישה להציג.</dd>
+    </dl>
+  </section>
+
+  <!-- ============ VARIANT B ============ -->
+  <section class="variant" id="b">
+    <div class="variant-head">
+      <span class="variant-letter">B</span>
+      <span class="variant-name">The Handoff</span>
+      <span class="variant-tag rtl" dir="rtl">מנגנון ההעברה, לא רשימת שמות</span>
+    </div>
+
+    <div class="frame-shell">
+      <div class="frame-bar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-label">mondaystorydeck — S2</span></div>
+      <div class="slide-mock">
+        <p class="sm-eyebrow">Agents Change That</p>
+        <h2 class="sm-h2">Meet your new teammates.</h2>
+        <p class="sm-sub">Agents aren't tools you prompt — they join your team, take on tasks, and scale your capacity.</p>
+        <div class="handoff-row">
+          <div class="ho-node">
+            <div class="ho-av" style="background:linear-gradient(160deg,#5b5bfa,#3737c9)">YOU</div>
+            <div class="ho-label">assign</div>
+          </div>
+          <div class="ho-arrow">
+            <svg viewBox="0 0 26 10" fill="none"><path d="M0 5h22M17 1l5 4-5 4" stroke="#fff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>Q2 campaign brief</span>
+          </div>
+          <div class="ho-node">
+            <div class="ho-av" style="background:linear-gradient(160deg,#00d2d2,#007373)">J</div>
+            <div class="ho-label">Jade · Agent</div>
+          </div>
+          <div class="ho-arrow">
+            <svg viewBox="0 0 26 10" fill="none"><path d="M0 5h22M17 1l5 4-5 4" stroke="#fff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>4 min later</span>
+          </div>
+          <div class="ho-node">
+            <div class="ho-outcome">✓ Brief ready</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <dl class="rationale rtl" dir="rtl">
+      <dt>הרעיון</dt><dd>במקום להראות <i>מי</i> הסוכנים, מראים <b>מה קורה</b> כשמאצילים להם משימה — רצף "אתה מקצה → הסוכן מבצע → תוצאה" בשלושה קודקודים.</dd>
+      <dt>מה זה פותר</dt><dd>ממחיש ישירות את "take on tasks" מתוך הכותרת — לא סטטי, יש בו תנועת עלילה קטנה שאפשר לעקוב אחריה בשנייה אחת.</dd>
+      <dt>המחיר</dt><dd>פחות "צוות גדול" ויותר "דוגמה אחת" — כדאי בעיקר אם רוצים למקד את הסיפור סביב רגע קונקרטי, לא סקירה רחבה.</dd>
+    </dl>
+  </section>
+
+  <!-- ============ VARIANT C ============ -->
+  <section class="variant" id="c">
+    <div class="variant-head">
+      <span class="variant-letter">C</span>
+      <span class="variant-name">The Team Wall</span>
+      <span class="variant-tag rtl" dir="rtl">תמונת צוות אחת, בני אדם וסוכנים מעורבבים</span>
+    </div>
+
+    <div class="frame-shell">
+      <div class="frame-bar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-label">mondaystorydeck — S2</span></div>
+      <div class="slide-mock">
+        <p class="sm-eyebrow">Agents Change That</p>
+        <h2 class="sm-h2">Meet your new teammates.</h2>
+        <p class="sm-sub">Agents aren't tools you prompt — they join your team, take on tasks, and scale your capacity.</p>
+        <div>
+          <div class="wall-stack">
+            <div class="wall-av" style="background:linear-gradient(160deg,#f48fb1,#c2185b)">S</div>
+            <div class="wall-av" style="background:linear-gradient(160deg,#00d2d2,#007373)">J</div>
+            <div class="wall-av" style="background:linear-gradient(160deg,#7fc8d4,#0d7f92)">D</div>
+            <div class="wall-av" style="background:linear-gradient(160deg,#a89bd9,#4b3b96)">N</div>
+            <div class="wall-av" style="background:linear-gradient(160deg,#f9d27a,#c47f00)">K</div>
+            <div class="wall-av" style="background:linear-gradient(160deg,#85c1ae,#1c6e52)">M</div>
+            <div class="wall-av" style="background:linear-gradient(160deg,#93c6e7,#1a5f8f)">H</div>
+            <div class="wall-av" style="background:linear-gradient(160deg,#5b5bfa,#3737c9)">A</div>
+          </div>
+          <p class="wall-caption">Marketing today: <b>3 people, 5 agents</b> — one team.</p>
+        </div>
+      </div>
+    </div>
+
+    <dl class="rationale rtl" dir="rtl">
+      <dt>הרעיון</dt><dd>מחסנית אווטארים חופפת (כמו רשימת "מי בפגישה") שמערבבת בכוונה בני אדם וסוכנים — <b>בלי סימון מי הוא מה</b>. הכיתוב מתחת חושף את היחס.</dd>
+      <dt>מה זה פותר</dt><dd>התמונה הכי קרובה ל"meet your new teammates" באופן מילולי — זו תמונת צוות. אי-ההבחנה הוויזואלית בין אדם לסוכן *היא* הטענה של הכותרת.</dd>
+      <dt>המחיר</dt><dd>הכי עדין/פחות אינפורמטיבי מבין הארבעה — לא מלמד כלום על תפקידים או יכולות, רק על "שייכות". מתאים אם רוצים רגש לפני עובדות.</dd>
+    </dl>
+  </section>
+
+  <!-- ============ VARIANT D ============ -->
+  <section class="variant" id="d">
+    <div class="variant-head">
+      <span class="variant-letter">D</span>
+      <span class="variant-name">The Capacity Meter</span>
+      <span class="variant-tag rtl" dir="rtl">מספר, לא מטאפורה — ל"scale your capacity"</span>
+    </div>
+
+    <div class="frame-shell">
+      <div class="frame-bar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-label">mondaystorydeck — S2</span></div>
+      <div class="slide-mock">
+        <p class="sm-eyebrow">Agents Change That</p>
+        <h2 class="sm-h2">Meet your new teammates.</h2>
+        <p class="sm-sub">Agents aren't tools you prompt — they join your team, take on tasks, and scale your capacity.</p>
+        <div class="meter-wrap">
+          <div class="meter-row">
+            <span class="meter-tag">Just you</span>
+            <div class="meter-track"><div class="meter-seg" style="width:25%; background:#5b5bfa"></div></div>
+            <span class="meter-val">1×</span>
+          </div>
+          <div class="meter-row">
+            <span class="meter-tag">You + agents</span>
+            <div class="meter-track">
+              <div class="meter-seg" style="width:25%; background:#5b5bfa"></div>
+              <div class="meter-seg" style="width:25%; background:#00d2d2"></div>
+              <div class="meter-seg" style="width:25%; background:#2ea8a8"></div>
+              <div class="meter-seg" style="width:25%; background:#1c7a7a"></div>
+            </div>
+            <span class="meter-val">4×</span>
+          </div>
+        </div>
+        <div class="meter-big">Same person. <span>4× the throughput.</span></div>
+      </div>
+    </div>
+
+    <dl class="rationale rtl" dir="rtl">
+      <dt>הרעיון</dt><dd>שני פסי-מדידה — "רק אתה" מול "אתה + סוכנים" — עם סטטיסטיקה גדולה שמכמתת את המילה "capacity" מהתת-כותרת במקום להשאיר אותה מופשטת.</dd>
+      <dt>מה זה פותר</dt><dd>היחיד מהארבעה שמדבר ישירות אל <b>"scale your capacity"</b> ולא רק אל "join your team, take on tasks". טוב לקהל שמונע ממספרים (מנהלים, פיננסים).</dd>
+      <dt>המחיר</dt><dd>ה-4× הוא דוגמה, לא נתון אמיתי מאומת — צריך להיזהר שלא יישמע כהבטחת ROI קונקרטית בלי מקור.</dd>
+    </dl>
+  </section>
+
+  <!-- ============ VARIANT E ============ -->
+  <section class="variant" id="e">
+    <div class="variant-head">
+      <span class="variant-letter">E</span>
+      <span class="variant-name">Org Chart — Flat</span>
+      <span class="variant-tag rtl" dir="rtl">אותו קו דיווח, אדם או סוכן</span>
+    </div>
+
+    <div class="frame-shell">
+      <div class="frame-bar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-label">mondaystorydeck — S2</span></div>
+      <div class="slide-mock">
+        <p class="sm-eyebrow">Agents Change That</p>
+        <h2 class="sm-h2">Meet your new teammates.</h2>
+        <p class="sm-sub">Agents aren't tools you prompt — they join your team, take on tasks, and scale your capacity.</p>
+        <div class="org-wrap">
+          <div class="org-node root">
+            <div class="org-node-av" style="background:linear-gradient(160deg,#f48fb1,#c2185b)">S</div>
+            <div class="org-node-text"><div class="org-node-name">Sophie</div><div class="org-node-role">Marketing Lead</div></div>
+          </div>
+          <div class="org-stem"></div>
+          <div class="org-children">
+            <div class="org-child">
+              <div class="org-node"><div class="org-node-av" style="background:linear-gradient(160deg,#93c6e7,#1a5f8f)">D</div><div class="org-node-text"><div class="org-node-name">Dan</div><div class="org-node-role">Copywriter</div></div></div>
+            </div>
+            <div class="org-child">
+              <div class="org-node"><div class="org-node-av is-agent" style="background:linear-gradient(160deg,#00d2d2,#007373)">J</div><div class="org-node-text"><div class="org-node-name">Jade</div><div class="org-node-role">Brief Creator</div></div></div>
+            </div>
+            <div class="org-child">
+              <div class="org-node"><div class="org-node-av is-agent" style="background:linear-gradient(160deg,#7fc8d4,#0d7f92)">N</div><div class="org-node-text"><div class="org-node-name">Nova</div><div class="org-node-role">Creative Gen.</div></div></div>
+            </div>
+            <div class="org-child">
+              <div class="org-node"><div class="org-node-av" style="background:linear-gradient(160deg,#f9d27a,#c47f00)">P</div><div class="org-node-text"><div class="org-node-name">Priya</div><div class="org-node-role">Designer</div></div></div>
+            </div>
+            <div class="org-child">
+              <div class="org-node"><div class="org-node-av is-agent" style="background:linear-gradient(160deg,#a89bd9,#4b3b96)">M</div><div class="org-node-text"><div class="org-node-name">Milo</div><div class="org-node-role">Ad Optimizer</div></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <dl class="rationale rtl" dir="rtl">
+      <dt>הרעיון</dt><dd>עץ ארגוני קלאסי: <b>Sophie, Marketing Lead</b>, למטה חמישה דיווחים ישירים באותה שורה, באותו עיצוב בדיוק — שני בני אדם, שלושה סוכנים (הנקודה הטורקיז מסמנת סוכן). אין הפרדה חזותית בין "צוות" ל"כלים".</dd>
+      <dt>מה זה פותר</dt><dd>מבטא את "join your team" הכי תרבותית-ארגונית מכל הווריאנטים — הם לא באים בצד, הם <i>בתרשים הארגוני</i>, על אותו קו דיווח כמו בן אדם.</dd>
+      <dt>המחיר</dt><dd>עלול לעורר שאלה לא רצויה: "אז הסוכנים מדווחים ל-Sophie כמו עובדים?" — צריך כיתוב/דיבור נלווה שמבהיר שזו מטאפורה לשיוך צוותי, לא מבנה ניהולי פורמלי.</dd>
+    </dl>
+  </section>
+
+  <!-- ============ VARIANT F ============ -->
+  <section class="variant" id="f">
+    <div class="variant-head">
+      <span class="variant-letter">F</span>
+      <span class="variant-name">Org Chart — Two Branches</span>
+      <span class="variant-tag rtl" dir="rtl">שני ענפים רשמיים שמתאחדים לצוות אחד</span>
+    </div>
+
+    <div class="frame-shell">
+      <div class="frame-bar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-label">mondaystorydeck — S2</span></div>
+      <div class="slide-mock">
+        <p class="sm-eyebrow">Agents Change That</p>
+        <h2 class="sm-h2">Meet your new teammates.</h2>
+        <p class="sm-sub">Agents aren't tools you prompt — they join your team, take on tasks, and scale your capacity.</p>
+        <div class="org-wrap">
+          <div class="org-node root"><div class="org-node-title">Marketing Team</div></div>
+          <div class="org-stem"></div>
+          <div class="org-children two">
+            <div class="org-child">
+              <div class="org-branch">
+                <span class="org-branch-label">People</span>
+                <div class="org-stem short"></div>
+                <div class="org-children">
+                  <div class="org-child"><div class="org-node"><div class="org-node-av" style="background:linear-gradient(160deg,#f48fb1,#c2185b)">S</div><div class="org-node-text"><div class="org-node-name">Sophie</div><div class="org-node-role">Lead</div></div></div></div>
+                  <div class="org-child"><div class="org-node"><div class="org-node-av" style="background:linear-gradient(160deg,#93c6e7,#1a5f8f)">D</div><div class="org-node-text"><div class="org-node-name">Dan</div><div class="org-node-role">Copywriter</div></div></div></div>
+                </div>
+              </div>
+            </div>
+            <div class="org-child">
+              <div class="org-branch">
+                <span class="org-branch-label">Agents</span>
+                <div class="org-stem short"></div>
+                <div class="org-children">
+                  <div class="org-child"><div class="org-node"><div class="org-node-av is-agent" style="background:linear-gradient(160deg,#00d2d2,#007373)">J</div><div class="org-node-text"><div class="org-node-name">Jade</div><div class="org-node-role">Brief Creator</div></div></div></div>
+                  <div class="org-child"><div class="org-node"><div class="org-node-av is-agent" style="background:linear-gradient(160deg,#7fc8d4,#0d7f92)">N</div><div class="org-node-text"><div class="org-node-name">Nova</div><div class="org-node-role">Creative Gen.</div></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="org-unify">One team. One workspace.</div>
+        </div>
+      </div>
+    </div>
+
+    <dl class="rationale rtl" dir="rtl">
+      <dt>הרעיון</dt><dd>ה-Marketing Team מתפצל רשמית לשני ענפים שווי-מעמד — <b>People</b> ו-<b>Agents</b> — ומתחת לכל ענף העלים שלו. פס "One team. One workspace." בתחתית מאחד אותם ויזואלית בחזרה.</dd>
+      <dt>מה זה פותר</dt><dd>נותן לסוכנים <b>מעמד רשמי בתרשים</b> (לא "תוספת" מתחת/בצד) אבל בלי הבלבול של וריאנט E — ברור שהם ענף נפרד, לא "מדווחים" לאותו אדם כמו עובד.</dd>
+      <dt>המחיר</dt><dd>הכי צפוף מבין השישה (שתי רמות היררכיה בתוך סליידה אחת) — עובד טוב יותר בדסקטופ מאשר במובייל, וידרוש טיפול קפדני בגדלי טקסט.</dd>
+    </dl>
+  </section>
+
+</div>
