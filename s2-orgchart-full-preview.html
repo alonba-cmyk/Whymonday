@@ -390,11 +390,12 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
   .ai-logo span { font-size: 8px; }
   .org-wrap { margin-top: 4px; }
   .org-root { font-size: 9px; padding: 6px 14px; }
-  .org-stem { display: none; }
-  .org-children { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding-top: 10px; max-width: 320px; margin: 0 auto; }
+  .org-stem { height: 12px; }
+  .org-children { display: flex; flex-direction: column; align-items: center; gap: 0; padding-top: 0; max-width: 280px; margin: 0 auto; }
   .org-children::before { display: none; }
-  .org-child::before { display: none; }
-  .pair-card { padding: 8px 10px 8px 8px; }
+  .org-child { position: relative; padding-top: 16px; }
+  .org-child::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 1px; height: 16px; background: var(--border); }
+  .pair-card { width: 100%; padding: 8px 10px 8px 8px; }
   .pair-av { width: 30px; height: 30px; }
   .pair-av.agent { margin-left: -10px; }
   .pair-name { font-size: 9.5px; }
