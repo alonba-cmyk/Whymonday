@@ -107,6 +107,15 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
 .pair-agent { font-size:9px; color:var(--teal); font-weight:600; margin-top:2px; }
 .org-caption { margin-top:20px; font-size:12px; color:var(--dim); max-width:420px; line-height:1.6; text-align:center; }
 .org-caption b { color:#fff; font-weight:700; }
+.org-caption.warn { color:rgba(255,255,255,.6); }
+.org-caption.warn::before { content:'⚠ '; color:#e0a030; }
+.org-root.ghost { background:transparent; border-style:dashed; border-color:rgba(255,255,255,.25); opacity:.55; }
+.org-root.ghost .org-root-icon { opacity:.7; }
+.org-stem.ghost { background:none; width:0; border-left:1px dashed rgba(255,255,255,.22); opacity:.6; }
+.silo-row { display:flex; justify-content:center; align-items:stretch; gap:0; flex-wrap:wrap; margin-top:2px; }
+.silo-box { background:rgba(255,255,255,.02); border:1px solid rgba(255,255,255,.09); border-radius:12px; padding:12px 14px 14px; display:flex; flex-direction:column; align-items:center; gap:8px; }
+.silo-label { font-size:8.5px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:rgba(255,255,255,.32); margin:0; }
+.silo-divider { align-self:center; width:1px; height:64px; margin:0 16px; background:repeating-linear-gradient(to bottom, rgba(255,255,255,.2) 0 4px, transparent 4px 9px); }
 /* S2 */
 #s2 { text-align:center; }
 .shift-wrap { max-width:1060px; width:100%; }
@@ -399,10 +408,11 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
   .org-root-icon { height: 10px; }
   .pair-av.agent svg { width: 13px; height: 13px; }
   .org-stem { height: 12px; }
-  .org-children { display: flex; flex-direction: column; align-items: center; gap: 0; padding-top: 0; max-width: 280px; margin: 0 auto; }
-  .org-children::before { display: none; }
-  .org-child { position: relative; padding-top: 16px; }
-  .org-child::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 1px; height: 16px; background: var(--border); }
+  .org-stem.ghost { height: 10px; }
+  .silo-row { display: flex; flex-direction: column; align-items: center; gap: 0; max-width: 280px; margin: 0 auto; }
+  .silo-box { width: 100%; padding: 10px 10px 12px; }
+  .silo-divider { width: 60%; height: 1px; margin: 8px 0; background: repeating-linear-gradient(to right, rgba(255,255,255,.2) 0 4px, transparent 4px 9px); }
+  .silo-label { font-size: 7.5px; }
   .pair-card { width: 100%; padding: 8px 10px 8px 8px; }
   .pair-av { width: 30px; height: 30px; }
   .pair-av.agent { margin-left: -10px; }
@@ -770,10 +780,11 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
     <h2>Meet your new teammates.</h2>
     <p class="shift-sub">Agents aren't tools you prompt — they join your team, take on tasks, and scale your capacity.</p>
     <div class="org-wrap">
-      <div class="org-root"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/monday%20Logo/monday.com%20icon.png" alt="" class="org-root-icon">Your Team</div>
-      <div class="org-stem"></div>
-      <div class="org-children">
-        <div class="org-child">
+      <div class="org-root ghost"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/monday%20Logo/monday.com%20icon.png" alt="" class="org-root-icon">Your Team</div>
+      <div class="org-stem ghost"></div>
+      <div class="silo-row">
+        <div class="silo-box">
+          <p class="silo-label">Product</p>
           <div class="pair-card">
             <div class="pair-avs">
               <img class="pair-av person" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/roni-rebish.png" alt="Roni Rebish">
@@ -781,12 +792,13 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
             </div>
             <div class="pair-text">
               <span class="pair-name">Roni Rebish</span>
-              <span class="pair-dept">Product</span>
               <span class="pair-agent">+ Claude</span>
             </div>
           </div>
         </div>
-        <div class="org-child">
+        <div class="silo-divider"></div>
+        <div class="silo-box">
+          <p class="silo-label">Sales</p>
           <div class="pair-card">
             <div class="pair-avs">
               <img class="pair-av person" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/ran-levgoren.png" alt="Ran Levgoren">
@@ -794,12 +806,13 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
             </div>
             <div class="pair-text">
               <span class="pair-name">Ran Levgoren</span>
-              <span class="pair-dept">Sales</span>
               <span class="pair-agent">+ ChatGPT</span>
             </div>
           </div>
         </div>
-        <div class="org-child">
+        <div class="silo-divider"></div>
+        <div class="silo-box">
+          <p class="silo-label">Marketing</p>
           <div class="pair-card">
             <div class="pair-avs">
               <img class="pair-av person" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/osher-mayor.png" alt="Osher Mayor">
@@ -807,12 +820,13 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
             </div>
             <div class="pair-text">
               <span class="pair-name">Osher Mayor</span>
-              <span class="pair-dept">Marketing</span>
               <span class="pair-agent">+ Gemini</span>
             </div>
           </div>
         </div>
-        <div class="org-child">
+        <div class="silo-divider"></div>
+        <div class="silo-box">
+          <p class="silo-label">Engineering</p>
           <div class="pair-card">
             <div class="pair-avs">
               <img class="pair-av person" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/amit-frishberg.png" alt="Amit Frishberg">
@@ -820,13 +834,12 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
             </div>
             <div class="pair-text">
               <span class="pair-name">Amit Frishberg</span>
-              <span class="pair-dept">Engineering</span>
               <span class="pair-agent">+ Cursor</span>
             </div>
           </div>
         </div>
       </div>
-      <p class="org-caption">Bring your own agent — <b>Claude, ChatGPT, Gemini, Cursor</b>, or build native in monday.</p>
+      <p class="org-caption warn">Different tools. Different silos. No shared context.</p>
     </div>
   </div>
   <!-- OLD VERSION – pillars + carousel (kept for easy revert)
