@@ -154,34 +154,38 @@ html, body { width:100%; font-family:'Poppins',sans-serif; background:var(--bg);
   .stage-1, .stage-2, .stage-3 { max-width:320px; height:320px; transform:scale(.82); }
   .replay-btn { top:auto; bottom:24px; right:24px; }
 
-  /* Variant 4 gets its own mobile layout instead of a blanket scale-down,
-     so the smaller cards still stay correctly inside the frame */
-  .stage4 { max-width:360px; height:400px; }
-  .stage4 .pair-card { width:150px; padding:10px; gap:6px; }
-  .stage4 .pair-av { width:36px; height:36px; }
-  .stage4 .pair-av.agent { margin-left:-11px; }
-  .stage4 .pair-av.agent svg { width:16px; height:16px; }
-  .stage4 .pair-name { font-size:9px; }
+  /* Variant 4 gets its own mobile layout instead of a blanket scale-down.
+     Values copied 1:1 from the real deck's S2 mobile card CSS (155px card
+     from a 2-col 320px grid, 42px avatars, vertical stacked layout) so
+     sizing is pixel-identical to slide 2 on mobile. */
+  .stage4 { max-width:360px; height:340px; }
+  .stage4 .pair-card { width:155px; text-align:center; gap:6px; padding:8px 6px; }
+  .stage4 .pair-card-top { flex-direction:column; align-items:center; gap:6px; }
+  .stage4 .pair-avs { margin-right:0; }
+  .stage4 .pair-av { width:42px; height:42px; }
+  .stage4 .pair-av.agent { margin-left:-14px; }
+  .stage4 .pair-av.agent svg { width:18px; height:18px; }
+  .stage4 .pair-name { font-size:8.5px; }
   .stage4 .pair-dept { font-size:7px; }
   .stage4 .pair-agent { font-size:7px; }
-  .stage4 .pair-desc { font-size:8px; }
-  .stage4 .s4-shell[data-slot="0"] { transform:translate(-50%,-50%) translate(-80px,-58px); }
-  .stage4 .s4-shell[data-slot="1"] { transform:translate(-50%,-50%) translate(80px,-58px); }
-  .stage4 .s4-shell[data-slot="2"] { transform:translate(-50%,-50%) translate(-80px,58px); }
-  .stage4 .s4-shell[data-slot="3"] { transform:translate(-50%,-50%) translate(80px,58px); }
-  .stage4.merge .s4-shell[data-slot="0"] { transform:translate(-50%,-50%) translate(-80px,-58px) scale(.96); }
-  .stage4.merge .s4-shell[data-slot="1"] { transform:translate(-50%,-50%) translate(80px,-58px) scale(.96); }
-  .stage4.merge .s4-shell[data-slot="2"] { transform:translate(-50%,-50%) translate(-80px,58px) scale(.96); }
-  .stage4.merge .s4-shell[data-slot="3"] { transform:translate(-50%,-50%) translate(80px,58px) scale(.96); }
-  .stage4 .s4-row-item[data-slot="0"] { transform:translate(-50%,-50%) translate(-112px,-65px); }
-  .stage4 .s4-row-item[data-slot="1"] { transform:translate(-50%,-50%) translate(48px,-65px); }
-  .stage4 .s4-row-item[data-slot="2"] { transform:translate(-50%,-50%) translate(-112px,48px); }
-  .stage4 .s4-row-item[data-slot="3"] { transform:translate(-50%,-50%) translate(48px,48px); }
-  .stage4.merge .s4-row-item[data-slot="0"] { transform:translate(-50%,-50%) translate(-72px,0); }
-  .stage4.merge .s4-row-item[data-slot="1"] { transform:translate(-50%,-50%) translate(-24px,0); }
-  .stage4.merge .s4-row-item[data-slot="2"] { transform:translate(-50%,-50%) translate(24px,0); }
-  .stage4.merge .s4-row-item[data-slot="3"] { transform:translate(-50%,-50%) translate(72px,0); }
-  .stage4.merge .s4-row-glow { width:200px; }
+  .stage4 .pair-desc { font-size:7px; margin-top:2px; }
+  .stage4 .s4-shell[data-slot="0"] { transform:translate(-50%,-50%) translate(-82px,-64px); }
+  .stage4 .s4-shell[data-slot="1"] { transform:translate(-50%,-50%) translate(82px,-64px); }
+  .stage4 .s4-shell[data-slot="2"] { transform:translate(-50%,-50%) translate(-82px,64px); }
+  .stage4 .s4-shell[data-slot="3"] { transform:translate(-50%,-50%) translate(82px,64px); }
+  .stage4.merge .s4-shell[data-slot="0"] { transform:translate(-50%,-50%) translate(-82px,-64px) scale(.96); }
+  .stage4.merge .s4-shell[data-slot="1"] { transform:translate(-50%,-50%) translate(82px,-64px) scale(.96); }
+  .stage4.merge .s4-shell[data-slot="2"] { transform:translate(-50%,-50%) translate(-82px,64px) scale(.96); }
+  .stage4.merge .s4-shell[data-slot="3"] { transform:translate(-50%,-50%) translate(82px,64px) scale(.96); }
+  .stage4 .s4-row-item[data-slot="0"] { transform:translate(-50%,-50%) translate(-82px,-93px); }
+  .stage4 .s4-row-item[data-slot="1"] { transform:translate(-50%,-50%) translate(82px,-93px); }
+  .stage4 .s4-row-item[data-slot="2"] { transform:translate(-50%,-50%) translate(-82px,35px); }
+  .stage4 .s4-row-item[data-slot="3"] { transform:translate(-50%,-50%) translate(82px,35px); }
+  .stage4.merge .s4-row-item[data-slot="0"] { transform:translate(-50%,-50%) translate(-84px,0); }
+  .stage4.merge .s4-row-item[data-slot="1"] { transform:translate(-50%,-50%) translate(-28px,0); }
+  .stage4.merge .s4-row-item[data-slot="2"] { transform:translate(-50%,-50%) translate(28px,0); }
+  .stage4.merge .s4-row-item[data-slot="3"] { transform:translate(-50%,-50%) translate(84px,0); }
+  .stage4.merge .s4-row-glow { width:220px; }
 }
 </style>
 </head>
