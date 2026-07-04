@@ -58,6 +58,9 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
 .cursor.short { height:clamp(14px,2vw,28px); }
 @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
 
+/* S0 – Mobile ghost hero (hidden on desktop) */
+@media (min-width: 769px) { .s0-mob-hero { display: none; } }
+
 /* S0 – Desktop (Variant E: logo → headline → strip → subtitle) */
 @media (min-width:769px) {
   .s0-body { padding:4% 0 2%; width:100%; gap:0; }
@@ -480,6 +483,22 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
 .sp-q-name { font-size:12px; font-weight:700; color:#fff; margin-top:14px; }
 .sp-q-role { font-size:10px; color:rgba(255,255,255,0.35); font-weight:300; line-height:1.5; }
 
+/* Customer Story (sstory) */
+#sstory { padding:0; }
+.cstory { display:flex; width:100%; height:100%; }
+.cstory-left { flex:0 0 50%; display:flex; flex-direction:column; justify-content:center; padding:64px 52px 64px 110px; }
+.cstory-logo { height:28px; margin-bottom:36px; }
+.cstory-qmark { display:block; width:48px; height:auto; margin-bottom:24px; }
+.cstory-quote { font-size:clamp(16px,1.5vw,22px); font-weight:400; line-height:1.65; color:rgba(255,255,255,0.85); margin-bottom:32px; }
+.cstory-quote em { color:inherit; font-style:normal; font-weight:600; }
+.cstory-person { display:flex; align-items:center; gap:14px; }
+.cstory-av { width:44px; height:44px; border-radius:50%; background:linear-gradient(135deg,#6161ff,#a78bfa); display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:700; flex-shrink:0; color:#fff; }
+.cstory-name { font-size:14px; font-weight:600; color:#fff; }
+.cstory-role { font-size:11px; color:rgba(255,255,255,0.4); margin-top:2px; }
+.cstory-right { flex:1; position:relative; overflow:hidden; }
+.cstory-right img { width:100%; height:100%; object-fit:cover; object-position:center top; }
+.cstory-right::before { content:''; position:absolute; inset:0; background:linear-gradient(to right,#09090f 0%,transparent 28%); z-index:1; }
+
 /* S6 */
 #s6 { text-align:center; }
 .outcome-wrap { max-width:720px; }
@@ -576,6 +595,39 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
   .slide::before { content:''; position:absolute; top:-15%; left:50%; transform:translateX(-50%); width:160%; height:48%; background:radial-gradient(ellipse at center, rgba(97,97,255,0.32) 0%, rgba(255,61,87,0.13) 45%, transparent 70%); filter:blur(38px); pointer-events:none; z-index:-1; }
   /* Yellow glow stays exclusive to the title slide */
   #s0::after { content:''; position:absolute; bottom:-18%; left:50%; transform:translateX(-50%); width:160%; height:40%; background:radial-gradient(ellipse at center, rgba(255,203,0,0.19) 0%, transparent 70%); filter:blur(46px); pointer-events:none; z-index:0; }
+
+  /* S0 – Mobile ghost hero */
+  #s0 .s0-body { display: none; }
+  .s0-mob-hero { display: block; position: absolute; inset: 0; overflow: hidden; }
+  .s0mh-chars { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+  .s0mh-char-a { position: absolute; bottom: 0; right: -60vw; height: 70vh; width: auto; object-fit: contain; object-position: bottom; transform: translateX(40px); opacity: 0; transition: transform 1.6s cubic-bezier(.25,.46,.45,.94) .12s, opacity 1.3s ease .12s; }
+  .s0mh-char-h { position: absolute; bottom: 0; left: -53vw; height: 70vh; width: auto; object-fit: contain; object-position: bottom; transform: translateX(-40px); opacity: 0; transition: transform 1.6s cubic-bezier(.25,.46,.45,.94), opacity 1.3s ease; }
+  .s0mh-chars.entered .s0mh-char-h { transform: translateX(0); opacity: 0.13; }
+  .s0mh-chars.entered .s0mh-char-a { transform: translateX(0); opacity: 0.13; }
+  .s0mh-vignette { position: absolute; inset: 0; background: radial-gradient(ellipse 54% 38% at 50% 52%, rgba(0,0,0,0.93) 0%, rgba(0,0,0,0.68) 36%, transparent 64%); z-index: 2; pointer-events: none; }
+  .s0mh-btm-fade { position: absolute; bottom: 0; left: 0; right: 0; height: 22%; background: linear-gradient(to top, #000 0%, transparent 100%); z-index: 2; pointer-events: none; }
+  .s0mh-top { position: absolute; top: 28px; left: 0; right: 0; display: flex; flex-direction: column; align-items: center; gap: 4px; z-index: 4; opacity: 0; transform: translateY(10px); transition: opacity .5s ease, transform .5s ease; }
+  .s0mh-top img { height: 18px; }
+  .s0mh-tag { font-size: 7px; font-weight: 600; letter-spacing: 5px; text-transform: uppercase; color: rgba(255,255,255,0.35); }
+  .s0mh-copy-wrap { position: absolute; top: 50%; left: 0; right: 0; transform: translateY(-52%); z-index: 3; }
+  .s0mh-copy { text-align: center; padding: 0 18px; }
+  .s0mh-hl { font-size: clamp(32px, 8.5vw, 44px); font-weight: 800; line-height: 1.05; letter-spacing: -2px; }
+  .s0mh-line { display: block; opacity: 0; transform: translateY(5px); transition: opacity .6s ease, transform .6s ease; background: linear-gradient(140deg, #fff 45%, rgba(255,255,255,0.45)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .s0-mob-hero.play .s0mh-top { opacity: 1; transform: translateY(0); transition-delay: .15s; }
+  .s0-mob-hero.play .s0mh-line:nth-child(1) { opacity: 1; transform: translateY(0); transition-delay: .35s; }
+  .s0-mob-hero.play .s0mh-line:nth-child(2) { opacity: 1; transform: translateY(0); transition-delay: .5s; }
+  .s0-mob-hero.play .s0mh-line:nth-child(3) { opacity: 1; transform: translateY(0); transition-delay: .65s; }
+
+  /* Customer Story (sstory) */
+  #sstory { padding: 0 !important; }
+  .cstory { flex-direction: column; }
+  .cstory-right { flex: 0 0 52%; position: relative; }
+  .cstory-right::before { background: linear-gradient(to bottom, transparent 50%, #09090f 100%); }
+  .cstory-logo { position: absolute; top: 20px; left: 20px; z-index: 2; margin-bottom: 0; }
+  .cstory-left { flex: 1; padding: 24px 28px 32px; justify-content: center; }
+  .cstory-qmark { width: 28px; margin-top: 40px; margin-bottom: 12px; }
+  .cstory-quote { font-size: 16px; margin-bottom: 20px; }
+  .cstory-av { display: none; }
 
   /* S0b – Running at 100% (mobile) */
   #s0b { padding: 40px 20px 24px; }
@@ -921,7 +973,7 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
 
 <div class="progress" id="prog"></div>
 <nav class="nav-dots" id="navDots">
-  <button class="nav-dot active" onclick="goTo(0)"></button><button class="nav-dot" onclick="goTo(1)"></button><button class="nav-dot" onclick="goTo(2)"></button><button class="nav-dot" onclick="goTo(3)"></button><button class="nav-dot" onclick="goTo(4)"></button><button class="nav-dot" onclick="goTo(5)"></button><button class="nav-dot" onclick="goTo(6)"></button><button class="nav-dot" onclick="goTo(7)"></button><button class="nav-dot" onclick="goTo(8)"></button><button class="nav-dot" onclick="goTo(9)"></button><button class="nav-dot" onclick="goTo(10)"></button>
+  <button class="nav-dot active" onclick="goTo(0)"></button><button class="nav-dot" onclick="goTo(1)"></button><button class="nav-dot" onclick="goTo(2)"></button><button class="nav-dot" onclick="goTo(3)"></button><button class="nav-dot" onclick="goTo(4)"></button><button class="nav-dot" onclick="goTo(5)"></button><button class="nav-dot" onclick="goTo(6)"></button><button class="nav-dot" onclick="goTo(7)"></button><button class="nav-dot" onclick="goTo(8)"></button><button class="nav-dot" onclick="goTo(9)"></button><button class="nav-dot" onclick="goTo(10)"></button><button class="nav-dot" onclick="goTo(11)"></button>
 </nav>
 
 <div class="deck">
@@ -937,6 +989,28 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
       <span class="line2" id="line2"></span>
     </div>
     <img class="s0-strip" id="s0Strip" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/Agents%20and%20People%20strip.png" alt="">
+  </div>
+
+  <div class="s0-mob-hero" id="s0MobHero">
+    <div class="s0mh-chars" id="s0MobChars">
+      <img class="s0mh-char-a" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/Agent.png" alt="Agent">
+      <img class="s0mh-char-h" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/Human.png" alt="Human">
+    </div>
+    <div class="s0mh-vignette"></div>
+    <div class="s0mh-btm-fade"></div>
+    <div class="s0mh-top">
+      <img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/monday%20Logo/monday.com%20Logo.png" alt="monday.com">
+      <span class="s0mh-tag">AI Work Platform</span>
+    </div>
+    <div class="s0mh-copy-wrap">
+      <div class="s0mh-copy">
+        <div class="s0mh-hl">
+          <span class="s0mh-line">People and agents</span>
+          <span class="s0mh-line">working together</span>
+          <span class="s0mh-line">driving business results.</span>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -1433,6 +1507,32 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
   </div><!-- /s5b-inner -->
 </div>
 
+<div class="slide" id="sstory">
+  <div class="cstory">
+    <div class="cstory-left">
+      <svg class="cstory-logo" viewBox="0 0 100 28" width="100" height="28" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="6" cy="14" r="5" fill="#6161ff"/>
+        <text x="16" y="21" font-family="Poppins,sans-serif" font-weight="700" font-size="17" fill="white" letter-spacing="-0.3">arcaise</text>
+      </svg>
+      <svg class="cstory-qmark" viewBox="0 0 26 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="0" y="0" width="9" height="22" rx="4.5" fill="#6161ff"/>
+        <rect x="14" y="0" width="9" height="22" rx="4.5" fill="#6161ff"/>
+      </svg>
+      <p class="cstory-quote">monday brought <em>AI to our data</em>, and that changed everything. Our planning cycles used to eat entire weeks, <em>now it surfaces automatically.</em></p>
+      <div class="cstory-person">
+        <div class="cstory-av">AB</div>
+        <div>
+          <div class="cstory-name">Alex Boulder</div>
+          <div class="cstory-role">Director of Operations, Arcaise</div>
+        </div>
+      </div>
+    </div>
+    <div class="cstory-right">
+      <img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/People%20Avatars/Operations.png" alt="">
+    </div>
+  </div>
+</div>
+
 <div class="slide" id="smom">
   <!-- Desktop layout -->
   <div class="mom-layout">
@@ -1721,7 +1821,7 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
     const navDots = document.getElementById('navDots');
     if (n === 5 && window.innerWidth > 768) navDots.classList.add('bottom-center');
     else navDots.classList.remove('bottom-center');
-    if (n === 9 && window._momSmomEnter) window._momSmomEnter();
+    if (n === 10 && window._momSmomEnter) window._momSmomEnter();
     if (n === 2) { if (window.innerWidth <= 768) { pcGoTo(0); pcStart(); } } else { pcStop(); }
     if (n === 4) { playStage4(); }
     if (n === 6) { mktPlayIntro(); } else { sbsStopAuto(); }
@@ -1998,16 +2098,31 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
     t();
   }
 
+  function s0MobPlay() {
+    const mobHero  = document.getElementById('s0MobHero');
+    const mobChars = document.getElementById('s0MobChars');
+    if (!mobHero) return;
+    mobHero.classList.remove('play');
+    if (mobChars) mobChars.classList.remove('entered');
+    void mobHero.offsetWidth;
+    mobHero.classList.add('play');
+    setTimeout(() => { if (mobChars) mobChars.classList.add('entered'); }, 900);
+  }
+
   setTimeout(() => {
-    typeWriter(line1El, 'People and agents.', 52, 'tall', () => {
-      setTimeout(() => {
-        const strip = document.getElementById('s0Strip');
-        if (strip) strip.classList.add('visible');
+    if (window.innerWidth <= 768) {
+      s0MobPlay();
+    } else {
+      typeWriter(line1El, 'People and agents.', 52, 'tall', () => {
         setTimeout(() => {
-          typeWriter(line2El, 'Working together. Driving results.', 42, 'short');
-        }, 400);
-      }, 350);
-    });
+          const strip = document.getElementById('s0Strip');
+          if (strip) strip.classList.add('visible');
+          setTimeout(() => {
+            typeWriter(line2El, 'Working together. Driving results.', 42, 'short');
+          }, 400);
+        }, 350);
+      });
+    }
   }, 500);
 
   // ── Monday on Monday slide (smom) ──
