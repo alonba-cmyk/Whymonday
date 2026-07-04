@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>S0b — "The Reality" — 5 Variants</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #000;
+  --purple: #6161ff;
+  --teal: #00d2d2;
+  --white: #fff;
+  --dim: rgba(255,255,255,0.4);
+  --border: rgba(255,255,255,0.08);
+  --card: rgba(255,255,255,0.04);
+}
+html, body { width:100%; font-family:'Poppins',sans-serif; background:var(--bg); color:var(--white); }
+
+.eyebrow { font-size:10px; font-weight:600; letter-spacing:4px; text-transform:uppercase; color:var(--purple); margin-bottom:20px; }
+
+.variant-slide {
+  width:100%; min-height:100vh; position:relative; overflow:hidden;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  padding:80px 120px; text-align:center; isolation:isolate;
+  border-bottom:2px dashed rgba(255,255,255,0.15);
+}
+.variant-slide::before { content:''; position:absolute; top:-28%; left:50%; transform:translateX(-50%); width:55%; height:75%; background:radial-gradient(ellipse at center, rgba(97,97,255,0.26) 0%, rgba(255,61,87,0.1) 45%, transparent 70%); filter:blur(90px); pointer-events:none; z-index:-1; }
+.variant-tag { position:absolute; top:24px; left:24px; font-size:11px; font-weight:700; letter-spacing:1px; color:#000; background:var(--teal); padding:6px 14px; border-radius:100px; z-index:10; }
+
+.r100-wrap { max-width:900px; width:100%; }
+.r100-hl { font-size:clamp(24px,3.2vw,44px); font-weight:800; line-height:1.2; margin-bottom:14px;
+  background: linear-gradient(140deg, #fff 50%, rgba(255,255,255,0.45));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.r100-sub { font-size:clamp(13px,1.3vw,17px); font-weight:300; color:var(--dim); line-height:1.6; margin-bottom:clamp(28px,5vh,56px); }
+
+/* ===== A: Real Builders, Real Overload ===== */
+.a-row { display:flex; gap:16px; justify-content:center; flex-wrap:wrap; }
+.a-card { display:flex; flex-direction:column; align-items:center; gap:10px; background:var(--card); border:1px solid var(--border); border-radius:16px; padding:20px 18px; width:190px; }
+.a-av { width:56px; height:56px; border-radius:50%; object-fit:cover; border:2px solid #0a0a0e; background:#222; }
+.a-name { font-size:12px; font-weight:700; color:#fff; }
+.a-dept { font-size:8px; font-weight:600; letter-spacing:.5px; text-transform:uppercase; color:var(--dim); margin-top:-6px; }
+.a-line { font-size:11.5px; color:var(--dim); font-weight:300; line-height:1.5; }
+
+/* ===== B: One Big Number ===== */
+.b-stats { display:flex; gap:clamp(24px,5vw,64px); justify-content:center; flex-wrap:wrap; margin-bottom:8px; }
+.b-stat { display:flex; flex-direction:column; align-items:center; }
+.b-num { font-size:clamp(48px,7vw,96px); font-weight:800; line-height:1;
+  background: linear-gradient(135deg,#6161ff,#a084ff);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.b-label { font-size:12px; color:var(--dim); font-weight:500; margin-top:8px; text-transform:uppercase; letter-spacing:1px; }
+
+/* ===== C: Notification Flood ===== */
+.c-stack { position:relative; width:100%; max-width:420px; height:260px; margin:0 auto; }
+.c-note { position:absolute; left:50%; width:100%; background:rgba(20,20,26,0.9); border:1px solid rgba(255,255,255,0.1); border-radius:14px; padding:12px 16px; display:flex; align-items:center; gap:10px; text-align:left; box-shadow:0 12px 30px rgba(0,0,0,0.5); }
+.c-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+.c-txt b { color:#fff; font-size:12px; }
+.c-txt span { display:block; font-size:10.5px; color:var(--dim); margin-top:2px; }
+
+/* ===== D: Calendar Crunch ===== */
+.d-cal { width:100%; max-width:480px; margin:0 auto; background:var(--card); border:1px solid var(--border); border-radius:16px; padding:16px; display:flex; flex-direction:column; gap:6px; }
+.d-block { display:flex; align-items:center; gap:10px; border-radius:8px; padding:9px 12px; text-align:left; }
+.d-time { font-size:9px; color:var(--dim); width:44px; flex-shrink:0; font-variant-numeric:tabular-nums; }
+.d-title { font-size:12px; font-weight:600; color:#fff; }
+
+/* ===== E: Chaotic Collage ===== */
+.e-collage { position:relative; width:100%; max-width:520px; height:280px; margin:0 auto; }
+.e-note { position:absolute; background:var(--card); border:1px solid var(--border); border-radius:12px; padding:14px 18px; font-size:12px; font-weight:600; color:#fff; box-shadow:0 10px 26px rgba(0,0,0,0.4); }
+.e-note .dot { width:6px; height:6px; border-radius:50%; background:var(--purple); display:inline-block; margin-right:8px; }
+
+@media (max-width:768px) {
+  .variant-slide { padding:100px 20px 40px; }
+  .r100-hl { font-size:clamp(20px,4vw,30px); }
+  .a-row { gap:10px; }
+  .a-card { width:44%; padding:14px 10px; }
+  .a-av { width:44px; height:44px; }
+  .b-stats { gap:20px; }
+  .b-num { font-size:clamp(32px,10vw,56px); }
+  .c-stack { max-width:320px; height:300px; }
+  .d-cal { max-width:340px; }
+  .e-collage { max-width:340px; height:340px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ VARIANT A ============ -->
+<section class="variant-slide" id="a">
+  <span class="variant-tag">A · Real Builders, Real Overload</span>
+  <div class="r100-wrap">
+    <p class="eyebrow">The Reality</p>
+    <h2 class="r100-hl">Your team is already running at 100%.</h2>
+    <p class="r100-sub">Ask anyone. They'll show you exactly what's piling up.</p>
+    <div class="a-row">
+      <div class="a-card">
+        <img class="a-av" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/roni-rebish.png" alt="Roni Rebish">
+        <div class="a-name">Roni Rebish</div>
+        <div class="a-dept">Product</div>
+        <div class="a-line">3 roadmap fires, one sprint.</div>
+      </div>
+      <div class="a-card">
+        <img class="a-av" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/ran-levgoren.png" alt="Ran Levgoren">
+        <div class="a-name">Ran Levgoren</div>
+        <div class="a-dept">Sales</div>
+        <div class="a-line">40 leads waiting on a reply.</div>
+      </div>
+      <div class="a-card">
+        <img class="a-av" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/osher-mayor.png" alt="Osher Mayor">
+        <div class="a-name">Osher Mayor</div>
+        <div class="a-dept">Marketing</div>
+        <div class="a-line">6 campaigns due, one calendar.</div>
+      </div>
+      <div class="a-card">
+        <img class="a-av" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/amit-frishberg.png" alt="Amit Frishberg">
+        <div class="a-name">Amit Frishberg</div>
+        <div class="a-dept">Engineering</div>
+        <div class="a-line">The backlog nobody has time for.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ VARIANT B ============ -->
+<section class="variant-slide" id="b">
+  <span class="variant-tag">B · One Big Number</span>
+  <div class="r100-wrap">
+    <p class="eyebrow">The Reality</p>
+    <h2 class="r100-hl">Your team is already running at 100%.</h2>
+    <div class="b-stats">
+      <div class="b-stat"><div class="b-num">47</div><div class="b-label">open tasks</div></div>
+      <div class="b-stat"><div class="b-num">12</div><div class="b-label">meetings this week</div></div>
+      <div class="b-stat"><div class="b-num">1</div><div class="b-label">you</div></div>
+    </div>
+    <p class="r100-sub" style="margin-top:16px;">More requests. More priorities. Same hours.</p>
+  </div>
+</section>
+
+<!-- ============ VARIANT C ============ -->
+<section class="variant-slide" id="c">
+  <span class="variant-tag">C · Notification Flood</span>
+  <div class="r100-wrap">
+    <p class="eyebrow">The Reality</p>
+    <h2 class="r100-hl">Your team is already running at 100%.</h2>
+    <p class="r100-sub">More requests. More priorities. Same hours.</p>
+    <div class="c-stack">
+      <div class="c-note" style="top:0px; transform:translateX(-50%) rotate(-2deg); z-index:4;"><div class="c-dot" style="background:#6161ff;"></div><div class="c-txt"><b>New request from Sarah</b><span>"Can you review this by EOD?"</span></div></div>
+      <div class="c-note" style="top:62px; transform:translateX(-50%) rotate(1.5deg); z-index:3;"><div class="c-dot" style="background:#e0a030;"></div><div class="c-txt"><b>3 tasks overdue</b><span>Sprint board · Product</span></div></div>
+      <div class="c-note" style="top:124px; transform:translateX(-50%) rotate(-1deg); z-index:2;"><div class="c-dot" style="background:#00d2d2;"></div><div class="c-txt"><b>Meeting starts in 5 min</b><span>Roadmap sync</span></div></div>
+      <div class="c-note" style="top:186px; transform:translateX(-50%) rotate(2deg); z-index:1;"><div class="c-dot" style="background:#ff3d57;"></div><div class="c-txt"><b>12 leads need follow-up</b><span>Sales pipeline</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ VARIANT D ============ -->
+<section class="variant-slide" id="d">
+  <span class="variant-tag">D · Calendar Crunch</span>
+  <div class="r100-wrap">
+    <p class="eyebrow">The Reality</p>
+    <h2 class="r100-hl">Your team is already running at 100%.</h2>
+    <p class="r100-sub">Same hours. Every one of them booked.</p>
+    <div class="d-cal">
+      <div class="d-block" style="background:rgba(97,97,255,.16);"><span class="d-time">9:00</span><span class="d-title">Daily standup</span></div>
+      <div class="d-block" style="background:rgba(0,210,210,.14);"><span class="d-time">9:30</span><span class="d-title">Client call — renewal risk</span></div>
+      <div class="d-block" style="background:rgba(255,203,0,.14);"><span class="d-time">11:00</span><span class="d-title">Roadmap review</span></div>
+      <div class="d-block" style="background:rgba(97,97,255,.16);"><span class="d-time">1:00</span><span class="d-title">1:1s — back to back</span></div>
+      <div class="d-block" style="background:rgba(255,61,87,.14);"><span class="d-time">3:00</span><span class="d-title">"Quick" sync that isn't</span></div>
+      <div class="d-block" style="background:rgba(0,210,210,.14);"><span class="d-time">4:30</span><span class="d-title">Sprint planning</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ VARIANT E ============ -->
+<section class="variant-slide" id="e">
+  <span class="variant-tag">E · Chaotic Collage</span>
+  <div class="r100-wrap">
+    <p class="eyebrow">The Reality</p>
+    <h2 class="r100-hl">Your team is already running at 100%.</h2>
+    <p class="r100-sub">More requests. More priorities. Same hours.</p>
+    <div class="e-collage">
+      <div class="e-note" style="top:0; left:8%; transform:rotate(-6deg); z-index:4;"><span class="dot"></span>Requests pile up</div>
+      <div class="e-note" style="top:40px; left:42%; transform:rotate(4deg); z-index:3;"><span class="dot"></span>Priorities conflict</div>
+      <div class="e-note" style="top:110px; left:4%; transform:rotate(3deg); z-index:2;"><span class="dot"></span>Never enough time</div>
+      <div class="e-note" style="top:130px; left:48%; transform:rotate(-4deg); z-index:1;"><span class="dot"></span>Everything's urgent</div>
+      <div class="e-note" style="top:200px; left:20%; transform:rotate(-2deg); z-index:5;"><span class="dot"></span>Same hours, more work</div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
