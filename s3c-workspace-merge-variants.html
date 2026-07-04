@@ -77,7 +77,8 @@ html, body { width:100%; font-family:'Poppins',sans-serif; background:var(--bg);
 
 /* ===== VARIANT 4: S2 grid → Team huddle → Platform frame → Live demo ===== */
 .stage4 { position:relative; width:100%; max-width:560px; height:440px; margin:0 auto; }
-.s4-frame { position:absolute; inset:20px; border:1px solid rgba(255,255,255,.14); border-radius:16px; background:rgba(255,255,255,.02); z-index:0; }
+.s4-frame { position:absolute; inset:20px; border:1px solid rgba(255,255,255,.14); border-radius:16px; background:rgba(255,255,255,.02); z-index:0; opacity:0; transform:scale(.95); transition:opacity .6s ease, transform .6s ease; }
+.stage4.merge .s4-frame, .stage4.demo .s4-frame { opacity:1; transform:scale(1); }
 .s4-frame-bar { display:flex; align-items:center; gap:6px; padding:10px 14px; border-bottom:1px solid rgba(255,255,255,.08); }
 .s4-frame-bar i { width:6px; height:6px; border-radius:50%; background:rgba(255,255,255,.15); display:block; }
 .s4-frame-label { margin-left:6px; font-size:9px; font-weight:600; letter-spacing:1px; text-transform:uppercase; color:var(--dim); }
