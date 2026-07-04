@@ -106,6 +106,15 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
 .pair-name { font-size:11px; font-weight:700; color:#fff; line-height:1.25; }
 .pair-dept { font-size:8px; font-weight:600; letter-spacing:.5px; text-transform:uppercase; color:var(--dim); }
 .pair-agent { font-size:9px; color:var(--teal); font-weight:600; margin-top:2px; }
+.b-wrap { margin-top:14px; }
+.b-row { display:flex; gap:22px; justify-content:center; flex-wrap:wrap; }
+.b-card { display:flex; flex-direction:column; align-items:center; gap:8px; background:rgba(255,255,255,.035); border:1px solid rgba(255,255,255,.09); border-radius:16px; padding:18px 20px; width:150px; }
+.b-card .pair-avs { margin-right:0; }
+.b-card .pair-av { width:44px; height:44px; }
+.b-card .pair-av.agent { margin-left:-14px; }
+.b-card .pair-av.agent svg { width:18px; height:18px; }
+.b-card .pair-dept, .b-card .pair-agent { text-align:center; }
+.b-name { font-size:12px; font-weight:700; color:#fff; text-align:center; }
 .org-caption { margin-top:20px; font-size:12px; color:var(--dim); max-width:420px; line-height:1.6; text-align:center; }
 .org-caption b { color:#fff; font-weight:700; }
 .org-caption.warn { color:rgba(255,255,255,.6); }
@@ -416,6 +425,15 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
   .org-children { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; max-width: 320px; margin: 0 auto; padding-top: 14px; }
   .org-children::before { display: none; }
   .org-child::before { display: none; }
+  .b-wrap { margin-top: 6px; }
+  .b-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; max-width: 320px; margin: 0 auto; }
+  .b-card { width: 100%; padding: 12px 6px; gap: 6px; }
+  .b-card .pair-av { width: 30px; height: 30px; }
+  .b-card .pair-av.agent { margin-left: -10px; }
+  .b-card .pair-av.agent svg { width: 13px; height: 13px; }
+  .b-name { font-size: 9px; }
+  .b-card .pair-dept { font-size: 7px; }
+  .b-card .pair-agent { font-size: 7px; }
   .silo-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; max-width: 320px; margin: 0 auto; }
   .silo-divider { display: none; }
   .silo-box { border-style: dashed; border-color: rgba(255,255,255,.16); padding: 10px 6px 10px; gap: 6px; }
@@ -790,64 +808,46 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
     <p class="eyebrow">Agents Change That</p>
     <h2>More hands. Bigger team.<br>More gets done.</h2>
     <p class="shift-sub">Agents aren't tools you prompt — they join your team, take on tasks, and scale your capacity.</p>
-    <div class="org-wrap">
-      <div class="org-root"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/monday%20Logo/monday.com%20icon.png" alt="" class="org-root-icon">Your Team</div>
-      <div class="org-stem"></div>
-      <div class="org-children">
-        <div class="org-child">
-          <div class="pair-card">
-            <div class="pair-avs">
-              <img class="pair-av person" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/roni-rebish.png" alt="Roni Rebish">
-              <div class="pair-av agent brand-claude" title="Claude"><svg viewBox="0 0 24 24"><path d="M13.827 3.52h3.603L24 20.48h-3.603l-6.57-16.96zm-7.258 0h3.767L16.906 20.48h-3.674l-1.343-3.461H5.017l-1.344 3.46H0L6.57 3.522zm4.132 9.959L8.453 7.687 6.205 13.48H10.7z"/></svg></div>
-            </div>
-            <div class="pair-text">
-              <span class="pair-name">Roni Rebish</span>
-              <span class="pair-dept">Product</span>
-              <span class="pair-agent">+ Claude</span>
-            </div>
+    <div class="org-wrap b-wrap">
+      <div class="b-row">
+        <div class="b-card">
+          <div class="pair-avs">
+            <img class="pair-av person" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/roni-rebish.png" alt="Roni Rebish">
+            <div class="pair-av agent brand-claude" title="Claude"><svg viewBox="0 0 24 24"><path d="M13.827 3.52h3.603L24 20.48h-3.603l-6.57-16.96zm-7.258 0h3.767L16.906 20.48h-3.674l-1.343-3.461H5.017l-1.344 3.46H0L6.57 3.522zm4.132 9.959L8.453 7.687 6.205 13.48H10.7z"/></svg></div>
           </div>
+          <span class="b-name">Roni Rebish</span>
+          <span class="pair-dept">Product</span>
+          <span class="pair-agent">+ Claude</span>
         </div>
-        <div class="org-child">
-          <div class="pair-card">
-            <div class="pair-avs">
-              <img class="pair-av person" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/ran-levgoren.png" alt="Ran Levgoren">
-              <div class="pair-av agent brand-sdr" title="SDR Agents"><svg viewBox="0 0 24 24"><rect x="5" y="7" width="14" height="11" rx="3" fill="none" stroke="#fff" stroke-width="1.6"/><circle cx="9.5" cy="12.5" r="1.3" fill="#fff"/><circle cx="14.5" cy="12.5" r="1.3" fill="#fff"/><path d="M12 7V4" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/></svg></div>
-            </div>
-            <div class="pair-text">
-              <span class="pair-name">Ran Levgoren</span>
-              <span class="pair-dept">Sales</span>
-              <span class="pair-agent">+ SDR Agents</span>
-            </div>
+        <div class="b-card">
+          <div class="pair-avs">
+            <img class="pair-av person" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/ran-levgoren.png" alt="Ran Levgoren">
+            <div class="pair-av agent brand-sdr" title="SDR Agents"><svg viewBox="0 0 24 24"><rect x="5" y="7" width="14" height="11" rx="3" fill="none" stroke="#fff" stroke-width="1.6"/><circle cx="9.5" cy="12.5" r="1.3" fill="#fff"/><circle cx="14.5" cy="12.5" r="1.3" fill="#fff"/><path d="M12 7V4" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/></svg></div>
           </div>
+          <span class="b-name">Ran Levgoren</span>
+          <span class="pair-dept">Sales</span>
+          <span class="pair-agent">+ SDR Agents</span>
         </div>
-        <div class="org-child">
-          <div class="pair-card">
-            <div class="pair-avs">
-              <img class="pair-av person" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/osher-mayor.png" alt="Osher Mayor">
-              <div class="pair-av agent brand-gemini" title="Gemini"><svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 2c.967 2.051 1.637 4.242 1.953 6.515C16.228 9.162 18.18 10.4 20 12c-1.82 1.6-3.772 2.838-6.047 3.485C13.637 17.758 12.967 19.949 12 22c-.967-2.051-1.637-4.242-1.953-6.515C7.772 14.838 5.82 13.6 4 12c1.82-1.6 3.772-2.838 6.047-3.485C10.363 6.242 11.033 4.051 12 2z"/></svg></div>
-            </div>
-            <div class="pair-text">
-              <span class="pair-name">Osher Mayor</span>
-              <span class="pair-dept">Marketing</span>
-              <span class="pair-agent">+ Gemini</span>
-            </div>
+        <div class="b-card">
+          <div class="pair-avs">
+            <img class="pair-av person" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/osher-mayor.png" alt="Osher Mayor">
+            <div class="pair-av agent brand-gemini" title="Gemini"><svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 2c.967 2.051 1.637 4.242 1.953 6.515C16.228 9.162 18.18 10.4 20 12c-1.82 1.6-3.772 2.838-6.047 3.485C13.637 17.758 12.967 19.949 12 22c-.967-2.051-1.637-4.242-1.953-6.515C7.772 14.838 5.82 13.6 4 12c1.82-1.6 3.772-2.838 6.047-3.485C10.363 6.242 11.033 4.051 12 2z"/></svg></div>
           </div>
+          <span class="b-name">Osher Mayor</span>
+          <span class="pair-dept">Marketing</span>
+          <span class="pair-agent">+ Gemini</span>
         </div>
-        <div class="org-child">
-          <div class="pair-card">
-            <div class="pair-avs">
-              <img class="pair-av person" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/amit-frishberg.png" alt="Amit Frishberg">
-              <div class="pair-av agent brand-cursor" title="Cursor"><svg viewBox="0 0 24 24"><path d="M4 2l15 7-6.2 1.9L11 17z"/></svg></div>
-            </div>
-            <div class="pair-text">
-              <span class="pair-name">Amit Frishberg</span>
-              <span class="pair-dept">Engineering</span>
-              <span class="pair-agent">+ Cursor</span>
-            </div>
+        <div class="b-card">
+          <div class="pair-avs">
+            <img class="pair-av person" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/amit-frishberg.png" alt="Amit Frishberg">
+            <div class="pair-av agent brand-cursor" title="Cursor"><svg viewBox="0 0 24 24"><path d="M4 2l15 7-6.2 1.9L11 17z"/></svg></div>
           </div>
+          <span class="b-name">Amit Frishberg</span>
+          <span class="pair-dept">Engineering</span>
+          <span class="pair-agent">+ Cursor</span>
         </div>
       </div>
-      <p class="org-caption">Bring your own agent — <b>Claude, ChatGPT, Gemini, Cursor</b>, or build native in monday.</p>
+      <p class="org-caption">Today, across monday — <b>every team already has an agent.</b> Just not the same one.</p>
     </div>
   </div>
   <!-- OLD VERSION – pillars + carousel (kept for easy revert)
