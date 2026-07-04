@@ -76,38 +76,47 @@ html, body { width:100%; font-family:'Poppins',sans-serif; background:var(--bg);
 .stage-3.play .m-card { transform:translate(-50%,-50%) translate(var(--fx),var(--fy)) rotate(var(--fr)); }
 
 /* ===== VARIANT 4: S2 grid → Team huddle → Platform frame → Live demo ===== */
-.stage4 { position:relative; width:100%; max-width:560px; height:380px; margin:0 auto; }
-.s4-frame { position:absolute; inset:20px; border:1px solid rgba(255,255,255,.14); border-radius:16px; background:rgba(255,255,255,.02); opacity:0; transform:scale(.94); transition:opacity .6s ease, transform .6s ease; z-index:0; }
-.stage4.framed .s4-frame, .stage4.demo .s4-frame { opacity:1; transform:scale(1); }
+.stage4 { position:relative; width:100%; max-width:560px; height:440px; margin:0 auto; }
+.s4-frame { position:absolute; inset:20px; border:1px solid rgba(255,255,255,.14); border-radius:16px; background:rgba(255,255,255,.02); z-index:0; }
 .s4-frame-bar { display:flex; align-items:center; gap:6px; padding:10px 14px; border-bottom:1px solid rgba(255,255,255,.08); }
 .s4-frame-bar i { width:6px; height:6px; border-radius:50%; background:rgba(255,255,255,.15); display:block; }
 .s4-frame-label { margin-left:6px; font-size:9px; font-weight:600; letter-spacing:1px; text-transform:uppercase; color:var(--dim); }
 
-/* exact copy of the S2 pair-card component, used as the "shell" that disappears */
+/* exact copy of the S2 pair-card component (same markup/sizing as the main deck), used as the "shell" that dissolves */
 .s4-shells { position:absolute; inset:0; z-index:1; }
-.s4-shell.pair-card { position:absolute; top:50%; left:50%; width:210px; transition:opacity .5s ease; }
-.s4-shell[data-slot="0"] { transform:translate(-50%,-50%) translate(-124px,-82px); }
-.s4-shell[data-slot="1"] { transform:translate(-50%,-50%) translate(124px,-82px); }
-.s4-shell[data-slot="2"] { transform:translate(-50%,-50%) translate(-124px,72px); }
-.s4-shell[data-slot="3"] { transform:translate(-50%,-50%) translate(124px,72px); }
-.stage4.merge .s4-shell { opacity:0; pointer-events:none; }
+.s4-shell.pair-card { position:absolute; top:50%; left:50%; width:220px; transition:opacity .9s ease, transform .9s ease; }
+.s4-shell[data-slot="0"] { transform:translate(-50%,-50%) translate(-118px,-70px); }
+.s4-shell[data-slot="1"] { transform:translate(-50%,-50%) translate(118px,-70px); }
+.s4-shell[data-slot="2"] { transform:translate(-50%,-50%) translate(-118px,70px); }
+.s4-shell[data-slot="3"] { transform:translate(-50%,-50%) translate(118px,70px); }
+.stage4.merge .s4-shell { opacity:0; transform:translate(-50%,-50%) translate(0,0) scale(.96); pointer-events:none; }
+.stage4.merge .s4-shell[data-slot="0"] { transform:translate(-50%,-50%) translate(-118px,-70px) scale(.96); }
+.stage4.merge .s4-shell[data-slot="1"] { transform:translate(-50%,-50%) translate(118px,-70px) scale(.96); }
+.stage4.merge .s4-shell[data-slot="2"] { transform:translate(-50%,-50%) translate(-118px,70px) scale(.96); }
+.stage4.merge .s4-shell[data-slot="3"] { transform:translate(-50%,-50%) translate(118px,70px) scale(.96); }
 
-/* avatar pairs only — start hidden at each shell's slot, glide + fade into one row */
+/* avatar pairs only — start exactly where the avatars sit inside their card, glide + fade into one unified row */
 .s4-row { position:absolute; inset:0; z-index:2; }
-.s4-row-item.pair-avs { position:absolute; top:50%; left:50%; margin:0; opacity:0; transition:opacity .8s ease, transform 1.1s cubic-bezier(.22,.8,.24,1); }
-.s4-row-item[data-slot="0"] { transform:translate(-50%,-50%) translate(-124px,-82px); }
-.s4-row-item[data-slot="1"] { transform:translate(-50%,-50%) translate(124px,-82px); }
-.s4-row-item[data-slot="2"] { transform:translate(-50%,-50%) translate(-124px,72px); }
-.s4-row-item[data-slot="3"] { transform:translate(-50%,-50%) translate(124px,72px); }
+.s4-row-item.pair-avs { position:absolute; top:50%; left:50%; margin:0; opacity:0; transition:opacity .9s ease, transform .9s cubic-bezier(.25,.8,.3,1); }
+.s4-row-item[data-slot="0"] { transform:translate(-50%,-50%) translate(-168px,-90px); }
+.s4-row-item[data-slot="1"] { transform:translate(-50%,-50%) translate(68px,-90px); }
+.s4-row-item[data-slot="2"] { transform:translate(-50%,-50%) translate(-168px,50px); }
+.s4-row-item[data-slot="3"] { transform:translate(-50%,-50%) translate(68px,50px); }
 .stage4.merge .s4-row-item { opacity:1; }
-.stage4.merge .s4-row-item[data-slot="0"] { transform:translate(-50%,-50%) translate(-165px,0); }
-.stage4.merge .s4-row-item[data-slot="1"] { transform:translate(-50%,-50%) translate(-55px,0); }
-.stage4.merge .s4-row-item[data-slot="2"] { transform:translate(-50%,-50%) translate(55px,0); }
-.stage4.merge .s4-row-item[data-slot="3"] { transform:translate(-50%,-50%) translate(165px,0); }
+.stage4.merge .s4-row-item[data-slot="0"] { transform:translate(-50%,-50%) translate(-108px,0); z-index:4; }
+.stage4.merge .s4-row-item[data-slot="1"] { transform:translate(-50%,-50%) translate(-36px,0); z-index:3; }
+.stage4.merge .s4-row-item[data-slot="2"] { transform:translate(-50%,-50%) translate(36px,0); z-index:2; }
+.stage4.merge .s4-row-item[data-slot="3"] { transform:translate(-50%,-50%) translate(108px,0); z-index:1; }
 .stage4.demo .s4-row-item { opacity:0; }
 
-/* re-use the real deck's pair-card styling */
-.pair-card { display:flex; align-items:center; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:14px; text-align:left; }
+/* shared highlight behind the assembled row, to read as one team not four separate pairs */
+.s4-row-glow { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:0; height:64px; border-radius:100px; background:rgba(97,97,255,.14); opacity:0; transition:opacity .5s ease .5s, width .7s cubic-bezier(.25,.8,.3,1) .3s; z-index:1; }
+.stage4.merge .s4-row-glow { opacity:1; width:290px; }
+.stage4.demo .s4-row-glow { opacity:0; }
+
+/* exact copy of the main deck's pair-card styling (S2), incl. the description line */
+.pair-card { display:flex; flex-direction:column; gap:10px; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:14px; text-align:left; }
+.pair-card-top { display:flex; align-items:center; }
 .pair-avs { display:flex; align-items:center; flex-shrink:0; margin-right:10px; }
 .pair-av { width:54px; height:54px; border-radius:50%; object-fit:cover; display:block; border:2px solid #0a0a0e; background:#222; }
 .pair-av.person { position:relative; z-index:2; }
@@ -120,8 +129,9 @@ html, body { width:100%; font-family:'Poppins',sans-serif; background:var(--bg);
 .pair-name { font-size:11px; font-weight:700; color:#fff; line-height:1.25; }
 .pair-dept { font-size:8px; font-weight:600; letter-spacing:.5px; text-transform:uppercase; color:var(--dim); }
 .pair-agent { font-size:9px; color:var(--teal); font-weight:600; margin-top:2px; }
+.pair-desc { font-size:10.5px; color:var(--dim); font-weight:300; line-height:1.5; }
 
-.s4-demo { position:absolute; top:56%; left:50%; transform:translate(-50%,-50%) scale(.85); opacity:0; transition:opacity .6s ease, transform .6s ease; pointer-events:none; z-index:3; }
+.s4-demo { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%) scale(.85); opacity:0; transition:opacity .6s ease, transform .6s ease; pointer-events:none; z-index:3; }
 .stage4.demo .s4-demo { opacity:1; transform:translate(-50%,-50%) scale(1); }
 .s4-demo-card { display:flex; flex-direction:column; align-items:center; gap:10px; background:rgba(15,15,20,.97); border:1px solid rgba(255,255,255,.16); border-radius:16px; padding:18px 26px; }
 .s4-demo-avs { display:flex; align-items:center; }
@@ -140,8 +150,37 @@ html, body { width:100%; font-family:'Poppins',sans-serif; background:var(--bg);
 @media (max-width:768px) {
   .variant-slide { padding:110px 20px 40px; }
   .hl { font-size:clamp(20px,4vw,30px); }
-  .stage-1, .stage-2, .stage-3, .stage4 { max-width:320px; height:320px; transform:scale(.82); }
+  .stage-1, .stage-2, .stage-3 { max-width:320px; height:320px; transform:scale(.82); }
   .replay-btn { top:auto; bottom:24px; right:24px; }
+
+  /* Variant 4 gets its own mobile layout instead of a blanket scale-down,
+     so the smaller cards still stay correctly inside the frame */
+  .stage4 { max-width:360px; height:400px; }
+  .stage4 .pair-card { width:150px; padding:10px; gap:6px; }
+  .stage4 .pair-av { width:36px; height:36px; }
+  .stage4 .pair-av.agent { margin-left:-11px; }
+  .stage4 .pair-av.agent svg { width:16px; height:16px; }
+  .stage4 .pair-name { font-size:9px; }
+  .stage4 .pair-dept { font-size:7px; }
+  .stage4 .pair-agent { font-size:7px; }
+  .stage4 .pair-desc { font-size:8px; }
+  .stage4 .s4-shell[data-slot="0"] { transform:translate(-50%,-50%) translate(-80px,-58px); }
+  .stage4 .s4-shell[data-slot="1"] { transform:translate(-50%,-50%) translate(80px,-58px); }
+  .stage4 .s4-shell[data-slot="2"] { transform:translate(-50%,-50%) translate(-80px,58px); }
+  .stage4 .s4-shell[data-slot="3"] { transform:translate(-50%,-50%) translate(80px,58px); }
+  .stage4.merge .s4-shell[data-slot="0"] { transform:translate(-50%,-50%) translate(-80px,-58px) scale(.96); }
+  .stage4.merge .s4-shell[data-slot="1"] { transform:translate(-50%,-50%) translate(80px,-58px) scale(.96); }
+  .stage4.merge .s4-shell[data-slot="2"] { transform:translate(-50%,-50%) translate(-80px,58px) scale(.96); }
+  .stage4.merge .s4-shell[data-slot="3"] { transform:translate(-50%,-50%) translate(80px,58px) scale(.96); }
+  .stage4 .s4-row-item[data-slot="0"] { transform:translate(-50%,-50%) translate(-112px,-65px); }
+  .stage4 .s4-row-item[data-slot="1"] { transform:translate(-50%,-50%) translate(48px,-65px); }
+  .stage4 .s4-row-item[data-slot="2"] { transform:translate(-50%,-50%) translate(-112px,48px); }
+  .stage4 .s4-row-item[data-slot="3"] { transform:translate(-50%,-50%) translate(48px,48px); }
+  .stage4.merge .s4-row-item[data-slot="0"] { transform:translate(-50%,-50%) translate(-72px,0); }
+  .stage4.merge .s4-row-item[data-slot="1"] { transform:translate(-50%,-50%) translate(-24px,0); }
+  .stage4.merge .s4-row-item[data-slot="2"] { transform:translate(-50%,-50%) translate(24px,0); }
+  .stage4.merge .s4-row-item[data-slot="3"] { transform:translate(-50%,-50%) translate(72px,0); }
+  .stage4.merge .s4-row-glow { width:200px; }
 }
 </style>
 </head>
@@ -253,22 +292,35 @@ html, body { width:100%; font-family:'Poppins',sans-serif; background:var(--bg);
       <div class="s4-frame"><div class="s4-frame-bar"><i></i><i></i><i></i><span class="s4-frame-label">AI Work Platform</span></div></div>
       <div class="s4-shells">
         <div class="s4-shell pair-card" data-slot="0">
-          <div class="pair-avs"><img class="pair-av person" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/roni-rebish.png" alt="Roni Rebish"><div class="pair-av agent brand-claude" title="Claude"><svg viewBox="0 0 24 24"><path d="M13.827 3.52h3.603L24 20.48h-3.603l-6.57-16.96zm-7.258 0h3.767L16.906 20.48h-3.674l-1.343-3.461H5.017l-1.344 3.46H0L6.57 3.522zm4.132 9.959L8.453 7.687 6.205 13.48H10.7z"/></svg></div></div>
-          <div class="pair-text"><span class="pair-name">Roni Rebish</span><span class="pair-dept">Product</span><span class="pair-agent">+ Claude</span></div>
+          <div class="pair-card-top">
+            <div class="pair-avs"><img class="pair-av person" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/roni-rebish.png" alt="Roni Rebish"><div class="pair-av agent brand-claude" title="Claude"><svg viewBox="0 0 24 24"><path d="M13.827 3.52h3.603L24 20.48h-3.603l-6.57-16.96zm-7.258 0h3.767L16.906 20.48h-3.674l-1.343-3.461H5.017l-1.344 3.46H0L6.57 3.522zm4.132 9.959L8.453 7.687 6.205 13.48H10.7z"/></svg></div></div>
+            <div class="pair-text"><span class="pair-name">Roni Rebish</span><span class="pair-dept">Product</span><span class="pair-agent">+ Claude</span></div>
+          </div>
+          <p class="pair-desc">Turns customer feedback into structured PRDs in minutes.</p>
         </div>
         <div class="s4-shell pair-card" data-slot="1">
-          <div class="pair-avs"><img class="pair-av person" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/ran-levgoren.png" alt="Ran Levgoren"><img class="pair-av agent" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/New%20agents%20images/agent-sales-contact-duplicates-finder.webp" alt="monday agents"></div>
-          <div class="pair-text"><span class="pair-name">Ran Levgoren</span><span class="pair-dept">Sales</span><span class="pair-agent">+ monday agents</span></div>
+          <div class="pair-card-top">
+            <div class="pair-avs"><img class="pair-av person" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/ran-levgoren.png" alt="Ran Levgoren"><img class="pair-av agent" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/New%20agents%20images/agent-sales-contact-duplicates-finder.webp" alt="monday agents"></div>
+            <div class="pair-text"><span class="pair-name">Ran Levgoren</span><span class="pair-dept">Sales</span><span class="pair-agent">+ monday agents</span></div>
+          </div>
+          <p class="pair-desc">Follows up on every lead automatically, so none go cold.</p>
         </div>
         <div class="s4-shell pair-card" data-slot="2">
-          <div class="pair-avs"><img class="pair-av person" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/osher-mayor.png" alt="Osher Mayor"><div class="pair-av agent brand-gemini" title="Gemini"><svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 2c.967 2.051 1.637 4.242 1.953 6.515C16.228 9.162 18.18 10.4 20 12c-1.82 1.6-3.772 2.838-6.047 3.485C13.637 17.758 12.967 19.949 12 22c-.967-2.051-1.637-4.242-1.953-6.515C7.772 14.838 5.82 13.6 4 12c1.82-1.6 3.772-2.838 6.047-3.485C10.363 6.242 11.033 4.051 12 2z"/></svg></div></div>
-          <div class="pair-text"><span class="pair-name">Osher Mayor</span><span class="pair-dept">Marketing</span><span class="pair-agent">+ Gemini</span></div>
+          <div class="pair-card-top">
+            <div class="pair-avs"><img class="pair-av person" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/osher-mayor.png" alt="Osher Mayor"><div class="pair-av agent brand-gemini" title="Gemini"><svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 2c.967 2.051 1.637 4.242 1.953 6.515C16.228 9.162 18.18 10.4 20 12c-1.82 1.6-3.772 2.838-6.047 3.485C13.637 17.758 12.967 19.949 12 22c-.967-2.051-1.637-4.242-1.953-6.515C7.772 14.838 5.82 13.6 4 12c1.82-1.6 3.772-2.838 6.047-3.485C10.363 6.242 11.033 4.051 12 2z"/></svg></div></div>
+            <div class="pair-text"><span class="pair-name">Osher Mayor</span><span class="pair-dept">Marketing</span><span class="pair-agent">+ Gemini</span></div>
+          </div>
+          <p class="pair-desc">Drafts campaign concepts and creative copy on demand.</p>
         </div>
         <div class="s4-shell pair-card" data-slot="3">
-          <div class="pair-avs"><img class="pair-av person" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/amit-frishberg.png" alt="Amit Frishberg"><div class="pair-av agent brand-cursor" title="Cursor"><svg viewBox="0 0 24 24"><path d="M4 2l15 7-6.2 1.9L11 17z"/></svg></div></div>
-          <div class="pair-text"><span class="pair-name">Amit Frishberg</span><span class="pair-dept">Engineering</span><span class="pair-agent">+ Cursor</span></div>
+          <div class="pair-card-top">
+            <div class="pair-avs"><img class="pair-av person" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/amit-frishberg.png" alt="Amit Frishberg"><div class="pair-av agent brand-cursor" title="Cursor"><svg viewBox="0 0 24 24"><path d="M4 2l15 7-6.2 1.9L11 17z"/></svg></div></div>
+            <div class="pair-text"><span class="pair-name">Amit Frishberg</span><span class="pair-dept">Engineering</span><span class="pair-agent">+ Cursor</span></div>
+          </div>
+          <p class="pair-desc">Writes and reviews code alongside the engineering team.</p>
         </div>
       </div>
+      <div class="s4-row-glow"></div>
       <div class="s4-row">
         <div class="s4-row-item pair-avs" data-slot="0"><img class="pair-av person" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/roni-rebish.png" alt="Roni Rebish"><div class="pair-av agent brand-claude"><svg viewBox="0 0 24 24"><path d="M13.827 3.52h3.603L24 20.48h-3.603l-6.57-16.96zm-7.258 0h3.767L16.906 20.48h-3.674l-1.343-3.461H5.017l-1.344 3.46H0L6.57 3.522zm4.132 9.959L8.453 7.687 6.205 13.48H10.7z"/></svg></div></div>
         <div class="s4-row-item pair-avs" data-slot="1"><img class="pair-av person" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/ran-levgoren.png" alt="Ran Levgoren"><img class="pair-av agent" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/New%20agents%20images/agent-sales-contact-duplicates-finder.webp" alt="monday agents"></div>
@@ -324,17 +376,16 @@ html, body { width:100%; font-family:'Poppins',sans-serif; background:var(--bg);
   }, { threshold: 0.5 });
   document.querySelectorAll('.stage').forEach(s => io.observe(s));
 
-  // Variant 4: multi-beat timeline (merge -> frame -> demo)
+  // Variant 4: two-beat timeline (merge -> demo). The frame is static chrome, always visible.
   let s4Timers = [];
   function playStage4() {
     const s = document.getElementById('stage4');
-    s.classList.remove('merge', 'framed', 'demo');
+    s.classList.remove('merge', 'demo');
     void s.offsetWidth;
     s4Timers.forEach(t => clearTimeout(t));
     s4Timers = [
-      setTimeout(() => s.classList.add('merge'), 300),
-      setTimeout(() => s.classList.add('framed'), 1200),
-      setTimeout(() => s.classList.add('demo'), 2600),
+      setTimeout(() => s.classList.add('merge'), 700),
+      setTimeout(() => s.classList.add('demo'), 2500),
     ];
   }
   function replayStage4() { playStage4(); }
