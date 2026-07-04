@@ -136,13 +136,14 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
 .r100-wrap { max-width:900px; width:100%; }
 .r100-hl { font-size:clamp(24px,3.2vw,44px); font-weight:800; line-height:1.2; margin-bottom:14px; }
 .r100-sub { font-size:clamp(13px,1.3vw,17px); font-weight:300; color:var(--dim); line-height:1.6; margin-bottom:clamp(28px,5vh,56px); }
-.r100-cards { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
-.r100-card { background:var(--card); border:1px solid var(--border); border-radius:16px; padding:28px 22px; display:flex; flex-direction:column; align-items:center; gap:14px; }
-.r100-dot { width:8px; height:8px; border-radius:50%; background:var(--purple); }
-.r100-card-title { font-size:15px; font-weight:700; color:#fff; }
+.r100-feed { position:relative; width:100%; max-width:460px; margin:0 auto; height:300px; }
+.r100-note { position:absolute; left:50%; width:92%; background:rgba(20,20,26,0.92); border:1px solid rgba(255,255,255,0.1); border-radius:14px; padding:12px 16px; display:flex; align-items:center; gap:12px; text-align:left; box-shadow:0 12px 30px rgba(0,0,0,0.5); }
+.r100-note-av { width:36px; height:36px; border-radius:50%; object-fit:cover; border:2px solid #0a0a0e; background:#222; flex-shrink:0; }
+.r100-note-txt b { color:#fff; font-size:12px; display:block; }
+.r100-note-txt span { display:block; font-size:11px; color:var(--dim); margin-top:2px; }
 @media (max-width:768px) {
-  .r100-cards { grid-template-columns:1fr; gap:10px; }
-  .r100-card { flex-direction:row; justify-content:center; padding:16px 18px; }
+  .r100-feed { max-width:320px; height:340px; }
+  .r100-note { width:96%; padding:10px 14px; }
 }
 
 /* S4c — Build by describing it */
@@ -749,12 +750,25 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
 <div class="slide" id="s0b">
   <div class="r100-wrap">
     <p class="eyebrow">The Reality</p>
-    <h2 class="r100-hl">Your team is already running at 100%.</h2>
-    <p class="r100-sub">More requests. More priorities. Same hours.</p>
-    <div class="r100-cards">
-      <div class="r100-card"><div class="r100-dot"></div><div class="r100-card-title">Requests pile up</div></div>
-      <div class="r100-card"><div class="r100-dot"></div><div class="r100-card-title">Priorities conflict</div></div>
-      <div class="r100-card"><div class="r100-dot"></div><div class="r100-card-title">There's never enough time</div></div>
+    <h2 class="r100-hl">Your team is already<br>running at 100%.</h2>
+    <p class="r100-sub">Different teams. Same feeling.</p>
+    <div class="r100-feed">
+      <div class="r100-note" style="top:0px; transform:translateX(-50%) rotate(-2deg); z-index:4;">
+        <img class="r100-note-av" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/roni-rebish.png" alt="Roni Rebish">
+        <div class="r100-note-txt"><b>Roni Rebish · Product</b><span>3 roadmap fires, one sprint.</span></div>
+      </div>
+      <div class="r100-note" style="top:66px; transform:translateX(-50%) rotate(1.5deg); z-index:3;">
+        <img class="r100-note-av" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/ran-levgoren.png" alt="Ran Levgoren">
+        <div class="r100-note-txt"><b>Ran Levgoren · Sales</b><span>40 leads waiting on a reply.</span></div>
+      </div>
+      <div class="r100-note" style="top:132px; transform:translateX(-50%) rotate(-1deg); z-index:2;">
+        <img class="r100-note-av" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/osher-mayor.png" alt="Osher Mayor">
+        <div class="r100-note-txt"><b>Osher Mayor · Marketing</b><span>6 campaigns due, one calendar.</span></div>
+      </div>
+      <div class="r100-note" style="top:198px; transform:translateX(-50%) rotate(2deg); z-index:1;">
+        <img class="r100-note-av" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/amit-frishberg.png" alt="Amit Frishberg">
+        <div class="r100-note-txt"><b>Amit Frishberg · Engineering</b><span>The backlog nobody has time for.</span></div>
+      </div>
     </div>
   </div>
 </div>
