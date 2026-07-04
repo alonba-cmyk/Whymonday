@@ -75,10 +75,44 @@ html, body { width:100%; font-family:'Poppins',sans-serif; background:var(--bg);
 .stage-3 .m-card { transition:transform 1s cubic-bezier(.22,.8,.24,1); transform:translate(-50%,-50%) translate(var(--sx),var(--sy)) rotate(var(--sr)); }
 .stage-3.play .m-card { transform:translate(-50%,-50%) translate(var(--fx),var(--fy)) rotate(var(--fr)); }
 
+/* ===== VARIANT 4: S2 grid → Team huddle → Platform frame → Live demo ===== */
+.stage4 { position:relative; width:100%; max-width:480px; height:340px; margin:0 auto; }
+.s4-frame { position:absolute; inset:26px; border:1px solid rgba(255,255,255,.14); border-radius:16px; background:rgba(255,255,255,.02); opacity:0; transform:scale(.94); transition:opacity .6s ease, transform .6s ease; }
+.stage4.framed .s4-frame, .stage4.demo .s4-frame { opacity:1; transform:scale(1); }
+.s4-frame-bar { display:flex; align-items:center; gap:6px; padding:10px 14px; border-bottom:1px solid rgba(255,255,255,.08); }
+.s4-frame-bar i { width:6px; height:6px; border-radius:50%; background:rgba(255,255,255,.15); display:block; }
+.s4-frame-label { margin-left:6px; font-size:9px; font-weight:600; letter-spacing:1px; text-transform:uppercase; color:var(--dim); }
+.s4-grid { position:absolute; inset:0; }
+.s4-card { position:absolute; top:50%; left:50%; width:150px; background:rgba(15,15,20,.96); border:1px solid rgba(255,255,255,.12); border-radius:12px; padding:10px 12px; display:flex; align-items:center; gap:8px; text-align:left; transition:transform 1.1s cubic-bezier(.22,.8,.24,1), opacity .5s ease; }
+.s4-card[data-slot="0"] { transform:translate(-50%,-50%) translate(-100px,-58px); }
+.s4-card[data-slot="1"] { transform:translate(-50%,-50%) translate(52px,-58px); }
+.s4-card[data-slot="2"] { transform:translate(-50%,-50%) translate(-100px,42px); }
+.s4-card[data-slot="3"] { transform:translate(-50%,-50%) translate(52px,42px); }
+.stage4.merge .s4-card[data-slot="0"] { transform:translate(-50%,-50%) translate(-34px,-16px) rotate(-6deg) scale(.9); }
+.stage4.merge .s4-card[data-slot="1"] { transform:translate(-50%,-50%) translate(14px,-22px) rotate(4deg) scale(.9); }
+.stage4.merge .s4-card[data-slot="2"] { transform:translate(-50%,-50%) translate(-32px,20px) rotate(5deg) scale(.9); }
+.stage4.merge .s4-card[data-slot="3"] { transform:translate(-50%,-50%) translate(16px,26px) rotate(-4deg) scale(.9); }
+.stage4.demo .s4-card { opacity:0; pointer-events:none; }
+.s4-demo { position:absolute; top:56%; left:50%; transform:translate(-50%,-50%) scale(.85); opacity:0; transition:opacity .6s ease, transform .6s ease; pointer-events:none; }
+.stage4.demo .s4-demo { opacity:1; transform:translate(-50%,-50%) scale(1); }
+.s4-demo-card { display:flex; flex-direction:column; align-items:center; gap:10px; background:rgba(15,15,20,.97); border:1px solid rgba(255,255,255,.16); border-radius:16px; padding:18px 26px; }
+.s4-demo-avs { display:flex; align-items:center; }
+.s4-demo-av { width:46px; height:46px; border-radius:50%; object-fit:cover; border:2px solid #0a0a0e; position:relative; z-index:3; background:#222; }
+.s4-demo-agent { width:34px; height:34px; border-radius:50%; display:flex; align-items:center; justify-content:center; border:2px solid #0a0a0e; margin-left:-12px; }
+.s4-demo-agent.claude { background:#CC785C; z-index:2; }
+.s4-demo-agent.monday { background:var(--purple); z-index:1; }
+.s4-demo-agent svg { width:16px; height:16px; fill:#fff; }
+.s4-demo-agent img { width:16px; height:16px; filter:brightness(0) invert(1); }
+.s4-demo-labels { display:flex; gap:14px; }
+.s4-demo-label { font-size:9px; color:var(--dim); text-align:center; }
+.s4-demo-name { font-size:12px; font-weight:700; color:#fff; display:flex; align-items:center; gap:1px; }
+.s4-cursor { display:inline-block; width:2px; height:12px; background:var(--teal); animation:s4blink .9s infinite; margin-left:3px; }
+@keyframes s4blink { 50% { opacity:0; } }
+
 @media (max-width:768px) {
   .variant-slide { padding:110px 20px 40px; }
   .hl { font-size:clamp(20px,4vw,30px); }
-  .stage-1, .stage-2, .stage-3 { max-width:320px; height:320px; transform:scale(.82); }
+  .stage-1, .stage-2, .stage-3, .stage4 { max-width:320px; height:320px; transform:scale(.82); }
   .replay-btn { top:auto; bottom:24px; right:24px; }
 }
 </style>
@@ -179,6 +213,49 @@ html, body { width:100%; font-family:'Poppins',sans-serif; background:var(--bg);
   </div>
 </section>
 
+<!-- ============ VARIANT 4 ============ -->
+<section class="variant-slide" id="v4">
+  <span class="variant-tag">4 · S2 Grid → Team → Platform Frame → Live Demo</span>
+  <button class="replay-btn" onclick="replayStage4()">Replay ↻</button>
+  <div class="wrap">
+    <p class="eyebrow">One Workspace</p>
+    <h2 class="hl">One workspace.<br>Your whole team.</h2>
+    <p class="sub">This is exactly what monday's AI Work Platform is built for — one place where people and agents work together to plan, execute, and deliver work.</p>
+    <div class="stage4" id="stage4">
+      <div class="s4-frame"><div class="s4-frame-bar"><i></i><i></i><i></i><span class="s4-frame-label">AI Work Platform</span></div></div>
+      <div class="s4-grid">
+        <div class="s4-card" data-slot="0">
+          <div class="m-av-wrap"><img class="m-av" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/roni-rebish.png" alt=""><div class="m-av agent m-brand-claude"><svg viewBox="0 0 24 24"><path d="M13.827 3.52h3.603L24 20.48h-3.603l-6.57-16.96zm-7.258 0h3.767L16.906 20.48h-3.674l-1.343-3.461H5.017l-1.344 3.46H0L6.57 3.522zm4.132 9.959L8.453 7.687 6.205 13.48H10.7z"/></svg></div></div>
+          <div><div class="m-name">Roni</div><div class="m-dept">Product</div></div>
+        </div>
+        <div class="s4-card" data-slot="1">
+          <div class="m-av-wrap"><img class="m-av" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/ran-levgoren.png" alt=""><img class="m-av agent" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/New%20agents%20images/agent-sales-contact-duplicates-finder.webp" alt=""></div>
+          <div><div class="m-name">Ran</div><div class="m-dept">Sales</div></div>
+        </div>
+        <div class="s4-card" data-slot="2">
+          <div class="m-av-wrap"><img class="m-av" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/osher-mayor.png" alt=""><div class="m-av agent m-brand-gemini"><svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 2c.967 2.051 1.637 4.242 1.953 6.515C16.228 9.162 18.18 10.4 20 12c-1.82 1.6-3.772 2.838-6.047 3.485C13.637 17.758 12.967 19.949 12 22c-.967-2.051-1.637-4.242-1.953-6.515C7.772 14.838 5.82 13.6 4 12c1.82-1.6 3.772-2.838 6.047-3.485C10.363 6.242 11.033 4.051 12 2z"/></svg></div></div>
+          <div><div class="m-name">Osher</div><div class="m-dept">Marketing</div></div>
+        </div>
+        <div class="s4-card" data-slot="3">
+          <div class="m-av-wrap"><img class="m-av" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/amit-frishberg.png" alt=""><div class="m-av agent m-brand-cursor"><svg viewBox="0 0 24 24"><path d="M4 2l15 7-6.2 1.9L11 17z"/></svg></div></div>
+          <div><div class="m-name">Amit</div><div class="m-dept">Engineering</div></div>
+        </div>
+      </div>
+      <div class="s4-demo">
+        <div class="s4-demo-card">
+          <div class="s4-demo-avs">
+            <img class="s4-demo-av" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/roni-rebish.png" alt="">
+            <div class="s4-demo-agent claude"><svg viewBox="0 0 24 24"><path d="M13.827 3.52h3.603L24 20.48h-3.603l-6.57-16.96zm-7.258 0h3.767L16.906 20.48h-3.674l-1.343-3.461H5.017l-1.344 3.46H0L6.57 3.522zm4.132 9.959L8.453 7.687 6.205 13.48H10.7z"/></svg></div>
+            <div class="s4-demo-agent monday"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/monday%20Logo/monday.com%20icon.png" alt=""></div>
+          </div>
+          <div class="s4-demo-name">Roni Rebish<span class="s4-cursor"></span></div>
+          <div class="s4-demo-labels"><span class="s4-demo-label">Claude</span><span class="s4-demo-label">Monday Agent</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <script>
   // draw the convergence lines for variant 2 with correct length/angle
   document.querySelectorAll('.stage-2 .line').forEach(line => {
@@ -212,6 +289,25 @@ html, body { width:100%; font-family:'Poppins',sans-serif; background:var(--bg);
     });
   }, { threshold: 0.5 });
   document.querySelectorAll('.stage').forEach(s => io.observe(s));
+
+  // Variant 4: multi-beat timeline (merge -> frame -> demo)
+  let s4Timers = [];
+  function playStage4() {
+    const s = document.getElementById('stage4');
+    s.classList.remove('merge', 'framed', 'demo');
+    void s.offsetWidth;
+    s4Timers.forEach(t => clearTimeout(t));
+    s4Timers = [
+      setTimeout(() => s.classList.add('merge'), 300),
+      setTimeout(() => s.classList.add('framed'), 1200),
+      setTimeout(() => s.classList.add('demo'), 2600),
+    ];
+  }
+  function replayStage4() { playStage4(); }
+  const io4 = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) playStage4(); });
+  }, { threshold: 0.5 });
+  io4.observe(document.getElementById('stage4'));
 </script>
 
 </body>
