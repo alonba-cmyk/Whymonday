@@ -4,12 +4,22 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>monday.com — Pick Your Pitch (Doors)</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html, body { width:100%; height:100%; overflow:hidden; background:#000; font-family:'Poppins',sans-serif; }
+html, body { width:100%; height:100%; overflow:hidden; background:#000; font-family:'Poppins',sans-serif; color:#fff; }
+body { display:flex; flex-direction:column; }
 
-.grid { display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr; width:100vw; height:100vh; gap:3px; background:#000; }
+/* Header — logo, tag, eyebrow, headline, sub */
+.header { flex-shrink:0; text-align:center; padding:clamp(10px,2.2vh,22px) 20px clamp(8px,1.6vh,14px); }
+.header img { height:clamp(14px,2.1vh,20px); opacity:0.85; }
+.header .tag { display:block; font-size:7px; font-weight:600; letter-spacing:4px; text-transform:uppercase; color:rgba(255,255,255,0.35); margin-top:4px; }
+.header .eyebrow { font-size:9px; font-weight:600; letter-spacing:3px; text-transform:uppercase; color:#6161ff; margin-top:clamp(10px,1.8vh,16px); }
+.header h1 { font-size:clamp(17px,2.5vh,30px); font-weight:800; line-height:1.15; letter-spacing:-0.5px; margin-top:6px; }
+.header .sub { font-size:clamp(10px,1.25vh,13px); font-weight:300; color:rgba(255,255,255,0.4); line-height:1.5; margin:8px auto 0; max-width:560px; }
+
+/* Grid — fills remaining space, no scroll */
+.grid { flex:1; min-height:0; display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr; gap:3px; background:#000; }
 
 .tile { position:relative; display:flex; align-items:center; justify-content:center; overflow:hidden; background:#0a0a0e; text-decoration:none; -webkit-tap-highlight-color:transparent; }
 
@@ -17,22 +27,23 @@ html, body { width:100%; height:100%; overflow:hidden; background:#000; font-fam
 .tile.live::before { content:''; position:absolute; inset:0; background:radial-gradient(circle at center, rgba(97,97,255,0.35), transparent 62%); opacity:0; transition:opacity .5s ease; z-index:0; }
 .tile.live:hover::before { opacity:1; }
 
-.door { position:absolute; top:0; bottom:0; width:50%; background:linear-gradient(160deg,#17171d,#09090c); transition:transform .6s cubic-bezier(.65,0,.35,1); z-index:1; }
+/* Frosted glass doors — the name is always visible through them, just softened */
+.door { position:absolute; top:0; bottom:0; width:50%; background:rgba(10,10,14,0.62); backdrop-filter:blur(7px); -webkit-backdrop-filter:blur(7px); transition:transform .6s cubic-bezier(.65,0,.35,1), opacity .6s ease; z-index:1; }
 .door.l { left:0; transform-origin:left; box-shadow: inset -1px 0 0 rgba(255,255,255,0.07); }
 .door.r { right:0; transform-origin:right; box-shadow: inset 1px 0 0 rgba(255,255,255,0.07); }
 .tile.live:hover .door.l { transform:translateX(-100%); }
 .tile.live:hover .door.r { transform:translateX(100%); }
 
-.name { position:relative; z-index:2; font-weight:700; font-size:clamp(20px,3.2vw,42px); letter-spacing:-0.5px; text-align:center; padding:0 24px; opacity:0; transform:translateY(16px) scale(0.94); transition:opacity .45s ease .18s, transform .45s ease .18s;
+.name { position:relative; z-index:2; font-weight:700; font-size:clamp(18px,3vw,38px); letter-spacing:-0.5px; text-align:center; padding:0 24px; transition:transform .45s ease, text-shadow .45s ease;
   background:linear-gradient(135deg,#fff 40%,rgba(255,255,255,0.6)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
-.tile.live:hover .name { opacity:1; transform:translateY(0) scale(1); }
+.tile.live:hover .name { transform:scale(1.05); text-shadow:0 0 40px rgba(255,255,255,0.2); }
 
-/* Locked tiles — no reveal, just a dim breathing seam */
-.tile.locked .door { background:linear-gradient(160deg,#101013,#08080a); }
+/* Locked tiles — doors stay shut, no name, just a dim breathing lock */
+.tile.locked .door { background:rgba(8,8,10,0.75); backdrop-filter:none; -webkit-backdrop-filter:none; }
 .tile.locked .door.l { box-shadow: inset -1px 0 0 rgba(255,255,255,0.03); }
 .tile.locked .door.r { box-shadow: inset 1px 0 0 rgba(255,255,255,0.03); }
 .lock-glyph { position:relative; z-index:2; width:16px; height:16px; opacity:0.16; }
-.tile.locked:hover .door { transform:translateX(2px); }
+.tile.locked:hover .door.l { transform:translateX(2px); }
 .tile.locked:hover .door.r { transform:translateX(-2px); }
 @keyframes breathe { 0%,100%{opacity:.10} 50%{opacity:.22} }
 .tile.locked .lock-glyph { animation:breathe 3.4s ease-in-out infinite; }
@@ -40,18 +51,26 @@ html, body { width:100%; height:100%; overflow:hidden; background:#000; font-fam
 </head>
 <body>
 
+<div class="header">
+  <img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/monday%20Logo/monday.com%20Logo.png" alt="monday.com">
+  <span class="tag">Sales Enablement</span>
+  <p class="eyebrow">Elevator Pitches</p>
+  <h1>Which elevator would you like to take?</h1>
+  <p class="sub">Four pitches, one destination: monday.com's AI Work Platform. Pick the ride that matches your meeting.</p>
+</div>
+
 <div class="grid">
 
   <a class="tile live" href="mondaystorydeck-agents.html" target="_blank" rel="noopener">
+    <span class="name">Close the Gap</span>
     <div class="door l"></div>
     <div class="door r"></div>
-    <span class="name">Close the Gap</span>
   </a>
 
   <a class="tile live" href="mondaystorydeck-shortpitch.html" target="_blank" rel="noopener">
+    <span class="name">More Hands</span>
     <div class="door l"></div>
     <div class="door r"></div>
-    <span class="name">More Hands</span>
   </a>
 
   <div class="tile locked">
