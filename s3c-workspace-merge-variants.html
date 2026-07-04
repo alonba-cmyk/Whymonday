@@ -179,15 +179,15 @@ html, body { width:100%; font-family:'Poppins',sans-serif; background:var(--bg);
 .s5-board-due { font-size:7px; color:#777; }
 
 .s5-board-cursors { position:absolute; inset:0; pointer-events:none; }
-.s5-cursor { position:absolute; top:0; left:0; display:flex; align-items:center; gap:5px; opacity:0; }
-.s5-cursor svg { width:14px; height:14px; filter:drop-shadow(0 1px 2px rgba(0,0,0,.25)); flex-shrink:0; }
-.s5-cursor.person svg { fill:#111; }
-.s5-cursor.agent svg { fill:#6161ff; }
-.s5-cursor-tag { display:flex; align-items:center; gap:4px; background:#fff; border:1px solid #e4e4e4; box-shadow:0 6px 14px rgba(0,0,0,.18); border-radius:100px; padding:2px 8px 2px 2px; }
-.s5-cursor-tag img { width:16px; height:16px; border-radius:50%; object-fit:cover; display:block; }
-.s5-agent-ic { width:16px; height:16px; border-radius:50%; background:#6161ff; display:flex; align-items:center; justify-content:center; }
-.s5-agent-ic svg { width:9px; height:9px; fill:#fff; }
-.s5-cursor-tag span { font-size:7.5px; font-weight:700; color:#222; white-space:nowrap; }
+.s5-cursor { position:absolute; top:0; left:0; display:flex; align-items:center; gap:6px; opacity:0; }
+.s5-cursor > svg { width:17px; height:17px; filter:drop-shadow(0 1px 2px rgba(0,0,0,.25)); flex-shrink:0; }
+.s5-cursor.person > svg { fill:#111; }
+.s5-cursor.agent > svg { fill:#6161ff; }
+.s5-cursor-tag { display:flex; align-items:center; gap:6px; background:#fff; border:1px solid #e4e4e4; box-shadow:0 6px 14px rgba(0,0,0,.18); border-radius:100px; padding:3px 10px 3px 3px; }
+.s5-cursor-tag img { width:24px; height:24px; border-radius:50%; object-fit:cover; display:block; }
+.s5-agent-ic { width:24px; height:24px; border-radius:50%; background:#6161ff; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.s5-agent-ic svg { width:13px; height:13px; fill:#fff; }
+.s5-cursor-tag span { font-size:9px; font-weight:700; color:#222; white-space:nowrap; }
 .stage5.demo .s5-cursor.person { animation:s5PersonMove 3.6s cubic-bezier(.45,0,.2,1) forwards; }
 .stage5.demo .s5-cursor.agent { animation:s5AgentMove 3.6s cubic-bezier(.45,0,.2,1) forwards; }
 @keyframes s5PersonMove {
@@ -292,9 +292,10 @@ html, body { width:100%; font-family:'Poppins',sans-serif; background:var(--bg);
   .s5-board-owner { width:15px; height:15px; }
   .s5-board-pill { font-size:5.2px; }
   .s5-board-due { font-size:6px; }
-  .s5-cursor svg { width:12px; height:12px; }
-  .s5-cursor-tag img, .s5-agent-ic { width:13px; height:13px; }
-  .s5-cursor-tag span { font-size:6.5px; }
+  .s5-cursor > svg { width:14px; height:14px; }
+  .s5-cursor-tag img, .s5-agent-ic { width:19px; height:19px; }
+  .s5-agent-ic svg { width:10px; height:10px; }
+  .s5-cursor-tag span { font-size:7.5px; }
   .stage5.demo .s5-cursor.person { animation-name:s5PersonMoveMob; }
   .stage5.demo .s5-cursor.agent { animation-name:s5AgentMoveMob; }
   @keyframes s5PersonMoveMob {
