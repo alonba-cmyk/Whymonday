@@ -251,12 +251,9 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
 
 /* victory frame beat 1: a live cross-department relay — agent writes, a person reviews, another person acts on it */
 .s4-relay { display:flex; flex-direction:column; gap:14px; background:rgba(15,15,20,.97); border:1px solid rgba(255,255,255,.14); border-radius:14px; padding:16px 18px; width:260px; text-align:left; }
-.s4-relay-row { display:flex; gap:10px; align-items:flex-start; opacity:0; transform:translateY(6px); transition:opacity .5s ease, transform .5s ease; }
-.s4-relay-row[data-i="0"] { transition-delay:.1s; }
-.s4-relay-row[data-i="1"] { transition-delay:.9s; }
-.s4-relay-row[data-i="2"] { transition-delay:1.7s; }
-.s4-relay-row[data-i="3"] { transition-delay:2.5s; }
-.stage4.demo .s4-relay-row { opacity:1; transform:translateY(0); }
+.s4-relay-row { display:none; gap:10px; align-items:flex-start; opacity:0; transform:translateY(6px); transition:opacity .5s ease, transform .5s ease; }
+.s4-relay-row.on { display:flex; }
+.s4-relay-row.on.show { opacity:1; transform:translateY(0); }
 .s4-relay-icon-col { position:relative; flex-shrink:0; width:26px; }
 .s4-relay-icon-col::after { content:''; position:absolute; top:26px; bottom:-14px; left:50%; width:2px; background:rgba(255,255,255,.14); transform:translateX(-50%); }
 .s4-relay-row:last-child .s4-relay-icon-col::after { display:none; }
@@ -1854,10 +1851,22 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
   function playStage4() {
     const s = document.getElementById('stage4');
     if (!s) return;
-    if (s4Played) { s.classList.add('merge', 'demo', 'board'); return; }
+    const relayRows = s.querySelectorAll('.s4-relay-row');
+    if (s4Played) {
+      s.classList.add('merge', 'demo', 'board');
+      relayRows.forEach(row => row.classList.add('on', 'show'));
+      return;
+    }
     s4Played = true;
     setTimeout(() => s.classList.add('merge'), 700);
     setTimeout(() => s.classList.add('demo'), 2500);
+    relayRows.forEach((row, i) => {
+      setTimeout(() => {
+        row.classList.add('on');
+        void row.offsetWidth;
+        row.classList.add('show');
+      }, 2500 + 100 + i * 800);
+    });
     setTimeout(() => s.classList.add('board'), 7000);
   }
 
