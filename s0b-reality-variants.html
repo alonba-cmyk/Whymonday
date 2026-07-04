@@ -71,6 +71,13 @@ html, body { width:100%; font-family:'Poppins',sans-serif; background:var(--bg);
 .e-note { position:absolute; background:var(--card); border:1px solid var(--border); border-radius:12px; padding:14px 18px; font-size:12px; font-weight:600; color:#fff; box-shadow:0 10px 26px rgba(0,0,0,0.4); }
 .e-note .dot { width:6px; height:6px; border-radius:50%; background:var(--purple); display:inline-block; margin-right:8px; }
 
+/* ===== F: Real Overload Feed (A + C combined) ===== */
+.f-stack { position:relative; width:100%; max-width:460px; height:300px; margin:0 auto; }
+.f-note { position:absolute; left:50%; width:92%; background:rgba(20,20,26,0.92); border:1px solid rgba(255,255,255,0.1); border-radius:14px; padding:12px 16px; display:flex; align-items:center; gap:12px; text-align:left; box-shadow:0 12px 30px rgba(0,0,0,0.5); }
+.f-av { width:36px; height:36px; border-radius:50%; object-fit:cover; border:2px solid #0a0a0e; background:#222; flex-shrink:0; }
+.f-txt b { color:#fff; font-size:12px; display:block; }
+.f-txt span { display:block; font-size:11px; color:var(--dim); margin-top:2px; }
+
 @media (max-width:768px) {
   .variant-slide { padding:100px 20px 40px; }
   .r100-hl { font-size:clamp(20px,4vw,30px); }
@@ -82,6 +89,8 @@ html, body { width:100%; font-family:'Poppins',sans-serif; background:var(--bg);
   .c-stack { max-width:320px; height:300px; }
   .d-cal { max-width:340px; }
   .e-collage { max-width:340px; height:340px; }
+  .f-stack { max-width:320px; height:340px; }
+  .f-note { width:96%; padding:10px 14px; }
 }
 </style>
 </head>
@@ -185,6 +194,34 @@ html, body { width:100%; font-family:'Poppins',sans-serif; background:var(--bg);
       <div class="e-note" style="top:110px; left:4%; transform:rotate(3deg); z-index:2;"><span class="dot"></span>Never enough time</div>
       <div class="e-note" style="top:130px; left:48%; transform:rotate(-4deg); z-index:1;"><span class="dot"></span>Everything's urgent</div>
       <div class="e-note" style="top:200px; left:20%; transform:rotate(-2deg); z-index:5;"><span class="dot"></span>Same hours, more work</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ VARIANT F ============ -->
+<section class="variant-slide" id="f">
+  <span class="variant-tag">F · Real Overload Feed (A + C)</span>
+  <div class="r100-wrap">
+    <p class="eyebrow">The Reality</p>
+    <h2 class="r100-hl">Your team is already running at 100%.</h2>
+    <p class="r100-sub">Ask anyone. They'll show you exactly what's piling up.</p>
+    <div class="f-stack">
+      <div class="f-note" style="top:0px; transform:translateX(-50%) rotate(-2deg); z-index:4;">
+        <img class="f-av" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/roni-rebish.png" alt="Roni Rebish">
+        <div class="f-txt"><b>Roni Rebish · Product</b><span>3 roadmap fires, one sprint.</span></div>
+      </div>
+      <div class="f-note" style="top:66px; transform:translateX(-50%) rotate(1.5deg); z-index:3;">
+        <img class="f-av" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/ran-levgoren.png" alt="Ran Levgoren">
+        <div class="f-txt"><b>Ran Levgoren · Sales</b><span>40 leads waiting on a reply.</span></div>
+      </div>
+      <div class="f-note" style="top:132px; transform:translateX(-50%) rotate(-1deg); z-index:2;">
+        <img class="f-av" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/osher-mayor.png" alt="Osher Mayor">
+        <div class="f-txt"><b>Osher Mayor · Marketing</b><span>6 campaigns due, one calendar.</span></div>
+      </div>
+      <div class="f-note" style="top:198px; transform:translateX(-50%) rotate(2deg); z-index:1;">
+        <img class="f-av" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/amit-frishberg.png" alt="Amit Frishberg">
+        <div class="f-txt"><b>Amit Frishberg · Engineering</b><span>The backlog nobody has time for.</span></div>
+      </div>
     </div>
   </div>
 </section>
