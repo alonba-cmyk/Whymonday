@@ -196,6 +196,199 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
 .s3b-card-desc { font-size:11px; color:rgba(255,255,255,0.55); line-height:1.5; }
 .s3b-mob-half { display:none; }
 
+/* S3c — One workspace, your whole team (resolution: siloed cards merge into one shared board) */
+#s3c { text-align:center; }
+#s3c h2 { font-size:clamp(22px,3vw,40px); font-weight:700; line-height:1.2; margin-bottom:14px; }
+
+.stage4 { position:relative; width:100%; max-width:560px; height:440px; margin:0 auto; }
+.s4-frame { position:absolute; inset:20px; border:1px solid rgba(255,255,255,.14); border-radius:16px; background:rgba(255,255,255,.02); z-index:0; opacity:0; transform:scale(.95); transition:opacity .6s ease, transform .6s ease; }
+.stage4.merge .s4-frame, .stage4.demo .s4-frame { opacity:1; transform:scale(1); }
+.s4-frame-bar { display:flex; align-items:center; gap:6px; padding:10px 14px; border-bottom:1px solid rgba(255,255,255,.08); }
+.s4-frame-bar i { width:6px; height:6px; border-radius:50%; background:rgba(255,255,255,.15); display:block; }
+.s4-frame-logo { width:14px; height:14px; margin-left:8px; border-radius:4px; display:block; }
+.s4-frame-label { margin-left:6px; font-size:9px; font-weight:600; letter-spacing:1px; text-transform:uppercase; color:var(--dim); }
+
+.s4-shells { position:absolute; inset:0; z-index:1; }
+.s4-shell.pair-card { position:absolute; top:50%; left:50%; width:220px; transition:opacity .9s ease, transform .9s ease; }
+.s4-shell[data-slot="0"] { transform:translate(-50%,-50%) translate(-118px,-70px); }
+.s4-shell[data-slot="1"] { transform:translate(-50%,-50%) translate(118px,-70px); }
+.s4-shell[data-slot="2"] { transform:translate(-50%,-50%) translate(-118px,70px); }
+.s4-shell[data-slot="3"] { transform:translate(-50%,-50%) translate(118px,70px); }
+.stage4.merge .s4-shell { opacity:0; transform:translate(-50%,-50%) translate(0,0) scale(.96); pointer-events:none; }
+.stage4.merge .s4-shell[data-slot="0"] { transform:translate(-50%,-50%) translate(-118px,-70px) scale(.96); }
+.stage4.merge .s4-shell[data-slot="1"] { transform:translate(-50%,-50%) translate(118px,-70px) scale(.96); }
+.stage4.merge .s4-shell[data-slot="2"] { transform:translate(-50%,-50%) translate(-118px,70px) scale(.96); }
+.stage4.merge .s4-shell[data-slot="3"] { transform:translate(-50%,-50%) translate(118px,70px) scale(.96); }
+
+.s4-row { position:absolute; inset:0; z-index:2; }
+.s4-row-item.pair-avs { position:absolute; top:50%; left:50%; margin:0; opacity:0; transition:opacity .9s ease, transform .9s cubic-bezier(.25,.8,.3,1); }
+.s4-row-item[data-slot="0"] { transform:translate(-50%,-50%) translate(-168px,-90px); }
+.s4-row-item[data-slot="1"] { transform:translate(-50%,-50%) translate(68px,-90px); }
+.s4-row-item[data-slot="2"] { transform:translate(-50%,-50%) translate(-168px,50px); }
+.s4-row-item[data-slot="3"] { transform:translate(-50%,-50%) translate(68px,50px); }
+.stage4.merge .s4-row-item { opacity:1; }
+.stage4.merge .s4-row-item[data-slot="0"] { transform:translate(-50%,-50%) translate(-108px,0); z-index:4; }
+.stage4.merge .s4-row-item[data-slot="1"] { transform:translate(-50%,-50%) translate(-36px,0); z-index:3; }
+.stage4.merge .s4-row-item[data-slot="2"] { transform:translate(-50%,-50%) translate(36px,0); z-index:2; }
+.stage4.merge .s4-row-item[data-slot="3"] { transform:translate(-50%,-50%) translate(108px,0); z-index:1; }
+.stage4.demo .s4-row-item { opacity:0; }
+
+.s4-row-glow { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:0; height:64px; border-radius:100px; background:rgba(97,97,255,.14); opacity:0; transition:opacity .5s ease .5s, width .7s cubic-bezier(.25,.8,.3,1) .3s; z-index:1; }
+.stage4.merge .s4-row-glow { opacity:1; width:290px; }
+.stage4.demo .s4-row-glow { opacity:0; }
+
+.s4-demo { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%) scale(.85); opacity:0; transition:opacity .6s ease, transform .6s ease; pointer-events:none; z-index:3; }
+.stage4.demo .s4-demo { opacity:1; transform:translate(-50%,-50%) scale(1); }
+.stage4.board .s4-demo { opacity:0; transform:translate(-50%,-50%) scale(.85); }
+
+.s4-board-final { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%) scale(.85); opacity:0; transition:opacity .6s ease, transform .6s ease; pointer-events:none; z-index:4; }
+.stage4.board .s4-board-final { opacity:1; transform:translate(-50%,-50%) scale(1); }
+.stage4.board .s5-cursor.person { animation:s5PersonMove 3.6s cubic-bezier(.45,0,.2,1) forwards; }
+.stage4.board .s5-cursor.agent { animation:s5AgentMove 3.6s cubic-bezier(.45,0,.2,1) forwards; }
+
+/* victory frame beat 1: a live cross-department relay — agent writes, a person reviews, another person acts on it */
+.s4-relay { display:flex; flex-direction:column; gap:14px; background:rgba(15,15,20,.97); border:1px solid rgba(255,255,255,.14); border-radius:14px; padding:16px 18px; width:260px; text-align:left; }
+.s4-relay-row { display:flex; gap:10px; align-items:flex-start; opacity:0; transform:translateY(6px); transition:opacity .5s ease, transform .5s ease; }
+.s4-relay-row[data-i="0"] { transition-delay:.1s; }
+.s4-relay-row[data-i="1"] { transition-delay:.9s; }
+.s4-relay-row[data-i="2"] { transition-delay:1.7s; }
+.s4-relay-row[data-i="3"] { transition-delay:2.5s; }
+.stage4.demo .s4-relay-row { opacity:1; transform:translateY(0); }
+.s4-relay-icon-col { position:relative; flex-shrink:0; width:26px; }
+.s4-relay-icon-col::after { content:''; position:absolute; top:26px; bottom:-14px; left:50%; width:2px; background:rgba(255,255,255,.14); transform:translateX(-50%); }
+.s4-relay-row:last-child .s4-relay-icon-col::after { display:none; }
+.s4-relay-icon { width:26px; height:26px; border-radius:50%; object-fit:cover; border:2px solid #0a0a0e; display:block; background:#222; }
+.s4-relay-icon.agent { display:flex; align-items:center; justify-content:center; background:#050505; border-color:#444; }
+.s4-relay-icon.agent svg { width:12px; height:12px; fill:#fff; }
+.s4-relay-icon.monday { background:var(--purple); border-color:var(--purple); }
+.s4-relay-icon.monday img { width:13px; height:13px; filter:brightness(0) invert(1); }
+.s4-relay-body { padding-top:1px; }
+.s4-relay-who { font-size:11px; font-weight:700; color:#fff; }
+.s4-relay-who span { font-size:9px; font-weight:500; color:var(--dim); }
+.s4-relay-action { font-size:10.5px; color:var(--dim); font-weight:300; margin-top:2px; line-height:1.4; }
+.s4-relay-cursor { display:inline-block; color:var(--teal); font-weight:600; animation:s4blink 1s steps(1) infinite; }
+.s4-relay-check { color:#22c55e; font-weight:700; }
+@keyframes s4blink { 50% { opacity:0; } }
+
+/* victory frame beat 2 (bonus): a real-looking board with a person cursor and an agent cursor moving across it together */
+.s5-board-card { background:#fff; border-radius:14px; overflow:hidden; width:300px; text-align:left; box-shadow:0 24px 50px rgba(0,0,0,.4); position:relative; }
+.s5-board-head { padding:10px 14px 0; }
+.s5-board-name { font-size:11px; font-weight:700; color:#111; margin-bottom:7px; }
+.s5-board-tabs { display:flex; gap:10px; font-size:7.5px; color:#999; border-bottom:1px solid #eee; }
+.s5-board-tabs span { padding-bottom:7px; }
+.s5-board-tabs span.active { color:#111; font-weight:700; border-bottom:2px solid #6161ff; }
+.s5-board-cols { display:grid; grid-template-columns:1fr 22px 54px 34px; gap:6px; padding:7px 14px 5px; font-size:6.5px; font-weight:700; color:#aaa; text-transform:uppercase; letter-spacing:.3px; }
+.s5-board-row { display:grid; grid-template-columns:1fr 22px 54px 34px; align-items:center; gap:6px; padding:7px 14px; border-top:1px solid #f2f2f2; }
+.s5-board-task-name { font-size:8.5px; color:#333; font-weight:500; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.s5-board-owner { width:18px; height:18px; border-radius:50%; object-fit:cover; display:block; }
+.s5-board-pill { font-size:6px; font-weight:700; color:#fff; text-align:center; border-radius:4px; padding:3px 0; text-transform:uppercase; letter-spacing:.2px; }
+.s5-board-pill.working { background:#fdab3d; }
+.s5-board-pill.done { background:#00c875; }
+.s5-board-due { font-size:7px; color:#777; }
+
+.s5-board-cursors { position:absolute; inset:0; pointer-events:none; }
+.s5-cursor { position:absolute; top:0; left:0; display:flex; align-items:center; gap:6px; opacity:0; }
+.s5-cursor > svg { width:17px; height:17px; filter:drop-shadow(0 1px 2px rgba(0,0,0,.25)); flex-shrink:0; }
+.s5-cursor.person > svg { fill:#111; }
+.s5-cursor.agent > svg { fill:#6161ff; }
+.s5-cursor-tag { display:flex; align-items:center; gap:6px; background:#fff; border:1px solid #e4e4e4; box-shadow:0 6px 14px rgba(0,0,0,.18); border-radius:100px; padding:3px 10px 3px 3px; }
+.s5-cursor-tag img { width:24px; height:24px; border-radius:50%; object-fit:cover; display:block; }
+.s5-agent-ic { width:24px; height:24px; border-radius:50%; background:#6161ff; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.s5-agent-ic svg { width:13px; height:13px; fill:#fff; }
+.s5-cursor-tag span { font-size:9px; font-weight:700; color:#222; white-space:nowrap; }
+@keyframes s5PersonMove {
+  0%   { transform:translate(14px,64px); opacity:0; }
+  8%   { opacity:1; }
+  32%  { transform:translate(70px,95px); }
+  56%  { transform:translate(115px,128px); }
+  100% { transform:translate(135px,155px); opacity:1; }
+}
+@keyframes s5AgentMove {
+  0%   { transform:translate(215px,64px); opacity:0; }
+  8%   { opacity:1; }
+  32%  { transform:translate(150px,95px); }
+  56%  { transform:translate(95px,128px); }
+  100% { transform:translate(55px,155px); opacity:1; }
+}
+
+/* S3c mobile — values copied 1:1 from S2's mobile card CSS (155px card from a
+   2-col 320px grid, 42px avatars, vertical stacked layout) so sizing stays
+   pixel-identical to slide 2 on mobile. */
+@media (max-width:768px) {
+  #s3c { padding:110px 20px 40px; }
+  #s3c h2 { font-size:clamp(20px,4vw,30px); margin-bottom:20px; }
+
+  .stage4 { max-width:360px; height:340px; }
+  .stage4 .pair-card { width:155px; text-align:center; gap:6px; padding:8px 6px; }
+  .stage4 .pair-card-top { flex-direction:column; align-items:center; gap:6px; }
+  .stage4 .pair-avs { margin-right:0; }
+  .stage4 .pair-av { width:42px; height:42px; }
+  .stage4 .pair-av.agent { margin-left:-14px; }
+  .stage4 .pair-av.agent svg { width:18px; height:18px; }
+  .stage4 .pair-name { font-size:8.5px; }
+  .stage4 .pair-dept { font-size:7px; }
+  .stage4 .pair-agent { font-size:7px; }
+  .stage4 .pair-desc { font-size:7px; margin-top:2px; }
+  .stage4 .s4-shell[data-slot="0"] { transform:translate(-50%,-50%) translate(-82px,-64px); }
+  .stage4 .s4-shell[data-slot="1"] { transform:translate(-50%,-50%) translate(82px,-64px); }
+  .stage4 .s4-shell[data-slot="2"] { transform:translate(-50%,-50%) translate(-82px,64px); }
+  .stage4 .s4-shell[data-slot="3"] { transform:translate(-50%,-50%) translate(82px,64px); }
+  .stage4.merge .s4-shell[data-slot="0"] { transform:translate(-50%,-50%) translate(-82px,-64px) scale(.96); }
+  .stage4.merge .s4-shell[data-slot="1"] { transform:translate(-50%,-50%) translate(82px,-64px) scale(.96); }
+  .stage4.merge .s4-shell[data-slot="2"] { transform:translate(-50%,-50%) translate(-82px,64px) scale(.96); }
+  .stage4.merge .s4-shell[data-slot="3"] { transform:translate(-50%,-50%) translate(82px,64px) scale(.96); }
+  .stage4 .s4-row-item[data-slot="0"] { transform:translate(-50%,-50%) translate(-82px,-93px); }
+  .stage4 .s4-row-item[data-slot="1"] { transform:translate(-50%,-50%) translate(82px,-93px); }
+  .stage4 .s4-row-item[data-slot="2"] { transform:translate(-50%,-50%) translate(-82px,35px); }
+  .stage4 .s4-row-item[data-slot="3"] { transform:translate(-50%,-50%) translate(82px,35px); }
+  .stage4.merge .s4-row-item[data-slot="0"] { transform:translate(-50%,-50%) translate(-84px,0); }
+  .stage4.merge .s4-row-item[data-slot="1"] { transform:translate(-50%,-50%) translate(-28px,0); }
+  .stage4.merge .s4-row-item[data-slot="2"] { transform:translate(-50%,-50%) translate(28px,0); }
+  .stage4.merge .s4-row-item[data-slot="3"] { transform:translate(-50%,-50%) translate(84px,0); }
+  .stage4.merge .s4-row-glow { width:220px; }
+
+  .s4-relay { width:220px; padding:12px 14px; gap:11px; }
+  .s4-relay-icon-col { width:22px; }
+  .s4-relay-icon-col::after { top:22px; bottom:-11px; }
+  .s4-relay-icon { width:22px; height:22px; }
+  .s4-relay-icon.agent svg { width:10px; height:10px; }
+  .s4-relay-icon.monday img { width:11px; height:11px; }
+  .s4-relay-who { font-size:9.5px; }
+  .s4-relay-who span { font-size:8px; }
+  .s4-relay-action { font-size:9px; }
+
+  .s5-board-card { width:230px; }
+  .s5-board-head { padding:8px 11px 0; }
+  .s5-board-name { font-size:9.5px; margin-bottom:5px; }
+  .s5-board-tabs { font-size:6.5px; }
+  .s5-board-cols { grid-template-columns:1fr 18px 42px 28px; padding:6px 11px 4px; font-size:5.5px; }
+  .s5-board-row { grid-template-columns:1fr 18px 42px 28px; padding:6px 11px; gap:5px; }
+  .s5-board-task-name { font-size:7.5px; }
+  .s5-board-owner { width:15px; height:15px; }
+  .s5-board-pill { font-size:5.2px; }
+  .s5-board-due { font-size:6px; }
+  .s5-cursor > svg { width:14px; height:14px; }
+  .s5-cursor-tag img, .s5-agent-ic { width:19px; height:19px; }
+  .s5-agent-ic svg { width:10px; height:10px; }
+  .s5-cursor-tag span { font-size:7.5px; }
+  .stage4.board .s5-cursor.person { animation-name:s5PersonMoveMob; }
+  .stage4.board .s5-cursor.agent { animation-name:s5AgentMoveMob; }
+  @keyframes s5PersonMoveMob {
+    0%   { transform:translate(10px,48px); opacity:0; }
+    8%   { opacity:1; }
+    32%  { transform:translate(50px,72px); }
+    56%  { transform:translate(85px,96px); }
+    100% { transform:translate(100px,116px); opacity:1; }
+  }
+  @keyframes s5AgentMoveMob {
+    0%   { transform:translate(160px,48px); opacity:0; }
+    8%   { opacity:1; }
+    32%  { transform:translate(112px,72px); }
+    56%  { transform:translate(70px,96px); }
+    100% { transform:translate(40px,116px); opacity:1; }
+  }
+}
+
 /* S4 */
 #s4 { text-align:center; }
 .answer-wrap { max-width:860px; }
@@ -640,7 +833,7 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
 .s0v3-strip { width:100%; max-width:1200px; opacity:0.35; pointer-events:none; }
 
 /* ── Shared gradient headline style ── */
-.shift-wrap h2, #s3b h2, .layers-top h2, .r100-hl, .build-hl,
+.shift-wrap h2, #s3b h2, #s3c h2, .layers-top h2, .r100-hl, .build-hl,
 .sbs-heading, .sp-heading, .mom-hl {
   background: linear-gradient(140deg, #fff 50%, rgba(255,255,255,0.45));
   -webkit-background-clip: text;
@@ -728,7 +921,7 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
 
 <div class="progress" id="prog"></div>
 <nav class="nav-dots" id="navDots">
-  <button class="nav-dot active" onclick="goTo(0)"></button><button class="nav-dot" onclick="goTo(1)"></button><button class="nav-dot" onclick="goTo(2)"></button><button class="nav-dot" onclick="goTo(3)"></button><button class="nav-dot" onclick="goTo(4)"></button><button class="nav-dot" onclick="goTo(5)"></button><button class="nav-dot" onclick="goTo(6)"></button><button class="nav-dot" onclick="goTo(7)"></button><button class="nav-dot" onclick="goTo(8)"></button><button class="nav-dot" onclick="goTo(9)"></button>
+  <button class="nav-dot active" onclick="goTo(0)"></button><button class="nav-dot" onclick="goTo(1)"></button><button class="nav-dot" onclick="goTo(2)"></button><button class="nav-dot" onclick="goTo(3)"></button><button class="nav-dot" onclick="goTo(4)"></button><button class="nav-dot" onclick="goTo(5)"></button><button class="nav-dot" onclick="goTo(6)"></button><button class="nav-dot" onclick="goTo(7)"></button><button class="nav-dot" onclick="goTo(8)"></button><button class="nav-dot" onclick="goTo(9)"></button><button class="nav-dot" onclick="goTo(10)"></button>
 </nav>
 
 <div class="deck">
@@ -920,6 +1113,129 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
       <div class="s3b-card"><div class="s3b-dot"></div><div><div class="s3b-card-title">No one managing them</div><div class="s3b-card-desc">Nobody owns them, tracks them, or keeps them aligned with what the business needs.</div></div></div>
       <div class="s3b-card"><div class="s3b-dot"></div><div><div class="s3b-card-title">Lack of context</div><div class="s3b-card-desc">Agents without business context can't act with real purpose.</div></div></div>
       <div class="s3b-card"><div class="s3b-dot"></div><div><div class="s3b-card-title">Siloed Output</div><div class="s3b-card-desc">Agent output stays isolated, with no impact on the organization.</div></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" id="s3c">
+  <div class="shift-wrap">
+    <p class="eyebrow">One Workspace</p>
+    <h2>One workspace.<br>Your whole team.</h2>
+    <p class="shift-sub">This is exactly what monday's AI Work Platform is built for — one place where people and agents work together to plan, execute, and deliver work.</p>
+    <div class="stage4" id="stage4">
+      <div class="s4-frame"><div class="s4-frame-bar"><i></i><i></i><i></i><img class="s4-frame-logo" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/monday%20Logo/monday.com%20icon.png" alt=""><span class="s4-frame-label">AI Work Platform</span></div></div>
+      <div class="s4-shells">
+        <div class="s4-shell pair-card" data-slot="0">
+          <div class="pair-card-top">
+            <div class="pair-avs"><img class="pair-av person" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/roni-rebish.png" alt="Roni Rebish"><div class="pair-av agent brand-claude" title="Claude"><svg viewBox="0 0 24 24"><path d="M13.827 3.52h3.603L24 20.48h-3.603l-6.57-16.96zm-7.258 0h3.767L16.906 20.48h-3.674l-1.343-3.461H5.017l-1.344 3.46H0L6.57 3.522zm4.132 9.959L8.453 7.687 6.205 13.48H10.7z"/></svg></div></div>
+            <div class="pair-text"><span class="pair-name">Roni Rebish</span><span class="pair-dept">Product</span><span class="pair-agent">+ Claude</span></div>
+          </div>
+          <p class="pair-desc">Turns customer feedback into structured PRDs in minutes.</p>
+        </div>
+        <div class="s4-shell pair-card" data-slot="1">
+          <div class="pair-card-top">
+            <div class="pair-avs"><img class="pair-av person" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/ran-levgoren.png" alt="Ran Levgoren"><img class="pair-av agent" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/New%20agents%20images/agent-sales-contact-duplicates-finder.webp" alt="monday agents"></div>
+            <div class="pair-text"><span class="pair-name">Ran Levgoren</span><span class="pair-dept">Sales</span><span class="pair-agent">+ monday agents</span></div>
+          </div>
+          <p class="pair-desc">Follows up on every lead automatically, so none go cold.</p>
+        </div>
+        <div class="s4-shell pair-card" data-slot="2">
+          <div class="pair-card-top">
+            <div class="pair-avs"><img class="pair-av person" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/osher-mayor.png" alt="Osher Mayor"><div class="pair-av agent brand-gemini" title="Gemini"><svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 2c.967 2.051 1.637 4.242 1.953 6.515C16.228 9.162 18.18 10.4 20 12c-1.82 1.6-3.772 2.838-6.047 3.485C13.637 17.758 12.967 19.949 12 22c-.967-2.051-1.637-4.242-1.953-6.515C7.772 14.838 5.82 13.6 4 12c1.82-1.6 3.772-2.838 6.047-3.485C10.363 6.242 11.033 4.051 12 2z"/></svg></div></div>
+            <div class="pair-text"><span class="pair-name">Osher Mayor</span><span class="pair-dept">Marketing</span><span class="pair-agent">+ Gemini</span></div>
+          </div>
+          <p class="pair-desc">Drafts campaign concepts and creative copy on demand.</p>
+        </div>
+        <div class="s4-shell pair-card" data-slot="3">
+          <div class="pair-card-top">
+            <div class="pair-avs"><img class="pair-av person" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/amit-frishberg.png" alt="Amit Frishberg"><div class="pair-av agent brand-cursor" title="Cursor"><svg viewBox="0 0 24 24"><path d="M4 2l15 7-6.2 1.9L11 17z"/></svg></div></div>
+            <div class="pair-text"><span class="pair-name">Amit Frishberg</span><span class="pair-dept">Engineering</span><span class="pair-agent">+ Cursor</span></div>
+          </div>
+          <p class="pair-desc">Writes and reviews code alongside the engineering team.</p>
+        </div>
+      </div>
+      <div class="s4-row-glow"></div>
+      <div class="s4-row">
+        <div class="s4-row-item pair-avs" data-slot="0"><img class="pair-av person" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/roni-rebish.png" alt="Roni Rebish"><div class="pair-av agent brand-claude"><svg viewBox="0 0 24 24"><path d="M13.827 3.52h3.603L24 20.48h-3.603l-6.57-16.96zm-7.258 0h3.767L16.906 20.48h-3.674l-1.343-3.461H5.017l-1.344 3.46H0L6.57 3.522zm4.132 9.959L8.453 7.687 6.205 13.48H10.7z"/></svg></div></div>
+        <div class="s4-row-item pair-avs" data-slot="1"><img class="pair-av person" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/ran-levgoren.png" alt="Ran Levgoren"><img class="pair-av agent" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/New%20agents%20images/agent-sales-contact-duplicates-finder.webp" alt="monday agents"></div>
+        <div class="s4-row-item pair-avs" data-slot="2"><img class="pair-av person" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/osher-mayor.png" alt="Osher Mayor"><div class="pair-av agent brand-gemini"><svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 2c.967 2.051 1.637 4.242 1.953 6.515C16.228 9.162 18.18 10.4 20 12c-1.82 1.6-3.772 2.838-6.047 3.485C13.637 17.758 12.967 19.949 12 22c-.967-2.051-1.637-4.242-1.953-6.515C7.772 14.838 5.82 13.6 4 12c1.82-1.6 3.772-2.838 6.047-3.485C10.363 6.242 11.033 4.051 12 2z"/></svg></div></div>
+        <div class="s4-row-item pair-avs" data-slot="3"><img class="pair-av person" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/amit-frishberg.png" alt="Amit Frishberg"><div class="pair-av agent brand-cursor"><svg viewBox="0 0 24 24"><path d="M4 2l15 7-6.2 1.9L11 17z"/></svg></div></div>
+      </div>
+      <div class="s4-demo">
+        <div class="s4-relay">
+          <div class="s4-relay-row" data-i="0">
+            <div class="s4-relay-icon-col"><div class="s4-relay-icon agent"><svg viewBox="0 0 24 24"><path d="M4 2l15 7-6.2 1.9L11 17z"/></svg></div></div>
+            <div class="s4-relay-body">
+              <div class="s4-relay-who">Cursor <span>· Amit's agent</span></div>
+              <div class="s4-relay-action">Writing the mobile parity fix<span class="s4-relay-cursor">▍</span></div>
+            </div>
+          </div>
+          <div class="s4-relay-row" data-i="1">
+            <div class="s4-relay-icon-col"><img class="s4-relay-icon" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/amit-frishberg.png" alt="Amit Frishberg"></div>
+            <div class="s4-relay-body">
+              <div class="s4-relay-who">Amit Frishberg <span>· Engineering</span></div>
+              <div class="s4-relay-action">Reviewed the code <span class="s4-relay-check">✓ Approved</span></div>
+            </div>
+          </div>
+          <div class="s4-relay-row" data-i="2">
+            <div class="s4-relay-icon-col"><div class="s4-relay-icon monday"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/monday%20Logo/monday.com%20icon.png" alt=""></div></div>
+            <div class="s4-relay-body">
+              <div class="s4-relay-who">monday agent <span>· Workflow</span></div>
+              <div class="s4-relay-action">Updated the board & notified Product</div>
+            </div>
+          </div>
+          <div class="s4-relay-row" data-i="3">
+            <div class="s4-relay-icon-col"><img class="s4-relay-icon" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/roni-rebish.png" alt="Roni Rebish"></div>
+            <div class="s4-relay-body">
+              <div class="s4-relay-who">Roni Rebish <span>· Product</span></div>
+              <div class="s4-relay-action">Added it to this week's roadmap</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="s4-board-final">
+        <div class="s5-board-card">
+          <div class="s5-board-head">
+            <div class="s5-board-name">Project plan</div>
+            <div class="s5-board-tabs"><span class="active">Main table</span><span>Gantt</span><span>Kanban</span></div>
+          </div>
+          <div class="s5-board-cols"><span>Task</span><span></span><span>Status</span><span>Due</span></div>
+          <div class="s5-board-row">
+            <span class="s5-board-task-name">Structured PRD from feedback</span>
+            <img class="s5-board-owner" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/roni-rebish.png" alt="Roni Rebish">
+            <span class="s5-board-pill done">Done</span>
+            <span class="s5-board-due">Sep 03</span>
+          </div>
+          <div class="s5-board-row">
+            <span class="s5-board-task-name">Follow-up sent to cold leads</span>
+            <img class="s5-board-owner" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/ran-levgoren.png" alt="Ran Levgoren">
+            <span class="s5-board-pill working">Working</span>
+            <span class="s5-board-due">Sep 04</span>
+          </div>
+          <div class="s5-board-row">
+            <span class="s5-board-task-name">Q2 campaign brief drafted</span>
+            <img class="s5-board-owner" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/osher-mayor.png" alt="Osher Mayor">
+            <span class="s5-board-pill done">Done</span>
+            <span class="s5-board-due">Sep 05</span>
+          </div>
+          <div class="s5-board-row">
+            <span class="s5-board-task-name">Mobile parity fix reviewed</span>
+            <img class="s5-board-owner" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/amit-frishberg.png" alt="Amit Frishberg">
+            <span class="s5-board-pill working">Working</span>
+            <span class="s5-board-due">Sep 06</span>
+          </div>
+          <div class="s5-board-cursors">
+            <div class="s5-cursor person">
+              <svg viewBox="0 0 24 24"><path d="M3 2l7.07 17.66 2.51-7.08 7.08-2.51z"/></svg>
+              <div class="s5-cursor-tag"><img src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/roni-rebish.png" alt=""><span>Roni Rebish</span></div>
+            </div>
+            <div class="s5-cursor agent">
+              <svg viewBox="0 0 24 24"><path d="M3 2l7.07 17.66 2.51-7.08 7.08-2.51z"/></svg>
+              <div class="s5-cursor-tag"><div class="s5-agent-ic"><svg viewBox="0 0 24 24"><path d="M13.827 3.52h3.603L24 20.48h-3.603l-6.57-16.96zm-7.258 0h3.767L16.906 20.48h-3.674l-1.343-3.461H5.017l-1.344 3.46H0L6.57 3.522zm4.132 9.959L8.453 7.687 6.205 13.48H10.7z"/></svg></div><span>Claude</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -1403,13 +1719,14 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
 
   function onSlideEnter(n) {
     const navDots = document.getElementById('navDots');
-    if (n === 4 && window.innerWidth > 768) navDots.classList.add('bottom-center');
+    if (n === 5 && window.innerWidth > 768) navDots.classList.add('bottom-center');
     else navDots.classList.remove('bottom-center');
-    if (n === 8 && window._momSmomEnter) window._momSmomEnter();
+    if (n === 9 && window._momSmomEnter) window._momSmomEnter();
     if (n === 2) { if (window.innerWidth <= 768) { pcGoTo(0); pcStart(); } } else { pcStop(); }
-    if (n === 5) { mktPlayIntro(); } else { sbsStopAuto(); }
-    if (n === 6) { buildDemoPlay(); }
-    if (n === 4 && !layersSpread) {
+    if (n === 4) { playStage4(); }
+    if (n === 6) { mktPlayIntro(); } else { sbsStopAuto(); }
+    if (n === 7) { buildDemoPlay(); }
+    if (n === 5 && !layersSpread) {
       if (window.innerWidth > 768) {
         enterLayersConverged();
       } else {
@@ -1430,6 +1747,18 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
         });
       }
     }
+  }
+
+  // S3c: three-beat timeline (merge -> relay -> board). Plays once; later visits jump to the resolved end-state.
+  let s4Played = false;
+  function playStage4() {
+    const s = document.getElementById('stage4');
+    if (!s) return;
+    if (s4Played) { s.classList.add('merge', 'demo', 'board'); return; }
+    s4Played = true;
+    setTimeout(() => s.classList.add('merge'), 700);
+    setTimeout(() => s.classList.add('demo'), 2500);
+    setTimeout(() => s.classList.add('board'), 7000);
   }
 
   function transformX(el) {
