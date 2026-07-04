@@ -134,19 +134,20 @@ html, body { width:100%; font-family:'Poppins',sans-serif; background:var(--bg);
 
 .s4-demo { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%) scale(.85); opacity:0; transition:opacity .6s ease, transform .6s ease; pointer-events:none; z-index:3; }
 .stage4.demo .s4-demo { opacity:1; transform:translate(-50%,-50%) scale(1); }
-.s4-demo-card { display:flex; flex-direction:column; align-items:center; gap:10px; background:rgba(15,15,20,.97); border:1px solid rgba(255,255,255,.16); border-radius:16px; padding:18px 26px; }
-.s4-demo-avs { display:flex; align-items:center; }
-.s4-demo-av { width:46px; height:46px; border-radius:50%; object-fit:cover; border:2px solid #0a0a0e; position:relative; z-index:3; background:#222; }
-.s4-demo-agent { width:34px; height:34px; border-radius:50%; display:flex; align-items:center; justify-content:center; border:2px solid #0a0a0e; margin-left:-12px; }
-.s4-demo-agent.claude { background:#CC785C; z-index:2; }
-.s4-demo-agent.monday { background:var(--purple); z-index:1; }
-.s4-demo-agent svg { width:16px; height:16px; fill:#fff; }
-.s4-demo-agent img { width:16px; height:16px; filter:brightness(0) invert(1); }
-.s4-demo-labels { display:flex; gap:14px; }
-.s4-demo-label { font-size:9px; color:var(--dim); text-align:center; }
-.s4-demo-name { font-size:12px; font-weight:700; color:#fff; display:flex; align-items:center; gap:1px; }
-.s4-cursor { display:inline-block; width:2px; height:12px; background:var(--teal); animation:s4blink .9s infinite; margin-left:3px; }
-@keyframes s4blink { 50% { opacity:0; } }
+/* victory frame: a completed task card, showing the "deliver" part of the promise */
+.s4-task-card { display:flex; flex-direction:column; gap:10px; background:rgba(15,15,20,.97); border:1px solid rgba(255,255,255,.14); border-left:3px solid #22c55e; border-radius:14px; padding:16px 20px; min-width:270px; text-align:left; }
+.s4-task-top { display:flex; align-items:center; justify-content:space-between; gap:12px; }
+.s4-task-status { display:inline-flex; align-items:center; gap:4px; font-size:10px; font-weight:700; color:#22c55e; background:rgba(34,197,94,.14); border-radius:100px; padding:4px 10px; white-space:nowrap; }
+.s4-task-avs { display:flex; align-items:center; flex-shrink:0; }
+.s4-task-av { width:28px; height:28px; border-radius:50%; object-fit:cover; border:2px solid #0a0a0e; position:relative; z-index:3; background:#222; }
+.s4-task-agent { width:22px; height:22px; border-radius:50%; display:flex; align-items:center; justify-content:center; border:2px solid #0a0a0e; margin-left:-9px; }
+.s4-task-agent.claude { background:#CC785C; z-index:2; }
+.s4-task-agent.monday { background:var(--purple); z-index:1; }
+.s4-task-agent svg { width:11px; height:11px; fill:#fff; }
+.s4-task-agent img { width:11px; height:11px; filter:brightness(0) invert(1); }
+.s4-task-title { font-size:14px; font-weight:700; color:#fff; line-height:1.35; }
+.s4-task-meta { font-size:10px; color:var(--dim); }
+.s4-task-meta b { color:var(--teal); font-weight:600; }
 
 @media (max-width:768px) {
   .variant-slide { padding:110px 20px 40px; }
@@ -333,14 +334,17 @@ html, body { width:100%; font-family:'Poppins',sans-serif; background:var(--bg);
         <div class="s4-row-item pair-avs" data-slot="3"><img class="pair-av person" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/amit-frishberg.png" alt="Amit Frishberg"><div class="pair-av agent brand-cursor"><svg viewBox="0 0 24 24"><path d="M4 2l15 7-6.2 1.9L11 17z"/></svg></div></div>
       </div>
       <div class="s4-demo">
-        <div class="s4-demo-card">
-          <div class="s4-demo-avs">
-            <img class="s4-demo-av" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/roni-rebish.png" alt="">
-            <div class="s4-demo-agent claude"><svg viewBox="0 0 24 24"><path d="M13.827 3.52h3.603L24 20.48h-3.603l-6.57-16.96zm-7.258 0h3.767L16.906 20.48h-3.674l-1.343-3.461H5.017l-1.344 3.46H0L6.57 3.522zm4.132 9.959L8.453 7.687 6.205 13.48H10.7z"/></svg></div>
-            <div class="s4-demo-agent monday"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/monday%20Logo/monday.com%20icon.png" alt=""></div>
+        <div class="s4-task-card">
+          <div class="s4-task-top">
+            <span class="s4-task-status">✓ Done</span>
+            <div class="s4-task-avs">
+              <img class="s4-task-av" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/roni-rebish.png" alt="Roni Rebish">
+              <div class="s4-task-agent claude"><svg viewBox="0 0 24 24"><path d="M13.827 3.52h3.603L24 20.48h-3.603l-6.57-16.96zm-7.258 0h3.767L16.906 20.48h-3.674l-1.343-3.461H5.017l-1.344 3.46H0L6.57 3.522zm4.132 9.959L8.453 7.687 6.205 13.48H10.7z"/></svg></div>
+              <div class="s4-task-agent monday"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/monday%20Logo/monday.com%20icon.png" alt=""></div>
+            </div>
           </div>
-          <div class="s4-demo-name">Roni Rebish<span class="s4-cursor"></span></div>
-          <div class="s4-demo-labels"><span class="s4-demo-label">Claude</span><span class="s4-demo-label">Monday Agent</span></div>
+          <div class="s4-task-title">Structured PRD from customer feedback</div>
+          <div class="s4-task-meta">Roni Rebish · Automated by <b>Claude + Monday Agent</b></div>
         </div>
       </div>
     </div>
