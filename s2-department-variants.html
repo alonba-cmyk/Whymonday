@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>S2 — Department Variants (5 concepts)</title>
+<style>
+:root{
+  --bg:#f3f3f6; --surface:#ffffff; --ink:#15161c; --muted:#6b6d7a; --line:rgba(20,20,30,.10);
+  --accent:#6161ff; --accent-ink:#4a4ade;
+  --mono-sans: -apple-system, "SF Pro Text", "Segoe UI", system-ui, "Helvetica Neue", Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root{ --bg:#0b0c10; --surface:#111219; --ink:#e9eaf0; --muted:#8f909d; --line:rgba(255,255,255,.09); --accent:#8a8aff; --accent-ink:#a9a9ff; }
+}
+:root[data-theme="dark"]{ --bg:#0b0c10; --surface:#111219; --ink:#e9eaf0; --muted:#8f909d; --line:rgba(255,255,255,.09); --accent:#8a8aff; --accent-ink:#a9a9ff; }
+:root[data-theme="light"]{ --bg:#f3f3f6; --surface:#ffffff; --ink:#15161c; --muted:#6b6d7a; --line:rgba(20,20,30,.10); --accent:#6161ff; --accent-ink:#4a4ade; }
+*,*::before,*::after{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{ background:var(--bg); color:var(--ink); font-family:var(--mono-sans); padding: clamp(24px,5vw,72px) clamp(16px,5vw,32px) 100px; }
+.wrap{ max-width:920px; margin:0 auto; }
+.rtl{ direction:rtl; text-align:right; }
+.kicker{ font-size:11px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--accent-ink); margin-bottom:14px; }
+h1{ font-size:clamp(24px,4vw,34px); font-weight:700; letter-spacing:-0.5px; line-height:1.2; margin:0 0 16px; text-wrap:balance; }
+.brief-box{ border-inline-end:2px solid var(--line); padding-inline-end:16px; margin: 0 0 40px; }
+.brief{ font-size:15px; line-height:1.75; color:var(--muted); max-width:660px; margin:0 0 8px; }
+.brief b{ color:var(--ink); font-weight:600; }
+
+.jumpnav{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom:48px; direction:ltr; }
+.jumpnav a{ font-size:12px; font-weight:600; color:var(--ink); text-decoration:none; border:1px solid var(--line); border-radius:100px; padding:7px 14px; }
+.jumpnav a:hover{ border-color:var(--accent); color:var(--accent-ink); }
+
+.variant{ margin-bottom:72px; scroll-margin-top:24px; }
+.variant-head{ display:flex; align-items:baseline; gap:12px; margin-bottom:6px; flex-wrap:wrap; }
+.variant-letter{ font-size:12px; font-weight:800; color:var(--surface); background:var(--accent); width:22px; height:22px; border-radius:6px; display:inline-flex; align-items:center; justify-content:center; flex-shrink:0; }
+.variant-name{ font-size:18px; font-weight:700; letter-spacing:-0.2px; }
+.variant-tag{ font-size:11px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); }
+
+.frame-shell{ border-radius:16px; overflow:hidden; border:1px solid var(--line); background:var(--surface); margin: 18px 0 16px; box-shadow: 0 1px 2px rgba(0,0,0,.04); }
+.frame-bar{ display:flex; align-items:center; gap:6px; padding:10px 14px; border-bottom:1px solid var(--line); direction:ltr; }
+.frame-dot{ width:7px; height:7px; border-radius:50%; background:var(--line); }
+.frame-label{ margin-inline-start:8px; font-size:11px; color:var(--muted); font-weight:500; }
+
+.slide-mock{ position:relative; aspect-ratio:16/10; background:#000; color:#fff; display:flex; flex-direction:column; align-items:center; justify-content:center; padding: 5% 6%; text-align:center; overflow:hidden; isolation:isolate; font-family: ui-rounded, var(--mono-sans); direction:ltr; }
+.slide-mock::before{ content:''; position:absolute; top:-30%; left:50%; transform:translateX(-50%); width:60%; height:80%; border-radius:50%; background:radial-gradient(ellipse at center, rgba(97,97,255,.30) 0%, rgba(255,61,87,.10) 45%, transparent 70%); filter:blur(50px); z-index:-1; }
+.sm-eyebrow{ font-size:11px; font-weight:700; letter-spacing:3.5px; text-transform:uppercase; color:#6161ff; margin-bottom:12px; }
+.sm-h2{ font-size:clamp(19px,3.2vw,30px); font-weight:700; line-height:1.18; margin:0 0 8px; background:linear-gradient(140deg,#fff 50%,rgba(255,255,255,.45)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.sm-sub{ font-size:clamp(10.5px,1.15vw,13px); font-weight:300; color:rgba(255,255,255,.5); max-width:460px; margin:0 auto 26px; line-height:1.6; }
+
+.rationale{ display:grid; grid-template-columns: auto 1fr; gap:8px 14px; font-size:13.5px; line-height:1.65; }
+.rationale dt{ font-weight:700; color:var(--ink); white-space:nowrap; }
+.rationale dd{ margin:0; color:var(--muted); }
+.rationale dd b{ color:var(--ink); font-weight:600; }
+@media (max-width:640px){ .rationale{ grid-template-columns: 1fr; gap:2px 0; } .rationale dt{ margin-top:8px; } }
+
+/* shared avatar bits */
+.pav{ width:40px; height:40px; border-radius:50%; object-fit:cover; display:block; border:2px solid #0a0a0e; background:#222; }
+.tool-badge{ width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; border:2px solid #0a0a0e; }
+.tool-badge svg{ width:14px; height:14px; fill:#fff; }
+.tool-claude{ background:#CC785C; } .tool-chatgpt{ background:#10A37F; }
+.tool-gemini{ background:linear-gradient(135deg,#4285F4,#9B72CB); } .tool-cursor{ background:#050505; }
+.tool-sdr{ background:linear-gradient(135deg,#6161ff,#8a5cf6); }
+
+/* ===== A: Connected Roster ===== */
+.a-root{ font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:#fff; background:rgba(97,97,255,.14); border:1px solid rgba(97,97,255,.5); border-radius:100px; padding:8px 20px; margin-bottom:16px; display:inline-block; }
+.a-row{ display:flex; gap:16px; justify-content:center; flex-wrap:wrap; }
+.a-card{ display:flex; align-items:center; gap:10px; background:rgba(255,255,255,.045); border:1px solid rgba(255,255,255,.1); border-radius:12px; padding:10px 16px 10px 10px; text-align:left; }
+.a-avs{ display:flex; align-items:center; }
+.a-avs .tool-badge{ margin-left:-10px; }
+.a-name{ font-size:11px; font-weight:700; color:#fff; }
+.a-dept{ font-size:8px; font-weight:600; letter-spacing:.5px; text-transform:uppercase; color:rgba(255,255,255,.4); }
+.a-tool{ font-size:9px; color:#00d2d2; font-weight:600; margin-top:2px; }
+
+/* ===== B: Independent cards, no frame ===== */
+.b-row{ display:flex; gap:22px; justify-content:center; flex-wrap:wrap; }
+.b-card{ display:flex; flex-direction:column; align-items:center; gap:10px; background:rgba(255,255,255,.035); border:1px solid rgba(255,255,255,.09); border-radius:16px; padding:18px 20px; width:130px; }
+.b-avs{ display:flex; align-items:center; }
+.b-avs .pav{ width:44px; height:44px; }
+.b-avs .tool-badge{ margin-left:-12px; width:28px; height:28px; }
+.b-name{ font-size:11px; font-weight:700; color:#fff; text-align:center; }
+.b-dept{ font-size:8px; font-weight:600; letter-spacing:1px; text-transform:uppercase; color:rgba(255,255,255,.4); }
+.b-tool{ font-size:9px; color:#00d2d2; font-weight:600; }
+.b-caption{ margin-top:22px; font-size:12px; color:rgba(255,255,255,.5); }
+.b-caption b{ color:#fff; }
+
+/* ===== C: Live feed ===== */
+.c-feed{ display:flex; flex-direction:column; gap:8px; width:100%; max-width:480px; }
+.c-row{ display:flex; align-items:center; gap:10px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); border-radius:10px; padding:9px 14px; text-align:left; }
+.c-dot{ width:6px; height:6px; border-radius:50%; background:#00d2d2; flex-shrink:0; box-shadow:0 0 0 3px rgba(0,210,210,.18); }
+.c-txt{ font-size:11px; color:rgba(255,255,255,.75); line-height:1.4; }
+.c-txt b{ color:#fff; }
+.c-time{ margin-left:auto; font-size:8.5px; color:rgba(255,255,255,.3); flex-shrink:0; }
+
+/* ===== D: Capacity meters ===== */
+.d-grid{ display:flex; flex-direction:column; gap:12px; width:100%; max-width:440px; }
+.d-row{ display:grid; grid-template-columns:84px 1fr 44px; align-items:center; gap:10px; }
+.d-label{ font-size:9px; font-weight:700; letter-spacing:.5px; text-transform:uppercase; color:rgba(255,255,255,.55); text-align:left; }
+.d-track{ height:10px; border-radius:5px; background:rgba(255,255,255,.08); overflow:hidden; }
+.d-fill{ height:100%; border-radius:5px; background:linear-gradient(90deg,#6161ff,#00d2d2); }
+.d-val{ font-size:11px; font-weight:800; color:#00d2d2; text-align:right; font-variant-numeric:tabular-nums; }
+
+/* ===== E: Tool-forward grid ===== */
+.e-row{ display:flex; gap:18px; justify-content:center; flex-wrap:wrap; }
+.e-card{ position:relative; width:104px; display:flex; flex-direction:column; align-items:center; gap:8px; }
+.e-tool{ width:56px; height:56px; border-radius:16px; display:flex; align-items:center; justify-content:center; }
+.e-tool svg{ width:28px; height:28px; fill:#fff; }
+.e-person{ width:26px; height:26px; border-radius:50%; object-fit:cover; border:2px solid #000; position:absolute; top:34px; left:34px; }
+.e-name{ font-size:9.5px; font-weight:700; color:#fff; margin-top:4px; }
+.e-dept{ font-size:8px; color:rgba(255,255,255,.4); text-transform:uppercase; letter-spacing:.5px; }
+
+@media (max-width:640px){
+  .a-row, .b-row, .e-row{ gap:10px; }
+  .b-card{ width:44%; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <p class="kicker">S2 — Department Visual, 5 Concepts</p>
+  <h1>People already work with agents today — for different jobs, separately.</h1>
+  <div class="brief-box rtl" dir="rtl">
+    <p class="brief">כותרת חדשה: <b>"More hands. Bigger team. More gets done."</b> — הוויזואל צריך להראות שאנשים כבר עובדים עם סוכנים שונים היום, כל אחד למטרה אחרת, <b>בנפרד</b>: Sales עם SDR Agents, Engineering עם Cursor, Marketing עם Gemini, Product עם Claude.</p>
+    <p class="brief">חמישה כיוונים ויזואליים שונים לאותו תוכן — כל אחד עם "aha" אחר.</p>
+  </div>
+
+  <nav class="jumpnav">
+    <a href="#a">A · Connected Roster</a>
+    <a href="#b">B · Independent Cards</a>
+    <a href="#c">C · Live Feed</a>
+    <a href="#d">D · Capacity Meters</a>
+    <a href="#e">E · Tool-Forward Grid</a>
+  </nav>
+
+  <!-- ============ A ============ -->
+  <section class="variant" id="a">
+    <div class="variant-head">
+      <span class="variant-letter">A</span>
+      <span class="variant-name">Connected Roster</span>
+      <span class="variant-tag rtl" dir="rtl">הגרסה הקיימת, מעודכנת</span>
+    </div>
+    <div class="frame-shell">
+      <div class="frame-bar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-label">mondaystorydeck — S2</span></div>
+      <div class="slide-mock">
+        <p class="sm-eyebrow">Agents Change That</p>
+        <h2 class="sm-h2">More hands. Bigger team.<br>More gets done.</h2>
+        <p class="sm-sub">Agents aren't tools you prompt — they join your team, take on tasks, and scale your capacity.</p>
+        <div class="a-root">Your Team</div>
+        <div class="a-row">
+          <div class="a-card"><div class="a-avs"><img class="pav" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/roni-rebish.png"><div class="tool-badge tool-claude"><svg viewBox="0 0 24 24"><path d="M13.827 3.52h3.603L24 20.48h-3.603l-6.57-16.96zm-7.258 0h3.767L16.906 20.48h-3.674l-1.343-3.461H5.017l-1.344 3.46H0L6.57 3.522zm4.132 9.959L8.453 7.687 6.205 13.48H10.7z"/></svg></div></div><div><div class="a-name">Roni Rebish</div><div class="a-dept">Product</div><div class="a-tool">+ Claude</div></div></div>
+          <div class="a-card"><div class="a-avs"><img class="pav" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/ran-levgoren.png"><div class="tool-badge tool-sdr"><svg viewBox="0 0 24 24"><rect x="5" y="7" width="14" height="11" rx="3" fill="none" stroke="#fff" stroke-width="1.6"/><circle cx="9.5" cy="12.5" r="1.3" fill="#fff"/><circle cx="14.5" cy="12.5" r="1.3" fill="#fff"/><path d="M12 7V4" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/></svg></div></div><div><div class="a-name">Ran Levgoren</div><div class="a-dept">Sales</div><div class="a-tool">+ SDR Agents</div></div></div>
+          <div class="a-card"><div class="a-avs"><img class="pav" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/osher-mayor.png"><div class="tool-badge tool-gemini"><svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 2c.967 2.051 1.637 4.242 1.953 6.515C16.228 9.162 18.18 10.4 20 12c-1.82 1.6-3.772 2.838-6.047 3.485C13.637 17.758 12.967 19.949 12 22c-.967-2.051-1.637-4.242-1.953-6.515C7.772 14.838 5.82 13.6 4 12c1.82-1.6 3.772-2.838 6.047-3.485C10.363 6.242 11.033 4.051 12 2z"/></svg></div></div><div><div class="a-name">Osher Mayor</div><div class="a-dept">Marketing</div><div class="a-tool">+ Gemini</div></div></div>
+          <div class="a-card"><div class="a-avs"><img class="pav" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/amit-frishberg.png"><div class="tool-badge tool-cursor"><svg viewBox="0 0 24 24"><path d="M4 2l15 7-6.2 1.9L11 17z"/></svg></div></div><div><div class="a-name">Amit Frishberg</div><div class="a-dept">Engineering</div><div class="a-tool">+ Cursor</div></div></div>
+        </div>
+      </div>
+    </div>
+    <dl class="rationale rtl" dir="rtl">
+      <dt>הרעיון</dt><dd>הגרסה הנוכחית, רק עם התוויות המעודכנות (Sales = SDR Agents). "Your Team" מחבר ויזואלית את כולם תחת קורת גג אחת.</dd>
+      <dt>ה-aha</dt><dd>מוכר, בטוח, ברור. הכי פחות "מסוכן" מבין החמישה.</dd>
+    </dl>
+  </section>
+
+  <!-- ============ B ============ -->
+  <section class="variant" id="b">
+    <div class="variant-head">
+      <span class="variant-letter">B</span>
+      <span class="variant-name">Independent Cards</span>
+      <span class="variant-tag rtl" dir="rtl">בלי מסגרת משותפת — כל אחד עומד לבד</span>
+    </div>
+    <div class="frame-shell">
+      <div class="frame-bar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-label">mondaystorydeck — S2</span></div>
+      <div class="slide-mock">
+        <p class="sm-eyebrow">Agents Change That</p>
+        <h2 class="sm-h2">More hands. Bigger team.<br>More gets done.</h2>
+        <p class="sm-sub">Agents aren't tools you prompt — they join your team, take on tasks, and scale your capacity.</p>
+        <div class="b-row">
+          <div class="b-card"><div class="b-avs"><img class="pav" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/ran-levgoren.png"><div class="tool-badge tool-sdr"><svg viewBox="0 0 24 24"><rect x="5" y="7" width="14" height="11" rx="3" fill="none" stroke="#fff" stroke-width="1.6"/><circle cx="9.5" cy="12.5" r="1.3" fill="#fff"/><circle cx="14.5" cy="12.5" r="1.3" fill="#fff"/><path d="M12 7V4" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/></svg></div></div><div class="b-name">Ran</div><div class="b-dept">Sales</div><div class="b-tool">+ SDR Agents</div></div>
+          <div class="b-card"><div class="b-avs"><img class="pav" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/amit-frishberg.png"><div class="tool-badge tool-cursor"><svg viewBox="0 0 24 24"><path d="M4 2l15 7-6.2 1.9L11 17z"/></svg></div></div><div class="b-name">Amit</div><div class="b-dept">Engineering</div><div class="b-tool">+ Cursor</div></div>
+          <div class="b-card"><div class="b-avs"><img class="pav" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/osher-mayor.png"><div class="tool-badge tool-gemini"><svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 2c.967 2.051 1.637 4.242 1.953 6.515C16.228 9.162 18.18 10.4 20 12c-1.82 1.6-3.772 2.838-6.047 3.485C13.637 17.758 12.967 19.949 12 22c-.967-2.051-1.637-4.242-1.953-6.515C7.772 14.838 5.82 13.6 4 12c1.82-1.6 3.772-2.838 6.047-3.485C10.363 6.242 11.033 4.051 12 2z"/></svg></div></div><div class="b-name">Osher</div><div class="b-dept">Marketing</div><div class="b-tool">+ Gemini</div></div>
+          <div class="b-card"><div class="b-avs"><img class="pav" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/roni-rebish.png"><div class="tool-badge tool-claude"><svg viewBox="0 0 24 24"><path d="M13.827 3.52h3.603L24 20.48h-3.603l-6.57-16.96zm-7.258 0h3.767L16.906 20.48h-3.674l-1.343-3.461H5.017l-1.344 3.46H0L6.57 3.522zm4.132 9.959L8.453 7.687 6.205 13.48H10.7z"/></svg></div></div><div class="b-name">Roni</div><div class="b-dept">Product</div><div class="b-tool">+ Claude</div></div>
+        </div>
+        <p class="b-caption">Today, across monday — <b>every team already has an agent.</b> Just not the same one.</p>
+      </div>
+    </div>
+    <dl class="rationale rtl" dir="rtl">
+      <dt>הרעיון</dt><dd>בלי "Your Team", בלי קווי חיבור בכלל — 4 כרטיסים עצמאיים לגמרי, עם רווח נשימה גדול ביניהם. הכיתוב אומר במפורש את ה"בנפרד".</dd>
+      <dt>ה-aha</dt><dd>הכי נאמן למה שביקשת: זה לא "צוות אחד מאורגן" (זה יבוא רק ב-S5) — זו תמונת מצב של עצמאות אמיתית, לפני איחוד.</dd>
+    </dl>
+  </section>
+
+  <!-- ============ C ============ -->
+  <section class="variant" id="c">
+    <div class="variant-head">
+      <span class="variant-letter">C</span>
+      <span class="variant-name">Live Feed</span>
+      <span class="variant-tag rtl" dir="rtl">זה קורה עכשיו, בזמן אמת</span>
+    </div>
+    <div class="frame-shell">
+      <div class="frame-bar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-label">mondaystorydeck — S2</span></div>
+      <div class="slide-mock">
+        <p class="sm-eyebrow">Agents Change That</p>
+        <h2 class="sm-h2">More hands. Bigger team.<br>More gets done.</h2>
+        <p class="sm-sub">Agents aren't tools you prompt — they join your team, take on tasks, and scale your capacity.</p>
+        <div class="c-feed">
+          <div class="c-row"><span class="c-dot"></span><span class="c-txt"><b>Sales</b> · SDR Agents qualified 14 new leads</span><span class="c-time">2m ago</span></div>
+          <div class="c-row"><span class="c-dot"></span><span class="c-txt"><b>Engineering</b> · Cursor shipped 3 pull requests</span><span class="c-time">6m ago</span></div>
+          <div class="c-row"><span class="c-dot"></span><span class="c-txt"><b>Marketing</b> · Gemini drafted 5 campaign variants</span><span class="c-time">11m ago</span></div>
+          <div class="c-row"><span class="c-dot"></span><span class="c-txt"><b>Product</b> · Claude wrote the Q3 feature spec</span><span class="c-time">14m ago</span></div>
+        </div>
+      </div>
+    </div>
+    <dl class="rationale rtl" dir="rtl">
+      <dt>הרעיון</dt><dd>פיד "לייב" (נקודה ירוקה פועמת, timestamps) שמדמה פעילות אמיתית שקורית ברגע זה, מחלקה אחר מחלקה.</dd>
+      <dt>ה-aha</dt><dd>הכי חזק ב"זה כבר קורה עכשיו, לא תיאוריה" — אבל דורש הימנעות מהרגשת "התראות מזויפות" (לכן אין תמונות אנשים, רק עובדות).</dd>
+    </dl>
+  </section>
+
+  <!-- ============ D ============ -->
+  <section class="variant" id="d">
+    <div class="variant-head">
+      <span class="variant-letter">D</span>
+      <span class="variant-name">Capacity Meters</span>
+      <span class="variant-tag rtl" dir="rtl">המספרים מדברים</span>
+    </div>
+    <div class="frame-shell">
+      <div class="frame-bar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-label">mondaystorydeck — S2</span></div>
+      <div class="slide-mock">
+        <p class="sm-eyebrow">Agents Change That</p>
+        <h2 class="sm-h2">More hands. Bigger team.<br>More gets done.</h2>
+        <p class="sm-sub">Agents aren't tools you prompt — they join your team, take on tasks, and scale your capacity.</p>
+        <div class="d-grid">
+          <div class="d-row"><span class="d-label">Sales</span><div class="d-track"><div class="d-fill" style="width:62%"></div></div><span class="d-val">+62%</span></div>
+          <div class="d-row"><span class="d-label">Engineering</span><div class="d-track"><div class="d-fill" style="width:40%"></div></div><span class="d-val">+40%</span></div>
+          <div class="d-row"><span class="d-label">Marketing</span><div class="d-track"><div class="d-fill" style="width:75%"></div></div><span class="d-val">+75%</span></div>
+          <div class="d-row"><span class="d-label">Product</span><div class="d-track"><div class="d-fill" style="width:50%"></div></div><span class="d-val">+50%</span></div>
+        </div>
+      </div>
+    </div>
+    <dl class="rationale rtl" dir="rtl">
+      <dt>הרעיון</dt><dd>כל מחלקה מקבלת מד-קיבולת עם אחוז שיפור מדומה — פחות "מי" ויותר "כמה".</dd>
+      <dt>ה-aha</dt><dd>טוב לקהל שמונע ממספרים, אבל <b>מסוכן</b>: האחוזים כאן פיקטיביים לגמרי, לא נתונים אמיתיים כמו ב-smom. עלול להישמע כהבטחת ROI בלי מקור.</dd>
+    </dl>
+  </section>
+
+  <!-- ============ E ============ -->
+  <section class="variant" id="e">
+    <div class="variant-head">
+      <span class="variant-letter">E</span>
+      <span class="variant-name">Tool-Forward Grid</span>
+      <span class="variant-tag rtl" dir="rtl">הכלי מוביל, האדם משני</span>
+    </div>
+    <div class="frame-shell">
+      <div class="frame-bar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-label">mondaystorydeck — S2</span></div>
+      <div class="slide-mock">
+        <p class="sm-eyebrow">Agents Change That</p>
+        <h2 class="sm-h2">More hands. Bigger team.<br>More gets done.</h2>
+        <p class="sm-sub">Agents aren't tools you prompt — they join your team, take on tasks, and scale your capacity.</p>
+        <div class="e-row">
+          <div class="e-card"><div class="e-tool tool-sdr"><svg viewBox="0 0 24 24"><rect x="5" y="7" width="14" height="11" rx="3" fill="none" stroke="#fff" stroke-width="1.6"/><circle cx="9.5" cy="12.5" r="1.3" fill="#fff"/><circle cx="14.5" cy="12.5" r="1.3" fill="#fff"/><path d="M12 7V4" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/></svg><img class="e-person" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/ran-levgoren.png"></div><div class="e-name">SDR Agents</div><div class="e-dept">Sales · Ran</div></div>
+          <div class="e-card"><div class="e-tool tool-cursor"><svg viewBox="0 0 24 24"><path d="M4 2l15 7-6.2 1.9L11 17z"/></svg><img class="e-person" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/amit-frishberg.png"></div><div class="e-name">Cursor</div><div class="e-dept">Engineering · Amit</div></div>
+          <div class="e-card"><div class="e-tool tool-gemini"><svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 2c.967 2.051 1.637 4.242 1.953 6.515C16.228 9.162 18.18 10.4 20 12c-1.82 1.6-3.772 2.838-6.047 3.485C13.637 17.758 12.967 19.949 12 22c-.967-2.051-1.637-4.242-1.953-6.515C7.772 14.838 5.82 13.6 4 12c1.82-1.6 3.772-2.838 6.047-3.485C10.363 6.242 11.033 4.051 12 2z"/></svg><img class="e-person" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/osher-mayor.png"></div><div class="e-name">Gemini</div><div class="e-dept">Marketing · Osher</div></div>
+          <div class="e-card"><div class="e-tool tool-claude"><svg viewBox="0 0 24 24"><path d="M13.827 3.52h3.603L24 20.48h-3.603l-6.57-16.96zm-7.258 0h3.767L16.906 20.48h-3.674l-1.343-3.461H5.017l-1.344 3.46H0L6.57 3.522zm4.132 9.959L8.453 7.687 6.205 13.48H10.7z"/></svg><img class="e-person" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/roni-rebish.png"></div><div class="e-name">Claude</div><div class="e-dept">Product · Roni</div></div>
+        </div>
+      </div>
+    </div>
+    <dl class="rationale rtl" dir="rtl">
+      <dt>הרעיון</dt><dd>הלוגו של הכלי גדול ומוביל, תמונת האדם היא רק badge קטן בפינה — הופך את הסדר: קודם "איזה AI", אח"כ "מי".</dd>
+      <dt>ה-aha</dt><dd>הכי חזק ב"אני מזהה את הכלים האלה!" (זיהוי מותג מיידי), אבל מחליש את הסיפור האנושי — האנשים כמעט נעלמים.</dd>
+    </dl>
+  </section>
+
+</div>
+</body>
+</html>
