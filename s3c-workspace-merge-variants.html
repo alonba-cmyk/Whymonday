@@ -97,6 +97,14 @@ html, body { width:100%; font-family:'Poppins',sans-serif; background:var(--bg);
 
 .s4-demo { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%) scale(.85); opacity:0; transition:opacity .6s ease, transform .6s ease; pointer-events:none; z-index:3; }
 .stage4.demo .s4-demo { opacity:1; transform:translate(-50%,-50%) scale(1); }
+.stage4.board .s4-demo { opacity:0; transform:translate(-50%,-50%) scale(.85); }
+
+/* extra bonus beat: after the relay, cross-fade into the same live board + crossing cursors used in variant 5 */
+.s4-board-final { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%) scale(.85); opacity:0; transition:opacity .6s ease, transform .6s ease; pointer-events:none; z-index:4; }
+.stage4.board .s4-board-final { opacity:1; transform:translate(-50%,-50%) scale(1); }
+.stage4.board .s5-cursor.person { animation:s5PersonMove 3.6s cubic-bezier(.45,0,.2,1) forwards; }
+.stage4.board .s5-cursor.agent { animation:s5AgentMove 3.6s cubic-bezier(.45,0,.2,1) forwards; }
+
 /* victory frame: a live cross-department relay — agent writes, a person reviews, another person acts on it — showing plan/execute/deliver in motion, not a single static state */
 .s4-relay { display:flex; flex-direction:column; gap:14px; background:rgba(15,15,20,.97); border:1px solid rgba(255,255,255,.14); border-radius:14px; padding:16px 18px; width:260px; text-align:left; }
 .s4-relay-row { display:flex; gap:10px; align-items:flex-start; opacity:0; transform:translateY(6px); transition:opacity .5s ease, transform .5s ease; }
@@ -298,6 +306,8 @@ html, body { width:100%; font-family:'Poppins',sans-serif; background:var(--bg);
   .s5-cursor-tag span { font-size:7.5px; }
   .stage5.demo .s5-cursor.person { animation-name:s5PersonMoveMob; }
   .stage5.demo .s5-cursor.agent { animation-name:s5AgentMoveMob; }
+  .stage4.board .s5-cursor.person { animation-name:s5PersonMoveMob; }
+  .stage4.board .s5-cursor.agent { animation-name:s5AgentMoveMob; }
   @keyframes s5PersonMoveMob {
     0%   { transform:translate(10px,48px); opacity:0; }
     8%   { opacity:1; }
@@ -392,6 +402,50 @@ html, body { width:100%; font-family:'Poppins',sans-serif; background:var(--bg);
             <div class="s4-relay-body">
               <div class="s4-relay-who">Roni Rebish <span>· Product</span></div>
               <div class="s4-relay-action">Added it to this week's roadmap</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- bonus final beat: the same live board + crossing cursors from variant 5, added after the relay -->
+      <div class="s4-board-final">
+        <div class="s5-board-card">
+          <div class="s5-board-head">
+            <div class="s5-board-name">Project plan</div>
+            <div class="s5-board-tabs"><span class="active">Main table</span><span>Gantt</span><span>Kanban</span></div>
+          </div>
+          <div class="s5-board-cols"><span>Task</span><span></span><span>Status</span><span>Due</span></div>
+          <div class="s5-board-row">
+            <span class="s5-board-task-name">Structured PRD from feedback</span>
+            <img class="s5-board-owner" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/roni-rebish.png" alt="Roni Rebish">
+            <span class="s5-board-pill done">Done</span>
+            <span class="s5-board-due">Sep 03</span>
+          </div>
+          <div class="s5-board-row">
+            <span class="s5-board-task-name">Follow-up sent to cold leads</span>
+            <img class="s5-board-owner" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/ran-levgoren.png" alt="Ran Levgoren">
+            <span class="s5-board-pill working">Working</span>
+            <span class="s5-board-due">Sep 04</span>
+          </div>
+          <div class="s5-board-row">
+            <span class="s5-board-task-name">Q2 campaign brief drafted</span>
+            <img class="s5-board-owner" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/osher-mayor.png" alt="Osher Mayor">
+            <span class="s5-board-pill done">Done</span>
+            <span class="s5-board-due">Sep 05</span>
+          </div>
+          <div class="s5-board-row">
+            <span class="s5-board-task-name">Mobile parity fix reviewed</span>
+            <img class="s5-board-owner" src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/amit-frishberg.png" alt="Amit Frishberg">
+            <span class="s5-board-pill working">Working</span>
+            <span class="s5-board-due">Sep 06</span>
+          </div>
+          <div class="s5-board-cursors">
+            <div class="s5-cursor person">
+              <svg viewBox="0 0 24 24"><path d="M3 2l7.07 17.66 2.51-7.08 7.08-2.51z"/></svg>
+              <div class="s5-cursor-tag"><img src="https://fymyrxqjmnekcmrpvtju.supabase.co/storage/v1/object/public/Builders/roni-rebish.png" alt=""><span>Roni Rebish</span></div>
+            </div>
+            <div class="s5-cursor agent">
+              <svg viewBox="0 0 24 24"><path d="M3 2l7.07 17.66 2.51-7.08 7.08-2.51z"/></svg>
+              <div class="s5-cursor-tag"><div class="s5-agent-ic"><svg viewBox="0 0 24 24"><path d="M13.827 3.52h3.603L24 20.48h-3.603l-6.57-16.96zm-7.258 0h3.767L16.906 20.48h-3.674l-1.343-3.461H5.017l-1.344 3.46H0L6.57 3.522zm4.132 9.959L8.453 7.687 6.205 13.48H10.7z"/></svg></div><span>Claude</span></div>
             </div>
           </div>
         </div>
@@ -495,16 +549,17 @@ html, body { width:100%; font-family:'Poppins',sans-serif; background:var(--bg);
 </section>
 
 <script>
-  // Two-beat timeline (merge -> demo). The frame is static chrome, always visible.
+  // Three-beat timeline (merge -> relay -> board). The frame is static chrome, always visible.
   let s4Timers = [];
   function playStage4() {
     const s = document.getElementById('stage4');
-    s.classList.remove('merge', 'demo');
+    s.classList.remove('merge', 'demo', 'board');
     void s.offsetWidth;
     s4Timers.forEach(t => clearTimeout(t));
     s4Timers = [
       setTimeout(() => s.classList.add('merge'), 700),
       setTimeout(() => s.classList.add('demo'), 2500),
+      setTimeout(() => s.classList.add('board'), 7000),
     ];
   }
   function replayStage4() { playStage4(); }
