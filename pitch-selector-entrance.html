@@ -55,27 +55,16 @@ body::after { content:''; position:fixed; bottom:-24%; left:50%; transform:trans
 .grid { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; width:100%; opacity:0; animation:fadeUp .5s ease .3s forwards; }
 @media (max-width:900px) { .grid { grid-template-columns:repeat(2,1fr); gap:10px; } }
 
-.card { position:relative; border:1px solid var(--border); border-radius:18px;
-  background:
-    repeating-linear-gradient(125deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 1px, transparent 1px, transparent 7px),
-    linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.015));
-  padding:22px 20px 20px; display:flex; flex-direction:column; text-align:left; transition:border-color .3s ease, transform .3s ease, box-shadow .3s ease; overflow:hidden; min-height:270px; --accent: rgba(255,255,255,0.3); }
-.card.accent-purple { --accent: var(--purple); }
-.card.accent-teal { --accent: var(--teal); }
+.card { position:relative; border:1px solid var(--border); border-radius:18px; background:rgba(255,255,255,0.035); padding:24px 22px 22px; display:flex; flex-direction:column; text-align:left; transition:border-color .3s ease, transform .3s ease, box-shadow .3s ease; overflow:hidden; min-height:270px; --accent: rgba(255,255,255,0.3); }
+.card.accent-purple { --accent: var(--purple); border-color:rgba(97,97,255,0.28); }
+.card.accent-teal { --accent: var(--teal); border-color:rgba(0,210,210,0.28); }
 
-/* Ambient glow tinted to the floor's accent color */
-.card::before { content:''; position:absolute; top:-40%; left:50%; transform:translateX(-50%); width:150%; height:65%; background:radial-gradient(ellipse at center, var(--accent), transparent 72%); opacity:0.22; transition:opacity .35s ease; pointer-events:none; z-index:0; }
-.card.soon::before { opacity:0.06; }
+/* A quiet, always-on hint of the floor's accent color */
+.card::before { content:''; position:absolute; top:-40%; left:50%; transform:translateX(-50%); width:150%; height:60%; background:radial-gradient(ellipse at center, var(--accent), transparent 72%); opacity:0.12; transition:opacity .35s ease; pointer-events:none; z-index:0; }
+.card.soon::before { opacity:0.04; }
 
-/* A permanent center seam — the card reads as a pair of closed elevator doors at rest */
-.card::after { content:''; position:absolute; top:16px; bottom:16px; left:50%; width:1px; background:linear-gradient(180deg, transparent, rgba(255,255,255,0.18), transparent); z-index:0; pointer-events:none; }
-
-/* Top ledge — like the lit strip above a real elevator floor button */
-.ledge { position:absolute; top:0; left:14px; right:14px; height:3px; border-radius:0 0 3px 3px; background:var(--accent); opacity:0.7; z-index:1; }
-.card.soon .ledge { opacity:0.15; }
-
-.card.live:hover { border-color:var(--accent); transform:translateY(-6px); box-shadow:0 22px 44px rgba(0,0,0,0.4), 0 0 0 1px var(--accent) inset; }
-.card.live:hover::before { opacity:0.4; }
+.card.live:hover { border-color:var(--accent); transform:translateY(-6px); box-shadow:0 20px 40px rgba(0,0,0,0.35); }
+.card.live:hover::before { opacity:0.3; }
 
 .plaque-top { position:relative; z-index:1; display:flex; align-items:center; gap:10px; margin-bottom:18px; }
 .floor-badge { position:relative; width:38px; height:38px; border-radius:50%; border:1px solid var(--border); display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; color:rgba(255,255,255,0.4); background:rgba(0,0,0,0.3); flex-shrink:0; }
@@ -93,9 +82,9 @@ body::after { content:''; position:fixed; bottom:-24%; left:50%; transform:trans
 .card p.desc { position:relative; z-index:1; font-size:12.5px; font-weight:300; color:var(--dim); line-height:1.6; margin-bottom:20px; flex-grow:1; }
 .card.soon p.desc { color:rgba(255,255,255,0.22); }
 
-.cta { position:relative; z-index:1; display:inline-flex; align-items:center; justify-content:center; gap:7px; width:100%; font-size:12.5px; font-weight:600; color:#fff; background:var(--accent); border:none; border-radius:12px; padding:11px 16px; text-decoration:none; transition:filter .2s ease, transform .2s ease; box-shadow:0 1px 0 rgba(255,255,255,0.3) inset, 0 6px 14px rgba(0,0,0,0.3); }
+.cta { position:relative; z-index:1; display:inline-flex; align-items:center; justify-content:center; gap:7px; width:100%; font-size:12.5px; font-weight:600; color:#fff; background:var(--accent); border:none; border-radius:30px; padding:11px 16px; text-decoration:none; transition:filter .2s ease, transform .2s ease; }
 .cta:hover { filter:brightness(1.12); transform:translateY(-1px); }
-.cta.disabled { background:transparent; border:1px solid var(--border); color:rgba(255,255,255,0.3); pointer-events:none; box-shadow:none; }
+.cta.disabled { background:transparent; border:1px solid var(--border); color:rgba(255,255,255,0.3); pointer-events:none; }
 .cta svg { width:13px; height:13px; flex-shrink:0; }
 
 @media (max-width:560px) {
@@ -147,7 +136,6 @@ body::after { content:''; position:fixed; bottom:-24%; left:50%; transform:trans
   <div class="grid">
 
     <a class="card live accent-purple" href="mondaystorydeck-agents.html" target="_blank" rel="noopener" style="text-decoration:none; color:inherit;">
-      <div class="ledge"></div>
       <div class="plaque-top">
         <span class="floor-badge">01</span>
         <span class="floor-label">Floor</span>
@@ -162,7 +150,6 @@ body::after { content:''; position:fixed; bottom:-24%; left:50%; transform:trans
     </a>
 
     <a class="card live accent-teal" href="mondaystorydeck-shortpitch.html" target="_blank" rel="noopener" style="text-decoration:none; color:inherit;">
-      <div class="ledge"></div>
       <div class="plaque-top">
         <span class="floor-badge">02</span>
         <span class="floor-label">Floor</span>
@@ -177,7 +164,6 @@ body::after { content:''; position:fixed; bottom:-24%; left:50%; transform:trans
     </a>
 
     <div class="card soon">
-      <div class="ledge"></div>
       <div class="plaque-top">
         <span class="floor-badge">03</span>
         <span class="floor-label">Floor</span>
@@ -188,7 +174,6 @@ body::after { content:''; position:fixed; bottom:-24%; left:50%; transform:trans
     </div>
 
     <div class="card soon">
-      <div class="ledge"></div>
       <div class="plaque-top">
         <span class="floor-badge">04</span>
         <span class="floor-label">Floor</span>
