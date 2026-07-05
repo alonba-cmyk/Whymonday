@@ -66,6 +66,14 @@ body::after { content:''; position:fixed; bottom:-24%; left:50%; transform:trans
 .card.soon h2 { color:rgba(255,255,255,0.35); }
 .card p.desc { position:relative; z-index:1; font-size:14px; font-weight:300; color:var(--dim); line-height:1.65; margin-bottom:24px; flex-grow:1; }
 .card.soon p.desc { color:rgba(255,255,255,0.22); }
+.card p.desc i { font-style:normal; font-size:0.85em; color:rgba(255,255,255,0.3); }
+
+/* The pitch's own opening problem-statement, straight from the deck */
+.stat-eyebrow { position:relative; z-index:1; font-size:10px; font-weight:600; letter-spacing:3px; text-transform:uppercase; margin-bottom:8px; }
+.card.accent-purple .stat-eyebrow { color:var(--purple); }
+.card.accent-teal .stat-eyebrow { color:var(--teal); }
+.stat-num { position:relative; z-index:1; font-size:clamp(40px,4.5vw,56px); font-weight:800; line-height:1; margin-bottom:10px; background:linear-gradient(135deg,#fff 45%,rgba(255,255,255,0.5)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.stat-num span { font-size:50%; vertical-align:top; }
 
 .cta { position:relative; z-index:1; display:inline-flex; align-items:center; gap:8px; align-self:flex-start; font-size:13px; font-weight:600; color:#fff; background:var(--purple); border:none; border-radius:30px; padding:11px 20px; text-decoration:none; transition:background .2s ease, transform .2s ease; }
 .cta:hover { background:#4d4dff; transform:translateX(2px); }
@@ -108,8 +116,9 @@ body::after { content:''; position:fixed; bottom:-24%; left:50%; transform:trans
       <div class="card-top">
         <span class="floor">Floor 01</span>
       </div>
-      <h2>Scattered AI, No Results</h2>
-      <p class="desc">Scattered, unmanaged AI use isn't moving the business — this pitch makes the case for one shared AI Work Platform instead.</p>
+      <p class="stat-eyebrow">The Gap</p>
+      <div class="stat-num">95<span>%</span></div>
+      <p class="desc">of businesses aren't feeling AI's impact on their bottom line. <i>— MIT Sloan</i></p>
       <span class="cta">Take this elevator
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </span>
@@ -120,8 +129,9 @@ body::after { content:''; position:fixed; bottom:-24%; left:50%; transform:trans
       <div class="card-top">
         <span class="floor">Floor 02</span>
       </div>
-      <h2>More Hands</h2>
-      <p class="desc">Your team's already maxed out — here's how agents step in as teammates, not tools.</p>
+      <p class="stat-eyebrow">The Reality</p>
+      <div class="stat-num">100<span>%</span></div>
+      <p class="desc">Your team is already running at capacity — more requests, same hours.</p>
       <span class="cta">Take this elevator
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </span>
@@ -153,7 +163,7 @@ body::after { content:''; position:fixed; bottom:-24%; left:50%; transform:trans
 
   </div>
 
-  <p class="footnote">Not sure which one? <b>Start with More Hands</b> — if you need more proof mid-conversation, Scattered AI, No Results has it.</p>
+  <p class="footnote">Not sure which one? Match it to what your prospect feels: <b>"we're maxed out"</b> → Floor 02. <b>"we've adopted AI but nothing's changed"</b> → Floor 01.</p>
 
 </div>
 
