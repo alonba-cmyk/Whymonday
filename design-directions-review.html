@@ -1,0 +1,856 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Design directions — review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+body{ background:#08080a; font-family:'Poppins',sans-serif; color:#f5f5f7; padding:48px 56px; }
+
+*{box-sizing:border-box;margin:0;padding:0;}
+.frame-outer{
+  position:relative; overflow:hidden; border-radius:10px;
+  background:#000; box-shadow:0 6px 24px rgba(0,0,0,.35);
+  flex-shrink:0;
+}
+.frame-inner{
+  position:absolute; top:0; left:0;
+  transform-origin:top left;
+  font-family:var(--font);
+  background:var(--bg);
+  color:var(--text);
+  overflow:hidden;
+}
+/* ---- shared slide/component classes (theme via CSS vars) ---- */
+.slide-d{ width:1280px; height:720px; padding:64px 72px; display:flex; flex-direction:column; position:relative; }
+.slide-m{ width:390px; height:844px; padding:32px 24px; display:flex; flex-direction:column; position:relative; overflow-y:auto; }
+.eyebrow{ font-size:14.5px; color:var(--dim); font-weight:500; display:flex; align-items:center; gap:9px; margin-bottom:8px; text-transform:uppercase; letter-spacing:.6px; }
+.slide-m .eyebrow{ font-size:12.5px; }
+.eyebrow .dot{ width:7px; height:7px; border-radius:50%; background:var(--accent); flex-shrink:0; }
+h1.slide-title{ font-size:44px; font-weight:600; line-height:1.14; letter-spacing:-0.8px; color:var(--text); }
+.slide-m h1.slide-title{ font-size:30px; }
+h2.slide-title{ font-size:32px; font-weight:600; letter-spacing:-0.5px; margin-bottom:24px; color:var(--text); }
+.slide-m h2.slide-title{ font-size:22px; margin-bottom:16px; }
+.grad-text{ background:var(--grad); -webkit-background-clip:text; background-clip:text; color:transparent; }
+.card{
+  background:var(--panel); border:1px solid var(--border); border-radius:var(--radius);
+  padding:22px; box-shadow:var(--card-shadow);
+}
+.theme-c .card{ border-left:6px solid var(--card-accent, var(--accent)); }
+.pill{ border:1px solid var(--border-bright); border-radius:10px; padding:8px 14px; font-size:13px; color:var(--text); background:var(--pill-bg); }
+.tag{ display:inline-block; font-size:11px; font-weight:600; padding:4px 10px; border-radius:6px; letter-spacing:.3px; }
+.theme-c .tag{ border-radius:20px; color:#fff !important; }
+.tag.high{ background:var(--tag-high-bg); color:var(--tag-high-fg); }
+.theme-c .tag.high{ background:var(--tag-high-fg); }
+.tag.med{ background:var(--tag-med-bg); color:var(--tag-med-fg); }
+.theme-c .tag.med{ background:var(--tag-med-fg); }
+.tag.low{ background:var(--tag-low-bg); color:var(--tag-low-fg); }
+.theme-c .tag.low{ background:var(--tag-low-fg); }
+.avatar{ width:56px; height:56px; border-radius:16px; overflow:hidden; flex-shrink:0; border:1px solid var(--border-bright); display:flex; align-items:center; justify-content:center; }
+.avatar img{ width:100%; height:100%; object-fit:cover; }
+.tabs{ display:flex; gap:6px; margin-bottom:18px; border-bottom:1px solid var(--border); overflow-x:auto; }
+.tab-btn{ padding:9px 18px; border-radius:8px 8px 0 0; font-size:13.5px; font-weight:500; background:transparent; border:1px solid transparent; color:var(--dim); white-space:nowrap; margin-bottom:-1px; }
+.slide-m .tab-btn{ padding:10px 16px; font-size:13px; }
+.tab-btn.active{ background:var(--accent); border-color:var(--accent); color:#fff; }
+.theme-c .tab-btn.active{ border-radius:20px; }
+table.data-tbl{ width:100%; border-collapse:collapse; font-size:14px; }
+table.data-tbl th{ text-align:left; font-weight:500; color:var(--dim); font-size:11.5px; text-transform:uppercase; letter-spacing:.6px; padding:10px 16px; border-bottom:1px solid var(--border-bright); }
+table.data-tbl td{ padding:13px 16px; border-bottom:1px solid var(--border); color:var(--text); }
+table.data-tbl tr:last-child td{ border-bottom:none; }
+.hero-stat{ position:relative; overflow:hidden; border:1px solid var(--border-bright); border-radius:var(--radius); background:var(--hero-bg); padding:22px 26px; display:flex; align-items:center; gap:20px; }
+.hero-stat .num{ font-family:var(--mono); font-weight:500; font-size:46px; letter-spacing:-1px; color:var(--hero-num-color); }
+.theme-a .hero-stat .num{ background:var(--grad); -webkit-background-clip:text; background-clip:text; color:transparent; }
+.glow-orb{ position:absolute; right:-160px; top:50%; transform:translateY(-50%); width:460px; height:460px; border-radius:50%; background:radial-gradient(circle at 35% 35%, rgba(0,210,210,.5), rgba(97,97,255,.32) 45%, rgba(0,0,0,0) 72%); filter:blur(2px); pointer-events:none; }
+.theme-b .glow-orb, .theme-c .glow-orb{ display:none; }
+.dim{ color:var(--dim); }
+.dim2{ color:var(--dim2); }
+.rowcard{ display:flex; align-items:center; justify-content:space-between; padding:14px 18px; border-radius:12px; background:var(--panel); border:1px solid var(--border); margin-bottom:10px; }
+.theme-c .rowcard{ border-left:6px solid var(--card-accent, var(--accent)); }
+.widget{ display:flex; align-items:center; gap:14px; background:var(--panel); border:1px solid var(--border); border-radius:18px; padding:18px 20px; box-shadow:var(--card-shadow); }
+.widget .icon{ width:44px; height:44px; border-radius:12px; background:var(--accent); display:flex; align-items:center; justify-content:center; color:#fff; font-size:20px; flex-shrink:0; }
+
+.theme-a{
+--bg:#050505; --panel:#111113; --border:rgba(255,255,255,.10); --border-bright:rgba(255,255,255,.22);
+--text:#f5f5f7; --dim:rgba(245,245,247,.58); --dim2:rgba(245,245,247,.38);
+--accent:#6161ff; --accent2:#00d2d2; --radius:16px;
+--font:'Poppins',sans-serif; --mono:'JetBrains Mono',monospace;
+--card-shadow:0 10px 30px rgba(0,0,0,.4);
+--pill-bg:rgba(255,255,255,.03);
+--tag-high-bg:rgba(16,185,129,.15); --tag-high-fg:#10b981;
+--tag-med-bg:rgba(232,233,77,.15); --tag-med-fg:#e8e94d;
+--tag-low-bg:rgba(255,90,90,.15); --tag-low-fg:#ff6b6b;
+--grad:linear-gradient(100deg,#fff 10%,#00d2d2 55%,#6161ff 100%);
+--hero-bg:linear-gradient(115deg, rgba(97,97,255,.16), rgba(0,210,210,.06) 55%, transparent 100%);
+--hero-num-color:#fff;
+}.theme-b{
+--bg:#ffffff; --panel:#ffffff; --border:#ececec; --border-bright:#dcdcdc;
+--text:#17171d; --dim:#6b6b76; --dim2:#9a9aa3;
+--accent:#6c5ce7; --accent2:#00c875; --radius:16px;
+--font:'Poppins',sans-serif; --mono:'JetBrains Mono',monospace;
+--card-shadow:0 8px 24px rgba(20,20,40,.07);
+--pill-bg:#f7f7fb;
+--tag-high-bg:rgba(0,200,117,.12); --tag-high-fg:#00a15c;
+--tag-med-bg:rgba(253,171,61,.15); --tag-med-fg:#c97a12;
+--tag-low-bg:rgba(226,68,92,.12); --tag-low-fg:#e2445c;
+--grad:linear-gradient(100deg,#6c5ce7 0%,#a463f2 100%);
+--hero-bg:linear-gradient(100deg, rgba(108,92,231,.06), rgba(0,200,117,.05));
+--hero-num-color:#17171d;
+}.theme-c{
+--bg:#f2f3f8; --panel:#ffffff; --border:#e4e6ef; --border-bright:#d3d6e6;
+--text:#292f4c; --dim:#676b8a; --dim2:#9497b0;
+--accent:#a25ddc; --accent2:#00c875; --radius:20px;
+--font:'Poppins',sans-serif; --mono:'JetBrains Mono',monospace;
+--card-shadow:0 6px 18px rgba(41,47,76,.08);
+--pill-bg:#f2f3f8;
+--tag-high-bg:#cbf2e0; --tag-high-fg:#00754a;
+--tag-med-bg:#ffe8c2; --tag-med-fg:#a35a00;
+--tag-low-bg:#ffd7de; --tag-low-fg:#c22a44;
+--grad:linear-gradient(100deg,#a25ddc 0%,#00c875 100%);
+--hero-bg:#ffffff;
+--hero-num-color:#292f4c;
+}
+</style>
+</head>
+<body>
+  <div style="max-width:1400px; margin:0 auto;">
+    <div style="margin-bottom:8px; font-size:13px; color:#8a8a95; text-transform:uppercase; letter-spacing:.6px;">End-to-end segmented funnels — design exploration</div>
+    <h1 style="font-size:34px; font-weight:600; margin-bottom:12px;">Three directions, six representative slides</h1>
+    <p style="font-size:15px; color:#c8c8d0; max-width:760px; line-height:1.6; margin-bottom:32px;">
+      Same content, three different visual languages — each shown at desktop (1280×720) and mobile (390×844) size.
+      Pick a direction below and we'll apply it across all 24 slides.
+    </p>
+    <div style="display:flex; gap:16px; margin-bottom:56px;">
+    <div class="theme-a" style="background:var(--bg); border:1px solid var(--border); border-radius:16px; padding:22px; flex:1;">
+      <div style="font-family:var(--font); font-weight:600; font-size:16px; color:var(--text); margin-bottom:8px;">A — Refined Dark</div>
+      <div style="font-family:var(--font); font-size:13px; color:var(--dim); line-height:1.5; margin-bottom:14px;">The current direction, taken further: deeper elevation, gradient accents, glow, premium startup-pitch feel.</div>
+      <div style="display:flex; gap:8px;">
+        <div style="width:28px;height:28px;border-radius:8px;background:var(--accent);"></div>
+        <div style="width:28px;height:28px;border-radius:8px;background:var(--accent2);"></div>
+        <div style="width:28px;height:28px;border-radius:8px;background:var(--panel); border:1px solid var(--border-bright);"></div>
+        <div style="width:28px;height:28px;border-radius:8px;background:var(--bg); border:1px solid var(--border-bright);"></div>
+      </div>
+    </div>
+    <div class="theme-b" style="background:var(--bg); border:1px solid var(--border); border-radius:16px; padding:22px; flex:1;">
+      <div style="font-family:var(--font); font-weight:600; font-size:16px; color:var(--text); margin-bottom:8px;">B — Monday Light</div>
+      <div style="font-family:var(--font); font-size:13px; color:var(--dim); line-height:1.5; margin-bottom:14px;">White canvas, editorial black type, monday.com brand colors (purple/green/orange/red) as accents. Boardroom-daylight feel.</div>
+      <div style="display:flex; gap:8px;">
+        <div style="width:28px;height:28px;border-radius:8px;background:var(--accent);"></div>
+        <div style="width:28px;height:28px;border-radius:8px;background:var(--accent2);"></div>
+        <div style="width:28px;height:28px;border-radius:8px;background:var(--panel); border:1px solid var(--border-bright);"></div>
+        <div style="width:28px;height:28px;border-radius:8px;background:var(--bg); border:1px solid var(--border-bright);"></div>
+      </div>
+    </div>
+    <div class="theme-c" style="background:var(--bg); border:1px solid var(--border); border-radius:16px; padding:22px; flex:1;">
+      <div style="font-family:var(--font); font-weight:600; font-size:16px; color:var(--text); margin-bottom:8px;">C — Bold Board</div>
+      <div style="font-family:var(--font); font-size:13px; color:var(--dim); line-height:1.5; margin-bottom:14px;">Light gray canvas + white cards echo monday.com's own product UI — colored group bars, solid status pills, dashboard widgets.</div>
+      <div style="display:flex; gap:8px;">
+        <div style="width:28px;height:28px;border-radius:8px;background:var(--accent);"></div>
+        <div style="width:28px;height:28px;border-radius:8px;background:var(--accent2);"></div>
+        <div style="width:28px;height:28px;border-radius:8px;background:var(--panel); border:1px solid var(--border-bright);"></div>
+        <div style="width:28px;height:28px;border-radius:8px;background:var(--bg); border:1px solid var(--border-bright);"></div>
+      </div>
+    </div></div>
+    
+    <section style="margin-bottom:56px;">
+      <h3 style="font-size:19px; font-weight:600; margin-bottom:16px; color:#f5f5f7;">Title</h3>
+      <div style="font-size:12px; color:#8a8a95; text-transform:uppercase; letter-spacing:.5px; margin-bottom:10px;">Desktop</div>
+      <div style="display:flex; gap:20px; flex-wrap:wrap; margin-bottom:24px;"><div class="frame-outer theme-a" style="width:420px;height:236px;">
+      <div class="frame-inner slide-d" style="transform:scale(0.328125);">
+    <div class="glow-orb"></div>
+    <div style="position:absolute; top:56px; left:72px; font-weight:700; font-size:15px; letter-spacing:-.3px;">monday<span style="color:var(--accent);">.com</span></div>
+    <div style="display:flex; flex-direction:column; justify-content:center; height:100%; max-width:640px;">
+      <h1 class="slide-title">End-to-end<br>segmented<br><span class="grad-text">funnels</span></h1>
+    </div>
+    <div style="position:absolute; top:64px; right:72px; width:300px;">
+      <div style="font-size:13px; font-weight:600; margin-bottom:14px;">Agenda</div>
+      <div style="display:flex; flex-direction:column; gap:10px; font-size:14px;">
+        <div style="display:flex; gap:10px;"><span style="color:var(--accent);">●</span>Executive summary <span class="dim" style="font-size:12px;">(5 min)</span></div>
+        <div style="display:flex; gap:10px;"><span style="color:var(--accent);">●</span>Insights <span class="dim" style="font-size:12px;">(10 min)</span></div>
+        <div style="display:flex; gap:10px;"><span style="color:var(--accent);">●</span>Way of working <span class="dim" style="font-size:12px;">(15 min)</span></div>
+      </div>
+    </div>
+    </div>
+    </div><div class="frame-outer theme-b" style="width:420px;height:236px;">
+      <div class="frame-inner slide-d" style="transform:scale(0.328125);">
+    <div class="glow-orb"></div>
+    <div style="position:absolute; top:56px; left:72px; font-weight:700; font-size:15px; letter-spacing:-.3px;">monday<span style="color:var(--accent);">.com</span></div>
+    <div style="display:flex; flex-direction:column; justify-content:center; height:100%; max-width:640px;">
+      <h1 class="slide-title">End-to-end<br>segmented<br><span class="grad-text">funnels</span></h1>
+    </div>
+    <div style="position:absolute; top:64px; right:72px; width:300px;">
+      <div style="font-size:13px; font-weight:600; margin-bottom:14px;">Agenda</div>
+      <div style="display:flex; flex-direction:column; gap:10px; font-size:14px;">
+        <div style="display:flex; gap:10px;"><span style="color:var(--accent);">●</span>Executive summary <span class="dim" style="font-size:12px;">(5 min)</span></div>
+        <div style="display:flex; gap:10px;"><span style="color:var(--accent);">●</span>Insights <span class="dim" style="font-size:12px;">(10 min)</span></div>
+        <div style="display:flex; gap:10px;"><span style="color:var(--accent);">●</span>Way of working <span class="dim" style="font-size:12px;">(15 min)</span></div>
+      </div>
+    </div>
+    </div>
+    </div><div class="frame-outer theme-c" style="width:420px;height:236px;">
+      <div class="frame-inner slide-d" style="transform:scale(0.328125);">
+    <div class="glow-orb"></div>
+    <div style="position:absolute; top:56px; left:72px; font-weight:700; font-size:15px; letter-spacing:-.3px;">monday<span style="color:var(--accent);">.com</span></div>
+    <div style="display:flex; flex-direction:column; justify-content:center; height:100%; max-width:640px;">
+      <h1 class="slide-title">End-to-end<br>segmented<br><span class="grad-text">funnels</span></h1>
+    </div>
+    <div style="position:absolute; top:64px; right:72px; width:300px;">
+      <div style="font-size:13px; font-weight:600; margin-bottom:14px;">Agenda</div>
+      <div style="display:flex; flex-direction:column; gap:10px; font-size:14px;">
+        <div style="display:flex; gap:10px;"><span style="color:var(--accent);">●</span>Executive summary <span class="dim" style="font-size:12px;">(5 min)</span></div>
+        <div style="display:flex; gap:10px;"><span style="color:var(--accent);">●</span>Insights <span class="dim" style="font-size:12px;">(10 min)</span></div>
+        <div style="display:flex; gap:10px;"><span style="color:var(--accent);">●</span>Way of working <span class="dim" style="font-size:12px;">(15 min)</span></div>
+      </div>
+    </div>
+    </div>
+    </div></div>
+      <div style="font-size:12px; color:#8a8a95; text-transform:uppercase; letter-spacing:.5px; margin-bottom:10px;">Mobile</div>
+      <div style="display:flex; gap:20px; flex-wrap:wrap;"><div class="frame-outer theme-a" style="width:190px;height:411px;">
+      <div class="frame-inner slide-m" style="transform:scale(0.48717948717948717);">
+    <div class="glow-orb" style="right:-220px; top:-80px; width:340px; height:340px;"></div>
+    <div style="font-weight:700; font-size:14px; margin-bottom:40px;">monday<span style="color:var(--accent);">.com</span></div>
+    <h1 class="slide-title" style="margin-bottom:36px;">End-to-end segmented <span class="grad-text">funnels</span></h1>
+    <div style="font-size:12px; font-weight:600; margin-bottom:12px;">Agenda</div>
+    <div style="display:flex; flex-direction:column; gap:12px; font-size:15px;">
+      <div style="display:flex; justify-content:space-between;"><span><span style="color:var(--accent);">●</span> Executive summary</span><span class="dim" style="font-size:12px;">5 min</span></div>
+      <div style="display:flex; justify-content:space-between;"><span><span style="color:var(--accent);">●</span> Insights</span><span class="dim" style="font-size:12px;">10 min</span></div>
+      <div style="display:flex; justify-content:space-between;"><span><span style="color:var(--accent);">●</span> Way of working</span><span class="dim" style="font-size:12px;">15 min</span></div>
+    </div>
+    </div>
+    </div><div class="frame-outer theme-b" style="width:190px;height:411px;">
+      <div class="frame-inner slide-m" style="transform:scale(0.48717948717948717);">
+    <div class="glow-orb" style="right:-220px; top:-80px; width:340px; height:340px;"></div>
+    <div style="font-weight:700; font-size:14px; margin-bottom:40px;">monday<span style="color:var(--accent);">.com</span></div>
+    <h1 class="slide-title" style="margin-bottom:36px;">End-to-end segmented <span class="grad-text">funnels</span></h1>
+    <div style="font-size:12px; font-weight:600; margin-bottom:12px;">Agenda</div>
+    <div style="display:flex; flex-direction:column; gap:12px; font-size:15px;">
+      <div style="display:flex; justify-content:space-between;"><span><span style="color:var(--accent);">●</span> Executive summary</span><span class="dim" style="font-size:12px;">5 min</span></div>
+      <div style="display:flex; justify-content:space-between;"><span><span style="color:var(--accent);">●</span> Insights</span><span class="dim" style="font-size:12px;">10 min</span></div>
+      <div style="display:flex; justify-content:space-between;"><span><span style="color:var(--accent);">●</span> Way of working</span><span class="dim" style="font-size:12px;">15 min</span></div>
+    </div>
+    </div>
+    </div><div class="frame-outer theme-c" style="width:190px;height:411px;">
+      <div class="frame-inner slide-m" style="transform:scale(0.48717948717948717);">
+    <div class="glow-orb" style="right:-220px; top:-80px; width:340px; height:340px;"></div>
+    <div style="font-weight:700; font-size:14px; margin-bottom:40px;">monday<span style="color:var(--accent);">.com</span></div>
+    <h1 class="slide-title" style="margin-bottom:36px;">End-to-end segmented <span class="grad-text">funnels</span></h1>
+    <div style="font-size:12px; font-weight:600; margin-bottom:12px;">Agenda</div>
+    <div style="display:flex; flex-direction:column; gap:12px; font-size:15px;">
+      <div style="display:flex; justify-content:space-between;"><span><span style="color:var(--accent);">●</span> Executive summary</span><span class="dim" style="font-size:12px;">5 min</span></div>
+      <div style="display:flex; justify-content:space-between;"><span><span style="color:var(--accent);">●</span> Insights</span><span class="dim" style="font-size:12px;">10 min</span></div>
+      <div style="display:flex; justify-content:space-between;"><span><span style="color:var(--accent);">●</span> Way of working</span><span class="dim" style="font-size:12px;">15 min</span></div>
+    </div>
+    </div>
+    </div></div>
+    </section>
+    
+    <section style="margin-bottom:56px;">
+      <h3 style="font-size:19px; font-weight:600; margin-bottom:16px; color:#f5f5f7;">Where we start</h3>
+      <div style="font-size:12px; color:#8a8a95; text-transform:uppercase; letter-spacing:.5px; margin-bottom:10px;">Desktop</div>
+      <div style="display:flex; gap:20px; flex-wrap:wrap; margin-bottom:24px;"><div class="frame-outer theme-a" style="width:420px;height:236px;">
+      <div class="frame-inner slide-d" style="transform:scale(0.328125);">
+    <div class="glow-orb"></div>
+    <div style="display:flex; flex-direction:column; justify-content:center; height:100%; max-width:640px;">
+      <div class="eyebrow"><span class="dot"></span>Where we start</div>
+      <h1 class="slide-title" style="margin-top:6px;">Choosing the right segment <span class="grad-text">to invest</span></h1>
+    </div>
+    </div>
+    </div><div class="frame-outer theme-b" style="width:420px;height:236px;">
+      <div class="frame-inner slide-d" style="transform:scale(0.328125);">
+    <div class="glow-orb"></div>
+    <div style="display:flex; flex-direction:column; justify-content:center; height:100%; max-width:640px;">
+      <div class="eyebrow"><span class="dot"></span>Where we start</div>
+      <h1 class="slide-title" style="margin-top:6px;">Choosing the right segment <span class="grad-text">to invest</span></h1>
+    </div>
+    </div>
+    </div><div class="frame-outer theme-c" style="width:420px;height:236px;">
+      <div class="frame-inner slide-d" style="transform:scale(0.328125);">
+    <div class="glow-orb"></div>
+    <div style="display:flex; flex-direction:column; justify-content:center; height:100%; max-width:640px;">
+      <div class="eyebrow"><span class="dot"></span>Where we start</div>
+      <h1 class="slide-title" style="margin-top:6px;">Choosing the right segment <span class="grad-text">to invest</span></h1>
+    </div>
+    </div>
+    </div></div>
+      <div style="font-size:12px; color:#8a8a95; text-transform:uppercase; letter-spacing:.5px; margin-bottom:10px;">Mobile</div>
+      <div style="display:flex; gap:20px; flex-wrap:wrap;"><div class="frame-outer theme-a" style="width:190px;height:411px;">
+      <div class="frame-inner slide-m" style="transform:scale(0.48717948717948717);">
+    <div class="glow-orb" style="right:-240px; top:60%; width:340px; height:340px;"></div>
+    <div style="display:flex; flex-direction:column; justify-content:center; flex:1;">
+      <div class="eyebrow"><span class="dot"></span>Where we start</div>
+      <h1 class="slide-title" style="margin-top:10px;">Choosing the right segment <span class="grad-text">to invest</span></h1>
+    </div>
+    </div>
+    </div><div class="frame-outer theme-b" style="width:190px;height:411px;">
+      <div class="frame-inner slide-m" style="transform:scale(0.48717948717948717);">
+    <div class="glow-orb" style="right:-240px; top:60%; width:340px; height:340px;"></div>
+    <div style="display:flex; flex-direction:column; justify-content:center; flex:1;">
+      <div class="eyebrow"><span class="dot"></span>Where we start</div>
+      <h1 class="slide-title" style="margin-top:10px;">Choosing the right segment <span class="grad-text">to invest</span></h1>
+    </div>
+    </div>
+    </div><div class="frame-outer theme-c" style="width:190px;height:411px;">
+      <div class="frame-inner slide-m" style="transform:scale(0.48717948717948717);">
+    <div class="glow-orb" style="right:-240px; top:60%; width:340px; height:340px;"></div>
+    <div style="display:flex; flex-direction:column; justify-content:center; flex:1;">
+      <div class="eyebrow"><span class="dot"></span>Where we start</div>
+      <h1 class="slide-title" style="margin-top:10px;">Choosing the right segment <span class="grad-text">to invest</span></h1>
+    </div>
+    </div>
+    </div></div>
+    </section>
+    
+    <section style="margin-bottom:56px;">
+      <h3 style="font-size:19px; font-weight:600; margin-bottom:16px; color:#f5f5f7;">Summary: top volume per segment</h3>
+      <div style="font-size:12px; color:#8a8a95; text-transform:uppercase; letter-spacing:.5px; margin-bottom:10px;">Desktop</div>
+      <div style="display:flex; gap:20px; flex-wrap:wrap; margin-bottom:24px;"><div class="frame-outer theme-a" style="width:420px;height:236px;">
+      <div class="frame-inner slide-d" style="transform:scale(0.328125);">
+    <div class="eyebrow"><span class="dot"></span>Where we're focusing first</div>
+    <h2 class="slide-title">Summary: top volume per segment</h2>
+    <div class="hero-stat" style="margin-bottom:22px;">
+      <div class="num">257,060</div>
+      <div class="dim" style="font-size:14px; max-width:340px;">total monthly searches across the segments we've chosen to go after</div>
+    </div>
+    <div style="display:flex; gap:40px; flex:1;">
+      <div style="flex:1.3;">
+        <div class="dim" style="font-size:12.5px; font-weight:600; margin-bottom:12px;">DEPARTMENTAL INTENT</div>
+        <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:12px;"><div class="card" style="padding:16px;" data-accent="#f2c14e" >
+        <div style="--card-accent:#f2c14e; width:38px; height:38px; border-radius:10px; background:#f2c14e; margin-bottom:12px;"></div>
+        <div style="font-size:15px; font-weight:600; margin-bottom:4px;">Marketing</div>
+        <div class="dim" style="font-size:11.5px;">Total monthly search: 33,810</div>
+      </div><div class="card" style="padding:16px;" data-accent="#3fae5c" >
+        <div style="--card-accent:#3fae5c; width:38px; height:38px; border-radius:10px; background:#3fae5c; margin-bottom:12px;"></div>
+        <div style="font-size:15px; font-weight:600; margin-bottom:4px;">HR</div>
+        <div class="dim" style="font-size:11.5px;">Total monthly search: 23,060</div>
+      </div><div class="card" style="padding:16px;" data-accent="#e8763c" >
+        <div style="--card-accent:#e8763c; width:38px; height:38px; border-radius:10px; background:#e8763c; margin-bottom:12px;"></div>
+        <div style="font-size:15px; font-weight:600; margin-bottom:4px;">Legal</div>
+        <div class="dim" style="font-size:11.5px;">Total monthly search: 22,790</div>
+      </div><div class="card" style="padding:16px;" data-accent="#5cc8e8" >
+        <div style="--card-accent:#5cc8e8; width:38px; height:38px; border-radius:10px; background:#5cc8e8; margin-bottom:12px;"></div>
+        <div style="font-size:15px; font-weight:600; margin-bottom:4px;">IT</div>
+        <div class="dim" style="font-size:11.5px;">Total monthly search: 129,520</div>
+      </div></div>
+      </div>
+      <div style="flex:1; border-left:1px solid var(--border); padding-left:40px;">
+        <div class="dim" style="font-size:12.5px; font-weight:600; margin-bottom:12px;">HORIZONTAL INTENT</div>
+        <div class="rowcard" style="--card-accent:var(--accent);"><span>Notetaker</span><span class="dim" style="font-size:12px;">30,700</span></div>
+        <div class="rowcard" style="--card-accent:var(--accent2);"><span>Vibe</span><span class="dim" style="font-size:12px;">15,280</span></div>
+      </div>
+    </div>
+    </div>
+    </div><div class="frame-outer theme-b" style="width:420px;height:236px;">
+      <div class="frame-inner slide-d" style="transform:scale(0.328125);">
+    <div class="eyebrow"><span class="dot"></span>Where we're focusing first</div>
+    <h2 class="slide-title">Summary: top volume per segment</h2>
+    <div class="hero-stat" style="margin-bottom:22px;">
+      <div class="num">257,060</div>
+      <div class="dim" style="font-size:14px; max-width:340px;">total monthly searches across the segments we've chosen to go after</div>
+    </div>
+    <div style="display:flex; gap:40px; flex:1;">
+      <div style="flex:1.3;">
+        <div class="dim" style="font-size:12.5px; font-weight:600; margin-bottom:12px;">DEPARTMENTAL INTENT</div>
+        <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:12px;"><div class="card" style="padding:16px;" data-accent="#f2c14e" >
+        <div style="--card-accent:#f2c14e; width:38px; height:38px; border-radius:10px; background:#f2c14e; margin-bottom:12px;"></div>
+        <div style="font-size:15px; font-weight:600; margin-bottom:4px;">Marketing</div>
+        <div class="dim" style="font-size:11.5px;">Total monthly search: 33,810</div>
+      </div><div class="card" style="padding:16px;" data-accent="#3fae5c" >
+        <div style="--card-accent:#3fae5c; width:38px; height:38px; border-radius:10px; background:#3fae5c; margin-bottom:12px;"></div>
+        <div style="font-size:15px; font-weight:600; margin-bottom:4px;">HR</div>
+        <div class="dim" style="font-size:11.5px;">Total monthly search: 23,060</div>
+      </div><div class="card" style="padding:16px;" data-accent="#e8763c" >
+        <div style="--card-accent:#e8763c; width:38px; height:38px; border-radius:10px; background:#e8763c; margin-bottom:12px;"></div>
+        <div style="font-size:15px; font-weight:600; margin-bottom:4px;">Legal</div>
+        <div class="dim" style="font-size:11.5px;">Total monthly search: 22,790</div>
+      </div><div class="card" style="padding:16px;" data-accent="#5cc8e8" >
+        <div style="--card-accent:#5cc8e8; width:38px; height:38px; border-radius:10px; background:#5cc8e8; margin-bottom:12px;"></div>
+        <div style="font-size:15px; font-weight:600; margin-bottom:4px;">IT</div>
+        <div class="dim" style="font-size:11.5px;">Total monthly search: 129,520</div>
+      </div></div>
+      </div>
+      <div style="flex:1; border-left:1px solid var(--border); padding-left:40px;">
+        <div class="dim" style="font-size:12.5px; font-weight:600; margin-bottom:12px;">HORIZONTAL INTENT</div>
+        <div class="rowcard" style="--card-accent:var(--accent);"><span>Notetaker</span><span class="dim" style="font-size:12px;">30,700</span></div>
+        <div class="rowcard" style="--card-accent:var(--accent2);"><span>Vibe</span><span class="dim" style="font-size:12px;">15,280</span></div>
+      </div>
+    </div>
+    </div>
+    </div><div class="frame-outer theme-c" style="width:420px;height:236px;">
+      <div class="frame-inner slide-d" style="transform:scale(0.328125);">
+    <div class="eyebrow"><span class="dot"></span>Where we're focusing first</div>
+    <h2 class="slide-title">Summary: top volume per segment</h2>
+    <div class="hero-stat" style="margin-bottom:22px;">
+      <div class="num">257,060</div>
+      <div class="dim" style="font-size:14px; max-width:340px;">total monthly searches across the segments we've chosen to go after</div>
+    </div>
+    <div style="display:flex; gap:40px; flex:1;">
+      <div style="flex:1.3;">
+        <div class="dim" style="font-size:12.5px; font-weight:600; margin-bottom:12px;">DEPARTMENTAL INTENT</div>
+        <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:12px;"><div class="card" style="padding:16px;" data-accent="#f2c14e" >
+        <div style="--card-accent:#f2c14e; width:38px; height:38px; border-radius:10px; background:#f2c14e; margin-bottom:12px;"></div>
+        <div style="font-size:15px; font-weight:600; margin-bottom:4px;">Marketing</div>
+        <div class="dim" style="font-size:11.5px;">Total monthly search: 33,810</div>
+      </div><div class="card" style="padding:16px;" data-accent="#3fae5c" >
+        <div style="--card-accent:#3fae5c; width:38px; height:38px; border-radius:10px; background:#3fae5c; margin-bottom:12px;"></div>
+        <div style="font-size:15px; font-weight:600; margin-bottom:4px;">HR</div>
+        <div class="dim" style="font-size:11.5px;">Total monthly search: 23,060</div>
+      </div><div class="card" style="padding:16px;" data-accent="#e8763c" >
+        <div style="--card-accent:#e8763c; width:38px; height:38px; border-radius:10px; background:#e8763c; margin-bottom:12px;"></div>
+        <div style="font-size:15px; font-weight:600; margin-bottom:4px;">Legal</div>
+        <div class="dim" style="font-size:11.5px;">Total monthly search: 22,790</div>
+      </div><div class="card" style="padding:16px;" data-accent="#5cc8e8" >
+        <div style="--card-accent:#5cc8e8; width:38px; height:38px; border-radius:10px; background:#5cc8e8; margin-bottom:12px;"></div>
+        <div style="font-size:15px; font-weight:600; margin-bottom:4px;">IT</div>
+        <div class="dim" style="font-size:11.5px;">Total monthly search: 129,520</div>
+      </div></div>
+      </div>
+      <div style="flex:1; border-left:1px solid var(--border); padding-left:40px;">
+        <div class="dim" style="font-size:12.5px; font-weight:600; margin-bottom:12px;">HORIZONTAL INTENT</div>
+        <div class="rowcard" style="--card-accent:var(--accent);"><span>Notetaker</span><span class="dim" style="font-size:12px;">30,700</span></div>
+        <div class="rowcard" style="--card-accent:var(--accent2);"><span>Vibe</span><span class="dim" style="font-size:12px;">15,280</span></div>
+      </div>
+    </div>
+    </div>
+    </div></div>
+      <div style="font-size:12px; color:#8a8a95; text-transform:uppercase; letter-spacing:.5px; margin-bottom:10px;">Mobile</div>
+      <div style="display:flex; gap:20px; flex-wrap:wrap;"><div class="frame-outer theme-a" style="width:190px;height:411px;">
+      <div class="frame-inner slide-m" style="transform:scale(0.48717948717948717);">
+    <div class="eyebrow"><span class="dot"></span>Where we're focusing</div>
+    <h2 class="slide-title">Summary: top volume</h2>
+    <div class="hero-stat" style="flex-direction:column; align-items:flex-start; gap:8px; margin-bottom:20px;">
+      <div class="num" style="font-size:34px;">257,060</div>
+      <div class="dim" style="font-size:13px;">total monthly searches, chosen segments</div>
+    </div>
+    <div class="dim" style="font-size:11.5px; font-weight:600; margin-bottom:10px;">DEPARTMENTAL INTENT</div>
+    <div class="card" style="padding:14px; margin-bottom:10px; display:flex; align-items:center; gap:12px;" >
+        <div style="--card-accent:#f2c14e; width:34px; height:34px; border-radius:9px; background:#f2c14e; flex-shrink:0;"></div>
+        <div style="flex:1;"><div style="font-size:14px; font-weight:600;">Marketing</div><div class="dim" style="font-size:11px;">Monthly search: 33,810</div></div>
+      </div><div class="card" style="padding:14px; margin-bottom:10px; display:flex; align-items:center; gap:12px;" >
+        <div style="--card-accent:#3fae5c; width:34px; height:34px; border-radius:9px; background:#3fae5c; flex-shrink:0;"></div>
+        <div style="flex:1;"><div style="font-size:14px; font-weight:600;">HR</div><div class="dim" style="font-size:11px;">Monthly search: 23,060</div></div>
+      </div><div class="card" style="padding:14px; margin-bottom:10px; display:flex; align-items:center; gap:12px;" >
+        <div style="--card-accent:#e8763c; width:34px; height:34px; border-radius:9px; background:#e8763c; flex-shrink:0;"></div>
+        <div style="flex:1;"><div style="font-size:14px; font-weight:600;">Legal</div><div class="dim" style="font-size:11px;">Monthly search: 22,790</div></div>
+      </div><div class="card" style="padding:14px; margin-bottom:10px; display:flex; align-items:center; gap:12px;" >
+        <div style="--card-accent:#5cc8e8; width:34px; height:34px; border-radius:9px; background:#5cc8e8; flex-shrink:0;"></div>
+        <div style="flex:1;"><div style="font-size:14px; font-weight:600;">IT</div><div class="dim" style="font-size:11px;">Monthly search: 129,520</div></div>
+      </div>
+    <div class="dim" style="font-size:11.5px; font-weight:600; margin:14px 0 10px;">HORIZONTAL INTENT</div>
+    <div class="rowcard" style="--card-accent:var(--accent);"><span style="font-size:14px;">Notetaker</span><span class="dim" style="font-size:12px;">30,700</span></div>
+    <div class="rowcard" style="--card-accent:var(--accent2);"><span style="font-size:14px;">Vibe</span><span class="dim" style="font-size:12px;">15,280</span></div>
+    </div>
+    </div><div class="frame-outer theme-b" style="width:190px;height:411px;">
+      <div class="frame-inner slide-m" style="transform:scale(0.48717948717948717);">
+    <div class="eyebrow"><span class="dot"></span>Where we're focusing</div>
+    <h2 class="slide-title">Summary: top volume</h2>
+    <div class="hero-stat" style="flex-direction:column; align-items:flex-start; gap:8px; margin-bottom:20px;">
+      <div class="num" style="font-size:34px;">257,060</div>
+      <div class="dim" style="font-size:13px;">total monthly searches, chosen segments</div>
+    </div>
+    <div class="dim" style="font-size:11.5px; font-weight:600; margin-bottom:10px;">DEPARTMENTAL INTENT</div>
+    <div class="card" style="padding:14px; margin-bottom:10px; display:flex; align-items:center; gap:12px;" >
+        <div style="--card-accent:#f2c14e; width:34px; height:34px; border-radius:9px; background:#f2c14e; flex-shrink:0;"></div>
+        <div style="flex:1;"><div style="font-size:14px; font-weight:600;">Marketing</div><div class="dim" style="font-size:11px;">Monthly search: 33,810</div></div>
+      </div><div class="card" style="padding:14px; margin-bottom:10px; display:flex; align-items:center; gap:12px;" >
+        <div style="--card-accent:#3fae5c; width:34px; height:34px; border-radius:9px; background:#3fae5c; flex-shrink:0;"></div>
+        <div style="flex:1;"><div style="font-size:14px; font-weight:600;">HR</div><div class="dim" style="font-size:11px;">Monthly search: 23,060</div></div>
+      </div><div class="card" style="padding:14px; margin-bottom:10px; display:flex; align-items:center; gap:12px;" >
+        <div style="--card-accent:#e8763c; width:34px; height:34px; border-radius:9px; background:#e8763c; flex-shrink:0;"></div>
+        <div style="flex:1;"><div style="font-size:14px; font-weight:600;">Legal</div><div class="dim" style="font-size:11px;">Monthly search: 22,790</div></div>
+      </div><div class="card" style="padding:14px; margin-bottom:10px; display:flex; align-items:center; gap:12px;" >
+        <div style="--card-accent:#5cc8e8; width:34px; height:34px; border-radius:9px; background:#5cc8e8; flex-shrink:0;"></div>
+        <div style="flex:1;"><div style="font-size:14px; font-weight:600;">IT</div><div class="dim" style="font-size:11px;">Monthly search: 129,520</div></div>
+      </div>
+    <div class="dim" style="font-size:11.5px; font-weight:600; margin:14px 0 10px;">HORIZONTAL INTENT</div>
+    <div class="rowcard" style="--card-accent:var(--accent);"><span style="font-size:14px;">Notetaker</span><span class="dim" style="font-size:12px;">30,700</span></div>
+    <div class="rowcard" style="--card-accent:var(--accent2);"><span style="font-size:14px;">Vibe</span><span class="dim" style="font-size:12px;">15,280</span></div>
+    </div>
+    </div><div class="frame-outer theme-c" style="width:190px;height:411px;">
+      <div class="frame-inner slide-m" style="transform:scale(0.48717948717948717);">
+    <div class="eyebrow"><span class="dot"></span>Where we're focusing</div>
+    <h2 class="slide-title">Summary: top volume</h2>
+    <div class="hero-stat" style="flex-direction:column; align-items:flex-start; gap:8px; margin-bottom:20px;">
+      <div class="num" style="font-size:34px;">257,060</div>
+      <div class="dim" style="font-size:13px;">total monthly searches, chosen segments</div>
+    </div>
+    <div class="dim" style="font-size:11.5px; font-weight:600; margin-bottom:10px;">DEPARTMENTAL INTENT</div>
+    <div class="card" style="padding:14px; margin-bottom:10px; display:flex; align-items:center; gap:12px;" >
+        <div style="--card-accent:#f2c14e; width:34px; height:34px; border-radius:9px; background:#f2c14e; flex-shrink:0;"></div>
+        <div style="flex:1;"><div style="font-size:14px; font-weight:600;">Marketing</div><div class="dim" style="font-size:11px;">Monthly search: 33,810</div></div>
+      </div><div class="card" style="padding:14px; margin-bottom:10px; display:flex; align-items:center; gap:12px;" >
+        <div style="--card-accent:#3fae5c; width:34px; height:34px; border-radius:9px; background:#3fae5c; flex-shrink:0;"></div>
+        <div style="flex:1;"><div style="font-size:14px; font-weight:600;">HR</div><div class="dim" style="font-size:11px;">Monthly search: 23,060</div></div>
+      </div><div class="card" style="padding:14px; margin-bottom:10px; display:flex; align-items:center; gap:12px;" >
+        <div style="--card-accent:#e8763c; width:34px; height:34px; border-radius:9px; background:#e8763c; flex-shrink:0;"></div>
+        <div style="flex:1;"><div style="font-size:14px; font-weight:600;">Legal</div><div class="dim" style="font-size:11px;">Monthly search: 22,790</div></div>
+      </div><div class="card" style="padding:14px; margin-bottom:10px; display:flex; align-items:center; gap:12px;" >
+        <div style="--card-accent:#5cc8e8; width:34px; height:34px; border-radius:9px; background:#5cc8e8; flex-shrink:0;"></div>
+        <div style="flex:1;"><div style="font-size:14px; font-weight:600;">IT</div><div class="dim" style="font-size:11px;">Monthly search: 129,520</div></div>
+      </div>
+    <div class="dim" style="font-size:11.5px; font-weight:600; margin:14px 0 10px;">HORIZONTAL INTENT</div>
+    <div class="rowcard" style="--card-accent:var(--accent);"><span style="font-size:14px;">Notetaker</span><span class="dim" style="font-size:12px;">30,700</span></div>
+    <div class="rowcard" style="--card-accent:var(--accent2);"><span style="font-size:14px;">Vibe</span><span class="dim" style="font-size:12px;">15,280</span></div>
+    </div>
+    </div></div>
+    </section>
+    
+    <section style="margin-bottom:56px;">
+      <h3 style="font-size:19px; font-weight:600; margin-bottom:16px; color:#f5f5f7;">Marketing segment</h3>
+      <div style="font-size:12px; color:#8a8a95; text-transform:uppercase; letter-spacing:.5px; margin-bottom:10px;">Desktop</div>
+      <div style="display:flex; gap:20px; flex-wrap:wrap; margin-bottom:24px;"><div class="frame-outer theme-a" style="width:420px;height:236px;">
+      <div class="frame-inner slide-d" style="transform:scale(0.328125);">
+    <div style="display:flex; align-items:center; gap:16px; margin-bottom:20px;">
+      <div class="avatar" style="background:linear-gradient(135deg,#f2c14e,#e89b3c); font-weight:700; color:#fff; font-size:20px; display:flex; align-items:center; justify-content:center;">M</div>
+      <div><div style="font-size:22px; font-weight:600;">Marketing</div><div class="dim" style="font-size:13px;">Total monthly search: <strong style="color:var(--text);">33,810</strong></div></div>
+    </div>
+    <div class="tabs">
+      <button class="tab-btn active">Identity</button>
+      <button class="tab-btn">Demand</button>
+      <button class="tab-btn">Trends</button>
+      <button class="tab-btn">Competitors</button>
+    </div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:16px;">
+      <div class="card" style="--card-accent:var(--accent); padding:16px;"><div style="font-size:11px; font-weight:600; color:var(--accent); text-transform:uppercase; margin-bottom:8px;">Persona</div><div class="dim" style="font-size:12.5px; line-height:1.55;">CMO, Brand & Creative, Growth/Demand Gen, Marketing Ops, Lifecycle, Analytics.</div></div>
+      <div class="card" style="--card-accent:var(--accent2); padding:16px;"><div style="font-size:11px; font-weight:600; color:var(--accent2); text-transform:uppercase; margin-bottom:8px;">Main promise</div><div style="font-size:13px; font-weight:500; line-height:1.5;">Drive more demand with the AI work platform that executes marketing work end to end.</div></div>
+    </div>
+    <div class="dim" style="font-size:11px; font-weight:600; text-transform:uppercase; margin-bottom:10px;">Example agents</div>
+    <div style="display:flex; gap:12px;">
+      <div class="card" style="--card-accent:var(--accent); flex:1; padding:14px 16px;"><div style="font-size:13px; font-weight:600;">Social Media</div><div class="dim" style="font-size:12px;">Post creation & scheduling.</div></div>
+      <div class="card" style="--card-accent:var(--accent2); flex:1; padding:14px 16px;"><div style="font-size:13px; font-weight:600;">Campaigns</div><div class="dim" style="font-size:12px;">Strategic planning & management.</div></div>
+      <div class="card" style="--card-accent:#e2445c; flex:1; padding:14px 16px;"><div style="font-size:13px; font-weight:600;">Content Creation</div><div class="dim" style="font-size:12px;">Copy, video, visual creatives.</div></div>
+    </div>
+    </div>
+    </div><div class="frame-outer theme-b" style="width:420px;height:236px;">
+      <div class="frame-inner slide-d" style="transform:scale(0.328125);">
+    <div style="display:flex; align-items:center; gap:16px; margin-bottom:20px;">
+      <div class="avatar" style="background:linear-gradient(135deg,#f2c14e,#e89b3c); font-weight:700; color:#fff; font-size:20px; display:flex; align-items:center; justify-content:center;">M</div>
+      <div><div style="font-size:22px; font-weight:600;">Marketing</div><div class="dim" style="font-size:13px;">Total monthly search: <strong style="color:var(--text);">33,810</strong></div></div>
+    </div>
+    <div class="tabs">
+      <button class="tab-btn active">Identity</button>
+      <button class="tab-btn">Demand</button>
+      <button class="tab-btn">Trends</button>
+      <button class="tab-btn">Competitors</button>
+    </div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:16px;">
+      <div class="card" style="--card-accent:var(--accent); padding:16px;"><div style="font-size:11px; font-weight:600; color:var(--accent); text-transform:uppercase; margin-bottom:8px;">Persona</div><div class="dim" style="font-size:12.5px; line-height:1.55;">CMO, Brand & Creative, Growth/Demand Gen, Marketing Ops, Lifecycle, Analytics.</div></div>
+      <div class="card" style="--card-accent:var(--accent2); padding:16px;"><div style="font-size:11px; font-weight:600; color:var(--accent2); text-transform:uppercase; margin-bottom:8px;">Main promise</div><div style="font-size:13px; font-weight:500; line-height:1.5;">Drive more demand with the AI work platform that executes marketing work end to end.</div></div>
+    </div>
+    <div class="dim" style="font-size:11px; font-weight:600; text-transform:uppercase; margin-bottom:10px;">Example agents</div>
+    <div style="display:flex; gap:12px;">
+      <div class="card" style="--card-accent:var(--accent); flex:1; padding:14px 16px;"><div style="font-size:13px; font-weight:600;">Social Media</div><div class="dim" style="font-size:12px;">Post creation & scheduling.</div></div>
+      <div class="card" style="--card-accent:var(--accent2); flex:1; padding:14px 16px;"><div style="font-size:13px; font-weight:600;">Campaigns</div><div class="dim" style="font-size:12px;">Strategic planning & management.</div></div>
+      <div class="card" style="--card-accent:#e2445c; flex:1; padding:14px 16px;"><div style="font-size:13px; font-weight:600;">Content Creation</div><div class="dim" style="font-size:12px;">Copy, video, visual creatives.</div></div>
+    </div>
+    </div>
+    </div><div class="frame-outer theme-c" style="width:420px;height:236px;">
+      <div class="frame-inner slide-d" style="transform:scale(0.328125);">
+    <div style="display:flex; align-items:center; gap:16px; margin-bottom:20px;">
+      <div class="avatar" style="background:linear-gradient(135deg,#f2c14e,#e89b3c); font-weight:700; color:#fff; font-size:20px; display:flex; align-items:center; justify-content:center;">M</div>
+      <div><div style="font-size:22px; font-weight:600;">Marketing</div><div class="dim" style="font-size:13px;">Total monthly search: <strong style="color:var(--text);">33,810</strong></div></div>
+    </div>
+    <div class="tabs">
+      <button class="tab-btn active">Identity</button>
+      <button class="tab-btn">Demand</button>
+      <button class="tab-btn">Trends</button>
+      <button class="tab-btn">Competitors</button>
+    </div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:16px;">
+      <div class="card" style="--card-accent:var(--accent); padding:16px;"><div style="font-size:11px; font-weight:600; color:var(--accent); text-transform:uppercase; margin-bottom:8px;">Persona</div><div class="dim" style="font-size:12.5px; line-height:1.55;">CMO, Brand & Creative, Growth/Demand Gen, Marketing Ops, Lifecycle, Analytics.</div></div>
+      <div class="card" style="--card-accent:var(--accent2); padding:16px;"><div style="font-size:11px; font-weight:600; color:var(--accent2); text-transform:uppercase; margin-bottom:8px;">Main promise</div><div style="font-size:13px; font-weight:500; line-height:1.5;">Drive more demand with the AI work platform that executes marketing work end to end.</div></div>
+    </div>
+    <div class="dim" style="font-size:11px; font-weight:600; text-transform:uppercase; margin-bottom:10px;">Example agents</div>
+    <div style="display:flex; gap:12px;">
+      <div class="card" style="--card-accent:var(--accent); flex:1; padding:14px 16px;"><div style="font-size:13px; font-weight:600;">Social Media</div><div class="dim" style="font-size:12px;">Post creation & scheduling.</div></div>
+      <div class="card" style="--card-accent:var(--accent2); flex:1; padding:14px 16px;"><div style="font-size:13px; font-weight:600;">Campaigns</div><div class="dim" style="font-size:12px;">Strategic planning & management.</div></div>
+      <div class="card" style="--card-accent:#e2445c; flex:1; padding:14px 16px;"><div style="font-size:13px; font-weight:600;">Content Creation</div><div class="dim" style="font-size:12px;">Copy, video, visual creatives.</div></div>
+    </div>
+    </div>
+    </div></div>
+      <div style="font-size:12px; color:#8a8a95; text-transform:uppercase; letter-spacing:.5px; margin-bottom:10px;">Mobile</div>
+      <div style="display:flex; gap:20px; flex-wrap:wrap;"><div class="frame-outer theme-a" style="width:190px;height:411px;">
+      <div class="frame-inner slide-m" style="transform:scale(0.48717948717948717);">
+    <div style="display:flex; align-items:center; gap:12px; margin-bottom:16px;">
+      <div class="avatar" style="width:44px; height:44px; background:linear-gradient(135deg,#f2c14e,#e89b3c); font-weight:700; color:#fff; font-size:16px; display:flex; align-items:center; justify-content:center;">M</div>
+      <div><div style="font-size:17px; font-weight:600;">Marketing</div><div class="dim" style="font-size:11.5px;">Monthly search: <strong style="color:var(--text);">33,810</strong></div></div>
+    </div>
+    <div class="tabs">
+      <button class="tab-btn active">Identity</button>
+      <button class="tab-btn">Demand</button>
+      <button class="tab-btn">Trends</button>
+      <button class="tab-btn">Competitors</button>
+    </div>
+    <div class="card" style="--card-accent:var(--accent); padding:14px; margin-bottom:10px;"><div style="font-size:11px; font-weight:600; color:var(--accent); text-transform:uppercase; margin-bottom:6px;">Persona</div><div class="dim" style="font-size:12.5px; line-height:1.5;">CMO, Brand & Creative, Growth/Demand Gen, Marketing Ops.</div></div>
+    <div class="card" style="--card-accent:var(--accent2); padding:14px; margin-bottom:16px;"><div style="font-size:11px; font-weight:600; color:var(--accent2); text-transform:uppercase; margin-bottom:6px;">Main promise</div><div style="font-size:13px; font-weight:500; line-height:1.5;">Drive more demand with the AI work platform.</div></div>
+    <div class="dim" style="font-size:11px; font-weight:600; text-transform:uppercase; margin-bottom:10px;">Example agents</div>
+    <div class="card" style="--card-accent:var(--accent); padding:14px; margin-bottom:8px;"><div style="font-size:13px; font-weight:600;">Social Media</div><div class="dim" style="font-size:12px;">Post creation & scheduling.</div></div>
+    <div class="card" style="--card-accent:var(--accent2); padding:14px; margin-bottom:8px;"><div style="font-size:13px; font-weight:600;">Campaigns</div><div class="dim" style="font-size:12px;">Strategic planning & management.</div></div>
+    <div class="card" style="--card-accent:#e2445c; padding:14px;"><div style="font-size:13px; font-weight:600;">Content Creation</div><div class="dim" style="font-size:12px;">Copy, video, visual creatives.</div></div>
+    </div>
+    </div><div class="frame-outer theme-b" style="width:190px;height:411px;">
+      <div class="frame-inner slide-m" style="transform:scale(0.48717948717948717);">
+    <div style="display:flex; align-items:center; gap:12px; margin-bottom:16px;">
+      <div class="avatar" style="width:44px; height:44px; background:linear-gradient(135deg,#f2c14e,#e89b3c); font-weight:700; color:#fff; font-size:16px; display:flex; align-items:center; justify-content:center;">M</div>
+      <div><div style="font-size:17px; font-weight:600;">Marketing</div><div class="dim" style="font-size:11.5px;">Monthly search: <strong style="color:var(--text);">33,810</strong></div></div>
+    </div>
+    <div class="tabs">
+      <button class="tab-btn active">Identity</button>
+      <button class="tab-btn">Demand</button>
+      <button class="tab-btn">Trends</button>
+      <button class="tab-btn">Competitors</button>
+    </div>
+    <div class="card" style="--card-accent:var(--accent); padding:14px; margin-bottom:10px;"><div style="font-size:11px; font-weight:600; color:var(--accent); text-transform:uppercase; margin-bottom:6px;">Persona</div><div class="dim" style="font-size:12.5px; line-height:1.5;">CMO, Brand & Creative, Growth/Demand Gen, Marketing Ops.</div></div>
+    <div class="card" style="--card-accent:var(--accent2); padding:14px; margin-bottom:16px;"><div style="font-size:11px; font-weight:600; color:var(--accent2); text-transform:uppercase; margin-bottom:6px;">Main promise</div><div style="font-size:13px; font-weight:500; line-height:1.5;">Drive more demand with the AI work platform.</div></div>
+    <div class="dim" style="font-size:11px; font-weight:600; text-transform:uppercase; margin-bottom:10px;">Example agents</div>
+    <div class="card" style="--card-accent:var(--accent); padding:14px; margin-bottom:8px;"><div style="font-size:13px; font-weight:600;">Social Media</div><div class="dim" style="font-size:12px;">Post creation & scheduling.</div></div>
+    <div class="card" style="--card-accent:var(--accent2); padding:14px; margin-bottom:8px;"><div style="font-size:13px; font-weight:600;">Campaigns</div><div class="dim" style="font-size:12px;">Strategic planning & management.</div></div>
+    <div class="card" style="--card-accent:#e2445c; padding:14px;"><div style="font-size:13px; font-weight:600;">Content Creation</div><div class="dim" style="font-size:12px;">Copy, video, visual creatives.</div></div>
+    </div>
+    </div><div class="frame-outer theme-c" style="width:190px;height:411px;">
+      <div class="frame-inner slide-m" style="transform:scale(0.48717948717948717);">
+    <div style="display:flex; align-items:center; gap:12px; margin-bottom:16px;">
+      <div class="avatar" style="width:44px; height:44px; background:linear-gradient(135deg,#f2c14e,#e89b3c); font-weight:700; color:#fff; font-size:16px; display:flex; align-items:center; justify-content:center;">M</div>
+      <div><div style="font-size:17px; font-weight:600;">Marketing</div><div class="dim" style="font-size:11.5px;">Monthly search: <strong style="color:var(--text);">33,810</strong></div></div>
+    </div>
+    <div class="tabs">
+      <button class="tab-btn active">Identity</button>
+      <button class="tab-btn">Demand</button>
+      <button class="tab-btn">Trends</button>
+      <button class="tab-btn">Competitors</button>
+    </div>
+    <div class="card" style="--card-accent:var(--accent); padding:14px; margin-bottom:10px;"><div style="font-size:11px; font-weight:600; color:var(--accent); text-transform:uppercase; margin-bottom:6px;">Persona</div><div class="dim" style="font-size:12.5px; line-height:1.5;">CMO, Brand & Creative, Growth/Demand Gen, Marketing Ops.</div></div>
+    <div class="card" style="--card-accent:var(--accent2); padding:14px; margin-bottom:16px;"><div style="font-size:11px; font-weight:600; color:var(--accent2); text-transform:uppercase; margin-bottom:6px;">Main promise</div><div style="font-size:13px; font-weight:500; line-height:1.5;">Drive more demand with the AI work platform.</div></div>
+    <div class="dim" style="font-size:11px; font-weight:600; text-transform:uppercase; margin-bottom:10px;">Example agents</div>
+    <div class="card" style="--card-accent:var(--accent); padding:14px; margin-bottom:8px;"><div style="font-size:13px; font-weight:600;">Social Media</div><div class="dim" style="font-size:12px;">Post creation & scheduling.</div></div>
+    <div class="card" style="--card-accent:var(--accent2); padding:14px; margin-bottom:8px;"><div style="font-size:13px; font-weight:600;">Campaigns</div><div class="dim" style="font-size:12px;">Strategic planning & management.</div></div>
+    <div class="card" style="--card-accent:#e2445c; padding:14px;"><div style="font-size:13px; font-weight:600;">Content Creation</div><div class="dim" style="font-size:12px;">Copy, video, visual creatives.</div></div>
+    </div>
+    </div></div>
+    </section>
+    
+    <section style="margin-bottom:56px;">
+      <h3 style="font-size:19px; font-weight:600; margin-bottom:16px; color:#f5f5f7;">Top vertical demand</h3>
+      <div style="font-size:12px; color:#8a8a95; text-transform:uppercase; letter-spacing:.5px; margin-bottom:10px;">Desktop</div>
+      <div style="display:flex; gap:20px; flex-wrap:wrap; margin-bottom:24px;"><div class="frame-outer theme-a" style="width:420px;height:236px;">
+      <div class="frame-inner slide-d" style="transform:scale(0.328125);">
+    <div class="eyebrow"><span class="dot"></span>Top Vertical demand — Keyword Planner</div>
+    <div class="dim" style="font-size:13px; margin-bottom:16px;">Departmental / Industry intent · monthly searches in US</div>
+    <div style="flex:1; display:flex; align-items:center;">
+    <table class="data-tbl"><thead><tr><th>Segment</th><th>Demand</th><th>Competitors</th></tr></thead><tbody><tr><td style="font-weight:500;">Marketing</td><td class="dim" style="font-family:var(--mono);">33,810</td><td class="dim">Jasper, Copy.ai</td></tr><tr><td style="font-weight:500;">HR</td><td class="dim" style="font-family:var(--mono);">23,060</td><td class="dim">Shapes, Ashby</td></tr><tr><td style="font-weight:500;">IT</td><td class="dim" style="font-family:var(--mono);">129,520</td><td class="dim">Moveworks, Aisera</td></tr><tr><td style="font-weight:500;">Legal</td><td class="dim" style="font-family:var(--mono);">22,790</td><td class="dim">Harvey, Legora</td></tr><tr><td style="font-weight:500;">Support</td><td class="dim" style="font-family:var(--mono);">61,090</td><td class="dim">Intercom, Decagon</td></tr></tbody></table>
+    </div>
+    </div>
+    </div><div class="frame-outer theme-b" style="width:420px;height:236px;">
+      <div class="frame-inner slide-d" style="transform:scale(0.328125);">
+    <div class="eyebrow"><span class="dot"></span>Top Vertical demand — Keyword Planner</div>
+    <div class="dim" style="font-size:13px; margin-bottom:16px;">Departmental / Industry intent · monthly searches in US</div>
+    <div style="flex:1; display:flex; align-items:center;">
+    <table class="data-tbl"><thead><tr><th>Segment</th><th>Demand</th><th>Competitors</th></tr></thead><tbody><tr><td style="font-weight:500;">Marketing</td><td class="dim" style="font-family:var(--mono);">33,810</td><td class="dim">Jasper, Copy.ai</td></tr><tr><td style="font-weight:500;">HR</td><td class="dim" style="font-family:var(--mono);">23,060</td><td class="dim">Shapes, Ashby</td></tr><tr><td style="font-weight:500;">IT</td><td class="dim" style="font-family:var(--mono);">129,520</td><td class="dim">Moveworks, Aisera</td></tr><tr><td style="font-weight:500;">Legal</td><td class="dim" style="font-family:var(--mono);">22,790</td><td class="dim">Harvey, Legora</td></tr><tr><td style="font-weight:500;">Support</td><td class="dim" style="font-family:var(--mono);">61,090</td><td class="dim">Intercom, Decagon</td></tr></tbody></table>
+    </div>
+    </div>
+    </div><div class="frame-outer theme-c" style="width:420px;height:236px;">
+      <div class="frame-inner slide-d" style="transform:scale(0.328125);">
+    <div class="eyebrow"><span class="dot"></span>Top Vertical demand — Keyword Planner</div>
+    <div class="dim" style="font-size:13px; margin-bottom:16px;">Departmental / Industry intent · monthly searches in US</div>
+    <div style="flex:1; display:flex; align-items:center;">
+    <table class="data-tbl"><thead><tr><th>Segment</th><th>Demand</th><th>Competitors</th></tr></thead><tbody><tr><td style="font-weight:500;">Marketing</td><td class="dim" style="font-family:var(--mono);">33,810</td><td class="dim">Jasper, Copy.ai</td></tr><tr><td style="font-weight:500;">HR</td><td class="dim" style="font-family:var(--mono);">23,060</td><td class="dim">Shapes, Ashby</td></tr><tr><td style="font-weight:500;">IT</td><td class="dim" style="font-family:var(--mono);">129,520</td><td class="dim">Moveworks, Aisera</td></tr><tr><td style="font-weight:500;">Legal</td><td class="dim" style="font-family:var(--mono);">22,790</td><td class="dim">Harvey, Legora</td></tr><tr><td style="font-weight:500;">Support</td><td class="dim" style="font-family:var(--mono);">61,090</td><td class="dim">Intercom, Decagon</td></tr></tbody></table>
+    </div>
+    </div>
+    </div></div>
+      <div style="font-size:12px; color:#8a8a95; text-transform:uppercase; letter-spacing:.5px; margin-bottom:10px;">Mobile</div>
+      <div style="display:flex; gap:20px; flex-wrap:wrap;"><div class="frame-outer theme-a" style="width:190px;height:411px;">
+      <div class="frame-inner slide-m" style="transform:scale(0.48717948717948717);">
+    <div class="eyebrow"><span class="dot"></span>Top Vertical demand</div>
+    <div class="dim" style="font-size:12px; margin-bottom:16px;">Monthly searches in US</div>
+    <div class="rowcard" style="--card-accent:#f2c14e; flex-direction:column; align-items:flex-start; gap:4px;">
+        <div style="display:flex; justify-content:space-between; width:100%;"><span style="font-weight:600; font-size:14px;">Marketing</span><span style="font-family:var(--mono); font-size:14px;">33,810</span></div>
+        <div class="dim" style="font-size:11.5px;">Jasper, Copy.ai</div>
+      </div><div class="rowcard" style="--card-accent:#3fae5c; flex-direction:column; align-items:flex-start; gap:4px;">
+        <div style="display:flex; justify-content:space-between; width:100%;"><span style="font-weight:600; font-size:14px;">HR</span><span style="font-family:var(--mono); font-size:14px;">23,060</span></div>
+        <div class="dim" style="font-size:11.5px;">Shapes, Ashby</div>
+      </div><div class="rowcard" style="--card-accent:#5cc8e8; flex-direction:column; align-items:flex-start; gap:4px;">
+        <div style="display:flex; justify-content:space-between; width:100%;"><span style="font-weight:600; font-size:14px;">IT</span><span style="font-family:var(--mono); font-size:14px;">129,520</span></div>
+        <div class="dim" style="font-size:11.5px;">Moveworks, Aisera</div>
+      </div><div class="rowcard" style="--card-accent:#e8763c; flex-direction:column; align-items:flex-start; gap:4px;">
+        <div style="display:flex; justify-content:space-between; width:100%;"><span style="font-weight:600; font-size:14px;">Legal</span><span style="font-family:var(--mono); font-size:14px;">22,790</span></div>
+        <div class="dim" style="font-size:11.5px;">Harvey, Legora</div>
+      </div><div class="rowcard" style="--card-accent:#a25ddc; flex-direction:column; align-items:flex-start; gap:4px;">
+        <div style="display:flex; justify-content:space-between; width:100%;"><span style="font-weight:600; font-size:14px;">Support</span><span style="font-family:var(--mono); font-size:14px;">61,090</span></div>
+        <div class="dim" style="font-size:11.5px;">Intercom, Decagon</div>
+      </div>
+    </div>
+    </div><div class="frame-outer theme-b" style="width:190px;height:411px;">
+      <div class="frame-inner slide-m" style="transform:scale(0.48717948717948717);">
+    <div class="eyebrow"><span class="dot"></span>Top Vertical demand</div>
+    <div class="dim" style="font-size:12px; margin-bottom:16px;">Monthly searches in US</div>
+    <div class="rowcard" style="--card-accent:#f2c14e; flex-direction:column; align-items:flex-start; gap:4px;">
+        <div style="display:flex; justify-content:space-between; width:100%;"><span style="font-weight:600; font-size:14px;">Marketing</span><span style="font-family:var(--mono); font-size:14px;">33,810</span></div>
+        <div class="dim" style="font-size:11.5px;">Jasper, Copy.ai</div>
+      </div><div class="rowcard" style="--card-accent:#3fae5c; flex-direction:column; align-items:flex-start; gap:4px;">
+        <div style="display:flex; justify-content:space-between; width:100%;"><span style="font-weight:600; font-size:14px;">HR</span><span style="font-family:var(--mono); font-size:14px;">23,060</span></div>
+        <div class="dim" style="font-size:11.5px;">Shapes, Ashby</div>
+      </div><div class="rowcard" style="--card-accent:#5cc8e8; flex-direction:column; align-items:flex-start; gap:4px;">
+        <div style="display:flex; justify-content:space-between; width:100%;"><span style="font-weight:600; font-size:14px;">IT</span><span style="font-family:var(--mono); font-size:14px;">129,520</span></div>
+        <div class="dim" style="font-size:11.5px;">Moveworks, Aisera</div>
+      </div><div class="rowcard" style="--card-accent:#e8763c; flex-direction:column; align-items:flex-start; gap:4px;">
+        <div style="display:flex; justify-content:space-between; width:100%;"><span style="font-weight:600; font-size:14px;">Legal</span><span style="font-family:var(--mono); font-size:14px;">22,790</span></div>
+        <div class="dim" style="font-size:11.5px;">Harvey, Legora</div>
+      </div><div class="rowcard" style="--card-accent:#a25ddc; flex-direction:column; align-items:flex-start; gap:4px;">
+        <div style="display:flex; justify-content:space-between; width:100%;"><span style="font-weight:600; font-size:14px;">Support</span><span style="font-family:var(--mono); font-size:14px;">61,090</span></div>
+        <div class="dim" style="font-size:11.5px;">Intercom, Decagon</div>
+      </div>
+    </div>
+    </div><div class="frame-outer theme-c" style="width:190px;height:411px;">
+      <div class="frame-inner slide-m" style="transform:scale(0.48717948717948717);">
+    <div class="eyebrow"><span class="dot"></span>Top Vertical demand</div>
+    <div class="dim" style="font-size:12px; margin-bottom:16px;">Monthly searches in US</div>
+    <div class="rowcard" style="--card-accent:#f2c14e; flex-direction:column; align-items:flex-start; gap:4px;">
+        <div style="display:flex; justify-content:space-between; width:100%;"><span style="font-weight:600; font-size:14px;">Marketing</span><span style="font-family:var(--mono); font-size:14px;">33,810</span></div>
+        <div class="dim" style="font-size:11.5px;">Jasper, Copy.ai</div>
+      </div><div class="rowcard" style="--card-accent:#3fae5c; flex-direction:column; align-items:flex-start; gap:4px;">
+        <div style="display:flex; justify-content:space-between; width:100%;"><span style="font-weight:600; font-size:14px;">HR</span><span style="font-family:var(--mono); font-size:14px;">23,060</span></div>
+        <div class="dim" style="font-size:11.5px;">Shapes, Ashby</div>
+      </div><div class="rowcard" style="--card-accent:#5cc8e8; flex-direction:column; align-items:flex-start; gap:4px;">
+        <div style="display:flex; justify-content:space-between; width:100%;"><span style="font-weight:600; font-size:14px;">IT</span><span style="font-family:var(--mono); font-size:14px;">129,520</span></div>
+        <div class="dim" style="font-size:11.5px;">Moveworks, Aisera</div>
+      </div><div class="rowcard" style="--card-accent:#e8763c; flex-direction:column; align-items:flex-start; gap:4px;">
+        <div style="display:flex; justify-content:space-between; width:100%;"><span style="font-weight:600; font-size:14px;">Legal</span><span style="font-family:var(--mono); font-size:14px;">22,790</span></div>
+        <div class="dim" style="font-size:11.5px;">Harvey, Legora</div>
+      </div><div class="rowcard" style="--card-accent:#a25ddc; flex-direction:column; align-items:flex-start; gap:4px;">
+        <div style="display:flex; justify-content:space-between; width:100%;"><span style="font-weight:600; font-size:14px;">Support</span><span style="font-family:var(--mono); font-size:14px;">61,090</span></div>
+        <div class="dim" style="font-size:11.5px;">Intercom, Decagon</div>
+      </div>
+    </div>
+    </div></div>
+    </section>
+    
+    <section style="margin-bottom:56px;">
+      <h3 style="font-size:19px; font-weight:600; margin-bottom:16px; color:#f5f5f7;">Two kinds of demand</h3>
+      <div style="font-size:12px; color:#8a8a95; text-transform:uppercase; letter-spacing:.5px; margin-bottom:10px;">Desktop</div>
+      <div style="display:flex; gap:20px; flex-wrap:wrap; margin-bottom:24px;"><div class="frame-outer theme-a" style="width:420px;height:236px;">
+      <div class="frame-inner slide-d" style="transform:scale(0.328125);">
+    <div class="eyebrow"><span class="dot"></span>We identified two kinds of AI demand</div>
+    <h2 class="slide-title" style="margin-bottom:20px;">Vertical vs. horizontal intent</h2>
+    <div style="display:flex; gap:22px; flex:1;">
+      <div class="card" style="--card-accent:var(--accent); flex:1; padding:26px;">
+        <div style="font-size:12px; font-weight:600; color:var(--accent); margin-bottom:4px;">VERTICAL INTENT</div>
+        <div class="dim" style="font-size:13px; margin-bottom:12px;">[Department | Industry]</div>
+        <div style="font-size:14.5px; line-height:1.6; margin-bottom:14px;">People searching for a department, industry, or specific use case.</div>
+        <div style="display:flex; gap:8px;"><span class="pill">Harvey</span><span class="pill">Clay</span><span class="pill">Jasper</span></div>
+      </div>
+      <div class="card" style="--card-accent:var(--accent2); flex:1; padding:26px;">
+        <div style="font-size:12px; font-weight:600; color:var(--accent2); margin-bottom:4px;">HORIZONTAL INTENT</div>
+        <div class="dim" style="font-size:13px; margin-bottom:12px;">[AI capability led]</div>
+        <div style="font-size:14.5px; line-height:1.6; margin-bottom:14px;">People searching for a capability or task, persona agnostic.</div>
+        <div style="display:flex; gap:8px;"><span class="pill">Relevance</span><span class="pill">Notion</span><span class="pill">Base44</span></div>
+      </div>
+    </div>
+    <div style="display:flex; gap:12px; margin-top:18px;">
+      <div class="rowcard" style="--card-accent:var(--accent); flex:1; margin-bottom:0;"><span style="font-size:12px; font-weight:600;">Proof: Gartner — vertical AI will outpace horizontal</span></div>
+      <div class="rowcard" style="--card-accent:var(--accent2); flex:1; margin-bottom:0;"><span style="font-size:12px; font-weight:600;">Proof: ~2.5× more investment in Vertical AI</span></div>
+    </div>
+    </div>
+    </div><div class="frame-outer theme-b" style="width:420px;height:236px;">
+      <div class="frame-inner slide-d" style="transform:scale(0.328125);">
+    <div class="eyebrow"><span class="dot"></span>We identified two kinds of AI demand</div>
+    <h2 class="slide-title" style="margin-bottom:20px;">Vertical vs. horizontal intent</h2>
+    <div style="display:flex; gap:22px; flex:1;">
+      <div class="card" style="--card-accent:var(--accent); flex:1; padding:26px;">
+        <div style="font-size:12px; font-weight:600; color:var(--accent); margin-bottom:4px;">VERTICAL INTENT</div>
+        <div class="dim" style="font-size:13px; margin-bottom:12px;">[Department | Industry]</div>
+        <div style="font-size:14.5px; line-height:1.6; margin-bottom:14px;">People searching for a department, industry, or specific use case.</div>
+        <div style="display:flex; gap:8px;"><span class="pill">Harvey</span><span class="pill">Clay</span><span class="pill">Jasper</span></div>
+      </div>
+      <div class="card" style="--card-accent:var(--accent2); flex:1; padding:26px;">
+        <div style="font-size:12px; font-weight:600; color:var(--accent2); margin-bottom:4px;">HORIZONTAL INTENT</div>
+        <div class="dim" style="font-size:13px; margin-bottom:12px;">[AI capability led]</div>
+        <div style="font-size:14.5px; line-height:1.6; margin-bottom:14px;">People searching for a capability or task, persona agnostic.</div>
+        <div style="display:flex; gap:8px;"><span class="pill">Relevance</span><span class="pill">Notion</span><span class="pill">Base44</span></div>
+      </div>
+    </div>
+    <div style="display:flex; gap:12px; margin-top:18px;">
+      <div class="rowcard" style="--card-accent:var(--accent); flex:1; margin-bottom:0;"><span style="font-size:12px; font-weight:600;">Proof: Gartner — vertical AI will outpace horizontal</span></div>
+      <div class="rowcard" style="--card-accent:var(--accent2); flex:1; margin-bottom:0;"><span style="font-size:12px; font-weight:600;">Proof: ~2.5× more investment in Vertical AI</span></div>
+    </div>
+    </div>
+    </div><div class="frame-outer theme-c" style="width:420px;height:236px;">
+      <div class="frame-inner slide-d" style="transform:scale(0.328125);">
+    <div class="eyebrow"><span class="dot"></span>We identified two kinds of AI demand</div>
+    <h2 class="slide-title" style="margin-bottom:20px;">Vertical vs. horizontal intent</h2>
+    <div style="display:flex; gap:22px; flex:1;">
+      <div class="card" style="--card-accent:var(--accent); flex:1; padding:26px;">
+        <div style="font-size:12px; font-weight:600; color:var(--accent); margin-bottom:4px;">VERTICAL INTENT</div>
+        <div class="dim" style="font-size:13px; margin-bottom:12px;">[Department | Industry]</div>
+        <div style="font-size:14.5px; line-height:1.6; margin-bottom:14px;">People searching for a department, industry, or specific use case.</div>
+        <div style="display:flex; gap:8px;"><span class="pill">Harvey</span><span class="pill">Clay</span><span class="pill">Jasper</span></div>
+      </div>
+      <div class="card" style="--card-accent:var(--accent2); flex:1; padding:26px;">
+        <div style="font-size:12px; font-weight:600; color:var(--accent2); margin-bottom:4px;">HORIZONTAL INTENT</div>
+        <div class="dim" style="font-size:13px; margin-bottom:12px;">[AI capability led]</div>
+        <div style="font-size:14.5px; line-height:1.6; margin-bottom:14px;">People searching for a capability or task, persona agnostic.</div>
+        <div style="display:flex; gap:8px;"><span class="pill">Relevance</span><span class="pill">Notion</span><span class="pill">Base44</span></div>
+      </div>
+    </div>
+    <div style="display:flex; gap:12px; margin-top:18px;">
+      <div class="rowcard" style="--card-accent:var(--accent); flex:1; margin-bottom:0;"><span style="font-size:12px; font-weight:600;">Proof: Gartner — vertical AI will outpace horizontal</span></div>
+      <div class="rowcard" style="--card-accent:var(--accent2); flex:1; margin-bottom:0;"><span style="font-size:12px; font-weight:600;">Proof: ~2.5× more investment in Vertical AI</span></div>
+    </div>
+    </div>
+    </div></div>
+      <div style="font-size:12px; color:#8a8a95; text-transform:uppercase; letter-spacing:.5px; margin-bottom:10px;">Mobile</div>
+      <div style="display:flex; gap:20px; flex-wrap:wrap;"><div class="frame-outer theme-a" style="width:190px;height:411px;">
+      <div class="frame-inner slide-m" style="transform:scale(0.48717948717948717);">
+    <div class="eyebrow"><span class="dot"></span>Two kinds of AI demand</div>
+    <h2 class="slide-title">Vertical vs. horizontal</h2>
+    <div class="card" style="--card-accent:var(--accent); padding:20px; margin-bottom:14px;">
+      <div style="font-size:12px; font-weight:600; color:var(--accent); margin-bottom:4px;">VERTICAL INTENT</div>
+      <div style="font-size:14px; line-height:1.55; margin-bottom:12px;">Searching for a department, industry, or use case.</div>
+      <div style="display:flex; gap:6px; flex-wrap:wrap;"><span class="pill">Harvey</span><span class="pill">Clay</span><span class="pill">Jasper</span></div>
+    </div>
+    <div class="card" style="--card-accent:var(--accent2); padding:20px; margin-bottom:16px;">
+      <div style="font-size:12px; font-weight:600; color:var(--accent2); margin-bottom:4px;">HORIZONTAL INTENT</div>
+      <div style="font-size:14px; line-height:1.55; margin-bottom:12px;">Searching for a capability, persona agnostic.</div>
+      <div style="display:flex; gap:6px; flex-wrap:wrap;"><span class="pill">Relevance</span><span class="pill">Notion</span><span class="pill">Base44</span></div>
+    </div>
+    <div class="rowcard" style="--card-accent:var(--accent);"><span style="font-size:12px; font-weight:600;">Proof: Gartner — vertical AI will outpace horizontal</span></div>
+    <div class="rowcard" style="--card-accent:var(--accent2);"><span style="font-size:12px; font-weight:600;">Proof: ~2.5× more investment in Vertical AI</span></div>
+    </div>
+    </div><div class="frame-outer theme-b" style="width:190px;height:411px;">
+      <div class="frame-inner slide-m" style="transform:scale(0.48717948717948717);">
+    <div class="eyebrow"><span class="dot"></span>Two kinds of AI demand</div>
+    <h2 class="slide-title">Vertical vs. horizontal</h2>
+    <div class="card" style="--card-accent:var(--accent); padding:20px; margin-bottom:14px;">
+      <div style="font-size:12px; font-weight:600; color:var(--accent); margin-bottom:4px;">VERTICAL INTENT</div>
+      <div style="font-size:14px; line-height:1.55; margin-bottom:12px;">Searching for a department, industry, or use case.</div>
+      <div style="display:flex; gap:6px; flex-wrap:wrap;"><span class="pill">Harvey</span><span class="pill">Clay</span><span class="pill">Jasper</span></div>
+    </div>
+    <div class="card" style="--card-accent:var(--accent2); padding:20px; margin-bottom:16px;">
+      <div style="font-size:12px; font-weight:600; color:var(--accent2); margin-bottom:4px;">HORIZONTAL INTENT</div>
+      <div style="font-size:14px; line-height:1.55; margin-bottom:12px;">Searching for a capability, persona agnostic.</div>
+      <div style="display:flex; gap:6px; flex-wrap:wrap;"><span class="pill">Relevance</span><span class="pill">Notion</span><span class="pill">Base44</span></div>
+    </div>
+    <div class="rowcard" style="--card-accent:var(--accent);"><span style="font-size:12px; font-weight:600;">Proof: Gartner — vertical AI will outpace horizontal</span></div>
+    <div class="rowcard" style="--card-accent:var(--accent2);"><span style="font-size:12px; font-weight:600;">Proof: ~2.5× more investment in Vertical AI</span></div>
+    </div>
+    </div><div class="frame-outer theme-c" style="width:190px;height:411px;">
+      <div class="frame-inner slide-m" style="transform:scale(0.48717948717948717);">
+    <div class="eyebrow"><span class="dot"></span>Two kinds of AI demand</div>
+    <h2 class="slide-title">Vertical vs. horizontal</h2>
+    <div class="card" style="--card-accent:var(--accent); padding:20px; margin-bottom:14px;">
+      <div style="font-size:12px; font-weight:600; color:var(--accent); margin-bottom:4px;">VERTICAL INTENT</div>
+      <div style="font-size:14px; line-height:1.55; margin-bottom:12px;">Searching for a department, industry, or use case.</div>
+      <div style="display:flex; gap:6px; flex-wrap:wrap;"><span class="pill">Harvey</span><span class="pill">Clay</span><span class="pill">Jasper</span></div>
+    </div>
+    <div class="card" style="--card-accent:var(--accent2); padding:20px; margin-bottom:16px;">
+      <div style="font-size:12px; font-weight:600; color:var(--accent2); margin-bottom:4px;">HORIZONTAL INTENT</div>
+      <div style="font-size:14px; line-height:1.55; margin-bottom:12px;">Searching for a capability, persona agnostic.</div>
+      <div style="display:flex; gap:6px; flex-wrap:wrap;"><span class="pill">Relevance</span><span class="pill">Notion</span><span class="pill">Base44</span></div>
+    </div>
+    <div class="rowcard" style="--card-accent:var(--accent);"><span style="font-size:12px; font-weight:600;">Proof: Gartner — vertical AI will outpace horizontal</span></div>
+    <div class="rowcard" style="--card-accent:var(--accent2);"><span style="font-size:12px; font-weight:600;">Proof: ~2.5× more investment in Vertical AI</span></div>
+    </div>
+    </div></div>
+    </section>
+    
+  </div>
+</body>
+</html>
