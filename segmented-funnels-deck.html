@@ -452,6 +452,28 @@
       </div>
     </section>
 
+    <!-- ============ SLIDE 8B : LIVE PAID CAMPAIGNS ============ -->
+    <section class="slide" data-title="Already in motion">
+      <div class="eyebrow"><span class="arrow">→</span> Already in motion — live paid campaigns</div>
+      <div style="font-size:13px; color:var(--dim); margin-bottom:16px;">Google Ads · last 30 days, across our chosen segments</div>
+      <div class="hero-stat" style="margin-bottom:20px;">
+        <div class="num">$<span id="campaigns-total-num">0</span></div>
+        <div style="font-size:14px; color:var(--dim); line-height:1.5; max-width:360px;">spent in the last 30 days — already converting, before any dedicated funnel work</div>
+      </div>
+      <div style="flex:1; display:flex; align-items:center;">
+      <table class="data-tbl">
+        <thead><tr><th>Segment</th><th>Spend (30d)</th><th>Clicks</th><th>Conversions</th><th>CPA</th><th>Payers</th></tr></thead>
+        <tbody>
+          <tr><td style="font-weight:500;">HR</td><td>$148,799</td><td>6,780</td><td>311.0</td><td>$478</td><td>2</td></tr>
+          <tr><td style="font-weight:500;">Work Builder <span style="color:var(--dim); font-weight:400;">(horizontal)</span></td><td>$98,142</td><td>5,584</td><td>579.4</td><td>$169</td><td>2</td></tr>
+          <tr><td style="font-weight:500;">Marketing</td><td>$60,927</td><td>3,358</td><td>434.0</td><td>$140</td><td>0</td></tr>
+          <tr><td style="font-weight:500;">Legal</td><td>$55,014</td><td>2,767</td><td>250.7</td><td>$219</td><td>1</td></tr>
+          <tr><td style="font-weight:500;">IT</td><td>$39,424</td><td>1,495</td><td>75.9</td><td>$519</td><td>0</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </section>
+
     <!-- ============ SLIDE 9 : HORIZONTAL DEMAND ============ -->
     <section class="slide" data-title="Horizontal demand">
       <div class="eyebrow"><span class="arrow">→</span> Horizontal demand [Capability led]</div>
@@ -963,6 +985,16 @@ document.addEventListener('slidechange', e=>{
   if(e.detail.title === 'Summary: top volume per segment' && !heroAnimated){
     heroAnimated = true;
     animateCount(document.getElementById('hero-total-num'), heroTotal, 1300);
+  }
+});
+
+/* ===== live paid campaigns hero stat ===== */
+const campaignsSpendTotal = 402306;
+let campaignsAnimated = false;
+document.addEventListener('slidechange', e=>{
+  if(e.detail.title === 'Already in motion' && !campaignsAnimated){
+    campaignsAnimated = true;
+    animateCount(document.getElementById('campaigns-total-num'), campaignsSpendTotal, 1300);
   }
 });
 
