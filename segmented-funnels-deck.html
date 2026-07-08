@@ -21,7 +21,13 @@
     --text:#1a1a1f;
     --dim: #6b6b76;
     --dim2: #9a9aa3;
-    --radius: 8px;
+    --radius: 12px;
+    /* vivid brand accents — decorative use only (shapes, chips, bars), not body text */
+    --brand-red:#e2445c;
+    --brand-orange:#fdab3d;
+    --brand-green:#00c875;
+    --brand-purple:#a25ddc;
+    --brand-blue:#3467e3;
   }
   *{box-sizing:border-box; margin:0; padding:0;}
   html,body{
@@ -82,6 +88,12 @@
   }
   .glow-orb, .grid-bg{ display:none; }
 
+  /* confetti dot cluster — echoes the monday.com logo dots, replaces the old gradient glow */
+  .confetti{ position:absolute; pointer-events:none; }
+  .confetti i{
+    position:absolute; border-radius:50%; display:block;
+  }
+
   /* pill / chip */
   .pill{
     border:1px solid var(--border-bright); border-radius:4px;
@@ -116,8 +128,8 @@
   .card{
     background:var(--panel); border:1px solid var(--border); border-radius:var(--radius);
     padding:26px;
-    box-shadow:none;
-    transition:border-color .2s;
+    box-shadow:0 2px 10px rgba(20,20,30,0.05), 0 10px 24px rgba(20,20,30,0.04);
+    transition:border-color .2s, transform .2s, box-shadow .2s;
   }
   .card-hi{ border-color:var(--purple); background:var(--purple-dim); }
 
@@ -136,11 +148,11 @@
   .tag.low{ background:rgba(226,67,47,0.10); color:var(--purple); }
 
   .avatar{
-    width:60px; height:60px; border-radius:10px; overflow:hidden; flex-shrink:0;
+    width:60px; height:60px; border-radius:14px; overflow:hidden; flex-shrink:0;
     background:var(--panel2);
     display:flex; align-items:center; justify-content:center;
-    border:1px solid var(--border-bright);
-    box-shadow:none;
+    border:2px solid #fff;
+    box-shadow:0 3px 12px rgba(20,20,30,0.14);
   }
   .avatar img{ width:100%; height:100%; object-fit:cover; }
   .avatar svg{ width:60%; height:60%; opacity:.85; }
@@ -160,7 +172,7 @@
     cursor:pointer; transition:all .15s; margin-bottom:-1px;
   }
   .tab-btn:hover{ color:var(--text); }
-  .tab-btn.active{ background:var(--purple); border-color:var(--purple); color:#fff; box-shadow:none; }
+  .tab-btn.active{ background:var(--seg-accent, var(--purple)); border-color:var(--seg-accent, var(--purple)); color:#fff; box-shadow:0 4px 12px rgba(20,20,30,0.16); }
   .tab-panel{ display:none; }
   .tab-panel.active{ display:block; }
   .kw-scroll{ max-height:420px; overflow-y:auto; }
@@ -195,8 +207,9 @@
   /* hero stat banner (Summary slide "aha moment") */
   .hero-stat{
     position:relative; overflow:visible; flex-shrink:0;
-    border:1px solid var(--border); border-radius:var(--radius);
+    border:1px solid var(--border); border-left:5px solid var(--purple); border-radius:var(--radius);
     background:var(--panel2);
+    box-shadow:0 2px 10px rgba(20,20,30,0.05);
     padding:20px 28px; display:flex; align-items:center; gap:22px;
   }
   .hero-stat .label{
@@ -281,8 +294,13 @@
 
     <!-- ============ SLIDE 1 : TITLE ============ -->
     <section class="slide active" data-title="Title">
-      <div class="grid-bg"></div>
-      <div class="glow-orb"></div>
+      <div class="confetti" style="right:60px; bottom:56px; width:220px; height:220px;">
+        <i style="background:var(--brand-red); width:64px; height:64px; top:6px; left:130px;"></i>
+        <i style="background:var(--brand-orange); width:42px; height:42px; top:96px; left:20px;"></i>
+        <i style="background:var(--brand-green); width:52px; height:52px; top:130px; left:120px;"></i>
+        <i style="background:var(--brand-purple); width:32px; height:32px; top:36px; left:30px;"></i>
+        <i style="background:var(--brand-blue); width:22px; height:22px; top:0px; left:60px;"></i>
+      </div>
       <img src="assets/segmented-funnels/logos/monday-logo.png" alt="monday.com" style="position:absolute; top:56px; left:72px; height:26px; width:auto;">
       <div style="display:flex; flex-direction:column; justify-content:center; height:100%; max-width:640px;">
         <h1 style="font-size:56px; font-weight:600; line-height:1.08; letter-spacing:-1px;">End-to-end<br>segmented<br>funnels</h1>
@@ -290,9 +308,9 @@
       <div style="position:absolute; top:64px; right:72px; width:300px;">
         <div style="font-size:14px; font-weight:600; color:var(--text); margin-bottom:14px;">Agenda:</div>
         <div style="display:flex; flex-direction:column; gap:10px;">
-          <div style="display:flex; gap:10px; align-items:baseline; font-size:14.5px;"><span style="color:var(--purple);">●</span><span>Executive summary</span><span style="color:var(--dim); font-size:13px;">(5 min)</span></div>
-          <div style="display:flex; gap:10px; align-items:baseline; font-size:14.5px;"><span style="color:var(--purple);">●</span><span>Insights</span><span style="color:var(--dim); font-size:13px;">(10 min)</span></div>
-          <div style="display:flex; gap:10px; align-items:baseline; font-size:14.5px;"><span style="color:var(--purple);">●</span><span>Way of working</span><span style="color:var(--dim); font-size:13px;">(15 min)</span></div>
+          <div style="display:flex; gap:10px; align-items:baseline; font-size:14.5px;"><span style="color:var(--brand-red);">●</span><span>Executive summary</span><span style="color:var(--dim); font-size:13px;">(5 min)</span></div>
+          <div style="display:flex; gap:10px; align-items:baseline; font-size:14.5px;"><span style="color:var(--brand-orange);">●</span><span>Insights</span><span style="color:var(--dim); font-size:13px;">(10 min)</span></div>
+          <div style="display:flex; gap:10px; align-items:baseline; font-size:14.5px;"><span style="color:var(--brand-green);">●</span><span>Way of working</span><span style="color:var(--dim); font-size:13px;">(15 min)</span></div>
         </div>
       </div>
     </section>
@@ -355,24 +373,24 @@
     <section class="slide" data-title="Why now">
       <div class="eyebrow"><span class="arrow">→</span> Why now?</div>
       <div style="display:flex; gap:22px; margin-top:50px; height:380px;">
-        <div class="card" style="flex:1; border-width:2px; border-color:var(--purple); background:#fff; display:flex; flex-direction:column;">
-          <div style="font-size:38px; font-weight:600; color:var(--dim2);">#1</div>
+        <div class="card" style="flex:1; border-width:2px; border-color:var(--brand-red); background:#fff; display:flex; flex-direction:column;">
+          <div style="font-size:38px; font-weight:700; color:var(--brand-red);">#1</div>
           <div style="margin-top:auto;">
-            <div style="color:var(--teal); font-size:14px; font-weight:600; margin-bottom:8px;">New demand</div>
+            <div style="color:var(--brand-red); font-size:14px; font-weight:600; margin-bottom:8px;">New demand</div>
             <div style="font-size:20px; font-weight:500; line-height:1.4;">AI demand is increasing every day</div>
           </div>
         </div>
-        <div class="card" style="flex:1; border-width:2px; border-color:var(--purple); background:#fff; display:flex; flex-direction:column;">
-          <div style="font-size:38px; font-weight:600; color:var(--dim2);">#2</div>
+        <div class="card" style="flex:1; border-width:2px; border-color:var(--brand-blue); background:#fff; display:flex; flex-direction:column;">
+          <div style="font-size:38px; font-weight:700; color:var(--brand-blue);">#2</div>
           <div style="margin-top:auto;">
-            <div style="color:var(--teal); font-size:14px; font-weight:600; margin-bottom:8px;">AI Work platform</div>
+            <div style="color:var(--brand-blue); font-size:14px; font-weight:600; margin-bottom:8px;">AI Work platform</div>
             <div style="font-size:20px; font-weight:500; line-height:1.4;">We can solve problems we couldn't solve before</div>
           </div>
         </div>
-        <div class="card" style="flex:1; border-width:2px; border-color:var(--purple); background:#fff; display:flex; flex-direction:column;">
-          <div style="font-size:38px; font-weight:600; color:var(--dim2);">#3</div>
+        <div class="card" style="flex:1; border-width:2px; border-color:var(--brand-green); background:#fff; display:flex; flex-direction:column;">
+          <div style="font-size:38px; font-weight:700; color:var(--brand-green);">#3</div>
           <div style="margin-top:auto;">
-            <div style="color:var(--teal); font-size:14px; font-weight:600; margin-bottom:8px;">It's our time</div>
+            <div style="color:var(--brand-green); font-size:14px; font-weight:600; margin-bottom:8px;">It's our time</div>
             <div style="font-size:20px; font-weight:500; line-height:1.4;">We have a brand that people trust and love</div>
           </div>
         </div>
@@ -394,8 +412,11 @@
 
     <!-- ============ SLIDE 11 : TRANSITION - WHERE WE START ============ -->
     <section class="slide" data-title="Where we start">
-      <div class="grid-bg"></div>
-      <div class="glow-orb"></div>
+      <div class="confetti" style="right:70px; top:70px; width:170px; height:170px;">
+        <i style="background:var(--brand-purple); width:46px; height:46px; top:0; left:90px;"></i>
+        <i style="background:var(--brand-green); width:34px; height:34px; top:70px; left:130px;"></i>
+        <i style="background:var(--brand-orange); width:26px; height:26px; top:110px; left:60px;"></i>
+      </div>
       <div style="display:flex; flex-direction:column; justify-content:center; height:100%; max-width:640px;">
         <div class="eyebrow"><span class="arrow">→</span> Where we start</div>
         <h1 style="font-size:48px; font-weight:600; line-height:1.15; letter-spacing:-0.8px; margin-top:6px;">Choosing the right segment <span class="grad-text">to invest</span></h1>
@@ -560,7 +581,7 @@
           <div style="font-size:13px; color:var(--dim);">Total monthly search: <strong style="color:var(--text);">33,810</strong></div>
         </div>
       </div>
-      <div class="tabs" data-seg="marketing" style="margin-top:6px;">
+      <div class="tabs" data-seg="marketing" style="margin-top:6px; --seg-accent:#c9970a;">
         <button class="tab-btn active" data-tab="identity">Identity</button>
         <button class="tab-btn" data-tab="demand">Demand</button>
         <button class="tab-btn" data-tab="trends">Trends</button>
@@ -568,22 +589,22 @@
       </div>
       <div class="tab-extra" id="identity-marketing" style="display:none;">
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
-          <div class="card" style="padding:15px;">
+          <div class="card" style="padding:15px; border-top:3px solid var(--teal);">
             <div style="font-size:11px; font-weight:600; color:var(--teal); text-transform:uppercase; letter-spacing:.4px; margin-bottom:8px;">Persona</div>
             <div style="font-size:12.5px; line-height:1.55; color:var(--dim);">One department, shared mission — drive revenue through awareness, demand, and pipeline — but many functions and ways of working: CMO, Brand &amp; Creative, Content &amp; Comms, Growth/Demand Gen, Product Marketing, Marketing Ops, Email &amp; Lifecycle, Field &amp; Events, Analytics, Regional, Agency/Vendor Management.</div>
           </div>
-          <div class="card" style="padding:15px;">
+          <div class="card" style="padding:15px; border-top:3px solid var(--brand-orange);">
             <div style="font-size:11px; font-weight:600; color:var(--yellow); text-transform:uppercase; letter-spacing:.4px; margin-bottom:8px;">Main promise</div>
             <div style="font-size:13px; font-weight:500; line-height:1.5;">Drive more demand with the AI work platform that executes marketing work from brief to launch.</div>
           </div>
-          <div class="card" style="padding:15px;">
+          <div class="card" style="padding:15px; border-top:3px solid var(--green);">
             <div style="font-size:11px; font-weight:600; color:var(--green); text-transform:uppercase; letter-spacing:.4px; margin-bottom:8px;">Value drivers in the AI era</div>
             <ul style="font-size:12.5px; line-height:1.7; padding-left:16px; color:var(--dim);">
               <li>Ship on-brand campaigns at the speed the business needs</li>
               <li>See what's working, and where to invest next</li>
             </ul>
           </div>
-          <div class="card" style="padding:15px;">
+          <div class="card" style="padding:15px; border-top:3px solid var(--purple);">
             <div style="font-size:11px; font-weight:600; color:var(--purple); text-transform:uppercase; letter-spacing:.4px; margin-bottom:8px;">Pain points</div>
             <ul style="font-size:12.5px; line-height:1.7; padding-left:16px; color:var(--dim);">
               <li>Team can't execute fast enough — and AI is making it worse</li>
@@ -628,7 +649,7 @@
           <div style="font-size:13px; color:var(--dim);">Total monthly search: <strong style="color:var(--text);">23,060</strong></div>
         </div>
       </div>
-      <div class="tabs" data-seg="hr">
+      <div class="tabs" data-seg="hr" style="--seg-accent:#0a8a4a;">
         <button class="tab-btn active" data-tab="identity">Identity</button>
         <button class="tab-btn" data-tab="demand">Demand</button>
         <button class="tab-btn" data-tab="trends">Trends</button>
@@ -673,7 +694,7 @@
           <div style="font-size:13px; color:var(--dim);">Total monthly search: <strong style="color:var(--text);">22,790</strong></div>
         </div>
       </div>
-      <div class="tabs" data-seg="legal">
+      <div class="tabs" data-seg="legal" style="--seg-accent:#c9612a;">
         <button class="tab-btn active" data-tab="identity">Identity</button>
         <button class="tab-btn" data-tab="demand">Demand</button>
         <button class="tab-btn" data-tab="competitors">Competitors</button>
@@ -754,8 +775,11 @@
 
     <!-- ============ SLIDE 19 : TRANSITION - WHAT'S NEXT ============ -->
     <section class="slide" data-title="What's next">
-      <div class="grid-bg"></div>
-      <div class="glow-orb"></div>
+      <div class="confetti" style="right:70px; top:70px; width:170px; height:170px;">
+        <i style="background:var(--brand-blue); width:44px; height:44px; top:10px; left:100px;"></i>
+        <i style="background:var(--brand-red); width:32px; height:32px; top:80px; left:20px;"></i>
+        <i style="background:var(--brand-orange); width:38px; height:38px; top:100px; left:110px;"></i>
+      </div>
       <div style="display:flex; flex-direction:column; justify-content:center; height:100%; max-width:640px;">
         <div class="eyebrow"><span class="arrow">→</span> What's next</div>
         <h1 style="font-size:48px; font-weight:600; line-height:1.15; letter-spacing:-0.8px; margin-top:6px;">From insight <span class="grad-text">to execution</span></h1>
@@ -908,7 +932,13 @@
 
     <!-- ============ SLIDE 25 : THANK YOU ============ -->
     <section class="slide" data-title="Thank you">
-      <div class="grid-bg"></div>
+      <div class="confetti" style="left:50%; top:50%; width:1px; height:1px;">
+        <i style="background:var(--brand-red); width:20px; height:20px; top:-190px; left:-260px;"></i>
+        <i style="background:var(--brand-orange); width:16px; height:16px; top:150px; left:250px;"></i>
+        <i style="background:var(--brand-green); width:24px; height:24px; top:-150px; left:230px;"></i>
+        <i style="background:var(--brand-purple); width:18px; height:18px; top:160px; left:-240px;"></i>
+        <i style="background:var(--brand-blue); width:14px; height:14px; top:-30px; left:300px;"></i>
+      </div>
       <div style="display:flex; align-items:center; justify-content:center; flex:1;">
         <h1 style="font-size:56px; font-weight:600; letter-spacing:-1px;">Thank you</h1>
       </div>
