@@ -410,14 +410,14 @@
       <table class="data-tbl">
         <thead><tr><th>Capability</th><th>Demand</th><th>Competition</th></tr></thead>
         <tbody>
-          <tr><td style="font-weight:500;">AI assistant</td><td>246,000</td><td>—</td></tr>
+          <tr><td style="font-weight:500;">AI assistant</td><td>246,000</td><td>ChatGPT, Claude</td></tr>
           <tr><td style="font-weight:500;">Vibe coding platform / no-code app builder</td><td>15,280</td><td>Base44, Relevance</td></tr>
           <tr><td style="font-weight:500;">AI note taker / AI meeting assistant</td><td>30,700</td><td>Zoom</td></tr>
-          <tr><td style="font-weight:500;">AI coding agent</td><td>12,100</td><td>—</td></tr>
-          <tr><td style="font-weight:500;">Customer service agent</td><td>1,600</td><td>—</td></tr>
+          <tr><td style="font-weight:500;">AI coding agent</td><td>12,100</td><td>Cursor, GitHub Copilot</td></tr>
+          <tr><td style="font-weight:500;">Customer service agent</td><td>1,600</td><td>Intercom, Decagon</td></tr>
           <tr><td style="font-weight:500;">AI agent builder</td><td>1,900</td><td>Relevance</td></tr>
-          <tr><td style="font-weight:500;">AI research assistant</td><td>2,400</td><td>—</td></tr>
-          <tr><td style="font-weight:500;">AI scheduling assistant</td><td>1,300</td><td>—</td></tr>
+          <tr><td style="font-weight:500;">AI research assistant</td><td>2,400</td><td>Perplexity, Elicit</td></tr>
+          <tr><td style="font-weight:500;">AI scheduling assistant</td><td>1,300</td><td>Reclaim.ai, Motion</td></tr>
         </tbody>
       </table>
       </div>
@@ -856,12 +856,12 @@ scaleStage();
 const verticalDemand = [
   {seg:'Marketing', demand:'33,810', comp:'Jasper, Copy.ai'},
   {seg:'HR', demand:'23,060', comp:'Shapes, Ashby'},
-  {seg:'IT', demand:'129,520', comp:'—'},
+  {seg:'IT', demand:'129,520', comp:'Moveworks, Aisera'},
   {seg:'Legal', demand:'22,790', comp:'Harvey, Legora'},
-  {seg:'Finance', demand:'27,790', comp:'—'},
-  {seg:'Construction', demand:'10,050', comp:'—'},
+  {seg:'Finance', demand:'27,790', comp:'Vic.ai, Ramp'},
+  {seg:'Construction', demand:'10,050', comp:'Togal.AI, Buildots'},
   {seg:'Sales', demand:'9,160', comp:'Alta, Salesforce'},
-  {seg:'Support', demand:'61,090', comp:'—'},
+  {seg:'Support', demand:'61,090', comp:'Intercom, Decagon'},
 ];
 document.getElementById('vertical-demand-tbl').innerHTML = verticalDemand.map(r=>
   `<tr><td style="font-weight:500;">${r.seg}</td><td>${r.demand}</td><td style="color:var(--dim);">${r.comp}</td></tr>`
