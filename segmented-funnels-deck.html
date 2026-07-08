@@ -457,8 +457,8 @@
       <div class="eyebrow"><span class="arrow">→</span> Already in motion — live paid campaigns</div>
       <div style="font-size:13px; color:var(--dim); margin-bottom:16px;">Google Ads · last 30 days, across our chosen segments</div>
       <div class="hero-stat" style="margin-bottom:20px;">
-        <div class="num">$<span id="campaigns-total-num">0</span></div>
-        <div style="font-size:14px; color:var(--dim); line-height:1.5; max-width:360px;">spent in the last 30 days — already converting, before any dedicated funnel work</div>
+        <div class="num"><span id="campaigns-total-num">0</span></div>
+        <div style="font-size:14px; color:var(--dim); line-height:1.5; max-width:360px;">clicks in the last 30 days — already converting, before any dedicated funnel work</div>
       </div>
       <div style="flex:1; display:flex; align-items:center;">
       <table class="data-tbl">
@@ -572,15 +572,20 @@
           <div style="font-size:13px; color:var(--dim);">Total monthly search: <strong style="color:var(--text);">23,060</strong></div>
         </div>
       </div>
-      <div style="display:flex; gap:14px; margin-bottom:18px;">
-        <div class="card" style="flex:1; padding:14px 16px;"><div style="font-size:13px; font-weight:600; margin-bottom:4px;">Recruitment sourcing</div><div style="font-size:12.5px; color:var(--dim); line-height:1.4;">Sources qualified candidates.</div></div>
-        <div class="card" style="flex:1; padding:14px 16px;"><div style="font-size:13px; font-weight:600; margin-bottom:4px;">Candidate scoring agent</div><div style="font-size:12.5px; color:var(--dim); line-height:1.4;">Scores candidates based on job requirements and fit.</div></div>
-        <div class="card" style="flex:1; padding:14px 16px;"><div style="font-size:13px; font-weight:600; margin-bottom:4px;">Onboarding agent</div><div style="font-size:12.5px; color:var(--dim); line-height:1.4;">Tracks where people are in the onboarding process.</div></div>
-      </div>
       <div class="tabs" data-seg="hr">
-        <button class="tab-btn active" data-tab="demand">Demand</button>
+        <button class="tab-btn active" data-tab="identity">Identity</button>
+        <button class="tab-btn" data-tab="demand">Demand</button>
         <button class="tab-btn" data-tab="trends">Trends</button>
         <button class="tab-btn" data-tab="competitors">Competitors</button>
+      </div>
+      <div class="tab-extra" id="identity-hr" style="display:none;">
+        <div style="font-size:11px; font-weight:600; color:var(--dim); text-transform:uppercase; letter-spacing:.4px; margin-bottom:8px;">Example agents</div>
+        <div style="display:flex; gap:12px;">
+          <div class="card" style="flex:1; padding:14px 16px;"><div style="font-size:13px; font-weight:600; margin-bottom:4px;">Recruitment sourcing</div><div style="font-size:12.5px; color:var(--dim); line-height:1.4;">Sources qualified candidates.</div></div>
+          <div class="card" style="flex:1; padding:14px 16px;"><div style="font-size:13px; font-weight:600; margin-bottom:4px;">Candidate scoring agent</div><div style="font-size:12.5px; color:var(--dim); line-height:1.4;">Scores candidates based on job requirements and fit.</div></div>
+          <div class="card" style="flex:1; padding:14px 16px;"><div style="font-size:13px; font-weight:600; margin-bottom:4px;">Onboarding agent</div><div style="font-size:12.5px; color:var(--dim); line-height:1.4;">Tracks where people are in the onboarding process.</div></div>
+        </div>
+        <div style="font-size:12px; color:var(--dim2); margin-top:16px;">Persona · Main promise · Value drivers · Pain points — coming with the department brief.</div>
       </div>
       <div class="kw-scroll" id="kwtable-hr"></div>
       <div class="tab-extra" id="trends-hr" style="display:none;">
@@ -612,14 +617,19 @@
           <div style="font-size:13px; color:var(--dim);">Total monthly search: <strong style="color:var(--text);">22,790</strong></div>
         </div>
       </div>
-      <div style="display:flex; gap:14px; margin-bottom:18px;">
-        <div class="card" style="flex:1; padding:14px 16px;"><div style="font-size:13px; font-weight:600; margin-bottom:4px;">Contract data extraction</div><div style="font-size:12.5px; color:var(--dim); line-height:1.4;">Pulls relevant info from the contract into the boards.</div></div>
-        <div class="card" style="flex:1; padding:14px 16px;"><div style="font-size:13px; font-weight:600; margin-bottom:4px;">Contract renewal agent</div><div style="font-size:12.5px; color:var(--dim); line-height:1.4;">Manages renewal process by tracking key dates.</div></div>
-        <div class="card" style="flex:1; padding:14px 16px;"><div style="font-size:13px; font-weight:600; margin-bottom:4px;">Compliance monitoring</div><div style="font-size:12.5px; color:var(--dim); line-height:1.4;">Tracks and monitors compliance processes.</div></div>
-      </div>
       <div class="tabs" data-seg="legal">
-        <button class="tab-btn active" data-tab="demand">Demand</button>
+        <button class="tab-btn active" data-tab="identity">Identity</button>
+        <button class="tab-btn" data-tab="demand">Demand</button>
         <button class="tab-btn" data-tab="competitors">Competitors</button>
+      </div>
+      <div class="tab-extra" id="identity-legal" style="display:none;">
+        <div style="font-size:11px; font-weight:600; color:var(--dim); text-transform:uppercase; letter-spacing:.4px; margin-bottom:8px;">Example agents</div>
+        <div style="display:flex; gap:12px;">
+          <div class="card" style="flex:1; padding:14px 16px;"><div style="font-size:13px; font-weight:600; margin-bottom:4px;">Contract data extraction</div><div style="font-size:12.5px; color:var(--dim); line-height:1.4;">Pulls relevant info from the contract into the boards.</div></div>
+          <div class="card" style="flex:1; padding:14px 16px;"><div style="font-size:13px; font-weight:600; margin-bottom:4px;">Contract renewal agent</div><div style="font-size:12.5px; color:var(--dim); line-height:1.4;">Manages renewal process by tracking key dates.</div></div>
+          <div class="card" style="flex:1; padding:14px 16px;"><div style="font-size:13px; font-weight:600; margin-bottom:4px;">Compliance monitoring</div><div style="font-size:12.5px; color:var(--dim); line-height:1.4;">Tracks and monitors compliance processes.</div></div>
+        </div>
+        <div style="font-size:12px; color:var(--dim2); margin-top:16px;">Persona · Main promise · Value drivers · Pain points — coming with the department brief.</div>
       </div>
       <div class="kw-scroll" id="kwtable-legal"></div>
       <div class="tab-extra" id="competitors-legal" style="display:none;">
@@ -989,12 +999,12 @@ document.addEventListener('slidechange', e=>{
 });
 
 /* ===== live paid campaigns hero stat ===== */
-const campaignsSpendTotal = 402306;
+const campaignsClicksTotal = 19984;
 let campaignsAnimated = false;
 document.addEventListener('slidechange', e=>{
   if(e.detail.title === 'Already in motion' && !campaignsAnimated){
     campaignsAnimated = true;
-    animateCount(document.getElementById('campaigns-total-num'), campaignsSpendTotal, 1300);
+    animateCount(document.getElementById('campaigns-total-num'), campaignsClicksTotal, 1300);
   }
 });
 
