@@ -439,10 +439,7 @@
       </div>
       <div class="tabs" data-seg="marketing">
         <button class="tab-btn active" data-tab="identity">Identity</button>
-        <button class="tab-btn" data-tab="generic">Generic</button>
-        <button class="tab-btn" data-tab="app">App</button>
-        <button class="tab-btn" data-tab="agent">Agent</button>
-        <button class="tab-btn" data-tab="use case">Use case</button>
+        <button class="tab-btn" data-tab="demand">Demand</button>
         <button class="tab-btn" data-tab="trends">Trends</button>
         <button class="tab-btn" data-tab="competitors">Competitors</button>
       </div>
@@ -508,10 +505,7 @@
         <div class="card" style="flex:1; padding:14px 16px;"><div style="font-size:13px; font-weight:600; margin-bottom:4px;">Onboarding agent</div><div style="font-size:12.5px; color:var(--dim); line-height:1.4;">Tracks where people are in the onboarding process.</div></div>
       </div>
       <div class="tabs" data-seg="hr">
-        <button class="tab-btn active" data-tab="generic">Generic</button>
-        <button class="tab-btn" data-tab="app">App</button>
-        <button class="tab-btn" data-tab="agent">Agent</button>
-        <button class="tab-btn" data-tab="use case">Use case</button>
+        <button class="tab-btn active" data-tab="demand">Demand</button>
         <button class="tab-btn" data-tab="trends">Trends</button>
         <button class="tab-btn" data-tab="competitors">Competitors</button>
       </div>
@@ -551,10 +545,7 @@
         <div class="card" style="flex:1; padding:14px 16px;"><div style="font-size:13px; font-weight:600; margin-bottom:4px;">Compliance monitoring</div><div style="font-size:12.5px; color:var(--dim); line-height:1.4;">Tracks and monitors compliance processes.</div></div>
       </div>
       <div class="tabs" data-seg="legal">
-        <button class="tab-btn active" data-tab="generic">Generic</button>
-        <button class="tab-btn" data-tab="app">App</button>
-        <button class="tab-btn" data-tab="agent">Agent</button>
-        <button class="tab-btn" data-tab="use case">Use case</button>
+        <button class="tab-btn active" data-tab="demand">Demand</button>
         <button class="tab-btn" data-tab="competitors">Competitors</button>
       </div>
       <div class="kw-scroll" id="kwtable-legal"></div>
@@ -956,20 +947,26 @@ function renderKwTable(seg){
     trends: document.getElementById('trends-'+seg),
     competitors: document.getElementById('competitors-'+seg),
   };
-  function drawKw(cat){
-    const rows = data[cat] || [];
-    kwContainer.innerHTML = `<table class="data-tbl"><thead><tr><th>Keyword</th><th style="text-align:right;">Monthly search</th></tr></thead><tbody>
+  function kwTable(rows){
+    return `<table class="data-tbl"><thead><tr><th>Keyword</th><th style="text-align:right;">Monthly search</th></tr></thead><tbody>
       ${rows.map(r=>`<tr><td>${r[0]}</td><td style="text-align:right; font-family:'JetBrains Mono',monospace; color:var(--dim);">${Number(r[1]).toLocaleString()}</td></tr>`).join('')}
     </tbody></table>`;
+  }
+  function drawDemand(){
+    const demand = [...(data.generic||[]), ...(data.agent||[]), ...(data['use case']||[])].sort((a,b)=>b[1]-a[1]);
+    const apps = [...(data.app||[])].sort((a,b)=>b[1]-a[1]);
+    kwContainer.innerHTML = kwTable(demand)
+      + `<div style="font-size:11px; color:var(--dim); font-weight:600; text-transform:uppercase; letter-spacing:.4px; margin:18px 0 8px;">Apps</div>`
+      + kwTable(apps);
   }
   function showTab(tab){
     const isExtra = !!extraPanels[tab];
     kwContainer.style.display = isExtra ? 'none' : '';
     Object.entries(extraPanels).forEach(([name, el])=>{ if (el) el.style.display = (tab === name) ? '' : 'none'; });
-    if (!isExtra) drawKw(tab);
+    if (!isExtra) drawDemand();
   }
   const activeBtn = document.querySelector(`.tabs[data-seg="${seg}"] .tab-btn.active`);
-  showTab(activeBtn ? activeBtn.dataset.tab : 'generic');
+  showTab(activeBtn ? activeBtn.dataset.tab : 'demand');
   document.querySelectorAll(`.tabs[data-seg="${seg}"] .tab-btn`).forEach(btn=>{
     btn.onclick = ()=>{
       document.querySelectorAll(`.tabs[data-seg="${seg}"] .tab-btn`).forEach(b=>b.classList.remove('active'));
