@@ -431,7 +431,7 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
 .pill:first-child { border-top:1px solid var(--border); }
 .pill.open { max-height:120px; opacity:1; padding:10px 24px; }
 .pill-num { font-size:9px; font-weight:600; letter-spacing:3px; color:var(--purple); text-transform:uppercase; flex-shrink:0; min-width:24px; }
-.pill-title { font-size:15px; font-weight:700; min-width:145px; }
+.pill-title { font-size:15px; font-weight:700; min-width:120px; }
 .pill-desc { font-size:12px; color:var(--dim); font-weight:300; line-height:1.6; }
 .pill.open { cursor:pointer; }
 /* S5 layer detail overlay */
@@ -728,8 +728,7 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
   .pill { flex-direction: row; align-items: center; gap: 10px; justify-content: flex-start; }
   .pill.open { padding: 6px 14px; }
   .pill-num { margin-bottom: 0; font-size: 8px; }
-  .pill-title { font-size: 12px; min-width: auto; flex: 1; text-align: center; padding-right: 4px; }
-  #pill0 .pill-title { font-size: 10.5px; }
+  .pill-title { font-size: 12px; min-width: auto; flex: 1; text-align: center; padding-right: 20px; }
   .pill-desc { display: none; }
   .pill { position: relative; }
   .pill.open::after { content: ''; position: absolute; right: 14px; top: 50%; transform: translateY(-50%) rotate(45deg); width: 5px; height: 5px; border-right: 1.5px solid rgba(255,255,255,0.3); border-top: 1.5px solid rgba(255,255,255,0.3); pointer-events: none; }
@@ -1330,7 +1329,7 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
     <img id="charP" class="char char-p" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/Human.png" alt="Human">
     <img id="charA" class="char char-a" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/Agent.png" alt="Agent">
     <div class="pills" id="pills">
-      <div class="pill" id="pill0" onclick="openLayer(0)"><div class="pill-num">01</div><div class="pill-title">Shared workspace</div><div class="pill-desc">One shared place for your team and agents to plan and execute together.</div></div><div class="pill" id="pill1" onclick="openLayer(1)"><div class="pill-num">02</div><div class="pill-title">Context</div><div class="pill-desc">Agents with full business context, acting like an experienced team member.</div></div><div class="pill" id="pill2" onclick="openLayer(2)"><div class="pill-num">03</div><div class="pill-title">Full control</div><div class="pill-desc">You stay in the driver's seat. All enterprise-grade secure.</div></div><div class="pill" id="pill3" onclick="openLayer(3)"><div class="pill-num">04</div><div class="pill-title">Workflows</div><div class="pill-desc">People and agents handing off seamlessly, keeping things moving.</div></div><div class="pill" id="pill4" onclick="openLayer(4)"><div class="pill-num">05</div><div class="pill-title">200+ Integrations</div><div class="pill-desc">200+ native integrations. Your entire stack, unified under one platform.</div></div><div class="pill" id="pill5" onclick="openLayer(5)"><div class="pill-num">06</div><div class="pill-title">Multi agent</div><div class="pill-desc">Connect agents from any AI provider and put them to work inside your workflows.</div></div>    </div>
+      <div class="pill" id="pill0" onclick="openLayer(0)"><div class="pill-num">01</div><div class="pill-title">Workspace</div><div class="pill-desc">One shared place for your team and agents to plan and execute together.</div></div><div class="pill" id="pill1" onclick="openLayer(1)"><div class="pill-num">02</div><div class="pill-title">Context</div><div class="pill-desc">Agents with full business context, acting like an experienced team member.</div></div><div class="pill" id="pill2" onclick="openLayer(2)"><div class="pill-num">03</div><div class="pill-title">Control</div><div class="pill-desc">You stay in the driver's seat. All enterprise-grade secure.</div></div><div class="pill" id="pill3" onclick="openLayer(3)"><div class="pill-num">04</div><div class="pill-title">Workflows</div><div class="pill-desc">People and agents handing off seamlessly, keeping things moving.</div></div><div class="pill" id="pill4" onclick="openLayer(4)"><div class="pill-num">05</div><div class="pill-title">Integrations</div><div class="pill-desc">200+ native integrations. Your entire stack, unified under one platform.</div></div><div class="pill" id="pill5" onclick="openLayer(5)"><div class="pill-num">06</div><div class="pill-title">Multi agent</div><div class="pill-desc">Connect agents from any AI provider and put them to work inside your workflows.</div></div>    </div>
   </div>
   <div class="s5-mob-half s5-mob-left" id="s5MobLeft"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/Human.png" alt=""></div>
   <div class="s5-mob-half s5-mob-right" id="s5MobRight"><img src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/Agents%20and%20People/Agent.png" alt=""></div>
