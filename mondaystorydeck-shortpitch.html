@@ -41,7 +41,7 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
 
 .eyebrow { font-size:10px; font-weight:600; letter-spacing:4px; text-transform:uppercase; color:var(--purple); margin-bottom:20px; }
 #s5 .eyebrow, #s4b .sbs-eyebrow { display:inline-flex; align-items:center; gap:6px; }
-.eyebrow-logo { height:12px; width:12px; flex-shrink:0; }
+.eyebrow-logo { height:12px; width:12px; flex-shrink:0; display:inline-block; background-color:var(--purple); -webkit-mask-image:url('https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/monday%20Logo/monday.com%20icon.png'); mask-image:url('https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/monday%20Logo/monday.com%20icon.png'); -webkit-mask-size:contain; mask-size:contain; -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat; -webkit-mask-position:center; mask-position:center; }
 .glow { position:absolute; border-radius:50%; filter:blur(120px); opacity:0.08; pointer-events:none; }
 
 /* S0 */
@@ -1325,7 +1325,7 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
     <img class="char-chip" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/5%20layers/Agents%20chip%202.png" alt="Bring your own agents" onclick="openLayer(5)">
   </div>
   <div class="layers-top" id="layersTop">
-    <p class="eyebrow"><img class="eyebrow-logo" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/monday%20Logo/monday.com%20icon.png" alt="">AI Work Platform</p>
+    <p class="eyebrow"><span class="eyebrow-logo"></span>AI Work Platform</p>
     <h2>Where people and agents <br>drive business results, together</h2>
     <p>What makes it possible.</p>
   </div>
@@ -1358,7 +1358,7 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
 <div class="slide" id="s4b">
   <div class="sbs-wrap">
     <div class="sbs-left">
-      <p class="sbs-eyebrow"><img class="eyebrow-logo" src="https://uauxewnxnprttvxnvsit.supabase.co/storage/v1/object/public/monday%20Logo/monday.com%20icon.png" alt="">The AI Work Platform</p>
+      <p class="sbs-eyebrow"><span class="eyebrow-logo"></span>The AI Work Platform</p>
       <h2 class="sbs-heading">How people and agents work together in every department</h2>
     </div>
     <div class="sbs-right">
