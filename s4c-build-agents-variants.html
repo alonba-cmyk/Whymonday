@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>S4c — "Build agents in minutes" variants</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #000;
+  --purple: #6161ff;
+  --teal: #00d2d2;
+  --white: #fff;
+  --dim: rgba(255,255,255,0.4);
+  --border: rgba(255,255,255,0.08);
+  --card: rgba(255,255,255,0.04);
+  --green: #22c55e;
+}
+html, body { width:100%; font-family:'Poppins',sans-serif; background:var(--bg); color:var(--white); }
+body { padding: 60px 24px 140px; }
+
+.intro { max-width:720px; margin:0 auto 80px; text-align:center; }
+.intro h1 { font-size:clamp(22px,3vw,32px); font-weight:800; margin-bottom:12px; }
+.intro p { font-size:14px; color:var(--dim); line-height:1.6; }
+.intro .brief-quote { display:inline-block; margin-top:16px; padding:10px 18px; border:1px solid var(--border); border-radius:10px; font-style:italic; color:rgba(255,255,255,0.7); font-size:13px; }
+
+.variant { max-width:900px; margin:0 auto 160px; padding-top:40px; border-top:1px solid var(--border); }
+.variant-label { font-size:10px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--teal); margin-bottom:32px; text-align:center; }
+
+.slide-mock { background:radial-gradient(ellipse 60% 50% at 50% 20%, rgba(97,97,255,0.14), transparent), #05050a; border-radius:20px; padding:70px 40px; text-align:center; min-height:560px; display:flex; flex-direction:column; align-items:center; justify-content:flex-start; }
+
+.eyebrow { font-size:10px; font-weight:600; letter-spacing:4px; text-transform:uppercase; color:var(--purple); margin-bottom:20px; }
+.hl { font-size:clamp(24px,3.4vw,44px); font-weight:800; line-height:1.2; margin-bottom:14px; }
+.sub { font-size:clamp(13px,1.3vw,17px); font-weight:300; color:var(--dim); line-height:1.6; max-width:520px; margin:0 auto 44px; }
+
+/* ---------- Variant 1: Describe it (agent-scoped) ---------- */
+.v1-demo { display:flex; flex-direction:column; align-items:center; gap:14px; width:100%; }
+.v1-prompt { display:flex; align-items:center; gap:10px; background:var(--card); border:1px solid var(--border); border-radius:100px; padding:14px 22px; min-height:22px; width:100%; max-width:520px; text-align:left; }
+.v1-prompt-dot { width:7px; height:7px; border-radius:50%; background:var(--teal); flex-shrink:0; }
+.v1-prompt-text { font-size:13px; color:rgba(255,255,255,0.8); font-weight:300; line-height:1.5; }
+.v1-cursor { display:inline-block; width:1.5px; height:14px; background:var(--purple); margin-left:1px; animation:blink 0.9s infinite; vertical-align:middle; }
+.v1-arrow { color:var(--purple); opacity:0; transform:translateY(-6px); transition:opacity 0.4s ease, transform 0.4s ease; }
+.v1-arrow svg { width:18px; height:18px; }
+.v1-arrow.show { opacity:0.6; transform:translateY(0); }
+.v1-output { width:100%; max-width:400px; background:var(--card); border:1px solid var(--border); border-radius:16px; padding:22px; opacity:0; transform:translateY(14px); transition:opacity 0.5s ease, transform 0.5s ease; text-align:left; }
+.v1-output.show { opacity:1; transform:translateY(0); }
+.v1-output-tag { display:flex; align-items:center; gap:8px; font-size:10px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--purple); margin-bottom:16px; }
+.v1-output-dot { width:6px; height:6px; border-radius:50%; background:var(--purple); }
+.v1-agent-row { display:flex; align-items:center; gap:12px; }
+.v1-agent-ic { width:38px; height:38px; border-radius:10px; background:linear-gradient(135deg,var(--purple),#a78bfa); display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; }
+.v1-agent-name { font-size:14px; font-weight:700; }
+.v1-agent-desc { font-size:11px; color:var(--dim); margin-top:2px; }
+.v1-agent-status { margin-left:auto; display:flex; align-items:center; gap:5px; font-size:10px; font-weight:600; color:var(--green); }
+.v1-agent-status-dot { width:6px; height:6px; border-radius:50%; background:var(--green); animation:pulse 1.4s infinite; }
+
+/* ---------- Variant 2: Build vs Bring ---------- */
+.v2-split { display:flex; gap:20px; width:100%; max-width:760px; }
+.v2-panel { flex:1; background:var(--card); border:1px solid var(--border); border-radius:16px; padding:26px 22px; text-align:left; }
+.v2-panel-title { font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--white); margin-bottom:4px; }
+.v2-panel-sub { font-size:11px; color:var(--dim); margin-bottom:20px; line-height:1.5; }
+.v2-mini-prompt { background:rgba(0,0,0,0.3); border:1px solid var(--border); border-radius:10px; padding:10px 14px; font-size:11px; color:rgba(255,255,255,0.75); margin-bottom:14px; min-height:34px; }
+.v2-mini-output { display:flex; align-items:center; gap:8px; font-size:11px; color:var(--dim); opacity:0; transition:opacity .4s ease; }
+.v2-mini-output.show { opacity:1; }
+.v2-mini-output .dot { width:6px; height:6px; border-radius:50%; background:var(--purple); }
+.v2-bring-logos { display:flex; flex-direction:column; gap:10px; }
+.v2-bring-row { display:flex; align-items:center; gap:10px; background:rgba(0,0,0,0.3); border:1px solid var(--border); border-radius:10px; padding:9px 12px; opacity:0.35; transition:opacity .4s ease; }
+.v2-bring-row.show { opacity:1; }
+.v2-bring-ic { width:20px; height:20px; border-radius:5px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:800; }
+.v2-bring-name { font-size:11px; font-weight:500; flex:1; }
+.v2-bring-check { font-size:11px; color:var(--green); opacity:0; transition:opacity .3s ease; }
+.v2-bring-row.show .v2-bring-check { opacity:1; }
+
+/* ---------- Variant 3: speed / timer ---------- */
+.v3-wrap { display:flex; flex-direction:column; align-items:center; gap:34px; width:100%; }
+.v3-timer { font-size:44px; font-weight:800; font-variant-numeric:tabular-nums; color:var(--white); }
+.v3-timer span { color:var(--teal); }
+.v3-steps { display:flex; align-items:center; gap:10px; }
+.v3-step { display:flex; align-items:center; gap:8px; font-size:11px; font-weight:600; letter-spacing:1px; text-transform:uppercase; color:rgba(255,255,255,0.25); transition:color .4s ease; }
+.v3-step-dot { width:8px; height:8px; border-radius:50%; border:1.5px solid rgba(255,255,255,0.25); transition:all .4s ease; }
+.v3-step.active { color:var(--white); }
+.v3-step.active .v3-step-dot { background:var(--purple); border-color:var(--purple); }
+.v3-step.done .v3-step-dot { background:var(--green); border-color:var(--green); }
+.v3-connector { width:28px; height:1px; background:rgba(255,255,255,0.15); }
+.v3-badge { padding:8px 18px; border-radius:100px; background:rgba(34,197,94,0.12); border:1px solid rgba(34,197,94,0.4); color:var(--green); font-size:12px; font-weight:700; opacity:0; transform:translateY(8px); transition:opacity .4s ease, transform .4s ease; }
+.v3-badge.show { opacity:1; transform:translateY(0); }
+
+/* ---------- Variant 4: template gallery ---------- */
+.v4-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; width:100%; max-width:640px; }
+.v4-card { background:var(--card); border:1px solid var(--border); border-radius:14px; padding:20px 14px; text-align:left; opacity:0; transform:translateY(10px); transition:opacity .4s ease, transform .4s ease; }
+.v4-card.show { opacity:1; transform:translateY(0); }
+.v4-card-ic { width:32px; height:32px; border-radius:9px; display:flex; align-items:center; justify-content:center; font-size:15px; margin-bottom:14px; }
+.v4-card-name { font-size:12px; font-weight:700; margin-bottom:3px; }
+.v4-card-desc { font-size:10px; color:var(--dim); line-height:1.4; }
+.v4-card.build-own { border-style:dashed; border-color:rgba(255,255,255,0.25); display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; color:var(--dim); }
+.v4-card.build-own .plus { font-size:22px; color:var(--purple); margin-bottom:6px; }
+.v4-card.build-own .label { font-size:11px; font-weight:600; color:rgba(255,255,255,0.7); }
+
+@keyframes blink { 50% { opacity:0; } }
+@keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:.3; } }
+</style>
+</head>
+<body>
+
+<div class="intro">
+  <h1>S4c — "Build agents in minutes" — 4 variants</h1>
+  <p>The brief's first sub-bullet under "everything the platform gives you" is a dedicated capability with no home in the current deck: S5's 6 layers cover workspace, context, integrations and control, but none of them cover <em>building</em> an agent — "Multi agent" only covers bringing an existing one. The current S4c broadens this into apps + workflows + agents, which goes beyond what the brief actually says. These 4 variants scope it back to exactly what the brief promises.</p>
+  <div class="brief-quote">"You can build agents in monday, in minutes, or bring your own, like Claude."</div>
+</div>
+
+<!-- VARIANT 1 -->
+<div class="variant" data-variant="1">
+  <div class="variant-label">Variant 1 — Describe It</div>
+  <div class="slide-mock">
+    <p class="eyebrow">Build Your Own</p>
+    <h2 class="hl">Build an agent. In minutes.</h2>
+    <p class="sub">Just describe what you need — monday builds the agent for you.</p>
+    <div class="v1-demo">
+      <div class="v1-prompt">
+        <div class="v1-prompt-dot"></div>
+        <span class="v1-prompt-text" id="v1PromptText"></span><span class="v1-cursor" id="v1Cursor"></span>
+      </div>
+      <div class="v1-arrow" id="v1Arrow">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="4" x2="12" y2="20"/><polyline points="6 14 12 20 18 14"/></svg>
+      </div>
+      <div class="v1-output" id="v1Output">
+        <div class="v1-output-tag"><span class="v1-output-dot"></span>Agent created</div>
+        <div class="v1-agent-row">
+          <div class="v1-agent-ic">🤖</div>
+          <div>
+            <div class="v1-agent-name">Lead Qualifier</div>
+            <div class="v1-agent-desc">Scores inbound leads &amp; books demo calls</div>
+          </div>
+          <div class="v1-agent-status"><span class="v1-agent-status-dot"></span>Live</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- VARIANT 2 -->
+<div class="variant" data-variant="2">
+  <div class="variant-label">Variant 2 — Build It. Or Bring It.</div>
+  <div class="slide-mock">
+    <p class="eyebrow">Two Ways In</p>
+    <h2 class="hl">Build it. Or bring it.</h2>
+    <p class="sub">Create a new agent from scratch, or connect the ones you already use.</p>
+    <div class="v2-split">
+      <div class="v2-panel">
+        <div class="v2-panel-title">Build</div>
+        <div class="v2-panel-sub">Describe it, monday builds it.</div>
+        <div class="v2-mini-prompt" id="v2PromptText"></div>
+        <div class="v2-mini-output" id="v2Output"><span class="dot"></span>Agent created — live in 90 seconds</div>
+      </div>
+      <div class="v2-panel">
+        <div class="v2-panel-title">Bring</div>
+        <div class="v2-panel-sub">Connect the agents you already use.</div>
+        <div class="v2-bring-logos" id="v2BringList">
+          <div class="v2-bring-row"><div class="v2-bring-ic" style="background:#6161ff">A\</div><div class="v2-bring-name">Claude</div><div class="v2-bring-check">✓</div></div>
+          <div class="v2-bring-row"><div class="v2-bring-ic" style="background:#10A37F">◆</div><div class="v2-bring-name">ChatGPT</div><div class="v2-bring-check">✓</div></div>
+          <div class="v2-bring-row"><div class="v2-bring-ic" style="background:#4285F4">G</div><div class="v2-bring-name">Gemini</div><div class="v2-bring-check">✓</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- VARIANT 3 -->
+<div class="variant" data-variant="3">
+  <div class="variant-label">Variant 3 — Minutes, Not Months</div>
+  <div class="slide-mock">
+    <p class="eyebrow">Minutes, Not Months</p>
+    <h2 class="hl">From idea to live agent in under a minute.</h2>
+    <p class="sub">No code. No dev backlog. Just describe it.</p>
+    <div class="v3-wrap">
+      <div class="v3-timer" id="v3Timer">0:00</div>
+      <div class="v3-steps">
+        <div class="v3-step" id="v3Step1"><span class="v3-step-dot"></span>Describe</div>
+        <div class="v3-connector"></div>
+        <div class="v3-step" id="v3Step2"><span class="v3-step-dot"></span>Configure</div>
+        <div class="v3-connector"></div>
+        <div class="v3-step" id="v3Step3"><span class="v3-step-dot"></span>Deploy</div>
+      </div>
+      <div class="v3-badge" id="v3Badge">● Agent is live</div>
+    </div>
+  </div>
+</div>
+
+<!-- VARIANT 4 -->
+<div class="variant" data-variant="4">
+  <div class="variant-label">Variant 4 — Start From a Template</div>
+  <div class="slide-mock">
+    <p class="eyebrow">Start From a Template</p>
+    <h2 class="hl">Build your own. Or start from ours.</h2>
+    <p class="sub">Pick a template and customize it, or start from a blank prompt.</p>
+    <div class="v4-grid" id="v4Grid">
+      <div class="v4-card"><div class="v4-card-ic" style="background:rgba(97,97,255,.18);color:#a78bfa">📋</div><div class="v4-card-name">Lead Qualifier</div><div class="v4-card-desc">Scores &amp; routes inbound leads</div></div>
+      <div class="v4-card"><div class="v4-card-ic" style="background:rgba(0,210,210,.15);color:#00d2d2">🐛</div><div class="v4-card-name">Bug Triager</div><div class="v4-card-desc">Sorts &amp; assigns by severity</div></div>
+      <div class="v4-card"><div class="v4-card-ic" style="background:rgba(255,171,61,.15);color:#fdab3d">✍️</div><div class="v4-card-name">Content Reviewer</div><div class="v4-card-desc">Checks copy against brand voice</div></div>
+      <div class="v4-card"><div class="v4-card-ic" style="background:rgba(34,197,94,.15);color:#22c55e">📝</div><div class="v4-card-name">Meeting Notetaker</div><div class="v4-card-desc">Summarizes &amp; assigns action items</div></div>
+      <div class="v4-card"><div class="v4-card-ic" style="background:rgba(236,72,153,.15);color:#ec4899">📊</div><div class="v4-card-name">OKR Tracker</div><div class="v4-card-desc">Surfaces metrics automatically</div></div>
+      <div class="v4-card build-own"><div class="plus">+</div><div class="label">Build your own</div></div>
+    </div>
+  </div>
+</div>
+
+<script>
+function typeInto(el, msg, speed, cb) {
+  let i = 0;
+  const t = setInterval(() => {
+    el.textContent = msg.slice(0, ++i);
+    if (i >= msg.length) { clearInterval(t); if (cb) cb(); }
+  }, speed);
+}
+
+function playV1() {
+  const txtEl = document.getElementById('v1PromptText');
+  const cursorEl = document.getElementById('v1Cursor');
+  const arrowEl = document.getElementById('v1Arrow');
+  const outputEl = document.getElementById('v1Output');
+  typeInto(txtEl, 'Build me an agent that qualifies inbound leads and books demo calls.', 30, () => {
+    setTimeout(() => {
+      cursorEl.style.display = 'none';
+      arrowEl.classList.add('show');
+      setTimeout(() => outputEl.classList.add('show'), 300);
+    }, 400);
+  });
+}
+
+function playV2() {
+  const promptEl = document.getElementById('v2PromptText');
+  const outputEl = document.getElementById('v2Output');
+  const rows = document.querySelectorAll('#v2BringList .v2-bring-row');
+  typeInto(promptEl, 'Build me a lead qualifier agent.', 28, () => {
+    setTimeout(() => outputEl.classList.add('show'), 300);
+  });
+  rows.forEach((row, i) => setTimeout(() => row.classList.add('show'), 400 + i * 500));
+}
+
+function playV3() {
+  const timerEl = document.getElementById('v3Timer');
+  const s1 = document.getElementById('v3Step1'), s2 = document.getElementById('v3Step2'), s3 = document.getElementById('v3Step3');
+  const badge = document.getElementById('v3Badge');
+  let secs = 0;
+  s1.classList.add('active');
+  const tick = setInterval(() => {
+    secs++;
+    timerEl.innerHTML = '0:' + String(secs).padStart(2, '0');
+    if (secs === 12) { s1.classList.remove('active'); s1.classList.add('done'); s2.classList.add('active'); }
+    if (secs === 30) { s2.classList.remove('active'); s2.classList.add('done'); s3.classList.add('active'); }
+    if (secs >= 47) {
+      clearInterval(tick);
+      s3.classList.remove('active'); s3.classList.add('done');
+      badge.classList.add('show');
+    }
+  }, 60);
+}
+
+function playV4() {
+  document.querySelectorAll('#v4Grid .v4-card').forEach((card, i) => {
+    setTimeout(() => card.classList.add('show'), i * 110);
+  });
+}
+
+const players = { 1: playV1, 2: playV2, 3: playV3, 4: playV4 };
+const played = {};
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const v = entry.target.dataset.variant;
+      if (!played[v]) { played[v] = true; players[v](); }
+    }
+  });
+}, { threshold: 0.4 });
+document.querySelectorAll('.variant').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
