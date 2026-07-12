@@ -151,37 +151,6 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
   .r100-note { width:96%; padding:10px 14px; }
 }
 
-/* S4c — Build by describing it */
-#s4c { text-align:center; }
-.build-wrap { max-width:640px; width:100%; }
-.build-hl { font-size:clamp(24px,3.2vw,44px); font-weight:800; line-height:1.2; margin-bottom:14px; }
-.build-sub { font-size:clamp(13px,1.3vw,17px); font-weight:300; color:var(--dim); line-height:1.6; max-width:520px; margin:0 auto clamp(28px,5vh,56px); }
-.build-demo { display:flex; flex-direction:column; align-items:center; gap:14px; }
-.build-prompt { display:flex; align-items:center; gap:10px; background:var(--card); border:1px solid var(--border); border-radius:100px; padding:14px 22px; min-height:22px; width:100%; max-width:520px; text-align:left; }
-.build-prompt-dot { width:7px; height:7px; border-radius:50%; background:var(--teal); flex-shrink:0; }
-.build-prompt-text { font-size:13px; color:rgba(255,255,255,0.8); font-weight:300; line-height:1.5; }
-.build-cursor { display:inline-block; width:1.5px; height:14px; background:var(--purple); margin-left:1px; animation:blink 0.9s infinite; vertical-align:middle; }
-.build-arrow { color:var(--purple); opacity:0; transform:translateY(-6px); transition:opacity 0.4s ease, transform 0.4s ease; }
-.build-arrow svg { width:18px; height:18px; }
-.build-arrow.show { opacity:0.6; transform:translateY(0); }
-.build-output { width:100%; max-width:520px; background:var(--card); border:1px solid var(--border); border-radius:16px; padding:20px 22px; opacity:0; transform:translateY(14px); transition:opacity 0.5s ease, transform 0.5s ease; }
-.build-output.show { opacity:1; transform:translateY(0); }
-.build-output-tag { display:flex; align-items:center; gap:8px; font-size:10px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--purple); margin-bottom:16px; }
-.build-output-dot { width:6px; height:6px; border-radius:50%; background:var(--purple); }
-.build-board { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
-.build-col { text-align:left; }
-.build-col-label { font-size:9px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; color:rgba(255,255,255,0.35); margin-bottom:8px; }
-.build-chip { height:22px; border-radius:6px; margin-bottom:6px; background:rgba(255,255,255,0.08); }
-.build-chip-1 { background:rgba(97,97,255,0.35); }
-.build-chip-3 { background:rgba(0,210,210,0.3); }
-.build-chip-4 { background:rgba(97,97,255,0.2); }
-@media (max-width:768px) {
-  .build-prompt { padding:12px 18px; }
-  .build-prompt-text { font-size:11px; }
-  .build-output { padding:16px 18px; }
-  .build-board { gap:8px; }
-}
-
 /* S3b – What's standing in their way? */
 #s3b { padding:0; }
 .s3b-glow { position:absolute; border-radius:50%; pointer-events:none; }
@@ -975,7 +944,7 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
 
 <div class="progress" id="prog"></div>
 <nav class="nav-dots" id="navDots">
-  <button class="nav-dot active" onclick="goTo(0)"></button><button class="nav-dot" onclick="goTo(1)"></button><button class="nav-dot" onclick="goTo(2)"></button><button class="nav-dot" onclick="goTo(3)"></button><button class="nav-dot" onclick="goTo(4)"></button><button class="nav-dot" onclick="goTo(5)"></button><button class="nav-dot" onclick="goTo(6)"></button><button class="nav-dot" onclick="goTo(7)"></button><button class="nav-dot" onclick="goTo(8)"></button><button class="nav-dot" onclick="goTo(9)"></button><button class="nav-dot" onclick="goTo(10)"></button><button class="nav-dot" onclick="goTo(11)"></button>
+  <button class="nav-dot active" onclick="goTo(0)"></button><button class="nav-dot" onclick="goTo(1)"></button><button class="nav-dot" onclick="goTo(2)"></button><button class="nav-dot" onclick="goTo(3)"></button><button class="nav-dot" onclick="goTo(4)"></button><button class="nav-dot" onclick="goTo(5)"></button><button class="nav-dot" onclick="goTo(6)"></button><button class="nav-dot" onclick="goTo(7)"></button><button class="nav-dot" onclick="goTo(8)"></button><button class="nav-dot" onclick="goTo(9)"></button><button class="nav-dot" onclick="goTo(10)"></button>
 </nav>
 
 <div class="deck">
@@ -1394,42 +1363,6 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
   </div>
 </div>
 
-<div class="slide" id="s4c">
-  <div class="build-wrap">
-    <p class="eyebrow">Build Anything</p>
-    <h2 class="build-hl">Build it by describing it.</h2>
-    <p class="build-sub">Create apps, automate workflows, and deploy agents — just by telling monday what you need.</p>
-    <div class="build-demo">
-      <div class="build-prompt">
-        <div class="build-prompt-dot"></div>
-        <span class="build-prompt-text" id="buildPromptText"></span><span class="build-cursor" id="buildCursor"></span>
-      </div>
-      <div class="build-arrow" id="buildArrow">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="4" x2="12" y2="20"/><polyline points="6 14 12 20 18 14"/></svg>
-      </div>
-      <div class="build-output" id="buildOutput">
-        <div class="build-output-tag"><span class="build-output-dot"></span>App created</div>
-        <div class="build-board">
-          <div class="build-col">
-            <div class="build-col-label">To Do</div>
-            <div class="build-chip build-chip-1"></div>
-            <div class="build-chip build-chip-2"></div>
-          </div>
-          <div class="build-col">
-            <div class="build-col-label">In Progress</div>
-            <div class="build-chip build-chip-3"></div>
-          </div>
-          <div class="build-col">
-            <div class="build-col-label">Done</div>
-            <div class="build-chip build-chip-4"></div>
-            <div class="build-chip build-chip-5"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
 <div class="slide" id="s5b">
   <div class="s5b-inner">
   <p class="sp-eyebrow">Don't take our word</p>
@@ -1726,30 +1659,6 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
   let layersConverged = false;
   let layersSpread = false;
   let mktDone = false;
-  let buildDone = false;
-
-  function buildDemoPlay() {
-    if (buildDone) return;
-    buildDone = true;
-    const txtEl    = document.getElementById('buildPromptText');
-    const cursorEl = document.getElementById('buildCursor');
-    const arrowEl  = document.getElementById('buildArrow');
-    const outputEl = document.getElementById('buildOutput');
-    if (!txtEl) return;
-    const msg = 'Build me a bug tracker with severity levels and auto-assignment.';
-    let i = 0;
-    const typeInterval = setInterval(() => {
-      txtEl.textContent = msg.slice(0, ++i);
-      if (i >= msg.length) {
-        clearInterval(typeInterval);
-        setTimeout(() => {
-          cursorEl.style.display = 'none';
-          arrowEl.classList.add('show');
-          setTimeout(() => outputEl.classList.add('show'), 300);
-        }, 400);
-      }
-    }, 35);
-  }
 
   function mktPlayIntro() {
     if (mktDone) return;
@@ -1823,11 +1732,10 @@ html, body { width:100%; height:100%; overflow:hidden; font-family:'Poppins',san
     const navDots = document.getElementById('navDots');
     if (n === 5 && window.innerWidth > 768) navDots.classList.add('bottom-center');
     else navDots.classList.remove('bottom-center');
-    if (n === 10 && window._momSmomEnter) window._momSmomEnter();
+    if (n === 9 && window._momSmomEnter) window._momSmomEnter();
     if (n === 2) { if (window.innerWidth <= 768) { pcGoTo(0); pcStart(); } } else { pcStop(); }
     if (n === 4) { playStage4(); }
     if (n === 6) { mktPlayIntro(); } else { sbsStopAuto(); }
-    if (n === 7) { buildDemoPlay(); }
     if (n === 5 && !layersSpread) {
       if (window.innerWidth > 768) {
         enterLayersConverged();
