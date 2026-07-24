@@ -45,6 +45,16 @@ Present these as a compact legend under any multi-option set, for example:
 - **When he rejects everything with no reason** ("לא אוהב אף אחד מהם" / "don't like any of these"), don't guess and burn another round in the same failed direction. Ask what's off first: too dramatic? too generic? not connected to the content?
 - Do real analysis before recommending. If asked to pick between options (copy, naming, ordering), check how each connects to the specific content already in the asset, not a surface gut read. Don't undersell an option first and discover its justification only when pushed.
 
+## Delivery: one shareable link per asset
+
+Every finished asset ships as its **own published artifact with its own shareable URL**, so Alon can share each one independently. One asset per link. Never combine assets into one artifact. Render each in the form that fits it:
+- **Landing page** -> a rendered HTML page.
+- **Email** -> a rendered HTML email (email width, realistic layout).
+- **Session titles / naming** -> a clean rendered page listing them.
+- **Presentation / deck** -> a rendered HTML slide deck (offer a `.pptx` export as a separate file when an editable deck is needed).
+
+Keep review/comparison boards (options per fold) as their own separate artifact, distinct from the final asset. Artifacts start private; Alon shares them from the page's share menu. Render monday-branded drafts with a visible "draft" marker and placeholder proof (no fabricated customer records).
+
 ## Language default
 
 Output English for anything customer-facing or product copy, even though Alon writes to Claude in Hebrew. Keep the conversation in Hebrew; keep the deliverable in English unless told otherwise.
