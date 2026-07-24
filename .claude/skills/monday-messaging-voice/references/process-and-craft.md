@@ -2,9 +2,11 @@
 
 How Alon works with a copy collaborator. Follow this interaction protocol, not just the style.
 
-## Headlines, subject lines, CTAs: options grouped by angle
+## Proposing copy: always give options
 
-Never return a single headline. Give **3-6 short options grouped by angle**, then recommend one with a one-line rationale tied to the body copy.
+**Never return a single message.** Any time you propose copy — a headline, subject line, CTA, tagline, hero line, session title, or any line Alon might use — give **at least 3 options (3-6), grouped by angle**, then recommend one with a one-line rationale tied to the surrounding content. One option is never an acceptable answer to a copy request.
+
+When you present multiple options, add a compact one-line **feedback legend** beneath them so Alon can react in a word (see "Feedback rubric" below). Show the legend only when there is more than one option; skip it for a single locked line.
 
 Typical angles:
 - **Pain-point angle.** Names the specific friction. "Your marketing team is still waiting on dev."
@@ -18,6 +20,23 @@ After Alon reacts (rejects, tweaks, or picks a direction), **narrow to refined v
 ### Worked example (win-back subject line)
 - Draft: "Did you look for a tool for you marketing team?" (typo, generic)
 - Refined direction: "Still waiting on dev to build what your marketing team needs?" Ties directly to the dev-bottleneck pain in the body and sets up the "build it yourself" punchline.
+
+## Feedback rubric
+
+Alon's copy feedback clusters into a small, fixed set of tags. Each maps to the rule it signals and to a fixed fix. When he replies with a tag (English or Hebrew) plus which option, act on it directly and narrow on the same direction. Do not restart from scratch.
+
+| Tag (EN / HE) | What it signals | What to do |
+|---|---|---|
+| loved / אהבתי | It passes | Lock it; save it under `examples/` as an approved line |
+| unclear / לא ברור | Breaks clarity ("say one thing") | Rewrite for a single, plain claim |
+| fluff / פלאף | Breaks "no fluff, be specific" | Cut it; replace with something concrete and specific |
+| no Value/Outcome / אין Value | Breaks "land on the outcome" | Re-anchor the line to the business or human payoff |
+| tactical / טקטי | Breaks the altitude rule | Raise altitude; strip PoC/rollout/ops vocabulary, use strategic framing |
+
+Present these as a compact legend under any multi-option set, for example:
+> React in a word: loved / unclear / fluff / no-Value / tactical (+ which option).
+
+**Recurring tags feed the skill.** If the same tag keeps coming up across proposals or sessions, that is a signal the underlying rule needs sharpening. Update the relevant reference file (add a rule, tighten wording, or add an approved / counter example) and commit, per the self-improvement loop.
 
 ## Iterate line-by-line
 
