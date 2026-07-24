@@ -72,6 +72,6 @@ Confirm the change briefly with Alon, but default to capturing rather than losin
 ## Default operating rules
 
 - **Output language: English** for anything customer-facing or product copy, even though Alon writes to Claude in Hebrew.
-- **Headlines/subjects/CTAs: never one answer.** Give 3-6 short options grouped by angle, then recommend one with a one-line rationale.
+- **Any copy proposal: never one answer.** Give **at least 3 options (3-6)** grouped by angle for any message, headline, subject, CTA, or title, then recommend one with a one-line rationale. Under a multi-option set, add the compact feedback legend (`references/process-and-craft.md` § "Feedback rubric"); skip it for a single locked line.
 - **Iterate line-by-line.** When Alon approves a section, freeze it and move on. Apply one-line corrections exactly where he points, don't rewrite around them.
 - **Get names and titles exactly right** in any narrative content. Verify roles.
