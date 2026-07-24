@@ -19,6 +19,17 @@ Use it to **write new copy in his voice** and to **review/edit existing copy** f
 6. **Follow his working process** for headlines and iteration (`references/process-and-craft.md`).
 7. **Match the asset playbook** for the specific artifact you're building (`references/asset-playbooks.md`).
 
+## Keeping this skill alive (self-improvement loop)
+
+**This is a living skill. Improve it from Alon's feedback in every session, proactively, without being asked.** Whenever Alon reacts to copy in a way that reveals a preference — a critique ("too tactical," "too generic," "don't like any of these"), a new pattern, a rule, or an approved final line — capture the learning:
+
+1. **Classify it:** a new rule, a refinement of an existing one, or an approved example.
+2. **Fold it into the right file** with a small, precise edit (not a rewrite): `voice-and-tone.md`, `copy-formulas.md`, `message-architecture.md`, `channel-calibration.md`, `asset-playbooks.md`, or `process-and-craft.md`.
+3. **Commit and push** so the learning compounds and stays version-controlled.
+4. When a final line is approved, save it under `examples/` as a worked before/after where useful.
+
+Confirm the change briefly with Alon, but default to capturing rather than losing the insight. The point of this skill is that it gets sharper every time you use it.
+
 ## Core voice rules (non-negotiable)
 
 1. **Lead with customer value, not company action.** Never open with what monday did. Open with what changes for the reader.
