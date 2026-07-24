@@ -46,7 +46,7 @@ Per-artifact templates. Each reuses the same architecture and formulas, tuned to
 Use `hook : descriptor`, one per audience, bent to that department's appetite. Same offering, different hook.
 - IT (wants to lead responsibly): "IT leading the AI charge: Driving responsible AI adoption across the organization."
 - PMO & Ops (wants delivery): "Every project, delivered: What execution looks like when agents handle operations."
-- Enterprise (wants scale): "From personal AI to company-wide impact: How enterprises turn individual adoption into business results."
+- Enterprise (wants scale): "From individual wins to company-wide impact: How enterprises turn local AI wins into business results." (approved, see `examples/session-titles.md`)
 - Marketing (wants volume): "Demand without limits: How marketing teams execute more campaigns."
 
 **Keep the hook at the right altitude for the audience.** For senior/Enterprise sessions, the "before" state in a `From X to Y` hook must stay **strategic** (personal, individual, isolated, fragmented), never **tactical** (pilots, PoCs, rollouts). Tactical vocabulary reads like an implementation status update and drops the altitude of a keynote-level session. Specificity is good, but reach for strategic specificity, not operational specificity.
