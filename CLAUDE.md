@@ -8,3 +8,4 @@
 
 - This repo carries the `monday-messaging-voice` skill at `.claude/skills/monday-messaging-voice/`. Use it for any customer-facing or GTM copy, messaging, headlines, subject lines, CTAs, or deck/landing narrative.
 - Keep it alive: whenever Alon gives feedback on messaging, copy, voice, or naming in any session — a critique ("too tactical," "too generic," "don't like any of these"), a preference, a new pattern, or an approved line — fold the learning into the skill's reference files and commit/push it. Do this proactively, with small precise edits. The skill is meant to get sharper from every conversation.
+- Deliver every finished asset (landing page, email, session titles, deck) as its own shareable artifact with its own URL. One asset per link; keep review/options boards as separate links.
