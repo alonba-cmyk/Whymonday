@@ -62,9 +62,14 @@ Reposition by swapping the question, not by arguing the answer.
 - The question changed, from "which product do you need?" to "what do you want to achieve?"
 
 ## `What if...?` hook
-Open by inviting the reader to imagine. A legitimate opener (unlike negation).
+Open by inviting the reader to imagine. A legitimate opener (unlike negation). **This is a go-to hook for Alon: when offered options, he consistently reaches for the "What if...?" opener over the direct/aspirational one. Treat it as a first-class candidate, not a fallback.** Use it in the strongest slot (usually the hero), and do not repeat the same question hook twice in one asset, or it dilutes.
 - What if your marketing team could build their own tools?
 - What if agents weren't tools you prompt, but teammates who join your team?
+- What if every project stayed on schedule, on budget, and on one plan?
+
+## Segment-native double meaning
+Mine the segment's own everyday vocabulary for a word that also carries the abstract point. Alon reaches for this. In construction, **"Build safely"** reads as literal jobsite safety and as secure, governed AI at once. Look for the word the audience uses daily that can do double duty, and let it carry the line.
+- Build fast. Build safely. (construction: on-time delivery + secure/governed AI)
 
 ## `just describe it`
 Collapse all the complexity down to language. The effort becomes a sentence.

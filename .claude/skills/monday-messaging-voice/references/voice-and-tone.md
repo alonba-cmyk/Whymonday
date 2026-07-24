@@ -48,6 +48,8 @@ Confident, warm, plain. First-person plural and present tense for the company vo
 
 Copy going into a fixed-width UI element (a card, a tile, a pill, a modal header) needs to be **shorter than the first instinct suggests.** Default to fewer words, not more. If a headline has to fit a set container, cut before you add.
 
+**Even a line Alon loves gets cut if it runs long.** When he says "love it, but too long," keep the structure and the rhythm and drop a beat or a clause. Do not rewrite it into something new. Example: "Every trade, every phase, every stakeholder. One plan everyone builds from." trims to "Every trade, every phase. One plan." Brevity wins over completeness every time.
+
 ## Cliché / phrase blocklist
 
 Avoid these even though they're common marketing/LinkedIn defaults. Alon flags them as worn out:
