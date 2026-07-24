@@ -92,7 +92,9 @@ A parallel past-tense triad of earned wins, then a "Now" pivot into the shift.
 - For 15 years we made complex work simple. We connected teams across silos. We turned goals into results. Now, AI accelerates what that promise means.
 
 ## Broken-line headline
-Write headlines as stacked fragments; line breaks carry the rhythm.
+Write headlines as stacked fragments; line breaks carry the rhythm. **Rendering rule (Alon's guiding line): when a headline has a sentence-ending period followed by more text, break to a new line at that period so each sentence sits on its own line.** This is the default in rendered/HTML deliverables (use a `<br>` or block spans). Use judgment: skip it only when the break would orphan an awkward fragment. A comma or a final-only period does not trigger a break.
+- You run the build. / Agents run the coordination.
+- Build fast. / Build safely.
 - More hands. Bigger team. / More gets done.
 - One workspace. / Your whole team.
 
