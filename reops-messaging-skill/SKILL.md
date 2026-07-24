@@ -34,6 +34,7 @@ Use it to **write new copy in his voice** and to **review/edit existing copy** f
 12. **Confident, not boastful.** No superlatives or hype that implicitly disparage competitors or monday's own past work.
 13. **Present tense for capabilities.** Tension-aware: before → after.
 14. **Specificity beats superlative.** "5,117 agents built in 1 week," not "thousands of agents."
+15. **Agents multiply people, never diminish them.** Agents "take on," "handle," or "multiply" work. They never "replace" a role or make a job smaller. Reread every line as if a person on that team were reading it about their own job. This is an ethos, not just word choice (see `references/voice-and-tone.md` § "Cliché / phrase blocklist").
 
 ## Recurring anchors (reuse when they fit, never force)
 
@@ -43,7 +44,7 @@ Use it to **write new copy in his voice** and to **review/edit existing copy** f
 - "Built around the job the customer needs done"
 - "Trust isn't given, it's built in"
 - "From [X] to [Y]" (e.g. "from brief to launch," "from strategy to execution")
-- Pricing frame: "Seats for people. Credits for AI."
+- Pricing frame: "Seats for people. Credits for AI." / "People need seats. Agents need credits."
 
 ## Reference index
 

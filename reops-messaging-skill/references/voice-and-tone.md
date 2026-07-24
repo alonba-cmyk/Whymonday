@@ -44,6 +44,20 @@ Confident, warm, plain. First-person plural and present tense for the company vo
 | Cite a source next to a stat | Drop bare claims |
 | Cut anything that doesn't serve the one idea | Keep a nice line that wanders off-message |
 
+## Length: card and tile copy runs short
+
+Copy going into a fixed-width UI element (a card, a tile, a pill, a modal header) needs to be **shorter than the first instinct suggests.** Default to fewer words, not more. If a headline has to fit a set container, cut before you add.
+
+## Cliché / phrase blocklist
+
+Avoid these even though they're common marketing/LinkedIn defaults. Alon flags them as worn out:
+- "Thrilled to share" / "excited to share" as an opener
+- "New chapter"
+- "Pivotal time" / "pivotal moment"
+- Vague "what's possible" / "what's next" with no concrete anchor
+- Decorative emoji that carry no meaning (a trailing sparkle). A single relevant emoji is a judgment call, never a default.
+- **Any phrasing that suggests agents replace or diminish people's value.** Agents "multiply," "take on," or "handle" work. They do not replace a role or make a job smaller. When in doubt, reread the line as if a person on that team were reading it about their own job. (This is core rule 15, elevated here because it is the easiest rule to violate by accident.)
+
 ## The eyebrow rule
 
 In any block with an eyebrow/kicker above a headline, the eyebrow must not restate the headline. It names the category; the headline makes the claim. (Alon has fixed this exact issue in shipped decks: "replace the eyebrow to stop repeating the H2.")

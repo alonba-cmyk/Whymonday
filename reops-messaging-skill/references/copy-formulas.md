@@ -21,6 +21,14 @@ Abstract input to a finished, ready-to-ship output. His signature verb.
 - Turns customer feedback into structured PRDs in minutes.
 - From daily challenges to agentic solutions.
 
+## `From X to Y`
+monday's default way to show a workflow transformed end-to-end. Anchor both ends in the department's real language. Used constantly across use cases:
+- From brief to campaign launch. (Marketing)
+- From first touch to closed deal. (Sales)
+- From job post to interview. (HR)
+- From contract request to redlined draft. (Legal)
+- From strategy to tracked execution. (PMO)
+
 ## `Every X. One Y.` / `Built for X. Safe for Y.`
 Two-beat antithesis headline. Breadth or tension in the first beat, resolution in the second.
 - Every marketing touchpoint. One AI work platform.

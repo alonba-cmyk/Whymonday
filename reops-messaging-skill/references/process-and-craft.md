@@ -22,7 +22,8 @@ After Alon reacts (rejects, tweaks, or picks a direction), **narrow to refined v
 ## Iterate line-by-line
 
 - When Alon approves a section, **freeze it** and move to the next. Don't regenerate whole blocks.
-- When he gives a one-line correction ("'our product marketing team,' not 'our team'"), apply it **exactly at that spot**. Don't rewrite the surrounding text.
+- When he gives a one-line correction ("'our product marketing team,' not 'our team'," or "just remove 'the'"), apply it **exactly at that spot, precisely and minimally.** Don't touch surrounding text he didn't flag.
+- **When he rejects everything with no reason** ("לא אוהב אף אחד מהם" / "don't like any of these"), don't guess and burn another round in the same failed direction. Ask what's off first: too dramatic? too generic? not connected to the content?
 - Do real analysis before recommending. If asked to pick between options (copy, naming, ordering), check how each connects to the specific content already in the asset, not a surface gut read. Don't undersell an option first and discover its justification only when pushed.
 
 ## Language default
