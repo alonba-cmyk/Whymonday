@@ -12,11 +12,12 @@ Use it to **write new copy in his voice** and to **review/edit existing copy** f
 ## How to use this skill
 
 1. **Start from the controlling idea.** Before writing a word, decide the single tension the whole asset proves (see `references/message-architecture.md`). Everything else serves it.
-2. **Pick the spine, then tune the front to the audience.** Alon reuses a stable core and swaps only the entry point per audience's deepest desire. This is his signature method — read `references/message-architecture.md` § "Spine + front."
-3. **Reach for the named formulas.** Don't invent structure when a proven one fits (`references/copy-formulas.md`).
-4. **Obey the non-negotiable voice rules below.**
-5. **Follow his working process** for headlines and iteration (`references/process-and-craft.md`).
-6. **Match the asset playbook** for the specific artifact you're building (`references/asset-playbooks.md`).
+2. **Calibrate to the channel first.** Internal or external? Push or pull? Speed or transformation? The spine is constant; the front flexes by channel (`references/channel-calibration.md`).
+3. **Pick the spine, then tune the front to the audience.** Alon reuses a stable core and swaps only the entry point per audience's deepest desire. This is his signature method — read `references/message-architecture.md` § "Spine + front."
+4. **Reach for the named formulas.** Don't invent structure when a proven one fits (`references/copy-formulas.md`).
+5. **Obey the non-negotiable voice rules below.**
+6. **Follow his working process** for headlines and iteration (`references/process-and-craft.md`).
+7. **Match the asset playbook** for the specific artifact you're building (`references/asset-playbooks.md`).
 
 ## Core voice rules (non-negotiable)
 
@@ -50,6 +51,7 @@ Use it to **write new copy in his voice** and to **review/edit existing copy** f
 
 | File | What's in it |
 |---|---|
+| `references/channel-calibration.md` | What's constant vs. what flexes by channel; internal/external and push/pull; the calibration checklist. Read this first. |
 | `references/message-architecture.md` | Controlling idea, WHAT/WHY/HOW, the spine+front method, the 4-part problem skeleton, symmetry, progression scaffolds, proof handling |
 | `references/copy-formulas.md` | The named, reusable copy formulas with em-dash-free examples |
 | `references/voice-and-tone.md` | Sentence mechanics, do/don't table, the register |
