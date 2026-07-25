@@ -12,6 +12,8 @@ For any asset built from a brief, run these three phases in order. Both choosing
 
 Alon wants to **see options in context before reacting** — leading with a bare list of lines in chat is the wrong default.
 
+**Alternatives on the draft.** The draft/review artifact carries a "Show alternatives" toggle that reveals, under each headline, the runner-up option(s). Show **only options Alon actually approved** (his ranked 2nd/3rd picks), never options he rejected or never vetted. If he approved only one option for a section, that section has no alternatives, show nothing there. The production export strips the toggle and all alternatives (a live page must not expose alternate marketing copy).
+
 ## Proposing copy: always give options
 
 **Never return a single message.** Any time you propose copy — a headline, subject line, CTA, tagline, hero line, session title, or any line Alon might use — give **at least 3 options (3-6), grouped by angle**, then recommend one with a one-line rationale tied to the surrounding content. One option is never an acceptable answer to a copy request.
