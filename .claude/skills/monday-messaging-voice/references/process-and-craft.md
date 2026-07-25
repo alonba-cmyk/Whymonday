@@ -2,6 +2,16 @@
 
 How Alon works with a copy collaborator. Follow this interaction protocol, not just the style.
 
+## Standard workflow: Options-first → Build → Review
+
+For any asset built from a brief, run these three phases in order. Both choosing and reviewing happen through the chat's click interface (AskUserQuestion), which returns Alon's input automatically; the published pages are the visual reference. Never ask for copy-paste or file upload. Surface the URL on every publish.
+
+1. **Options first (see, then choose).** From the brief, build a visual **options page** in the asset's own design language: 2-4 options per section, grouped by angle, the recommendation marked. Publish and send the URL. Then, section by section via the click interface, Alon picks his preferred option (offer a second pick to capture priority order).
+2. **Build.** Assemble Alon's chosen options into the clean production asset. Publish and send the URL.
+3. **Review together.** Fold by fold, run the tag review (see "Review mode" and "Feedback rubric") on the assembled asset until every message is "loved." Fold each reaction into the skill as you go.
+
+Alon wants to **see options in context before reacting** — leading with a bare list of lines in chat is the wrong default.
+
 ## Proposing copy: always give options
 
 **Never return a single message.** Any time you propose copy — a headline, subject line, CTA, tagline, hero line, session title, or any line Alon might use — give **at least 3 options (3-6), grouped by angle**, then recommend one with a one-line rationale tied to the surrounding content. One option is never an acceptable answer to a copy request.
