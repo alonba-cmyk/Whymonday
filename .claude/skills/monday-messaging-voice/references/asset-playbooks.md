@@ -23,6 +23,8 @@ Per-artifact templates. Each reuses the same architecture and formulas, tuned to
 8. Proof: `Recognized by analysts, loved by users.`
 9. Enterprise trust pillars: Transparency / Accountability / Control / Security, one line each.
 
+**Shared-workspace section ("[roles] and agents work side by side"):** the supporting boxes each have to (a) show people AND agents working *together* in one place, never agent automation alone, and (b) be distinct facets of the shared space (talking/deciding, field-to-office, coordination, meetings, one source of truth, human decisions). Do not let a box repeat an individual agent from the agent-showcase section. Replace generic monday titles (Meetings, Share, Portfolio context) with a concrete artifact or moment the audience names every day (for construction: RFIs, OAC meetings, the live drawing set, a delay claim). Test every box: is there a person and an agent, together, on the same work?
+
 ## Narrative pitch / story deck
 
 **Arc:** Vision → Problem (capacity) → Diagnosis (4-part skeleton) → Solution (reframe + Workspace·Context·Control) → Proof (testimonials, 5,117 agents, Monday-on-Monday) → CTA.
