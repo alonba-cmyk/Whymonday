@@ -64,7 +64,7 @@ Before an asset goes to production, collect Alon's per-message feedback through 
 
 ## Don't present unverifiable specifics as fact
 
-This skill does not carry monday's live inventory of agents, apps, integrations, or customers. So when an asset needs concrete specifics you cannot verify (named example agents, products, integrations, customer names, stats), treat them as **illustrative recommendations to validate**, never as an existing catalog. Flag it visibly on the asset itself (a short note placed as a side annotation, not a subheadline) and call it out in the handoff. Example note: "Recommended examples, not existing agents. Validate each against monday's current agent catalog before use." Prefer real, public claims (250,000+ customers, Gartner Leader) over invented specifics.
+This skill does not carry monday's live inventory of agents, apps, integrations, or customers. So when an asset needs concrete specifics you cannot verify (named example agents, products, integrations, customer names, stats), treat them as **illustrative recommendations to validate**, never as an existing catalog. Flag it visibly on the asset itself (a short note placed out of the main reading flow: a quiet footnote under the content or a side annotation, never between a headline and the content it introduces) and call it out in the handoff. Example note: "Recommended examples, not existing agents. Validate each against monday's current agent catalog before use." Prefer real, public claims (250,000+ customers, Gartner Leader) over invented specifics.
 
 ## Delivery: one shareable link per asset
 
