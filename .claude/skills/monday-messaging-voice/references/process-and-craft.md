@@ -97,6 +97,7 @@ Alon cares about visual restraint as much as copy restraint:
 - One accent color, used consistently and meaningfully, not decoratively.
 - A technical/monospace font paired with a humanist sans.
 - Consistent divider and section patterns.
+- Every rendered page ships **theme-aware (full light and dark)** with a **light/dark toggle in the header**. Many viewers consume content more comfortably in light, and shared pages open outside claude.ai where the viewer's own theme control is not available.
 
 If it's unclear which system applies (Readout deck vs. dark vision-page vs. email), **ask which artifact this is for before assuming.**
 
