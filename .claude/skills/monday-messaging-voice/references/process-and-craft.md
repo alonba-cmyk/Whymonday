@@ -45,6 +45,10 @@ Present these as a compact legend under any multi-option set, for example:
 - **When he rejects everything with no reason** ("לא אוהב אף אחד מהם" / "don't like any of these"), don't guess and burn another round in the same failed direction. Ask what's off first: too dramatic? too generic? not connected to the content?
 - Do real analysis before recommending. If asked to pick between options (copy, naming, ordering), check how each connects to the specific content already in the asset, not a surface gut read. Don't undersell an option first and discover its justification only when pushed.
 
+## Don't present unverifiable specifics as fact
+
+This skill does not carry monday's live inventory of agents, apps, integrations, or customers. So when an asset needs concrete specifics you cannot verify (named example agents, products, integrations, customer names, stats), treat them as **illustrative recommendations to validate**, never as an existing catalog. Flag it visibly on the asset itself (a short note near that section) and call it out in the handoff. Example note: "Recommended examples, not existing agents. Validate each against monday's current agent catalog before use." Prefer real, public claims (250,000+ customers, Gartner Leader) over invented specifics.
+
 ## Delivery: one shareable link per asset
 
 Every finished asset ships as its **own published artifact with its own shareable URL**, so Alon can share each one independently. One asset per link. Never combine assets into one artifact. Render each in the form that fits it:
