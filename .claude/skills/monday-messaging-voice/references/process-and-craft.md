@@ -47,7 +47,7 @@ Present these as a compact legend under any multi-option set, for example:
 
 ## Don't present unverifiable specifics as fact
 
-This skill does not carry monday's live inventory of agents, apps, integrations, or customers. So when an asset needs concrete specifics you cannot verify (named example agents, products, integrations, customer names, stats), treat them as **illustrative recommendations to validate**, never as an existing catalog. Flag it visibly on the asset itself (a short note near that section) and call it out in the handoff. Example note: "Recommended examples, not existing agents. Validate each against monday's current agent catalog before use." Prefer real, public claims (250,000+ customers, Gartner Leader) over invented specifics.
+This skill does not carry monday's live inventory of agents, apps, integrations, or customers. So when an asset needs concrete specifics you cannot verify (named example agents, products, integrations, customer names, stats), treat them as **illustrative recommendations to validate**, never as an existing catalog. Flag it visibly on the asset itself (a short note placed as a side annotation, not a subheadline) and call it out in the handoff. Example note: "Recommended examples, not existing agents. Validate each against monday's current agent catalog before use." Prefer real, public claims (250,000+ customers, Gartner Leader) over invented specifics.
 
 ## Delivery: one shareable link per asset
 
@@ -58,6 +58,8 @@ Every finished asset ships as its **own published artifact with its own shareabl
 - **Presentation / deck** -> a rendered HTML slide deck (offer a `.pptx` export as a separate file when an editable deck is needed).
 
 Keep review/comparison boards (options per fold) as their own separate artifact, distinct from the final asset. Artifacts start private; Alon shares them from the page's share menu. Render monday-branded drafts with a visible "draft" marker and placeholder proof (no fabricated customer records).
+
+**Always surface the artifact's URL as plain, visible text in the reply** every time you publish or update an asset, not only as a linked word. Alon wants the raw URL each time.
 
 ## Language default
 
