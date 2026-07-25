@@ -32,11 +32,16 @@ Alon's copy feedback clusters into a small, fixed set of tags. Each maps to the 
 | fluff / פלאף | Breaks "no fluff, be specific" | Cut it; replace with something concrete and specific |
 | no Value/Outcome / אין Value | Breaks "land on the outcome" | Re-anchor the line to the business or human payoff |
 | tactical / טקטי | Breaks the altitude rule | Raise altitude; strip PoC/rollout/ops vocabulary, use strategic framing |
+| overlap / חזרתי | Repeats or overlaps another headline (breaks "each section says one new thing") | Re-angle to a distinct facet, or cut; check it against sibling sections, especially the agent-showcase |
 
 Present these as a compact legend under any multi-option set, for example:
-> React in a word: loved / unclear / fluff / no-Value / tactical (+ which option).
+> React in a word: loved / unclear / fluff / no-Value / tactical / overlap (+ which option).
 
 **Recurring tags feed the skill.** If the same tag keeps coming up across proposals or sessions, that is a signal the underlying rule needs sharpening. Update the relevant reference file (add a rule, tighten wording, or add an approved / counter example) and commit, per the self-improvement loop.
+
+## Review mode: collect feedback by click, not copy-paste
+
+Before an asset goes to production, collect Alon's per-message feedback through the chat's native question UI (AskUserQuestion), not a copy-paste board or a file upload. He clicks a tag per message and the answers return to you automatically. Present messages in batches (up to 4 per call); each message is one question with the rubric tags as options. The UI caps at 4 options, so show the most relevant tags for that batch and rely on "Other" for the remaining tags and free text. Then learn from each reaction (sharpen the skill), and present alternatives for the flagged ones the same way, until each message is "loved." A published artifact can show the messages in context, but the reactions come through the question UI. Never ask Alon to copy-paste or upload his feedback.
 
 ## Iterate line-by-line
 
