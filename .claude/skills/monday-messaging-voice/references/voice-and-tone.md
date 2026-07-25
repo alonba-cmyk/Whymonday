@@ -6,6 +6,10 @@ Sentence-level mechanics. How the copy sounds once the architecture is set.
 
 Confident, warm, plain. First-person plural and present tense for the company voice. No jargon. Human warmth shows up in small casual generosities ("on us," "there's a story," "we'll build it for you"). Confident, never boastful: state what's true and let it stand, no superlatives that puff up monday or put down anyone else.
 
+## Clarity over cleverness
+
+Alon rejects copy that tries to be clever or cute at the cost of clarity ("מתחכם"). A pun or a wink that makes the reader stop and decode what you meant has failed, even when it is witty. Example he flagged: the Elevate IT title "The guardians of the galaxAI" reads as clever but unclear, it never says what the session is about or lands a value. Test: if a line is clever but you have to think about what it means, cut the cleverness and say the plain thing.
+
 ## Rhythm
 
 - **Fragments are tools.** Verbless sentences are welcome when they hit harder. "More requests. More priorities. Same hours."

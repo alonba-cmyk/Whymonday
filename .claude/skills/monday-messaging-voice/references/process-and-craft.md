@@ -28,7 +28,7 @@ Alon's copy feedback clusters into a small, fixed set of tags. Each maps to the 
 | Tag (EN / HE) | What it signals | What to do |
 |---|---|---|
 | loved / אהבתי | It passes | Lock it; save it under `examples/` as an approved line |
-| unclear / לא ברור | Breaks clarity ("say one thing") | Rewrite for a single, plain claim |
+| unclear / לא ברור | Too clever or cute in a way that obscures the point: a pun or wink you have to decode (e.g. "The guardians of the galaxAI") | Cut the cleverness; say the one plain thing directly |
 | fluff / פלאף | Breaks "no fluff, be specific" | Cut it; replace with something concrete and specific |
 | no Value/Outcome / אין Value | Breaks "land on the outcome" | Re-anchor the line to the business or human payoff |
 | tactical / טקטי | Breaks the altitude rule | Raise altitude; strip PoC/rollout/ops vocabulary, use strategic framing |
@@ -41,7 +41,7 @@ Present these as a compact legend under any multi-option set, for example:
 
 ## Review mode: collect feedback by click, not copy-paste
 
-Before an asset goes to production, collect Alon's per-message feedback through the chat's native question UI (AskUserQuestion), not a copy-paste board or a file upload. He clicks a tag per message and the answers return to you automatically. Present messages in batches (up to 4 per call); each message is one question with the rubric tags as options. The UI caps at 4 options, so show the most relevant tags for that batch and rely on "Other" for the remaining tags and free text. Then learn from each reaction (sharpen the skill), and present alternatives for the flagged ones the same way, until each message is "loved." A published artifact can show the messages in context, but the reactions come through the question UI. Never ask Alon to copy-paste or upload his feedback.
+Before an asset goes to production, collect Alon's per-message feedback through the chat's native question UI (AskUserQuestion), not a copy-paste board or a file upload. He clicks a tag per message and the answers return to you automatically. Present messages in batches (up to 4 per call); each message is one question with the rubric tags as options. The UI caps at 4 options, so show the most relevant tags for that batch and rely on "Other" for the remaining tags and free text. Keep **"unclear" in the default chip set** (Alon values it). A workable default four is Loved / Unclear / Tactical / Fluff-or-no-value, swapping Overlap in when sibling-headline repetition is the live risk. Then learn from each reaction (sharpen the skill), and present alternatives for the flagged ones the same way, until each message is "loved." A published artifact can show the messages in context, but the reactions come through the question UI. Never ask Alon to copy-paste or upload his feedback.
 
 ## Iterate line-by-line
 
