@@ -2,6 +2,10 @@
 
 Per-artifact templates. Each reuses the same architecture and formulas, tuned to the format. Confirm which artifact you're building, then follow its skeleton.
 
+## Activation emails are different from acquisition
+
+For an email to someone **already in the product** (a free-trial or existing user) whose goal is the next action (build their first agent), lead with **possibility and the ease of that action**, not problem-agitation. Name the villain hard only in **acquisition and win-back**. For a trial user, dwelling on the pain reads as tactical and low-altitude, and cute wordplay reads as clever-but-empty. Keep the opening positive, plain, forward, higher-altitude, and free of cleverness.
+
 ## Marketing / product email
 
 **Shape:** hook → named villain → the collapse to "just describe it" → three concrete examples → generous CTA.
