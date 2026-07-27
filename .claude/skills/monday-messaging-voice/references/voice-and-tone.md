@@ -10,6 +10,10 @@ Confident, warm, plain. First-person plural and present tense for the company vo
 
 Alon rejects copy that tries to be clever or cute at the cost of clarity ("מתחכם"). A pun or a wink that makes the reader stop and decode what you meant has failed, even when it is witty. Example he flagged: the Elevate IT title "The guardians of the galaxAI" reads as clever but unclear, it never says what the session is about or lands a value. Test: if a line is clever but you have to think about what it means, cut the cleverness and say the plain thing.
 
+## Warm, not technical
+
+Even copy that explains how something works stays human and inviting, never a procedural spec-list. Alon flagged "Describe what you need, put one on your first project, and it's live in minutes. No setup." as too technical and informative, a string of instructions. Say it the way a person would say it, warmly, not as a feature how-to.
+
 ## Rhythm
 
 - **Fragments are tools.** Verbless sentences are welcome when they hit harder. "More requests. More priorities. Same hours."
