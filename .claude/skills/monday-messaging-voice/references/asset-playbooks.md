@@ -6,6 +6,8 @@ Per-artifact templates. Each reuses the same architecture and formulas, tuned to
 
 For an email to someone **already in the product** (a free-trial or existing user) whose goal is the next action (build their first agent), lead with **possibility and the ease of that action**, not problem-agitation. Name the villain hard only in **acquisition and win-back**. For a trial user, dwelling on the pain reads as tactical and low-altitude, and cute wordplay reads as clever-but-empty. Keep the opening positive, plain, forward, higher-altitude, and free of cleverness.
 
+**Tune the headline to the funnel stage, not only the persona.** A strong persona/positioning line ("You run the PMO. Agents keep the projects moving.") can still miss for a free-trial activation email, where the headline should also signal a trial user *getting started* (start with one, see, your first). Match the persona AND the moment. (What made Alon's PMO headline picks work: the You/Agents division, PMO-specificity, and a two-beat rhythm; and separately, simple + direct + breadth.)
+
 ## Marketing / product email
 
 **Shape:** hook → named villain → the collapse to "just describe it" → three concrete examples → generous CTA.
