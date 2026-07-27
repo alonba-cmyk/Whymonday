@@ -55,6 +55,10 @@ Present these as a compact legend under any multi-option set, for example:
 
 Before an asset goes to production, collect Alon's per-message feedback through the chat's native question UI (AskUserQuestion), not a copy-paste board or a file upload. He clicks a tag per message and the answers return to you automatically. Present messages in batches (up to 4 per call); each message is one question with the rubric tags as options. The UI caps at 4 options, so show the most relevant tags for that batch and rely on "Other" for the remaining tags and free text. Keep **"unclear" in the default chip set** (Alon values it). A workable default four is Loved / Unclear / Tactical / Fluff-or-no-value, swapping Overlap in when sibling-headline repetition is the live risk. Then learn from each reaction (sharpen the skill), and present alternatives for the flagged ones the same way, until each message is "loved." A published artifact can show the messages in context, but the reactions come through the question UI. Never ask Alon to copy-paste or upload his feedback.
 
+## After each choice, report the learning
+
+After every pick Alon makes, tell him **what you learned from that choice** (what it reveals about his taste, including what he rejected and why) and **how you propose to sharpen the skill**, then apply it. He wants the living-loop made explicit on every choice, not just occasionally. Keep it short: the signal from the pick, the contrast with the options he passed on, and the one-line skill refinement.
+
 ## Be decisive, don't over-ask
 
 Never re-ask something Alon has already answered, and don't ask permission to proceed or to "start the review." When you have enough direction, assemble and present the finished asset. Reserve questions for genuine open choices, and prefer building over asking. A quick sequence of "which do you want / shall we review / continue?" frustrates him. Interpret his short answers generously and move.

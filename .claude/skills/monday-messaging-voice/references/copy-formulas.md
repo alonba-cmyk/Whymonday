@@ -87,6 +87,8 @@ Three vivid, specific, capitalized nouns beat one abstract claim.
 - Briefs, ads, emails, landing pages.
 - Plan, execute, and deliver.
 
+**Value detail = a triad of the reader's nouns + the outcome, not the agent's actions.** When elaborating on value, name a concrete triad of the reader's own things tied to the result ("keeps every task, update, and deadline on track"), not a list of what the agent does ("chases updates, flags risks, keeps the plan current"). Nouns-tied-to-outcome read as value; agent-action verb-lists read as technical. Also beats an abstract benefit ("so your team can focus on delivery").
+
 ## Heritage → "Now" cadence
 A parallel past-tense triad of earned wins, then a "Now" pivot into the shift.
 - For 15 years we made complex work simple. We connected teams across silos. We turned goals into results. Now, AI accelerates what that promise means.
