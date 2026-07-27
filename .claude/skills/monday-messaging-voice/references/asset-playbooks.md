@@ -15,6 +15,11 @@ For an email to someone **already in the product** (a free-trial or existing use
 - **Body:** two sentences max per paragraph. Name the villain ("die waiting on developers"), then the release ("builds them in minutes, no code, no dev ticket").
 - **Examples line:** a triad of capitalized, specific tools ("A Campaign Health Dashboard? An Asset Request Portal? An Event Command Center?").
 - **Close:** warm and low-friction ("build what you need, on us"). End on a temporal or "just describe it" payoff.
+- **Preview text:** the inbox snippet shown after the subject. Treat it as a second subject line, extend the hook, don't waste it on "view in browser." (E.g. subject "Give your first project an agent" + preview "Your first agent is live in minutes.")
+
+**Know before you write (light brief).** Before drafting, know: the audience and their journey stage (cold / trialing / churned / customer), the one action (CTA), the value (for them and their business), and how monday actually delivers it (the mechanism). Pull examples from the persona brief, not imagination. Get these from the brief; don't interrogate Alon for them.
+
+**Pre-send self-check (run it silently, don't make Alon do it):** one main point and one CTA? value in the subject and headline, not buried? value is an outcome, not a feature? explained the "how"? sounds like a person, positive, not on the defensive? no em-dashes or other craft tells? filler cut? spelling clean?
 
 ## Persona landing page (per department)
 

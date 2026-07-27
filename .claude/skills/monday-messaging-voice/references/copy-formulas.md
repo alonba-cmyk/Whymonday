@@ -52,7 +52,7 @@ Make an abstract pain concrete: a real name, a department, a specific pain in ab
 (Note: the shipped originals used an em-dash between role and pain. Render new copy with a period or colon instead.)
 
 ## `X, not Y` reframe
-Left side is the old assumption, right side is the new positioning. The core rhetorical engine.
+Left side is the old assumption, right side is the new positioning. The core rhetorical engine. **A core device, but use it sparingly in email** so it doesn't read as a writing tic (Alon's call).
 - Real business outcomes, not just completed tasks.
 - Teammates, not tools.
 - Same team, more output.
