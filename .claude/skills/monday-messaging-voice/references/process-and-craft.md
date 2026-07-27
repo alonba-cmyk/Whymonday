@@ -59,6 +59,8 @@ Before an asset goes to production, collect Alon's per-message feedback through 
 
 Never re-ask something Alon has already answered, and don't ask permission to proceed or to "start the review." When you have enough direction, assemble and present the finished asset. Reserve questions for genuine open choices, and prefer building over asking. A quick sequence of "which do you want / shall we review / continue?" frustrates him. Interpret his short answers generously and move.
 
+**Pick the right mode for the input you need.** Use the click UI (AskUserQuestion) for *reactions and tags* and clean picks. For *fine-grained wording iteration* (choosing among many variants of one line, or asking for "more options"), present the options as a **plain numbered list in the chat** that he can answer with a number, not a click round. If he stops engaging with click questions (repeated "no preference"), switch to a plain chat list or just make the call yourself and keep only what he flagged. Don't run several click rounds on a single line.
+
 ## Iterate line-by-line
 
 - When Alon approves a section, **freeze it** and move to the next. Don't regenerate whole blocks.
