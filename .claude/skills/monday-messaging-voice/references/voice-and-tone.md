@@ -14,6 +14,10 @@ Alon rejects copy that tries to be clever or cute at the cost of clarity ("מת�
 
 Even copy that explains how something works stays human and inviting, never a procedural spec-list. Alon flagged "Describe what you need, put one on your first project, and it's live in minutes. No setup." as too technical and informative, a string of instructions. Say it the way a person would say it, warmly, not as a feature how-to.
 
+## The swap test (is it specific enough?)
+
+The fastest check that a subject or headline is specific enough: if you can swap the audience, role, department, or industry for a different one and the line still works, it is too generic. Sharpen it until it could only have been written for this reader. ("Your first agent is one prompt away" survives a swap, so it is generic; "Every project, delivered" for PMO does not.) Run it on every subject and headline.
+
 ## Rhythm
 
 - **Fragments are tools.** Verbless sentences are welcome when they hit harder. "More requests. More priorities. Same hours."
@@ -67,6 +71,10 @@ Avoid these even though they're common marketing/LinkedIn defaults. Alon flags t
 - Vague "what's possible" / "what's next" with no concrete anchor
 - Decorative emoji that carry no meaning (a trailing sparkle). A single relevant emoji is a judgment call, never a default.
 - **Any phrasing that suggests agents replace or diminish people's value.** Agents "multiply," "take on," or "handle" work. They do not replace a role or make a job smaller. When in doubt, reread the line as if a person on that team were reading it about their own job. (This is core rule 15, elevated here because it is the easiest rule to violate by accident.)
+
+## Cut the filler
+
+Kill words that pad and soften, they weaken the point and add length: just, really, very, quite, actually, simply, "in order to", "the fact that", "we think", "kind of". Cut every word that doesn't change the meaning, then read it again and cut more.
 
 ## The eyebrow rule
 
