@@ -86,7 +86,7 @@
   .wr.h{background:var(--panel-3);font-family:ui-monospace,Menlo,monospace;font-size:.58rem;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-faint)}
   .wpill{border-radius:5px;padding:2px 0;text-align:center;color:#fff;font-weight:700;font-size:.6rem}
   .wpill.w{background:var(--warn)}.wpill.d{background:var(--good)}.wpill.s{background:var(--crit)}
-  .wmini{width:18px;height:18px;border-radius:50%;background-size:cover;background-position:center 16%;background-color:#9699A6}
+  .wmini{display:inline-block;vertical-align:middle;width:20px;height:20px;border-radius:50%;background-size:cover;background-position:center 16%;background-color:#9699A6}
 
   /* R3 video */
   .vidcard{border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:var(--shadow-soft);margin-top:4px}
@@ -135,6 +135,26 @@
   .abtn{background:var(--accent);color:var(--accent-ink);border-radius:11px;padding:12px 22px;font-weight:700;font-size:.92rem}
   .anol{color:var(--ink-soft);font-size:.88rem;text-decoration:underline;text-underline-offset:3px}
 
+  .asplit{display:grid;grid-template-columns:1fr 1fr;min-height:470px}
+  @media(max-width:760px){.asplit{grid-template-columns:1fr}}
+  .apanel{padding:24px}
+  .apanel h3{font-size:1.32rem;font-weight:800;letter-spacing:-.02em;margin:8px 0 2px}
+  .arow{display:flex;align-items:center;gap:11px;border:1.5px solid var(--line);border-radius:12px;padding:10px 12px;background:var(--panel);margin-top:8px}
+  .arow.on{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-tint)}
+  .arow .fa{width:40px;height:40px;border-radius:11px;background-size:cover;background-position:center 16%;background-color:var(--panel-2);flex:none}
+  .arow b{font-size:.9rem;letter-spacing:-.01em;display:block}
+  .arow .role{font-family:ui-monospace,Menlo,monospace;font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);font-weight:700}
+  .arow .add{margin-left:auto;border:1.5px solid var(--line);border-radius:8px;padding:5px 12px;font-size:.72rem;font-weight:700;flex:none}
+  .arow.on .add{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+  .arow.make{border-style:dashed;color:var(--ink-soft)}
+  .arow.make .fa{background:var(--accent-tint);color:var(--accent);display:grid;place-items:center;font-size:1.2rem;font-weight:700}
+  .afoot2{display:flex;align-items:center;gap:14px;margin-top:18px;flex-wrap:wrap}
+  .wpanel{border-left:1px solid var(--line);background:var(--panel-3);padding:22px}
+  @media(max-width:760px){.wpanel{border-left:0;border-top:1px solid var(--line)}}
+  .wtop{display:flex;align-items:center;justify-content:space-between;margin:2px 0 10px}
+  .wtop b{font-size:1rem;letter-spacing:-.01em}
+  .wagpill{font-size:.64rem;font-family:ui-monospace,Menlo,monospace;background:var(--accent-tint);color:var(--accent-deep);border-radius:20px;padding:3px 9px;font-weight:700;display:inline-flex;align-items:center;gap:6px}
+  .wagpill .d{width:6px;height:6px;border-radius:50%;background:var(--good)}
   footer{border-top:1px solid var(--line);margin-top:40px;padding:24px 0 60px}
   footer .fn{font-family:ui-monospace,Menlo,monospace;font-size:.72rem;color:var(--ink-faint)}
   footer .draft{color:var(--accent);font-weight:700}
@@ -244,28 +264,37 @@
 
   <!-- SECTION B -->
   <div class="secttl">Screen 2 · the agent screen</div>
-  <h2>A team for the job, plus your own, plus none.</h2>
-  <p class="sub">The selected use case brings up the agents that fit it, and you pick as many as you want. Two escape hatches: build a custom agent, or start with no agent at all, right by the CTA.</p>
+  <h2>Pick agents on the left. Watch the workspace fill on the right.</h2>
+  <p class="sub">The selected use case surfaces the agents that fit it. Add as many as you want and see them land on the board live. Build your own, or start with none, right by the CTA.</p>
 
   <div class="mock">
     <div class="bar"><i></i><i></i><i></i><span class="u">app.monday.com/agents</span></div>
-    <div class="ascreen">
-      <div class="aback">← Keep projects on track</div>
-      <div class="ah">Meet the agents for <span class="pill">projects</span></div>
-      <p class="asub">Add the ones you want on your board. You can change this any time.</p>
-      <div class="agrid">
-        <div class="acard on"><div class="chk">✓</div><div class="fa" data-img="projects"></div><b>Judy</b><div class="role">Priorities Manager</div><p>Surfaces and escalates what's urgent before it slips.</p><div class="addbtn">Added</div></div>
-        <div class="acard on"><div class="chk">✓</div><div class="fa" data-img="ops"></div><b>Milo</b><div class="role">Milestone Guardian</div><p>Guards every deadline and flags risk early.</p><div class="addbtn">Added</div></div>
-        <div class="acard"><div class="chk"></div><div class="fa" data-img="clients"></div><b>Vera</b><div class="role">Status Reporter</div><p>Turns updates into a weekly recap for you.</p><div class="addbtn">Add</div></div>
-        <div class="acard make"><div class="plus">+</div><b>Create your own agent</b><p>Describe a job in your words and we'll build it.</p></div>
+    <div class="asplit">
+      <div class="apanel">
+        <div class="aback">← Keep projects on track</div>
+        <h3>Add your agents</h3>
+        <p class="asub" style="margin-bottom:12px">Pick as many as you want. Watch them join the board.</p>
+        <div class="arow on"><span class="fa" data-img="projects"></span><div><b>Judy</b><div class="role">Priorities Manager</div></div><span class="add">Added</span></div>
+        <div class="arow on"><span class="fa" data-img="ops"></span><div><b>Milo</b><div class="role">Milestone Guardian</div></div><span class="add">Added</span></div>
+        <div class="arow"><span class="fa" data-img="clients"></span><div><b>Vera</b><div class="role">Status Reporter</div></div><span class="add">Add</span></div>
+        <div class="arow make"><span class="fa">+</span><div><b>Create your own agent</b><div class="role" style="color:var(--ink-faint)">describe the job</div></div></div>
+        <div class="afoot2"><span class="abtn">Continue with 2 agents</span><span class="anol">I'll start without an agent</span></div>
       </div>
-      <div class="afoot">
-        <span class="abtn">Continue with 2 agents</span>
-        <span class="anol">I'll start without an agent</span>
+      <div class="wpanel">
+        <div class="rlabel">Right · your workspace, live</div>
+        <div class="wtop"><b>This quarter</b><span class="wagpill"><span class="d"></span> 2 agents working</span></div>
+        <div class="wtable">
+          <div class="wr h"><div>Item</div><div>Owner</div><div>Status</div></div>
+          <div class="wr"><div>Kickoff &amp; scope</div><div><span class="wmini" data-img="ops"></span></div><div><span class="wpill d">Done</span></div></div>
+          <div class="wr"><div>Milestone 1 delivery</div><div><span class="wmini" data-img="projects"></span></div><div><span class="wpill w">Working</span></div></div>
+          <div class="wr"><div>Vendor dependency</div><div><span class="wmini" data-img="projects"></span></div><div><span class="wpill s">Stuck</span></div></div>
+          <div class="wr"><div>Risk review</div><div><span class="wmini" data-img="ops"></span></div><div><span class="wpill w">Working</span></div></div>
+        </div>
+        <div class="agrow" style="margin-top:12px"><span class="fa" data-img="projects"></span><div><b style="font-size:.8rem">Judy</b><span>Flagged “Vendor dependency” as at-risk</span></div></div>
       </div>
     </div>
   </div>
-  <div class="why"><b>Why this shape</b><p>Multi-select (not a single pick) matches how teams really staff a board. "Create your own agent" turns the catalog from a menu into a platform. And "start without an agent" keeps the fast, familiar path open, so agents feel like an offer, never a toll gate. The counter on the CTA ("Continue with 2 agents") makes the choice legible.</p></div>
+  <div class="why"><b>Why this shape</b><p>The workspace on the right makes the payoff concrete: every agent you add appears as an owner doing real work, so "more than one agent" is something you watch happen, not just a list you tick. Multi-select with a live CTA count, plus create-your-own and start-without, keep it a team you assemble, never a gate.</p></div>
 
 </div>
 
