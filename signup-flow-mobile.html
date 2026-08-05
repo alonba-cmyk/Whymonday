@@ -357,8 +357,8 @@
       <div class="hsplit">
         <div class="hero-left"><div class="hform lg">
           <button class="aback" data-back="2">← <span id="appBack">Add an agent</span></button>
-          <h1>Add the apps this workflow runs on</h1>
-          <p class="hint">Pre-picked for your use case. Add what fits.</p>
+          <h1 id="appHead">The apps built for your workflow</h1>
+          <p class="hint">The recommended one's in. Add what else fits.</p>
           <div id="appList"></div>
           <div class="afoot">
             <button class="btn primary" id="appGo" data-next="build">Continue</button>
@@ -617,10 +617,11 @@ var APPS={
  ops:[{n:'Process Automations',d:'Run the routine steps on their own.',i:'bolt'},{n:'Request Forms',d:'One front door for every ask.',i:'form'},{n:'Ops Dashboard',d:'Throughput and bottlenecks at a glance.',i:'chart'}],
  _default:[{n:'Dashboards',d:'Track progress and results at a glance.',i:'chart'},{n:'Automations',d:'Let the routine work run itself.',i:'bolt'},{n:'Docs',d:'Plans and updates right next to the work.',i:'doc'}]
 };
+var HEADWORD={launch:'launch',campaigns:'campaigns',content:'content plan',deals:'sales pipeline',pipeline:'pipeline',outreach:'outreach',dev:'sprint',roadmap:'roadmap',feedback:'feedback loop',projects:'projects',portfolio:'portfolio',risk:'risk tracking',recruiting:'hiring',onboarding:'onboarding',hrrequests:'people requests',tickets:'IT tickets',assets:'asset tracking',access:'access requests',ops:'operations',vendors:'vendor management',budget:'budget'};
 var appsAdded={};
 function appsFor(k){return APPS[k]||APPS._default;}
 function appsAddedList(){var apps=appsFor(chosen),out=[];apps.forEach(function(a,i){if(appsAdded[chosen+i])out.push(a);});return out;}
-function enterApps(){document.getElementById('appBack').textContent=UC[chosen].label;if(appsAdded[chosen+0]===undefined)appsAdded[chosen+0]=true;renderApps();}
+function enterApps(){document.getElementById('appBack').textContent=UC[chosen].label;document.getElementById('appHead').textContent='The apps built for your '+(HEADWORD[chosen]||'workflow');if(appsAdded[chosen+0]===undefined)appsAdded[chosen+0]=true;renderApps();}
 function renderApps(){
  var list=document.getElementById('appList');list.innerHTML='';
  appsFor(chosen).forEach(function(a,idx){
