@@ -19,8 +19,8 @@
   :root[data-theme="dark"]{--ground:#0C0C16;--panel:#151524;--panel-2:#1C1B30;--panel-3:#17172A;--ink:#ECECF6;--ink-soft:#A6A6C0;--ink-faint:#71718C;--line:#282740;--line-soft:#20203499;--accent:#8B7DFF;--accent-ink:#0C0C16;--accent-tint:#241F45;--accent-deep:#B4ABFF;--shadow:0 1px 2px rgba(0,0,0,.4),0 18px 46px rgba(0,0,0,.55);--shadow-soft:0 1px 2px rgba(0,0,0,.35),0 10px 26px rgba(0,0,0,.4);}
 
   *{box-sizing:border-box}
-  html,body{height:100%}
-  body{margin:0;background:var(--ground);color:var(--ink);font-family:"Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased;overflow:hidden}
+  html,body{min-height:100%}
+  body{margin:0;background:var(--ground);color:var(--ink);font-family:"Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
   .mono{font-family:ui-monospace,"SF Mono","JetBrains Mono",Menlo,Consolas,monospace}
 
   /* ---------- full-bleed background ---------- */
@@ -59,7 +59,7 @@
   .prog i.on{background:var(--accent)}.prog i.done{background:var(--good)}
   body.on-dark .prog i.on{background:#fff}
 
-  .content{flex:1;display:grid;place-items:center;padding:22px}
+  .content{flex:1 0 auto;display:flex;align-items:center;justify-content:center;padding:40px 22px}
   .pane{display:none;width:min(92vw,440px)}
   .pane.on{display:block;animation:fade .4s ease}
   .pane.wide{width:min(94vw,480px)}
@@ -131,7 +131,7 @@
   @keyframes spin{to{transform:rotate(360deg)}}
 
   /* ---------- app board (step 4) ---------- */
-  .appboard{display:none;height:100vh;height:100dvh;grid-template-rows:auto auto 1fr;position:relative;z-index:5;background:var(--ground)}
+  .appboard{display:none;min-height:100vh;min-height:100dvh;grid-template-rows:auto auto 1fr;position:relative;z-index:5;background:var(--ground)}
   body.in-app .appboard{display:grid}
   .welcomebar{background:var(--accent-tint);color:var(--accent-deep);font-size:.86rem;text-align:center;padding:8px 16px;font-weight:600}
   .appbar{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;border-bottom:1px solid var(--line);background:var(--panel-3)}
