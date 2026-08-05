@@ -52,6 +52,7 @@ Confirm the change briefly with Alon, but default to capturing rather than losin
 
 - "People and agents, working together" / "People and agents, together"
 - "You lead. Agents act." / "People make the calls, agents run the routine." / "People lead, agents deliver."
+- "…to work alongside you" — an agent works **alongside you**, not for you. Approved: **"Add an agent to work alongside you."** Prefer "alongside you" (partnership, on the together-thesis) over "doing the work for you" (reads as delegation/replacement). See `references/voice-and-tone.md` § "alongside you, not for you."
 - "Execute, manage, and operate as one team"
 - "Built around the job the customer needs done"
 - "Trust isn't given, it's built in"
