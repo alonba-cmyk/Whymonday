@@ -111,6 +111,15 @@
 
   /* use-case list */
   .uclist{display:flex;flex-direction:column;gap:8px}
+  .deptgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .depttile{display:flex;align-items:center;gap:10px;border:1.5px solid var(--line);border-radius:12px;padding:11px 12px;background:var(--panel);cursor:pointer;text-align:left;color:var(--ink);font-family:inherit;transition:.15s;min-width:0}
+  .depttile:hover{border-color:var(--accent)}
+  .depttile.sel{border-color:var(--accent);background:var(--accent-tint);box-shadow:0 0 0 3px var(--accent-tint)}
+  .depttile .ic{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;flex:none;background:var(--accent-tint);color:var(--accent)}
+  .depttile .ic svg{width:17px;height:17px}
+  .depttile .tx{min-width:0}
+  .depttile .tx b{display:block;font-size:.85rem;letter-spacing:-.01em}
+  .depttile .tx span{display:block;font-size:.71rem;color:var(--ink-soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .ucrow{display:flex;align-items:center;gap:11px;border:1.5px solid var(--line);border-radius:12px;padding:11px 13px;background:var(--panel);cursor:pointer;text-align:left;color:var(--ink);width:100%;font-family:inherit;transition:.15s}
   .ucrow:hover{border-color:var(--accent)}
   .ucrow.sel{border-color:var(--accent);background:var(--accent-tint)}
@@ -213,7 +222,7 @@
         <div class="hero-left">
           <div class="hform tc">
             <h1>Welcome to the AI Workspace</h1>
-            <p class="hint">Get started with monday, it's free. No credit card needed.</p>
+            <p class="hint">Get started with monday, it's free.<br>No credit card needed.</p>
             <button class="btn google" data-next="dept"><svg width="17" height="17" viewBox="0 0 48 48" aria-hidden="true"><path fill="#4285F4" d="M45 24.5c0-1.6-.1-2.8-.4-4H24v7.3h12c-.2 1.9-1.5 4.8-4.4 6.7l6.5 5C42 42 45 34 45 24.5z"/><path fill="#34A853" d="M24 46c5.9 0 10.9-2 14.5-5.3l-6.9-5.3c-1.9 1.3-4.4 2.2-7.6 2.2-5.8 0-10.7-3.9-12.5-9.2l-7 5.4C8 39.9 15.4 46 24 46z"/><path fill="#FBBC05" d="M11.5 28.4c-.5-1.4-.7-2.9-.7-4.4s.3-3 .7-4.4l-7-5.4C3.9 17 3 20.4 3 24s.9 7 2.5 9.8l6-5.4z"/><path fill="#EA4335" d="M24 10.7c3.3 0 5.5 1.4 6.8 2.6l5.9-5.7C33 4.2 28.9 2 24 2 15.4 2 8 8.1 5.5 16.6l7 5.4C14.3 14.6 19.2 10.7 24 10.7z"/></svg> Continue with Google</button>
             <div class="divword mono">or</div>
             <input class="field" type="email" placeholder="name@work.com" aria-label="Work email">
@@ -231,7 +240,7 @@
         <div class="hero-left"><div class="hform lg">
           <h1>Where do you work?</h1>
           <p class="hint">We'll tailor monday to your team.</p>
-          <div class="uclist" id="deptlist"></div>
+          <div class="deptgrid" id="deptlist"></div>
           <div class="row-cta">
             <button class="btn primary" id="deptNext" data-next="1" disabled>Continue</button>
           </div>
@@ -383,11 +392,11 @@ var chosen=null, chosenDept=null, added={}, noAgent=false;
 /* department + use-case lists */
 function DEP(){for(var i=0;i<DEPTS.length;i++)if(DEPTS[i].k===chosenDept)return DEPTS[i];return DEPTS[0];}
 function renderDeptList(){var w=document.getElementById('deptlist');w.innerHTML='';
- DEPTS.forEach(function(d){var b=document.createElement('button');b.className='ucrow deptrow';b.dataset.dept=d.k;
-  b.innerHTML='<span class="ic">'+ICON[DICON[d.k]]+'</span><span class="tx"><b>'+d.name+'</b><span>'+d.sub+'</span></span><span class="rd"></span>';
+ DEPTS.forEach(function(d){var b=document.createElement('button');b.className='depttile';b.dataset.dept=d.k;
+  b.innerHTML='<span class="ic">'+ICON[DICON[d.k]]+'</span><span class="tx"><b>'+d.name+'</b><span>'+d.sub+'</span></span>';
   b.addEventListener('click',function(){pickDept(d.k);});w.appendChild(b);});}
 function pickDept(k){chosenDept=k;
- document.querySelectorAll('.deptrow').forEach(function(c){c.classList.toggle('sel',c.dataset.dept===k);});
+ document.querySelectorAll('.depttile').forEach(function(c){c.classList.toggle('sel',c.dataset.dept===k);});
  document.getElementById('deptNext').disabled=false;
  var v=document.getElementById('deptVid');if(v){v.poster=DPOSTER[k];v.src=DVID[k];v.load();var pr=v.play();if(pr&&pr.catch)pr.catch(function(){});}}
 var deptBuilt=false;
