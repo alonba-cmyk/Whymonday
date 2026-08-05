@@ -77,9 +77,10 @@
   .tilemedia video{width:100%;height:auto;display:block}
   .rowmedia{display:flex;flex-direction:column;gap:8px;flex-basis:100%;width:100%;margin-top:16px;padding-top:14px;border-top:1px solid var(--line-soft)}
   .rowmedia .rmhead{font-family:ui-monospace,Menlo,monospace;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);font-weight:700}
-  .rowmedia .wtable{width:100%;font-size:.74rem;border-color:var(--line-soft);background:transparent}
+  .rowmedia .wtable{width:100%;font-size:.74rem;border:0;border-radius:0;background:transparent;overflow:visible}
   .rowmedia .wr.h{display:none}
-  .rowmedia .wr>div{padding:7px 10px;border-bottom-color:var(--line-soft)}
+  .rowmedia .wr>div{padding:8px 2px;border-bottom-color:var(--line-soft)}
+  .rowmedia .wr:first-child>div{border-top:1px solid var(--line-soft)}
   .rowmedia .rmnote{display:flex;align-items:center;gap:8px;font-size:.73rem;color:var(--ink-soft);white-space:normal;line-height:1.35}
   .rowmedia .rmnote .fa{width:20px;height:20px;border-radius:6px;background-size:cover;background-position:center 16%;flex:none}
   .agmedia.show{display:flex;flex-direction:column;gap:6px;flex-basis:100%;width:100%;margin-top:11px;padding-top:11px;border-top:1px solid var(--line-soft)}
