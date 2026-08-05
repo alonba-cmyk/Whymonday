@@ -63,6 +63,8 @@
   .hero-left{display:flex;align-items:center;justify-content:center;padding:40px 24px;background:var(--ground)}
   .hform{width:min(360px,100%)}
   .hform h1{font-size:1.95rem;margin-bottom:6px}
+  .hform.tc{text-align:center}
+  .hform.tc .hint{font-size:.86rem}
   .hero-right{background:radial-gradient(34% 38% at 6% 5%,rgba(139,124,255,.13),transparent 62%),radial-gradient(40% 42% at 97% 97%,rgba(0,178,214,.11),transparent 62%),radial-gradient(30% 34% at 92% 4%,rgba(255,120,180,.07),transparent 60%),var(--ground);border-left:1px solid var(--line);display:flex;align-items:center;justify-content:center;padding:40px}
   .hvis{width:min(96%,700px);border-radius:16px;overflow:hidden;box-shadow:0 18px 44px rgba(40,30,90,.14);border:1px solid var(--line);line-height:0}
   .hvis video{width:100%;height:auto;display:block}
@@ -140,10 +142,10 @@
   .wsnote .fa{width:24px;height:24px;border-radius:7px;background-size:cover;background-position:center 16%;background-color:var(--panel-2);flex:none}
 
   /* agent select rows */
-  .arow{display:flex;align-items:center;gap:11px;border:1.5px solid var(--line);border-radius:12px;padding:10px 12px;background:var(--panel);margin-top:8px;cursor:pointer;text-align:left;color:var(--ink);width:100%;font-family:inherit;transition:.15s}
+  .arow{display:flex;align-items:center;gap:13px;border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;background:var(--panel);margin-top:8px;cursor:pointer;text-align:left;color:var(--ink);width:100%;font-family:inherit;transition:.15s;min-height:84px}
   .arow:hover{border-color:var(--accent)}
   .arow.on{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-tint)}
-  .arow .fa{width:42px;height:42px;border-radius:11px;background-size:cover;background-position:center 16%;background-color:var(--panel-2);flex:none}
+  .arow .fa{width:52px;height:52px;border-radius:13px;background-size:cover;background-position:center 16%;background-color:var(--panel-2);flex:none}
   .arow .tx{flex:1;min-width:0}
   .arow .tx b{display:block;font-size:.9rem;letter-spacing:-.01em}
   .arow .tx .role{font-family:ui-monospace,Menlo,monospace;font-size:.56rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);font-weight:700}
@@ -209,7 +211,7 @@
     <div class="pane on" data-pane="0">
       <div class="hsplit">
         <div class="hero-left">
-          <div class="hform">
+          <div class="hform tc">
             <h1>Welcome to the AI Workspace</h1>
             <p class="hint">Get started with monday, it's free. No credit card needed.</p>
             <button class="btn google" data-next="dept"><svg width="17" height="17" viewBox="0 0 48 48" aria-hidden="true"><path fill="#4285F4" d="M45 24.5c0-1.6-.1-2.8-.4-4H24v7.3h12c-.2 1.9-1.5 4.8-4.4 6.7l6.5 5C42 42 45 34 45 24.5z"/><path fill="#34A853" d="M24 46c5.9 0 10.9-2 14.5-5.3l-6.9-5.3c-1.9 1.3-4.4 2.2-7.6 2.2-5.8 0-10.7-3.9-12.5-9.2l-7 5.4C8 39.9 15.4 46 24 46z"/><path fill="#FBBC05" d="M11.5 28.4c-.5-1.4-.7-2.9-.7-4.4s.3-3 .7-4.4l-7-5.4C3.9 17 3 20.4 3 24s.9 7 2.5 9.8l6-5.4z"/><path fill="#EA4335" d="M24 10.7c3.3 0 5.5 1.4 6.8 2.6l5.9-5.7C33 4.2 28.9 2 24 2 15.4 2 8 8.1 5.5 16.6l7 5.4C14.3 14.6 19.2 10.7 24 10.7z"/></svg> Continue with Google</button>
