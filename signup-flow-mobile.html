@@ -150,7 +150,7 @@
   .ucrow .ic svg{width:17px;height:17px}
   .ucrow .tx b{display:block;font-size:.9rem;letter-spacing:-.01em}
   .ucrow .tx span{display:block;font-size:.74rem;color:var(--ink-soft)}
-  .ucrow .rd{margin-left:auto;width:17px;height:17px;border-radius:50%;border:2px solid var(--line);flex:none}
+  .ucrow .rd{margin-left:auto;align-self:flex-start;margin-top:3px;width:17px;height:17px;border-radius:50%;border:2px solid var(--line);flex:none}
   .ucrow.sel .rd{border-color:var(--accent);background:radial-gradient(circle,var(--accent) 45%,transparent 47%)}
 
   /* workspace board */
@@ -462,7 +462,7 @@ function pickUC(k){
  document.querySelectorAll('.ucrow').forEach(function(c){var sel=c.dataset.uc===k;c.classList.toggle('sel',sel);
   var m=c.querySelector('.rowmedia');
   if(sel&&mob()){ if(!m){m=document.createElement('div');m.className='rowmedia';c.appendChild(m);}
-   m.innerHTML='<div class="rmhead">'+u.board+' · '+u.agents.length+' agents ready</div><div class="wtable">'+boardHTML(k,false)+'</div><div class="rmnote"><span class="fa" style="background-image:url('+IMG[lead.f]+')"></span> <span>'+u.agents.length+' agents fit this, led by '+lead.n+'. Meet them next.</span></div>';
+   m.innerHTML='<div class="wtable">'+boardHTML(k,false)+'</div><div class="rmnote"><span class="fa" style="background-image:url('+IMG[lead.f]+')"></span> <span>'+u.agents.length+' agents fit this, led by '+lead.n+'. Meet them next.</span></div>';
   } else if(m){ m.remove(); }
  });
  document.getElementById('ucNext').disabled=false;
@@ -480,7 +480,7 @@ function renderAgents(){
  var list=document.getElementById('agList');list.innerHTML='';
  u.agents.forEach(function(a,idx){
   var row=document.createElement('button');row.className='arow'+(added[chosen+idx]?' on':'');row.dataset.idx=idx;
-  row.innerHTML='<span class="fa" style="background-image:url('+IMG[a.f]+')"></span><span class="tx"><b>'+a.n+'</b><span class="role">'+a.r+'</span><p>'+a.p+'</p></span><span class="add">'+(added[chosen+idx]?'Added':'Add')+'</span><div class="agmedia"></div>';
+  row.innerHTML='<span class="fa" style="background-image:url('+IMG[a.f]+')"></span><span class="tx"><b>'+a.n+'</b><span class="role">'+a.r+'</span><p>'+a.p+'</p></span><span class="add">'+(added[chosen+idx]?'Added':'Add')+'</span>';
   row.addEventListener('click',function(){toggleAgent(idx);});list.appendChild(row);
  });
  syncAgentBoard();
