@@ -23,6 +23,7 @@ monday's friendly-bold foundation (rounded, generous whitespace, confident type,
 6. **Self-contained.** Inline all CSS/JS, embed assets as data URIs, no external fonts/CDN/requests (strict CSP). Responsive, no horizontal page scroll. Emoji favicon.
 7. **Drafts carry review chrome; production strips it.** A draft shows the review bar, the "Show alternatives" toggle, and a draft marker. The production export removes all of it (`references/components.md`).
 8. **Never fabricate records.** Use placeholder logos/avatars and real public proof only; flag invented specifics as recommendations to validate (this mirrors the voice skill's accuracy rule).
+9. **Equal cards in a group.** Cards/tiles sitting together on the same screen are always the same size as each other (equal height), unless a size difference is deliberate. Never let one- vs multi-line content make one card taller — use `align-items: stretch`, a shared `min-height`, and `-webkit-line-clamp` on variable text, and re-verify at mobile widths (`references/layout-and-components.md` § Cards).
 
 ## Workflow
 
