@@ -219,13 +219,47 @@
   .brow>div{padding:11px 14px;border-bottom:1px solid var(--line-soft)}
   .brow.h{background:var(--panel-3);font-family:ui-monospace,Menlo,monospace;font-size:.62rem;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-faint)}
   .brow:last-child>div{border-bottom:0}
+  /* app rows (reuse .arow shell) */
+  .arow .aic{width:46px;height:46px;border-radius:13px;display:grid;place-items:center;flex:none;background:var(--accent-tint);color:var(--accent)}
+  .arow .aic svg{width:23px;height:23px}
+  .apptiles{display:flex;flex-direction:column;gap:9px}
+  .apptile{display:flex;align-items:center;gap:11px;background:var(--panel-3);border:1px solid var(--line);border-radius:12px;padding:11px 13px}
+  .apptile .aic{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;flex:none;background:var(--accent-tint);color:var(--accent)}
+  .apptile .aic svg{width:19px;height:19px}
+  .apptile b{font-size:.86rem;display:block}
+  .apptile span{font-size:.72rem;color:var(--ink-soft)}
+  .apptile.empty{color:var(--ink-faint);font-size:.82rem;justify-content:center;border-style:dashed}
+  /* board view tabs */
+  .bh-right{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .viewtabs{display:inline-flex;background:var(--panel-3);border:1px solid var(--line);border-radius:10px;padding:3px}
+  .vt{border:0;background:none;font-family:inherit;font-size:.8rem;font-weight:600;color:var(--ink-soft);padding:6px 13px;border-radius:7px;cursor:pointer}
+  .vt.on{background:var(--panel);color:var(--ink);box-shadow:var(--shadow-soft)}
+  /* kanban */
+  .kb{display:flex;gap:12px;overflow-x:auto;padding-bottom:4px}
+  .kbcol{flex:1;min-width:150px;background:var(--panel-3);border:1px solid var(--line);border-radius:12px;padding:11px}
+  .kbh{display:flex;align-items:center;gap:7px;font-size:.72rem;font-weight:700;margin-bottom:9px}
+  .kbh .dot{width:9px;height:9px;border-radius:50%}
+  .kbh .dot.work{background:var(--warn)}.kbh .dot.done{background:var(--good)}.kbh .dot.stuck{background:var(--crit)}
+  .kbc{background:var(--panel);border:1px solid var(--line);border-radius:9px;padding:10px;margin-bottom:8px;font-size:.85rem;box-shadow:var(--shadow-soft)}
+  .kbc:last-child{margin-bottom:0}
+  .kbc .cft{display:flex;align-items:center;justify-content:space-between;margin-top:8px}
+  .kbc .cdue{font-family:ui-monospace,Menlo,monospace;font-size:.68rem;color:var(--ink-faint)}
+  /* timeline */
+  .tl{border:1px solid var(--line);border-radius:12px;overflow:hidden;max-width:840px}
+  .tlrow{display:grid;grid-template-columns:minmax(120px,1.3fr) 2fr;align-items:center;gap:14px;padding:11px 14px;border-bottom:1px solid var(--line-soft)}
+  .tlrow:last-child{border-bottom:0}
+  .tlrow .tlname{font-size:.9rem;display:flex;align-items:center;gap:9px;min-width:0}
+  .tltrack{position:relative;height:24px;background:var(--panel-3);border-radius:7px}
+  .tlbar{position:absolute;top:4px;height:16px;border-radius:5px;display:flex;align-items:center;padding:0 8px;font-size:.62rem;font-weight:700;color:#fff;white-space:nowrap}
+  .tlbar.work{background:var(--warn)}.tlbar.done{background:var(--good)}.tlbar.stuck{background:var(--crit)}
+  @media(max-width:820px){.tlrow{grid-template-columns:1fr;gap:7px}.viewtabs{width:100%;justify-content:space-between}.vt{flex:1;text-align:center}}
   .bmini{display:inline-block;width:24px;height:24px;border-radius:50%;background-size:cover;background-position:center 16%;background-color:#c7c7d2}
   .toast{position:fixed;right:20px;bottom:20px;z-index:40;background:var(--ink);color:var(--ground);border-radius:14px;padding:13px 15px;font-size:.86rem;max-width:280px;box-shadow:var(--shadow);display:none;gap:10px;align-items:flex-start}
   .toast.show{display:flex}
   .toast .fa{width:26px;height:26px;border-radius:8px;background-size:cover;background-position:center 16%;background-color:var(--panel-2);flex:none}
   .toast .x{margin-left:4px;cursor:pointer;color:var(--ink-faint);background:none;border:0;font-size:1rem}
   .restart{position:fixed;left:14px;bottom:14px;z-index:50;background:var(--panel);border:1px solid var(--line);color:var(--ink-soft);border-radius:20px;padding:7px 13px;font-size:.76rem;cursor:pointer;font-family:ui-monospace,Menlo,monospace;box-shadow:var(--shadow-soft)}
-  @media(max-width:820px){.restart{left:auto;bottom:auto;top:14px;right:62px;padding:6px 11px;font-size:.72rem}}
+  @media(max-width:820px){.restart{left:auto;bottom:auto;top:14px;right:62px;padding:6px 11px;font-size:.72rem}body.in-app .restart{top:auto;bottom:16px;right:16px}}
 </style>
 
 <div class="bg" id="bg">
@@ -305,8 +339,8 @@
           <div id="agList"></div>
           <div class="arow make" id="makeAgent"><span class="fa">+</span><div class="tx"><b>Create your own agent</b><p>Describe a job in your words and we'll build it.</p></div></div>
           <div class="afoot">
-            <button class="btn primary" id="agGo" data-next="build">Continue with 0 agents</button>
-            <button class="skiplink" data-next="build" data-noagent="1">I'll start without an agent</button>
+            <button class="btn primary" id="agGo" data-next="apps">Continue with 0 agents</button>
+            <button class="skiplink" data-next="apps" data-noagent="1">I'll start without an agent</button>
           </div>
         </div></div>
         <div class="hero-right"><div class="wscard">
@@ -314,6 +348,27 @@
           <div class="wshead"><b id="agBoardName">Your board</b><span class="wagpill" id="agAgPill"><span class="d"></span> 0 agents working</span></div>
           <div class="wtable" id="agBoard"></div>
           <div class="wsnote" id="agNote" style="display:none"></div>
+        </div></div>
+      </div>
+    </div>
+
+    <!-- apps -->
+    <div class="pane" data-pane="apps">
+      <div class="hsplit">
+        <div class="hero-left"><div class="hform lg">
+          <button class="aback" data-back="2">← <span id="appBack">Add an agent</span></button>
+          <h1>Add the apps this workflow runs on</h1>
+          <p class="hint">Pre-picked for your use case. Add what fits.</p>
+          <div id="appList"></div>
+          <div class="afoot">
+            <button class="btn primary" id="appGo" data-next="build">Continue</button>
+            <button class="skiplink" data-next="build" data-noapp="1">Skip apps for now</button>
+          </div>
+        </div></div>
+        <div class="hero-right"><div class="wscard">
+          <div class="rlabel">Your toolkit</div>
+          <div class="wshead"><b>Ready to run</b><span class="wagpill" id="appPill"><span class="d"></span> 0 apps</span></div>
+          <div class="apptiles" id="appTiles"></div>
         </div></div>
       </div>
     </div>
@@ -346,12 +401,18 @@
     <button id="themeBtn2" class="theme-toggle" aria-label="Toggle light or dark mode"><span class="ti"></span></button>
   </div>
   <div class="boardwrap">
-    <div class="bh"><h2 id="finBoardName">Your board</h2><span class="wagpill" id="finPill"><span class="d"></span> agents working</span></div>
-    <div class="glabel">This week</div>
-    <div class="btable">
-      <div class="brow h"><div>Item</div><div>Owner</div><div>Status</div><div>Due</div></div>
-      <div id="finRows"></div>
+    <div class="bh"><h2 id="finBoardName">Your board</h2>
+      <div class="bh-right">
+        <span class="wagpill" id="finPill"><span class="d"></span> agents working</span>
+        <div class="viewtabs" id="viewtabs">
+          <button class="vt on" data-view="table">Table</button>
+          <button class="vt" data-view="timeline">Timeline</button>
+          <button class="vt" data-view="kanban">Kanban</button>
+        </div>
+      </div>
     </div>
+    <div class="glabel">This week</div>
+    <div id="boardView"></div>
   </div>
 </div>
 
@@ -458,7 +519,7 @@ function boardHTML(k,ownersActive){
 
 function pickUC(k){
  chosen=k;
- added={}; added[k+0]=true;
+ added={}; added[k+0]=true; appsAdded={};
  var u=UC[k];var lead=u.agents[0];
  document.querySelectorAll('.ucrow').forEach(function(c){c.classList.toggle('sel',c.dataset.uc===k);
   var m=c.querySelector('.rowmedia');if(m)m.remove();
@@ -529,16 +590,96 @@ function setMode(m){bg.className='bg '+m;body.classList.toggle('ws-step',m==='ws
 function show(step){
  panes.forEach(function(p){p.classList.toggle('on',p.dataset.pane===String(step));});
  body.classList.toggle('step0',String(step)==='0');
- var idx={'0':0,'dept':1,'1':2,'2':3,'build':3}[String(step)];
+ var idx={'0':0,'dept':1,'1':2,'2':3,'apps':4,'build':4}[String(step)];
  progs.forEach(function(i,n){i.classList.remove('on','done');if(n<idx)i.classList.add('done');if(n===idx)i.classList.add('on');});
  setMode(step==='0'?'ws':'bp');
 }
+/* apps */
+var AICON={
+ chart:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="12" width="3" height="6"/><rect x="12" y="8" width="3" height="10"/><rect x="17" y="5" width="3" height="13"/></svg>',
+ bolt:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>',
+ doc:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h5"/></svg>',
+ cal:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>',
+ grid:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>',
+ form:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 13l2 2 4-4"/></svg>',
+ plug:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2v6M15 2v6M7 8h10v3a5 5 0 0 1-10 0zM12 16v6"/></svg>',
+ check:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>'
+};
+var APPS={
+ launch:[{n:'Launch Timeline',d:'Every phase and owner on one dated plan.',i:'cal'},{n:'Creative Hub',d:'Briefs, assets and approvals in one place.',i:'grid'},{n:'Stakeholder Updates',d:'Auto-share status with leadership.',i:'doc'}],
+ campaigns:[{n:'Campaign Dashboard',d:'Spend, reach and results, live.',i:'chart'},{n:'Content Calendar',d:'Plan and schedule across channels.',i:'cal'},{n:'Link Tracking',d:'Tie every click back to a campaign.',i:'plug'}],
+ content:[{n:'Editorial Calendar',d:'Every brief, draft and deadline in view.',i:'cal'},{n:'Asset Library',d:'One home for approved creative.',i:'grid'},{n:'Approvals',d:'Route drafts for sign-off automatically.',i:'check'}],
+ deals:[{n:'Sales Dashboard',d:'Pipeline, forecast and win-rate, live.',i:'chart'},{n:'Email Sync',d:'Log every email against the deal.',i:'plug'},{n:'Quote Builder',d:'Generate quotes without leaving the deal.',i:'doc'}],
+ dev:[{n:'Sprint Board',d:'Plan and track every sprint.',i:'grid'},{n:'Bug Intake',d:'Capture and triage issues fast.',i:'form'},{n:'Release Notes',d:'Ship notes straight from done items.',i:'doc'}],
+ projects:[{n:'Project Timeline',d:'Phases, owners and dates in one view.',i:'cal'},{n:'Workload',d:'See who is over capacity.',i:'chart'},{n:'Status Reports',d:'Auto-built updates for every project.',i:'doc'}],
+ recruiting:[{n:'Candidate Pipeline',d:'Every applicant, stage by stage.',i:'grid'},{n:'Interview Scheduler',d:'Book interviews without the back-and-forth.',i:'cal'},{n:'Application Forms',d:'Capture and route new applicants.',i:'form'}],
+ tickets:[{n:'Ticket Forms',d:'One intake for every request.',i:'form'},{n:'SLA Automations',d:'Escalate before you breach.',i:'bolt'},{n:'Support Dashboard',d:'Volume, response time and load, live.',i:'chart'}],
+ ops:[{n:'Process Automations',d:'Run the routine steps on their own.',i:'bolt'},{n:'Request Forms',d:'One front door for every ask.',i:'form'},{n:'Ops Dashboard',d:'Throughput and bottlenecks at a glance.',i:'chart'}],
+ _default:[{n:'Dashboards',d:'Track progress and results at a glance.',i:'chart'},{n:'Automations',d:'Let the routine work run itself.',i:'bolt'},{n:'Docs',d:'Plans and updates right next to the work.',i:'doc'}]
+};
+var appsAdded={};
+function appsFor(k){return APPS[k]||APPS._default;}
+function appsAddedList(){var apps=appsFor(chosen),out=[];apps.forEach(function(a,i){if(appsAdded[chosen+i])out.push(a);});return out;}
+function enterApps(){document.getElementById('appBack').textContent=UC[chosen].label;if(appsAdded[chosen+0]===undefined)appsAdded[chosen+0]=true;renderApps();}
+function renderApps(){
+ var list=document.getElementById('appList');list.innerHTML='';
+ appsFor(chosen).forEach(function(a,idx){
+  var on=appsAdded[chosen+idx];
+  var row=document.createElement('button');row.className='arow'+(on?' on':'');row.dataset.aidx=idx;
+  row.innerHTML='<span class="aic">'+AICON[a.i]+'</span><span class="tx"><b>'+a.n+'</b><span class="role">App</span><p>'+a.d+'</p></span><span class="add">'+(on?'Added':'Add')+'</span>';
+  row.addEventListener('click',function(){appsAdded[chosen+idx]=!appsAdded[chosen+idx];renderApps();});
+  list.appendChild(row);
+ });
+ var n=appsAddedList().length;
+ document.getElementById('appGo').textContent=n?('Continue with '+n+' app'+(n>1?'s':'')):'Continue';
+ document.getElementById('appPill').innerHTML='<span class="d"></span> '+n+' app'+(n===1?'':'s');
+ syncAppTiles();
+}
+function syncAppTiles(){
+ var t=document.getElementById('appTiles');if(!t)return;var mine=appsAddedList();
+ if(!mine.length){t.innerHTML='<div class="apptile empty">No apps yet</div>';return;}
+ t.innerHTML=mine.map(function(a){return '<div class="apptile"><span class="aic">'+AICON[a.i]+'</span><div><b>'+a.n+'</b><span>'+a.d+'</span></div></div>';}).join('');
+}
+/* board views */
+var boardView='table';
+function renderBoardView(){
+ var d=window._board;if(!d)return;var u=d.u,mine=d.mine,n=d.n,h='';
+ var el=document.getElementById('boardView');
+ if(boardView==='table'){
+  h='<div class="btable"><div class="brow h"><div>Item</div><div>Owner</div><div>Status</div><div>Due</div></div>';
+  u.rows.forEach(function(r,i){var own=ownerCell(n>0?mine[i%n].f:null);
+   h+='<div class="brow"><div>'+r[0]+'</div><div>'+own+'</div><div><span class="wpill '+r[1]+'">'+LBL[r[1]]+'</span></div><div class="mono" style="color:var(--ink-faint);font-size:.82rem">'+r[2]+'</div></div>';});
+  h+='</div>';
+ } else if(boardView==='kanban'){
+  h='<div class="kb">';
+  [['work','Working on it'],['done','Done'],['stuck','Stuck']].forEach(function(c){
+   h+='<div class="kbcol"><div class="kbh"><span class="dot '+c[0]+'"></span>'+c[1]+'</div>';
+   u.rows.forEach(function(r,i){if(r[1]===c[0]){var own=ownerCell(n>0?mine[i%n].f:null);
+    h+='<div class="kbc">'+r[0]+'<div class="cft">'+own+'<span class="cdue">'+r[2]+'</span></div></div>';}});
+   h+='</div>';});
+  h+='</div>';
+ } else {
+  var pos=[[6,50],[38,40],[62,32]];
+  h='<div class="tl">';
+  u.rows.forEach(function(r,i){var own=ownerCell(n>0?mine[i%n].f:null),p=pos[i%pos.length];
+   h+='<div class="tlrow"><div class="tlname">'+own+' '+r[0]+'</div><div class="tltrack"><div class="tlbar '+r[1]+'" style="left:'+p[0]+'%;width:'+p[1]+'%">'+r[2]+'</div></div></div>';});
+  h+='</div>';
+ }
+ el.innerHTML=h;
+}
+document.querySelectorAll('#viewtabs .vt').forEach(function(b){b.addEventListener('click',function(){
+ boardView=b.dataset.view;
+ document.querySelectorAll('#viewtabs .vt').forEach(function(x){x.classList.toggle('on',x===b);});
+ renderBoardView();
+});});
+
 document.querySelectorAll('[data-next]').forEach(function(btn){btn.addEventListener('click',function(){
  var n=btn.getAttribute('data-next');
  if(n==='dept'){ enterDept(); show('dept'); return; }
  if(n==='1'){ renderUCList(); show('1'); return; }
  if(n==='2'){ if(btn.dataset.skip){ if(!chosen)pickUC(DEP().ucs[0]); } renderAgents(); show('2'); return; }
- if(n==='build'){ if(btn.dataset.noagent){ Object.keys(added).forEach(function(k){delete added[k];}); noAgent=true; } runBuild(); return; }
+ if(n==='apps'){ if(btn.dataset.noagent){ Object.keys(added).forEach(function(k){delete added[k];}); noAgent=true; } enterApps(); show('apps'); return; }
+ if(n==='build'){ if(btn.dataset.noapp){ Object.keys(appsAdded).forEach(function(k){delete appsAdded[k];}); } runBuild(); return; }
  show(n);
 });});
 document.querySelectorAll('[data-back]').forEach(function(b){b.addEventListener('click',function(){show(b.getAttribute('data-back'));});});
@@ -559,12 +700,10 @@ function enterApp(){
  var u=UC[chosen],mine=addedList(),n=mine.length;
  document.getElementById('finBoardName').textContent=u.board;
  document.getElementById('finPill').innerHTML='<span class="d"></span> '+n+' agent'+(n===1?'':'s')+' working';
- var h='';
- u.rows.forEach(function(r,i){
-   var own=ownerCell(n>0?mine[i%n].f:null);
-   h+='<div class="brow"><div>'+r[0]+'</div><div>'+own+'</div><div><span class="wpill '+r[1]+'">'+LBL[r[1]]+'</span></div><div class="mono" style="color:var(--ink-faint);font-size:.82rem">'+r[2]+'</div></div>';
- });
- document.getElementById('finRows').innerHTML=h;
+ window._board={u:u,mine:mine,n:n};
+ boardView='table';
+ document.querySelectorAll('#viewtabs .vt').forEach(function(x){x.classList.toggle('on',x.dataset.view==='table');});
+ renderBoardView();
  body.classList.add('in-app');
  var toast=document.getElementById('toast');toast.classList.remove('show');
  if(n>0){var a=mine[0],stuck=u.rows.find(function(r){return r[1]==='stuck';});
@@ -575,7 +714,7 @@ function enterApp(){
  }
 }
 document.getElementById('restart').addEventListener('click',function(){
- body.classList.remove('in-app');chosen=null;chosenDept=null;added={};noAgent=false;
+ body.classList.remove('in-app');chosen=null;chosenDept=null;added={};appsAdded={};boardView='table';noAgent=false;
  document.querySelectorAll('.ucrow').forEach(function(c){c.classList.remove('sel');});
  document.getElementById('ucNext').disabled=true;document.getElementById('toast').classList.remove('show');
  show('0');
