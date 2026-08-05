@@ -626,7 +626,7 @@ function renderApps(){
  appsFor(chosen).forEach(function(a,idx){
   var on=appsAdded[chosen+idx];
   var row=document.createElement('button');row.className='arow'+(on?' on':'');row.dataset.aidx=idx;
-  row.innerHTML='<span class="aic">'+AICON[a.i]+'</span><span class="tx"><b>'+a.n+'</b><span class="role">App</span><p>'+a.d+'</p></span><span class="add">'+(on?'Added':'Add')+'</span>';
+  row.innerHTML='<span class="aic">'+AICON[a.i]+'</span><span class="tx"><b>'+a.n+'</b><p>'+a.d+'</p></span><span class="add">'+(on?'Added':'Add')+'</span>';
   row.addEventListener('click',function(){appsAdded[chosen+idx]=!appsAdded[chosen+idx];renderApps();});
   list.appendChild(row);
  });
