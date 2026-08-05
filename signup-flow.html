@@ -54,6 +54,15 @@
 
   /* ---------- left: the form column ---------- */
   .left{position:relative;display:flex;flex-direction:column;padding:26px 6vw;overflow:auto}
+  .left::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.7;
+    background:
+      radial-gradient(85% 55% at 12% -5%, color-mix(in srgb,var(--accent) 13%,transparent) 0%, transparent 58%),
+      radial-gradient(70% 50% at 100% 108%, color-mix(in srgb,var(--accent) 9%,transparent) 0%, transparent 60%),
+      repeating-linear-gradient(0deg,transparent 0 33px,var(--line-soft) 33px 34px),
+      repeating-linear-gradient(90deg,transparent 0 33px,var(--line-soft) 33px 34px);
+    -webkit-mask-image:radial-gradient(130% 100% at 15% 0%,#000 38%,transparent 82%);
+            mask-image:radial-gradient(130% 100% at 15% 0%,#000 38%,transparent 82%);}
+  .left>*{position:relative;z-index:1}
   body.in-app .left{display:none}
   .brand{display:flex;align-items:center;gap:9px;font-weight:700;letter-spacing:-.01em;font-size:1rem}
   .mark{display:inline-flex;align-items:center;gap:3px}
