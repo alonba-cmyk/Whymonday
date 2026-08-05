@@ -1,0 +1,232 @@
+<title>Airtable switch — messaging options</title>
+<script>document.documentElement.setAttribute('data-theme','light');</script>
+<style>
+  :root{
+    --ground:#fbfbfe; --panel:#ffffff; --panel-2:#f4f4fb; --ink:#15152b; --ink-soft:#4a4a68;
+    --ink-faint:#8a8aa6; --line:#e7e7f4; --accent:#6161ff; --accent-ink:#ffffff; --accent-tint:#eeeeff;
+    --good:#00c875; --warn:#fdab3d;
+    --sans:"Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
+    --mono:ui-monospace,"SF Mono","JetBrains Mono",Menlo,Consolas,monospace;
+  }
+  @media (prefers-color-scheme:dark){:root{
+    --ground:#0d0d16; --panel:#14141f; --panel-2:#191926; --ink:#f2f2fa; --ink-soft:#b8b8d0;
+    --ink-faint:#77778f; --line:#25253a; --accent:#8a8aff; --accent-ink:#0d0d16; --accent-tint:#1c1c30;}}
+  :root[data-theme="dark"]{
+    --ground:#0d0d16; --panel:#14141f; --panel-2:#191926; --ink:#f2f2fa; --ink-soft:#b8b8d0;
+    --ink-faint:#77778f; --line:#25253a; --accent:#8a8aff; --accent-ink:#0d0d16; --accent-tint:#1c1c30;}
+  :root[data-theme="light"]{
+    --ground:#fbfbfe; --panel:#ffffff; --panel-2:#f4f4fb; --ink:#15152b; --ink-soft:#4a4a68;
+    --ink-faint:#8a8aa6; --line:#e7e7f4; --accent:#6161ff; --accent-ink:#ffffff; --accent-tint:#eeeeff;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--sans);line-height:1.55}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 24px}
+
+  /* sticky review bar */
+  .bar{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--ground) 90%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .bar .wrap{display:flex;align-items:center;gap:14px;padding:12px 24px;flex-wrap:wrap}
+  .bar .mark{display:flex;align-items:center;gap:8px;font-weight:800;letter-spacing:-.02em}
+  .dots{display:inline-flex;gap:3px}.dots i{display:block;border-radius:99px}
+  .dots i:nth-child(1){width:14px;height:6px;background:#e2445c}
+  .dots i:nth-child(2){width:14px;height:6px;background:#fdab3d}
+  .dots i:nth-child(3){width:6px;height:6px;background:#00c875}
+  .bar .ctx{font-family:var(--mono);font-size:.64rem;letter-spacing:.11em;text-transform:uppercase;color:var(--ink-faint)}
+  .theme-toggle{margin-left:auto;background:none;border:1px solid var(--line);border-radius:8px;width:32px;height:32px;display:grid;place-items:center;cursor:pointer;color:var(--ink-soft)}
+  .theme-toggle:hover{border-color:var(--accent);color:var(--accent)}
+
+  /* intro */
+  .intro{padding:40px 0 8px}
+  .intro h1{font-size:clamp(1.7rem,3.6vw,2.4rem);font-weight:800;letter-spacing:-.025em;margin:0 0 12px;text-wrap:balance}
+  .intro p{color:var(--ink-soft);max-width:64ch;margin:0 0 18px;font-size:1.02rem}
+  .decisions{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+  .chip{font-family:var(--mono);font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--line);background:var(--panel);border-radius:99px;padding:7px 13px;color:var(--ink-soft)}
+  .chip b{color:var(--accent)}
+  .legend{font-family:var(--mono);font-size:.64rem;letter-spacing:.05em;color:var(--ink-faint);margin-top:16px}
+  .legend b{color:var(--ink-soft)}
+
+  /* folds */
+  .fold{padding:30px 0;border-top:1px solid var(--line)}
+  .fold-head{display:flex;align-items:baseline;gap:14px;margin-bottom:4px}
+  .num{font-family:var(--mono);font-size:.72rem;font-weight:700;color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 40%,var(--line));min-width:34px;height:26px;padding:0 8px;border-radius:7px;display:grid;place-items:center}
+  .fold h2{font-size:1.18rem;font-weight:800;letter-spacing:-.01em;margin:0}
+  .fold .note{color:var(--ink-faint);font-size:.9rem;margin:6px 0 18px;padding-left:48px;max-width:70ch}
+
+  .opts{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+  .opt{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:18px 18px 16px;position:relative;display:flex;flex-direction:column;gap:10px}
+  .opt.rec{border-color:color-mix(in srgb,var(--accent) 55%,var(--line));box-shadow:0 0 0 1px color-mix(in srgb,var(--accent) 30%,transparent)}
+  .opt .top{display:flex;align-items:center;gap:8px}
+  .opt .ltr{font-family:var(--mono);font-weight:700;font-size:.7rem;color:var(--ink-faint);border:1px solid var(--line);border-radius:6px;width:22px;height:22px;display:grid;place-items:center}
+  .opt .angle{font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint)}
+  .opt.rec .angle{color:var(--accent)}
+  .rec-chip{margin-left:auto;font-family:var(--mono);font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:var(--good);border:1px solid color-mix(in srgb,var(--good) 45%,var(--line));border-radius:99px;padding:3px 8px}
+  .opt .line{font-size:1.06rem;font-weight:700;letter-spacing:-.01em;line-height:1.35}
+  .opt.big .line{font-size:1.18rem}
+  .opt .line .br{display:block}
+  .opt .sub{font-size:.86rem;color:var(--ink-soft);line-height:1.5}
+  .opt .why{font-size:.76rem;color:var(--ink-faint);border-top:1px dashed var(--line);padding-top:9px;margin-top:2px}
+
+  /* CTA chips row */
+  .cta-opts{display:flex;flex-wrap:wrap;gap:10px}
+  .cta-opt{border:1px solid var(--line);background:var(--panel);border-radius:10px;padding:11px 16px;font-weight:700;font-size:.92rem;display:flex;align-items:center;gap:9px}
+  .cta-opt.rec{border-color:color-mix(in srgb,var(--accent) 55%,var(--line))}
+  .cta-opt .ltr{font-family:var(--mono);font-size:.62rem;color:var(--ink-faint)}
+  .cta-opt.rec .ltr{color:var(--accent)}
+
+  footer{padding:34px 0 60px;border-top:1px solid var(--line);margin-top:20px}
+  footer .wrap{font-family:var(--mono);font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);display:flex;gap:12px;flex-wrap:wrap}
+  footer .draft{margin-left:auto;color:var(--warn)}
+</style>
+
+<div class="bar">
+  <div class="wrap">
+    <span class="mark"><span class="dots"><i></i><i></i><i></i></span></span>
+    <span class="ctx">Messaging options · Airtable switch campaign</span>
+    <button class="theme-toggle" id="themeBtn" aria-label="Toggle light or dark mode"><span class="ti"></span></button>
+  </div>
+</div>
+
+<div class="wrap intro">
+  <h1>Pick the messaging.</h1>
+  <p>Every key line on the switch page, laid out so you can choose. Tuned to the direction you set: a stable <b>home</b> whose roadmap is <b>built around your work</b>, not an acquirer's return, in a tone that stays warm and dignified and lets the offer do the work.</p>
+  <div class="decisions">
+    <span class="chip">Angle · <b>stability + your roadmap</b></span>
+    <span class="chip">Tone · <b>dignified, customer-first</b></span>
+    <span class="chip">Villain · <b>implied, never attacked</b></span>
+  </div>
+  <div class="legend"><b>React per card:</b> ✓ keep&nbsp;&nbsp;·&nbsp;&nbsp;✎ tweak the wording&nbsp;&nbsp;·&nbsp;&nbsp;✕ cut&nbsp;&nbsp;·&nbsp;&nbsp;→ want a new angle. &nbsp;Green = my pick.</div>
+</div>
+
+<!-- FOLD 1 — controlling idea -->
+<div class="fold"><div class="wrap">
+  <div class="fold-head"><span class="num">01</span><h2>The controlling idea</h2></div>
+  <p class="note">The one sentence the whole page proves. Everything else serves it. This is the spine you're choosing between 1 and 2 on.</p>
+  <div class="opts">
+    <div class="opt rec big"><div class="top"><span class="ltr">A</span><span class="angle">Stability + roadmap</span><span class="rec-chip">✓ Rec</span></div>
+      <div class="line">When your platform changes hands, your work needs a home whose roadmap is built around it, not an acquirer's return.</div>
+      <div class="why">Fuses both halves you liked: the home (stability) and the roadmap that answers to you (control). Warm, not a jab.</div></div>
+    <div class="opt big"><div class="top"><span class="ltr">B</span><span class="angle">Built for you</span></div>
+      <div class="line">The tools you run your business on should keep building forward for you, not get sold off.</div>
+      <div class="why">Leans harder on stability. Cleaner, slightly more product-generic.</div></div>
+    <div class="opt big"><div class="top"><span class="ltr">C</span><span class="angle">Whose roadmap</span></div>
+      <div class="line">Airtable's future now serves its new owners. Your work deserves a platform that still serves you.</div>
+      <div class="why">Leans harder on the ownership tension. Sharpest of the three; closest to angle 2.</div></div>
+  </div>
+</div></div>
+
+<!-- FOLD 2 — hero headline -->
+<div class="fold"><div class="wrap">
+  <div class="fold-head"><span class="num">02</span><h2>Hero headline</h2></div>
+  <p class="note">The first thing they read. Line-break rule applies: each sentence on its own line.</p>
+  <div class="opts">
+    <div class="opt rec big"><div class="top"><span class="ltr">A</span><span class="angle">New owner / new home</span><span class="rec-chip">✓ Rec</span></div>
+      <div class="line"><span class="br">Airtable has a new owner.</span><span class="br">Your work deserves a home built around you.</span></div>
+      <div class="why">Names the moment, answers it with the blended promise. Dignified, two-beat rhythm.</div></div>
+    <div class="opt big"><div class="top"><span class="ltr">B</span><span class="angle">Roadmap stays yours</span></div>
+      <div class="line"><span class="br">Airtable changed hands.</span><span class="br">Your roadmap shouldn't.</span></div>
+      <div class="why">Tightest option. Captures change + ownership in six words. Very quotable.</div></div>
+    <div class="opt big"><div class="top"><span class="ltr">C</span><span class="angle">Answer to you</span></div>
+      <div class="line"><span class="br">Airtable answers to someone new.</span><span class="br">Your work should answer to you.</span></div>
+      <div class="why">Warmest of the set, most customer-first. Mirror structure.</div></div>
+    <div class="opt big"><div class="top"><span class="ltr">D</span><span class="angle">Outlasts the deal</span></div>
+      <div class="line"><span class="br">Your work outlasts an acquisition.</span><span class="br">Give it a home built to last.</span></div>
+      <div class="why">Most aspirational, least reactive to the news. Evergreen if the campaign runs long.</div></div>
+  </div>
+</div></div>
+
+<!-- FOLD 3 — hero subhead -->
+<div class="fold"><div class="wrap">
+  <div class="fold-head"><span class="num">03</span><h2>Hero subhead</h2></div>
+  <p class="note">The paragraph under the headline. States the news, then lands on monday + the ease of moving.</p>
+  <div class="opts">
+    <div class="opt rec"><div class="top"><span class="ltr">A</span><span class="angle">News → home → ease</span><span class="rec-chip">✓ Rec</span></div>
+      <div class="line" style="font-weight:600;font-size:.98rem">Bending Spoons just acquired Airtable, and its roadmap now answers to new owners. monday is a home built around your work, invested for the long run, and moving over takes an afternoon.</div></div>
+    <div class="opt"><div class="top"><span class="ltr">B</span><span class="angle">Shorter, warmer</span></div>
+      <div class="line" style="font-weight:600;font-size:.98rem">Airtable's future is now in new hands. monday keeps building around the work your team actually does. Bring your bases over in an afternoon.</div></div>
+  </div>
+</div></div>
+
+<!-- FOLD 4 — why-switch section headline -->
+<div class="fold"><div class="wrap">
+  <div class="fold-head"><span class="num">04</span><h2>"Why switch" section headline</h2></div>
+  <p class="note">The contrast section: Airtable-after-the-deal vs. monday-for-the-long-run.</p>
+  <div class="opts">
+    <div class="opt rec big"><div class="top"><span class="ltr">A</span><span class="angle">Sold vs. built-for-you</span><span class="rec-chip">✓ Rec</span></div>
+      <div class="line"><span class="br">A platform being sold,</span><span class="br">or a platform built around you.</span></div></div>
+    <div class="opt big"><div class="top"><span class="ltr">B</span><span class="angle">Whose roadmap</span></div>
+      <div class="line">Whose roadmap are you building on?</div></div>
+    <div class="opt big"><div class="top"><span class="ltr">C</span><span class="angle">Change, contained</span></div>
+      <div class="line"><span class="br">New ownership changes the roadmap.</span><span class="br">It doesn't have to change yours.</span></div></div>
+  </div>
+</div></div>
+
+<!-- FOLD 5 — platform section headline -->
+<div class="fold"><div class="wrap">
+  <div class="fold-head"><span class="num">05</span><h2>"The platform" section headline</h2></div>
+  <p class="note">What you move up to. The anchor line for monday's AI work platform.</p>
+  <div class="opts">
+    <div class="opt rec big"><div class="top"><span class="ltr">A</span><span class="angle">Anchor line</span><span class="rec-chip">✓ Rec</span></div>
+      <div class="line"><span class="br">People and agents,</span><span class="br">working together.</span></div>
+      <div class="why">The repeatable throughline across all monday assets. Keep it consistent.</div></div>
+    <div class="opt big"><div class="top"><span class="ltr">B</span><span class="angle">The upgrade</span></div>
+      <div class="line">The home your work levels up to.</div></div>
+    <div class="opt big"><div class="top"><span class="ltr">C</span><span class="angle">Job to be done</span></div>
+      <div class="line">One platform, built around the job to be done.</div></div>
+  </div>
+</div></div>
+
+<!-- FOLD 6 — migration section headline -->
+<div class="fold"><div class="wrap">
+  <div class="fold-head"><span class="num">06</span><h2>Migration section headline</h2></div>
+  <p class="note">The move. Reassures them nothing is lost and momentum continues.</p>
+  <div class="opts">
+    <div class="opt rec big"><div class="top"><span class="ltr">A</span><span class="angle">Keep your work</span><span class="rec-chip">✓ Rec</span></div>
+      <div class="line"><span class="br">Bring your bases.</span><span class="br">Keep your work.</span></div></div>
+    <div class="opt big"><div class="top"><span class="ltr">B</span><span class="angle">No stop</span></div>
+      <div class="line"><span class="br">Your work moves.</span><span class="br">Your momentum doesn't stop.</span></div></div>
+    <div class="opt big"><div class="top"><span class="ltr">C</span><span class="angle">One afternoon</span></div>
+      <div class="line"><span class="br">Switch in an afternoon.</span><span class="br">Keep everything that matters.</span></div></div>
+  </div>
+</div></div>
+
+<!-- FOLD 7 — primary CTA -->
+<div class="fold"><div class="wrap">
+  <div class="fold-head"><span class="num">07</span><h2>Primary CTA</h2></div>
+  <p class="note">The button. One verb, low friction.</p>
+  <div class="cta-opts">
+    <div class="cta-opt rec"><span class="ltr">A</span> Make the switch <span class="rec-chip">✓ Rec</span></div>
+    <div class="cta-opt"><span class="ltr">B</span> Give your work a home</div>
+    <div class="cta-opt"><span class="ltr">C</span> Start your move</div>
+    <div class="cta-opt"><span class="ltr">D</span> Move your work to monday</div>
+  </div>
+</div></div>
+
+<!-- FOLD 8 — close line -->
+<div class="fold"><div class="wrap">
+  <div class="fold-head"><span class="num">08</span><h2>Closing line</h2></div>
+  <p class="note">Where the page lands. Opens and closes on the same idea.</p>
+  <div class="opts">
+    <div class="opt rec big"><div class="top"><span class="ltr">A</span><span class="angle">Yours to write</span><span class="rec-chip">✓ Rec</span></div>
+      <div class="line"><span class="br">Your work's next chapter</span><span class="br">should be yours to write.</span></div>
+      <div class="why">Warm, ownership-forward, no jab. Fits the tone you set.</div></div>
+    <div class="opt big"><div class="top"><span class="ltr">B</span><span class="angle">Building forward</span></div>
+      <div class="line">Give the work that runs your business a home that's building forward.</div></div>
+    <div class="opt big"><div class="top"><span class="ltr">C</span><span class="angle">New owner / new home</span></div>
+      <div class="line"><span class="br">A new owner for Airtable.</span><span class="br">A new home for your work.</span></div>
+      <div class="why">Bookends the hero if you pick hero A. Nice symmetry.</div></div>
+  </div>
+</div></div>
+
+<footer><div class="wrap">
+  <span><span class="dots"><i></i><i></i><i></i></span></span>
+  <span>monday.com · Airtable switch campaign · messaging board</span>
+  <span class="draft">● Working surface · pick per fold, then I lock the page</span>
+</div></footer>
+
+<script>
+  var root=document.documentElement, tb=document.getElementById('themeBtn');
+  var SUN='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>';
+  var MOON='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>';
+  function current(){return root.getAttribute('data-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');}
+  function render(){tb.querySelector('.ti').innerHTML=current()==='dark'?SUN:MOON;}
+  tb.addEventListener('click',function(){root.setAttribute('data-theme',current()==='dark'?'light':'dark');render();});
+  render();
+</script>
