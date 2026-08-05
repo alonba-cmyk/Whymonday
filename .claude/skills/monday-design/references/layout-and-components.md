@@ -7,6 +7,7 @@
 - **Split rows:** a common section is a two-column split (headline left, supporting lead right) that stacks on mobile.
 - **Cards:** `background: var(--panel)`, `1px solid var(--line)`, radius ~14px, generous inner padding. Moderate radii, not `rounded-lg` on everything.
 - **Spec-sheet pattern:** for pillars/attributes (Transparency / Accountability / Control / Security), a bordered "sheet" with rows separated by hairlines, each row a mono label + a one-line value. Reads as a considered spec, not decoration.
+- **Allocation / org map:** to present a structure to a stakeholder (team split, org shape, funnel routing), make the *layout itself* carry the argument — a dark root node with a headcount pill, a short stem, then N sibling columns for the groups. Each column leads with the number set big in the accent (`2` / `3` / `1`), a mono group label, a one-line role, and a footer detail (segment chips, product list, or model). The relative weights read at a glance before anyone parses a word. Prefer this over a dense matrix/table when the goal is for someone to *see* the model, not decode it; reserve the table for when exact per-cell precision is the point.
 - Responsive: relative units, flex/grid, `max-width:100%` on media, grids collapse to fewer columns at ~820px and one column at ~560px.
 
 ## Standard components
