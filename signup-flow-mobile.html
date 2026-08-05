@@ -430,7 +430,7 @@ function pickDept(k){chosenDept=k;
  document.getElementById('deptNext').disabled=false;
  if(!mob()){var v=document.getElementById('deptVid');if(v){v.poster=DPOSTER[k];v.src=DVID[k];v.load();var pr=v.play();if(pr&&pr.catch)pr.catch(function(){});}}}
 var deptBuilt=false;
-function enterDept(){if(!deptBuilt){renderDeptList();deptBuilt=true;}if(!chosenDept)pickDept(DEPTS[0].k);}
+function enterDept(){if(!deptBuilt){renderDeptList();deptBuilt=true;}if(!chosenDept&&!mob())pickDept(DEPTS[0].k);}
 function renderUCList(){var w=document.getElementById('uclist');w.innerHTML='';chosen=null;
  document.getElementById('ucNext').disabled=true;
  var d=DEP();
