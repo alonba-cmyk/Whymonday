@@ -459,11 +459,8 @@ function pickUC(k){
  chosen=k;
  added={}; added[k+0]=true;
  var u=UC[k];var lead=u.agents[0];
- document.querySelectorAll('.ucrow').forEach(function(c){var sel=c.dataset.uc===k;c.classList.toggle('sel',sel);
-  var m=c.querySelector('.rowmedia');
-  if(sel&&mob()){ if(!m){m=document.createElement('div');m.className='rowmedia';c.appendChild(m);}
-   m.innerHTML='<div class="wtable">'+boardHTML(k,false)+'</div><div class="rmnote"><span class="fa" style="background-image:url('+IMG[lead.f]+')"></span> <span>'+u.agents.length+' agents fit this, led by '+lead.n+'. Meet them next.</span></div>';
-  } else if(m){ m.remove(); }
+ document.querySelectorAll('.ucrow').forEach(function(c){c.classList.toggle('sel',c.dataset.uc===k);
+  var m=c.querySelector('.rowmedia');if(m)m.remove();
  });
  document.getElementById('ucNext').disabled=false;
  document.getElementById('ucBoardName').textContent=u.board;
