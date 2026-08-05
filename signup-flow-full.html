@@ -432,6 +432,7 @@ function boardHTML(k,ownersActive){
 
 function pickUC(k){
  chosen=k;
+ added={}; added[k+0]=true;
  document.querySelectorAll('.ucrow').forEach(function(c){c.classList.toggle('sel',c.dataset.uc===k);});
  document.getElementById('ucNext').disabled=false;
  var u=UC[k];
