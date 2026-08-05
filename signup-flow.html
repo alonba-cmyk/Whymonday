@@ -1,0 +1,548 @@
+<title>monday signup — the new flow</title>
+<script>document.documentElement.setAttribute('data-theme','light');</script>
+<style>
+  :root{
+    --ground:#FBFBFE; --panel:#FFFFFF; --panel-2:#F5F4FD; --panel-3:#FAF9FF;
+    --ink:#14141F; --ink-soft:#57576E; --ink-faint:#8B8BA3;
+    --line:#E9E7F5; --line-soft:#F1EFFA;
+    --accent:#5A4CF0; --accent-ink:#FFFFFF; --accent-tint:#EDEAFF; --accent-deep:#4536C8;
+    --good:#00C875; --warn:#FDAB3D; --crit:#E2445C;
+    --shadow:0 1px 2px rgba(20,20,40,.04),0 12px 34px rgba(38,30,110,.10);
+    --shadow-soft:0 1px 2px rgba(20,20,40,.04),0 8px 22px rgba(38,30,110,.07);
+    --dot1:#FF3D57; --dot2:#FFCB00; --dot3:#00CA72;
+    --stage:var(--accent);
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --ground:#0C0C16; --panel:#151524; --panel-2:#1C1B30; --panel-3:#17172A;
+      --ink:#ECECF6; --ink-soft:#A6A6C0; --ink-faint:#71718C;
+      --line:#282740; --line-soft:#20203499;
+      --accent:#8B7DFF; --accent-ink:#0C0C16; --accent-tint:#241F45; --accent-deep:#B4ABFF;
+      --shadow:0 1px 2px rgba(0,0,0,.4),0 16px 40px rgba(0,0,0,.5);
+      --shadow-soft:0 1px 2px rgba(0,0,0,.35),0 10px 26px rgba(0,0,0,.4);
+    }
+  }
+  :root[data-theme="light"]{
+    --ground:#FBFBFE; --panel:#FFFFFF; --panel-2:#F5F4FD; --panel-3:#FAF9FF;
+    --ink:#14141F; --ink-soft:#57576E; --ink-faint:#8B8BA3;
+    --line:#E9E7F5; --line-soft:#F1EFFA;
+    --accent:#5A4CF0; --accent-ink:#FFFFFF; --accent-tint:#EDEAFF; --accent-deep:#4536C8;
+    --shadow:0 1px 2px rgba(20,20,40,.04),0 12px 34px rgba(38,30,110,.10);
+    --shadow-soft:0 1px 2px rgba(20,20,40,.04),0 8px 22px rgba(38,30,110,.07);
+  }
+  :root[data-theme="dark"]{
+    --ground:#0C0C16; --panel:#151524; --panel-2:#1C1B30; --panel-3:#17172A;
+    --ink:#ECECF6; --ink-soft:#A6A6C0; --ink-faint:#71718C;
+    --line:#282740; --line-soft:#20203499;
+    --accent:#8B7DFF; --accent-ink:#0C0C16; --accent-tint:#241F45; --accent-deep:#B4ABFF;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 16px 40px rgba(0,0,0,.5);
+    --shadow-soft:0 1px 2px rgba(0,0,0,.35),0 10px 26px rgba(0,0,0,.4);
+  }
+
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;background:var(--ground);color:var(--ink);
+    font-family:"Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.6;-webkit-font-smoothing:antialiased;overflow:hidden;
+  }
+  .mono{font-family:ui-monospace,"SF Mono","JetBrains Mono",Menlo,Consolas,monospace}
+
+  /* ===== app shell ===== */
+  .app{height:100vh;height:100dvh;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);transition:grid-template-columns .4s ease}
+  body.in-app .app{grid-template-columns:1fr}
+
+  /* ---------- left: the form column ---------- */
+  .left{position:relative;display:flex;flex-direction:column;padding:26px 6vw;overflow:auto}
+  body.in-app .left{display:none}
+  .brand{display:flex;align-items:center;gap:9px;font-weight:700;letter-spacing:-.01em;font-size:1rem}
+  .mark{display:inline-flex;align-items:center;gap:3px}
+  .mark i{display:block;border-radius:20px}
+  .mark .c{width:7px;height:15px;background:var(--dot1)}
+  .mark .y{width:7px;height:15px;background:var(--dot2)}
+  .mark .g{width:7px;height:7px;border-radius:50%;background:var(--dot3);align-self:center}
+  .brand .dim{color:var(--ink-faint);font-weight:600}
+
+  .topline{display:flex;align-items:center;justify-content:space-between}
+  .theme-toggle{width:34px;height:34px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--ink);cursor:pointer;display:grid;place-items:center}
+  .theme-toggle:hover{border-color:var(--accent)}
+  .theme-toggle svg{width:16px;height:16px}
+
+  /* progress */
+  .prog{display:flex;gap:6px;margin-top:26px}
+  .prog i{height:4px;flex:1;border-radius:4px;background:var(--line);transition:.3s}
+  .prog i.on{background:var(--accent)}
+  .prog i.done{background:var(--good)}
+
+  .body{flex:1;display:flex;flex-direction:column;justify-content:center;max-width:400px;width:100%;margin:0 auto;padding:24px 0}
+  .pane{display:none}
+  .pane.on{display:block;animation:fade .34s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  @media(prefers-reduced-motion:reduce){.pane.on{animation:none}}
+
+  h1{font-size:clamp(1.5rem,3.4vw,2rem);letter-spacing:-.025em;font-weight:800;margin:0 0 6px;text-wrap:balance;line-height:1.1}
+  .hint{color:var(--ink-soft);margin:0 0 22px;font-size:1rem}
+
+  .btn{border:0;cursor:pointer;font-family:inherit;font-weight:700;font-size:.98rem;border-radius:12px;padding:13px 22px;letter-spacing:-.01em;transition:.15s}
+  .btn.primary{background:var(--accent);color:var(--accent-ink)}
+  .btn.primary:hover{background:var(--accent-deep)}
+  .btn.primary:disabled{opacity:.4;cursor:not-allowed}
+  .btn.ghost{background:transparent;color:var(--ink-soft);border:1px solid var(--line)}
+  .btn.ghost:hover{border-color:var(--accent);color:var(--ink)}
+  .btn.google{background:var(--panel);color:var(--ink);border:1.5px solid var(--line);display:flex;align-items:center;gap:10px;width:100%;justify-content:center}
+  .btn.google:hover{border-color:var(--accent)}
+  .skiplink{background:none;border:0;color:var(--ink-faint);cursor:pointer;font-family:inherit;font-size:.92rem;text-decoration:underline;text-underline-offset:3px}
+  .row-cta{display:flex;align-items:center;gap:14px;margin-top:24px;flex-wrap:wrap}
+
+  .field{width:100%;border:1.5px solid var(--line);background:var(--panel-3);border-radius:12px;padding:13px 15px;font-size:.98rem;color:var(--ink);font-family:inherit;margin-top:12px}
+  .field:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 4px var(--accent-tint)}
+  .divword{display:flex;align-items:center;gap:12px;color:var(--ink-faint);font-size:.8rem;margin:16px 0}
+  .divword::before,.divword::after{content:"";height:1px;background:var(--line);flex:1}
+  .terms{font-size:.78rem;color:var(--ink-faint);margin-top:18px;line-height:1.5}
+  .terms a{color:var(--accent);text-decoration:none}
+
+  /* intent */
+  .nlbox{display:flex;align-items:center;gap:10px;border:1.5px solid var(--line);border-radius:13px;padding:13px 15px;background:var(--panel-3)}
+  .nlbox:focus-within{border-color:var(--accent);box-shadow:0 0 0 4px var(--accent-tint)}
+  .nlbox .spark{color:var(--accent)}
+  .nlbox input{border:0;background:transparent;flex:1;font-size:1rem;color:var(--ink);outline:none;font-family:inherit}
+  .or{display:flex;align-items:center;gap:12px;color:var(--ink-faint);font-size:.76rem;margin:16px 0 12px;letter-spacing:.08em}
+  .or::before,.or::after{content:"";height:1px;background:var(--line);flex:1}
+  .chips{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+  @media(max-width:520px){.chips{grid-template-columns:1fr}}
+  .chip{display:flex;align-items:center;gap:11px;text-align:left;cursor:pointer;border:1.5px solid var(--line);background:var(--panel);border-radius:12px;padding:11px 13px;transition:.15s;color:var(--ink)}
+  .chip:hover{border-color:var(--accent);transform:translateY(-1px);box-shadow:var(--shadow-soft)}
+  .chip.sel{border-color:var(--accent);background:var(--accent-tint)}
+  .chip .ico{width:32px;height:32px;border-radius:9px;display:grid;place-items:center;flex:none;font-size:1rem}
+  .chip .txt b{display:block;font-size:.92rem;letter-spacing:-.01em}
+  .chip .txt span{display:block;font-size:.75rem;color:var(--ink-soft)}
+
+  /* meet agent (left side content) */
+  .agentmini{display:flex;align-items:center;gap:14px;border:1px solid var(--line);background:var(--panel-3);border-radius:15px;padding:16px;margin-bottom:4px;box-shadow:var(--shadow-soft)}
+  .avatar{border-radius:15px;flex:none;display:grid;place-items:center;color:#fff;font-weight:800;letter-spacing:-.02em}
+  .agentmini .avatar{width:52px;height:52px;font-size:1.2rem}
+  .agentmini .who b{font-size:1.05rem;letter-spacing:-.01em}
+  .agentmini .role{font-family:ui-monospace,Menlo,monospace;font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-top:1px}
+  .agpitch{color:var(--ink-soft);font-size:.96rem;margin:14px 0 0}
+  .tasklist{margin:14px 0 0;padding:0;list-style:none;display:grid;gap:7px}
+  .tasklist li{display:flex;align-items:center;gap:10px;font-size:.9rem;color:var(--ink-soft)}
+  .tasklist li .bx{width:18px;height:18px;border-radius:6px;background:var(--accent-tint);flex:none;display:grid;place-items:center;font-size:.6rem;color:var(--accent)}
+
+  /* ---------- right: the stage ---------- */
+  .right{position:relative;overflow:hidden;background:
+      radial-gradient(120% 90% at 80% 10%, color-mix(in srgb,var(--stage) 22%,var(--ground)) 0%, var(--ground) 60%);
+    display:flex;align-items:center;justify-content:center;padding:40px;transition:background .5s ease}
+  body.in-app .right{display:none}
+  .right::before{content:"";position:absolute;inset:0;opacity:.5;
+    background:repeating-linear-gradient(0deg,transparent 0 39px,color-mix(in srgb,var(--stage) 10%,transparent) 39px 40px),
+               repeating-linear-gradient(90deg,transparent 0 39px,color-mix(in srgb,var(--stage) 10%,transparent) 39px 40px);
+    -webkit-mask-image:radial-gradient(80% 70% at 70% 30%,#000,transparent 75%);
+            mask-image:radial-gradient(80% 70% at 70% 30%,#000,transparent 75%)}
+
+  .stagecard{position:relative;z-index:1;width:100%;max-width:380px}
+  .stageline{font-family:ui-monospace,Menlo,monospace;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:color-mix(in srgb,var(--stage) 80%,var(--ink));font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+  .stageline .live{width:7px;height:7px;border-radius:50%;background:var(--good);box-shadow:0 0 0 4px color-mix(in srgb,var(--good) 22%,transparent)}
+
+  /* forming team (steps 1-2) */
+  .team{display:grid;gap:12px}
+  .teamrow{display:flex;align-items:center;gap:12px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:11px 14px;box-shadow:var(--shadow-soft);opacity:0;transform:translateY(8px);animation:rise .5s ease forwards}
+  .teamrow:nth-child(2){animation-delay:.12s}.teamrow:nth-child(3){animation-delay:.24s}.teamrow:nth-child(4){animation-delay:.36s}
+  @keyframes rise{to{opacity:1;transform:none}}
+  @media(prefers-reduced-motion:reduce){.teamrow{opacity:1;transform:none;animation:none}}
+  .teamrow .avatar{width:40px;height:40px;border-radius:11px;font-size:.95rem}
+  .teamrow .tt b{display:block;font-size:.92rem;letter-spacing:-.01em}
+  .teamrow .tt span{display:block;font-size:.72rem;color:var(--ink-faint);font-family:ui-monospace,Menlo,monospace}
+
+  /* big agent (step 3) */
+  .bigagent{text-align:center}
+  .bigagent .avatar{width:96px;height:96px;border-radius:26px;font-size:2.3rem;margin:0 auto 16px}
+  .bigagent h3{margin:0;font-size:1.5rem;letter-spacing:-.02em}
+  .bigagent .r{font-family:ui-monospace,Menlo,monospace;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:color-mix(in srgb,var(--stage) 78%,var(--ink));font-weight:700;margin-top:4px}
+  .miniboard{margin-top:20px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px;box-shadow:var(--shadow-soft);text-align:left}
+  .miniboard .mbrow{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;padding:7px 4px;font-size:.82rem;border-top:1px solid var(--line-soft)}
+  .miniboard .mbrow:first-child{border-top:0}
+  .pill{border-radius:6px;padding:3px 9px;color:#fff;font-weight:700;font-size:.68rem;white-space:nowrap}
+  .pill.work{background:var(--warn)}.pill.done{background:var(--good)}.pill.stuck{background:var(--crit)}
+
+  /* building (step 3.5, shown on stage) */
+  .buildbox{text-align:center}
+  .buildbox .avatar{width:88px;height:88px;border-radius:24px;font-size:2rem;margin:0 auto 14px;animation:pulse 1.8s ease-in-out infinite}
+  @keyframes pulse{0%,100%{box-shadow:0 0 0 0 color-mix(in srgb,var(--stage) 30%,transparent)}50%{box-shadow:0 0 0 16px transparent}}
+  @media(prefers-reduced-motion:reduce){.buildbox .avatar{animation:none}}
+  .buildbox h3{margin:0 0 2px;font-size:1.2rem;letter-spacing:-.01em}
+  .buildbox .sub{color:var(--ink-soft);font-size:.9rem}
+  .bsteps{margin:18px auto 0;display:grid;gap:10px;text-align:left;max-width:250px}
+  .bsteps .s{display:flex;align-items:center;gap:10px;color:var(--ink-faint);font-size:.9rem;transition:.3s}
+  .bsteps .s.done{color:var(--ink)}
+  .bsteps .s .tick{width:19px;height:19px;border-radius:50%;border:2px solid var(--line);flex:none;display:grid;place-items:center;font-size:.62rem}
+  .bsteps .s.done .tick{background:var(--good);border-color:var(--good);color:#053}
+  .bsteps .s.run .tick{border-color:var(--stage);border-top-color:transparent;animation:spin .8s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+
+  /* ---------- the app board (step 4, full width) ---------- */
+  .appboard{display:none;height:100vh;height:100dvh;grid-template-rows:auto auto 1fr}
+  body.in-app .appboard{display:grid}
+  .appbar{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;border-bottom:1px solid var(--line);background:var(--panel-3)}
+  .appbar .l{display:flex;align-items:center;gap:14px}
+  .appbar .plans{font-size:.78rem;border:1px solid var(--line);border-radius:8px;padding:5px 11px;color:var(--ink-soft);font-weight:600}
+  .welcomebar{background:var(--accent-tint);color:var(--accent-deep);font-size:.86rem;text-align:center;padding:8px 16px;font-weight:600}
+  .boardwrap{overflow:auto;padding:22px clamp(16px,5vw,60px)}
+  .boardhead{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:18px;flex-wrap:wrap}
+  .boardhead h2{font-size:1.4rem;letter-spacing:-.02em;font-weight:800;margin:0}
+  .agpill{display:inline-flex;align-items:center;gap:8px;font-size:.8rem;font-family:ui-monospace,Menlo,monospace;background:var(--accent-tint);color:var(--accent-deep);border-radius:20px;padding:5px 13px;font-weight:700}
+  .agpill .dot{width:7px;height:7px;border-radius:50%;background:var(--good);box-shadow:0 0 0 3px color-mix(in srgb,var(--good) 25%,transparent)}
+  .grouplabel{font-size:.86rem;font-weight:800;margin:0 0 10px;display:flex;align-items:center;gap:8px}
+  .grouplabel::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--accent)}
+  .btable{border:1px solid var(--line);border-radius:12px;overflow:hidden;max-width:820px}
+  .bhrow{display:grid;grid-template-columns:2fr .9fr 1fr 1fr;gap:0;background:var(--panel-3);font-family:ui-monospace,Menlo,monospace;font-size:.68rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint);font-weight:700}
+  .bhrow>div{padding:9px 14px;border-bottom:1px solid var(--line)}
+  .brow{display:grid;grid-template-columns:2fr .9fr 1fr 1fr;gap:0;background:var(--panel);align-items:center;font-size:.9rem}
+  .brow>div{padding:11px 14px;border-bottom:1px solid var(--line-soft)}
+  .brow:last-child>div{border-bottom:0}
+  .owner{display:flex;align-items:center;gap:8px}
+  .mini{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:.64rem;font-weight:700;flex:none}
+  .cellpill{display:flex}
+  .invite{margin:18px 0 0;max-width:820px;border:1px dashed var(--line);border-radius:12px;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:14px;background:var(--panel-3)}
+  .invite .it b{display:block;font-size:.94rem}.invite .it span{color:var(--ink-soft);font-size:.83rem}
+  .toast{position:fixed;right:22px;bottom:22px;z-index:30;background:var(--ink);color:var(--ground);border-radius:14px;padding:14px 16px;font-size:.88rem;max-width:280px;box-shadow:var(--shadow);display:none;gap:11px;align-items:flex-start}
+  .toast.show{display:flex;animation:rise .4s ease}
+  .toast .av{width:28px;height:28px;border-radius:9px;flex:none;display:grid;place-items:center;color:#fff;font-weight:700;font-size:.72rem}
+  .toast .x{margin-left:6px;cursor:pointer;color:var(--ink-faint);background:none;border:0;font-size:1rem;line-height:1}
+
+  /* restart chip */
+  .restart{position:fixed;left:16px;bottom:16px;z-index:40;background:var(--panel);border:1px solid var(--line);color:var(--ink-soft);border-radius:20px;padding:7px 14px;font-size:.78rem;cursor:pointer;font-family:ui-monospace,Menlo,monospace;box-shadow:var(--shadow-soft)}
+  .restart:hover{border-color:var(--accent);color:var(--ink)}
+
+  /* mobile: stack, hide stage on small */
+  @media(max-width:820px){
+    body{overflow:auto}
+    .app{grid-template-columns:1fr;height:auto;min-height:100dvh}
+    .right{display:none}
+    .left{min-height:100dvh}
+  }
+</style>
+
+<div class="app">
+  <!-- ================= LEFT: FORM ================= -->
+  <div class="left">
+    <div class="topline">
+      <div class="brand"><span class="mark" aria-hidden="true"><i class="c"></i><i class="y"></i><i class="g"></i></span> monday<span class="dim">.com</span></div>
+      <button id="themeBtn" class="theme-toggle" aria-label="Toggle light or dark mode"><span class="ti"></span></button>
+    </div>
+    <div class="prog" id="prog"><i></i><i></i><i></i></div>
+
+    <div class="body">
+      <!-- STEP 1 -->
+      <div class="pane on" data-pane="0">
+        <h1>Get started. It's free.</h1>
+        <p class="hint">No credit card needed.</p>
+        <button class="btn google" data-next="1">
+          <svg width="17" height="17" viewBox="0 0 48 48" aria-hidden="true"><path fill="#4285F4" d="M45 24.5c0-1.6-.1-2.8-.4-4H24v7.3h12c-.2 1.9-1.5 4.8-4.4 6.7l6.5 5C42 42 45 34 45 24.5z"/><path fill="#34A853" d="M24 46c5.9 0 10.9-2 14.5-5.3l-6.9-5.3c-1.9 1.3-4.4 2.2-7.6 2.2-5.8 0-10.7-3.9-12.5-9.2l-7 5.4C8 39.9 15.4 46 24 46z"/><path fill="#FBBC05" d="M11.5 28.4c-.5-1.4-.7-2.9-.7-4.4s.3-3 .7-4.4l-7-5.4C3.9 17 3 20.4 3 24s.9 7 2.5 9.8l6-5.4z"/><path fill="#EA4335" d="M24 10.7c3.3 0 5.5 1.4 6.8 2.6l5.9-5.7C33 4.2 28.9 2 24 2 15.4 2 8 8.1 5.5 16.6l7 5.4C14.3 14.6 19.2 10.7 24 10.7z"/></svg>
+          Continue with Google
+        </button>
+        <div class="divword mono">or</div>
+        <input class="field" type="email" placeholder="name@work.com" aria-label="Work email">
+        <button class="btn primary" style="width:100%;margin-top:12px" data-next="1">Continue</button>
+        <p class="terms">By proceeding you agree to the <a href="#">Terms</a> and <a href="#">Privacy Policy</a>.</p>
+      </div>
+
+      <!-- STEP 2 -->
+      <div class="pane" data-pane="1">
+        <h1>What do you want to get done?</h1>
+        <p class="hint">Tell us once. We'll bring in an agent built for exactly that.</p>
+        <div class="nlbox">
+          <span class="spark" aria-hidden="true">✦</span>
+          <input id="nlinput" type="text" placeholder="e.g. keep our product launch on track…" aria-label="Describe what you want to get done">
+        </div>
+        <div class="or mono">or pick one</div>
+        <div class="chips" id="chips"></div>
+        <div class="row-cta">
+          <button class="btn primary" id="intentNext" data-next="2" disabled>Continue</button>
+          <button class="skiplink" data-next="2" data-skip="1">Skip for now</button>
+        </div>
+      </div>
+
+      <!-- STEP 3 -->
+      <div class="pane" data-pane="2">
+        <h1 id="agH">Meet your agent.</h1>
+        <p class="hint" id="agHint">Matched to what you want to get done.</p>
+        <div class="agentmini">
+          <div class="avatar" id="agAv">J</div>
+          <div class="who"><b id="agName">Judy</b><div class="role" id="agRole">Priorities Manager</div></div>
+        </div>
+        <p class="agpitch" id="agPitch"></p>
+        <ul class="tasklist" id="agTasks"></ul>
+        <div class="row-cta">
+          <button class="btn primary" data-next="3" id="agGo">Let's go</button>
+          <button class="skiplink" data-back="1">See other agents</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= RIGHT: STAGE ================= -->
+  <div class="right">
+    <div class="stagecard">
+      <!-- forming team: steps 0 & 1 -->
+      <div class="pane on" data-stage="0">
+        <div class="stageline"><span class="live"></span> People and agents, together</div>
+        <div class="team">
+          <div class="teamrow"><div class="avatar" style="background:#5A4CF0">You</div><div class="tt"><b>You</b><span>account owner</span></div></div>
+          <div class="teamrow"><div class="avatar" style="background:#00C875">✦</div><div class="tt"><b>Your first agent</b><span>coming up next</span></div></div>
+          <div class="teamrow"><div class="avatar" style="background:#FDAB3D">+</div><div class="tt"><b>Your team</b><span>invite them later</span></div></div>
+        </div>
+      </div>
+      <!-- intent forming: step 1 -->
+      <div class="pane" data-stage="1">
+        <div class="stageline"><span class="live"></span> Finding your agent</div>
+        <div class="team" id="stageTeam"></div>
+      </div>
+      <!-- big agent: step 2 -->
+      <div class="pane" data-stage="2">
+        <div class="bigagent">
+          <div class="avatar" id="bigAv">J</div>
+          <h3 id="bigName">Judy</h3>
+          <div class="r" id="bigRole">Priorities Manager</div>
+          <div class="miniboard" id="bigBoard"></div>
+        </div>
+      </div>
+      <!-- building: step build -->
+      <div class="pane" data-stage="build">
+        <div class="buildbox">
+          <div class="avatar" id="buildAv">J</div>
+          <h3 id="buildName">Judy is setting up your workspace</h3>
+          <div class="sub">This takes a moment.</div>
+          <div class="bsteps" id="buildSteps">
+            <div class="s"><span class="tick">✓</span> Reading your intent</div>
+            <div class="s"><span class="tick">✓</span> Building your board</div>
+            <div class="s"><span class="tick">✓</span> Adding the first items</div>
+            <div class="s"><span class="tick">✓</span> Getting to work</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= APP BOARD (step 4) ================= -->
+<div class="appboard">
+  <div class="welcomebar" id="welcomebar">Welcome to monday.com. Your workspace is ready.</div>
+  <div class="appbar">
+    <div class="l">
+      <div class="brand"><span class="mark" aria-hidden="true"><i class="c"></i><i class="y"></i><i class="g"></i></span> monday<span class="dim">.com</span></div>
+      <span class="plans">See plans</span>
+    </div>
+    <button id="themeBtn2" class="theme-toggle" aria-label="Toggle light or dark mode"><span class="ti"></span></button>
+  </div>
+  <div class="boardwrap">
+    <div class="boardhead">
+      <h2 id="boardTitle">Product launch</h2>
+      <span class="agpill"><span class="dot"></span> <span id="boardAgent">Judy</span> · working</span>
+    </div>
+    <div class="grouplabel">This week</div>
+    <div class="btable">
+      <div class="bhrow"><div>Item</div><div>Owner</div><div>Status</div><div>Due</div></div>
+      <div id="boardRows"></div>
+    </div>
+    <div class="invite">
+      <div class="it"><b>Bring your team in</b><span>Now that it's working, add the people who'll run it with you.</span></div>
+      <button class="btn ghost" id="inviteBtn">Invite</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast">
+  <div class="av" id="toastAv">J</div>
+  <div><b id="toastName">Judy</b><br><span id="toastMsg"></span></div>
+  <button class="x" onclick="document.getElementById('toast').classList.remove('show')" aria-label="Dismiss">×</button>
+</div>
+
+<button class="restart" id="restart">↺ start over</button>
+
+<script>
+/* ---------- theme ---------- */
+(function(){
+  var root=document.documentElement;
+  var SUN='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>';
+  var MOON='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1111.2 3 7 7 0 0021 12.8z"/></svg>';
+  function cur(){return root.getAttribute('data-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');}
+  function render(){document.querySelectorAll('.theme-toggle .ti').forEach(function(t){t.innerHTML=cur()==='dark'?SUN:MOON;});}
+  document.querySelectorAll('.theme-toggle').forEach(function(b){b.addEventListener('click',function(){root.setAttribute('data-theme',cur()==='dark'?'light':'dark');render();});});
+  render();
+})();
+
+/* ---------- data ---------- */
+var AGENTS={
+  launch:{icon:'🚀',tint:'#FF3D57',name:'Ruby',role:'Launch Manager',label:'Launch products & campaigns',sub:'GTM, releases, campaigns',
+    pitch:"I run the launch plan end to end, so every owner knows what's due and nothing slips before go-live.",
+    tasks:['Build the launch timeline','Chase owners on open tasks','Flag risks before launch day'],
+    board:'Product launch',rows:[['Finalize launch messaging','work','R','Aug 6'],['Design assets ready','done','D','Aug 4'],['Press & analyst briefing','stuck','R','Aug 7']],
+    toast:"Press briefing has no owner yet. Want me to assign it?"},
+  projects:{icon:'🎯',tint:'#5A4CF0',name:'Judy',role:'Priorities Manager',label:'Keep projects on track',sub:'Deadlines, priorities, delivery',
+    pitch:"I keep your priorities straight, surfacing and escalating what's urgent before it slips.",
+    tasks:['Map the plan into a board','Surface what is at risk','Escalate before things slip'],
+    board:'This quarter',rows:[['Kickoff & scope','done','D','Aug 4'],['Milestone 1 delivery','work','J','Aug 6'],['Vendor dependency','stuck','J','Aug 5']],
+    toast:"I flagged one item as at-risk. Want me to reschedule it?"},
+  deals:{icon:'💰',tint:'#00C875',name:'Cleo',role:'Deals Agent',label:'Close more deals',sub:'Pipeline, follow-ups, CRM',
+    pitch:"I keep your pipeline moving, following up on every deal so none go cold while you sell.",
+    tasks:['Set up your pipeline','Draft follow-ups','Nudge deals going quiet'],
+    board:'Sales pipeline',rows:[['Acme Corp — proposal','work','C','Aug 6'],['Globex — closed won','done','D','Aug 3'],['Initech — no reply 9d','stuck','C','Aug 5']],
+    toast:"3 deals went quiet this week. Want me to draft follow-ups?"},
+  dev:{icon:'💻',tint:'#0073EA',name:'Dev',role:'Delivery Agent',label:'Ship software faster',sub:'Sprints, bugs, releases',
+    pitch:"I run the sprint board, so bugs, reviews, and releases keep moving without the standup overhead.",
+    tasks:['Set up the sprint board','Triage incoming bugs','Track the release'],
+    board:'Sprint 12',rows:[['Auth refactor','work','D','Aug 6'],['Login bug fixed','done','D','Aug 4'],['Release blocker','stuck','D','Aug 5']],
+    toast:"One PR has been waiting 2 days for review. Want me to nudge?"},
+  clients:{icon:'🤝',tint:'#FDAB3D',name:'Sol',role:'Service Agent',label:'Deliver client work',sub:'Requests, approvals, delivery',
+    pitch:"I keep every client request on track, from intake to approval, so nothing waits on you to chase it.",
+    tasks:['Organize incoming requests','Route for approval','Keep clients updated'],
+    board:'Client delivery',rows:[['Brand refresh — draft','work','S','Aug 6'],['Website copy approved','done','D','Aug 4'],['Awaiting client sign-off','stuck','S','Aug 5']],
+    toast:"Two requests are stuck awaiting approval. Want me to send a reminder?"},
+  ops:{icon:'⚙️',tint:'#A25DDC',name:'Nova',role:'Operations Agent',label:'Run operations',sub:'Processes, requests, resources',
+    pitch:"I keep the operation running, routing requests and catching bottlenecks before they pile up.",
+    tasks:['Map your process','Route incoming requests','Surface bottlenecks'],
+    board:'Operations',rows:[['Onboarding new hire','work','N','Aug 6'],['Vendor renewal done','done','D','Aug 4'],['Budget approval','stuck','N','Aug 5']],
+    toast:"The budget approval has been idle 4 days. Want me to escalate?"}
+};
+var ORDER=['launch','projects','deals','dev','clients','ops'];
+function tintBg(hex){var h=hex.replace('#','');return 'rgba('+parseInt(h.substr(0,2),16)+','+parseInt(h.substr(2,2),16)+','+parseInt(h.substr(4,2),16)+',.14)';}
+
+/* build chips */
+(function(){
+  var wrap=document.getElementById('chips');
+  ORDER.forEach(function(k){
+    var a=AGENTS[k];var b=document.createElement('button');
+    b.className='chip';b.setAttribute('data-intent',k);
+    b.innerHTML='<span class="ico" style="background:'+tintBg(a.tint)+';color:'+a.tint+'">'+a.icon+'</span><span class="txt"><b>'+a.label+'</b><span>'+a.sub+'</span></span>';
+    b.addEventListener('click',function(){selectIntent(k);});
+    wrap.appendChild(b);
+  });
+})();
+
+var chosen='projects', skipped=false;
+var nl=document.getElementById('nlinput'), intentNext=document.getElementById('intentNext');
+nl.addEventListener('input',function(){ if(nl.value.trim().length>2){ guessFromText(nl.value); enableIntent(); }});
+function guessFromText(t){
+  t=t.toLowerCase();
+  var map=[['launch',['launch','campaign','go-to-market','gtm','release','marketing','event']],
+           ['deals',['deal','sales','pipeline','revenue','crm','lead','close','prospect']],
+           ['dev',['software','sprint','bug','engineer','code','dev','app','ship']],
+           ['clients',['client','agency','request','approval','deliver','account','creative']],
+           ['ops',['operation','process','ops','resource','logistics','procure','vendor']],
+           ['projects',['project','deadline','track','priorit','plan','milestone']]];
+  for(var i=0;i<map.length;i++)for(var j=0;j<map[i][1].length;j++)if(t.indexOf(map[i][1][j])>-1){setChosen(map[i][0]);return;}
+  setChosen('projects');
+}
+function setChosen(k){chosen=k;document.querySelectorAll('.chip').forEach(function(c){c.classList.toggle('sel',c.getAttribute('data-intent')===k);});updateStageTeam();}
+function selectIntent(k){setChosen(k);skipped=false;enableIntent();}
+function enableIntent(){intentNext.disabled=false;}
+
+/* ---------- stage sync ---------- */
+function updateStageTeam(){
+  var a=AGENTS[chosen];var wrap=document.getElementById('stageTeam');if(!wrap)return;
+  wrap.innerHTML=
+    '<div class="teamrow"><div class="avatar" style="background:#5A4CF0">You</div><div class="tt"><b>You</b><span>account owner</span></div></div>'+
+    '<div class="teamrow"><div class="avatar" style="background:'+a.tint+'">'+a.name[0]+'</div><div class="tt"><b>'+a.name+'</b><span>'+a.role+'</span></div></div>'+
+    '<div class="teamrow"><div class="avatar" style="background:#FDAB3D">+</div><div class="tt"><b>Your team</b><span>invite them later</span></div></div>';
+}
+
+/* ---------- navigation ---------- */
+var leftPanes=document.querySelectorAll('.left .pane');
+var stagePanes=document.querySelectorAll('.right .pane');
+var progs=document.querySelectorAll('#prog i');
+function setStage(id){stagePanes.forEach(function(p){p.classList.toggle('on',p.getAttribute('data-stage')===String(id));document.documentElement.style.setProperty('--stage',(id==='2'||id==='build')?AGENTS[chosen].tint:'var(--accent)');});}
+function show(step){
+  // left content
+  var idx={'0':0,'1':1,'2':2}[String(step)];
+  if(idx!==undefined){leftPanes.forEach(function(p){p.classList.toggle('on',p.getAttribute('data-pane')===String(step));});}
+  // progress
+  progs.forEach(function(i,n){i.classList.remove('on','done');if(n<idx)i.classList.add('done');if(n===idx)i.classList.add('on');});
+  // stage
+  if(step==='0')setStage(0);
+  else if(step==='1'){updateStageTeam();setStage(1);}
+  else if(step==='2')setStage(2);
+}
+
+document.querySelectorAll('[data-next]').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    var n=btn.getAttribute('data-next');
+    if(btn.getAttribute('data-skip')){skipped=true;setChosen('projects');}
+    if(n==='2'){renderAgent();show('2');}
+    else if(n==='3'){runBuild();}
+    else if(n==='1'){show('1');}
+    else show(n);
+  });
+});
+document.querySelectorAll('[data-back]').forEach(function(b){b.addEventListener('click',function(){show(b.getAttribute('data-back'));});});
+
+/* ---------- render agent (left + stage) ---------- */
+function renderAgent(){
+  var a=AGENTS[chosen];
+  document.getElementById('agName').textContent=a.name;
+  document.getElementById('agRole').textContent=a.role;
+  document.getElementById('agPitch').textContent=a.pitch;
+  document.getElementById('agAv').textContent=a.name[0];document.getElementById('agAv').style.background=a.tint;
+  document.getElementById('agH').textContent='Meet '+a.name+'.';
+  document.getElementById('agHint').textContent=skipped?'A solid default to get you moving. Swap agents any time.':'Matched to “'+a.label.toLowerCase()+'.”';
+  var ul=document.getElementById('agTasks');ul.innerHTML='';
+  a.tasks.forEach(function(t){var li=document.createElement('li');li.innerHTML='<span class="bx">✓</span>'+t;ul.appendChild(li);});
+  // stage big agent
+  document.getElementById('bigAv').textContent=a.name[0];document.getElementById('bigAv').style.background=a.tint;
+  document.getElementById('bigName').textContent=a.name;
+  document.getElementById('bigRole').textContent=a.role;
+  var lbl={work:'Working on it',done:'Done',stuck:'Stuck'};
+  var mb=document.getElementById('bigBoard');mb.innerHTML='';
+  a.rows.forEach(function(r){var d=document.createElement('div');d.className='mbrow';d.innerHTML='<span>'+r[0]+'</span><span class="pill '+r[1]+'">'+lbl[r[1]]+'</span>';mb.appendChild(d);});
+}
+
+/* ---------- build ---------- */
+function runBuild(){
+  var a=AGENTS[chosen];
+  document.getElementById('buildAv').textContent=a.name[0];document.getElementById('buildAv').style.background=a.tint;
+  document.getElementById('buildName').textContent=a.name+' is setting up your workspace';
+  var steps=document.querySelectorAll('#buildSteps .s');steps.forEach(function(s){s.classList.remove('done','run');});
+  setStage('build');
+  var i=0;steps[0].classList.add('run');
+  var t=setInterval(function(){
+    steps[i].classList.remove('run');steps[i].classList.add('done');i++;
+    if(i<steps.length)steps[i].classList.add('run');
+    else{clearInterval(t);setTimeout(enterApp,420);}
+  },560);
+}
+
+/* ---------- app board ---------- */
+function enterApp(){
+  var a=AGENTS[chosen];
+  document.getElementById('boardTitle').textContent=a.board;
+  document.getElementById('boardAgent').textContent=a.name;
+  document.getElementById('toastName').textContent=a.name;
+  document.getElementById('toastMsg').textContent=a.toast;
+  document.getElementById('toastAv').textContent=a.name[0];document.getElementById('toastAv').style.background=a.tint;
+  var lbl={work:'Working on it',done:'Done',stuck:'Stuck'};
+  var wrap=document.getElementById('boardRows');wrap.innerHTML='';
+  a.rows.forEach(function(r){
+    var owColor=r[2]===a.name[0]?a.tint:'#9699A6';
+    var div=document.createElement('div');div.className='brow';
+    div.innerHTML='<div>'+r[0]+'</div><div class="owner"><span class="mini" style="background:'+owColor+'">'+r[2]+'</span></div>'+
+      '<div class="cellpill"><span class="pill '+r[1]+'">'+lbl[r[1]]+'</span></div><div class="mono" style="color:var(--ink-faint);font-size:.82rem">'+r[3]+'</div>';
+    wrap.appendChild(div);
+  });
+  document.body.classList.add('in-app');
+  document.getElementById('toast').classList.remove('show');
+  clearTimeout(window._tt);
+  window._tt=setTimeout(function(){document.getElementById('toast').classList.add('show');},1500);
+}
+document.getElementById('inviteBtn').addEventListener('click',function(){document.getElementById('toast').classList.add('show');});
+
+/* ---------- restart ---------- */
+document.getElementById('restart').addEventListener('click',function(){
+  document.body.classList.remove('in-app');
+  skipped=false;setChosen('projects');intentNext.disabled=true;nl.value='';
+  document.querySelectorAll('.chip').forEach(function(c){c.classList.remove('sel');});
+  document.getElementById('toast').classList.remove('show');
+  show('0');
+});
+
+/* init */
+renderAgent();updateStageTeam();show('0');
+</script>
