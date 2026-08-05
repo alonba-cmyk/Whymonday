@@ -1,0 +1,699 @@
+<title>monday signup, reimagined — intent-first, agent-first</title>
+<script>document.documentElement.setAttribute('data-theme','light');</script>
+<style>
+  :root{
+    --ground:#FBFBFE; --panel:#FFFFFF; --panel-2:#F5F4FD; --panel-3:#FAF9FF;
+    --ink:#14141F; --ink-soft:#57576E; --ink-faint:#8B8BA3;
+    --line:#E9E7F5; --line-soft:#F1EFFA;
+    --accent:#5A4CF0; --accent-ink:#FFFFFF; --accent-tint:#EDEAFF; --accent-deep:#4536C8;
+    --good:#00C875; --warn:#FDAB3D; --crit:#E2445C;
+    --shadow:0 1px 2px rgba(20,20,40,.04),0 12px 34px rgba(38,30,110,.10);
+    --shadow-soft:0 1px 2px rgba(20,20,40,.04),0 8px 22px rgba(38,30,110,.07);
+    --dot1:#FF3D57; --dot2:#FFCB00; --dot3:#00CA72;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --ground:#0C0C16; --panel:#151524; --panel-2:#1C1B30; --panel-3:#17172A;
+      --ink:#ECECF6; --ink-soft:#A6A6C0; --ink-faint:#71718C;
+      --line:#282740; --line-soft:#20203499;
+      --accent:#8B7DFF; --accent-ink:#0C0C16; --accent-tint:#241F45; --accent-deep:#B4ABFF;
+      --shadow:0 1px 2px rgba(0,0,0,.4),0 16px 40px rgba(0,0,0,.5);
+      --shadow-soft:0 1px 2px rgba(0,0,0,.35),0 10px 26px rgba(0,0,0,.4);
+    }
+  }
+  :root[data-theme="light"]{
+    --ground:#FBFBFE; --panel:#FFFFFF; --panel-2:#F5F4FD; --panel-3:#FAF9FF;
+    --ink:#14141F; --ink-soft:#57576E; --ink-faint:#8B8BA3;
+    --line:#E9E7F5; --line-soft:#F1EFFA;
+    --accent:#5A4CF0; --accent-ink:#FFFFFF; --accent-tint:#EDEAFF; --accent-deep:#4536C8;
+    --shadow:0 1px 2px rgba(20,20,40,.04),0 12px 34px rgba(38,30,110,.10);
+    --shadow-soft:0 1px 2px rgba(20,20,40,.04),0 8px 22px rgba(38,30,110,.07);
+  }
+  :root[data-theme="dark"]{
+    --ground:#0C0C16; --panel:#151524; --panel-2:#1C1B30; --panel-3:#17172A;
+    --ink:#ECECF6; --ink-soft:#A6A6C0; --ink-faint:#71718C;
+    --line:#282740; --line-soft:#20203499;
+    --accent:#8B7DFF; --accent-ink:#0C0C16; --accent-tint:#241F45; --accent-deep:#B4ABFF;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 16px 40px rgba(0,0,0,.5);
+    --shadow-soft:0 1px 2px rgba(0,0,0,.35),0 10px 26px rgba(0,0,0,.4);
+  }
+
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;background:var(--ground);color:var(--ink);
+    font-family:"Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.6;-webkit-font-smoothing:antialiased;
+  }
+  .mono{font-family:ui-monospace,"SF Mono","JetBrains Mono",Menlo,Consolas,monospace}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+
+  /* ---------- draft / review chrome ---------- */
+  .reviewbar{
+    background:var(--accent);color:var(--accent-ink);
+    font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+    font-size:.7rem;letter-spacing:.06em;
+    display:flex;gap:14px;align-items:center;justify-content:center;flex-wrap:wrap;
+    padding:8px 16px;text-align:center;
+  }
+  .reviewbar b{font-weight:700}
+  .reviewbar .sep{opacity:.5}
+
+  header.top{
+    position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--ground) 86%,transparent);
+    backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid var(--line);
+  }
+  .topbar{display:flex;align-items:center;justify-content:space-between;height:60px}
+  .brand{display:flex;align-items:center;gap:9px;font-weight:700;letter-spacing:-.01em;font-size:1.02rem}
+  .mark{display:inline-flex;align-items:center;gap:3px}
+  .mark i{display:block;border-radius:20px}
+  .mark .c{width:8px;height:16px;background:var(--dot1)}
+  .mark .y{width:8px;height:16px;background:var(--dot2)}
+  .mark .g{width:8px;height:8px;border-radius:50%;background:var(--dot3);align-self:center}
+  .brand .dim{color:var(--ink-faint);font-weight:600}
+  .theme-toggle{
+    width:38px;height:38px;border-radius:11px;border:1px solid var(--line);
+    background:var(--panel);color:var(--ink);cursor:pointer;display:grid;place-items:center;
+  }
+  .theme-toggle:hover{border-color:var(--accent)}
+  .theme-toggle svg{width:17px;height:17px}
+
+  /* ---------- hero / framing ---------- */
+  .hero{padding:52px 0 26px;position:relative;overflow:hidden}
+  .hero::before{
+    content:"";position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.5;
+    background:
+      repeating-linear-gradient(0deg,transparent 0 33px,var(--line-soft) 33px 34px),
+      repeating-linear-gradient(90deg,transparent 0 33px,var(--line-soft) 33px 34px);
+    -webkit-mask-image:radial-gradient(120% 90% at 20% 0%,#000 30%,transparent 72%);
+            mask-image:radial-gradient(120% 90% at 20% 0%,#000 30%,transparent 72%);
+  }
+  .hero .wrap{position:relative;z-index:1}
+  .eyebrow{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.7rem;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--accent);font-weight:700}
+  h1{font-size:clamp(2rem,4.6vw,3.15rem);line-height:1.04;letter-spacing:-.025em;font-weight:800;
+    margin:.5rem 0 .1rem;text-wrap:balance;max-width:17ch}
+  .lede{font-size:1.1rem;color:var(--ink-soft);max-width:60ch;margin:.6rem 0 0}
+  .lede b{color:var(--ink);font-weight:700}
+
+  /* ---------- problem → principle strip ---------- */
+  .strip{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:30px 0 8px}
+  @media(max-width:720px){.strip{grid-template-columns:1fr}}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px 22px;box-shadow:var(--shadow-soft)}
+  .card .tag{font-family:ui-monospace,Menlo,monospace;font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700}
+  .card.prob .tag{color:var(--crit)}
+  .card.prin .tag{color:var(--good)}
+  .card h3{margin:.5rem 0 .3rem;font-size:1.12rem;letter-spacing:-.01em}
+  .card p{margin:.2rem 0 0;color:var(--ink-soft);font-size:.98rem}
+  .card p b{color:var(--ink)}
+
+  /* section rhythm */
+  section.block{padding:40px 0}
+  .kicker{font-family:ui-monospace,Menlo,monospace;font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-faint);font-weight:700}
+  h2{font-size:clamp(1.5rem,3vw,2rem);letter-spacing:-.02em;font-weight:800;margin:.35rem 0 .2rem;text-wrap:balance}
+  .sub{color:var(--ink-soft);max-width:64ch;margin:.2rem 0 0}
+
+  /* ---------- prototype device ---------- */
+  .stage{margin:26px auto 0;max-width:960px}
+  .steprail{display:flex;gap:8px;align-items:center;justify-content:center;flex-wrap:wrap;margin-bottom:16px}
+  .steprail .pip{display:flex;align-items:center;gap:8px;font-family:ui-monospace,Menlo,monospace;font-size:.68rem;letter-spacing:.03em;
+    color:var(--ink-faint);border:1px solid var(--line);background:var(--panel);padding:5px 11px;border-radius:20px;cursor:pointer}
+  .steprail .pip .n{width:16px;height:16px;border-radius:50%;display:grid;place-items:center;font-size:.6rem;background:var(--panel-2);color:var(--ink-faint)}
+  .steprail .pip.active{color:var(--ink);border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-tint)}
+  .steprail .pip.active .n{background:var(--accent);color:var(--accent-ink)}
+  .steprail .pip.done{color:var(--ink-soft)}
+  .steprail .pip.done .n{background:var(--good);color:#053}
+  .steprail .arw{color:var(--ink-faint);font-size:.8rem}
+
+  .device{background:var(--panel);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);overflow:hidden}
+  .chrome{display:flex;align-items:center;gap:8px;padding:11px 15px;border-bottom:1px solid var(--line);background:var(--panel-3)}
+  .chrome .dots{display:flex;gap:6px}
+  .chrome .dots i{width:10px;height:10px;border-radius:50%;background:var(--line);display:block}
+  .chrome .url{flex:1;text-align:center;font-family:ui-monospace,Menlo,monospace;font-size:.68rem;color:var(--ink-faint);
+    background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:4px 10px;max-width:320px;margin:0 auto}
+  .screen{min-height:430px;position:relative}
+  .pane{display:none;animation:fade .32s ease}
+  .pane.on{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  @media(prefers-reduced-motion:reduce){.pane.on{animation:none}}
+
+  .padbox{padding:34px 38px}
+  @media(max-width:560px){.padbox{padding:26px 20px}}
+  .brandline{display:flex;align-items:center;gap:8px;margin-bottom:20px;font-weight:700;font-size:.92rem}
+  .brandline .mark i.c,.brandline .mark i.y{height:14px;width:7px}
+  .brandline .mark i.g{width:7px;height:7px}
+  .screen h4{font-size:1.42rem;letter-spacing:-.02em;font-weight:800;margin:0 0 4px}
+  .screen .hint{color:var(--ink-soft);margin:0 0 22px;font-size:.98rem}
+
+  /* intent chips */
+  .nlbox{display:flex;align-items:center;gap:10px;border:1.5px solid var(--line);border-radius:13px;padding:12px 14px;background:var(--panel-3);margin-bottom:8px}
+  .nlbox:focus-within{border-color:var(--accent);box-shadow:0 0 0 4px var(--accent-tint)}
+  .nlbox .spark{color:var(--accent)}
+  .nlbox input{border:0;background:transparent;flex:1;font-size:1rem;color:var(--ink);outline:none;font-family:inherit}
+  .or{display:flex;align-items:center;gap:12px;color:var(--ink-faint);font-size:.78rem;margin:14px 0 12px;font-family:ui-monospace,Menlo,monospace;letter-spacing:.08em}
+  .or::before,.or::after{content:"";height:1px;background:var(--line);flex:1}
+  .chips{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  @media(max-width:560px){.chips{grid-template-columns:1fr}}
+  .chip{display:flex;align-items:center;gap:12px;text-align:left;cursor:pointer;
+    border:1.5px solid var(--line);background:var(--panel);border-radius:13px;padding:13px 14px;transition:.15s;color:var(--ink)}
+  .chip:hover{border-color:var(--accent);transform:translateY(-1px);box-shadow:var(--shadow-soft)}
+  .chip.sel{border-color:var(--accent);background:var(--accent-tint)}
+  .chip .ico{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;flex:none;font-size:1.05rem}
+  .chip .txt b{display:block;font-size:.96rem;letter-spacing:-.01em}
+  .chip .txt span{display:block;font-size:.78rem;color:var(--ink-soft)}
+
+  /* buttons */
+  .row-cta{display:flex;align-items:center;gap:12px;margin-top:22px;flex-wrap:wrap}
+  .btn{border:0;cursor:pointer;font-family:inherit;font-weight:700;font-size:.96rem;border-radius:11px;padding:12px 20px;letter-spacing:-.01em;transition:.15s}
+  .btn.primary{background:var(--accent);color:var(--accent-ink)}
+  .btn.primary:hover{background:var(--accent-deep)}
+  .btn.primary:disabled{opacity:.4;cursor:not-allowed}
+  .btn.ghost{background:transparent;color:var(--ink-soft);border:1px solid var(--line)}
+  .btn.ghost:hover{border-color:var(--accent);color:var(--ink)}
+  .btn.google{background:var(--panel);color:var(--ink);border:1.5px solid var(--line);display:flex;align-items:center;gap:10px;width:100%;justify-content:center}
+  .btn.google:hover{border-color:var(--accent)}
+  .skiplink{background:none;border:0;color:var(--ink-faint);cursor:pointer;font-family:inherit;font-size:.9rem;text-decoration:underline;text-underline-offset:3px}
+
+  /* signup screen */
+  .signupwrap{max-width:360px}
+  .field{width:100%;border:1.5px solid var(--line);background:var(--panel-3);border-radius:11px;padding:12px 14px;font-size:.95rem;color:var(--ink);font-family:inherit;margin-top:10px}
+  .divword{text-align:center;color:var(--ink-faint);font-size:.82rem;margin:14px 0 4px}
+  .terms{font-size:.76rem;color:var(--ink-faint);margin-top:16px;line-height:1.5}
+  .terms a{color:var(--accent);text-decoration:none}
+
+  /* agent match screen */
+  .agentcard{display:flex;gap:18px;align-items:flex-start;border:1px solid var(--line);background:var(--panel-3);border-radius:16px;padding:20px;box-shadow:var(--shadow-soft)}
+  .avatar{width:64px;height:64px;border-radius:16px;flex:none;display:grid;place-items:center;color:#fff;font-weight:800;font-size:1.4rem;letter-spacing:-.02em}
+  .agentcard .who b{font-size:1.15rem;letter-spacing:-.01em}
+  .agentcard .role{font-family:ui-monospace,Menlo,monospace;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-top:2px}
+  .agentcard .pitch{color:var(--ink-soft);margin:.5rem 0 0;font-size:.96rem}
+  .tasklist{margin:16px 0 0;padding:0;list-style:none;display:grid;gap:8px}
+  .tasklist li{display:flex;align-items:center;gap:10px;font-size:.92rem;color:var(--ink-soft)}
+  .tasklist li .bx{width:18px;height:18px;border-radius:6px;border:1.5px solid var(--line);flex:none;display:grid;place-items:center;font-size:.6rem;color:var(--accent)}
+  .matchnote{font-family:ui-monospace,Menlo,monospace;font-size:.7rem;color:var(--ink-faint);margin-top:6px;letter-spacing:.02em}
+
+  /* building screen */
+  .building{display:grid;place-items:center;text-align:center;min-height:400px;gap:6px}
+  .building .avatar{width:78px;height:78px;border-radius:20px;font-size:1.7rem;margin-bottom:6px;animation:pulse 1.8s ease-in-out infinite}
+  @keyframes pulse{0%,100%{box-shadow:0 0 0 0 var(--accent-tint)}50%{box-shadow:0 0 0 14px transparent}}
+  @media(prefers-reduced-motion:reduce){.building .avatar{animation:none}}
+  .building h4{margin:0}
+  .steps{margin:18px 0 0;display:grid;gap:11px;text-align:left;min-width:250px}
+  .steps .s{display:flex;align-items:center;gap:11px;color:var(--ink-faint);font-size:.94rem;transition:.3s}
+  .steps .s.done{color:var(--ink)}
+  .steps .s .tick{width:20px;height:20px;border-radius:50%;border:2px solid var(--line);flex:none;display:grid;place-items:center;font-size:.66rem}
+  .steps .s.done .tick{background:var(--good);border-color:var(--good);color:#053}
+  .steps .s.run .tick{border-color:var(--accent);border-top-color:transparent;animation:spin .8s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+
+  /* board screen */
+  .boardtop{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid var(--line);background:var(--panel-3)}
+  .boardtop .bt{font-weight:800;letter-spacing:-.01em;font-size:1.02rem}
+  .boardtop .agpill{display:inline-flex;align-items:center;gap:7px;font-size:.76rem;font-family:ui-monospace,Menlo,monospace;
+    background:var(--accent-tint);color:var(--accent-deep);border-radius:20px;padding:4px 11px;font-weight:700}
+  .agpill .dot{width:7px;height:7px;border-radius:50%;background:var(--good);box-shadow:0 0 0 3px color-mix(in srgb,var(--good) 25%,transparent)}
+  .grp{padding:14px 16px 4px}
+  .grp .glabel{font-size:.82rem;font-weight:800;margin-bottom:8px;display:flex;align-items:center;gap:7px}
+  .grp .glabel::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--accent)}
+  .brow{display:grid;grid-template-columns:1.6fr .7fr .8fr;gap:8px;align-items:center;padding:9px 12px;border:1px solid var(--line);border-radius:10px;background:var(--panel);margin-bottom:7px;font-size:.88rem}
+  .brow .owner{display:flex;align-items:center;gap:7px;color:var(--ink-soft);font-size:.8rem}
+  .brow .mini{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:.62rem;font-weight:700;flex:none}
+  .pill{border-radius:6px;padding:4px 0;text-align:center;color:#fff;font-weight:700;font-size:.76rem}
+  .pill.work{background:var(--warn)} .pill.done{background:var(--good)} .pill.stuck{background:var(--crit)}
+  .invite{margin:12px 16px 16px;border:1px dashed var(--line);border-radius:12px;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;gap:12px;background:var(--panel-3)}
+  .invite .it{font-size:.9rem}.invite .it b{display:block}
+  .invite .it span{color:var(--ink-soft);font-size:.82rem}
+  .toast{position:absolute;right:16px;bottom:16px;background:var(--ink);color:var(--ground);border-radius:12px;padding:12px 15px;font-size:.86rem;max-width:250px;box-shadow:var(--shadow);display:flex;gap:10px;align-items:flex-start}
+  .toast .av{width:26px;height:26px;border-radius:8px;flex:none;display:grid;place-items:center;color:#fff;font-weight:700;font-size:.7rem}
+
+  .restart{display:flex;justify-content:center;margin-top:16px}
+
+  /* before/after */
+  .ba{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:22px}
+  @media(max-width:720px){.ba{grid-template-columns:1fr}}
+  .bacol{border:1px solid var(--line);border-radius:16px;padding:20px;background:var(--panel);box-shadow:var(--shadow-soft)}
+  .bacol.after{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-tint),var(--shadow-soft)}
+  .bacol .htag{font-family:ui-monospace,Menlo,monospace;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;display:flex;justify-content:space-between;align-items:center}
+  .bacol.before .htag{color:var(--ink-faint)}
+  .bacol.after .htag{color:var(--accent)}
+  .bacol .count{font-size:2rem;font-weight:800;letter-spacing:-.03em;margin:.2rem 0 .4rem;font-variant-numeric:tabular-nums}
+  .flow{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:6px;counter-reset:st}
+  .flow li{display:flex;align-items:center;gap:9px;font-size:.86rem;color:var(--ink-soft);padding:6px 0;border-top:1px solid var(--line-soft)}
+  .flow li:first-child{border-top:0}
+  .flow li .num{font-family:ui-monospace,Menlo,monospace;font-size:.66rem;color:var(--ink-faint);width:20px;flex:none}
+  .flow li.gate::after{content:"gate";font-family:ui-monospace,Menlo,monospace;font-size:.6rem;color:var(--crit);margin-left:auto;text-transform:uppercase;letter-spacing:.1em}
+  .flow li.hi{color:var(--ink);font-weight:600}
+  .flow li.hi .num{color:var(--accent)}
+  .flow li.value{color:var(--good);font-weight:700}
+  .flow li.value::after{content:"value";font-family:ui-monospace,Menlo,monospace;font-size:.6rem;color:var(--good);margin-left:auto;text-transform:uppercase;letter-spacing:.1em}
+
+  /* principles list */
+  .prins{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:20px}
+  @media(max-width:720px){.prins{grid-template-columns:1fr}}
+  .prin-item{border:1px solid var(--line);border-radius:14px;padding:18px;background:var(--panel);box-shadow:var(--shadow-soft)}
+  .prin-item .pn{font-family:ui-monospace,Menlo,monospace;font-size:.7rem;color:var(--accent);font-weight:700;letter-spacing:.06em}
+  .prin-item h5{margin:.4rem 0 .3rem;font-size:1.02rem;letter-spacing:-.01em}
+  .prin-item p{margin:0;color:var(--ink-soft);font-size:.9rem}
+
+  footer{border-top:1px solid var(--line);margin-top:44px;padding:26px 0 60px}
+  footer .fn{font-family:ui-monospace,Menlo,monospace;font-size:.72rem;color:var(--ink-faint);letter-spacing:.03em}
+  footer .draft{color:var(--accent);font-weight:700}
+</style>
+
+<div class="reviewbar mono">
+  <span><b>DRAFT</b> · signup redesign concept</span><span class="sep">|</span>
+  <span>intent-first · agent-first · 3 gates not 7</span><span class="sep">|</span>
+  <span>clickable prototype — pick an intent to see the match</span>
+</div>
+
+<header class="top">
+  <div class="wrap topbar">
+    <div class="brand">
+      <span class="mark" aria-hidden="true"><i class="c"></i><i class="y"></i><i class="g"></i></span>
+      monday<span class="dim">.com</span>
+    </div>
+    <button id="themeBtn" class="theme-toggle" aria-label="Toggle light or dark mode"><span class="ti"></span></button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Signup, reimagined</div>
+    <h1>An agent shows up in the first minute.</h1>
+    <p class="lede">The homepage already promises <b>people and agents, working together to deliver results.</b> The signup should prove it before you finish signing up, not seven screens later.</p>
+
+    <div class="strip">
+      <div class="card prob">
+        <div class="tag">The problem</div>
+        <h3>The agent arrives too late.</h3>
+        <p>Today the flow asks what brings you here, then your role, then your focus, then to invite your team, all <b>before</b> an agent ever appears. By then the promise has gone cold.</p>
+      </div>
+      <div class="card prin">
+        <div class="tag">The principle</div>
+        <h3>One question. Then an agent, working.</h3>
+        <p>Ask the one thing that matters, <b>what you want to get done</b>, and use it to put a relevant agent on screen immediately. Everything else can wait until after the value lands.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <div class="kicker">Clickable prototype</div>
+    <h2>The new flow, in three gates.</h2>
+    <p class="sub">Sign up, tell us your intent once, and meet the agent matched to it. Click through it, and try a different intent to see the agent change.</p>
+
+    <div class="stage">
+      <div class="steprail" id="rail">
+        <div class="pip" data-go="0"><span class="n">1</span> Sign up</div>
+        <span class="arw">→</span>
+        <div class="pip" data-go="1"><span class="n">2</span> Your intent</div>
+        <span class="arw">→</span>
+        <div class="pip" data-go="2"><span class="n">3</span> Meet your agent</div>
+        <span class="arw">→</span>
+        <div class="pip" data-go="3"><span class="n">✓</span> In the board</div>
+      </div>
+
+      <div class="device">
+        <div class="chrome">
+          <div class="dots"><i></i><i></i><i></i></div>
+          <div class="url mono">auth.monday.com/signup</div>
+        </div>
+        <div class="screen">
+
+          <!-- STEP 1 · signup -->
+          <div class="pane on" data-pane="0">
+            <div class="padbox">
+              <div class="brandline"><span class="mark" aria-hidden="true"><i class="c"></i><i class="y"></i><i class="g"></i></span> monday<span style="color:var(--ink-faint);font-weight:600">.com</span></div>
+              <div class="signupwrap">
+                <h4>Get started. It's free.</h4>
+                <p class="hint">No credit card needed.</p>
+                <button class="btn google" data-next="1">
+                  <svg width="17" height="17" viewBox="0 0 48 48" aria-hidden="true"><path fill="#4285F4" d="M45 24.5c0-1.6-.1-2.8-.4-4H24v7.3h12c-.2 1.9-1.5 4.8-4.4 6.7l6.5 5C42 42 45 34 45 24.5z"/><path fill="#34A853" d="M24 46c5.9 0 10.9-2 14.5-5.3l-6.9-5.3c-1.9 1.3-4.4 2.2-7.6 2.2-5.8 0-10.7-3.9-12.5-9.2l-7 5.4C8 39.9 15.4 46 24 46z"/><path fill="#FBBC05" d="M11.5 28.4c-.5-1.4-.7-2.9-.7-4.4s.3-3 .7-4.4l-7-5.4C3.9 17 3 20.4 3 24s.9 7 2.5 9.8l6-5.4z"/><path fill="#EA4335" d="M24 10.7c3.3 0 5.5 1.4 6.8 2.6l5.9-5.7C33 4.2 28.9 2 24 2 15.4 2 8 8.1 5.5 16.6l7 5.4C14.3 14.6 19.2 10.7 24 10.7z"/></svg>
+                  Continue with Google
+                </button>
+                <div class="divword mono">or</div>
+                <input class="field" type="email" placeholder="name@work.com" aria-label="Work email">
+                <div class="row-cta" style="margin-top:12px">
+                  <button class="btn primary" style="width:100%" data-next="1">Continue</button>
+                </div>
+                <p class="terms">By proceeding you agree to the <a href="#">Terms</a> and <a href="#">Privacy Policy</a>.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- STEP 2 · intent -->
+          <div class="pane" data-pane="1">
+            <div class="padbox">
+              <div class="brandline"><span class="mark" aria-hidden="true"><i class="c"></i><i class="y"></i><i class="g"></i></span> monday<span style="color:var(--ink-faint);font-weight:600">.com</span></div>
+              <h4>What do you want to get done?</h4>
+              <p class="hint">Tell us once. We'll bring in an agent built for exactly that.</p>
+              <div class="nlbox">
+                <span class="spark" aria-hidden="true">✦</span>
+                <input id="nlinput" type="text" placeholder="e.g. keep our product launch on track…" aria-label="Describe what you want to get done">
+              </div>
+              <div class="or mono">or pick one</div>
+              <div class="chips" id="chips"></div>
+              <div class="row-cta">
+                <button class="btn primary" id="intentNext" data-next="2" disabled>Continue</button>
+                <button class="skiplink" data-next="2" data-skip="1">Skip for now</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- STEP 3 · agent match -->
+          <div class="pane" data-pane="2">
+            <div class="padbox">
+              <div class="brandline"><span class="mark" aria-hidden="true"><i class="c"></i><i class="y"></i><i class="g"></i></span> monday<span style="color:var(--ink-faint);font-weight:600">.com</span></div>
+              <h4 id="agentH">Meet your agent.</h4>
+              <p class="hint" id="agentHint">Matched to what you want to get done.</p>
+              <div class="agentcard">
+                <div class="avatar" id="agAv">J</div>
+                <div>
+                  <div class="who"><b id="agName">Judy</b></div>
+                  <div class="role" id="agRole">Priorities Manager</div>
+                  <p class="pitch" id="agPitch"></p>
+                  <ul class="tasklist" id="agTasks"></ul>
+                  <div class="matchnote" id="agMatch"></div>
+                </div>
+              </div>
+              <div class="row-cta">
+                <button class="btn primary" data-next="3" id="agGo">Let's go</button>
+                <button class="skiplink" data-back="1">See other agents</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- STEP 3.5 · building (auto) -->
+          <div class="pane" data-pane="build">
+            <div class="padbox building">
+              <div class="avatar" id="buildAv">J</div>
+              <h4 id="buildName">Judy is setting up your workspace</h4>
+              <p class="hint">This takes a moment.</p>
+              <div class="steps" id="buildSteps">
+                <div class="s"><span class="tick">✓</span> Reading your intent</div>
+                <div class="s"><span class="tick">✓</span> Building your board</div>
+                <div class="s"><span class="tick">✓</span> Adding the first items</div>
+                <div class="s"><span class="tick">✓</span> Getting to work</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- STEP 4 · board -->
+          <div class="pane" data-pane="3">
+            <div class="boardtop">
+              <div class="bt" id="boardTitle">Product launch</div>
+              <div class="agpill"><span class="dot"></span> <span id="boardAgent">Judy</span> · working</div>
+            </div>
+            <div class="grp">
+              <div class="glabel">This week</div>
+              <div id="boardRows"></div>
+            </div>
+            <div class="invite">
+              <div class="it"><b>Bring your team in</b><span>Now that it's working, add the people who'll run it with you.</span></div>
+              <button class="btn ghost" onclick="toast()">Invite</button>
+            </div>
+            <div class="toast" id="toast" style="display:none">
+              <div class="av" id="toastAv">J</div>
+              <div><b id="toastName">Judy</b><br><span id="toastMsg">I flagged one item as at-risk. Want me to reschedule it?</span></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="restart">
+        <button class="btn ghost" id="restart">↺ Start over</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <div class="kicker">The argument, at a glance</div>
+    <h2>Seven gates become three.</h2>
+    <p class="sub">Same signup goals, resequenced around the promise. The three separate questions collapse into one intent, the agent moves to the front, and inviting the team waits until after the value lands.</p>
+    <div class="ba">
+      <div class="bacol before">
+        <div class="htag"><span>Today</span><span>time-to-agent: slow</span></div>
+        <div class="count">7 <span style="font-size:1rem;font-weight:600;color:var(--ink-soft)">gates before value</span></div>
+        <ul class="flow">
+          <li><span class="num">01</span> Sign up</li>
+          <li class="gate"><span class="num">02</span> What brings you here?</li>
+          <li class="gate"><span class="num">03</span> What's your role?</li>
+          <li class="gate"><span class="num">04</span> What to focus on first?</li>
+          <li class="gate"><span class="num">05</span> Invite your team</li>
+          <li class="gate"><span class="num">06</span> Pick your first agent</li>
+          <li class="gate"><span class="num">07</span> Agent sets things up</li>
+          <li class="value"><span class="num">08</span> You reach the board</li>
+        </ul>
+      </div>
+      <div class="bacol after">
+        <div class="htag"><span>Reimagined</span><span>time-to-agent: step 2</span></div>
+        <div class="count">3 <span style="font-size:1rem;font-weight:600;color:var(--ink-soft)">gates, agent up front</span></div>
+        <ul class="flow">
+          <li class="hi"><span class="num">01</span> Sign up</li>
+          <li class="hi"><span class="num">02</span> What do you want to get done? <em style="font-style:normal;color:var(--ink-faint);font-size:.76rem;margin-left:6px">(one question)</em></li>
+          <li class="hi"><span class="num">03</span> Meet the agent matched to it</li>
+          <li class="value"><span class="num">04</span> Land in the board, agent already working</li>
+          <li style="border-top:1px solid var(--line-soft);color:var(--ink-faint)"><span class="num">+</span> Invite your team (after value, optional)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <div class="kicker">Why it works</div>
+    <h2>Three decisions doing the heavy lifting.</h2>
+    <div class="prins">
+      <div class="prin-item">
+        <div class="pn">01</div>
+        <h5>Intent replaces the questionnaire</h5>
+        <p>One question, "what do you want to get done," carries the signal that role plus focus plus "what brings you here" used to spread across three screens.</p>
+      </div>
+      <div class="prin-item">
+        <div class="pn">02</div>
+        <h5>The agent is the reward, not a setup step</h5>
+        <p>Instead of "pick an agent" as a chore, the right agent is offered to you, by name, already knowing the job you came to do.</p>
+      </div>
+      <div class="prin-item">
+        <div class="pn">03</div>
+        <h5>Team invite earns its place</h5>
+        <p>You invite people once you have something worth inviting them to. It moves out of the critical path and stops blocking the first win.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="fn"><span class="draft">DRAFT</span> · signup-agent-first · concept prototype for review · matching logic is illustrative</div>
+  </div>
+</footer>
+
+<script>
+/* ---------- theme toggle ---------- */
+(function(){
+  var root=document.documentElement, tb=document.getElementById('themeBtn');
+  var SUN='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>';
+  var MOON='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1111.2 3 7 7 0 0021 12.8z"/></svg>';
+  function cur(){return root.getAttribute('data-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');}
+  function render(){tb.querySelector('.ti').innerHTML=cur()==='dark'?SUN:MOON;}
+  tb.addEventListener('click',function(){root.setAttribute('data-theme',cur()==='dark'?'light':'dark');render();});
+  render();
+})();
+
+/* ---------- intent → agent data ---------- */
+var AGENTS={
+  launch:{key:'launch',icon:'🚀',tint:'#FF3D57',name:'Ruby',role:'Launch Manager',
+    label:'Launch products & campaigns',sub:'Go-to-market, releases, campaigns',
+    pitch:"I run the launch plan end to end, so every owner knows what's due and nothing slips before go-live.",
+    tasks:['Build the launch timeline','Chase owners on open tasks','Flag risks before launch day'],
+    board:'Product launch',rows:[['Finalize launch messaging','work','R'],['Design assets ready','done','D'],['Press & analyst briefing','stuck','R']],
+    toast:"Press briefing has no owner yet. Want me to assign it?"},
+  projects:{key:'projects',icon:'🎯',tint:'#5A4CF0',name:'Judy',role:'Priorities Manager',
+    label:'Keep projects on track',sub:'Deadlines, priorities, delivery',
+    pitch:"I keep your priorities straight, surfacing and escalating what's urgent before it slips.",
+    tasks:['Map the plan into a board','Surface what is at risk','Escalate before things slip'],
+    board:'This quarter',rows:[['Kickoff & scope','done','D'],['Milestone 1 delivery','work','J'],['Vendor dependency','stuck','J']],
+    toast:"I flagged one item as at-risk. Want me to reschedule it?"},
+  deals:{key:'deals',icon:'💰',tint:'#00C875',name:'Cleo',role:'Deals Agent',
+    label:'Close more deals',sub:'Pipeline, follow-ups, CRM',
+    pitch:"I keep your pipeline moving, following up on every deal so none go cold while you sell.",
+    tasks:['Set up your pipeline','Draft follow-ups','Nudge deals going quiet'],
+    board:'Sales pipeline',rows:[['Acme Corp — proposal','work','C'],['Globex — closed won','done','D'],['Initech — no reply 9d','stuck','C']],
+    toast:"3 deals went quiet this week. Want me to draft follow-ups?"},
+  dev:{key:'dev',icon:'💻',tint:'#0073EA',name:'Dev',role:'Delivery Agent',
+    label:'Ship software faster',sub:'Sprints, bugs, releases',
+    pitch:"I run the sprint board, so bugs, reviews, and releases keep moving without the standup overhead.",
+    tasks:['Set up the sprint board','Triage incoming bugs','Track the release'],
+    board:'Sprint 12',rows:[['Auth refactor','work','D'],['Login bug fixed','done','D'],['Release blocker','stuck','D']],
+    toast:"One PR has been waiting 2 days for review. Want me to nudge?"},
+  clients:{key:'clients',icon:'🤝',tint:'#FDAB3D',name:'Sol',role:'Service Agent',
+    label:'Deliver client work',sub:'Requests, approvals, delivery',
+    pitch:"I keep every client request on track, from intake to approval, so nothing waits on you to chase it.",
+    tasks:['Organize incoming requests','Route for approval','Keep clients updated'],
+    board:'Client delivery',rows:[['Brand refresh — draft','work','S'],['Website copy approved','done','D'],['Awaiting client sign-off','stuck','S']],
+    toast:"Two requests are stuck awaiting approval. Want me to send a reminder?"},
+  ops:{key:'ops',icon:'⚙️',tint:'#A25DDC',name:'Nova',role:'Operations Agent',
+    label:'Run operations',sub:'Processes, requests, resources',
+    pitch:"I keep the operation running, routing requests and catching bottlenecks before they pile up.",
+    tasks:['Map your process','Route incoming requests','Surface bottlenecks'],
+    board:'Operations',rows:[['Onboarding new hire','work','N'],['Vendor renewal done','done','D'],['Budget approval','stuck','N']],
+    toast:"The budget approval has been idle 4 days. Want me to escalate?"}
+};
+var ORDER=['launch','projects','deals','dev','clients','ops'];
+
+/* build chips */
+(function(){
+  var wrap=document.getElementById('chips');
+  ORDER.forEach(function(k){
+    var a=AGENTS[k];
+    var b=document.createElement('button');
+    b.className='chip';b.setAttribute('data-intent',k);
+    b.innerHTML='<span class="ico" style="background:'+hexTint(a.tint)+';color:'+a.tint+'">'+a.icon+'</span>'+
+      '<span class="txt"><b>'+a.label+'</b><span>'+a.sub+'</span></span>';
+    b.addEventListener('click',function(){selectIntent(k);});
+    wrap.appendChild(b);
+  });
+})();
+function hexTint(hex){
+  // light translucent tint of the accent color
+  var h=hex.replace('#','');var r=parseInt(h.substr(0,2),16),g=parseInt(h.substr(2,2),16),b=parseInt(h.substr(4,2),16);
+  return 'rgba('+r+','+g+','+b+',.14)';
+}
+
+var chosen='projects', skipped=false;
+var nl=document.getElementById('nlinput');
+var intentNext=document.getElementById('intentNext');
+
+nl.addEventListener('input',function(){
+  if(nl.value.trim().length>2){ guessFromText(nl.value); enableIntent(); }
+});
+function guessFromText(t){
+  t=t.toLowerCase();
+  var map=[['launch',['launch','campaign','go-to-market','gtm','release','marketing','event']],
+           ['deals',['deal','sales','pipeline','revenue','crm','lead','close','prospect']],
+           ['dev',['software','sprint','bug','engineer','code','dev','release','product build','app']],
+           ['clients',['client','agency','request','approval','deliver','account','creative']],
+           ['ops',['operation','process','ops','resource','logistics','procure','vendor']],
+           ['projects',['project','deadline','track','priorit','plan','milestone','deliver on time']]];
+  for(var i=0;i<map.length;i++){for(var j=0;j<map[i][1].length;j++){ if(t.indexOf(map[i][1][j])>-1){ setChosen(map[i][0]); return; } }}
+  setChosen('projects');
+}
+function setChosen(k){
+  chosen=k;
+  document.querySelectorAll('.chip').forEach(function(c){c.classList.toggle('sel',c.getAttribute('data-intent')===k);});
+}
+function selectIntent(k){ setChosen(k); skipped=false; enableIntent(); }
+function enableIntent(){ intentNext.disabled=false; }
+
+/* ---------- pane navigation ---------- */
+var panes=document.querySelectorAll('.pane');
+var pips=document.querySelectorAll('#rail .pip');
+function showPane(id){
+  panes.forEach(function(p){p.classList.toggle('on',p.getAttribute('data-pane')===String(id));});
+  var stepIndex={'0':0,'1':1,'2':2,'build':3,'3':3}[String(id)];
+  pips.forEach(function(p,i){
+    p.classList.toggle('active',i===stepIndex);
+    p.classList.toggle('done',i<stepIndex);
+  });
+  var urls={'0':'auth.monday.com/signup','1':'auth.monday.com/intent','2':'auth.monday.com/your-agent','build':'app.monday.com/setup','3':'app.monday.com/boards'};
+  document.querySelector('.chrome .url').textContent=urls[String(id)]||'app.monday.com';
+}
+
+document.querySelectorAll('[data-next]').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    var n=btn.getAttribute('data-next');
+    if(btn.getAttribute('data-skip')){ skipped=true; setChosen('projects'); }
+    if(n==='2'){ renderAgent(); }
+    if(n==='3'){ runBuild(); return; }
+    showPane(n);
+  });
+});
+document.querySelectorAll('[data-back]').forEach(function(btn){
+  btn.addEventListener('click',function(){ showPane(btn.getAttribute('data-back')); });
+});
+pips.forEach(function(p){
+  p.addEventListener('click',function(){
+    var g=p.getAttribute('data-go');
+    if(g==='2'){renderAgent();}
+    if(g==='3'){prepBoard();}
+    showPane(g);
+  });
+});
+
+/* ---------- render agent match ---------- */
+function renderAgent(){
+  var a=AGENTS[chosen];
+  document.getElementById('agName').textContent=a.name;
+  document.getElementById('agRole').textContent=a.role;
+  document.getElementById('agPitch').textContent=a.pitch;
+  document.getElementById('agAv').textContent=a.name[0];
+  document.getElementById('agAv').style.background=a.tint;
+  document.getElementById('agH').textContent='Meet '+a.name+'.';
+  document.getElementById('agentHint').textContent=skipped?'A solid default to get you moving. You can swap agents any time.':'Matched to “'+a.label.toLowerCase()+'.”';
+  var ul=document.getElementById('agTasks');ul.innerHTML='';
+  a.tasks.forEach(function(t){var li=document.createElement('li');li.innerHTML='<span class="bx">✓</span>'+t;ul.appendChild(li);});
+  document.getElementById('agMatch').textContent=skipped?'// default agent':'// matched from your intent';
+}
+
+/* ---------- build animation ---------- */
+function runBuild(){
+  var a=AGENTS[chosen];
+  document.getElementById('buildAv').textContent=a.name[0];
+  document.getElementById('buildAv').style.background=a.tint;
+  document.getElementById('buildName').textContent=a.name+' is setting up your workspace';
+  var steps=document.querySelectorAll('#buildSteps .s');
+  steps.forEach(function(s){s.classList.remove('done','run');});
+  showPane('build');
+  var i=0;
+  steps[0].classList.add('run');
+  var t=setInterval(function(){
+    steps[i].classList.remove('run');steps[i].classList.add('done');
+    i++;
+    if(i<steps.length){steps[i].classList.add('run');}
+    else{clearInterval(t);setTimeout(function(){prepBoard();showPane('3');},420);}
+  },560);
+}
+
+/* ---------- board ---------- */
+function prepBoard(){
+  var a=AGENTS[chosen];
+  document.getElementById('boardTitle').textContent=a.board;
+  document.getElementById('boardAgent').textContent=a.name;
+  document.getElementById('toastName').textContent=a.name;
+  document.getElementById('toastMsg').textContent=a.toast;
+  document.getElementById('toastAv').textContent=a.name[0];
+  document.getElementById('toastAv').style.background=a.tint;
+  var wrap=document.getElementById('boardRows');wrap.innerHTML='';
+  var cls={work:'work',done:'done',stuck:'stuck'};
+  var lbl={work:'Working on it',done:'Done',stuck:'Stuck'};
+  a.rows.forEach(function(r){
+    var owColor = r[2]===a.name[0]?a.tint:'#9699A6';
+    var div=document.createElement('div');div.className='brow';
+    div.innerHTML='<div>'+r[0]+'</div>'+
+      '<div class="owner"><span class="mini" style="background:'+owColor+'">'+r[2]+'</span></div>'+
+      '<div class="pill '+cls[r[1]]+'">'+lbl[r[1]]+'</div>';
+    wrap.appendChild(div);
+  });
+  document.getElementById('toast').style.display='none';
+  clearTimeout(window._tt);
+  window._tt=setTimeout(function(){document.getElementById('toast').style.display='flex';},1400);
+}
+function toast(){document.getElementById('toast').style.display='flex';}
+window.toast=toast;
+
+/* ---------- restart ---------- */
+document.getElementById('restart').addEventListener('click',function(){
+  skipped=false;setChosen('projects');intentNext.disabled=true;nl.value='';
+  document.querySelectorAll('.chip').forEach(function(c){c.classList.remove('sel');});
+  showPane('0');
+});
+
+/* init */
+renderAgent();
+</script>
