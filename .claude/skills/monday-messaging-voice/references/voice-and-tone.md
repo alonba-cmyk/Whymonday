@@ -78,6 +78,8 @@ Avoid these even though they're common marketing/LinkedIn defaults. Alon flags t
 
 When an agent is framed relative to the reader, put it **alongside** them, not doing the work **for** them. "Alongside you" reads as partnership and sits on the together-thesis; "does the work for you" reads as delegation or hand-off, a short step from replacement. Approved example (agent picker heading, chosen over "Add your agents" and over a "…doing the work for you" variant): **"Add an agent to work alongside you."** Use "for you" only for a narrow, unthreatening task ("drafts the follow-up for you"), never for the whole job.
 
+**Approved evolution (keep the anchor, add the person's world):** the same agent-picker heading later went dynamic by inserting the reader's department while keeping the anchor intact: **"Pick your [Department] agents, ready to work alongside you"** (Marketing / Sales / HR / IT…). This is the swap-test move applied to an anchor line: hold the partnership phrase, personalize the front with what the surface already knows. Note the deliberate contrast with the sibling apps heading, which personalizes on the *use case* ("built for your launch") rather than the department, so the two screens don't repeat one construction.
+
 ## Cut the filler
 
 Kill words that pad and soften, they weaken the point and add length: just, really, very, quite, actually, simply, "in order to", "the fact that", "we think", "kind of". Cut every word that doesn't change the meaning, then read it again and cut more.
