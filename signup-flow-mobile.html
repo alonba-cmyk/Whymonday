@@ -75,15 +75,20 @@
   .depttile,.ucrow,.arow{flex-wrap:wrap}
   .tilemedia{display:block;flex-basis:100%;width:100%;margin-top:11px;border-radius:11px;overflow:hidden;line-height:0;border:1px solid var(--line)}
   .tilemedia video{width:100%;height:auto;display:block}
-  .rowmedia{display:flex;flex-direction:column;gap:9px;flex-basis:100%;width:100%;margin-top:12px}
-  .rowmedia .rmhead{font-family:ui-monospace,Menlo,monospace;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);font-weight:700}
-  .rowmedia .wtable{width:100%}
-  .rowmedia .rmnote{display:flex;align-items:center;gap:8px;font-size:.75rem;color:var(--ink-soft);white-space:normal;line-height:1.35}
-  .rowmedia .rmnote .fa{width:22px;height:22px;border-radius:6px;background-size:cover;background-position:center 16%;flex:none}
-  .agmedia.show{display:flex;flex-direction:column;gap:7px;flex-basis:100%;width:100%;margin-top:12px;padding-top:12px;border-top:1px solid var(--line)}
-  .agmedia .amlabel{font-family:ui-monospace,Menlo,monospace;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);font-weight:700}
-  .agmedia .amrow{display:flex;align-items:center;gap:9px;font-size:.78rem}
-  .agmedia .amitem{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .rowmedia{display:flex;flex-direction:column;gap:8px;flex-basis:100%;width:100%;margin-top:16px;padding-top:14px;border-top:1px solid var(--line-soft)}
+  .rowmedia .rmhead{font-family:ui-monospace,Menlo,monospace;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);font-weight:700}
+  .rowmedia .wtable{width:100%;font-size:.74rem;border-color:var(--line-soft);background:transparent}
+  .rowmedia .wr.h{display:none}
+  .rowmedia .wr>div{padding:7px 10px;border-bottom-color:var(--line-soft)}
+  .rowmedia .rmnote{display:flex;align-items:center;gap:8px;font-size:.73rem;color:var(--ink-soft);white-space:normal;line-height:1.35}
+  .rowmedia .rmnote .fa{width:20px;height:20px;border-radius:6px;background-size:cover;background-position:center 16%;flex:none}
+  .agmedia.show{display:flex;flex-direction:column;gap:6px;flex-basis:100%;width:100%;margin-top:11px;padding-top:11px;border-top:1px solid var(--line-soft)}
+  .agmedia .amlabel{font-family:ui-monospace,Menlo,monospace;font-size:.56rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);font-weight:700;margin-bottom:1px}
+  .agmedia .amrow{display:flex;align-items:center;gap:10px;font-size:.8rem}
+  .agmedia .amrow .dot{width:6px;height:6px;border-radius:50%;flex:none;background:var(--ink-faint)}
+  .agmedia .amrow .dot.work{background:var(--warn)}.agmedia .amrow .dot.done{background:var(--good)}.agmedia .amrow .dot.stuck{background:var(--crit)}
+  .agmedia .amitem{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--ink-soft)}
+  .agmedia .wpill{font-size:.58rem;padding:2px 8px}
   }
   .prog{display:none}
   .topbar{position:absolute;top:0;left:0;right:0;z-index:6}
@@ -154,7 +159,7 @@
   .wagpill{font-size:.64rem;font-family:ui-monospace,Menlo,monospace;background:var(--accent-tint);color:var(--accent-deep);border-radius:20px;padding:3px 9px;font-weight:700;display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
   .wagpill .d{width:6px;height:6px;border-radius:50%;background:var(--good)}
   .wtable{border:1px solid var(--line);border-radius:11px;overflow:hidden;background:var(--panel);font-size:.78rem}
-  .wr{display:grid;grid-template-columns:1.7fr .62fr 1fr;align-items:center}
+  .wr{display:grid;grid-template-columns:minmax(0,1fr) 52px 108px;align-items:center}
   .wr>div{padding:8px 11px;border-bottom:1px solid var(--line-soft)}
   .wr:last-child>div{border-bottom:0}
   .wr.h{background:var(--panel-3);font-family:ui-monospace,Menlo,monospace;font-size:.56rem;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-faint)}
@@ -507,7 +512,7 @@ function updateAgentCardMedia(){
   if(!added[chosen+idx]||n===0){m.classList.remove('show');m.innerHTML='';return;}
   var a=u.agents[idx],pos=mine.indexOf(a);
   var h='<span class="amlabel">On your board</span>';
-  u.rows.forEach(function(r,i){ if(i%n===pos){ h+='<span class="amrow">'+ownerCell(a.f)+'<span class="amitem">'+r[0]+'</span><span class="wpill '+r[1]+'">'+LBL[r[1]]+'</span></span>'; } });
+  u.rows.forEach(function(r,i){ if(i%n===pos){ h+='<span class="amrow"><span class="dot '+r[1]+'"></span><span class="amitem">'+r[0]+'</span><span class="wpill '+r[1]+'">'+LBL[r[1]]+'</span></span>'; } });
   m.innerHTML=h;m.classList.add('show');
  });
 }
