@@ -72,6 +72,10 @@ Avoid these even though they're common marketing/LinkedIn defaults. Alon flags t
 - Decorative emoji that carry no meaning (a trailing sparkle). A single relevant emoji is a judgment call, never a default.
 - **Any phrasing that suggests agents replace or diminish people's value.** Agents "multiply," "take on," or "handle" work. They do not replace a role or make a job smaller. When in doubt, reread the line as if a person on that team were reading it about their own job. (This is core rule 15, elevated here because it is the easiest rule to violate by accident.)
 
+## "alongside you," not "for you"
+
+When an agent is framed relative to the reader, put it **alongside** them, not doing the work **for** them. "Alongside you" reads as partnership and sits on the together-thesis; "does the work for you" reads as delegation or hand-off, a short step from replacement. Approved example (agent picker heading, chosen over "Add your agents" and over a "…doing the work for you" variant): **"Add an agent to work alongside you."** Use "for you" only for a narrow, unthreatening task ("drafts the follow-up for you"), never for the whole job.
+
 ## Cut the filler
 
 Kill words that pad and soften, they weaken the point and add length: just, really, very, quite, actually, simply, "in order to", "the fact that", "we think", "kind of". Cut every word that doesn't change the meaning, then read it again and cut more.
