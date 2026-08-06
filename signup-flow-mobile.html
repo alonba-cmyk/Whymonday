@@ -117,7 +117,8 @@
   .btn.primary:disabled{opacity:.4;cursor:not-allowed}
   .btn.google{background:var(--panel);color:var(--ink);border:1.5px solid var(--line);display:flex;align-items:center;gap:10px;width:100%;justify-content:center}
   .btn.google:hover{border-color:var(--accent)}
-  .skiplink{background:none;border:0;color:var(--ink-faint);cursor:pointer;font-family:inherit;font-size:.9rem;text-decoration:underline;text-underline-offset:3px}
+  .skiplink{background:none;border:0;color:var(--ink-faint);cursor:pointer;font-family:inherit;font-size:.9rem;text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
+  @media(max-width:820px){.skiplink{font-size:.78rem}}
   .row-cta{display:flex;align-items:center;gap:14px;margin-top:20px;flex-wrap:wrap}
   .field{width:100%;border:1.5px solid var(--line);background:var(--panel-3);border-radius:12px;padding:12px 14px;font-size:.96rem;color:var(--ink);font-family:inherit;margin-top:12px}
   .field:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 4px var(--accent-tint)}
