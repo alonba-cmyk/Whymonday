@@ -204,20 +204,18 @@
   .bsteps .s .tk{width:19px;height:19px;border-radius:50%;border:2px solid var(--line);flex:none;display:grid;place-items:center;font-size:.62rem}
   .bsteps .s.done .tk{background:var(--good);border-color:var(--good);color:#053}
   .bsteps .s.run .tk{border-color:var(--accent);border-top-color:transparent;animation:spin .8s linear infinite}
-  /* mobile build visualization (workspace assembling) */
-  .buildviz{display:none}
-  @media(max-width:820px){
-  .buildviz{display:block;margin-top:26px;width:100%}
+  /* build visualization (workspace assembling) — desktop right panel + mobile stacked */
+  .buildviz{width:100%;max-width:460px}
   .bvcard{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:var(--shadow-soft);transition:box-shadow .45s}
   .buildviz.s5 .bvcard{box-shadow:0 0 0 2px var(--accent-tint),var(--shadow)}
   .bvhead{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}
-  .bvhead b{font-size:.98rem;letter-spacing:-.01em}
+  .bvhead b{font-size:1rem;letter-spacing:-.01em}
   .bvpill{font-family:ui-monospace,Menlo,monospace;font-size:.58rem;font-weight:700;color:var(--accent-deep);background:var(--accent-tint);border-radius:20px;padding:3px 9px;white-space:nowrap}
   .buildviz.s5 .bvpill{color:var(--good)}
   .bvtable{display:flex;flex-direction:column}
-  .bvrow{display:grid;grid-template-columns:minmax(0,1fr) 44px 92px;align-items:center;gap:8px;padding:9px 0;border-bottom:1px solid var(--line-soft)}
+  .bvrow{display:grid;grid-template-columns:minmax(0,1fr) 44px 96px;align-items:center;gap:8px;padding:9px 0;border-bottom:1px solid var(--line-soft);transition:background .3s,box-shadow .3s;border-radius:8px}
   .bvrow:last-child{border-bottom:0}
-  .bvitem{font-size:.8rem;font-weight:500;opacity:0;transform:translateY(3px);transition:.45s;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .bvitem{font-size:.82rem;font-weight:500;opacity:0;transform:translateY(3px);transition:.45s;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .buildviz.s1 .bvitem{opacity:1;transform:none}
   .bvown{opacity:0;transition:.45s .05s}
   .buildviz.s2 .bvown{opacity:1}
@@ -225,16 +223,15 @@
   .buildviz.s4 .bvst{opacity:1}
   .bvapps{display:flex;flex-wrap:wrap;gap:7px;max-height:0;opacity:0;overflow:hidden;transition:.55s}
   .buildviz.s3 .bvapps{max-height:140px;opacity:1;margin-top:12px}
-  .bvchip{display:inline-flex;align-items:center;gap:6px;font-size:.72rem;font-weight:600;background:var(--panel-3);border:1px solid var(--line);border-radius:20px;padding:5px 10px}
+  .bvchip{display:inline-flex;align-items:center;gap:6px;font-size:.74rem;font-weight:600;background:var(--panel-3);border:1px solid var(--line);border-radius:20px;padding:5px 10px}
   .bvchip .aic{width:18px;height:18px;background:var(--accent-tint);color:var(--accent);border-radius:6px;display:grid;place-items:center;flex:none}
   .bvchip .aic svg{width:11px;height:11px}
   .bvagent{display:flex;align-items:flex-start;gap:11px;margin-bottom:14px}
-  .bvav{width:44px;height:44px;border-radius:13px;background-size:cover;background-position:center 16%;background-color:var(--panel-2);flex:none;animation:bvpulse 1.9s ease-in-out infinite}
-  .bvbubble{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:14px;border-top-left-radius:4px;padding:10px 13px;font-size:.82rem;line-height:1.35;color:var(--ink);min-height:22px;box-shadow:var(--shadow-soft);max-width:80%}
+  .bvav{width:46px;height:46px;border-radius:13px;background-size:cover;background-position:center 16%;background-color:var(--panel-2);flex:none;animation:bvpulse 1.9s ease-in-out infinite}
+  .bvbubble{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:14px;border-top-left-radius:4px;padding:10px 13px;font-size:.84rem;line-height:1.35;color:var(--ink);min-height:22px;box-shadow:var(--shadow-soft);max-width:82%}
   .bvbubble .cur{display:inline-block;width:2px;height:.95em;background:var(--accent);margin-left:1px;vertical-align:-2px;animation:bvblink 1s steps(1) infinite}
-  .bvrow{transition:background .3s,box-shadow .3s;border-radius:8px}
   .bvrow.hi{background:linear-gradient(90deg,rgba(226,68,92,.12),transparent);animation:bvhi 1.2s ease-out}
-  }
+  @media(max-width:820px){.pane[data-pane="build"] .hero-right{display:block;border-left:0;background:none;padding:8px 22px 44px;min-height:auto}.buildviz{max-width:none}}
   @keyframes bvpulse{0%,100%{box-shadow:0 0 0 0 rgba(90,76,240,.30)}50%{box-shadow:0 0 0 9px rgba(90,76,240,0)}}
   @keyframes bvblink{50%{opacity:0}}
   @keyframes bvhi{0%{box-shadow:inset 0 0 0 2px rgba(226,68,92,0)}30%{box-shadow:inset 0 0 0 2px rgba(226,68,92,.55)}100%{box-shadow:inset 0 0 0 2px rgba(226,68,92,0)}}
@@ -422,9 +419,8 @@
             <div class="s"><span class="tk">✓</span> Assigning the first items</div>
             <div class="s"><span class="tk">✓</span> Getting to work</div>
           </div>
-          <div class="buildviz" id="buildViz"></div>
         </div></div>
-        <div class="hero-right"><div class="buildav" id="buildAv"></div></div>
+        <div class="hero-right"><div class="buildviz" id="buildViz"></div></div>
       </div>
     </div>
 
@@ -727,8 +723,6 @@ document.querySelectorAll('[data-back]').forEach(function(b){b.addEventListener(
 /* build + board */
 function runBuild(){
  var u=UC[chosen],mine=addedList();
- var av=mine.length?mine[0].f:u.agents[0].f;
- document.getElementById('buildAv').style.backgroundImage='url('+IMG[av]+')';
  document.getElementById('buildName').textContent=mine.length?(mine[0].n+' is setting up your workspace'):'Setting up your workspace';
  var steps=document.querySelectorAll('#bsteps .s');steps.forEach(function(s){s.classList.remove('done','run');});
  buildViz();
@@ -749,14 +743,14 @@ function runBuild(){
    if(stage>=steps.length){var pl=vz.querySelector('.bvpill');if(pl)pl.textContent='ready';
      var hr=vz.querySelector('.bvr-stuck');if(hr)hr.classList.add('hi');}
    i++;
-   if(i<steps.length)steps[i].classList.add('run');else{clearInterval(t);setTimeout(enterApp,1500);}},560);
+   if(i<steps.length)steps[i].classList.add('run');else{clearInterval(t);setTimeout(enterApp,2000);}},720);
 }
 var _typeT;
 function typeMsg(text){
  clearInterval(_typeT);
  var el=document.getElementById('bvtype');if(!el)return;
  el.textContent='';
- var total=text.length,dur=Math.min(460,Math.max(200,total*15)),step=total?dur/total:16,k=0;
+ var total=text.length,dur=Math.min(620,Math.max(280,total*19)),step=total?dur/total:20,k=0;
  _typeT=setInterval(function(){k++;el.textContent=text.slice(0,k);if(k>=total)clearInterval(_typeT);},step);
 }
 function buildViz(){
@@ -791,7 +785,10 @@ function enterApp(){
 }
 document.querySelectorAll('.restartbtn').forEach(function(rb){rb.addEventListener('click',function(){
  body.classList.remove('in-app');chosen=null;chosenDept=null;added={};appsAdded={};boardView='table';noAgent=false;
- document.querySelectorAll('.ucrow').forEach(function(c){c.classList.remove('sel');});
+ deptBuilt=false;
+ document.querySelectorAll('.depttile').forEach(function(c){c.classList.remove('sel');var m=c.querySelector('.tilemedia');if(m)m.remove();});
+ document.querySelectorAll('.ucrow').forEach(function(c){c.classList.remove('sel');var m=c.querySelector('.rowmedia');if(m)m.remove();});
+ var dn2=document.getElementById('deptNext');if(dn2)dn2.disabled=true;
  document.getElementById('ucNext').disabled=true;document.getElementById('toast').classList.remove('show');
  show('0');
 });});
