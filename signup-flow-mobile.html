@@ -138,21 +138,22 @@
   .uclist{display:flex;flex-direction:column;gap:8px}
   .deptgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
   @media(max-width:560px){.deptgrid{grid-template-columns:1fr}}
-  .depttile{display:flex;align-items:center;gap:10px;border:1.5px solid var(--line);border-radius:12px;padding:11px 12px;background:var(--panel);cursor:pointer;text-align:left;color:var(--ink);font-family:inherit;transition:.15s;min-width:0}
+  .depttile{display:flex;align-items:center;gap:13px;border:1.5px solid var(--line);border-radius:12px;padding:11px 14px;background:var(--panel);cursor:pointer;text-align:left;color:var(--ink);font-family:inherit;transition:.15s;min-width:0;min-height:62px}
+  @media(max-width:820px){.depttile{min-height:92px}}
   .depttile:hover{border-color:var(--accent)}
   .depttile.sel{border-color:var(--accent);background:var(--accent-tint);box-shadow:0 0 0 3px var(--accent-tint)}
-  .depttile .ic{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;flex:none;background:var(--accent-tint);color:var(--accent)}
-  .depttile .ic svg{width:17px;height:17px}
+  .depttile .ic{width:46px;height:46px;border-radius:13px;display:grid;place-items:center;flex:none;background:var(--accent-tint);color:var(--accent)}
+  .depttile .ic svg{width:22px;height:22px}
   .depttile .tx{min-width:0}
   .depttile .tx b{display:block;font-size:.85rem;letter-spacing:-.01em}
   .depttile .tx span{display:block;font-size:.71rem;color:var(--ink-soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .ucrow{display:flex;align-items:center;gap:11px;border:1.5px solid var(--line);border-radius:12px;padding:11px 13px;background:var(--panel);cursor:pointer;text-align:left;color:var(--ink);width:100%;font-family:inherit;transition:.15s;min-height:62px}
-  @media(max-width:820px){.ucrow{min-height:88px}}
+  .ucrow{display:flex;align-items:center;gap:13px;border:1.5px solid var(--line);border-radius:12px;padding:11px 13px;background:var(--panel);cursor:pointer;text-align:left;color:var(--ink);width:100%;font-family:inherit;transition:.15s;min-height:62px}
+  @media(max-width:820px){.ucrow{min-height:92px}}
   .ucrow:hover{border-color:var(--accent)}
   .ucrow.sel{border-color:var(--accent);background:var(--accent-tint)}
-  .ucrow .ic{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;flex:none;background:var(--accent-tint);color:var(--accent)}
+  .ucrow .ic{width:46px;height:46px;border-radius:13px;display:grid;place-items:center;flex:none;background:var(--accent-tint);color:var(--accent)}
   .ucrow.sel .ic,.depttile.sel .ic{background:var(--panel);box-shadow:0 0 0 1px var(--line-soft)}
-  .ucrow .ic svg{width:17px;height:17px}
+  .ucrow .ic svg{width:22px;height:22px}
   .ucrow .tx b{display:block;font-size:.9rem;letter-spacing:-.01em}
   .ucrow .tx span{display:block;font-size:.74rem;color:var(--ink-soft)}
   .ucrow .rd{margin-left:auto;align-self:flex-start;margin-top:3px;width:17px;height:17px;border-radius:50%;border:2px solid var(--line);flex:none}
@@ -538,6 +539,7 @@ function pickDept(k){chosenDept=k;
   } else if(m){ m.remove(); }
  });
  document.getElementById('deptNext').disabled=false;
+ if(mob()){var _dn=document.getElementById('deptNext');setTimeout(function(){_dn.scrollIntoView({behavior:'smooth',block:'center'});},90);}
  if(!mob()){var v=document.getElementById('deptVid');if(v){v.poster=DPOSTER[k];v.src=DVID[k];v.load();var pr=v.play();if(pr&&pr.catch)pr.catch(function(){});}}}
 var deptBuilt=false;
 function enterDept(){if(!deptBuilt){renderDeptList();deptBuilt=true;}if(!chosenDept&&!mob())pickDept(DEPTS[0].k);}
