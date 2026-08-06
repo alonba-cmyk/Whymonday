@@ -228,7 +228,17 @@
   .bvchip{display:inline-flex;align-items:center;gap:6px;font-size:.72rem;font-weight:600;background:var(--panel-3);border:1px solid var(--line);border-radius:20px;padding:5px 10px}
   .bvchip .aic{width:18px;height:18px;background:var(--accent-tint);color:var(--accent);border-radius:6px;display:grid;place-items:center;flex:none}
   .bvchip .aic svg{width:11px;height:11px}
+  .bvagent{display:flex;align-items:flex-start;gap:11px;margin-bottom:14px}
+  .bvav{width:44px;height:44px;border-radius:13px;background-size:cover;background-position:center 16%;background-color:var(--panel-2);flex:none;animation:bvpulse 1.9s ease-in-out infinite}
+  .bvbubble{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:14px;border-top-left-radius:4px;padding:10px 13px;font-size:.82rem;line-height:1.35;color:var(--ink);min-height:22px;box-shadow:var(--shadow-soft);max-width:80%}
+  .bvbubble .cur{display:inline-block;width:2px;height:.95em;background:var(--accent);margin-left:1px;vertical-align:-2px;animation:bvblink 1s steps(1) infinite}
+  .bvrow{transition:background .3s,box-shadow .3s;border-radius:8px}
+  .bvrow.hi{background:linear-gradient(90deg,rgba(226,68,92,.12),transparent);animation:bvhi 1.2s ease-out}
   }
+  @keyframes bvpulse{0%,100%{box-shadow:0 0 0 0 rgba(90,76,240,.30)}50%{box-shadow:0 0 0 9px rgba(90,76,240,0)}}
+  @keyframes bvblink{50%{opacity:0}}
+  @keyframes bvhi{0%{box-shadow:inset 0 0 0 2px rgba(226,68,92,0)}30%{box-shadow:inset 0 0 0 2px rgba(226,68,92,.55)}100%{box-shadow:inset 0 0 0 2px rgba(226,68,92,0)}}
+  @media(prefers-reduced-motion:reduce){.bvav,.bvbubble .cur,.bvrow.hi{animation:none}}
   @keyframes spin{to{transform:rotate(360deg)}}
 
   /* app board */
@@ -723,23 +733,44 @@ function runBuild(){
  var steps=document.querySelectorAll('#bsteps .s');steps.forEach(function(s){s.classList.remove('done','run');});
  buildViz();
  show('build');
+ var u2=UC[chosen],apps2=appsAddedList(),lead2=(mine.length?mine[0]:u2.agents[0]);
+ var stuck=u2.rows.find(function(r){return r[1]==='stuck';});
+ var msgs=['',
+   'Building your board…',
+   'Bringing your agents in…',
+   (apps2.length?('Adding '+apps2[0].n+'…'):'Setting up your apps…'),
+   'Assigning the first tasks…',
+   (stuck?('Heads up: '+stuck[0]+' looks stuck. I can fix it.'):'Everything is on track.')];
+ typeMsg(lead2.n+' is on it…');
  var i=0;steps[0].classList.add('run');
  var t=setInterval(function(){steps[i].classList.remove('run');steps[i].classList.add('done');
-   var vz=document.getElementById('buildViz');vz.classList.add('s'+(i+1));
-   if(i+1>=steps.length){var pl=vz.querySelector('.bvpill');if(pl)pl.textContent='ready';}
+   var stage=i+1;var vz=document.getElementById('buildViz');vz.classList.add('s'+stage);
+   typeMsg(msgs[stage]);
+   if(stage>=steps.length){var pl=vz.querySelector('.bvpill');if(pl)pl.textContent='ready';
+     var hr=vz.querySelector('.bvr-stuck');if(hr)hr.classList.add('hi');}
    i++;
-   if(i<steps.length)steps[i].classList.add('run');else{clearInterval(t);setTimeout(enterApp,400);}},520);
+   if(i<steps.length)steps[i].classList.add('run');else{clearInterval(t);setTimeout(enterApp,1500);}},560);
+}
+var _typeT;
+function typeMsg(text){
+ clearInterval(_typeT);
+ var el=document.getElementById('bvtype');if(!el)return;
+ el.textContent='';
+ var total=text.length,dur=Math.min(460,Math.max(200,total*15)),step=total?dur/total:16,k=0;
+ _typeT=setInterval(function(){k++;el.textContent=text.slice(0,k);if(k>=total)clearInterval(_typeT);},step);
 }
 function buildViz(){
  var u=UC[chosen],mine=addedList(),n=mine.length,apps=appsAddedList();
+ var lead=mine.length?mine[0]:u.agents[0];
  var rows=u.rows.map(function(r,i){
    var own=ownerCell(n>0?mine[i%n].f:null);
-   return '<div class="bvrow"><span class="bvitem">'+r[0]+'</span><span class="bvown">'+own+'</span><span class="bvst"><span class="wpill '+r[1]+'">'+LBL[r[1]]+'</span></span></div>';
+   return '<div class="bvrow bvr-'+r[1]+'"><span class="bvitem">'+r[0]+'</span><span class="bvown">'+own+'</span><span class="bvst"><span class="wpill '+r[1]+'">'+LBL[r[1]]+'</span></span></div>';
  }).join('');
  var chips=apps.length?('<div class="bvapps">'+apps.map(function(a){return '<span class="bvchip"><span class="aic">'+AICON[a.i]+'</span>'+a.n+'</span>';}).join('')+'</div>'):'';
  var v=document.getElementById('buildViz');
  v.className='buildviz';
- v.innerHTML='<div class="bvcard"><div class="bvhead"><b>'+u.board+'</b><span class="bvpill">building…</span></div><div class="bvtable">'+rows+'</div>'+chips+'</div>';
+ v.innerHTML='<div class="bvagent"><span class="bvav" style="background-image:url('+IMG[lead.f]+')"></span><div class="bvbubble"><span id="bvtype"></span><span class="cur"></span></div></div>'+
+   '<div class="bvcard"><div class="bvhead"><b>'+u.board+'</b><span class="bvpill">building…</span></div><div class="bvtable">'+rows+'</div>'+chips+'</div>';
 }
 function enterApp(){
  var u=UC[chosen],mine=addedList(),n=mine.length;
