@@ -18,6 +18,8 @@ Even copy that explains how something works stays human and inviting, never a pr
 
 The fastest check that a subject or headline is specific enough: if you can swap the audience, role, department, or industry for a different one and the line still works, it is too generic. Sharpen it until it could only have been written for this reader. ("Your first agent is one prompt away" survives a swap, so it is generic; "Every project, delivered" for PMO does not.) Run it on every subject and headline.
 
+**Map a picker's headline to its actual options.** On a selection screen, the headline should name exactly what the tiles are, so the reader instantly knows what to pick. Alon replaced the department screen's "Where do you work?" (reads as company/location, doesn't map to the tiles) with **"What team are you on?"** — the tiles are teams (Marketing, Sales, HR…), so the question maps 1:1. Test a picker headline against its options: if it doesn't obviously ask for the thing on the buttons, sharpen it.
+
 **Approved application (dynamic personalization):** on the signup apps screen, Alon chose a heading that inserts the user's own use case — **"The apps built for your launch"** (the word "launch" swaps per use case: campaigns, sales pipeline, hiring, IT tickets…) — over the static "Add the apps this workflow runs on." The static version survives a swap (any workflow), so it reads generic; the dynamic one could only have been written for this reader. When the surface already knows the reader's job (department, use case, role), spend that knowledge in the headline itself.
 
 ## Rhythm
