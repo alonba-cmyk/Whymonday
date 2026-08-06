@@ -628,6 +628,7 @@ function show(step){
  var idx={'0':0,'dept':1,'1':2,'2':3,'apps':4,'build':4}[String(step)];
  progs.forEach(function(i,n){i.classList.remove('on','done');if(n<idx)i.classList.add('done');if(n===idx)i.classList.add('on');});
  setMode(step==='0'?'ws':'bp');
+ window.scrollTo(0,0);
 }
 /* apps */
 var AICON={
@@ -775,6 +776,7 @@ function enterApp(){
  document.querySelectorAll('#viewtabs .vt').forEach(function(x){x.classList.toggle('on',x.dataset.view==='table');});
  renderBoardView();
  body.classList.add('in-app');
+ window.scrollTo(0,0);
  var toast=document.getElementById('toast');toast.classList.remove('show');
  if(n>0){var a=mine[0],stuck=u.rows.find(function(r){return r[1]==='stuck';});
   document.getElementById('toastFa').style.backgroundImage='url('+IMG[a.f]+')';
