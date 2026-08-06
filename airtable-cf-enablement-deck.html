@@ -1,0 +1,311 @@
+<title>The Airtable opening — CF enablement</title>
+<script>document.documentElement.setAttribute('data-theme','light');</script>
+<style>
+  :root{
+    --ground:#fbfbfe; --panel:#ffffff; --panel-2:#f4f4fb; --ink:#15152b; --ink-soft:#4a4a68;
+    --ink-faint:#8a8aa6; --line:#e7e7f4; --accent:#6161ff; --accent-ink:#ffffff; --accent-tint:#eeeeff;
+    --good:#00c875; --warn:#fdab3d; --crit:#e2445c;
+    --sans:"Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
+    --mono:ui-monospace,"SF Mono","JetBrains Mono",Menlo,Consolas,monospace;
+  }
+  @media (prefers-color-scheme:dark){:root{
+    --ground:#0c0c14; --panel:#14141f; --panel-2:#191926; --ink:#f2f2fa; --ink-soft:#b8b8d0;
+    --ink-faint:#77778f; --line:#25253a; --accent:#8a8aff; --accent-ink:#0c0c14; --accent-tint:#1c1c30;}}
+  :root[data-theme="dark"]{
+    --ground:#0c0c14; --panel:#14141f; --panel-2:#191926; --ink:#f2f2fa; --ink-soft:#b8b8d0;
+    --ink-faint:#77778f; --line:#25253a; --accent:#8a8aff; --accent-ink:#0c0c14; --accent-tint:#1c1c30;}
+  :root[data-theme="light"]{
+    --ground:#fbfbfe; --panel:#ffffff; --panel-2:#f4f4fb; --ink:#15152b; --ink-soft:#4a4a68;
+    --ink-faint:#8a8aa6; --line:#e7e7f4; --accent:#6161ff; --accent-ink:#ffffff; --accent-tint:#eeeeff;}
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--sans);line-height:1.55}
+
+  /* top bar */
+  .topbar{position:fixed;top:0;left:0;right:0;z-index:40;background:color-mix(in srgb,var(--ground) 86%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .topbar .in{display:flex;align-items:center;gap:12px;padding:11px 26px}
+  .mark{display:flex;align-items:center;gap:8px;font-weight:800;letter-spacing:-.02em;font-size:.98rem}
+  .dots{display:inline-flex;gap:3px}.dots i{display:block;border-radius:99px}
+  .dots i:nth-child(1){width:14px;height:6px;background:#e2445c}
+  .dots i:nth-child(2){width:14px;height:6px;background:#fdab3d}
+  .dots i:nth-child(3){width:6px;height:6px;background:#00c875}
+  .tag-int{font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--warn);border:1px solid color-mix(in srgb,var(--warn) 45%,var(--line));border-radius:99px;padding:3px 9px}
+  .topbar .sp{margin-left:auto;display:flex;align-items:center;gap:14px}
+  .counter{font-family:var(--mono);font-size:.7rem;color:var(--ink-faint);letter-spacing:.05em;font-variant-numeric:tabular-nums}
+  .theme-toggle{background:none;border:1px solid var(--line);border-radius:8px;width:32px;height:32px;display:grid;place-items:center;cursor:pointer;color:var(--ink-soft)}
+  .theme-toggle:hover{border-color:var(--accent);color:var(--accent)}
+
+  /* slide deck */
+  .deck{scroll-snap-type:y mandatory;height:100vh;overflow-y:scroll}
+  .slide{scroll-snap-align:start;min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:96px 26px 90px;position:relative}
+  .slide .in{max-width:1000px;margin:0 auto;width:100%}
+  .grid-tex{position:absolute;inset:0;background-image:
+     repeating-linear-gradient(0deg,var(--line),var(--line) 1px,transparent 1px,transparent 44px),
+     repeating-linear-gradient(90deg,var(--line),var(--line) 1px,transparent 1px,transparent 44px);
+     opacity:.45;mask-image:radial-gradient(120% 80% at 78% 8%,#000 18%,transparent 70%);pointer-events:none}
+  .eyebrow{font-family:var(--mono);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:18px;display:flex;align-items:center;gap:10px}
+  .eyebrow .snum{color:var(--ink-faint)}
+  h1{font-size:clamp(2.4rem,6vw,4.2rem);line-height:1.02;font-weight:800;letter-spacing:-.03em;margin:0 0 20px;text-wrap:balance}
+  h2{font-size:clamp(1.9rem,4.4vw,3rem);line-height:1.06;font-weight:800;letter-spacing:-.025em;margin:0 0 16px;text-wrap:balance}
+  .sub{font-size:clamp(1.05rem,1.7vw,1.28rem);color:var(--ink-soft);max-width:60ch;margin:0}
+  .lede{font-size:clamp(1.1rem,1.9vw,1.4rem);color:var(--ink-soft);max-width:56ch;margin:0}
+
+  .spec-strip{margin-top:34px;display:flex;flex-wrap:wrap;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--panel);max-width:760px}
+  .spec-strip div{flex:1 1 0;min-width:130px;padding:15px 20px;border-right:1px solid var(--line)}
+  .spec-strip div:last-child{border-right:none}
+  .spec-strip .k{font-family:var(--mono);font-size:.58rem;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:5px}
+  .spec-strip .v{font-weight:800;font-size:1.12rem;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+
+  .body-cols{display:grid;grid-template-columns:1.1fr .9fr;gap:34px;margin-top:26px;align-items:start}
+  .bullets{list-style:none;margin:22px 0 0;padding:0;display:flex;flex-direction:column;gap:15px;max-width:60ch}
+  .bullets li{display:flex;gap:13px;font-size:1.06rem;color:var(--ink-soft)}
+  .bullets li b{color:var(--ink)}
+  .bullets li .mk{flex:0 0 auto;width:9px;height:9px;border-radius:3px;background:var(--accent);margin-top:8px}
+
+  .cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:30px}
+  .seg{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:12px}
+  .seg .num{font-family:var(--mono);font-size:.66rem;font-weight:700;color:var(--accent);letter-spacing:.1em}
+  .seg h3{font-size:1.18rem;font-weight:800;margin:0;letter-spacing:-.01em}
+  .seg p{margin:0;font-size:.92rem;color:var(--ink-soft)}
+  .seg .metric{margin-top:auto;padding-top:12px;border-top:1px dashed var(--line);font-family:var(--mono);font-size:.7rem;color:var(--ink-faint);text-transform:uppercase;letter-spacing:.08em}
+  .seg .metric b{color:var(--accent);font-size:1.4rem;font-variant-numeric:tabular-nums;display:block;letter-spacing:-.02em}
+  .seg.play{border-color:color-mix(in srgb,var(--accent) 30%,var(--line))}
+
+  /* table */
+  .tbl{margin-top:26px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--panel)}
+  .tbl .r{display:grid;grid-template-columns:1.4fr .7fr .8fr 1fr;gap:14px;padding:14px 22px;border-bottom:1px solid var(--line);align-items:center}
+  .tbl .r:last-child{border-bottom:none}
+  .tbl .r.h{background:var(--panel-2);font-family:var(--mono);font-size:.62rem;letter-spacing:.11em;text-transform:uppercase;color:var(--ink-faint)}
+  .tbl .r .seglbl{font-weight:700}
+  .tbl .r .cnt{font-variant-numeric:tabular-nums;font-weight:700;color:var(--accent)}
+  .pri{font-family:var(--mono);font-size:.6rem;letter-spacing:.06em;text-transform:uppercase;border-radius:99px;padding:3px 9px;border:1px solid var(--line);display:inline-block}
+  .pri.p1{color:var(--crit);border-color:color-mix(in srgb,var(--crit) 40%,var(--line))}
+  .pri.p2{color:var(--warn);border-color:color-mix(in srgb,var(--warn) 40%,var(--line))}
+  .pri.p3{color:var(--ink-faint)}
+
+  /* templates */
+  .tmpls{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:26px}
+  .tmpl{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:10px}
+  .tmpl .to{font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);font-weight:700}
+  .tmpl .subj{font-weight:800;font-size:.98rem;letter-spacing:-.01em}
+  .tmpl p{margin:0;font-size:.86rem;color:var(--ink-soft);line-height:1.5}
+
+  /* next steps */
+  .steps4{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:26px}
+  .st{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px 22px;display:flex;gap:15px;align-items:flex-start}
+  .st .n{font-family:var(--mono);font-size:.72rem;font-weight:700;color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 40%,var(--line));width:30px;height:30px;border-radius:8px;display:grid;place-items:center;flex:0 0 auto}
+  .st h4{margin:0 0 4px;font-size:1.05rem;font-weight:800;letter-spacing:-.01em}
+  .st p{margin:0;font-size:.9rem;color:var(--ink-soft)}
+  .st .own{font-family:var(--mono);font-size:.62rem;color:var(--ink-faint);text-transform:uppercase;letter-spacing:.08em;margin-top:7px}
+
+  .flag{margin-top:24px;background:var(--accent-tint);border:1px solid color-mix(in srgb,var(--accent) 30%,var(--line));border-radius:10px;padding:12px 16px;font-size:.85rem;color:var(--ink-soft);max-width:70ch}
+  .flag b{color:var(--ink)}
+  .flag.legal{background:color-mix(in srgb,var(--warn) 12%,var(--panel));border-color:color-mix(in srgb,var(--warn) 40%,var(--line))}
+
+  /* nav */
+  .nav{position:fixed;bottom:0;left:0;right:0;z-index:40;background:color-mix(in srgb,var(--ground) 86%,transparent);backdrop-filter:blur(10px);border-top:1px solid var(--line)}
+  .nav .in{display:flex;align-items:center;gap:14px;padding:10px 26px}
+  .dotsnav{display:flex;gap:8px;margin:0 auto}
+  .dotsnav button{width:9px;height:9px;border-radius:99px;border:none;background:var(--line);cursor:pointer;padding:0}
+  .dotsnav button.on{background:var(--accent);width:22px;border-radius:99px}
+  .navbtn{background:var(--panel);border:1px solid var(--line);border-radius:9px;width:36px;height:32px;display:grid;place-items:center;cursor:pointer;color:var(--ink-soft)}
+  .navbtn:hover{border-color:var(--accent);color:var(--accent)}
+  .navlbl{font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint)}
+
+  @media (max-width:820px){
+    .cards3,.tmpls,.steps4{grid-template-columns:1fr}
+    .body-cols{grid-template-columns:1fr}
+    .tbl .r{grid-template-columns:1.3fr .7fr;gap:8px}
+    .tbl .r .own,.tbl .r.h .own{display:none}
+    .navlbl{display:none}
+  }
+</style>
+
+<!-- TOP BAR -->
+<div class="topbar"><div class="in">
+  <span class="mark"><span class="dots"><i></i><i></i><i></i></span> monday.com</span>
+  <span class="tag-int">Internal · CF enablement</span>
+  <span class="sp">
+    <span class="counter" id="counter">01 / 07</span>
+    <button class="theme-toggle" id="themeBtn" aria-label="Toggle light or dark mode"><span class="ti"></span></button>
+  </span>
+</div></div>
+
+<div class="deck" id="deck">
+
+  <!-- SLIDE 0 — TITLE -->
+  <section class="slide" id="s0">
+    <div class="grid-tex"></div>
+    <div class="in">
+      <div class="eyebrow">CF enablement session · August 2026</div>
+      <h1>The Airtable opening.</h1>
+      <p class="lede">Airtable just changed hands. Here's how our customer-facing teams turn that moment into conversations, and conversations into pipeline, while the window is open.</p>
+      <div class="spec-strip">
+        <div><div class="k">The deal</div><div class="v">$1.285B</div></div>
+        <div><div class="k">Airtable orgs</div><div class="v">500,000+</div></div>
+        <div><div class="k">Airtable ARR</div><div class="v">~$480M</div></div>
+        <div><div class="k">Our segments</div><div class="v">3</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 1 — CONTEXT -->
+  <section class="slide" id="s1">
+    <div class="in">
+      <div class="eyebrow"><span class="snum">01</span> Context</div>
+      <h2>Airtable just changed hands.</h2>
+      <p class="sub">On August 4, Bending Spoons acquired Airtable for $1.285 billion. Overnight, 500,000+ organizations, including 80% of the Fortune 100, have their critical work sitting on a platform under new ownership.</p>
+      <ul class="bullets">
+        <li><span class="mk"></span><span><b>The acquirer's pattern is known.</b> Bending Spoons (Evernote, WeTransfer, Meetup, AOL, Eventbrite) buys software and monetizes hard. Airtable customers are reading the same headlines.</span></li>
+        <li><span class="mk"></span><span><b>Uncertainty creates openness.</b> Roadmap, pricing, and support are now question marks. Customers are open to a conversation they weren't having a month ago.</span></li>
+        <li><span class="mk"></span><span><b>The window is now.</b> Every competitor sees the same opening. Speed and specificity win the accounts.</span></li>
+      </ul>
+      <div class="flag"><b>Validate before the session:</b> confirm the acquisition figures and any customer-facing framing with comms/legal. Keep the acquirer references factual and on public record.</div>
+    </div>
+  </section>
+
+  <!-- SLIDE 2 — GOAL -->
+  <section class="slide" id="s2">
+    <div class="in">
+      <div class="eyebrow"><span class="snum">02</span> Goal</div>
+      <h2>Turn the moment<br>into pipeline.</h2>
+      <p class="sub">Equip every CF rep to reach the right Airtable accounts with the right message, fast, before the window closes. Three outcomes from one moment:</p>
+      <ul class="bullets">
+        <li><span class="mk"></span><span><b>Reopen</b> the deals we lost to Airtable.</span></li>
+        <li><span class="mk"></span><span><b>Expand</b> the customers already running both.</span></li>
+        <li><span class="mk"></span><span><b>Open</b> net-new accounts with an Airtable footprint.</span></li>
+      </ul>
+      <div class="flag">By the end of today, every rep leaves with their target list, an approved opener, and a clear next step. That's the bar for this session.</div>
+    </div>
+  </section>
+
+  <!-- SLIDE 3 — POTENTIAL -->
+  <section class="slide" id="s3">
+    <div class="in">
+      <div class="eyebrow"><span class="snum">03</span> Potential</div>
+      <h2>Three segments.<br>One opening.</h2>
+      <p class="sub">We mapped the Airtable base against ours and found three distinct plays, each with its own motion.</p>
+      <div class="cards3">
+        <div class="seg play">
+          <div class="num">SEGMENT 01</div>
+          <h3>Lost deals</h3>
+          <p>Deals we lost to Airtable. The reason they chose it is now in question. Reopen the conversation with the change as the reason to revisit.</p>
+          <div class="metric"><b>##</b> accounts · fill from CRM</div>
+        </div>
+        <div class="seg play">
+          <div class="num">SEGMENT 02</div>
+          <h3>Dual usage</h3>
+          <p>Existing monday customers also running Airtable. Consolidate onto one platform. The cleanest, warmest expansion motion of the three.</p>
+          <div class="metric"><b>##</b> accounts · fill from CRM</div>
+        </div>
+        <div class="seg play">
+          <div class="num">SEGMENT 03</div>
+          <h3>New footprint</h3>
+          <p>Net-new accounts with an Airtable footprint, surfaced via ZoomInfo. Prospect for the next wave. Nurture now, ABM later.</p>
+          <div class="metric"><b>##</b> accounts · fill from ZoomInfo</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 4 — CUSTOMER LIST -->
+  <section class="slide" id="s4">
+    <div class="in">
+      <div class="eyebrow"><span class="snum">04</span> The targets</div>
+      <h2>Who to reach first.</h2>
+      <p class="sub">Prioritized by fit and timing: ARR potential, renewal or contract windows, and current engagement. Owners assigned so nothing sits unclaimed after today.</p>
+      <div class="tbl">
+        <div class="r h"><span>Segment</span><span>Accounts</span><span>Priority</span><span class="own">Owner</span></div>
+        <div class="r"><span class="seglbl">Lost deals</span><span class="cnt">##</span><span><span class="pri p1">Tier 1</span></span><span class="own">Assign</span></div>
+        <div class="r"><span class="seglbl">Dual usage</span><span class="cnt">##</span><span><span class="pri p1">Tier 1</span></span><span class="own">Assign</span></div>
+        <div class="r"><span class="seglbl">New footprint</span><span class="cnt">##</span><span><span class="pri p2">Tier 2</span></span><span class="own">Assign</span></div>
+        <div class="r"><span class="seglbl">Long-tail footprint</span><span class="cnt">##</span><span><span class="pri p3">Nurture</span></span><span class="own">Marketing</span></div>
+      </div>
+      <div class="flag"><b>Pull the live list before the session:</b> named accounts, counts, ARR, and renewal dates come straight from Salesforce and ZoomInfo. Do not present placeholder counts as final. Distribute the working list as a shared board, not on the slide.</div>
+    </div>
+  </section>
+
+  <!-- SLIDE 5 — CONVERSATION TEMPLATES -->
+  <section class="slide" id="s5">
+    <div class="in">
+      <div class="eyebrow"><span class="snum">05</span> How to open</div>
+      <h2>Start the conversation.</h2>
+      <p class="sub">One approved opener per segment, on the campaign's line: a home whose roadmap is built around your work. Warm, not opportunistic. Consultative, not a pounce.</p>
+      <div class="tmpls">
+        <div class="tmpl">
+          <div class="to">For · Lost deals</div>
+          <div class="subj">"Worth a fresh look?"</div>
+          <p>Open on the change, not the sell. "A lot has shifted for Airtable since we last spoke. If the roadmap is a question for your team, it may be worth another look at how monday fits now."</p>
+        </div>
+        <div class="tmpl">
+          <div class="to">For · Dual usage</div>
+          <div class="subj">"One platform, less to manage."</div>
+          <p>Lead with consolidation value. "You already run part of your work on monday. With Airtable's future in flux, here's what moving the rest onto one platform looks like, and how simple the switch is."</p>
+        </div>
+        <div class="tmpl">
+          <div class="to">For · New footprint</div>
+          <div class="subj">"A home built around your work."</div>
+          <p>Introduce the alternative. "If your team is weighing what Airtable's acquisition means, monday is a platform built for the long run, where people and agents run the work together. Happy to show you."</p>
+        </div>
+      </div>
+      <div class="flag legal"><b>Legal sign-off required before any outreach.</b> Every line here is a draft. Legal must clear the acquisition references and competitive claims. Do not send until approved.</div>
+    </div>
+  </section>
+
+  <!-- SLIDE 6 — NEXT STEPS -->
+  <section class="slide" id="s6">
+    <div class="in">
+      <div class="eyebrow"><span class="snum">06</span> Next steps</div>
+      <h2>From today<br>to pipeline.</h2>
+      <p class="sub">Four workstreams turn this session into sustained motion. Each gets an owner and a date before we leave the room.</p>
+      <div class="steps4">
+        <div class="st"><span class="n">01</span><div><h4>Approach the customers</h4><p>Reps work their Tier 1 lists this week with the approved openers. Cadence and ownership locked today.</p><div class="own">Owner · Sales leadership · this week</div></div></div>
+        <div class="st"><span class="n">02</span><div><h4>Battle cards</h4><p>monday vs. Airtable: positioning, objection handling, migration proof. One-pager in reps' hands.</p><div class="own">Owner · PMM · in production</div></div></div>
+        <div class="st"><span class="n">03</span><div><h4>Monitoring</h4><p>Track Airtable changes (pricing, support, outages, announcements) and time outreach to each trigger.</p><div class="own">Owner · Competitive intel · ongoing</div></div></div>
+        <div class="st"><span class="n">04</span><div><h4>ABM</h4><p>Targeted campaigns for top-tier footprint accounts, aligned to the switch landing page and email.</p><div class="own">Owner · Demand gen · next sprint</div></div></div>
+      </div>
+      <div class="flag"><b>Assign owners live.</b> This slide is the accountability checkpoint. Replace each placeholder owner and date in the room so the work leaves with a name on it.</div>
+    </div>
+  </section>
+
+</div>
+
+<!-- NAV -->
+<div class="nav"><div class="in">
+  <button class="navbtn" id="prev" aria-label="Previous slide">‹</button>
+  <span class="navlbl" id="navlbl">Context</span>
+  <div class="dotsnav" id="dotsnav"></div>
+  <span class="navlbl" id="navlbl2">Use ← → keys</span>
+  <button class="navbtn" id="next" aria-label="Next slide">›</button>
+</div></div>
+
+<script>
+  // theme
+  var root=document.documentElement, tb=document.getElementById('themeBtn');
+  var SUN='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>';
+  var MOON='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>';
+  function curT(){return root.getAttribute('data-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');}
+  function renderT(){tb.querySelector('.ti').innerHTML=curT()==='dark'?SUN:MOON;}
+  tb.addEventListener('click',function(){root.setAttribute('data-theme',curT()==='dark'?'light':'dark');renderT();});
+  renderT();
+
+  // deck nav
+  var deck=document.getElementById('deck');
+  var slides=Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var labels=['Title','Context','Goal','Potential','Targets','Templates','Next steps'];
+  var counter=document.getElementById('counter'), navlbl=document.getElementById('navlbl');
+  var dotsnav=document.getElementById('dotsnav'), cur=0;
+  slides.forEach(function(s,i){var b=document.createElement('button');b.addEventListener('click',function(){slides[i].scrollIntoView();});dotsnav.appendChild(b);});
+  var dotBtns=dotsnav.querySelectorAll('button');
+  function setCur(i){cur=i;counter.textContent=String(i+1).padStart(2,'0')+' / 0'+slides.length;navlbl.textContent=labels[i];dotBtns.forEach(function(b,j){b.classList.toggle('on',j===i);});}
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){setCur(slides.indexOf(e.target));}});},{root:deck,threshold:.55});
+  slides.forEach(function(s){io.observe(s);});
+  function go(d){var n=Math.max(0,Math.min(slides.length-1,cur+d));slides[n].scrollIntoView();}
+  document.getElementById('prev').addEventListener('click',function(){go(-1);});
+  document.getElementById('next').addEventListener('click',function(){go(1);});
+  document.addEventListener('keydown',function(e){
+    if(e.key==='ArrowRight'||e.key==='ArrowDown'||e.key===' '){e.preventDefault();go(1);}
+    if(e.key==='ArrowLeft'||e.key==='ArrowUp'){e.preventDefault();go(-1);}
+  });
+  setCur(0);
+</script>
