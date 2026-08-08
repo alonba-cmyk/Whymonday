@@ -136,6 +136,45 @@
 
   /* use-case list */
   .uclist{display:flex;flex-direction:column;gap:8px}
+  /* describe-it entry on the use-case screen */
+  .uc-describe{display:flex;align-items:center;gap:11px;width:100%;margin-top:12px;border:1.5px dashed var(--line);border-radius:12px;padding:12px 14px;background:var(--panel-3);cursor:pointer;text-align:left;color:var(--ink);font-family:inherit;transition:.15s}
+  .uc-describe:hover{border-color:var(--accent);background:var(--accent-tint)}
+  .uc-describe .ucd-ic{width:34px;height:34px;flex:none;border-radius:10px;display:grid;place-items:center;background:#fff;box-shadow:0 1px 2px rgba(20,20,40,.08)}
+  :root[data-theme="dark"] .uc-describe .ucd-ic{background:var(--panel)}
+  @media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .uc-describe .ucd-ic{background:var(--panel)}}
+  .uc-describe .ucd-ic img{height:19px;width:auto}
+  .uc-describe .ucd-tx{flex:1;min-width:0;font-size:.82rem;color:var(--ink-soft)}
+  .uc-describe .ucd-tx b{color:var(--ink);font-weight:700}
+  .uc-describe .ucd-go{flex:none;color:var(--accent);font-weight:800;font-size:1.05rem}
+  /* chat pane */
+  .chatpane{max-width:660px;margin:0 auto;min-height:100dvh;padding:78px 22px 20px;display:flex;flex-direction:column}
+  .chathead{display:flex;align-items:center;gap:12px;padding:6px 0 14px;border-bottom:1px solid var(--line);margin-bottom:16px}
+  .chav{width:42px;height:42px;flex:none;border-radius:12px;display:grid;place-items:center;background:var(--accent-tint)}
+  .chav img{height:23px;width:auto}
+  .chht b{display:block;font-size:.98rem;letter-spacing:-.01em}
+  .chht span{display:block;font-size:.78rem;color:var(--ink-soft)}
+  .chatlog{flex:1;display:flex;flex-direction:column;gap:11px;overflow-y:auto;padding-bottom:12px}
+  .msg{max-width:84%;padding:11px 14px;border-radius:16px;font-size:.9rem;line-height:1.42;white-space:pre-wrap}
+  .msg.agent{align-self:flex-start;background:var(--panel);border:1px solid var(--line);border-bottom-left-radius:5px}
+  .msg.user{align-self:flex-end;background:var(--accent);color:#fff;border-bottom-right-radius:5px}
+  .msg.typing{display:inline-flex;gap:4px;align-items:center}
+  .msg.typing i{width:6px;height:6px;border-radius:50%;background:var(--ink-faint);animation:bvblink 1s infinite}
+  .msg.typing i:nth-child(2){animation-delay:.15s}.msg.typing i:nth-child(3){animation-delay:.3s}
+  .propcard{align-self:stretch;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:15px;box-shadow:var(--shadow-soft)}
+  .propcard .ph{font-family:ui-monospace,Menlo,monospace;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);font-weight:700;margin-bottom:11px}
+  .propcard .pr{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--line-soft)}
+  .propcard .pr:last-of-type{border-bottom:0}
+  .propcard .pr .k{font-size:.72rem;color:var(--ink-faint);width:56px;flex:none}
+  .propcard .pr b{font-size:.88rem}
+  .propcard .chips{display:flex;flex-wrap:wrap;gap:6px}
+  .propcard .chip{display:inline-flex;align-items:center;gap:6px;background:var(--panel-3);border:1px solid var(--line);border-radius:20px;padding:3px 9px 3px 3px;font-size:.76rem;font-weight:600}
+  .propcard .chip .fa{width:22px;height:22px;border-radius:7px;background-size:cover;background-position:center 16%;flex:none}
+  .propcard .chip .aic{width:22px;height:22px;border-radius:7px;display:grid;place-items:center;background:var(--accent-tint);color:var(--accent)}
+  .propcard .chip .aic svg{width:13px;height:13px}
+  .propcard .btn.primary{width:100%;margin-top:13px}
+  .chatbar{display:flex;align-items:center;gap:8px;border:1.5px solid var(--line);border-radius:14px;padding:6px 6px 6px 15px;background:var(--panel);margin-top:8px}
+  .chatbar input{flex:1;border:0;background:none;font-family:inherit;font-size:.92rem;outline:none;color:var(--ink)}
+  .chatsend{width:38px;height:38px;flex:none;border-radius:10px;background:var(--accent);color:var(--accent-ink);border:0;cursor:pointer;font-size:1.15rem;line-height:1}
   .deptgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
   @media(max-width:560px){.deptgrid{grid-template-columns:1fr}}
   .depttile{display:flex;align-items:center;gap:13px;border:1.5px solid var(--line);border-radius:12px;padding:11px 14px;background:var(--panel);cursor:pointer;text-align:left;color:var(--ink);font-family:inherit;transition:.15s;min-width:0;min-height:62px}
@@ -358,6 +397,11 @@
           <h1>What do you want to get done?</h1>
           <p class="hint">We'll build the workspace for your team and agents.</p>
           <div class="uclist" id="uclist"></div>
+          <button class="uc-describe" id="ucDescribe" type="button">
+            <span class="ucd-ic"><img id="ucdMark" alt=""></span>
+            <span class="ucd-tx"><b>Not on the list?</b> Tell an agent what you're trying to do</span>
+            <span class="ucd-go">→</span>
+          </button>
           <div class="row-cta">
             <button class="btn primary" id="ucNext" data-next="2" disabled>Continue</button>
             <button class="skiplink" data-next="2" data-skip="1">I'll set it up myself</button>
@@ -369,6 +413,19 @@
           <div class="wtable" id="ucBoard"></div>
           <div class="wsnote" id="ucNote"></div>
         </div></div>
+      </div>
+    </div>
+
+    <!-- chat (describe your goal) -->
+    <div class="pane" data-pane="chat">
+      <div class="chatpane">
+        <button class="aback" data-back="1">← <span>Back to use cases</span></button>
+        <div class="chathead"><span class="chav"><img id="chavMark" alt=""></span><div class="chht"><b>Setup assistant</b><span>Tell me your goal, I'll build the workspace</span></div></div>
+        <div class="chatlog" id="chatlog"></div>
+        <form class="chatbar" id="chatForm" autocomplete="off">
+          <input id="chatField" placeholder="e.g. Launch our Q3 campaign, things keep slipping">
+          <button type="submit" class="chatsend" aria-label="Send">↑</button>
+        </form>
       </div>
     </div>
 
@@ -645,7 +702,7 @@ function setMode(m){bg.className='bg '+m;body.classList.toggle('ws-step',m==='ws
 function show(step){
  panes.forEach(function(p){p.classList.toggle('on',p.dataset.pane===String(step));});
  body.classList.toggle('step0',String(step)==='0');
- var idx={'0':0,'dept':1,'1':2,'2':3,'apps':4,'build':4}[String(step)];
+ var idx={'0':0,'dept':1,'1':2,'chat':2,'2':3,'apps':4,'build':4}[String(step)];
  progs.forEach(function(i,n){i.classList.remove('on','done');if(n<idx)i.classList.add('done');if(n===idx)i.classList.add('on');});
  setMode(step==='0'?'ws':'bp');
  window.scrollTo(0,0);
@@ -730,6 +787,35 @@ document.querySelectorAll('#viewtabs .vt').forEach(function(b){b.addEventListene
  document.querySelectorAll('#viewtabs .vt').forEach(function(x){x.classList.toggle('on',x===b);});
  renderBoardView();
 });});
+
+/* describe-your-goal chat */
+(function(){var a=document.getElementById('ucdMark');if(a)a.src=window.AGENTS;var c=document.getElementById('chavMark');if(c)c.src=window.AGENTS;})();
+function openChat(){show('chat');var log=document.getElementById('chatlog');log.innerHTML='';
+ addMsg('agent',"Tell me what you're trying to get done, and what's slowing you down. I'll set up the workspace for you.");
+ var f=document.getElementById('chatField');f.value='';setTimeout(function(){f.focus();},120);}
+function addMsg(who,text){var d=document.createElement('div');d.className='msg '+who;d.textContent=text;document.getElementById('chatlog').appendChild(d);scrollChat();return d;}
+function scrollChat(){var l=document.getElementById('chatlog');l.scrollTop=l.scrollHeight;}
+var CHINT={launch:['launch','go-live','gtm','release','ship'],campaigns:['campaign','demand','lead','ads','growth','channel'],content:['content','blog','editorial','post','calendar','copy'],deals:['deal','close','sell','revenue','quota'],pipeline:['pipeline','forecast','stage','hygiene'],outreach:['outreach','prospect','cold','sequence'],dev:['sprint','bug','feature','engineering'],roadmap:['roadmap','theme','prioriti'],feedback:['feedback','insight','request','survey'],projects:['project','deliver','deadline'],portfolio:['portfolio','program'],risk:['risk','mitigat','blocker'],recruiting:['hire','recruit','candidate','interview'],onboarding:['onboard','new hire','ramp'],hrrequests:['pto','people','question'],tickets:['ticket','support','helpdesk','sla'],assets:['asset','inventory','license','device'],access:['access','permission','provision'],ops:['operation','process','routine'],vendors:['vendor','contract','procure'],budget:['budget','spend','cost','approval']};
+function matchUC(text){text=text.toLowerCase();var cands=DEP().ucs,best=cands[0],bestScore=0;
+ cands.forEach(function(k){var score=0;(CHINT[k]||[]).forEach(function(w){if(text.indexOf(w)>=0)score+=2;});
+  (UC[k].label+' '+UC[k].sub).toLowerCase().split(/[^a-z]+/).forEach(function(w){if(w.length>3&&text.indexOf(w)>=0)score++;});
+  if(score>bestScore){bestScore=score;best=k;}});return best;}
+function sendChat(){var f=document.getElementById('chatField');var text=(f.value||'').trim();if(!text)return;
+ addMsg('user',text);f.value='';
+ var t=document.createElement('div');t.className='msg agent typing';t.innerHTML='<i></i><i></i><i></i>';document.getElementById('chatlog').appendChild(t);scrollChat();
+ setTimeout(function(){t.remove();var k=matchUC(text);var u=UC[k];
+  var pain=/slip|stuck|behind|late|manual|drown|overwhelm|chas|miss|forget|swamp/.test(text.toLowerCase());
+  addMsg('agent','Got it, that is a '+u.board+' setup.'+(pain?' I will keep things from slipping.':'')+' Here is the workspace I would build:');
+  renderProposal(k);},1100);}
+function renderProposal(k){var u=UC[k],ags=u.agents.slice(0,2),app=(APPS[k]||APPS._default)[0];
+ var agchips=ags.map(function(a){return '<span class="chip"><span class="fa" style="background-image:url('+IMG[a.f]+')"></span>'+a.n+'</span>';}).join('');
+ var appchip=app?'<span class="chip"><span class="aic">'+AICON[app.i]+'</span>'+app.n+'</span>':'';
+ var d=document.createElement('div');d.className='propcard';
+ d.innerHTML='<div class="ph">Proposed setup</div><div class="pr"><span class="k">Board</span><b>'+u.board+'</b></div><div class="pr"><span class="k">Agents</span><span class="chips">'+agchips+'</span></div>'+(app?'<div class="pr"><span class="k">App</span><span class="chips">'+appchip+'</span></div>':'')+'<button class="btn primary" onclick="buildFromChat(\''+k+'\')">Build my workspace</button>';
+ document.getElementById('chatlog').appendChild(d);scrollChat();}
+function buildFromChat(k){chosen=k;added={};UC[k].agents.slice(0,2).forEach(function(a,i){added[k+i]=true;});appsAdded={};appsAdded[k+0]=true;runBuild();}
+document.getElementById('ucDescribe').addEventListener('click',openChat);
+document.getElementById('chatForm').addEventListener('submit',function(e){e.preventDefault();sendChat();});
 
 document.querySelectorAll('[data-next]').forEach(function(btn){btn.addEventListener('click',function(){
  var n=btn.getAttribute('data-next');
