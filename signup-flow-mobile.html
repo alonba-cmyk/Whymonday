@@ -178,8 +178,8 @@
   /* chat pane */
   .chatpane{max-width:660px;margin:0 auto;min-height:100dvh;padding:78px 22px 20px;display:flex;flex-direction:column}
   .chathead{display:flex;align-items:center;gap:12px;padding:6px 0 14px;border-bottom:1px solid var(--line);margin-bottom:16px}
-  .chav{width:42px;height:42px;flex:none;border-radius:12px;display:grid;place-items:center;background:var(--accent-tint)}
-  .chav img{height:23px;width:auto}
+  .chav{width:42px;height:42px;flex:none;border-radius:50%;overflow:hidden;background:var(--accent-tint);box-shadow:0 0 0 1px var(--line-soft)}
+  .chav img{width:100%;height:100%;object-fit:cover;object-position:center 20%;display:block}
   .chht b{display:block;font-size:.98rem;letter-spacing:-.01em}
   .chht span{display:block;font-size:.78rem;color:var(--ink-soft)}
   .chatlog{flex:1;display:flex;flex-direction:column;gap:11px;overflow-y:auto;padding-bottom:12px}
@@ -856,7 +856,7 @@ document.querySelectorAll('#viewtabs .vt').forEach(function(b){b.addEventListene
 });});
 
 /* describe-your-goal chat */
-(function(){var a=document.getElementById('ucdMark');if(a)a.src=window.AGENTS;var c=document.getElementById('chavMark');if(c)c.src=window.AGENTS;var k=document.getElementById('askMark');if(k)k.src=window.AGENTS;})();
+(function(){var a=document.getElementById('ucdMark');if(a)a.src=window.AGENTS;var c=document.getElementById('chavMark');if(c)c.src=IMG['launch'];var k=document.getElementById('askMark');if(k)k.src=window.AGENTS;})();
 function enterStart(){var m=document.getElementById('doorMark');if(m&&!m.getAttribute('src'))m.src=window.AGENTS;var f=document.getElementById('fvMark');if(f&&!f.getAttribute('src'))f.src=window.AGENTS;}
 var ALL_UCS=[];DEPTS.forEach(function(d){d.ucs.forEach(function(k){if(ALL_UCS.indexOf(k)<0)ALL_UCS.push(k);});});
 function deptForUC(k){for(var i=0;i<DEPTS.length;i++)if(DEPTS[i].ucs.indexOf(k)>=0)return DEPTS[i].k;return DEPTS[0].k;}
