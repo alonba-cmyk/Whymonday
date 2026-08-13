@@ -108,3 +108,9 @@ On a data slide, drop one terse, code-comment-style takeaway under the numbers.
 ## `it was never about X` closer
 Deny the obvious thesis, assert the deeper one. Negation as a closer, never an opener.
 - It was never about the AI. It's about who owns the surface where AI meets real work.
+
+## Signal a free offer with `on us` / `we cover`, never a flat "free"
+When the hook is that a service costs the customer nothing, carry it in monday's warm generosity register, not a flat "free" / "no cost" / "at no cost." **"On us"** and **"we cover"** imply done-for-you *and* no-cost-to-you at once, without sounding cheap or discount-y. Pair with a done-for-you division of labor (You act. We cover.). If a page already says "free" in the eyebrow, the headline should *dramatize* the free, not repeat the word.
+- Switch from Airtable. We cover the move. (approved, Airtable migration services one-pager, Aug 2026. Replaced "A smooth migration from Airtable to monday," which undersold a full import + build + train + go-live package by naming it a mere "migration." "Cover" also carries the free without saying it.)
+- Build what you need, on us.
+- **Mechanics:** in a two-clause headline, never glue the clauses with a comma + a capitalized second clause ("Switch from Airtable, We've got the move covered") — the comma splice stutters. Use a period two-beat (each sentence its own line, per the broken-line rule) or join with "and" for one flowing line.
