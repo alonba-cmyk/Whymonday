@@ -54,7 +54,8 @@
   .hero .in{position:relative}
   .eyebrow{font-family:var(--mono);font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:22px;display:inline-flex;align-items:center;gap:9px}
   .eyebrow::before{content:"";width:22px;height:2px;background:var(--accent);border-radius:2px}
-  h1{font-size:clamp(2.7rem,7vw,4.8rem);line-height:1;font-weight:800;letter-spacing:-.035em;margin:0 0 26px;text-wrap:balance;max-width:14ch}
+  h1{font-size:clamp(2.05rem,6.2vw,4rem);line-height:1.05;font-weight:800;letter-spacing:-.035em;margin:0 0 26px}
+  h1 .ln{display:block;white-space:nowrap}
   h1 .hl{color:var(--accent)}
   .lede{font-size:clamp(1.06rem,1.5vw,1.25rem);color:var(--ink-soft);max-width:64ch;margin:0}
   .lede b{color:var(--ink);font-weight:700}
@@ -81,7 +82,7 @@
   .step.import{--edge:var(--c-import)} .step.build{--edge:var(--c-build)}
   .step.train{--edge:var(--c-train)} .step.golive{--edge:var(--c-golive)}
   .step .sn{font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--edge);font-weight:700;margin-bottom:7px}
-  .step h3{font-size:1.12rem;font-weight:800;letter-spacing:-.015em;margin:0 0 9px}
+  .step h3{font-size:1.12rem;font-weight:800;letter-spacing:-.015em;margin:0 0 9px;min-height:2.5em}
   .step p{margin:0;color:var(--ink-soft);font-size:.92rem;line-height:1.55}
 
   /* aha */
@@ -105,14 +106,18 @@
   footer .note{margin-left:auto;font-family:var(--mono);font-size:.64rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint)}
 
   @media (max-width:760px){
-    .flow{grid-template-columns:1fr;gap:14px}
+    h1 .ln{white-space:normal}
+    .hdr-tag{display:none}
+    .flow{grid-template-columns:1fr;gap:20px}
     .flow::before{display:none}
-    .step{display:grid;grid-template-columns:56px 1fr;column-gap:18px;align-items:start}
-    .step .node{margin-bottom:0}
-    .step .sn{margin-top:2px}
+    .step{display:grid;grid-template-columns:56px 1fr;column-gap:18px;row-gap:0;align-items:start}
+    .step .node{grid-column:1;grid-row:1 / span 3;margin-bottom:0}
+    .step .sn{grid-column:2;grid-row:1;margin-top:3px}
+    .step h3{grid-column:2;grid-row:2;min-height:0}
+    .step p{grid-column:2;grid-row:3}
     .cta{flex-direction:column;align-items:flex-start}
     .aha{padding:46px 24px}
-    .aha .zero{font-size:9rem}
+    .aha .zero{display:none}
   }
   @media print{
     :root{ color-scheme:light; }
@@ -137,7 +142,7 @@
     <div class="grid-tex"></div>
     <div class="in">
       <div class="eyebrow">Free services &amp; implementation package</div>
-      <h1>Switch from Airtable.<br>We'll <span class="hl">cover the move</span>.</h1>
+      <h1><span class="ln">Switch from Airtable.</span><span class="ln">We'll <span class="hl">cover the move</span>.</span></h1>
       <p class="lede">We want to build a trusted partnership and set you up for success. That's why your move will come with a <span class="free">free services and implementation package</span>: monday experts will assess your Airtable environment, then build and test your new setup before anything switches over. Once everything is in place, they will train your team so everyone can hit the ground running.</p>
       <div class="specs">
         <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m20 6-11 11-5-5"/></svg> Native import tools</span>
