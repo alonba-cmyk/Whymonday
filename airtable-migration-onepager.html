@@ -64,12 +64,29 @@
   .nocost{font-family:var(--mono);font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--c-train);font-weight:700;margin-top:12px;display:flex;align-items:center;gap:7px}
   .nocost::before{content:"";width:8px;height:8px;border-radius:99px;background:var(--c-train)}
 
+  .aha{margin:56px 0 0;background:var(--accent);color:var(--accent-ink);border-radius:24px;padding:56px 40px;text-align:center;position:relative;overflow:hidden}
+  .aha .glow{position:absolute;inset:0;background:
+     radial-gradient(60% 90% at 50% 120%, color-mix(in srgb,#ffffff 22%,transparent), transparent 70%);pointer-events:none}
+  .aha .kick{font-family:var(--mono);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;font-weight:700;margin-bottom:14px;opacity:.82;position:relative}
+  .aha h2{font-size:clamp(2.6rem,6.6vw,4.2rem);font-weight:800;letter-spacing:-.035em;margin:0 0 18px;line-height:.98;position:relative}
+  .aha p{margin:0 auto;max-width:54ch;font-size:clamp(1.04rem,1.5vw,1.2rem);opacity:.94;position:relative}
+  .aha p b{font-weight:800;opacity:1}
+
   footer{padding:34px 0 56px}
   footer .in{max-width:1000px;margin:0 auto;padding:0 26px;display:flex;align-items:center;gap:12px;border-top:1px solid var(--line);padding-top:22px}
   footer .fmark{display:flex;align-items:center;gap:8px;font-weight:800;letter-spacing:-.02em;color:var(--ink-soft)}
   footer .note{margin-left:auto;font-family:var(--mono);font-size:.64rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint)}
 
-  @media (max-width:760px){ .cards{grid-template-columns:1fr} .cta{flex-direction:column;align-items:flex-start} }
+  @media (max-width:760px){ .cards{grid-template-columns:1fr} .cta{flex-direction:column;align-items:flex-start} .aha{padding:44px 26px} }
+
+  @media print{
+    :root{ color-scheme:light; }
+    .theme-toggle{ display:none; }
+    body{ -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+    .hero{ padding-top:26px; }
+    .card:hover{ transform:none; box-shadow:none; }
+    .aha, .card, .cta{ break-inside:avoid; }
+  }
 </style>
 
 <header class="site"><div class="in">
@@ -111,6 +128,13 @@
       <h3>Go-live support</h3>
       <p>Our team stays on hand to keep the transition on track, so your team never misses a beat.</p>
     </div>
+  </section>
+
+  <section class="aha">
+    <div class="glow"></div>
+    <div class="kick">The catch?</div>
+    <h2>There isn't one.</h2>
+    <p>monday covers the import, the build, the training, and go-live. Your team keeps working, your budget stays where it is, and the whole switch is <b>on us</b>.</p>
   </section>
 
   <section class="cta">
