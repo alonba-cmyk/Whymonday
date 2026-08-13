@@ -114,3 +114,9 @@ When the hook is that a service costs the customer nothing, carry it in monday's
 - Switch from Airtable. We cover the move. (approved, Airtable migration services one-pager, Aug 2026. Replaced "A smooth migration from Airtable to monday," which undersold a full import + build + train + go-live package by naming it a mere "migration." "Cover" also carries the free without saying it.)
 - Build what you need, on us.
 - **Mechanics:** in a two-clause headline, never glue the clauses with a comma + a capitalized second clause ("Switch from Airtable, We've got the move covered") — the comma splice stutters. Use a period two-beat (each sentence its own line, per the broken-line rule) or join with "and" for one flowing line.
+
+## Bound commitment language for one-time offers (legal)
+For a one-time / fixed-scope service offering (an implementation or migration package, not ongoing Managed Services), never use open-ended availability language that reads as a perpetual commitment. Bound it to the engagement. Legal flags exactly this.
+- Not: "Our team stays on hand to keep the transition on track." (open-ended, implies ongoing service)
+- Yes: "Our team stays on hand **through the project** to keep the transition on track." (approved with monday legal, Airtable migration one-pager, Aug 2026)
+- Same trap words to bound or avoid on one-time offers: "always", "whenever you need", "on call", "ongoing", "24/7", "for as long as you need". Tie the promise to "through the project", "through go-live", "for the duration of the rollout".
