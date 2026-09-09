@@ -33,6 +33,16 @@ After Alon reacts (rejects, tweaks, or picks a direction), **narrow to refined v
 - Draft: "Did you look for a tool for you marketing team?" (typo, generic)
 - Refined direction: "Still waiting on dev to build what your marketing team needs?" Ties directly to the dev-bottleneck pain in the body and sets up the "build it yourself" punchline.
 
+## Naming a product or feature
+
+A naming request is a copy request: still give **3-6 options grouped by angle**, then recommend one. Beyond the standard rules:
+
+- **Match the DNA of the references Alon names.** If he anchors to peers (e.g. "like monday Vibe, Lovable, Base44"), infer their shared pattern — short, warm, human, ownable, landing on what the user *feels/gets*, not the mechanism (never "AI"/"code" in the name) — and stay in that lane.
+- **Name on-thesis, not merely clever.** The name should encode the product's core promise. For a vibe-coding builder that means: words/speech → software, flow/vibe state, instant thought→thing, or effortless new ability. Decode-required puns read as "unclear."
+- **Verify existence BEFORE recommending — non-negotiable.** Web-search every candidate and reject any name already used by a real product, *especially a competitor in the same category*. Present only names that survive the check, and say so. Recommending a taken name (or worse, a direct competitor's name) is a hard fail.
+- **In saturated categories, go coined/twisted, not dictionary.** Common single words are almost all gone. In vibe-coding specifically, verified-taken includes Riff (riff.ai), Knack, Conjure, Tadabase, Muse, Napkin, Fathom, Voila, Presto, Presti, Sayble, Blurt — plus Lovable, Bolt, v0, Base44, Replit. Reach for a real-word-plus-twist (Base44 model), an invented adjective (Lovable model), or a short coinage that still says the promise (verified-clear examples from this work: Promptu, Poof, Sayo, Improvo).
+- **State the limits of a search-only check.** Passing web search is necessary, not sufficient. Before locking, an exact-match **domain (.com/.ai)**, a **USPTO/EUIPO trademark** clearance, and **social handles** still need their own check. Say this out loud; don't imply a name is fully cleared.
+
 ## Feedback rubric
 
 Alon's copy feedback clusters into a small, fixed set of tags. Each maps to the rule it signals and to a fixed fix. When he replies with a tag (English or Hebrew) plus which option, act on it directly and narrow on the same direction. Do not restart from scratch.
